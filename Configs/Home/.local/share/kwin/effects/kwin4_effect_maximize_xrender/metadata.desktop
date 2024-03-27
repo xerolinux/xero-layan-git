@@ -1,0 +1,19 @@
+[Desktop Entry]
+Comment=Animation for windows going to maximize/restore from maximize, less glitches
+Icon=preferences-system-windows-effect-maximize
+Name=Maximize antiglitch
+Type=Service
+X-KDE-ParentApp=
+X-KDE-PluginInfo-Author=Martin Gräßlin (changed by Antonio Orefice)
+X-KDE-PluginInfo-Category=Appearance
+X-KDE-PluginInfo-Email=kokoko3k@gmail.com
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-Name=kwin4_effect_maximize_xrender
+X-KDE-PluginInfo-Version=1.1
+X-KDE-PluginInfo-Website=
+X-KDE-ServiceTypes=KWin/Effect
+X-KDE-PluginInfo-EnabledByDefault=false
+X-KDE-Ordering=60
+X-Plasma-API=javascript
+X-Plasma-MainScript=code/maximize-xrender.js
+

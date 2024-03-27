@@ -1,0 +1,17 @@
+[Desktop Entry]
+Type=Service
+ServiceTypes=KonqPopupMenu/Plugin
+MimeType=image/png;
+Icon=image-png
+Actions=jpg
+X-KDE-Priority=TopLevel
+X-KDE-StartupNotify=false
+X-KDE-Submenu=Convert to
+X-KDE-Submenu[it]=Converti in
+
+[Desktop Action jpg]
+Name=JPEG image
+Name[it]=Immagine JPEG
+Icon=image-jpg
+Exec=filename=%f; convert %f ${filename%.*}.jpg
+

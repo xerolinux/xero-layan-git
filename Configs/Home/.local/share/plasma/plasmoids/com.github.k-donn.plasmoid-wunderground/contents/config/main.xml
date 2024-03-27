@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0 http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
+    <kcfgfile name=""/>
+    <group name="Station">
+        <entry name="stationID" type="String">
+            <default></default>
+        </entry>
+        <entry name="longitude" type="String">
+            <default>-83.905502</default>
+        </entry>
+        <entry name="latitude" type="String">
+            <default>34.0602</default>
+        </entry>
+        <entry name="refreshPeriod" type="Int">
+            <default>60</default>
+        </entry>
+    </group>
+    <group name="Appearance">
+        <entry name="compactPointSize" type="Int">
+            <default>0</default>
+        </entry>
+        <!-- If this is added, the font is distorted.
+        <entry name="compactFamily" type="String">
+            <default>Default</default>
+        </entry> -->
+        <entry name="compactWeight" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="compactItalic" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="compactUnderline" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="propHeadPointSize" type="Int">
+            <default>13</default>
+        </entry>
+        <entry name="propPointSize" type="Int">
+            <default>10</default>
+        </entry>
+        <entry name="tempPointSize" type="Int">
+            <default>30</default>
+        </entry>
+        <entry name="tempAutoColor" type="Bool">
+            <default>true</default>
+        </entry>
+    </group>
+    <group name="Units">
+        <entry name="unitsChoice" type="Int">
+            <default>0</default>
+        </entry>
+    </group>
+    <group name="Debug">
+        <entry name="logConsole" type="Bool">
+            <default>false</default>
+        </entry>
+    </group>
+</kcfg>
+

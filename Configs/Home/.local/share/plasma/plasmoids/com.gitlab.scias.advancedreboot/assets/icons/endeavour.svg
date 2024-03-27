@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="48.237793mm"
+   height="41.009922mm"
+   inkscape:version="1.3.2 (091e20ef0f, 2023-11-25, custom)"
+   sodipodi:docname="endeavour.svg"
+   version="1.1"
+   viewBox="0 0 48.237792 41.009921"
+   id="svg8"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <defs
+     id="defs8" />
+  <sodipodi:namedview
+     id="cvfa"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:current-layer="svg8"
+     inkscape:cx="-167.97336"
+     inkscape:cy="-115.32499"
+     inkscape:document-rotation="0"
+     inkscape:document-units="mm"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:window-height="1412"
+     inkscape:window-maximized="1"
+     inkscape:window-width="2560"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:zoom="1.1966184"
+     pagecolor="#ffffff"
+     showgrid="false"
+     inkscape:showpageshadow="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050" />
+  <title
+     id="title1">EndeavourOS Logo</title>
+  <metadata
+     id="metadata1">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>EndeavourOS Logo</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <path
+     id="path1"
+     style="display:inline;fill:#000000;fill-opacity:1;stroke-width:0.528759"
+     d="m 27.953094,1.3921805 -0.01351,0.047687 C 26.579764,1.6307264 1.6375191,32.945027 1.6375191,32.945027 c 0,0 1.7760787,0.512698 5.7960414,1.109306 -1.7741463,2.970376 -3.1925741,5.373608 -3.1925741,5.373608 0,0 19.2343676,0.882942 34.0850386,-1.159883 C 59.226661,35.405426 34.715484,8.5010876 28.253641,1.7861949 28.178582,1.6842709 28.043933,1.4965838 27.975227,1.4032603 c -0.0063,-0.00639 -0.01351,-0.00962 -0.02219,-0.011077 z" />
+</svg>

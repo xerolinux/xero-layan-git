@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 17.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 200 200" enable-background="new 0 0 200 200" xml:space="preserve">
+<g id="sun">
+</g>
+<g id="clear-night">
+</g>
+<g id="mostly-sunny">
+</g>
+<g id="mostly-clear-night">
+</g>
+<g id="fog">
+</g>
+<g id="wind">
+</g>
+<g id="cloudy">
+</g>
+<g id="partly-cloudy">
+</g>
+<g id="partly-cloudy-night">
+</g>
+<g id="mostly-cloudy">
+</g>
+<g id="mostly-cloudy-night">
+</g>
+<g id="default">
+	<path fill="#D3D3D3" d="M100,1C45.3,1,1,45.3,1,100c0,54.7,44.3,99,99,99c54.7,0,99-44.3,99-99C199,45.3,154.7,1,100,1z
+		 M81.1,108.9H40.3c-5.1,0-9.2-4.1-9.2-9.2c0-5.1,4.1-9.2,9.2-9.2h40.9c5.1,0,9.2,4.1,9.2,9.2C90.4,104.8,86.2,108.9,81.1,108.9z
+		 M158.9,108.9h-40.9c-5.1,0-9.2-4.1-9.2-9.2c0-5.1,4.1-9.2,9.2-9.2h40.9c5.1,0,9.2,4.1,9.2,9.2C168.1,104.8,164,108.9,158.9,108.9z
+		"/>
+</g>
+<g id="light-rain">
+</g>
+<g id="rain">
+</g>
+<g id="heavy-rain">
+</g>
+<g id="scattered-showers-night">
+</g>
+<g id="isolated-t-storms">
+</g>
+<g id="scattered-t-storms">
+</g>
+<g id="scattered-t-storms-night">
+</g>
+<g id="strong-t-storms">
+</g>
+<g id="flurries">
+</g>
+<g id="snow">
+</g>
+<g id="heavy-snow">
+</g>
+<g id="blowing-snow">
+</g>
+<g id="scattered-snow">
+</g>
+<g id="scattered-snow-night">
+</g>
+<g id="freezing-drizzle">
+</g>
+<g id="freezing-rain">
+</g>
+<g id="wintry-mix">
+</g>
+<g id="sleet">
+</g>
+<g id="tornado">
+</g>
+<g id="hurricane">
+</g>
+</svg>

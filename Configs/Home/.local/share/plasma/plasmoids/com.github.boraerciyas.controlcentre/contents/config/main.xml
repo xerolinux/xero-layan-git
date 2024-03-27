@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+      http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
+    <kcfgfile name=""/>
+    <group name="Appearance">
+        <entry name="scale" type="Int">
+            <default>100</default>
+        </entry>
+        <entry name="transparency" type="Bool">
+            <default>False</default>
+        </entry>
+        <entry name="isDarkTheme" type="bool">
+            <default>false</default>
+        </entry>
+        <entry name="mainIconHeight" type="int">
+            <default>24</default>
+        </entry>
+        <entry name="mainIconName" type="string">
+            <default>configure</default>
+        </entry>
+        <entry name="lightTheme" type="String">
+            <label>Light Theme</label>
+            <default>BreezeLight</default>
+        </entry>
+        <entry name="darkTheme" type="String">
+            <label>Dark Theme</label>
+            <default>BreezeDark</default>
+        </entry>
+        
+        <!--    BEHAVIOUR      -->
+        <entry name="playVolumeFeedback" type="Bool">
+            <label>Play Volume Feedback</label>
+            <default>True</default>
+        </entry>
+        
+        <!--    SHOW/HIDE Components      -->
+        <entry name="showKDEConnect" type="bool">
+            <default>false</default>
+        </entry>
+        <entry name="showNightColor" type="bool">
+            <default>true</default>
+        </entry>
+        <entry name="showColorSwitcher" type="bool">
+            <default>true</default>
+        </entry>
+        <entry name="showDnd" type="bool">
+            <default>true</default>
+        </entry>
+        <entry name="showVolume" type="bool">
+            <default>true</default>
+        </entry>
+        <entry name="showBrightness" type="bool">
+            <default>true</default>
+        </entry>
+        <entry name="showMediaPlayer" type="bool">
+            <default>true</default>
+        </entry>
+        <entry name="showCmd1" type="bool">
+            <default>false</default>
+        </entry>
+        <entry name="showCmd2" type="bool">
+            <default>false</default>
+        </entry>
+        <entry name="showPercentage" type="bool">
+            <default>false</default>
+        </entry>
+        
+        <!--      HEHEHE GET RICKROLLED LOL        -->
+        <entry name="cmdRun1" type="string">
+            <default>xdg-open "https://shattereddisk.github.io/rickroll/rickroll.mp4"</default>
+        </entry>
+        <entry name="cmdTitle1" type="string">
+            <default>Command Button</default>
+        </entry>
+        <entry name="cmdIcon1" type="string">
+            <default>system-run-symbolic</default>
+        </entry>
+        <entry name="cmdRun2" type="string">
+            <default>xdg-open "https://bit.ly/3yCFTip"</default>
+        </entry>
+        <entry name="cmdTitle2" type="string">
+            <default>Command Button</default>
+        </entry>
+        <entry name="cmdIcon2" type="string">
+            <default>system-run-symbolic</default>
+        </entry>
+    </group>
+</kcfg>

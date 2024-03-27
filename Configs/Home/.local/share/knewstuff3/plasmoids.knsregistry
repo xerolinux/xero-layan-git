@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE khotnewstuff3>
+<hotnewstuffregistry>
+ <stuff category="424">
+  <name>Wunderground PWS Widget</name>
+  <providerid>https://api.kde-look.org/ocs/v1/</providerid>
+  <author>odd-k</author>
+  <homepage>https://store.kde.org/p/1411968</homepage>
+  <licence></licence>
+  <version>2.3.6</version>
+  <rating>78</rating>
+  <downloads>1838</downloads>
+  <installedfile>/home/xero/.local/share/plasma/plasmoids/com.github.k-donn.plasmoid-wunderground</installedfile>
+  <id>1411968</id>
+  <releasedate>2021-08-04</releasedate>
+  <summary>A Plasma 5 widget for showing data from Wunderground Personal Weather Stations.&lt;br />
+&lt;br />
+Wunderground lets you upload data from Smart Ambient Weather stations through their API. &lt;br />
+You can view the data though wunderground or through Wunderground API. This widget lets&lt;br />
+you input the...</summary>
+  <changelog></changelog>
+  <preview>https://cn.opendesktop.org/cache/100x100-0/img/2/d/b/2/ce6d2179b844e5138d7fd4e8232c6982466635a861d46bcbc2c53a3b67af79f5fe9a.png</preview>
+  <previewBig>https://cn.opendesktop.org/cache/770x540-0/img/2/d/b/2/ce6d2179b844e5138d7fd4e8232c6982466635a861d46bcbc2c53a3b67af79f5fe9a.png</previewBig>
+  <payload>https://dllb2.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjE2MjgxMDMwNDMiLCJvIjoiMSIsInMiOiJjMzA4M2U2ODY5YmM4YTk5ZWNmYjM5MjBiZjI4Y2Q2MGE3MmUwNzRmYThmNjYxM2UxNzYwZDY1ZTM1OTU2MzczYjBlNzE4YWIxMmIwYzIwNTM0N2NhMjE5NDRiYWQ5ZTlkMmQ1MzdmMTA4Zjc1OWFmYzY2NTJhOTcwZmE0YTBmYSIsInQiOjE2MzA4NjE2NzUsInN0ZnAiOm51bGwsInN0aXAiOiIxODUuMTg3Ljk0LjUifQ.u256rhZs2EFQI_wmtsdktCLEJfMdpxHlgXb-A5XMmD0/applet-wunderground-pws.plasmoid</payload>
+  <tags>plasma##majorversion=5,widget,weather,kde,extension,linux,unix,plasma,desktop,original-product,gplv2-later</tags>
+  <status>installed</status>
+ </stuff>
+ <stuff category="425">
+  <name>Netspeed Widget</name>
+  <providerid>https://api.kde-look.org/ocs/v1/</providerid>
+  <author>HessiJames</author>
+  <homepage>https://store.kde.org/p/998895</homepage>
+  <licence></licence>
+  <version>1.9</version>
+  <rating>84</rating>
+  <downloads>116709</downloads>
+  <installedfile>/home/xero/.local/share/plasma/plasmoids/org.kde.netspeedWidget</installedfile>
+  <id>998895</id>
+  <releasedate>2020-09-03</releasedate>
+  <summary>Plasma 5 widget that displays the currently used network bandwidth.&lt;br />
+&lt;br />
+The appearance can be customized in the configuration dialog and a user defined application (eg. nethogs) can be launched when the applet is clicked.&lt;br />
+&lt;br />
+Required dependencies:&lt;br />
+&lt;br />
+ - ksysguard...</summary>
+  <changelog></changelog>
+  <preview>https://cn.opendesktop.org/cache/100x100-0/img/a/7/1/9/19851d283f6d53dde8f2cb213a09d1adb805.png</preview>
+  <previewBig>https://cn.opendesktop.org/cache/770x540-0/img/a/7/1/9/19851d283f6d53dde8f2cb213a09d1adb805.png</previewBig>
+  <payload>https://dllb2.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjE1OTkxNTk5NzMiLCJvIjoiMSIsInMiOiIwYTNhZDhkMTU3MmNmNzhlOWJkMDdjMDY2MzMyMTIzM2U0Yzg0NWFkOTgyNTM4NzIwOWRmOGI1MzBlYmM0MTRmYzI2ODAwOTE1M2EwOTk2YjA1Nzk4ZTZjMjAyYmE1YTU5M2M5NWJlYTg4NzNhNjczM2JkNTc0M2ViYmU3YzFiOSIsInQiOjE2MzA4NjE2NjAsInN0ZnAiOm51bGwsInN0aXAiOiIxODUuMTg3Ljk0LjUifQ.PdYcbNvMVkRLK7hHzSLF0ieI7eYujm3NjtlA3wUYDRM/netspeed-widget-1.9.plasmoid</payload>
+  <tags>original-product,linux,unix,extension,plasma##majorversion=5,widget,kde,plasma,monitoring,network,monitor,gplv2-later</tags>
+  <status>installed</status>
+ </stuff>
+ <stuff category="399">
+  <name>Better inline clock</name>
+  <providerid>https://api.kde-look.org/ocs/v1/</providerid>
+  <author>marianarlt</author>
+  <homepage>https://store.kde.org/p/1245902</homepage>
+  <licence></licence>
+  <version>3.1</version>
+  <rating>80</rating>
+  <downloads>138135</downloads>
+  <installedfile>/home/xero/.local/share/plasma/plasmoids/org.kde.plasma.betterinlineclock</installedfile>
+  <id>1245902</id>
+  <releasedate>2020-06-23</releasedate>
+  <summary>The hottest clock around!&lt;br />
+· Formats not found in any other clock, including custom!&lt;br />
+· Disable the separator with a simple check box!&lt;br />
+· Option for manual font size!&lt;br />
+· Correctly calculated width at any time and date!&lt;br />
+· Manual spacing and offsetting!&lt;br />
+·...</summary>
+  <changelog></changelog>
+  <preview>https://cn.opendesktop.org/cache/100x100-0/img/c/8/8/1/2e3d478b3cdfe43f6c902d3c667f6e43060d.png</preview>
+  <previewBig>https://cn.opendesktop.org/cache/770x540-0/img/c/8/8/1/2e3d478b3cdfe43f6c902d3c667f6e43060d.png</previewBig>
+  <payload>https://dllb2.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjE1OTI5NjY2NTUiLCJvIjoiMSIsInMiOiI3ZTAzOTJjM2I2M2Y0MjM1MjJmNWJmNjA5OTBhNDExZjlmZTczYzE4MzNkOTk5NzUwNGU1Yjk4NDRhYTA5ZGMyOWQ5YmVkYTZhMDc3NTUyNTUyZmZmNjE0YzQwOWU2YWMwMjI3MWNiZjAwZDdkZmViNjYyMmZiMTU3MGE0MmNjZiIsInQiOjE2MzA4NjE2NDIsInN0ZnAiOm51bGwsInN0aXAiOiIxODUuMTg3Ljk0LjUifQ.e8WROw7WNqufQQpbUBw1FzSdvpxbmUxNZ_5aaGFHJ_M/betterinlineclock.tar.gz</payload>
+  <tags>gplv3,modification-product,linux,unix,extension,kde,plasma##majorversion=5,widget,plasma,plasmoid,clock</tags>
+  <status>installed</status>
+ </stuff>
+</hotnewstuffregistry>

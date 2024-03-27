@@ -1,0 +1,16 @@
+[AC][Display]
+TurnOffDisplayWhenIdle=false
+
+[AC][SuspendAndShutdown]
+LidAction=1
+
+[Battery][SuspendAndShutdown]
+AutoSuspendAction=1
+LidAction=1
+
+[General]
+pausePlayersOnSuspend=false
+
+[LowBattery][SuspendAndShutdown]
+AutoSuspendAction=1
+LidAction=1

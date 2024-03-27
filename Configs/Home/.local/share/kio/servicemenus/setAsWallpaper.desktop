@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Service
+ServiceTypes=KonqPopupMenu/Plugin
+MimeType=image/*;
+Actions=SetAsWallpaperFive;
+X-KDE-Priority=TopLevel
+X-KDE-StartupNotify=false
+
+[Desktop Action SetAsWallpaperFive]
+Icon=preferences-desktop-wallpaper
+Name=Set as desktop background
+Exec=RANDSUFFIX=$(shuf -i 0-100000 -n 1) ; rm "$HOME/.dolphin_wallpaper_"* ; cp %u "$HOME/.dolphin_wallpaper_$RANDSUFFIX" && gsettings set org.gnome.desktop.background picture-uri "file://$HOME/.dolphin_wallpaper_$RANDSUFFIX"

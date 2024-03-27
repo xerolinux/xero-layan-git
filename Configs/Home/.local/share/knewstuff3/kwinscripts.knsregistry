@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE khotnewstuff3>
+<hotnewstuffregistry>
+ <stuff category="210">
+  <name>Force Decorations for GTK+ 3</name>
+  <providerid>https://api.kde-look.org/ocs/v1/</providerid>
+  <author>oldschoolthemer</author>
+  <homepage>https://store.kde.org/p/1235093</homepage>
+  <licence></licence>
+  <version>0.2</version>
+  <rating>65</rating>
+  <downloads>11326</downloads>
+  <installedfile>/home/xero/.local/share/kwin/scripts/force-decorations-gtk3</installedfile>
+  <id>1235093</id>
+  <releasedate>2018-05-15</releasedate>
+  <summary>Forces server-side decorations for a list of common GTK+ 3 applications which use client-side decorations (also known as CSDs and headerbars). For the best look, use Breeze GTK.</summary>
+  <changelog></changelog>
+  <preview>https://cn.opendesktop.org/cache/100x100-0/img/3/4/9/d/5a75131607443b276aa719726b12a7196fab.png</preview>
+  <previewBig>https://cn.opendesktop.org/cache/770x540-0/img/3/4/9/d/5a75131607443b276aa719726b12a7196fab.png</previewBig>
+  <payload>https://dllb2.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjE1MjYzNzA2MzQiLCJvIjoiMSIsInMiOiIyYjZkOWY5NTk0NjM5ZmVmNTU3NWMzMjMxOWY3YWY4MTU1NDkwNzM1MGI0OTBlYTdhYmY3ZmUzNDBmZjk2NWM4M2E5NTA3M2YxYjI5ZmMzNTJlZTA5MTU4NWFhMjMxYTI0Mzc3ZWUyN2YwMjFiODBmNTc5MThiOTBlYTM0ODRiMSIsInQiOjE2MzA4NTM3ODUsInN0ZnAiOm51bGwsInN0aXAiOiIxODUuMTg3Ljk0LjUifQ.BxPGUuJd9wT2VxJfFyynHYLNzWILYqxA0gLK7rtCMWs/force-decorations-gtk3.kwinscript</payload>
+  <tags>linux,unix</tags>
+  <status>installed</status>
+ </stuff>
+ <stuff category="210">
+  <name>Force Blur</name>
+  <providerid>https://api.kde-look.org/ocs/v1/</providerid>
+  <author>esjeon</author>
+  <homepage>https://store.kde.org/p/1294604</homepage>
+  <licence></licence>
+  <version>0.5</version>
+  <rating>88</rating>
+  <downloads>167270</downloads>
+  <installedfile>/home/xero/.local/share/kwin/scripts/forceblur</installedfile>
+  <id>1294604</id>
+  <releasedate>2020-05-14</releasedate>
+  <summary>Force-enable blur effect for user-specified windows</summary>
+  <changelog></changelog>
+  <preview>https://cn.opendesktop.org/cache/100x100-0/img/0/f/b/2/25d2a853b8055b383e5ede66db535b5c9a68.png</preview>
+  <previewBig>https://cn.opendesktop.org/cache/770x540-0/img/0/f/b/2/25d2a853b8055b383e5ede66db535b5c9a68.png</previewBig>
+  <payload>https://dllb2.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjE1ODk1MTA5NTMiLCJvIjoiMSIsInMiOiJmYjQ5ZmRiZmZmNzY4NjY4YzBhYjMxODViNzU4NDgxZmI4ZTVhMmY3MWFmODA5NDE4NDkyMmMwYzQzNWM2ZTA0NzdjN2Y4YWMwZWY1YWY0YThmNzc2NjlhMTZkZjVkYmY1YjRjMjRiNjViNWZhY2M3YWQxOWVkMWZhNjA2NGI4ZCIsInQiOjE2MzA4NTM3MzUsInN0ZnAiOm51bGwsInN0aXAiOiIxODUuMTg3Ljk0LjUifQ.YYRckSTeDYU8pyqHktG0Ldh3JwBOB00scnDlIoMCA50/forceblur-0.5.kwinscript</payload>
+  <tags>linux,unix,mit-license,original-product,kwin,blur</tags>
+  <status>installed</status>
+ </stuff>
+ <stuff category="210">
+  <name>Screen Snapping 5</name>
+  <providerid>https://api.kde-look.org/ocs/v1/</providerid>
+  <author>bobf</author>
+  <homepage>https://store.kde.org/p/1135334</homepage>
+  <licence></licence>
+  <version>1.0</version>
+  <rating>50</rating>
+  <downloads>4199</downloads>
+  <installedfile>/home/xero/.local/share/kwin/scripts/screenSnapping5</installedfile>
+  <id>1135334</id>
+  <releasedate>2016-06-29</releasedate>
+  <summary>This is Thomas Lübking's "Screen Snapping" KWin script, now for KDE Plasma 5. A couple of new problems that appeared in KDE5 are fixed: configuration dialog works again, and newly-placed windows will be properly snapped (if applicable).&lt;br />
+&lt;br />
+Thomas's original description: "This...</summary>
+  <changelog></changelog>
+  <preview>https://cn.opendesktop.org/cache/100x100-0/img/1/d/9/d/745a0b742cb25cfe6285b074fd3a1d2b6105.png</preview>
+  <previewBig>https://cn.opendesktop.org/cache/770x540-0/img/1/d/9/d/745a0b742cb25cfe6285b074fd3a1d2b6105.png</previewBig>
+  <payload>https://dllb2.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjE0NjcxOTA4NTciLCJvIjoiMSIsInMiOiJmNzEzNDY4OTE2NDhlZGVjMDBmMWRiZTUyYTM0Y2M1MGE4MjkxMjEzZjg2ZDZkNGRiMDgxNWE3MWJkNzdmYjI1MDRiZDcwODQ3ZjhkNGM0N2MyNDMxNDE4ZjdmOTQyNWEwNWJjZGI0YjMyODIxMzk2OWUyNzVmMzA4N2Q1NjQyNiIsInQiOjE2MzA4NTM4NTQsInN0ZnAiOm51bGwsInN0aXAiOiIxODUuMTg3Ljk0LjUifQ.DYnFNX92xP9GjS_KNKhkUO-3YvxEV8PsF0Szyvzc5n8/screenSnapping5.kwinscript</payload>
+  <tags>linux,unix</tags>
+  <status>installed</status>
+ </stuff>
+ <stuff category="210">
+  <name>Move Window to Center</name>
+  <providerid>https://api.kde-look.org/ocs/v1/</providerid>
+  <author>artemisfowl2007</author>
+  <homepage>https://store.kde.org/p/1254986</homepage>
+  <licence></licence>
+  <version>1.1</version>
+  <rating>69</rating>
+  <downloads>4974</downloads>
+  <installedfile>/home/xero/.local/share/kwin/scripts/movewindowtocenter</installedfile>
+  <id>1254986</id>
+  <releasedate>2020-04-22</releasedate>
+  <summary>A simple KWin script that introduces a KDE Global Shortcut (Meta+C by default) for centering the active window in the current screen.&lt;br />
+&lt;br />
+Check the &lt;a href="https://github.com/KSmanis/kwin-move-window-to-center" target="_blank" rel="nofollow">GitHub page&lt;/a> for installation and usage...</summary>
+  <changelog></changelog>
+  <preview>https://cn.opendesktop.org/img/9/c/9/2/22685139dff18b258b8273e45b584b1b0391.gif</preview>
+  <previewBig>https://cn.opendesktop.org/img/9/c/9/2/22685139dff18b258b8273e45b584b1b0391.gif</previewBig>
+  <payload>https://dllb2.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjE1ODc1NTEyNzgiLCJvIjoiMSIsInMiOiJmNzYxMGIzNDg0ZDRjZGE5NTkzMmYzZDRjZDI3ZmM1OTI5ODk2MDVkMjc5NTgzMDcyMGYwYTJjMTI2ZGVjZmY0N2Q4MTI2NWFkYmYxODhlNWIxMjkzMjQ2OTRjOTRjNTU3MWJiYmM4Y2M2YzlhNzE0OTc3MzM5N2JjMzc2Y2M5OSIsInQiOjE2MzA4NTM3NzcsInN0ZnAiOm51bGwsInN0aXAiOiIxODUuMTg3Ljk0LjUifQ.FNm6f4n9ttVCrMWGlVRjEw_8QgN6Ze5lhrJFrXviYAg/movewindowtocenter-1.1.kwinscript</payload>
+  <tags>gplv2-later,original-product,linux,unix</tags>
+  <status>installed</status>
+ </stuff>
+</hotnewstuffregistry>

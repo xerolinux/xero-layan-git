@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   id="Layer_1"
+   x="0px"
+   y="0px"
+   width="552"
+   height="552"
+   viewBox="0 0 552 552"
+   enable-background="new 0 0 512 512"
+   xml:space="preserve"
+   sodipodi:docname="45.svg"><metadata
+   id="metadata13"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
+   id="defs11" /><sodipodi:namedview
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="0"
+   inkscape:pageshadow="2"
+   inkscape:window-width="640"
+   inkscape:window-height="480"
+   id="namedview9"
+   fit-margin-top="20"
+   fit-margin-left="20"
+   fit-margin-right="20"
+   fit-margin-bottom="20" />
+	<g
+   id="g6"
+   transform="translate(20,20)">
+		<g
+   id="g4">
+			<style
+   id="current-color-scheme" />
+			<path
+   class="ColorScheme-Text"
+   id="hint-apply-color-scheme"
+   fill-rule="evenodd"
+   clip-rule="evenodd"
+   fill="currentColor"
+   d="m 400,64 c -5.312,0 -10.562,0.375 -15.792,1.125 C 354.334,24.417 307.188,0 256,0 204.812,0 157.688,24.417 127.792,65.125 122.562,64.375 117.312,64 112,64 50.25,64 0,114.25 0,176 c 0,61.75 50.25,112 112,112 13.688,0 27.084,-2.5 39.709,-7.333 C 180.666,305.917 217.5,320 256,320 294.542,320 331.333,305.917 360.291,280.667 372.916,285.5 386.312,288 400,288 461.75,288 512,237.75 512,176 512,114.25 461.75,64 400,64 Z M 225,480 c 0,17.688 14.312,32 32,32 17.688,0 32,-14.312 32,-32 0,-17.688 -32,-64 -32,-64 0,0 -32,46.312 -32,64 z m 127,-32 c 0,17.688 14.312,32 32,32 17.688,0 32,-14.312 32,-32 0,-17.688 -32,-64 -32,-64 0,0 -32,46.312 -32,64 z M 96,384 c 0,17.688 14.312,32 32,32 17.688,0 32,-14.312 32,-32 0,-17.688 -32,-64 -32,-64 0,0 -32,46.312 -32,64 z" />
+		</g>
+	</g>
+</svg>

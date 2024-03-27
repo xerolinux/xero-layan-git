@@ -1,0 +1,204 @@
+# Translation of plasmoid-wunderground in ru_RU
+# Copyright (C) 2022
+# This file is distributed under the same license as the plasmoid-wunderground package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: plasmoid-wunderground\n"
+"Report-Msgid-Bugs-To: https://github.com/k-donn/plasmoid-wunderground\n"
+"POT-Creation-Date: 2024-01-21 20:04-0500\n"
+"PO-Revision-Date: 2023-07-03 20:36+0100\n"
+"Last-Translator: AleksZZ <alexyvp@mail.ru>\n"
+"Language-Team: Russian <ru@li.org>\n"
+"Language: ru_RU\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../metadata.desktop
+msgid "Wunderground"
+msgstr "Wunderground"
+
+#: ../metadata.desktop
+msgid "Wunderground Personal Weather Station viewer"
+msgstr "Программа просмотра персональных метеостанций Wunderground"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Compact Representation"
+msgstr "Компактное представление"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Font"
+msgstr "Шрифт"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Font size (0px=scale to widget)"
+msgstr "Размер шрифта (0px=Автомасштаб)"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Font styles"
+msgstr "Стили шрифтов"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Full Representation"
+msgstr "Полное представление"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Property header text size"
+msgstr "Размер текста заголовка свойства"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Property text size"
+msgstr "Размер текста свойства"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Temperature text size"
+msgstr "Размер текста температуры"
+
+#: ../contents/ui/config/ConfigDebug.qml
+msgid "Write to console.log:"
+msgstr "Записывать в console.log:"
+
+#: ../contents/ui/config/ConfigFontFamily.qml
+msgctxt "Use default font"
+msgid "Default"
+msgstr "По умолчанию"
+
+#: ../contents/ui/config/ConfigStation.qml
+msgid "Enter Station"
+msgstr "Ввести станцию"
+
+#: ../contents/ui/config/ConfigStation.qml
+msgid "Weatherstation ID:"
+msgstr "ID метеостанции:"
+
+#: ../contents/ui/config/ConfigStation.qml
+msgid "Get Nearest Station"
+msgstr "Получить ближайшую станцию"
+
+#: ../contents/ui/config/ConfigStation.qml
+msgid "Uses WGS84 geocode coordinates"
+msgstr "Геокод в формате WGS84"
+
+#: ../contents/ui/config/ConfigStation.qml
+msgid "Longitude:"
+msgstr "Долгота:"
+
+#: ../contents/ui/config/ConfigStation.qml
+msgid "Latitude:"
+msgstr "Широта:"
+
+#: ../contents/ui/config/ConfigStation.qml
+msgid "Refresh period (s):"
+msgstr "Интервал обновления (сек):"
+
+#: ../contents/ui/config/ConfigStation.qml
+msgid "Find Station"
+msgstr "Найти станцию"
+
+#: ../contents/ui/config/ConfigUnits.qml
+msgctxt "The unit system"
+msgid "Metric"
+msgstr "Метрическая"
+
+#: ../contents/ui/config/ConfigUnits.qml
+msgctxt "The unit system"
+msgid "Imperial"
+msgstr "Американская"
+
+#: ../contents/ui/config/ConfigUnits.qml
+msgctxt "The unit system"
+msgid "Hybrid (UK)"
+msgstr "Британская"
+
+#: ../contents/ui/config/ConfigUnits.qml
+msgid "Choose:"
+msgstr "Еденицы измерения:"
+
+#: ../contents/ui/DetailsItem.qml
+msgid "WIND & GUST"
+msgstr "ВЕТЕР и ПОРЫВЫ"
+
+#: ../contents/ui/DetailsItem.qml
+msgid "Feels like %1"
+msgstr "По ощущениям %1"
+
+#: ../contents/ui/DetailsItem.qml
+msgid "Wind from: %1"
+msgstr "Напралвение ветра: %1"
+
+#: ../contents/ui/DetailsItem.qml
+msgid "DEWPOINT"
+msgstr "ТОЧКА РОСЫ"
+
+#: ../contents/ui/DetailsItem.qml
+msgctxt "Precipitaion rate"
+msgid "PRECIP RATE"
+msgstr "КОЛИЧЕСТВО ОСАДКОВ"
+
+#: ../contents/ui/DetailsItem.qml
+msgid "PRESSURE"
+msgstr "ДАВЛЕНИЕ"
+
+#: ../contents/ui/DetailsItem.qml
+msgid "HUMIDITY"
+msgstr "ВЛАЖНОСТЬ"
+
+#: ../contents/ui/DetailsItem.qml
+msgctxt "Precipitation accumulation"
+msgid "PRECIP ACCUM"
+msgstr "СКОПЛЕНИЕ ОСАДКОВ"
+
+#: ../contents/ui/DetailsItem.qml
+msgctxt "Ultra Violet"
+msgid "UV"
+msgstr "УФ"
+
+#: ../contents/ui/FullRepresentation.qml
+msgid "Loading data..."
+msgstr "Загрузка данных ..."
+
+#: ../contents/ui/main.qml
+msgctxt "Do not edit HTML tags. 'Temp' means temperature"
+msgid "<font size='4'>Temp: %1</font><br />"
+msgstr "<размер шрифта='4'>температура: %1</font><br />"
+
+#: ../contents/ui/main.qml
+msgctxt "Do not edit HTML tags."
+msgid "<font size='4'>Feels: %1</font><br />"
+msgstr "<размер шрифта='4'>по ощущениям: %1</font><br />"
+
+#: ../contents/ui/main.qml
+msgctxt "Do not edit HTML tags. 'Wnd Spd' means Wind Speed"
+msgid "<font size='4'>Wnd spd: %1</font><br />"
+msgstr "<размер шрифта='4'>скорость ветра: %1</font><br />"
+
+#: ../contents/ui/main.qml
+msgid "Set the weather station to pull data from."
+msgstr "Конфигурация метеостанции, с которой будут извлекаться данные."
+
+#: ../contents/ui/main.qml
+msgid "Please Configure"
+msgstr "Настроить"
+
+#: ../contents/ui/main.qml ../contents/ui/TopPanel.qml
+msgid "Loading..."
+msgstr "Загрузка..."
+
+#: ../contents/ui/main.qml
+msgid "Error..."
+msgstr "Ошибка..."
+
+#: ../contents/ui/SwitchPanel.qml
+msgid "Weather Details"
+msgstr "Информация о погоде"
+
+#: ../contents/ui/SwitchPanel.qml
+msgid "Forecast"
+msgstr "Прогноз"
+
+#: ../contents/ui/TopPanel.qml
+msgid "High: %1 Low: %2"
+msgstr "Высокий: %1 Низкий: %2"

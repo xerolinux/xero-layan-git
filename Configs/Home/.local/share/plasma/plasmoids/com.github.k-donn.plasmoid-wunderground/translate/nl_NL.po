@@ -1,0 +1,205 @@
+# Translation of plasmoid-wunderground in nl_NL
+# Copyright (C) 2022
+# This file is distributed under the same license as the plasmoid-wunderground package.
+#
+# Heimen Stoffels <vistausss@fastmail.com>, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasmoid-wunderground\n"
+"Report-Msgid-Bugs-To: https://github.com/k-donn/plasmoid-wunderground\n"
+"POT-Creation-Date: 2024-01-21 20:04-0500\n"
+"PO-Revision-Date: 2022-04-17 14:14+0200\n"
+"Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
+"Language-Team: Dutch <>\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 22.03.90\n"
+
+#: ../metadata.desktop
+msgid "Wunderground"
+msgstr "Wunderground"
+
+#: ../metadata.desktop
+msgid "Wunderground Personal Weather Station viewer"
+msgstr "Wunderground - Bekijk je eigen weerstation"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Compact Representation"
+msgstr "Compacte indeling gebruiken"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Font"
+msgstr "Lettertype"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Font size (0px=scale to widget)"
+msgstr "Tekstgrootte (0 px = afhankelijk van widgetafmetingen)"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Font styles"
+msgstr "Lettertypestijlen"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Full Representation"
+msgstr "Uitgebreide indeling gebruiken"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Property header text size"
+msgstr "Tekstgrootte van koppen"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Property text size"
+msgstr "Tekstgrootte van items"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Temperature text size"
+msgstr "Tekstgrootte van temperatuur"
+
+#: ../contents/ui/config/ConfigDebug.qml
+msgid "Write to console.log:"
+msgstr "Wegschrijven naar console.log:"
+
+#: ../contents/ui/config/ConfigFontFamily.qml
+msgctxt "Use default font"
+msgid "Default"
+msgstr "Standaard"
+
+#: ../contents/ui/config/ConfigStation.qml
+msgid "Enter Station"
+msgstr "Voer de naam in van een weerstation"
+
+#: ../contents/ui/config/ConfigStation.qml
+msgid "Weatherstation ID:"
+msgstr "Weerstation-id:"
+
+#: ../contents/ui/config/ConfigStation.qml
+msgid "Get Nearest Station"
+msgstr "Dichtstbijzijnde station gebruiken"
+
+#: ../contents/ui/config/ConfigStation.qml
+msgid "Uses WGS84 geocode coordinates"
+msgstr "Hiervoor worden de WGS84-geocodecoördinaten gebruikt"
+
+#: ../contents/ui/config/ConfigStation.qml
+msgid "Longitude:"
+msgstr "Lengtegraad:"
+
+#: ../contents/ui/config/ConfigStation.qml
+msgid "Latitude:"
+msgstr "Breedtegraad:"
+
+#: ../contents/ui/config/ConfigStation.qml
+msgid "Refresh period (s):"
+msgstr "Periodiek bijwerken (in sec.):"
+
+#: ../contents/ui/config/ConfigStation.qml
+msgid "Find Station"
+msgstr "Weerstation zoeken"
+
+#: ../contents/ui/config/ConfigUnits.qml
+msgctxt "The unit system"
+msgid "Metric"
+msgstr "Metrisch"
+
+#: ../contents/ui/config/ConfigUnits.qml
+msgctxt "The unit system"
+msgid "Imperial"
+msgstr "Imperiaal"
+
+#: ../contents/ui/config/ConfigUnits.qml
+msgctxt "The unit system"
+msgid "Hybrid (UK)"
+msgstr "Hybride (VK)"
+
+#: ../contents/ui/config/ConfigUnits.qml
+msgid "Choose:"
+msgstr "Kiezen:"
+
+#: ../contents/ui/DetailsItem.qml
+msgid "WIND & GUST"
+msgstr "Windsnelheid"
+
+#: ../contents/ui/DetailsItem.qml
+msgid "Feels like %1"
+msgstr "Gevoelstemperatuur: %1"
+
+#: ../contents/ui/DetailsItem.qml
+msgid "Wind from: %1"
+msgstr "Windrichting: %1"
+
+#: ../contents/ui/DetailsItem.qml
+msgid "DEWPOINT"
+msgstr "DAUWPUNT"
+
+#: ../contents/ui/DetailsItem.qml
+msgctxt "Precipitaion rate"
+msgid "PRECIP RATE"
+msgstr "HOEVEELHEID NEERSLAG"
+
+#: ../contents/ui/DetailsItem.qml
+msgid "PRESSURE"
+msgstr "LUCHTDRUK"
+
+#: ../contents/ui/DetailsItem.qml
+msgid "HUMIDITY"
+msgstr "LUCHTVOCHTIGHEID"
+
+#: ../contents/ui/DetailsItem.qml
+msgctxt "Precipitation accumulation"
+msgid "PRECIP ACCUM"
+msgstr "HOEVEELHEID NEERSLAG"
+
+#: ../contents/ui/DetailsItem.qml
+msgctxt "Ultra Violet"
+msgid "UV"
+msgstr "UV-index"
+
+#: ../contents/ui/FullRepresentation.qml
+msgid "Loading data..."
+msgstr "Bezig met laden…"
+
+#: ../contents/ui/main.qml
+msgctxt "Do not edit HTML tags. 'Temp' means temperature"
+msgid "<font size='4'>Temp: %1</font><br />"
+msgstr "<font size='4'>Temp.: %1</font><br />"
+
+#: ../contents/ui/main.qml
+msgctxt "Do not edit HTML tags."
+msgid "<font size='4'>Feels: %1</font><br />"
+msgstr "<font size='4'>Voelt als: %1</font><br />"
+
+#: ../contents/ui/main.qml
+msgctxt "Do not edit HTML tags. 'Wnd Spd' means Wind Speed"
+msgid "<font size='4'>Wnd spd: %1</font><br />"
+msgstr "<font size='4'>Windsnelh.: %1</font><br />"
+
+#: ../contents/ui/main.qml
+msgid "Set the weather station to pull data from."
+msgstr "Kies het weerstation dat de gegevens moet leveren."
+
+#: ../contents/ui/main.qml
+msgid "Please Configure"
+msgstr "Instellen"
+
+#: ../contents/ui/main.qml ../contents/ui/TopPanel.qml
+msgid "Loading..."
+msgstr "Bezig met laden…"
+
+#: ../contents/ui/main.qml
+msgid "Error..."
+msgstr "Foutmelding"
+
+#: ../contents/ui/SwitchPanel.qml
+msgid "Weather Details"
+msgstr "Weerinformatie"
+
+#: ../contents/ui/SwitchPanel.qml
+msgid "Forecast"
+msgstr "Weersvoorspelling"
+
+#: ../contents/ui/TopPanel.qml
+msgid "High: %1 Low: %2"
+msgstr "Hoog: %1 - Laag: %2"

@@ -1,0 +1,25 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "hessijames@gmail.com",
+                "Name": "Daniel Faust"
+            }
+        ],
+        "Category": "System Information",
+        "Description": "Displays the currently used network bandwidth",
+        "Icon": "network-connect",
+        "Id": "org.kde.netspeedWidget",
+        "License": "GPL2",
+        "Name": "Netspeed Widget",
+        "KPackageStructure": [
+            "Plasma/Applet"
+        ],
+        "Version": "3.1",
+        "Website": "https://github.com/dfaust/plasma-applet-netspeed-widget"
+    },
+    "X-KDE-ParentApp": "",
+    "X-Plasma-API-Minimum-Version": "6.0",
+    "X-Plasma-MainScript": "ui/main.qml",
+    "X-Plasma-RemoteLocation": ""
+}

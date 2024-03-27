@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+      http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
+    <kcfgfile name=""/>
+    <group name="Appearance">
+        <!-- Boolean values -->
+        <entry name="enable_shadows" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="show_date" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="show_sys_mon" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="show_audio" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="enable_fill_animation" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="proportional_font" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="enable_24_hour" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="use_system_colors" type="Bool">
+            <default>false</default>
+        </entry>
+        
+        <!-- Font Sizes -->
+        <entry name="month_font_size" type="Int">
+            <default>48</default>
+        </entry>
+        <entry name="day_font_size" type="Int">
+            <default>108</default>
+        </entry>
+        <entry name="year_font_size" type="Int">
+            <default>38</default>
+        </entry>
+        <entry name="time_font_size" type="Int">
+            <default>250</default>
+        </entry>
+        <entry name="timeap_font_size" type="Int">
+            <default>48</default>
+        </entry>
+        <entry name="sys_mon_text_font_size" type="Int">
+            <default>38</default>
+        </entry>
+        <entry name="sys_mon_usage_font_size" type="Int">
+            <default>20</default>
+        </entry>
+        <entry name="audio_title_font_size" type="Int">
+            <default>20</default>
+        </entry>
+        <entry name="audio_artist_font_size" type="Int">
+            <default>14</default>
+        </entry>
+        <entry name="now_playing_font_size" type="Int">
+            <default>16</default>
+        </entry>
+        <entry name="global_font_size" type="Int">
+            <default>200</default>
+        </entry>
+        <entry name="audio_image_width" type="Int">
+            <default>50</default>
+        </entry>
+        
+        <!-- Other -->
+        <entry name="sys_mon_interval" type="Int">
+            <default>2000</default>
+        </entry>
+        
+        <!-- Spacing -->
+        <entry name="sys_mon_spacing" type="Int">
+            <default>0</default>
+        </entry>
+        <entry name="audio_spacing" type="Int">
+            <default>0</default>
+        </entry>
+        <entry name="date_spacing" type="Int">
+            <default>0</default>
+        </entry>
+        
+        <!-- Colors -->
+        <entry name="color_one" type="Color">
+            <default>#d78695</default>
+        </entry>
+        <entry name="color_two" type="Color">
+            <default>#9ed24a</default>
+        </entry>
+        <entry name="color_three" type="Color">
+            <default>#dfa45c</default>
+        </entry>
+        <entry name="text_background_color" type="Color">
+            <default>#464a4b</default>
+        </entry>
+      </group>
+</kcfg>

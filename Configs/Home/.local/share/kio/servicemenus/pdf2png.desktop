@@ -1,0 +1,15 @@
+[Desktop Entry]
+Type=Service
+ServiceTypes=KonqPopupMenu/Plugin
+MimeType=application/pdf;
+Icon=okular
+Actions=PNG
+X-KDE-Priority=TopLevel
+X-KDE-StartupNotify=false
+
+
+[Desktop Action PNG]
+Name=Convert PDF to PNG
+Name[ru]=Конвертировать PDF в PNG
+Icon=okular
+Exec=pdftoppm "%f" "%f.png" -png -rx 300 -ry 300

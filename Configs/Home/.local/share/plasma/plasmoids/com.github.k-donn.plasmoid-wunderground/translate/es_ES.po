@@ -1,0 +1,205 @@
+# Translation of plasmoid-wunderground in es_ES
+# Copyright (C) 2021
+# This file is distributed under the same license as the plasmoid-wunderground package.
+#
+# victorhck <victorhck@mailbox.org>, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasmoid-wunderground\n"
+"Report-Msgid-Bugs-To: https://github.com/k-donn/plasmoid-wunderground\n"
+"POT-Creation-Date: 2024-01-21 20:04-0500\n"
+"PO-Revision-Date: 2022-03-09 20:36+0100\n"
+"Last-Translator: victorhck <victorhck@mailbox.org>\n"
+"Language-Team: Spanish <>\n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 21.12.3\n"
+
+#: ../metadata.desktop
+msgid "Wunderground"
+msgstr "Wunderground"
+
+#: ../metadata.desktop
+msgid "Wunderground Personal Weather Station viewer"
+msgstr "Visor de la estación meteorológica personal Wunderground"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Compact Representation"
+msgstr "Representación compacta"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Font"
+msgstr "Fuentes"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Font size (0px=scale to widget)"
+msgstr "Tamaño de fuente (0px=escala a widget)"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Font styles"
+msgstr "Estilos de fuente"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Full Representation"
+msgstr "Representación completa"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Property header text size"
+msgstr "Propiedades del tamaño del texto del encabezado"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Property text size"
+msgstr "Propiedad del tamaño de texto"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Temperature text size"
+msgstr "Tamaño del texto de temperatura"
+
+#: ../contents/ui/config/ConfigDebug.qml
+msgid "Write to console.log:"
+msgstr "Escribir en console.log:"
+
+#: ../contents/ui/config/ConfigFontFamily.qml
+msgctxt "Use default font"
+msgid "Default"
+msgstr "Predeterminado"
+
+#: ../contents/ui/config/ConfigStation.qml
+msgid "Enter Station"
+msgstr "Introducir estación"
+
+#: ../contents/ui/config/ConfigStation.qml
+msgid "Weatherstation ID:"
+msgstr "ID de la estación meteorológica"
+
+#: ../contents/ui/config/ConfigStation.qml
+msgid "Get Nearest Station"
+msgstr "Obtener la estación más cercana"
+
+#: ../contents/ui/config/ConfigStation.qml
+msgid "Uses WGS84 geocode coordinates"
+msgstr "Utiliza coordenadas de geocodificación WGS84"
+
+#: ../contents/ui/config/ConfigStation.qml
+msgid "Longitude:"
+msgstr "Longitud:"
+
+#: ../contents/ui/config/ConfigStation.qml
+msgid "Latitude:"
+msgstr "Latitud:"
+
+#: ../contents/ui/config/ConfigStation.qml
+msgid "Refresh period (s):"
+msgstr "Periodo de actualización (s):"
+
+#: ../contents/ui/config/ConfigStation.qml
+msgid "Find Station"
+msgstr "Encontrar estación"
+
+#: ../contents/ui/config/ConfigUnits.qml
+msgctxt "The unit system"
+msgid "Metric"
+msgstr "Métrico"
+
+#: ../contents/ui/config/ConfigUnits.qml
+msgctxt "The unit system"
+msgid "Imperial"
+msgstr "Imperial"
+
+#: ../contents/ui/config/ConfigUnits.qml
+msgctxt "The unit system"
+msgid "Hybrid (UK)"
+msgstr "Híbrido (UK)"
+
+#: ../contents/ui/config/ConfigUnits.qml
+msgid "Choose:"
+msgstr "Escoger:"
+
+#: ../contents/ui/DetailsItem.qml
+msgid "WIND & GUST"
+msgstr "RÁFAGA DE VIENTO"
+
+#: ../contents/ui/DetailsItem.qml
+msgid "Feels like %1"
+msgstr "Sensación térmica de %1"
+
+#: ../contents/ui/DetailsItem.qml
+msgid "Wind from: %1"
+msgstr "Viento desde: %1"
+
+#: ../contents/ui/DetailsItem.qml
+msgid "DEWPOINT"
+msgstr "PUNTO DE ROCÍO"
+
+#: ../contents/ui/DetailsItem.qml
+msgctxt "Precipitaion rate"
+msgid "PRECIP RATE"
+msgstr "TASA DE PRECIPITACIÓN"
+
+#: ../contents/ui/DetailsItem.qml
+msgid "PRESSURE"
+msgstr "PRESIÓN"
+
+#: ../contents/ui/DetailsItem.qml
+msgid "HUMIDITY"
+msgstr "HUMEDAD"
+
+#: ../contents/ui/DetailsItem.qml
+msgctxt "Precipitation accumulation"
+msgid "PRECIP ACCUM"
+msgstr "PRECIP. ACUMULADA"
+
+#: ../contents/ui/DetailsItem.qml
+msgctxt "Ultra Violet"
+msgid "UV"
+msgstr "UV"
+
+#: ../contents/ui/FullRepresentation.qml
+msgid "Loading data..."
+msgstr "Cargando datos..."
+
+#: ../contents/ui/main.qml
+msgctxt "Do not edit HTML tags. 'Temp' means temperature"
+msgid "<font size='4'>Temp: %1</font><br />"
+msgstr "<font size='4'>Temp: %1</font><br />"
+
+#: ../contents/ui/main.qml
+msgctxt "Do not edit HTML tags."
+msgid "<font size='4'>Feels: %1</font><br />"
+msgstr "<font size='4'>Sensación: %1</font><br />"
+
+#: ../contents/ui/main.qml
+msgctxt "Do not edit HTML tags. 'Wnd Spd' means Wind Speed"
+msgid "<font size='4'>Wnd spd: %1</font><br />"
+msgstr "<font size='4'>Veloc. viento: %1</font><br />"
+
+#: ../contents/ui/main.qml
+msgid "Set the weather station to pull data from."
+msgstr "Configure la estación meteorológica para extraer datos."
+
+#: ../contents/ui/main.qml
+msgid "Please Configure"
+msgstr "Configurar por favor"
+
+#: ../contents/ui/main.qml ../contents/ui/TopPanel.qml
+msgid "Loading..."
+msgstr "Cargando..."
+
+#: ../contents/ui/main.qml
+msgid "Error..."
+msgstr "Error..."
+
+#: ../contents/ui/SwitchPanel.qml
+msgid "Weather Details"
+msgstr "Detalles del clima"
+
+#: ../contents/ui/SwitchPanel.qml
+msgid "Forecast"
+msgstr "Pronóstico"
+
+#: ../contents/ui/TopPanel.qml
+msgid "High: %1 Low: %2"
+msgstr "Alto: %1 Bajo: %2"

@@ -1,0 +1,16 @@
+[Desktop Entry]
+Name=Preview Reel
+Comment=
+
+Type=Service
+X-KDE-ServiceTypes=KWin/WindowSwitcher
+
+X-Plasma-API=declarativeappletscript
+X-Plasma-MainScript=ui/main.qml
+
+Icon=preferences-system-windows-switcher-big-icons
+X-KDE-PluginInfo-Author=Mohamed Helmy
+X-KDE-PluginInfo-Email=helmym40@gmail.com
+X-KDE-PluginInfo-Name=preview_reel
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Depends=

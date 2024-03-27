@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+                          http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
+  <kcfgfile name=""/>
+  <group name="General">
+    <entry name="allEntries" type="StringList">
+      <label>All entries</label>
+    </entry>
+    <entry name="hideEntries" type="StringList">
+      <label>Hidden entries</label>
+    </entry>
+    <entry name="rebootMode" type="Enum">
+      <label>Reboot behaviour</label>
+      <choices>
+        <choice name="now">
+          <label>Immediately</label>
+        </choice>
+        <choice name="confirm">
+          <label>Ask confirmation</label>
+        </choice>
+        <choice name="none">
+          <label>No reboot</label>
+        </choice>
+      </choices>
+      <default>0</default>
+    </entry>
+  </group>
+</kcfg>

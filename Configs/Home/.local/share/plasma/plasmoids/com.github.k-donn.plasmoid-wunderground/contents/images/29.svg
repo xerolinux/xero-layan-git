@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   enable-background="new 0 0 512 512"
+   height="552"
+   id="Layer_1"
+   version="1.1"
+   viewBox="0 0 552 552"
+   width="552"
+   xml:space="preserve"
+   sodipodi:docname="29.svg"><metadata
+   id="metadata9"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
+   id="defs7" /><sodipodi:namedview
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="0"
+   inkscape:pageshadow="2"
+   inkscape:window-width="640"
+   inkscape:window-height="480"
+   id="namedview5"
+   fit-margin-top="20"
+   fit-margin-left="20"
+   fit-margin-right="20"
+   fit-margin-bottom="20" />
+	<style
+   id="current-color-scheme" />
+	<path
+   class="ColorScheme-Text"
+   fill="currentColor"
+   d="m 455.062,282.166 c 4.875,-3.625 9.812,-7.187 14.229,-11.604 13.208,-13.229 23.271,-29.333 29.792,-47.854 2.083,-5.792 0.604,-12.292 -3.772,-16.625 -4.354,-4.375 -10.812,-5.854 -16.622,-3.792 -35.396,12.5 -73.688,4 -99.896,-22.25 -26.249,-26.25 -34.791,-64.521 -22.249,-99.896 2.042,-5.812 0.583,-12.271 -3.792,-16.646 -4.333,-4.333 -10.812,-5.833 -16.625,-3.791 -18.542,6.583 -34.625,16.625 -47.834,29.833 -33.541,33.5 -43.979,81 -32.479,123.792 -43.25,5.521 -82.125,28.5 -108.021,63.792 C 142.563,276.375 137.313,276 132,276 70.25,276 20,326.249 20,388 c 0,61.75 50.25,112 112,112 13.688,0 27.084,-2.501 39.709,-7.334 28.956,25.25 65.79,39.334 104.29,39.334 38.542,0 75.333,-14.084 104.291,-39.334 12.625,4.833 26.021,7.334 39.709,7.334 61.75,0 112,-50.25 112,-112 C 532,338.562 499.583,296.979 455.062,282.166 Z M 310.916,112.167 c 2.542,-2.583 5.271,-4.979 8.146,-7.229 -2.25,35.979 10.729,71.375 37.104,97.729 26.376,26.375 61.771,39.333 97.751,37.104 -13.792,17.584 -32.792,28.521 -53.126,33.188 -27.375,-34.75 -67.604,-56.624 -111.958,-60.187 -12.271,-33.959 -5.083,-73.439 22.083,-100.605 z"
+   id="hint-apply-color-scheme" />
+</svg>
