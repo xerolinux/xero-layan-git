@@ -1,6 +1,7 @@
 import QtQuick
 
 import org.kde.plasma.plasmoid
+import org.kde.plasma.components as PlasmaComponents
 
 PlasmoidItem {
   id: root
@@ -10,15 +11,11 @@ PlasmoidItem {
   preferredRepresentation: compactRepresentation
 
   compactRepresentation: CompactRepresentation { id: compact }
-  fullRepresentation: FullRepresentation {
-    id: full
-    eligible: bootMgr.canEfi || bootMgr.canMenu || bootMgr.canEntry || bootMgr.bootEntries.count > 0
-  }
+
+  fullRepresentation: FullRepresentation { id: full }
 
   Component.onCompleted: {
-    plasmoid.configuration.allEntries = []
-    bootMgr.doChecks()
-    bootMgr.getEntries()
+    bootMgr.initialize()
   }
 
 }

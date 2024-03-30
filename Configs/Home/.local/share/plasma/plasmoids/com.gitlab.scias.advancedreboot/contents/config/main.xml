@@ -26,5 +26,20 @@
       </choices>
       <default>0</default>
     </entry>
+    <!-- TODO: GET RID OF THIS TERRIBLE WORKAROUND -->
+    <entry name="sysdOK" type="Bool">
+    </entry>
+    <entry name="bctlOK" type="Bool">
+    </entry>
+    <entry name="gotEntries" type="Bool">
+    </entry>
+    <entry name="canEfi" type="Bool">
+    </entry>
+    <entry name="canMenu" type="Bool">
+    </entry>
+    <entry name="canEntry" type="Bool">
+    </entry>
+    <entry name="gotEntries" type="Bool">
+    </entry>
   </group>
 </kcfg>

@@ -11,27 +11,46 @@ This allows you to quickly reboot into Windows, the EFI or bootloader menu, othe
 
 **Other bootloaders (GRUB/rEFInd...) and non-systemd systems are NOT supported!**
 
+## Troubleshooting
+
+In addition to the requirements above, some other criterias must be met in order for this applet to fully work :
+
+- The EFI partition (esp) must be user accessible
+
+By default, most Linux distributions hide it completely to the user for security reasons. This makes bootctl listing impossible without root.
+You can work around this by making the esp readable to users by editing your /etc/fstab file and setting the esp fmask and dmask values to 0022.
+```
+UUID=xxxxx  /efi   vfat    ...,fmask=0022,dmask=0022,...
+```
+From version 0.5 this applet will work without the need of such workaround.
+
+- The required DBus methods must be usable without root
+
+A few distributions (like OpenSUSE) make the user unable to interact with bootctl (via DBus) without root. For now there's no solution to this issue yet.
+
+## Tested on
+
+- ✅ **Archlinux** - Should work out of the box
+- 🟨 **Endeavour OS** - See Troubleshooting
+- 🟨 **Fedora KDE (Rawhide)** - See Troubleshooting
+- 🚫 **KDE Neon (based on Ubuntu 22.04)** - systemd/bootctl version is too old
+- 🚫 **OpenSUSE Tumbleweed** - busctl requires root for setting bootnext
+
 ## Roadmap / TODO
 
-- [ ] Improve the look
+- [ ] Improve look and feel
 - [X] Translation support
 - [X] Custom icons
 - [X] Detect if requirements are really met and warn the user/disable the feature if not
 - [X] Dynamically get and list all the bootloader entries
 - [X] Ability to tweak visibility of every entry
-- [ ] Show which entry is currently the active one
-- [ ] Show which entry has been set for next boot
 - [X] Ability to just set the flag without rebooting immediately
-- [ ] Better error detection and reporting
-- [ ] Allow customisation of entry names, logos and order
-
-## Tested on
-
-- ✅ **Archlinux** - Should work out of the box
-- 🟨 **Endeavour OS** - See Troubleshooting #1
-- 🚫 **Fedora KDE (Rawhide)** - Planned fix in 0.41. Workaround: `ln -s /usr/bin/qtbus-qt6 /usr/bin/qdbus6` + See Troubleshooting #1
-- 🚫 **KDE Neon (Ubuntu 22.04)** - systemd/bootctl version is too old
-- 🚫 **OpenSUSE** - See Troubleshooting #2
+- [X] Better error detection and reporting (0.45)
+- [ ] Ask for root to get the initial entry list for the distros that hide the ESP by default (0.5)
+- [ ] Show detailed entry info/metadata (0.6)
+- [ ] Show which entry is currently the active one (0.6x)
+- [ ] Show which entry has been set for next boot (0.6x)
+- [ ] Allow customisation of entry names, logos and order (0.7)
 
 ## Translations
 
@@ -39,31 +58,6 @@ This allows you to quickly reboot into Windows, the EFI or bootloader menu, othe
 - [X] Dutch (by Heimen Stoffels)
 
 If you wish to contribute your own translation, a template.pot file is available in the translate folder.
-
-## Bugs
-
-- This will not work if sudo/root is needed for dbus or bootctl interaction. (eg: OpenSUSE)
-
-## Troubleshooting
-
-In addition to the requirements above, certain other criterias must be met in order for this plasmoid to work. Unfortunately distributions do things differently by default.
-If despite meeting the above requirements :
-
-- No entries are listed (applet can't work error) : Check point 1 below.
-- Entries are listed but it doesn't reboot to the chosen entry (reboots normally instead) : Check point 2 below
-
-**1. The ESP (/boot/efi or /efi) must be user-accessible.**
-
-To check this, run "bootctl list" as the user. If you get a permissions error, you have to edit your ESP's fstab options line in /etc/fstab.
-Edit the fmask and dmask values to 0022 so that the line looks like this:
-```
-UUID=xxxxx  /efi   vfat    ...,fmask=0022,dmask=0022,...
-```
-Then reboot or remount the partition.
-
-**2. The logind D-Bus methods must be user-accessible**
-
-For now there's no easy solution I know for this. One possible way would be to ask for sudo priviledges (via pkexec) when choosing an entry which in my opinion is a terrible workaround...
 
 ## License
 

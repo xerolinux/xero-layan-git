@@ -26,14 +26,14 @@ import "../code/pws-api.js" as StationAPI
 PlasmoidItem {
     id: root
 
-    property var weatherData: null
+    property var weatherData: {"stationID":"","uv":0,"obsTimeLocal":"","winddir":0,"details":{"temp":0,"windSpeed":0,"windGust":0,"dewpt":0,"precipRate":0,"pressure":0,"precipTotal":0,"elev":0},"aq":{"aqi":"","aqhi":"","aqDesc":"","aqColor":""},"alerts":[]}
     property ListModel forecastModel: ListModel {}
     property string errorStr: ""
     property string toolTipSubTextVar: ""
     property string iconCode: "weather-clear" // 32 = sunny
     property string conditionNarrative: ""
 
-    // TODO: add option for showFORECAST and showFORECASTERROR
+    // TODO: add option for showFORECASTERROR
     property int showCONFIG: 1
     property int showLOADING: 2
     property int showERROR: 4

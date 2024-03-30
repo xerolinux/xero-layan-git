@@ -46,7 +46,7 @@ let iconThemeMap = {
 	23: "weather-clouds-wind-symbolic",
 	24: "weather-clouds-wind-symbolic",
 	25: "weather-snow-symbolic",
-	26: "weather-clouds-symbolic",
+	26: "weather-many-clouds-symbolic",
 	27: "weather-many-clouds-symbolic",
 	28: "weather-clouds-symbolic",
 	29: "weather-clouds-night-symbolic",
@@ -123,6 +123,8 @@ function getCurrentData() {
 
 				var res = JSON.parse(req.responseText);
 
+				// The nested section name returned in JSON is the units type
+				// So res cannot be directly assigned to weatherData
 				var tmp = {};
 				var tmp = res["observations"][0];
 
@@ -312,6 +314,10 @@ function getNearestStation() {
 	req.send();
 }
 
+// TODO: replace with getExtendedConditions
+/**
+ * Get icon code for display in TopPanel and CompactRep
+ */
 function findIconCode() {
 	var req = new XMLHttpRequest();
 
@@ -373,3 +379,88 @@ function findIconCode() {
 
 	req.send();
 }
+
+/**
+ * Get broad weather info from station area including textual/icon description of conditions and weather warnings.
+ */
+function getExtendedConditions() {
+	var req = new XMLHttpRequest();
+
+	var long = plasmoid.configuration.longitude;
+	var lat = plasmoid.configuration.latitude;
+
+	var url = "https://api.weather.com/v3/aggcommon/v3-wx-observations-current;v3alertsHeadlines;v3-wx-globalAirQuality";
+
+	url += "?geocodes=" + lat + "," + long;
+	url += "&apiKey=" + API_KEY;
+	url += "&language=en-US";
+	url += "&scale=EPA"
+
+	if (unitsChoice === 0) {
+		url += "&units=m";
+	} else if (unitsChoice === 1) {
+		url += "&units=e";
+	} else {
+		url += "&units=h";
+	}
+
+	url += "&format=json";
+
+	req.open("GET", url);
+
+	req.setRequestHeader("Accept-Encoding", "gzip");
+	req.setRequestHeader("Origin", "https://www.wunderground.com");
+
+	req.onerror = function () {
+		printDebug("[pws-api.js] " + req.responseText);
+	};
+
+	printDebug("[pws-api.js] " + url);
+
+	req.onreadystatechange = function () {
+		if (req.readyState == 4) {
+			if (req.status == 200) {
+				var res = JSON.parse(req.responseText);
+
+				var combinedVars = res[0]
+
+				var condVars = combinedVars["v3-wx-observations-current"]
+				var alertsVars = combinedVars["v3alertsHeadlines"]
+				var airQualVars = combinedVars["v3-wx-globalAirQuality"]["globalairquality"]
+
+				iconCode = iconThemeMap[condVars["iconCode"]];
+				conditionNarrative = condVars["wxPhraseLong"];
+
+				// Determine if the precipitation is snow or rain
+				// All of these codes are for snow
+				if (
+					iconCode === 5 ||
+					iconCode === 13 ||
+					iconCode === 14 ||
+					iconCode === 15 ||
+					iconCode === 16 ||
+					iconCode === 42 ||
+					iconCode === 43 ||
+					iconCode === 46
+				) {
+					isRain = false;
+				}
+
+				if (alertsVars !== null) {
+					// TODO: parse and show weather alerts
+				}
+
+				weatherData["aq"]["aqi"] = airQualVars["airQualityIndex"]
+				weatherData["aq"]["aqhi"] = airQualVars["airQualityCategoryIndex"]
+				weatherData["aq"]["aqDesc"] = airQualVars["airQualityCategory"]
+				weatherData["aq"]["aqColor"] = airQualVars["airQualityCategoryIndexColor"]
+
+			}
+		}
+	};
+
+	req.send();
+}
+
+/**
+ * Get air quality

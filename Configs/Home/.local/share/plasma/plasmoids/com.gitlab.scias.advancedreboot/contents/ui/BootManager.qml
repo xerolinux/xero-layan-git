@@ -5,21 +5,30 @@ import org.kde.plasma.plasma5support as Plasma5Support
 
 Item {
 
-    readonly property string cmdGetEntries: "bootctl list --json=short"
+    // TODO: 0.5 / sudo
+    //property bool requiresRoot: false
+    readonly property string cmdSudo: "pkexec "
 
-    // TODO: Use busctl instead of qdbus
-    readonly property string cmdPre: "qdbus6 --system org.freedesktop.login1 /org/freedesktop/login1 org.freedesktop.login1.Manager."
+    readonly property int minVersion: 251 // Minimum systemd version required
+    readonly property string cmdDbusPre: "busctl"
+    readonly property string cmdSdboot: "bootctl"
+    readonly property string cmdDbusCheck: cmdDbusPre + " --version"
+    readonly property string cmdSdbootCheck: cmdSdboot + " --version"
+    readonly property string cmdDbusPath: "org.freedesktop.login1 /org/freedesktop/login1 org.freedesktop.login1.Manager"
 
-    readonly property string cmdSetEfi: "SetRebootToFirmwareSetup"
-    readonly property string cmdSetMenu: "SetRebootToBootLoaderMenu"
-    readonly property string cmdSetEntry: "SetRebootToBootLoaderEntry"
+    readonly property string cmdGetEntries: cmdSdboot + " list --json=short --no-pager"
 
-    readonly property string cmdCheckEfi: "CanRebootToFirmwareSetup"
-    readonly property string cmdCheckCustom: "CanRebootToBootLoaderEntry"
-    readonly property string cmdCheckMenu: "CanRebootToBootLoaderMenu"
+    readonly property string cmdCheckEfi: cmdDbusPre + " call " + cmdDbusPath + " CanRebootToFirmwareSetup --json=short"
+    readonly property string cmdCheckCustom: cmdDbusPre + " call " + cmdDbusPath + " CanRebootToBootLoaderEntry --json=short"
+    readonly property string cmdCheckMenu: cmdDbusPre + " call " + cmdDbusPath + " CanRebootToBootLoaderMenu --json=short"
+
+    readonly property string cmdSetEfi: cmdDbusPre + " call " + cmdDbusPath + " SetRebootToFirmwareSetup b true" 
+    readonly property string cmdSetMenu: cmdDbusPre + " call " + cmdDbusPath + " SetRebootToBootLoaderMenu t 0"
+    readonly property string cmdSetEntry: cmdDbusPre + " call " + cmdDbusPath + " SetRebootToBootLoaderEntry s "
 
     readonly property var ignoreEntries: ["auto-reboot-to-firmware-setup"]
-    readonly property var systemEntries: ["auto-efi-shell", "bootloader-menu"]
+    //TODO: sections
+    //readonly property var systemEntries: ["auto-efi-shell", "bootloader-menu"]
 
     readonly property string defaultIcon: "default"
     readonly property var iconMap: {
@@ -41,10 +50,23 @@ Item {
         "Linux" : "linux",
     }
 
-    property bool canEntry: false
-    property bool canMenu: false
-    property bool canEfi: false
+    property var busctlOK: null
+    property var bootctlOK: null
+    property var canEntry: null
+    property var canMenu: null
+    property var canEfi: null
+    property var gotEntries: null
 
+    enum State {
+        ReqPass,
+        GotEntries,
+        Ready,
+        Error,
+        RootRequired
+    }
+    property int step: -1
+
+    // TODO: Optimisation: use a temporary model
     property var bootEntries: ListModel { }
     
     SessionManagement {
@@ -58,31 +80,70 @@ Item {
         
         onNewData: (cmd, data) => {
             const stdout = data["stdout"]
+            const stderr = data["stderr"]
 
-            if (cmd == cmdGetEntries) {
-                const rawEntries = JSON.parse(stdout)
-                for (const entry of rawEntries) {
-                    if (!ignoreEntries.includes(entry.id)) {
-                        bootEntries.append(mapEntry(entry.id, entry.title, entry.showTitle))
-                    }
-                }
+            disconnectSource(cmd)
+
+            if (cmd == cmdDbusCheck) {
+                if (stdout && !stderr) {
+                    const resp = stdout.split(" ")
+                    busctlOK = parseInt(resp[1]) >= minVersion
+                } else busctlOK = false
+            }
+            else if (cmd == cmdSdbootCheck) {
+                // Assume bootctl version == busctl version
+                bootctlOK = !stderr
             }
             else {
-                if (cmd.includes(cmdCheckCustom)) {
-                    canEntry = true
-                }
-                else if (stdout == "yes\n") {
-                    if (cmd.includes(cmdCheckMenu)) {
-                        bootEntries.append(mapEntry("bootloader-menu", "Bootloader Menu", "Bootloader Menu"))
-                        canMenu = true
+                let json
+                try { json = JSON.parse(stdout) }
+                catch (err) {
+                    if (stderr.includes("Permission")) {
+                        step = BootManager.RootRequired
+                        return
                     }
-                    else if (cmd.includes(cmdCheckEfi)) {
-                        bootEntries.append(mapEntry("firmware-setup", "Firmware Setup", "Firmware Setup"))
-                        canEfi = true
+                    else {
+                        gotEntries = false
+                        step = BootManager.GotEntries
+                    }
+                }
+                if (cmd == cmdCheckCustom) {
+                    canEntry = json.data == "yes"
+                    if (canEntry) getEntries(false)
+                    else step = BootManager.GotEntries
+                }
+                else if (cmd == cmdCheckMenu) {
+                    canMenu = json.data == "yes"
+                    if (canMenu) bootEntries.append(mapEntry("bootloader-menu", "Bootloader Menu", i18n("Bootloader Menu")))
+                }
+                else if (cmd == cmdCheckEfi) {
+                    canEfi = json.data == "yes"
+                    if (canEfi) bootEntries.append(mapEntry("firmware-setup", "Firmware Setup", i18n("Firmware Setup")))
+                }
+                else if (cmd.includes(cmdGetEntries)) {
+                    if (step != BootManager.GotEntries) {
+                        for (const entry of json) {
+                            if (!ignoreEntries.includes(entry.id)) {
+                                bootEntries.append(mapEntry(entry.id, entry.title, entry.showTitle))
+                            }
+                        }
+                        step = BootManager.GotEntries
+                        gotEntries = true
                     }
                 }
             }
-            disconnectSource(cmd)
+
+            if (step === -1) {
+                if (busctlOK && bootctlOK) {
+                    step = BootManager.ReqPass
+                    getAbilities()
+                }
+                else if (busctlOK === false || bootctlOK === false) {
+                    step = BootManager.Error
+                }
+            }
+
+            if (step >= BootManager.GotEntries) finish(false)
 
         }
 
@@ -94,12 +155,12 @@ Item {
 
     function mapEntry(id, title, fullTitle) {
         let bIcon = defaultIcon
-        let system = systemEntries.includes(id)
+        //let system = systemEntries.includes(id)
         let cmd
 
-        if (id == "bootloader-menu") cmd = cmdSetMenu + " true"
-        else if (id == "firmware-setup") cmd = cmdSetEfi + " true"
-        else cmd = cmdSetEntry + " " + id
+        if (id == "bootloader-menu") cmd = cmdSetMenu
+        else if (id == "firmware-setup") cmd = cmdSetEfi
+        else cmd = cmdSetEntry + id
 
         for (const key in iconMap) {
             if (title.includes(key)) {
@@ -115,7 +176,7 @@ Item {
 
         return ({
             id: id,
-            system: system,
+            //system: system,
             title: title,
             fullTitle: fullTitle,
             bIcon: Qt.resolvedUrl("../../assets/icons/" + bIcon + ".svg"),
@@ -125,24 +186,53 @@ Item {
 
     }
 
-    function doChecks() {
-        // TODO: check busctl/bootctl better and abort if not good
-        executable.exec(cmdPre + cmdCheckEfi)
-        executable.exec(cmdPre + cmdCheckMenu)
-        executable.exec(cmdPre + cmdCheckCustom)
+    function initialize() {
+        plasmoid.configuration.allEntries = []
+        executable.exec(cmdDbusCheck)
+        executable.exec(cmdSdbootCheck)
     }
 
-    function getEntries() {
-        executable.exec(cmdGetEntries)
+    function getAbilities() {
+        executable.exec(cmdCheckEfi)
+        executable.exec(cmdCheckMenu)
+        executable.exec(cmdCheckCustom)
     }
 
-    function bootEntry(cmdEnd) {
-        executable.exec(cmdPre + cmdEnd)
+    function getEntries(root) {
+        let cmd = cmdGetEntries
+        if (root) cmd = cmdSudo + cmd
+        executable.exec(cmd)
+    }
+
+    function bootEntry(cmd) {
+        executable.exec(cmd)
         let mode = plasmoid.configuration.rebootMode
         if (mode === 0 || mode === 1) {
             session["requestReboot"](mode)
         }
     }
 
+    function finish(skip) {
+
+        if (skip) step = BootManager.GotEntries
+
+        if (step === BootManager.GotEntries && canEntry !== null && canEfi !== null && canMenu !== null) {
+            step = (canEntry || canEfi || canMenu) ? BootManager.Ready : BootManager.Error
+            loaded(step)
+        }
+
+        if (step >= BootManager.Ready) {
+                // TERRRIBLE WORKAROUND - GIVE INFO TO CONFIG PANEL
+                plasmoid.configuration.sysdOK = busctlOK
+                plasmoid.configuration.bctlOK = bootctlOK
+                plasmoid.configuration.canEfi = canEfi
+                plasmoid.configuration.canMenu = canMenu
+                plasmoid.configuration.canEntry = canEntry
+                plasmoid.configuration.gotEntries = gotEntries
+                // TODO: Save all entries in configuration once ready
+        }
+    }
+
+    signal loaded(int step)
 
 }

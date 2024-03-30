@@ -9,7 +9,7 @@ import org.kde.kcmutils as KCM
 // TODO: Better look
 // TODO?: Clean hideEntries in case of config changed
 KCM.ScrollViewKCM {
-  id: root
+  id: generalRoot
 
   property alias cfg_rebootMode: rebootMode.currentIndex
 
@@ -18,6 +18,7 @@ KCM.ScrollViewKCM {
     horizontalAlignment: Text.AlignHCenter
     verticalAlignment: Text.AlignVCenter
     text: i18n("Displayed boot entries in the plasmoid view")
+    wrapMode: Text.WordWrap
   }
 
   view: ListView {
@@ -37,9 +38,10 @@ KCM.ScrollViewKCM {
       sIcon: "dialog-error-symbolic"
       message: i18n("No boot entries could be found.\nPlease check that your system meets the requirements.")
       show: plasmoid.configuration.allEntries == 0
-      // TODO: add open configuration button
-      //plasmoid.action("configure").trigger()
     }
+
+    //TODO: Placeholder while entries not ready yet
+
   }
 
   footer: RowLayout {

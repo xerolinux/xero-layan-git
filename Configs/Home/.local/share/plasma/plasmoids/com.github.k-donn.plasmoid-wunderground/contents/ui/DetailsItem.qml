@@ -47,8 +47,9 @@ GridLayout {
         source: "gnumeric-object-arrow-symbolic"
         //source: "plasmoid/contents/images/wind-barbs/" + Utils.getWindBarb(weatherData["details"]["windSpeed"])+ ".svg"
 
-        // wind barb icons are -90/270 degrees deviated from 0 degrees (north)
+        // wind barb icons are 270 degrees deviated from 0 degrees (north)
         //rotation: weatherData["winddir"] - 270
+
         // new rotation for icons:
         rotation: weatherData["winddir"] - 135
 
@@ -57,6 +58,7 @@ GridLayout {
         Layout.preferredWidth: Layout.minimumWidth
         Layout.preferredHeight: Layout.minimumHeight
     }
+
     PlasmaComponents.Label {
         id: windLabel
         text: i18n("WIND & GUST")
@@ -73,7 +75,7 @@ GridLayout {
     }
     PlasmaComponents.Label {
         id: windDirCard
-        text: i18n("Wind from: %1", Utils.windDirToCard(weatherData["winddir"]))
+        text: i18n("Wind from: %1 (%2°)", Utils.windDirToCard(weatherData["winddir"]),weatherData["winddir"])
         font.pointSize: plasmoid.configuration.propPointSize
     }
     PlasmaComponents.Label {

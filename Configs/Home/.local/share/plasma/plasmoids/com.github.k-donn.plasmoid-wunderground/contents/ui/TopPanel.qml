@@ -31,7 +31,7 @@ RowLayout {
     Kirigami.Icon {
         id: topPanelIcon
 
-	source: iconCode
+        source: iconCode
 
         Layout.minimumWidth: Kirigami.Units.iconSizes.large
         Layout.minimumHeight: Kirigami.Units.iconSizes.large
