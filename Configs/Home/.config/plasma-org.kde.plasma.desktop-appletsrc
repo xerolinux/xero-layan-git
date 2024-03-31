@@ -428,13 +428,14 @@ DialogWidth=720
 
 [Containments][132][Applets][223][Configuration][General]
 checkOnStartup=true
+middleClick=upgradeSystem
+rightClick=checkUpdates
 timestamp=1711316477584
 
 [Containments][132][Applets][223][Configuration][Misc]
 timestamp=1710850669270
 
 [Containments][132][Applets][223][Configuration][Upgrade]
-terminal=/usr/bin/konsole
 wrapperUpgrade=true
 
 [Containments][132][Applets][228]
