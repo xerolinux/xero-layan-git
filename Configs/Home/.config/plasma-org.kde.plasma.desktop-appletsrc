@@ -503,6 +503,9 @@ DialogWidth=720
 immutability=1
 plugin=org.kde.plasma.trash
 
+[Containments][168][Applets][232][Configuration]
+PreloadWeight=55
+
 [Containments][168][ConfigDialog]
 DialogHeight=87
 DialogWidth=2560

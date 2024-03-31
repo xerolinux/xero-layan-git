@@ -152,11 +152,12 @@ LookAndFeelPackage=com.github.vinceliuice.Layan
 ShowDeleteCommand=true
 SingleClick=false
 contrast=0
+widgetStyle=kvantum-dark
 
 [KFileDialog Settings]
 Allow Expansion=false
 Automatically select filename extension=true
-Breadcrumb Navigation=true
+Breadcrumb Navigation=false
 Decoration position=2
 LocationCombo Completionmode=5
 PathCombo Completionmode=5
@@ -165,19 +166,20 @@ Show Full Path=false
 Show Inline Previews=true
 Show Preview=false
 Show Speedbar=true
-Show hidden files=false
-Sort by=Name
+Show hidden files=true
+Sort by=Type
 Sort directories first=true
 Sort hidden files last=false
 Sort reversed=false
 Speedbar Width=138
 View Style=Simple
 
+[KScreen]
+ScreenScaleFactors=HDMI-A-1=1;HDMI-A-2=1;DP-1=1;
+XwaylandClientsScale=false
+
 [PreviewSettings]
 MaximumRemoteSize=0
-
-[Sounds]
-Theme=oxygen
 
 [WM]
 activeBackground=54,56,62

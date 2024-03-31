@@ -43,7 +43,7 @@ Meta=org.kde.lattedock,/Latte,org.kde.LatteDock,activateLauncherMenu
 [Plugins]
 autocomposerEnabled=false
 blurEnabled=true
-contrastEnabled=false
+contrastEnabled=true
 cubeEnabled=true
 desktopchangeosdEnabled=false
 dynamic_workspacesEnabled=true
@@ -98,8 +98,20 @@ tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"wi
 [Tiling][bce2cc06-f65b-5571-823c-b67750620a63]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
+[Tiling][be49f4ee-86fd-5b3d-9cef-03175d095fce]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][f3633089-b0bd-59f0-a1c3-5265ab8bb0e9]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][ffbf4450-f42f-531d-be28-e14bc2ae5e70]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
 [Windows]
 Placement=Centered
 
 [Xwayland]
 Scale=1
+
+[org.kde.kdecoration2]
+theme=__aurorae__svg__Layan

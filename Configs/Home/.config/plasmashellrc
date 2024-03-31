@@ -1,35 +1,67 @@
-[Applets][189]
+[Applets][197]
 immutability=1
 plugin=org.kde.plasma.weather
 
-[Applets][189][Configuration]
-PreloadWeight=70
+[Applets][197][Configuration]
+PreloadWeight=80
 configMigrated=true
 
-[Applets][189][Configuration][ConfigDialog]
+[Applets][197][Configuration][Appearance]
+showHumidityInTooltip=false
+showTemperatureInBadge=true
+showTemperatureInCompactMode=true
+showWindInTooltip=false
+
+[Applets][197][Configuration][ConfigDialog]
 DialogHeight=540
 DialogWidth=720
 
-[Applets][189][Configuration][Units]
+[Applets][197][Configuration][Units]
 pressureUnit=5029
 speedUnit=9001
 temperatureUnit=6001
 visibilityUnit=2007
 
-[Applets][189][Configuration][WeatherStation]
+[Applets][197][Configuration][WeatherStation]
+source=wettercom|weather|Jdaidé, Mohafazat Mont-Liban, LB|LB0279854;Jdaidé
+
+[Applets][199]
+immutability=1
+plugin=org.kde.plasma.weather
+
+[Applets][199][Configuration]
+PreloadWeight=0
+configMigrated=true
+
+[Applets][199][Configuration][ConfigDialog]
+DialogHeight=540
+DialogWidth=720
+
+[Applets][199][Configuration][Units]
+pressureUnit=5022
+speedUnit=9001
+temperatureUnit=6001
+visibilityUnit=2007
+
+[Applets][199][Configuration][WeatherStation]
 source=wettercom|weather|Beirut, Beyrouth, LB|LB0BA0002;Beirut
+
+[KPropertiesDialog]
+3 screens: Height=524
+3 screens: Width=568
 
 [PlasmaViews][Panel 126]
 alignment=132
 floating=1
-panelLengthMode=1
+panelLengthMode=2
 panelOpacity=2
 panelVisibility=2
 
 [PlasmaViews][Panel 126][Defaults]
+floating=0
 maxLength=2502
 minLength=2502
-thickness=42
+thickness=40
 
 [PlasmaViews][Panel 126][Horizontal2560]
 maxLength=2502
@@ -43,13 +75,10 @@ panelOpacity=2
 panelVisibility=2
 
 [PlasmaViews][Panel 168][Defaults]
-maxLength=574
-minLength=392
-thickness=50
-
-[PlasmaViews][Panel 168][Horizontal1920]
-maxLength=574
-minLength=392
+floating=0
+maxLength=1822
+minLength=342
+thickness=46
 
 [PlasmaViews][Panel 168][Horizontal2560]
 maxLength=1822
@@ -58,10 +87,12 @@ minLength=342
 [PlasmaViews][Panel 2]
 alignment=132
 floating=1
+panelLengthMode=2
 panelOpacity=2
 panelVisibility=0
 
 [PlasmaViews][Panel 2][Defaults]
+floating=0
 maxLength=1870
 minLength=1870
 thickness=0
