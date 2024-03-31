@@ -21,6 +21,7 @@ SimpleKCM {
 
     property alias cfg_aur: aur.checked
     property alias cfg_flatpak: flatpak.checked
+    property alias cfg_archNews: archNews.checked
 
     property string cfg_wrapper: plasmoid.configuration.wrapper
 
@@ -57,12 +58,22 @@ SimpleKCM {
             Label {
                 text: i18n("minutes")
             }
+
+            ContextualHelpButton {
+                toolTipText: "<p>The current timer is reset when either of these settings is changed.</p>"
+            }
         }
 
-        CheckBox {
-            id: checkOnStartup
-            text: "Check on start up"
-            enabled: interval.checked
+        RowLayout {
+            CheckBox {
+                id: checkOnStartup
+                text: "Check on start up"
+                enabled: interval.checked
+            }
+
+            ContextualHelpButton {
+                toolTipText: "<p>If the option is <b>enabled</b>, update checking will begin immediately upon widget startup.</p><br><p>If the option is <b>disabled</b>, update checking will be initiated after a specified time interval has passed since the widget was started.</p>"
+            }
         }
 
         Item {
@@ -119,6 +130,17 @@ SimpleKCM {
                 font.pointSize: tip.font.pointSize
                 color: Kirigami.Theme.neutralTextColor
                 visible: !pkg.flatpak
+            }
+        }
+
+        RowLayout {
+            CheckBox {
+                id: archNews
+                text: "Arch Linux News"
+            }
+
+            ContextualHelpButton {
+                toolTipText: "<p>It is necessary to have paru or yay installed.</p>"
             }
         }
 
@@ -239,10 +261,16 @@ SimpleKCM {
             }
         }
 
-        CheckBox {
-            id: notifyEveryBump
-            text: i18n("For every version bump")
-            enabled: notifications.checked
+        RowLayout {
+            CheckBox {
+                id: notifyEveryBump
+                text: i18n("For every version bump")
+                enabled: notifications.checked
+            }
+
+            ContextualHelpButton {
+                toolTipText: "<p>If the option is <b>enabled</b>, notifications will be sent when a new version of the package is bumped, even if the package is already on the list. <b>More notifications.</b></p><br><p>If the option is <b>disabled</b>, notifications will only be sent for packages that are not yet on the list. <b>Less notifications.</b></p>"
+            }
         }
 
         Kirigami.Separator {

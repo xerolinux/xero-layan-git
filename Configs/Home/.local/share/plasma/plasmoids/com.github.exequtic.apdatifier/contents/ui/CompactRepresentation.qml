@@ -25,20 +25,21 @@ Item {
             width: JS.setFrameSize()
             height: width * 0.9
             opacity: 0
-            visible: cfg.indicatorUpdates && !busy && plasmoid.location !== PlasmaCore.Types.Floating
+            visible: !busy && plasmoid.location !== PlasmaCore.Types.Floating
         }
 
         Rectangle {
             id: circle
-            width: frame.width / 3.7
+            width: Math.round((frame.width / 4) + cfg.indicatorSize)
             height: width
             radius: width / 2
-            visible: frame.visible && cfg.indicatorCircle && (error || count)
+            visible: frame.visible && cfg.indicatorUpdates && cfg.indicatorCircle && (error || count)
             color: error ? Kirigami.Theme.negativeTextColor
                  : cfg.indicatorColor ? cfg.indicatorColor
                  : Kirigami.Theme.highlightColor
 
             anchors {
+                centerIn: JS.setAnchor("parent")
                 top: JS.setAnchor("top")
                 bottom: JS.setAnchor("bottom")
                 right: JS.setAnchor("right")
@@ -48,12 +49,12 @@ Item {
 
         Rectangle {
             id: counterFrame
-            width: counter.width + frame.width / 8
-            height: cfg.indicatorScale ? frame.width / 3 : counter.height
+            width: Math.round(counter.width + (counter.width / 4))
+            height: counter.height
             radius: width * 0.35
             color: Kirigami.Theme.backgroundColor
-            opacity: 0.9
-            visible: frame.visible && cfg.indicatorCounter
+            opacity: 0.8
+            visible: frame.visible && cfg.indicatorUpdates && cfg.indicatorCounter
 
             Label {
                 id: counter
@@ -61,13 +62,14 @@ Item {
                 text: error ? "🛇" : (count || "✔")
                 renderType: Text.NativeRendering
                 font.bold: true
-                font.pointSize: cfg.indicatorScale ? frame.width / 5 : Kirigami.Theme.smallFont.pointSize
+                font.pointSize: Math.round((frame.width / 5) + cfg.indicatorSize)
                 color: error ? Kirigami.Theme.negativeTextColor
                      : !count ? Kirigami.Theme.positiveTextColor
                      : Kirigami.Theme.textColor
             }
 
             anchors {
+                centerIn: JS.setAnchor("parent")
                 top: JS.setAnchor("top")
                 bottom: JS.setAnchor("bottom")
                 right: JS.setAnchor("right")
@@ -89,7 +91,7 @@ Item {
                 anchors.centerIn: parent
                 text: "⏸"
                 renderType: Text.NativeRendering
-                font.pointSize: cfg.indicatorScale ? frame.width / 5 : Kirigami.Theme.smallFont.pointSize
+                font.pointSize: Math.round(frame.width / 5)
                 color: Kirigami.Theme.neutralTextColor
             }
 

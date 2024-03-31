@@ -6,7 +6,7 @@
 
 function catchError(code, err) {
     if (err) {
-        error = err.trim().substring(0, 100) + "..."
+        error = err.trim().substring(0, 150) + "..."
         setStatusBar(code)
         return true
     }
@@ -14,7 +14,7 @@ function catchError(code, err) {
 }
 
 const script = "$HOME/.local/share/plasma/plasmoids/com.github.exequtic.apdatifier/contents/tools/tools.sh"
-const cachefile = "$HOME/.local/share/plasma/plasmoids/com.github.exequtic.apdatifier/cache"
+const cachefile = "$HOME/.local/share/plasma/plasmoids/com.github.exequtic.apdatifier/cache.json"
 function runScript() {
     sh.exec(`${script} copy`, (cmd, stdout, stderr, exitCode) => {
         if (catchError(exitCode, stderr)) return
@@ -76,18 +76,14 @@ function defineCommands() {
     const wrapperCmd = trizen ? `${cfg.wrapper} -Qu; ${cfg.wrapper} -Qu -a 2> >(grep ':: Unable' >&2)` : `${cfg.wrapper} -Qu`
 
     cmd.arch = pkg.checkupdates
-        ? cfg.aur
-            ? `bash -c "(checkupdates; ${wrapperCmd}) | sort -u -t' ' -k1,1"`
-            : "checkupdates"
-        : cfg.aur
-            ? wrapperCmd
-            : "ping -c 1 archlinux.org >/dev/null 2>&1 || { echo 'No internet' >&2; exit 1; }; pacman -Qu"     
+                    ? cfg.aur ? `bash -c "(checkupdates; ${wrapperCmd}) | sort -u -t' ' -k1,1"` : "checkupdates"
+                    : cfg.aur ? wrapperCmd : "pacman -Qu"
 
     if (!pkg.pacman) delete cmd.arch
 
     const flatpak = cfg.flatpak ? "; flatpak update" : ""
-    const flags = cfg.upgradeFlags ? ` ${cfg.upgradeFlagsText}` : " "
-    const arch = cfg.wrapperUpgrade ? cfg.wrapper + " -Syu" + flags : "sudo pacman -Syu" + flags
+    const flags = cfg.upgradeFlags ? ` ${cfg.upgradeFlagsText.trim()}` : " "
+    const arch = cfg.aur ? cfg.wrapper + " -Syu" + flags.trim() : "sudo pacman -Syu" + flags.trim()
 
     if (cfg.terminal.split("/").pop() === "yakuake") {
         const qdbus = "qdbus org.kde.yakuake /yakuake/sessions"
@@ -100,7 +96,7 @@ function defineCommands() {
     const done = i18n("Press Enter to close")
     const blue = "\x1B[1m\x1B[34m", bold = "\x1B[1m", reset = "\x1B[0m"
     const exec = blue + ":: " + reset + bold + i18n("Executed: ") + reset
-    const executed = cfg.wrapperUpgrade && trizen ? "echo " : "echo; echo -e " + exec + arch + "; echo"
+    const executed = cfg.aur && trizen ? "echo " : "echo; echo -e " + exec + arch + "; echo"
 
     const trap = "trap '' SIGINT"
     const terminalArg = { "gnome-terminal": " --", "terminator": " -x" }
@@ -144,7 +140,58 @@ function checkUpdates() {
     let updFlpk
     let infFlpk
 
-    cmd.arch ? archCheck() : cfg.flatpak ? flpkCheck() : merge()
+    cmd.arch && cfg.archNews ? newsCheck() : cmd.arch ? archCheck() : cfg.flatpak ? flpkCheck() : merge()
+
+    function newsCheck() {
+        statusIco = "news-subscribe"
+        statusMsg = "Checking latest Arch Linux news..."
+
+        const wrapper = (cfg.wrappers.find(el => el.name === "paru" || el.name === "yay") || {}).value || ""
+        const newsCmd = wrapper ? wrapper + " -Pwwq" : null
+
+        if (!newsCmd) {
+            archCheck()
+            return
+        }
+
+        sh.exec(newsCmd, (cmd, stdout, stderr, exitCode) => {
+            if (catchError(exitCode, stderr)) return
+
+            if (!stdout) {
+                archCheck()
+                return
+            }
+
+            function createLink(text) {
+                const baseURL = "https://archlinux.org/news/"
+                const articleURL = text.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9\-]/g, "")
+                return baseURL + articleURL
+            }
+
+            let article = stdout.trim().split("\n")
+            if (article.length > 10) article = article.filter(line => !line.startsWith(' '))
+            article = article[article.length - 1]
+
+            let lastNews = {}
+            lastNews["article"] = article.split(" ").slice(1).join(" ")
+
+            const prevArticle = cfg.lastNews ? JSON.parse(cfg.lastNews).article : ""
+
+            if (lastNews.article !== prevArticle) {
+                lastNews["date"] = article.split(" ")[0]
+                lastNews["link"] = createLink(lastNews.article)
+                lastNews["dismissed"] = false
+                cfg.lastNews = JSON.stringify(lastNews)
+
+                if (cfg.notifications) {
+                    notifyTitle = "Arch Linux News"
+                    notifyBody = "<b>Latest article:</b> " + lastNews.article + "\n⠀\n" + `<a href="${lastNews.link}">Open full article in browser</a>`
+                    notify.sendEvent()
+                }
+            }
+
+            archCheck()
+    })}
 
     function archCheck() {
         statusIco = "package"
@@ -173,15 +220,15 @@ function checkUpdates() {
 
     function flpkCheck() {
         statusIco = "flatpak-discover"
-        statusMsg = i18n("Searching flathub for updates...")
-        sh.exec("flatpak remote-ls --app --updates", (cmd, stdout, stderr, exitCode) => {
+        statusMsg = i18n("Searching for flatpak updates...")
+        sh.exec("flatpak update --appstream >/dev/null 2>&1; flatpak remote-ls --app --updates --show-details", (cmd, stdout, stderr, exitCode) => {
             if (catchError(exitCode, stderr)) return
             updFlpk = stdout ? stdout : null
             updFlpk ? flpkList() : merge()
     })}
 
     function flpkList() {
-        sh.exec("flatpak list --app", (cmd, stdout, stderr, exitCode) => {
+        sh.exec("flatpak list --app --columns=application,version", (cmd, stdout, stderr, exitCode) => {
             if (catchError(exitCode, stderr)) return
             infFlpk = stdout ? stdout : null
             merge()
@@ -225,8 +272,9 @@ function makeArchList(upd, inf, desc) {
     })
 
     extendedInfo.forEach(el => {
-        let found = false
+        ['appID', 'branch', 'commit', 'runtime', 'downloadsize'].forEach(key => el[key] = '')
 
+        let found = false
         inf.forEach(str => {
             const parts = str.split(" ")
             if (el.name === parts[1]) {
@@ -255,26 +303,28 @@ function makeArchList(upd, inf, desc) {
 
 
 function makeFlpkList(upd, inf) {
-    upd = upd.trim().replace(/ /g, "-").replace(/\t/g, " ").split("\n")
-    inf = inf.trim().replace(/ /g, "-").replace(/\t/g, " ").split("\n")
+    const list = inf.split('\n').slice(1).reduce((map, line) => {
+        const [appID, verold] = line.split('\t').map(entry => entry.trim())
+        map.set(appID, verold)
+        return map
+    }, new Map())
 
-    let extendedInfo = []
-    upd.forEach(pkg => {
-        const part = pkg.split(" ")
-        const curr = inf.find(line => line.includes(part[1])).split(" ")[2]
-        const newv = part[2] === curr ? "refresh of " + curr : part[2]
-
-        extendedInfo.push({
-            name: part[0].toLowerCase(),
-            repository: "flatpak",
-            vernew: newv,
-            verold: curr,
-            idflatpak: part[1],
-            branch: part[3]
-        })
-    })
-
-    return extendedInfo
+    return upd.split('\n').map(line => {
+        const [name, desc, appID, vernew, branch, , repository, , commit, runtime, installedsize, downloadsize] = line.split('\t').map(entry => entry.trim())
+        return name ? {
+            name: name.replace(/ /g, "-").toLowerCase(),
+            desc: desc,
+            appID: appID,
+            verold: list.get(appID),
+            vernew: list.get(appID) === vernew ? "refresh of " + vernew : vernew,
+            branch: branch,
+            repository: repository,
+            commit: commit,
+            runtime: runtime,
+            installedsize: installedsize,
+            downloadsize: downloadsize,
+        } : null
+    }).filter(Boolean)
 }
 
 
@@ -328,7 +378,7 @@ function refreshListModel(list) {
 
 
 function finalize(list) {
-    cfg.timestamp = new Date().getTime()
+    cfg.timestamp = new Date().getTime().toString()
 
     if (!list) {
         listModel.clear()
@@ -345,7 +395,8 @@ function finalize(list) {
 
     count = list.length
     cache = list
-    sh.exec(`echo '${JSON.stringify(list).replace(/'/g, '')}' > ${cachefile}`, (cmd, stdout, stderr, exitCode) => {})
+    const json = JSON.stringify(list).replace(/},/g, "},\n").replace(/'/g, '')
+    sh.exec(`echo '${json}' > ${cachefile}`, (cmd, stdout, stderr, exitCode) => {})
     setStatusBar()
 }
 
@@ -361,9 +412,9 @@ function setStatusBar(code) {
 function getLastCheck() {
     if (!cfg.timestamp) return ""
 
-    const diff = new Date().getTime() - cfg.timestamp
-    const sec = Math.floor((diff % (1000 * 60)) / 1000)
-    const min = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
+    const diff = new Date().getTime() - parseInt(cfg.timestamp)
+    const sec = Math.round((diff / 1000) % 60)
+    const min = Math.floor((diff / (1000 * 60)) % 60)
     const hrs = Math.floor(diff / (1000 * 60 * 60))
 
     const lastcheck = i18n("Last check:")
@@ -397,9 +448,23 @@ function setIcon(icon) {
 }
 
 
+function setPackageIcon(icons, name, appID) {
+    if (appID) {
+        if (appID === "org.libreoffice.LibreOffice") return appID + ".main"
+        return appID
+    }
+
+    if (cfg.customIconsEnabled) {
+        const match = icons.find(item => item.name.includes(name))
+        return match ? match.icon : "server-database"
+    }
+
+    return "server-database"
+}
+
+
 function setFrameSize() {
-    const multiplier = cfg.indicatorCounter && cfg.indicatorScale ? 1.1 :  
-                       cfg.indicatorCounter && !cfg.indicatorScale ? 1 : 0.85
+    const multiplier = cfg.indicatorCounter ? 1.1 : 0.9
 
     return plasmoid.location === 5 || plasmoid.location === 6 ? icon.height * multiplier :     
            plasmoid.location === 3 || plasmoid.location === 4 ? icon.width * multiplier : 0
@@ -408,6 +473,7 @@ function setFrameSize() {
 
 function setAnchor(pos, stop) {
     const anchors = {
+        parent: cfg.indicatorCenter ? parent : undefined,
         top: cfg.indicatorBottom && !cfg.indicatorTop,
         bottom: cfg.indicatorTop && !cfg.indicatorBottom,
         right: cfg.indicatorLeft && !cfg.indicatorRight,
@@ -415,6 +481,7 @@ function setAnchor(pos, stop) {
     }
 
     return (stop ? anchors[pos] : {
+        parent: cfg.indicatorCenter ? parent : undefined,
         top: anchors.bottom,
         bottom: anchors.top,
         right: anchors.left,

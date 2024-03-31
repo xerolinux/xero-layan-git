@@ -19,6 +19,8 @@ import "../tools/tools.js" as JS
 SimpleKCM {
     property alias cfg_fullView: extView.checked
     property alias cfg_spacing: spacing.value
+    property alias cfg_customIconsEnabled: customIconsEnabled.checked
+    property alias cfg_customIcons: customIcons.text
 
     property alias cfg_showStatusBar: showStatusBar.checked
     property alias cfg_searchButton: searchButton.checked
@@ -32,13 +34,14 @@ SimpleKCM {
     property alias cfg_relevantIcon: relevantIcon.checked
     property string cfg_selectedIcon: plasmoid.configuration.selectedIcon
 
+    property alias cfg_indicatorStop: indicatorStop.checked
+    property alias cfg_indicatorUpdates: indicatorUpdates.checked
     property alias cfg_indicatorCounter: indicatorCounter.checked
-    property alias cfg_indicatorScale: indicatorScale.checked
     property alias cfg_indicatorCircle: indicatorCircle.checked
     property string cfg_indicatorColor: plasmoid.configuration.indicatorColor
-    property alias cfg_indicatorUpdates: indicatorUpdates.checked
-    property alias cfg_indicatorStop: indicatorStop.checked
+    property alias cfg_indicatorSize: indicatorSize.value
 
+    property alias cfg_indicatorCenter: indicatorCenter.checked
     property bool cfg_indicatorTop: plasmoid.configuration.indicatorTop
     property bool cfg_indicatorBottom: plasmoid.configuration.indicatorBottom
     property bool cfg_indicatorRight: plasmoid.configuration.indicatorRight
@@ -68,7 +71,6 @@ SimpleKCM {
             Component.onCompleted: {
                 checked = plasmoid.configuration.fullView
             }
-
         }
 
         RadioButton {
@@ -80,7 +82,6 @@ SimpleKCM {
                 checked = !plasmoid.configuration.fullView
             }
         }
-
 
         RowLayout {
             Kirigami.FormData.label: i18n("Spacing:")
@@ -95,6 +96,44 @@ SimpleKCM {
 
                 onValueChanged: {
                     plasmoid.configuration.spacing = spacing.value
+                }
+            }
+
+            Label {
+                text: spacing.value
+            }
+        }
+
+        Item {
+            Kirigami.FormData.isSection: true
+        }
+
+        RowLayout {
+            Kirigami.FormData.label: "Custom icons:"
+            CheckBox {
+                id: customIconsEnabled
+                text: "Enable"
+            }
+
+            ContextualHelpButton {
+                toolTipText: "<p>You can specify which icon to use in the extended list for each <b>system</b> package.</p><br><p><b>PKG1-NAME ICON-NAME<br>PKG2-NAME ICON-NAME</b></p><br><p>Each package should be on a new line. The package and icon should be separated by a space.</p><br><p><b>You may lose these settings after updating the widget, so make a backup of this list just in case.</b></p>"
+            }
+        }
+
+        ColumnLayout {
+            Layout.maximumWidth: appearancePage.width / 2
+            Layout.maximumHeight: 100
+            visible: customIconsEnabled.checked
+
+            ScrollView {
+                Layout.preferredWidth: appearancePage.width / 2
+                Layout.preferredHeight: 100
+
+                TextArea {
+                    id: customIcons
+                    width: parent.width
+                    height: parent.height
+                    placeholderText: "EXAMPLE:\nlinux preferences-system-linux"
                 }
             }
         }
@@ -170,10 +209,17 @@ SimpleKCM {
             Kirigami.FormData.label: i18n("Panel Icon View")
         }
 
-        CheckBox {
-            Kirigami.FormData.label: i18n("Icon:")
-            id: relevantIcon
-            text: "Shown when relevant"
+        RowLayout {
+            Kirigami.FormData.label: i18n("Panel icon:")
+
+            CheckBox {
+                id: relevantIcon
+                text: "Shown when relevant"
+            }
+
+            ContextualHelpButton {
+                toolTipText: "<p>If the option is <b>enabled</b>, the icon in the system tray will be <b>hidden</b> when there are no updates.</p><br><p>If the option is <b>disabled</b>, the icon in the system tray will always be <b>shown</b>.</p>"
+            }
         }
 
         Button {
@@ -261,20 +307,11 @@ SimpleKCM {
                 id: indicator
             }
 
-            RowLayout {
-                RadioButton {
-                    id: indicatorCounter
-                    text: i18n("Counter")
-                    checked: true
-                    ButtonGroup.group: indicator
-                }
-
-                CheckBox {
-                    id: indicatorScale
-                    Layout.leftMargin: Kirigami.Units.gridUnit
-                    text: i18n("Scale with icon")
-                    visible: indicatorCounter.checked
-                }
+            RadioButton {
+                id: indicatorCounter
+                text: i18n("Counter")
+                checked: true
+                ButtonGroup.group: indicator
             }
 
             RowLayout {
@@ -344,9 +381,41 @@ SimpleKCM {
             Kirigami.FormData.isSection: true
         }
 
+        RowLayout {
+            Kirigami.FormData.label: "Size:"
+            enabled: indicatorUpdates.checked
+
+            Slider {
+                id: indicatorSize
+                from: -5
+                to: 10
+                stepSize: 1
+                value: indicatorSize.value
+
+                onValueChanged: {
+                    plasmoid.configuration.indicatorSize = indicatorSize.value
+                }
+            }
+
+            Label {
+                text: indicatorSize.value
+            }
+        }
+
+        Item {
+            Kirigami.FormData.isSection: true
+        }
+
+        CheckBox {
+            Kirigami.FormData.label: "Position:"
+            enabled: indicatorUpdates.checked
+            id: indicatorCenter
+            text: "Center"
+        }
+
         GridLayout {
             Layout.fillWidth: true
-            enabled: indicatorUpdates.checked
+            enabled: indicatorUpdates.checked && !indicatorCenter.checked
             columns: 4
             rowSpacing: 0
             columnSpacing: 0

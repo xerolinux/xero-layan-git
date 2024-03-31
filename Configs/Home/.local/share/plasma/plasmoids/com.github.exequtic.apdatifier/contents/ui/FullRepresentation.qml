@@ -5,6 +5,7 @@
 
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Dialogs
 import QtQuick.Controls
 
 import org.kde.ksvg
@@ -18,9 +19,44 @@ import "../tools/tools.js" as JS
 
 Item {
     property bool searchFieldOpen: false
+    property var lastNews: cfg.lastNews.length ? JSON.parse(cfg.lastNews) : null
+
+    Kirigami.InlineMessage {
+        id: news
+        anchors.top: parent.top
+        anchors.right: parent.right
+        anchors.left: parent.left
+
+        icon.source: "news-subscribe"
+        text: lastNews ? `<b>Check out the latest news! (${lastNews.date})</b><br><b>Article:</b> ${lastNews.article}` : ""
+        onLinkActivated: Qt.openUrlExternally(link)
+        type: Kirigami.MessageType.Warning
+
+        visible: !busy && lastNews && !lastNews.dismissed
+        enabled: visible
+
+        actions: [
+            Kirigami.Action {
+                text: "Read full article"
+                icon.name: "internet-web-browser"
+                onTriggered: {
+                    Qt.openUrlExternally(lastNews.link)
+                }
+            },
+            Kirigami.Action {
+                text: "Dismiss"
+                icon.name: "dialog-close"
+                onTriggered: {
+                    lastNews.dismissed = true
+                    cfg.lastNews = JSON.stringify(lastNews)
+                }
+            }
+        ]
+    }
+    
 
     ScrollView {
-        anchors.top: parent.top
+        anchors.top: news.bottom
         anchors.right: parent.right
         anchors.left: parent.left
         anchors.bottom: separator.top
@@ -49,7 +85,7 @@ Item {
     }
 
     ScrollView {
-        anchors.top: parent.top
+        anchors.top: news.bottom
         anchors.right: parent.right
         anchors.left: parent.left
         anchors.bottom: separator.top
@@ -67,17 +103,18 @@ Item {
 
             delegate: ExpandableListItem {
                 property var pkg: []
+                property var pkgIcons: cfg.customIcons.split("\n").filter(Boolean).map(l => ({ name: l.split(' ')[0], icon: l.split(' ')[1] }))
                 title: model.name
                 subtitle: model.repository + "  " + model.verold + " → " + model.vernew
-                icon: model.repository === "flatpak" ? model.idflatpak : "server-database"
+                icon: JS.setPackageIcon(pkgIcons, model.name, model.appID)
 
                 contextualActions: [
                     Action {
                         id: updateButton
                         icon.name: "folder-download-symbolic"
                         text: "Update"
-                        enabled: model.repository === "flatpak" && cfg.terminal
-                        onTriggered: JS.updatePackage(model.idflatpak)
+                        enabled: model.appID !== "" && cfg.terminal
+                        onTriggered: JS.updatePackage(model.appID)
                     }
                 ]
 
@@ -116,10 +153,11 @@ Item {
                                     Label {
                                         property bool header: !(index % 2)
                                         Layout.fillWidth: true
+                                        Layout.alignment: Qt.AlignTop
                                         horizontalAlignment: Text.AlignLeft
                                         font: Kirigami.Theme.smallFont
                                         opacity: header ? 0.6 : 1
-                                        text: header ? pkg[index] + ":"
+                                        text: header ? "<b>" + pkg[index] + ":</b>"
                                                      : pkg[index].indexOf("://") !== -1
                                                      ? "<a href=\"" + pkg[index] + "\">" + pkg[index].replace(/\/+$/, '') + "</a>"
                                                      : pkg[index]
@@ -141,6 +179,10 @@ Item {
                         Component.onCompleted: {
                             const details = []
                             model.desc && details.push("Description", model.desc)
+                            model.appID && details.push("App ID", model.appID)
+                            model.branch && details.push("Branch", model.branch)
+                            model.commit && details.push("Commit", model.commit)
+                            model.runtime && details.push("Runtime", model.runtime)
                             model.link && details.push("URL", model.link)
                             model.group && details.push("Groups", model.group)
                             model.provides && details.push("Provides", model.provides)
@@ -149,10 +191,9 @@ Item {
                             model.conflicts && details.push("Conflicts with", model.conflicts)
                             model.replaces && details.push("Replaces", model.replaces)
                             model.installedsize && details.push("Installed size", model.installedsize)
+                            model.downloadsize && details.push("Download size", model.downloadsize)
                             model.installdate && details.push("Install date", model.installdate)
                             model.reason && details.push("Install reason", model.reason)
-                            model.idflatpak && details.push("ID", model.idflatpak)
-                            model.branch && details.push("Branch", model.branch)
                             pkg = details
                         }
                     }

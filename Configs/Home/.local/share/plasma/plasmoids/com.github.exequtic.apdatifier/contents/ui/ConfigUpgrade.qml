@@ -13,7 +13,6 @@ import org.kde.kirigami as Kirigami
 import "../tools/tools.js" as JS
 
 SimpleKCM {
-    property alias cfg_wrapperUpgrade: wrapperUpgrade.checked
     property alias cfg_upgradeFlags: upgradeFlags.checked
     property alias cfg_upgradeFlagsText: upgradeFlagsText.text
     property string cfg_terminal: plasmoid.configuration.terminal
@@ -27,6 +26,8 @@ SimpleKCM {
     property var terminals: plasmoid.configuration.terminals
 
     Kirigami.FormLayout {
+        id: upgradePage
+
         Item {
             Kirigami.FormData.isSection: true
         }
@@ -67,30 +68,22 @@ SimpleKCM {
             }
         }
 
-        Item {
-            Kirigami.FormData.isSection: true
-        }
-
-        CheckBox {
-            id: wrapperUpgrade
-            text: i18n("Upgrade using wrapper")
-            enabled: terminals && plasmoid.configuration.wrappers
+        RowLayout {
+            Kirigami.FormData.label: i18n("Additional flags:")
+            spacing: 0
             visible: pkg.pacman
-        }
 
+            CheckBox {
+                id: upgradeFlags
+                enabled: terminals
+            }
 
-        CheckBox {
-            id: upgradeFlags
-            text: i18n("Additional flags")
-            enabled: terminals
-            visible: pkg.pacman
-        }
-
-        TextField {
-            id: upgradeFlagsText
-            placeholderText: i18n(" only flags, without -Syu")
-            placeholderTextColor: "grey"
-            visible: pkg.pacman && upgradeFlags.checked
+            TextField {
+                id: upgradeFlagsText
+                placeholderText: "--noconfirm"
+                placeholderTextColor: "grey"
+                enabled: pkg.pacman && upgradeFlags.checked
+            }
         }
 
         Kirigami.Separator {
@@ -98,66 +91,59 @@ SimpleKCM {
             Kirigami.FormData.isSection: true
         }
 
-        Kirigami.UrlButton {
-            horizontalAlignment: Text.AlignHCenter
-            url: "https://archlinux.org/mirrorlist"
-            text: "archlinux.org"
-            font.pointSize: Kirigami.Theme.smallFont.pointSize
-            color: Kirigami.Theme.positiveTextColor
-        }
-
-        Item {
-            Kirigami.FormData.isSection: true
-        }
-
-        CheckBox {
+        RowLayout {
             Kirigami.FormData.label: i18n("Generator:")
-            id: mirrors
-            text: i18n("Refresh on upgrade")
-            enabled: pkg.checkupdates && cfg_terminal.split("/").pop() !== "yakuake"
-            visible: pkg.pacman
+
+            CheckBox {
+                id: mirrors
+                text: i18n("Refresh on upgrade")
+                enabled: pkg.checkupdates && cfg_terminal.split("/").pop() !== "yakuake"
+                visible: pkg.pacman
+            }
+
+            ContextualHelpButton {
+                toolTipText: "<p>To use this feature, the following installed utilities are required: <b>curl, pacman-contrib</b>, any supported terminal except yakuake.</p><br><p>See https://archlinux.org/mirrorlist</p>"
+                onClicked: {
+                    Qt.openUrlExternally("https://archlinux.org/mirrorlist")
+                }
+            }
         }
 
-        Item {
-            Kirigami.FormData.isSection: true
-        }   
-
-        CheckBox {
+        RowLayout {
             Kirigami.FormData.label: i18n("Protocol:")
-            id: http
-            text: "http"
-            onClicked: updateUrl()
-            enabled: mirrors.checked
+
+            CheckBox {
+                
+                id: http
+                text: "http"
+                onClicked: updateUrl()
+                enabled: mirrors.checked
+            }
+
+            CheckBox {
+                id: https
+                text: "https"
+                onClicked: updateUrl()
+                enabled: mirrors.checked
+            }
         }
 
-        CheckBox {
-            id: https
-            text: "https"
-            onClicked: updateUrl()
-            enabled: mirrors.checked
-        }
-
-        Item {
-            Kirigami.FormData.isSection: true
-        }
-
-        CheckBox {
+        RowLayout {
             Kirigami.FormData.label: i18n("IP version:")
-            id: ipv4
-            text: "IPv4"
-            onClicked: updateUrl()
-            enabled: mirrors.checked
-        }
 
-        CheckBox {
-            id: ipv6
-            text: "IPv6"
-            onClicked: updateUrl()
-            enabled: mirrors.checked
-        }
+            CheckBox {
+                id: ipv4
+                text: "IPv4"
+                onClicked: updateUrl()
+                enabled: mirrors.checked
+            }
 
-        Item {
-            Kirigami.FormData.isSection: true
+            CheckBox {
+                id: ipv6
+                text: "IPv6"
+                onClicked: updateUrl()
+                enabled: mirrors.checked
+            }
         }
 
         CheckBox {
@@ -168,50 +154,70 @@ SimpleKCM {
             enabled: mirrors.checked
         }
 
-        Item {
-            Kirigami.FormData.isSection: true
-        }
-
-        SpinBox {
+        RowLayout {
             Kirigami.FormData.label: i18n("Number output:")
-            id: mirrorCount
-            from: 1
-            to: 10
-            stepSize: 1
-            value: mirrorCount
-            enabled: mirrors.checked
-        }
 
-        Item {
-            Kirigami.FormData.isSection: true
-        }
+            SpinBox {
+                id: mirrorCount
+                from: 0
+                to: 10
+                stepSize: 1
+                value: mirrorCount
+                enabled: mirrors.checked
+            }
 
-        Label {
-            Kirigami.FormData.label: i18n("Country:")
-            textFormat: Text.RichText
-            text: {
-                var matchResult = cfg_dynamicUrl.match(/country=([A-Z]+)/g)
-                if (matchResult !== null) {
-                    var countries = matchResult.map(str => str.split("=")[1]).join(", ")
-                    return countries
-                } else {
-                    return '<a style="color: ' + Kirigami.Theme.negativeTextColor + '">Select at least one!</a>'
-                }
+            ContextualHelpButton {
+                toolTipText: "<p>Number of servers to write to mirrorlist file, 0 for all</p>"
             }
         }
 
-        ScrollView {
+        Item {
+            Kirigami.FormData.isSection: true
+        }
+
+        RowLayout {
+            Kirigami.FormData.label: i18n("Country:")
+
+            Label {
+                textFormat: Text.RichText
+                text: {
+                    var matchResult = cfg_dynamicUrl.match(/country=([A-Z]+)/g)
+                    if (matchResult !== null) {
+                        var countries = matchResult.map(str => str.split("=")[1]).join(", ")
+                        return countries
+                    } else {
+                        return '<a style="color: ' + Kirigami.Theme.negativeTextColor + '">Select at least one!</a>'
+                    }
+                }
+            }
+
+            ContextualHelpButton {
+                toolTipText: "<p>You must select at least one country, otherwise all will be chosen by default.<br><br><b>The more countries you select, the longer it will take to generate the mirrors!</b><br><br>It is optimal to choose <b>1-2</b> countries closest to you.</p>"
+            }
+        }
+
+        ColumnLayout {
+            Layout.maximumWidth: upgradePage.width / 2
+            Layout.maximumHeight: 150
             enabled: mirrors.checked
-            Column {
-                Repeater {
-                    model: countryListModel
-                    delegate: CheckBox {
-                        text: model.text
-                        checked: model.checked
-                        onClicked: {
-                            model.checked = checked
-                            checked ? countryList.push(model.code) : countryList.splice(countryList.indexOf(model.code), 1)
-                            updateUrl()
+
+            ScrollView {
+                Layout.preferredWidth: upgradePage.width / 2
+                Layout.preferredHeight: 150
+
+                GridLayout {
+                    columns: 1
+                
+                    Repeater {
+                        model: countryListModel
+                        delegate: CheckBox {
+                            text: model.text
+                            checked: model.checked
+                            onClicked: {
+                                model.checked = checked
+                                checked ? countryList.push(model.code) : countryList.splice(countryList.indexOf(model.code), 1)
+                                updateUrl()
+                            }
                         }
                     }
                 }
@@ -259,76 +265,88 @@ SimpleKCM {
         cfg_dynamicUrl = baseUrl + params.substring(1)
     }
 
-    property ListModel countryListModel: ListModel {
-        ListElement { text: "Australia"; code: "AU"; checked: false }
-        ListElement { text: "Austria"; code: "AT"; checked: false }
-        ListElement { text: "Azerbaijan"; code: "AZ"; checked: false }
-        ListElement { text: "Bangladesh"; code: "BD"; checked: false }
-        ListElement { text: "Belarus"; code: "BY"; checked: false }
-        ListElement { text: "Belgium"; code: "BE"; checked: false }
-        ListElement { text: "Bosnia and Herzegovina"; code: "BA"; checked: false }
-        ListElement { text: "Brazil"; code: "BR"; checked: false }
-        ListElement { text: "Bulgaria"; code: "BG"; checked: false }
-        ListElement { text: "Cambodia"; code: "KH"; checked: false }
-        ListElement { text: "Canada"; code: "CA"; checked: false }
-        ListElement { text: "Chile"; code: "CL"; checked: false }
-        ListElement { text: "China"; code: "CN"; checked: false }
-        ListElement { text: "Colombia"; code: "CO"; checked: false }
-        ListElement { text: "Croatia"; code: "HR"; checked: false }
-        ListElement { text: "Czech Republic"; code: "CZ"; checked: false }
-        ListElement { text: "Denmark"; code: "DK"; checked: false }
-        ListElement { text: "Ecuador"; code: "EC"; checked: false }
-        ListElement { text: "Estonia"; code: "EE"; checked: false }
-        ListElement { text: "Finland"; code: "FI"; checked: false }
-        ListElement { text: "France"; code: "FR"; checked: false }
-        ListElement { text: "Georgia"; code: "GE"; checked: false }
-        ListElement { text: "Germany"; code: "DE"; checked: false }
-        ListElement { text: "Greece"; code: "GR"; checked: false }
-        ListElement { text: "Hong Kong"; code: "HK"; checked: false }
-        ListElement { text: "Hungary"; code: "HU"; checked: false }
-        ListElement { text: "Iceland"; code: "IS"; checked: false }
-        ListElement { text: "India"; code: "IN"; checked: false }
-        ListElement { text: "Indonesia"; code: "ID"; checked: false }
-        ListElement { text: "Iran"; code: "IR"; checked: false }
-        ListElement { text: "Israel"; code: "IL"; checked: false }
-        ListElement { text: "Italy"; code: "IT"; checked: false }
-        ListElement { text: "Japan"; code: "JP"; checked: false }
-        ListElement { text: "Kazakhstan"; code: "KZ"; checked: false }
-        ListElement { text: "Kenya"; code: "KE"; checked: false }
-        ListElement { text: "Latvia"; code: "LV"; checked: false }
-        ListElement { text: "Lithuania"; code: "LT"; checked: false }
-        ListElement { text: "Luxembourg"; code: "LU"; checked: false }
-        ListElement { text: "Mauritius"; code: "MU"; checked: false }
-        ListElement { text: "Mexico"; code: "MX"; checked: false }
-        ListElement { text: "Moldova"; code: "MD"; checked: false }
-        ListElement { text: "Monaco"; code: "MC"; checked: false }
-        ListElement { text: "Netherlands"; code: "NL"; checked: false }
-        ListElement { text: "New Caledonia"; code: "NC"; checked: false }
-        ListElement { text: "New Zealand"; code: "NZ"; checked: false }
-        ListElement { text: "North Macedonia"; code: "MK"; checked: false }
-        ListElement { text: "Norway"; code: "NO"; checked: false }
-        ListElement { text: "Paraguay"; code: "PY"; checked: false }
-        ListElement { text: "Poland"; code: "PL"; checked: false }
-        ListElement { text: "Portugal"; code: "PT"; checked: false }
-        ListElement { text: "Romania"; code: "RO"; checked: false }
-        ListElement { text: "Russia"; code: "RU"; checked: false }
-        ListElement { text: "Réunion"; code: "RE"; checked: false }
-        ListElement { text: "Serbia"; code: "RS"; checked: false }
-        ListElement { text: "Singapore"; code: "SG"; checked: false }
-        ListElement { text: "Slovakia"; code: "SK"; checked: false }
-        ListElement { text: "Slovenia"; code: "SI"; checked: false }
-        ListElement { text: "South Africa"; code: "ZA"; checked: false }
-        ListElement { text: "South Korea"; code: "KR"; checked: false }
-        ListElement { text: "Spain"; code: "ES"; checked: false }
-        ListElement { text: "Sweden"; code: "SE"; checked: false }
-        ListElement { text: "Switzerland"; code: "CH"; checked: false }
-        ListElement { text: "Taiwan"; code: "TW"; checked: false }
-        ListElement { text: "Thailand"; code: "TH"; checked: false }
-        ListElement { text: "Turkey"; code: "TR"; checked: false }
-        ListElement { text: "Ukraine"; code: "UA"; checked: false }
-        ListElement { text: "United Kingdom"; code: "GB"; checked: false }
-        ListElement { text: "United States"; code: "US"; checked: false }
-        ListElement { text: "Uzbekistan"; code: "UZ"; checked: false }
-        ListElement { text: "Vietnam"; code: "VN"; checked: false }
+    ListModel {
+        id: countryListModel
+
+        function createCountryList() {
+            let countries = [
+                {text: "Australia", code: "AU"},
+                {text: "Austria", code: "AT"},
+                {text: "Azerbaijan", code: "AZ"},
+                {text: "Bangladesh", code: "BD"},
+                {text: "Belarus", code: "BY"},
+                {text: "Belgium", code: "BE"},
+                {text: "Bosnia and Herzegovina", code: "BA"},
+                {text: "Brazil", code: "BR"},
+                {text: "Bulgaria", code: "BG"},
+                {text: "Cambodia", code: "KH"},
+                {text: "Canada", code: "CA"},
+                {text: "Chile", code: "CL"},
+                {text: "China", code: "CN"},
+                {text: "Colombia", code: "CO"},
+                {text: "Croatia", code: "HR"},
+                {text: "Czech Republic", code: "CZ"},
+                {text: "Denmark", code: "DK"},
+                {text: "Ecuador", code: "EC"},
+                {text: "Estonia", code: "EE"},
+                {text: "Finland", code: "FI"},
+                {text: "France", code: "FR"},
+                {text: "Georgia", code: "GE"},
+                {text: "Germany", code: "DE"},
+                {text: "Greece", code: "GR"},
+                {text: "Hong Kong", code: "HK"},
+                {text: "Hungary", code: "HU"},
+                {text: "Iceland", code: "IS"},
+                {text: "India", code: "IN"},
+                {text: "Indonesia", code: "ID"},
+                {text: "Iran", code: "IR"},
+                {text: "Israel", code: "IL"},
+                {text: "Italy", code: "IT"},
+                {text: "Japan", code: "JP"},
+                {text: "Kazakhstan", code: "KZ"},
+                {text: "Kenya", code: "KE"},
+                {text: "Latvia", code: "LV"},
+                {text: "Lithuania", code: "LT"},
+                {text: "Luxembourg", code: "LU"},
+                {text: "Mauritius", code: "MU"},
+                {text: "Mexico", code: "MX"},
+                {text: "Moldova", code: "MD"},
+                {text: "Monaco", code: "MC"},
+                {text: "Netherlands", code: "NL"},
+                {text: "New Caledonia", code: "NC"},
+                {text: "New Zealand", code: "NZ"},
+                {text: "North Macedonia", code: "MK"},
+                {text: "Norway", code: "NO"},
+                {text: "Paraguay", code: "PY"},
+                {text: "Poland", code: "PL"},
+                {text: "Portugal", code: "PT"},
+                {text: "Romania", code: "RO"},
+                {text: "Russia", code: "RU"},
+                {text: "Réunion", code: "RE"},
+                {text: "Serbia", code: "RS"},
+                {text: "Singapore", code: "SG"},
+                {text: "Slovakia", code: "SK"},
+                {text: "Slovenia", code: "SI"},
+                {text: "South Africa", code: "ZA"},
+                {text: "South Korea", code: "KR"},
+                {text: "Spain", code: "ES"},
+                {text: "Sweden", code: "SE"},
+                {text: "Switzerland", code: "CH"},
+                {text: "Taiwan", code: "TW"},
+                {text: "Thailand", code: "TH"},
+                {text: "Turkey", code: "TR"},
+                {text: "Ukraine", code: "UA"},
+                {text: "United Kingdom", code: "GB"},
+                {text: "United States", code: "US"},
+                {text: "Uzbekistan", code: "UZ"},
+                {text: "Vietnam", code: "VN"}
+            ]
+
+            for (var i = 0; i < countries.length; ++i) {
+                countryListModel.append({text: countries[i].text, code: countries[i].code, checked: false})
+            }
+        }
+
+        Component.onCompleted: createCountryList()
     }
 }
