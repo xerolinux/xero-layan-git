@@ -11,7 +11,6 @@ PlasmoidItem {
   preferredRepresentation: compactRepresentation
 
   compactRepresentation: CompactRepresentation { id: compact }
-
   fullRepresentation: FullRepresentation { id: full }
 
   Component.onCompleted: {

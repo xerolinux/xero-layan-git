@@ -25,8 +25,8 @@ PlasmaExtras.Representation {
 
   header: PlasmaExtras.PlasmoidHeading {
     contentItem: Kirigami.Heading {
+      padding: Kirigami.Units.smallSpacing
       horizontalAlignment: Text.AlignHCenter
-      verticalAlignment: Text.AlignVCenter
       text: i18n("Reboot into...")
     }
   }
@@ -34,44 +34,52 @@ PlasmaExtras.Representation {
     ListView {
       id: mainList
 
-      anchors.verticalCenter: parent.verticalCenter
-
       interactive: false
+      spacing: Kirigami.Units.smallSpacing
 
+      anchors.verticalCenter: parent.verticalCenter
       width: parent.width
       height: shownEntries.count > 0 ? contentHeight : 300
-
-      spacing: Kirigami.Units.smallSpacing
 
       model: shownEntries
 
       delegate: PlasmaComponents.ItemDelegate {
-        required property string cmd
+        required property string id
         required property string bIcon
-        required property string fullTitle
+        required property string title
+        required property string version
         width: parent ? parent.width : 0 // BUG: Occasional error here
         contentItem: RowLayout {
 
           Layout.fillWidth: true
 
           Kirigami.Icon {
-            source: bIcon
+            source: Qt.resolvedUrl("../../assets/icons/" + bIcon + ".svg")
             color: Kirigami.Theme.colorSet
             smooth: true
             isMask: true
             scale: 0.8
           }
-
-          PlasmaComponents.Label {
-            Layout.fillWidth: true
-            text: fullTitle
+          ColumnLayout {
+            spacing: 0
+            Kirigami.Heading {
+              level: 4
+              Layout.fillWidth: true
+              text: title
+            }
+            PlasmaComponents.Label {
+              color: Kirigami.Theme.disabledTextColor
+              Layout.fillWidth: true
+              visible: version
+              text: version
+            }
           }
         }
         onClicked: {
           root.expanded = !root.expanded
-          selectedEntry = fullTitle
+          selectedEntry = title
           myNotif.sendEvent()
-          bootMgr.bootEntry(cmd)
+          bootMgr.bootEntry(id)
         }
     }
 
@@ -89,7 +97,7 @@ PlasmaExtras.Representation {
       message: i18n("No boot entries could be listed.\nPlease check this applet settings.")
       show: bootMgr.step === BootManager.Ready && shownEntries.count == 0 && !busy
       // TODO: add open configuration button
-      //plasmoid.action("configure").trigger()
+      //Plasmoid.internalAction("configure").trigger()
     }
 
     PlasmaComponents.BusyIndicator {
@@ -116,7 +124,7 @@ PlasmaExtras.Representation {
       action: Kirigami.Action {
         text: i18n("Retry as root")
         icon.name: "unlock-symbolic"
-        onTriggered: bootMgr.getEntries(true)
+        onTriggered: bootMgr.getEntriesFull(true)
       }
       PlasmaComponents.Button {
         anchors.bottom: parent.bottom
@@ -139,12 +147,12 @@ PlasmaExtras.Representation {
     iconName: "refreshstructure"
   }
 
-  function buildModel(toHide, model) {
+  function updateModel() {
     busy = true
     shownEntries.clear()
-    for (let i = 0; i < model.count; i++) {
-      if (!toHide.includes(model.get(i).fullTitle)) {
-        shownEntries.append(model.get(i))
+    for (let entry of bootMgr.bootEntries) {
+      if (!plasmoid.configuration.blacklist.includes(entry.id)) {
+        shownEntries.append(entry)
       }
     }
     busy = false
@@ -152,7 +160,7 @@ PlasmaExtras.Representation {
 
   Component.onCompleted: {
     if (bootMgr.step === BootManager.Ready) { 
-      buildModel(plasmoid.configuration.hideEntries, bootMgr.bootEntries)
+      updateModel()
     }
   }
 
@@ -160,8 +168,9 @@ PlasmaExtras.Representation {
     target: bootMgr
 
     function onLoaded(signal) {
-      if (signal === BootManager.Ready) { 
-        buildModel(plasmoid.configuration.hideEntries, bootMgr.bootEntries)
+      if (signal === BootManager.Ready) {
+        bootMgr.alog("Boot entries are ready - Updating the listview")
+        updateModel()
       }
     }
   
@@ -171,7 +180,10 @@ PlasmaExtras.Representation {
     target: plasmoid.configuration
 
     function onValueChanged(value) {
-      if (bootMgr.step === BootManager.Ready && value == "hideEntries") buildModel(plasmoid.configuration.hideEntries, bootMgr.bootEntries)
+      if (bootMgr.step === BootManager.Ready && value == "blacklist") {
+        //bootMgr.alog("Configuration has changed - Updating the listview")
+        updateModel()
+      }
     }
    }
 

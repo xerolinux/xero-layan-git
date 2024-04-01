@@ -5,10 +5,11 @@
                           http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
   <kcfgfile name=""/>
   <group name="General">
-    <entry name="allEntries" type="StringList">
-      <label>All entries</label>
+    <entry name="entriesID" type="String"></entry>
+    <entry name="savedEntries" type="String">
+      <label>Saved boot entries</label>
     </entry>
-    <entry name="hideEntries" type="StringList">
+    <entry name="blacklist" type="StringList">
       <label>Hidden entries</label>
     </entry>
     <entry name="rebootMode" type="Enum">
@@ -26,20 +27,10 @@
       </choices>
       <default>0</default>
     </entry>
-    <!-- TODO: GET RID OF THIS TERRIBLE WORKAROUND -->
-    <entry name="sysdOK" type="Bool">
-    </entry>
-    <entry name="bctlOK" type="Bool">
-    </entry>
-    <entry name="gotEntries" type="Bool">
-    </entry>
-    <entry name="canEfi" type="Bool">
-    </entry>
-    <entry name="canMenu" type="Bool">
-    </entry>
-    <entry name="canEntry" type="Bool">
-    </entry>
-    <entry name="gotEntries" type="Bool">
-    </entry>
+    <entry name="confVersion" type="Int"></entry>
+    <!-- Ugly workaround to get info from bootmgr -->
+    <entry name="appLog" type="String"></entry>
+    <entry name="appState" type="Int"></entry>
+    <entry name="checkState" type="StringList"></entry>
   </group>
 </kcfg>

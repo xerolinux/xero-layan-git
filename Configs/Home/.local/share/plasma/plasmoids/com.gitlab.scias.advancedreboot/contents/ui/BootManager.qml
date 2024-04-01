@@ -9,14 +9,17 @@ Item {
     //property bool requiresRoot: false
     readonly property string cmdSudo: "pkexec "
 
-    readonly property int minVersion: 251 // Minimum systemd version required
+    readonly property int minVersion: 251 // Minimum required systemd version
+    readonly property int confVersion: 1 // Used to flush existing config data on new releases if needed
+
     readonly property string cmdDbusPre: "busctl"
     readonly property string cmdSdboot: "bootctl"
     readonly property string cmdDbusCheck: cmdDbusPre + " --version"
     readonly property string cmdSdbootCheck: cmdSdboot + " --version"
     readonly property string cmdDbusPath: "org.freedesktop.login1 /org/freedesktop/login1 org.freedesktop.login1.Manager"
 
-    readonly property string cmdGetEntries: cmdSdboot + " list --json=short --no-pager"
+    readonly property string cmdGetEntriesFull: cmdSdboot + " list --json=short --no-pager"
+    readonly property string cmdGetEntriesID: cmdDbusPre + " get-property " + cmdDbusPath + " BootLoaderEntries --json=short"
 
     readonly property string cmdCheckEfi: cmdDbusPre + " call " + cmdDbusPath + " CanRebootToFirmwareSetup --json=short"
     readonly property string cmdCheckCustom: cmdDbusPre + " call " + cmdDbusPath + " CanRebootToBootLoaderEntry --json=short"
@@ -32,8 +35,6 @@ Item {
 
     readonly property string defaultIcon: "default"
     readonly property var iconMap: {
-        "Firmware Setup" : "settings",
-        "Bootloader Menu" : "menu",
         "Windows" : "windows",
         "Mac OS" : "apple",
         "Memtest" : "memtest",
@@ -56,6 +57,7 @@ Item {
     property var canMenu: null
     property var canEfi: null
     property var gotEntries: null
+    property bool reusedConfig: false
 
     enum State {
         ReqPass,
@@ -66,8 +68,7 @@ Item {
     }
     property int step: -1
 
-    // TODO: Optimisation: use a temporary model
-    property var bootEntries: ListModel { }
+    property var bootEntries: []
     
     SessionManagement {
         id: session
@@ -84,6 +85,10 @@ Item {
 
             disconnectSource(cmd)
 
+            if (cmd.includes("SetReboot")) {
+                return
+            }
+
             if (cmd == cmdDbusCheck) {
                 if (stdout && !stderr) {
                     const resp = stdout.split(" ")
@@ -99,51 +104,68 @@ Item {
                 try { json = JSON.parse(stdout) }
                 catch (err) {
                     if (stderr.includes("Permission")) {
+                        alog("Root is required to get bootctl entries - Awaiting user response...")
                         step = BootManager.RootRequired
                         return
                     }
                     else {
+                        alog("Could not parse bootctl entries: " + err)
                         gotEntries = false
                         step = BootManager.GotEntries
                     }
                 }
                 if (cmd == cmdCheckCustom) {
                     canEntry = json.data == "yes"
-                    if (canEntry) getEntries(false)
+                    alog("This system can reboot to any entry: " + canEntry)
+                    if (canEntry) getEntriesID()
                     else step = BootManager.GotEntries
                 }
                 else if (cmd == cmdCheckMenu) {
                     canMenu = json.data == "yes"
-                    if (canMenu) bootEntries.append(mapEntry("bootloader-menu", "Bootloader Menu", i18n("Bootloader Menu")))
+                    alog("This system can reboot to the bootloader menu: " + canMenu)
+                    if (canMenu) mapEfiMenu("bootloader-menu")
                 }
                 else if (cmd == cmdCheckEfi) {
                     canEfi = json.data == "yes"
-                    if (canEfi) bootEntries.append(mapEntry("firmware-setup", "Firmware Setup", i18n("Firmware Setup")))
+                    alog("This system can reboot to the firmware setup: " + canEfi)
+                    if (canEfi) mapEfiMenu("firmware-setup")
                 }
-                else if (cmd.includes(cmdGetEntries)) {
-                    if (step != BootManager.GotEntries) {
-                        for (const entry of json) {
-                            if (!ignoreEntries.includes(entry.id)) {
-                                bootEntries.append(mapEntry(entry.id, entry.title, entry.showTitle))
-                            }
-                        }
+                else if (cmd == cmdGetEntriesID) {
+                    let entriesID = JSON.stringify(json.data)
+
+                    if (!plasmoid.configuration.entriesID || !plasmoid.configuration.savedEntries || plasmoid.configuration.entriesID != entriesID || plasmoid.configuration.confVersion != confVersion) {
+                        alog("No saved entries were found or they have changed")
+                        plasmoid.configuration.entriesID = entriesID
+                        getEntriesFull(false)
+                    }
+                    else {
+                        alog("Existing saved entries were found and match saved ones")
+                        getEntriesSaved()
                         step = BootManager.GotEntries
                         gotEntries = true
                     }
+                }
+                else if (cmd.includes(cmdGetEntriesFull) && step != BootManager.GotEntries) {
+                    mapAllEntries(json)
+                    step = BootManager.GotEntries
+                    gotEntries = true
+                    alog("Parsed new bootctl entries")
                 }
             }
 
             if (step === -1) {
                 if (busctlOK && bootctlOK) {
+                    alog("The systemd and bootctl requirements seem met")
                     step = BootManager.ReqPass
                     getAbilities()
                 }
                 else if (busctlOK === false || bootctlOK === false) {
+                    alog("The systemd and/or bootctl requirements are NOT met - Aborting")
                     step = BootManager.Error
                 }
             }
 
-            if (step >= BootManager.GotEntries) finish(false)
+            if (step === BootManager.GotEntries) finish(false)
 
         }
 
@@ -153,84 +175,123 @@ Item {
 
     }
 
-    function mapEntry(id, title, fullTitle) {
-        let bIcon = defaultIcon
-        //let system = systemEntries.includes(id)
-        let cmd
-
-        if (id == "bootloader-menu") cmd = cmdSetMenu
-        else if (id == "firmware-setup") cmd = cmdSetEfi
-        else cmd = cmdSetEntry + id
-
-        for (const key in iconMap) {
-            if (title.includes(key)) {
-                bIcon = iconMap[key]
-                break
-            }
-        }
-
-        // TODO: figure out why push method doesn't work on the plasmoid.configuration item
-        let tmpList = plasmoid.configuration.allEntries
-        tmpList.push(fullTitle)
-        plasmoid.configuration.allEntries = tmpList
-
-        return ({
-            id: id,
-            //system: system,
-            title: title,
-            fullTitle: fullTitle,
-            bIcon: Qt.resolvedUrl("../../assets/icons/" + bIcon + ".svg"),
-            cmd: cmd,
-            enabled: true,
-        })
-
-    }
-
     function initialize() {
-        plasmoid.configuration.allEntries = []
+        // Workarounds
+        plasmoid.configuration.appLog = ""
+        plasmoid.configuration.checkState = [false,false,false,false,false,false]
+
+        alog("Saved/Current configuration model version: " + plasmoid.configuration.confVersion + "/" + confVersion)
+        alog("Checking base requirements...")
         executable.exec(cmdDbusCheck)
         executable.exec(cmdSdbootCheck)
     }
 
     function getAbilities() {
+        alog("Querying system reboot capabilities...")
         executable.exec(cmdCheckEfi)
         executable.exec(cmdCheckMenu)
         executable.exec(cmdCheckCustom)
     }
 
-    function getEntries(root) {
-        let cmd = cmdGetEntries
+    function getEntriesID() {
+        alog("Getting boot entries IDs to compare with the saved ones...")
+        executable.exec(cmdGetEntriesID)
+    }
+
+    function getEntriesSaved() {
+        alog("Reusing saved bootctl entries")
+        try {
+            bootEntries = JSON.parse(plasmoid.configuration.savedEntries)
+        } 
+        catch (err) {
+            alog("Could not restore saved bootctl entries - Getting fresh ones instead")
+            getEntriesFull(false)
+            return
+        }
+        reusedConfig = true
+    }
+
+    function getEntriesFull(root) {
+        alog("Attempting to get fresh bootctl entries - root access: " + root)
+        let cmd = cmdGetEntriesFull
         if (root) cmd = cmdSudo + cmd
         executable.exec(cmd)
     }
 
-    function bootEntry(cmd) {
-        executable.exec(cmd)
-        let mode = plasmoid.configuration.rebootMode
-        if (mode === 0 || mode === 1) {
-            session["requestReboot"](mode)
+    function mapEfiMenu(id) {
+        bootEntries.push({
+            id: id,
+            title: id == "firmware-setup" ? i18n("Firmware Setup") : i18n("Bootloader Menu"),
+            showTitle: id == "firmware-setup" ? i18n("Firmware Setup") : i18n("Bootloader Menu"),
+            version: "",
+            bIcon: id == "firmware-setup" ? "settings" : "menu",
+        })
+        alog("Added \"" + id + "\"")
+    }
+
+    function mapAllEntries(json) {
+        for (const entry of json) {
+            if (!ignoreEntries.includes(entry.id)) {
+                let bIcon = defaultIcon
+
+                for (const key in iconMap) {
+                    if (entry.title.includes(key)) {
+                        bIcon = iconMap[key]
+                        break
+                    }
+                }
+                bootEntries.push({
+                    id: entry.id,
+                    title: entry.title,
+                    showTitle: entry.showTitle,
+                    version: entry.version ?? "",
+                    bIcon: bIcon,
+                })
+                alog("Added \"" + entry.id + "\"")
+            }
         }
     }
 
     function finish(skip) {
-
         if (skip) step = BootManager.GotEntries
 
         if (step === BootManager.GotEntries && canEntry !== null && canEfi !== null && canMenu !== null) {
-            step = (canEntry || canEfi || canMenu) ? BootManager.Ready : BootManager.Error
-            loaded(step)
+            if (!canEfi && !canMenu) {
+                if (!canEntry || bootEntries.length == 0) {
+                    step = BootManager.Error
+                }
+                else step = BootManager.Ready
+            }
+            else {
+                step = BootManager.Ready
+            }
         }
 
         if (step >= BootManager.Ready) {
-                // TERRRIBLE WORKAROUND - GIVE INFO TO CONFIG PANEL
-                plasmoid.configuration.sysdOK = busctlOK
-                plasmoid.configuration.bctlOK = bootctlOK
-                plasmoid.configuration.canEfi = canEfi
-                plasmoid.configuration.canMenu = canMenu
-                plasmoid.configuration.canEntry = canEntry
-                plasmoid.configuration.gotEntries = gotEntries
-                // TODO: Save all entries in configuration once ready
+            alog("Finished initialization - Error state: " + (step === BootManager.Error))
+            if (!reusedConfig) plasmoid.configuration.savedEntries = JSON.stringify(bootEntries)
+            loaded(step)
+
+            plasmoid.configuration.confVersion = confVersion
+            // Ugly workaround to give info to config panels
+            plasmoid.configuration.checkState = [busctlOK,bootctlOK,canEfi,canMenu,canEntry,gotEntries]
+            plasmoid.configuration.appState = step
         }
+    }
+
+    function bootEntry(id) {
+        let cmd
+        if (id == "firmware-setup") cmd = cmdSetEfi
+        else if (id == "bootloader-menu") cmd = cmdSetMenu
+        else cmd = cmdSetEntry + id
+        alog("Setting reboot to entry: " + id + " - Command: " + cmd)
+        executable.exec(cmd)
+        if (plasmoid.configuration.rebootMode != 2) session["requestReboot"](plasmoid.configuration.rebootMode)
+    }
+
+    function alog(msg) {
+        plasmoid.configuration.appLog += "> " + msg + "\n" // Workaround
+        console.log("advancedreboot: " + msg)
     }
 
     signal loaded(int step)

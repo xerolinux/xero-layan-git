@@ -3,51 +3,47 @@ import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15 as Controls
 
 import org.kde.kirigami 2.20 as Kirigami
-import org.kde.plasma.components as PlasmaComponents
 import org.kde.kcmutils as KCM
 
-// TODO: Better look
-// TODO?: Clean hideEntries in case of config changed
 KCM.ScrollViewKCM {
   id: generalRoot
 
   property alias cfg_rebootMode: rebootMode.currentIndex
+  property var allEntries: ListModel { }
 
-  header: Kirigami.Heading {
+  header: Controls.Label {
     Layout.fillWidth: true
     horizontalAlignment: Text.AlignHCenter
-    verticalAlignment: Text.AlignVCenter
     text: i18n("Displayed boot entries in the plasmoid view")
     wrapMode: Text.WordWrap
   }
 
   view: ListView {
-    //anchors.fill: parent
-    //height: contentHeight
     focus: true
-    model: plasmoid.configuration.allEntries
+    model: allEntries
     delegate: Controls.SwitchDelegate {
+      required property string showTitle
+      required property string id
+      required property string version
       width: ListView.view.width - ListView.view.leftMargin - ListView.view.rightMargin
-      text: modelData
-      checked: !plasmoid.configuration.hideEntries.includes(modelData)
-      onToggled: toggleEntry(modelData, !checked)
+      text: showTitle
+      checked: !plasmoid.configuration.blacklist.includes(id)
+      onToggled: toggleEntry(id, checked)
     }
 
     ErrorMessage {
       id: noEntriesMsg
       sIcon: "dialog-error-symbolic"
       message: i18n("No boot entries could be found.\nPlease check that your system meets the requirements.")
-      show: plasmoid.configuration.allEntries == 0
+      show: !plasmoid.configuration.savedEntries || plasmoid.configuration.appState == 3
     }
-
     //TODO: Placeholder while entries not ready yet
-
   }
 
   footer: RowLayout {
     Layout.fillWidth: true
 
-    PlasmaComponents.Label {
+    Controls.Label {
       Layout.alignment: Qt.AlignRight
       text: i18n("Behavior upon selecting an entry :")
     }
@@ -59,17 +55,26 @@ KCM.ScrollViewKCM {
     }
   }
 
-  function toggleEntry(entry, hide) {
-    // TODO: figure out why push method doesn't work on the plasmoid.configuration item
-    let tmpList = plasmoid.configuration.hideEntries
-    if (!hide) {
-      const index = tmpList.indexOf(entry)
-      if (index > -1) tmpList.splice(index, 1)
+  function toggleEntry(id, enabled) {
+    // BUG/WORKAROUND: Have to use copy methods because direct modification (push) doesn't work...
+    if (enabled) {
+      plasmoid.configuration.blacklist = plasmoid.configuration.blacklist.filter((entry) => entry != id)
     }
     else {
-      tmpList.push(entry)
+      plasmoid.configuration.blacklist = plasmoid.configuration.blacklist.concat([id])
     }
-    plasmoid.configuration.hideEntries = tmpList
+  }
+
+  Component.onCompleted: {
+    if (plasmoid.configuration.savedEntries) {
+      for (const entry of JSON.parse(plasmoid.configuration.savedEntries)) {
+        allEntries.append({
+          id: entry.id,
+          showTitle: entry.showTitle,
+          version: entry.version
+        })
+      }
+    }
   }
 
 }
