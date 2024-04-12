@@ -15,6 +15,7 @@ import "../tools/tools.js" as JS
 SimpleKCM {
     property alias cfg_upgradeFlags: upgradeFlags.checked
     property alias cfg_upgradeFlagsText: upgradeFlagsText.text
+    property alias cfg_refreshShell: refreshShell.checked
     property string cfg_terminal: plasmoid.configuration.terminal
     property alias cfg_mirrors: mirrors.checked
 
@@ -43,9 +44,6 @@ SimpleKCM {
 
                 onCurrentIndexChanged: {
                     cfg_terminal = model[currentIndex]["value"]
-                    if (cfg_terminal.split("/").pop() === "yakuake") {
-                        mirrors.checked = false
-                    }
                 }
 
                 Component.onCompleted: {
@@ -86,6 +84,23 @@ SimpleKCM {
             }
         }
 
+        Item {
+            Kirigami.FormData.isSection: true
+        }
+
+        RowLayout {
+            Kirigami.FormData.label: i18n("Plasmoids:")
+
+            CheckBox {
+                id: refreshShell
+                text: "Refresh plasmashell"
+            }
+
+            ContextualHelpButton {
+                toolTipText: "<p><b>Required installed qdbus.</b><br>After upgrading plasmoid, the old version will still remain in memory until you restart plasmashell. To avoid doing this manually, enable this option. It will refresh plasmashell via qdbus. The terminal may be closed automatically as Apdatifier will also be restarted.<br><br>If plasmashell is only terminating and not starting itself, then execute the command: kstart plasmashell.</p>"
+            }
+        }
+
         Kirigami.Separator {
             Kirigami.FormData.label: i18n("Pacman Mirrorlist Generator")
             Kirigami.FormData.isSection: true
@@ -97,12 +112,11 @@ SimpleKCM {
             CheckBox {
                 id: mirrors
                 text: i18n("Refresh on upgrade")
-                enabled: pkg.checkupdates && cfg_terminal.split("/").pop() !== "yakuake"
-                visible: pkg.pacman
+                enabled: pkg.pacman
             }
 
             ContextualHelpButton {
-                toolTipText: "<p>To use this feature, the following installed utilities are required: <b>curl, pacman-contrib</b>, any supported terminal except yakuake.</p><br><p>See https://archlinux.org/mirrorlist</p>"
+                toolTipText: "<p>To use this feature, the following installed utilities are required:<br><b>curl, pacman-contrib.</b></p><br><p>Also see https://archlinux.org/mirrorlist (click button to open link)</p>"
                 onClicked: {
                     Qt.openUrlExternally("https://archlinux.org/mirrorlist")
                 }

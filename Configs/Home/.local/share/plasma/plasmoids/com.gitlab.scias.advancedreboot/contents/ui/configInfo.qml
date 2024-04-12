@@ -77,12 +77,10 @@ KCM.SimpleKCM {
     standardButtons: Kirigami.Dialog.Ok | Kirigami.Dialog.Cancel
 
     onAccepted: {
-      plasmoid.configuration.entriesID = ""
-      plasmoid.configuration.savedEntries = ""
       plasmoid.configuration.blacklist = []
       plasmoid.configuration.rebootMode = 0
-      // TODO: Maybe there's a way to restart the plasmoid?
-      showPassiveNotification(i18n("This plasmoid's configuration and state have been reset. Please restart it (or Plasma) to start anew."))
+      plasmoid.internalAction("reset").trigger()
+      showPassiveNotification(i18n("This plasmoid's configuration and state have been reset."))
     }
   }
 

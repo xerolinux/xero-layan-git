@@ -34,8 +34,8 @@ KCM.ScrollViewKCM {
     ErrorMessage {
       id: noEntriesMsg
       sIcon: "dialog-error-symbolic"
-      message: i18n("No boot entries could be found.\nPlease check that your system meets the requirements.")
-      show: !plasmoid.configuration.savedEntries || plasmoid.configuration.appState == 3
+      message: i18n("No boot entries could be found.")
+      show: !plasmoid.configuration.savedEntries || plasmoid.configuration.appState == 4
     }
     //TODO: Placeholder while entries not ready yet
   }

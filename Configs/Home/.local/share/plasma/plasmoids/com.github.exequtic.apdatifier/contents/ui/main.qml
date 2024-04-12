@@ -17,7 +17,7 @@ PlasmoidItem {
     compactRepresentation: CompactRepresentation {}
     fullRepresentation: FullRepresentation {}
 
-    switchWidth: Kirigami.Units.gridUnit * 20
+    switchWidth: Kirigami.Units.gridUnit * 25
     switchHeight: Kirigami.Units.gridUnit * 10
 
     Plasmoid.busy: busy
@@ -41,8 +41,10 @@ PlasmoidItem {
     property string notifyTitle: ""
     property string notifyBody: ""
     property string lastCheck
+    property string timestamp
     property var count
     property var cache
+    property var news: []
 
     property bool interval: plasmoid.configuration.interval
     property int time: plasmoid.configuration.time
@@ -64,7 +66,7 @@ PlasmoidItem {
         eventId: cfg.withSound ? "sound" : "popup"
         title: notifyTitle
         text: notifyBody
-        iconName: "apdatifier-packages"
+        iconName: notifyTitle === "Arch Linux News" ? "news-subscribe" : "apdatifier-packages"
     }
 
     Timer {

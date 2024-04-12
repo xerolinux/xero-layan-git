@@ -19,36 +19,40 @@ import "../tools/tools.js" as JS
 
 Item {
     property bool searchFieldOpen: false
-    property var lastNews: cfg.lastNews.length ? JSON.parse(cfg.lastNews) : null
+    property var pkgIcons: cfg.customIcons
+
+    property bool visibility: !busy && Object.keys(news).length !== 0 && !news.dismissed
+    function updateVisibility() {
+        visibility = !news.dismissed
+    }
 
     Kirigami.InlineMessage {
-        id: news
+        id: newsAlert
         anchors.top: parent.top
         anchors.right: parent.right
         anchors.left: parent.left
+        visible: visibility
 
         icon.source: "news-subscribe"
-        text: lastNews ? `<b>Check out the latest news! (${lastNews.date})</b><br><b>Article:</b> ${lastNews.article}` : ""
+        text: news ? `<b>Check out the latest news! (${news.date})</b><br><b>Article:</b> ${news.article}` : ""
         onLinkActivated: Qt.openUrlExternally(link)
-        type: Kirigami.MessageType.Warning
-
-        visible: !busy && lastNews && !lastNews.dismissed
-        enabled: visible
+        type: Kirigami.MessageType.Positive
 
         actions: [
             Kirigami.Action {
                 text: "Read full article"
                 icon.name: "internet-web-browser"
                 onTriggered: {
-                    Qt.openUrlExternally(lastNews.link)
+                    Qt.openUrlExternally(news.link)
                 }
             },
             Kirigami.Action {
                 text: "Dismiss"
                 icon.name: "dialog-close"
                 onTriggered: {
-                    lastNews.dismissed = true
-                    cfg.lastNews = JSON.stringify(lastNews)
+                    news.dismissed = true
+                    sh.exec(`echo '${JSON.stringify(news)}' > "${JS.newsFile}"`)
+                    updateVisibility()
                 }
             }
         ]
@@ -56,7 +60,7 @@ Item {
     
 
     ScrollView {
-        anchors.top: news.bottom
+        anchors.top: newsAlert.bottom
         anchors.right: parent.right
         anchors.left: parent.left
         anchors.bottom: separator.top
@@ -67,17 +71,37 @@ Item {
             id: list
             model: !cfg.fullView ? modelList : []
             delegate: GridLayout {
-                height: Math.round(Kirigami.Theme.defaultFont.pointSize * 1.5 + cfg.spacing)
+                property var heightItem: Math.round(Kirigami.Theme.defaultFont.pointSize * 1.5)
+                height: heightItem + cfg.spacing
+                Rectangle {
+                    Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                    height: heightItem
+                    width: height
+                    color: "transparent"
+                    Kirigami.Icon {
+                        anchors.centerIn: parent
+                        height: heightItem
+                        width: height
+                        source: !hoverIcon.containsMouse ? JS.setPackageIcon(pkgIcons, model.NM, model.RE, model.GR, model.ID) : "folder-download-symbolic"
+                    }
+                    MouseArea {
+                        id: hoverIcon
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: { JS.upgradePackage(model.NM, model.ID, model.CN) }
+                    }
+                }
                 Label {
                     Layout.minimumWidth: list.width / 2
                     Layout.maximumWidth: list.width / 2
-                    text: model.name
+                    text: model.NM
                     elide: Text.ElideRight
                 }
                 Label {
                     Layout.minimumWidth: list.width / 2
                     Layout.maximumWidth: list.width / 2
-                    text: model.repository + " → " + model.vernew
+                    text: model.RE + " → " + model.VN
                     elide: Text.ElideRight
                 }
             }
@@ -85,7 +109,7 @@ Item {
     }
 
     ScrollView {
-        anchors.top: news.bottom
+        anchors.top: newsAlert.bottom
         anchors.right: parent.right
         anchors.left: parent.left
         anchors.bottom: separator.top
@@ -103,18 +127,17 @@ Item {
 
             delegate: ExpandableListItem {
                 property var pkg: []
-                property var pkgIcons: cfg.customIcons.split("\n").filter(Boolean).map(l => ({ name: l.split(' ')[0], icon: l.split(' ')[1] }))
-                title: model.name
-                subtitle: model.repository + "  " + model.verold + " → " + model.vernew
-                icon: JS.setPackageIcon(pkgIcons, model.name, model.appID)
+                title: model.NM
+                subtitle: model.RE + "  " + model.VO + " → " + model.VN
+                icon: JS.setPackageIcon(pkgIcons, model.NM, model.RE, model.GR, model.ID)
 
                 contextualActions: [
                     Action {
                         id: updateButton
                         icon.name: "folder-download-symbolic"
-                        text: "Update"
-                        enabled: model.appID !== "" && cfg.terminal
-                        onTriggered: JS.updatePackage(model.appID)
+                        text: "Upgrade"
+                        enabled: cfg.terminal
+                        onTriggered: JS.upgradePackage(model.NM, model.ID, model.CN)
                     }
                 ]
 
@@ -159,7 +182,7 @@ Item {
                                         opacity: header ? 0.6 : 1
                                         text: header ? "<b>" + pkg[index] + ":</b>"
                                                      : pkg[index].indexOf("://") !== -1
-                                                     ? "<a href=\"" + pkg[index] + "\">" + pkg[index].replace(/\/+$/, '') + "</a>"
+                                                     ? "<a href=\"" + pkg[index] + "\">" + pkg[index] + "</a>"
                                                      : pkg[index]
                                         textFormat: header ? Text.StyledText
                                                            : pkg[index].indexOf("://") !== -1
@@ -178,22 +201,23 @@ Item {
 
                         Component.onCompleted: {
                             const details = []
-                            model.desc && details.push("Description", model.desc)
-                            model.appID && details.push("App ID", model.appID)
-                            model.branch && details.push("Branch", model.branch)
-                            model.commit && details.push("Commit", model.commit)
-                            model.runtime && details.push("Runtime", model.runtime)
-                            model.link && details.push("URL", model.link)
-                            model.group && details.push("Groups", model.group)
-                            model.provides && details.push("Provides", model.provides)
-                            model.depends && details.push("Depends on", model.depends)
-                            model.required && details.push("Required by", model.required)
-                            model.conflicts && details.push("Conflicts with", model.conflicts)
-                            model.replaces && details.push("Replaces", model.replaces)
-                            model.installedsize && details.push("Installed size", model.installedsize)
-                            model.downloadsize && details.push("Download size", model.downloadsize)
-                            model.installdate && details.push("Install date", model.installdate)
-                            model.reason && details.push("Install reason", model.reason)
+                            model.DE && details.push("Description", model.DE)
+                            model.AU && details.push("Author", model.AU)
+                            model.ID && details.push("App ID", model.ID)
+                            model.BR && details.push("Branch", model.BR)
+                            model.CM && details.push("Commit", model.CM)
+                            model.RT && details.push("Runtime", model.RT)
+                            model.LN && details.push("URL", model.LN)
+                            model.GR && details.push("Groups", model.GR)
+                            model.PR && details.push("Provides", model.PR)
+                            model.DP && details.push("Depends on", model.DP)
+                            model.RQ && details.push("Required by", model.RQ)
+                            model.CF && details.push("Conflicts with", model.CF)
+                            model.RP && details.push("Replaces", model.RP)
+                            model.IS && details.push("Installed size", model.IS)
+                            model.DS && details.push("Download size", model.DS)
+                            model.DT && details.push("Install date", model.DT)
+                            model.RN && details.push("Install reason", model.RN)
                             pkg = details
                         }
                     }

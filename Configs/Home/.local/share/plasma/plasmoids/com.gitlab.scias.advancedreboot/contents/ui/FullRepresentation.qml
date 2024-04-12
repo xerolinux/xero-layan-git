@@ -1,16 +1,14 @@
 import QtQuick 2.15
 import QtQuick.Layouts 1.15
 
+import org.kde.plasma.plasmoid
 import org.kde.plasma.components as PlasmaComponents
 import org.kde.plasma.extras as PlasmaExtras
 import org.kde.kirigami 2.20 as Kirigami
 import org.kde.notification
 
-// TODO: Trim long entries or make them scroll
-// TODO: Put stuff inside parenthesis / kernel versions in a separate line below
 PlasmaExtras.Representation {
 
-  property var shownEntries: ListModel { }
   property var selectedEntry
   property bool busy: false
 
@@ -24,10 +22,22 @@ PlasmaExtras.Representation {
   Layout.minimumHeight: implicitHeight
 
   header: PlasmaExtras.PlasmoidHeading {
-    contentItem: Kirigami.Heading {
-      padding: Kirigami.Units.smallSpacing
-      horizontalAlignment: Text.AlignHCenter
-      text: i18n("Reboot into...")
+    contentItem: RowLayout {
+      Kirigami.Heading {
+        Layout.fillWidth: true
+        padding: Kirigami.Units.smallSpacing
+        text: i18n("Reboot to...")
+      }
+      PlasmaComponents.ToolButton {
+        icon.name: "view-refresh"
+        onClicked: plasmoid.internalAction("reset").trigger()
+        PlasmaComponents.ToolTip { text: i18n("Reload this applet") }
+      }
+      PlasmaComponents.ToolButton {
+        icon.name: "configure"
+        onClicked: plasmoid.internalAction("configure").trigger()
+        PlasmaComponents.ToolTip { text: i18n("Configure this applet") }
+      }
     }
   }
 
@@ -66,6 +76,7 @@ PlasmaExtras.Representation {
               level: 4
               Layout.fillWidth: true
               text: title
+              elide: Text.ElideRight
             }
             PlasmaComponents.Label {
               color: Kirigami.Theme.disabledTextColor
@@ -96,8 +107,11 @@ PlasmaExtras.Representation {
       sIcon: "dialog-warning-symbolic"
       message: i18n("No boot entries could be listed.\nPlease check this applet settings.")
       show: bootMgr.step === BootManager.Ready && shownEntries.count == 0 && !busy
-      // TODO: add open configuration button
-      //Plasmoid.internalAction("configure").trigger()
+      action: Kirigami.Action {
+        text: i18n("Configure")
+        icon.name: "configure"
+        onTriggered: plasmoid.internalAction("configure").trigger()
+      }
     }
 
     PlasmaComponents.BusyIndicator {

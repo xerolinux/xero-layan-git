@@ -13,7 +13,7 @@
         "Id": "com.gitlab.scias.advancedreboot",
         "Name": "Advanced Reboot",
         "Name[fr]": "Redémarrage avancé",
-        "Version": "0.50",
+        "Version": "0.53",
         "License": "Mozilla Public License 2.0",
         "Website": "https://www.gitlab.com/Scias/plasma-advancedreboot"
     },

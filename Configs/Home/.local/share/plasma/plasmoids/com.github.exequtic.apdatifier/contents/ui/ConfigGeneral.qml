@@ -19,11 +19,15 @@ SimpleKCM {
     property alias cfg_time: time.value
     property alias cfg_checkOnStartup: checkOnStartup.checked
 
+    property alias cfg_archRepo: archRepo.checked
     property alias cfg_aur: aur.checked
     property alias cfg_flatpak: flatpak.checked
     property alias cfg_archNews: archNews.checked
+    property alias cfg_plasmoids: plasmoids.checked
 
     property string cfg_wrapper: plasmoid.configuration.wrapper
+
+    property alias cfg_exclude: exclude.text
 
     property alias cfg_notifications: notifications.checked
     property alias cfg_withSound: withSound.checked
@@ -72,7 +76,7 @@ SimpleKCM {
             }
 
             ContextualHelpButton {
-                toolTipText: "<p>If the option is <b>enabled</b>, update checking will begin immediately upon widget startup.</p><br><p>If the option is <b>disabled</b>, update checking will be initiated after a specified time interval has passed since the widget was started.</p>"
+                toolTipText: "<p>If the option is <b>enabled</b>, update checking will begin immediately upon widget startup.</p><br><p>If the option is <b>disabled</b>, update checking will be initiated after a specified time interval has passed since the widget was started. <b>Recommended.</b></p>"
             }
         }
 
@@ -86,9 +90,26 @@ SimpleKCM {
             spacing: Kirigami.Units.gridUnit
 
             CheckBox {
+                id: archRepo
+                text: i18n("Arch repositories")
+                enabled: pkg.pacman
+
+                Component.onCompleted: {
+                    if (checked && !pkg.pacman) {
+                        checked = false
+                        cfg_archRepo = checked
+                    }
+                }
+            }
+        }
+
+        RowLayout {
+            spacing: Kirigami.Units.gridUnit
+
+            CheckBox {
                 id: aur
                 text: i18n("AUR")
-                enabled: pkg.pacman && wrappers
+                enabled: archRepo.checked && pkg.pacman && wrappers
             }
 
             Kirigami.UrlButton {
@@ -104,6 +125,18 @@ SimpleKCM {
                 color: Kirigami.Theme.positiveTextColor
                 text: i18n("found: %1", cfg_wrapper)
                 visible: aur.checked && wrappers.length == 1
+            }
+        }
+
+        RowLayout {
+            CheckBox {
+                id: archNews
+                text: "Arch Linux News"
+                enabled: pkg.pacman && wrappers
+            }
+
+            ContextualHelpButton {
+                toolTipText: "<p>It is necessary to have paru or yay installed.</p>"
             }
         }
 
@@ -135,12 +168,12 @@ SimpleKCM {
 
         RowLayout {
             CheckBox {
-                id: archNews
-                text: "Arch Linux News"
+                id: plasmoids
+                text: "Plasmoids (beta)"
             }
 
             ContextualHelpButton {
-                toolTipText: "<p>It is necessary to have paru or yay installed.</p>"
+                toolTipText: "To use this feature, the following installed utilities are required:<br><b>curl, jq, xmlstarlet, unzip, tar</b>.<br><br>For plasmoid developers:<br>Don't forget to update the metadata.json and specify the name of the applet and its version <b>exactly</b> as they appear on the KDE Store."
             }
         }
 
@@ -187,6 +220,23 @@ SimpleKCM {
                 text: i18n("pacman-contrib not installed! Highly recommended to install it for getting the latest updates without the need to download fresh package databases.")
                 wrapMode: Text.WordWrap
                 horizontalAlignment: Text.AlignHCenter
+            }
+        }
+
+        Item {
+            Kirigami.FormData.isSection: true
+        }
+
+        RowLayout {
+            Kirigami.FormData.label: i18n("Exclude packages:")
+            spacing: 0
+
+            TextField {
+                id: exclude
+            }
+
+            ContextualHelpButton {
+                toolTipText: "<p>In this field, you can specify package names that you want to ignore.<br><b>Specify names separated by spaces.</b><br><br>If you want to ignore packages or groups during an upgrade, specify them in the settings <b>IgnorePkg</b> and <b>IgnoreGroup</b> of the /etc/pacman.conf file.</p>"
             }
         }
 

@@ -5,15 +5,13 @@ import org.kde.plasma.plasma5support as Plasma5Support
 
 Item {
 
-    // TODO: 0.5 / sudo
-    //property bool requiresRoot: false
-    readonly property string cmdSudo: "pkexec "
-
     readonly property int minVersion: 251 // Minimum required systemd version
     readonly property int confVersion: 1 // Used to flush existing config data on new releases if needed
 
+    readonly property string cmdSudo: "pkexec "
     readonly property string cmdDbusPre: "busctl"
     readonly property string cmdSdboot: "bootctl"
+
     readonly property string cmdDbusCheck: cmdDbusPre + " --version"
     readonly property string cmdSdbootCheck: cmdSdboot + " --version"
     readonly property string cmdDbusPath: "org.freedesktop.login1 /org/freedesktop/login1 org.freedesktop.login1.Manager"
@@ -60,13 +58,14 @@ Item {
     property bool reusedConfig: false
 
     enum State {
+        Init,
         ReqPass,
         GotEntries,
         Ready,
         Error,
         RootRequired
     }
-    property int step: -1
+    property int step: BootManager.Init
 
     property var bootEntries: []
     
@@ -153,7 +152,7 @@ Item {
                 }
             }
 
-            if (step === -1) {
+            if (step === BootManager.Init) {
                 if (busctlOK && bootctlOK) {
                     alog("The systemd and bootctl requirements seem met")
                     step = BootManager.ReqPass
@@ -184,6 +183,16 @@ Item {
         alog("Checking base requirements...")
         executable.exec(cmdDbusCheck)
         executable.exec(cmdSdbootCheck)
+    }
+
+    function reset() {
+        alog("Reset has been requested")
+        step = BootManager.Init
+        plasmoid.configuration.savedEntries = ""
+        plasmoid.configuration.entriesID = ""
+        bootEntries = []
+        reusedConfig = false
+        initialize()
     }
 
     function getAbilities() {
@@ -253,14 +262,10 @@ Item {
     }
 
     function finish(skip) {
-        if (skip) step = BootManager.GotEntries
 
-        if (step === BootManager.GotEntries && canEntry !== null && canEfi !== null && canMenu !== null) {
-            if (!canEfi && !canMenu) {
-                if (!canEntry || bootEntries.length == 0) {
-                    step = BootManager.Error
-                }
-                else step = BootManager.Ready
+        if (skip || (canEntry !== null && canEfi !== null && canMenu !== null)) {
+            if (!canEfi && !canMenu && (!canEntry || bootEntries.length == 0)) {
+                step = BootManager.Error
             }
             else {
                 step = BootManager.Ready
