@@ -1,22 +1,22 @@
 {
-    "KPlugin": {
-        "Authors": [
-            {
-                "Email": "khirac@proton.me",
-                "Name": "Scias"
-            }
-        ],
-        "Category": "Utilities",
-        "Description": "Quickly reboot to a bootloader entry",
-        "Description[fr]": "Redémarrage rapide vers une entrée de démarrage",
-        "Icon": "chronometer-reset",
-        "Id": "com.gitlab.scias.advancedreboot",
-        "Name": "Advanced Reboot",
-        "Name[fr]": "Redémarrage avancé",
-        "Version": "0.53",
-        "License": "Mozilla Public License 2.0",
-        "Website": "https://www.gitlab.com/Scias/plasma-advancedreboot"
-    },
-    "KPackageStructure": "Plasma/Applet",
-    "X-Plasma-API-Minimum-Version": "6.0"
+  "KPlugin": {
+    "Authors": [
+      {
+        "Email": "khirac@proton.me",
+        "Name": "Scias"
+      }
+    ],
+    "Category": "Utilities",
+    "Description": "Quickly reboot to a bootloader entry",
+    "Description[fr]": "Redémarrage rapide vers une entrée de démarrage",
+    "Icon": "chronometer-reset",
+    "Id": "com.gitlab.scias.advancedreboot",
+    "Name": "Advanced Reboot",
+    "Name[fr]": "Redémarrage avancé",
+    "Version": "0.60",
+    "License": "Mozilla Public License 2.0",
+    "Website": "https://www.gitlab.com/Scias/plasma-advancedreboot"
+  },
+  "KPackageStructure": "Plasma/Applet",
+  "X-Plasma-API-Minimum-Version": "6.0"
 }

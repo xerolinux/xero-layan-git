@@ -19,22 +19,22 @@ import org.kde.plasma.configuration
 
 ConfigModel {
     ConfigCategory {
-        name: "Station"
+        name: i18n("Station")
         icon: "flag"
         source: "config/ConfigStation.qml"
     }
     ConfigCategory {
-        name: "Appearance"
+        name: i18n("Appearance")
         icon: "preferences-desktop-color"
         source: "config/ConfigAppearance.qml"
     }
     ConfigCategory {
-        name: "Units"
+        name: i18n("Units")
         icon: "configure"
         source: "config/ConfigUnits.qml"
     }
     ConfigCategory {
-        name: "Debug"
+        name: i18n("Debug")
         icon: "preferences-other"
         source: "config/ConfigDebug.qml"
     }

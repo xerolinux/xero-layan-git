@@ -39,6 +39,7 @@ KCM.SimpleKCM {
           Layout.fillWidth: true
           Layout.leftMargin: Kirigami.Units.gridUnit*2
           verticalAlignment: Text.AlignVCenter
+          elide: Text.ElideRight
           text: modelData
         }
         Kirigami.Icon {
@@ -77,7 +78,6 @@ KCM.SimpleKCM {
     standardButtons: Kirigami.Dialog.Ok | Kirigami.Dialog.Cancel
 
     onAccepted: {
-      plasmoid.configuration.blacklist = []
       plasmoid.configuration.rebootMode = 0
       plasmoid.internalAction("reset").trigger()
       showPassiveNotification(i18n("This plasmoid's configuration and state have been reset."))

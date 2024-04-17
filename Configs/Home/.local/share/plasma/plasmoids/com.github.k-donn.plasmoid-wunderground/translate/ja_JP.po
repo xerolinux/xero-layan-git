@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmoid-wunderground\n"
 "Report-Msgid-Bugs-To: https://github.com/k-donn/plasmoid-wunderground\n"
-"POT-Creation-Date: 2024-01-21 20:04-0500\n"
+"POT-Creation-Date: 2024-03-28 21:52-0400\n"
 "PO-Revision-Date: 2024-01-14 22:54+0900\n"
 "Last-Translator: Yuta Takahashi <y.highbridge04@gmail.com>\n"
 "Language-Team: Japanese-Team <LL@li.org>\n"
@@ -17,13 +17,29 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../metadata.desktop
+#: ../metadata.json
 msgid "Wunderground"
 msgstr "Wunderground"
 
-#: ../metadata.desktop
+#: ../metadata.json
 msgid "Wunderground Personal Weather Station viewer"
 msgstr "Wunderground Personal Weather Station viewer"
+
+#: ../contents/config/config.qml
+msgid "Station"
+msgstr ""
+
+#: ../contents/config/config.qml
+msgid "Appearance"
+msgstr ""
+
+#: ../contents/config/config.qml
+msgid "Units"
+msgstr ""
+
+#: ../contents/config/config.qml
+msgid "Debug"
+msgstr ""
 
 #: ../contents/ui/config/ConfigAppearance.qml
 msgid "Compact Representation"
@@ -126,8 +142,8 @@ msgid "Feels like %1"
 msgstr "体感温度 %1"
 
 #: ../contents/ui/DetailsItem.qml
-msgid "Wind from: %1"
-msgstr "風向: %1"
+msgid "Wind from: %1 (%2°)"
+msgstr "風向: %1 (%2°)"
 
 #: ../contents/ui/DetailsItem.qml
 msgid "DEWPOINT"
@@ -156,9 +172,18 @@ msgctxt "Ultra Violet"
 msgid "UV"
 msgstr "紫外線"
 
+#: ../contents/ui/ForecastItem.qml
+msgctxt "Do not edit HTML tags."
+msgid "<font size='4'>Feels like: %1<br/>Thunder: %2<br/>UV: %3<br/>Snow: %4<br/>Golf: %5</font>"
+msgstr ""
+
 #: ../contents/ui/FullRepresentation.qml
 msgid "Loading data..."
 msgstr "データを読み込み中..."
+
+#: ../contents/ui/lib/ConfigBtn.qml
+msgid "Configure Wunderground"
+msgstr ""
 
 #: ../contents/ui/main.qml
 msgctxt "Do not edit HTML tags. 'Temp' means temperature"
@@ -202,3 +227,6 @@ msgstr "予報"
 #: ../contents/ui/TopPanel.qml
 msgid "High: %1 Low: %2"
 msgstr "最高気温: %1 最低気温: %2"
+
+#~ msgid "Wind from: %1"
+#~ msgstr "風向: %1"

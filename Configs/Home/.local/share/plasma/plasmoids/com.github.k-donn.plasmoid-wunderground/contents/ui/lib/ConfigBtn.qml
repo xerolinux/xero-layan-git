@@ -22,7 +22,7 @@ import org.kde.plasma.plasmoid
 import org.kde.plasma.core as PlasmaCore
 
 Button {
-    text: "Configure Wunderground"
+    text: i18n("Configure Wunderground")
     icon.name: "settings"
 
     onClicked: plasmoid.internalAction("configure").trigger()

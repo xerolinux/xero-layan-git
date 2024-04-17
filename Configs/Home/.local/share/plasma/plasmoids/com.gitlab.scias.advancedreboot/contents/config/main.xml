@@ -9,9 +9,6 @@
     <entry name="savedEntries" type="String">
       <label>Saved boot entries</label>
     </entry>
-    <entry name="blacklist" type="StringList">
-      <label>Hidden entries</label>
-    </entry>
     <entry name="rebootMode" type="Enum">
       <label>Reboot behaviour</label>
       <choices>

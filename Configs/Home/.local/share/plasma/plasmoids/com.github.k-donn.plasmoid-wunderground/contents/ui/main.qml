@@ -15,6 +15,7 @@
  * along with this program.  If not, see <http: //www.gnu.org/licenses/>.
  */
 
+import QtQml
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
@@ -144,12 +145,7 @@ PlasmoidItem {
 
     Component.onCompleted: {
         //printDebug(plasmoid.containment.corona.kPackage)
-	//printDebug("qlocation: " + plasmoid.location)
-	//printDebug("qformfactor: " + plasmoid.formFactor)
-	//printDebug("qavailscreen: " + plasmoid.containment.availableScreenRect)
-	//printDebug("qcontaintype: " + plasmoid.containment.containmentType)
-	//printDebug("qcontainhint: " + plasmoid.containment.containmentDisplayHints)
-	inTray = plasmoid.containment.containmentType == 129 && plasmoid.formFactor == 2
+        inTray = plasmoid.containment.containmentType == 129 && plasmoid.formFactor == 2
 
         plasmoid.configurationRequiredReason = i18n("Set the weather station to pull data from.")
 

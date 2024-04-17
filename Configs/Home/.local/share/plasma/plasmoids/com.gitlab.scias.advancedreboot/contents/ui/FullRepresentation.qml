@@ -11,6 +11,7 @@ PlasmaExtras.Representation {
 
   property var selectedEntry
   property bool busy: false
+  property bool resetting: false
 
   implicitWidth: Kirigami.Units.gridUnit * 20
   implicitHeight: mainList.height + header.height + Kirigami.Units.largeSpacing
@@ -30,8 +31,11 @@ PlasmaExtras.Representation {
       }
       PlasmaComponents.ToolButton {
         icon.name: "view-refresh"
-        onClicked: plasmoid.internalAction("reset").trigger()
-        PlasmaComponents.ToolTip { text: i18n("Reload this applet") }
+        onClicked: {
+          plasmoid.internalAction("reset").trigger()
+          resetting = true
+        }
+        PlasmaComponents.ToolTip { text: i18n("Reset this applet") }
       }
       PlasmaComponents.ToolButton {
         icon.name: "configure"
@@ -58,7 +62,7 @@ PlasmaExtras.Representation {
         required property string bIcon
         required property string title
         required property string version
-        width: parent ? parent.width : 0 // BUG: Occasional error here
+        width: parent ? parent.width : 0
         contentItem: RowLayout {
 
           Layout.fillWidth: true
@@ -94,12 +98,12 @@ PlasmaExtras.Representation {
         }
     }
 
-    // TODO: sections
-    /*section.property: "system"
-    section.delegate: Kirigami.ListSectionHeader {
-      width: parent.width
-      label: section == 1 ? "System entries" : "Custom entries"
-    }*/
+    PlasmaComponents.BusyIndicator {
+      implicitWidth: 150
+      implicitHeight: 150
+      anchors.centerIn: parent
+      visible: bootMgr.step < BootManager.Ready || busy
+    }
 
     ErrorMessage {
       id: noEntriesMsg
@@ -112,13 +116,6 @@ PlasmaExtras.Representation {
         icon.name: "configure"
         onTriggered: plasmoid.internalAction("configure").trigger()
       }
-    }
-
-    PlasmaComponents.BusyIndicator {
-      implicitWidth: 150
-      implicitHeight: 150
-      anchors.centerIn: parent
-      visible: bootMgr.step < BootManager.Ready || busy
     }
 
     ErrorMessage {
@@ -164,41 +161,40 @@ PlasmaExtras.Representation {
   function updateModel() {
     busy = true
     shownEntries.clear()
-    for (let entry of bootMgr.bootEntries) {
-      if (!plasmoid.configuration.blacklist.includes(entry.id)) {
-        shownEntries.append(entry)
+    try {
+      for (let entry of JSON.parse(plasmoid.configuration.savedEntries)) {
+        if (entry.show) shownEntries.append(entry)
       }
+    }
+    catch (err) {
+      bootmgr.alog("Error parsing saved entries for the mainview: " + err)
     }
     busy = false
   }
 
   Component.onCompleted: {
-    if (bootMgr.step === BootManager.Ready) { 
-      updateModel()
-    }
-  }
-
-  Connections {
-    target: bootMgr
-
-    function onLoaded(signal) {
-      if (signal === BootManager.Ready) {
-        bootMgr.alog("Boot entries are ready - Updating the listview")
-        updateModel()
-      }
-    }
-  
+    if (bootMgr.step === BootManager.Ready || bootMgr.step === BootManager.Error) updateModel()
   }
 
   Connections {
     target: plasmoid.configuration
 
     function onValueChanged(value) {
-      if (bootMgr.step === BootManager.Ready && value == "blacklist") {
-        //bootMgr.alog("Configuration has changed - Updating the listview")
+      if (bootMgr.step === BootManager.Ready && value == "savedEntries" && plasmoid.configuration.savedEntries) {
         updateModel()
       }
     }
    }
+
+  // Workaround bug mainview not updating when ready
+  Connections {
+    target: bootMgr
+
+    function onReady(step) {
+      if (step === BootManager.Ready) {
+        resetting ? resetting = false : updateModel() // Prevent double refresh upon reset...
+      }
+    }
+  }
 
 }

@@ -1,35 +1,35 @@
 {
-    "KPackageStructure": "Plasma/Applet",
-    "KPlugin": {
-        "Authors": [
-            {
-                "Email": "k-donn@github.com",
-                "Name": "k-donn"
-            }
-        ],
-        "Category": "Environment and Weather",
-        "Description": "Wunderground Personal Weather Station viewer",
-        "Description[de_DE]": "Wunderground Personal Weather Station viewer",
-        "Description[es_ES]": "Visor de la estación meteorológica personal Wunderground",
-        "Description[fr_FR]": "Visualisation de station météorologique personnelle Wunderground",
-        "Description[ja_JP]": "Wunderground Personal Weather Station viewer",
-        "Description[nl_NL]": "Wunderground - Bekijk je eigen weerstation",
-        "Description[ru_RU]": "Программа просмотра персональных метеостанций Wunderground",
-        "Icon": "weather-clear",
-        "Id": "com.github.k-donn.plasmoid-wunderground",
-        "License": "GPL2-or-later",
-        "Name": "Wunderground",
-        "Name[de_DE]": "Wunderground",
-        "Name[es_ES]": "Wunderground",
-        "Name[fr_FR]": "Wunderground",
-        "Name[ja_JP]": "Wunderground",
-        "Name[nl_NL]": "Wunderground",
-        "Name[ru_RU]": "Wunderground",
-        "Version": "0.0.6",
-        "Website": "https://github.com/k-donn/plasmoid-wunderground"
-    },
-    "X-KDE-ParentApp": "",
-    "X-Plasma-API-Minimum-Version": "6.0",
-    "X-Plasma-NotificationArea": "true",
-    "X-Plasma-NotificationAreaCategory": "SystemServices"
+  "KPackageStructure": "Plasma/Applet",
+  "KPlugin": {
+    "Authors": [
+      {
+        "Email": "k-donn@github.com",
+        "Name": "k-donn"
+      }
+    ],
+    "Category": "Environment and Weather",
+    "Description": "Wunderground Personal Weather Station viewer",
+    "Description[de_DE]": "Wunderground Personal Weather Station viewer",
+    "Description[es_ES]": "Visor de la estación meteorológica personal Wunderground",
+    "Description[fr_FR]": "Visualisation de station météorologique personnelle Wunderground",
+    "Description[ja_JP]": "Wunderground Personal Weather Station viewer",
+    "Description[nl_NL]": "Wunderground - Bekijk je eigen weerstation",
+    "Description[ru_RU]": "Программа просмотра персональных метеостанций Wunderground",
+    "Icon": "weather-clear",
+    "Id": "com.github.k-donn.plasmoid-wunderground",
+    "License": "GPL2-or-later",
+    "Name": "Wunderground",
+    "Name[de_DE]": "Wunderground",
+    "Name[es_ES]": "Wunderground",
+    "Name[fr_FR]": "Wunderground",
+    "Name[ja_JP]": "Wunderground",
+    "Name[nl_NL]": "Wunderground",
+    "Name[ru_RU]": "Wunderground",
+    "Version": "0.0.9",
+    "Website": "https://github.com/k-donn/plasmoid-wunderground"
+  },
+  "X-KDE-ParentApp": "",
+  "X-Plasma-API-Minimum-Version": "6.0",
+  "X-Plasma-NotificationArea": "true",
+  "X-Plasma-NotificationAreaCategory": "SystemServices"
 }

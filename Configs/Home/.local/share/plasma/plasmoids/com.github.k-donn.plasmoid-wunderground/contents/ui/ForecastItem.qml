@@ -48,6 +48,7 @@ RowLayout {
             PlasmaComponents.Label {
                 Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
 
+                // TODO: add elide behavior since non-English descriptions can be longer
                 text: shortDesc
             }
             Kirigami.Icon {
@@ -64,7 +65,7 @@ RowLayout {
                     id: tooltip
 
                     mainText: longDesc
-                    subText: "<font size='4'>" + "Feels like: " + Utils.currentTempUnit(feelsLike) + "<br/>Thunder: " + thunderDesc + "<br/>UV: " + UVDesc + "<br/>Snow: " + snowDesc + "<br/>Golf: " + golfDesc + "</font>"
+                    subText: i18nc("Do not edit HTML tags.","<font size='4'>Feels like: %1<br/>Thunder: %2<br/>UV: %3<br/>Snow: %4<br/>Golf: %5</font>", Utils.currentTempUnit(feelsLike), thunderDesc, UVDesc, snowDesc, golfDesc)
 
                     interactive: true
 

@@ -177,7 +177,7 @@ function getForecastData() {
 		plasmoid.configuration.longitude;
 	url += "/forecast/daily/7day.json";
 	url += "?apiKey=" + API_KEY;
-	url += "&language=en-US";
+	url += "&language=" + Qt.locale().name.replace("_","-");
 
 	if (unitsChoice === 0) {
 		url += "&units=m";
@@ -215,6 +215,7 @@ function getForecastData() {
 						fullDateTime.split("T")[0].split("-")[2]
 					);
 
+					// API returns empty string if no snow. Check for empty string.
 					var snowDesc = "";
 					if (isDay) {
 						snowDesc =
@@ -228,6 +229,24 @@ function getForecastData() {
 								: night["snow_phrase"];
 					}
 
+					// API does not return a thunderDesc for non-English languages. Check for null value.
+					var thunderDesc = "";
+					if (isDay) {
+						thunderDesc = day["thunder_enum_phrase"] !== null ? day["thunder_enum_phrase"] : "N/A"
+					} else {
+						thunderDesc = night["thunder_enum_phrase"] !== null ? night["thunder_enum_phrase"] : "N/A"
+					}
+
+					// API does not return a 12char weather description for non-English languages, but it always returns a 32char. Check for empty string.
+					var shortDesc = "";
+					if (isDay) {
+						shortDesc = day["phrase_12char"] !== "" ? day["phrase_12char"] : day["phrase_32char"]
+					} else {
+
+						shortDesc = night["phrase_12char"] !== "" ? night["phrase_12char"] : night["phrase_32char"]
+					}
+
+
 					forecastModel.append({
 						date: date,
 						dayOfWeek: isDay ? forecast["dow"] : "Tonight",
@@ -235,13 +254,9 @@ function getForecastData() {
 						high: isDay ? forecast["max_temp"] : night["hi"],
 						low: forecast["min_temp"],
 						feelsLike: isDay ? day["hi"] : night["hi"],
-						shortDesc: isDay
-							? day["phrase_12char"]
-							: night["phrase_12char"],
+						shortDesc: shortDesc,
 						longDesc: isDay ? day["narrative"] : night["narrative"],
-						thunderDesc: isDay
-							? day["thunder_enum_phrase"]
-							: night["thunder_enum_phrase"],
+						thunderDesc: thunderDesc,
 						winDesc: isDay
 							? day["wind_phrase"]
 							: night["wind_phrase"],
@@ -328,7 +343,7 @@ function findIconCode() {
 
 	url += "?geocode=" + lat + "," + long;
 	url += "&apiKey=" + API_KEY;
-	url += "&language=en-US";
+	url += "&language=" + Qt.locale().name.replace("_","-");
 
 	if (unitsChoice === 0) {
 		url += "&units=m";
@@ -462,5 +477,3 @@ function getExtendedConditions() {
 	req.send();
 }
 
-/**
- * Get air quality

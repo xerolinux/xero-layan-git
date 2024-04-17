@@ -6,7 +6,7 @@ import org.kde.plasma.plasma5support as Plasma5Support
 Item {
 
     readonly property int minVersion: 251 // Minimum required systemd version
-    readonly property int confVersion: 1 // Used to flush existing config data on new releases if needed
+    readonly property int confVersion: 2 // Used to flush existing config data on new releases if needed
 
     readonly property string cmdSudo: "pkexec "
     readonly property string cmdDbusPre: "busctl"
@@ -221,7 +221,7 @@ Item {
     }
 
     function getEntriesFull(root) {
-        alog("Attempting to get fresh bootctl entries - root access: " + root)
+        alog("Attempting to get fresh bootctl entries - as root: " + root)
         let cmd = cmdGetEntriesFull
         if (root) cmd = cmdSudo + cmd
         executable.exec(cmd)
@@ -234,6 +234,7 @@ Item {
             showTitle: id == "firmware-setup" ? i18n("Firmware Setup") : i18n("Bootloader Menu"),
             version: "",
             bIcon: id == "firmware-setup" ? "settings" : "menu",
+            show: true,
         })
         alog("Added \"" + id + "\"")
     }
@@ -255,6 +256,7 @@ Item {
                     showTitle: entry.showTitle,
                     version: entry.version ?? "",
                     bIcon: bIcon,
+                    show: true,
                 })
                 alog("Added \"" + entry.id + "\"")
             }
@@ -275,9 +277,9 @@ Item {
         if (step >= BootManager.Ready) {
             alog("Finished initialization - Error state: " + (step === BootManager.Error))
             if (!reusedConfig) plasmoid.configuration.savedEntries = JSON.stringify(bootEntries)
-            loaded(step)
-
-            plasmoid.configuration.confVersion = confVersion
+            if (plasmoid.configuration.confVersion != confVersion) plasmoid.configuration.confVersion = confVersion
+            // Workaround mainview not updating sometimes...
+            ready(step)
             // Ugly workaround to give info to config panels
             plasmoid.configuration.checkState = [busctlOK,bootctlOK,canEfi,canMenu,canEntry,gotEntries]
             plasmoid.configuration.appState = step
@@ -299,6 +301,6 @@ Item {
         console.log("advancedreboot: " + msg)
     }
 
-    signal loaded(int step)
+    signal ready(int step)
 
 }
