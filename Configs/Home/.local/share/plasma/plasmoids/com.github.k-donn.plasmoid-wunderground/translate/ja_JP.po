@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmoid-wunderground\n"
 "Report-Msgid-Bugs-To: https://github.com/k-donn/plasmoid-wunderground\n"
-"POT-Creation-Date: 2024-03-28 21:52-0400\n"
+"POT-Creation-Date: 2024-04-27 16:04-0400\n"
 "PO-Revision-Date: 2024-01-14 22:54+0900\n"
 "Last-Translator: Yuta Takahashi <y.highbridge04@gmail.com>\n"
 "Language-Team: Japanese-Team <LL@li.org>\n"
@@ -72,6 +72,14 @@ msgstr "文字サイズ"
 #: ../contents/ui/config/ConfigAppearance.qml
 msgid "Temperature text size"
 msgstr "気温の文字サイズ"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Auto-color temperature:"
+msgstr ""
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Show forecast page on load:"
+msgstr ""
 
 #: ../contents/ui/config/ConfigDebug.qml
 msgid "Write to console.log:"

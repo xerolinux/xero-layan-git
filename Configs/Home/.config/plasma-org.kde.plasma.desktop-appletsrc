@@ -427,16 +427,13 @@ DialogHeight=540
 DialogWidth=720
 
 [Containments][132][Applets][223][Configuration][General]
+archNews=true
 checkOnStartup=true
-middleClick=upgradeSystem
-rightClick=checkUpdates
-timestamp=1711316477584
+plasmoids=true
 
-[Containments][132][Applets][223][Configuration][Misc]
-timestamp=1710850669270
-
-[Containments][132][Applets][223][Configuration][Upgrade]
-wrapperUpgrade=true
+[Containments][132][Applets][238][Configuration][Upgrade]
+refreshShell=true
+upgradeFlags=true
 
 [Containments][132][Applets][228]
 immutability=1
