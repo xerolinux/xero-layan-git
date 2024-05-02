@@ -61,5 +61,7 @@ sleep 2
 echo "clear && neofetch" >> ~/.bashrc
 rm -rf ~/xero-layan-git/ ~/Tela-circle-icon-theme/
 echo
+if [ -f ~/.bashrc ]; then sed -i 's/neofetch/fastfetch/g' ~/.bashrc; fi
+if [ -f ~/.zshrc ]; then sed -i 's/neofetch/fastfetch/g' ~/.zshrc; fi
 echo "Plz Reboot To Apply Settings..."
 echo "###############################"
