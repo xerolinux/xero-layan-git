@@ -33,7 +33,12 @@
         },
         {
             "type": "memory",
-            "key": "└ └󰑭",
+            "key": "│ ├󰍛",
+            "keyColor": "green"
+        },
+        {
+            "type": "disk",
+            "key": "└ └",
             "keyColor": "green"
         },
         {
@@ -77,6 +82,11 @@
             "keyColor": "blue"
         },
         {
+            "type": "lm",
+            "key": "│ ├",
+            "keyColor": "blue"
+        },
+        {
             "type": "wm",
             "key": "│ ├",
             "keyColor": "blue"
@@ -109,6 +119,11 @@
         {
             "type": "uptime",
             "key": "  Uptime ",
+            "keyColor": "magenta"
+        },
+        {
+            "type": "datetime",
+            "key": "  DateTime ",
             "keyColor": "magenta"
         },
         {
