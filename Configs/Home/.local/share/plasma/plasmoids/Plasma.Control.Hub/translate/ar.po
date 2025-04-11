@@ -1,0 +1,194 @@
+# Translation of plasma control hub in Arabic
+# Copyright (C) 2024
+# This file is distributed under the same license as the plasma control hub package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma control hub\n"
+"Report-Msgid-Bugs-To: https://store.kde.org/p/2139890/\n"
+"POT-Creation-Date: 2024-12-01 16:59-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Arabic <LL@li.org>\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../contents/ui/UserInfo.qml
+msgid "Hi"
+msgstr "مرحبًا"
+
+#: ../contents/ui/FullRepresentation.qml
+msgid "Settings"
+msgstr "الإعدادات"
+
+#: ../contents/ui/FullRepresentation.qml
+msgid "System Settings"
+msgstr "إعدادات النظام"
+
+#: ../contents/ui/FullRepresentation.qml
+msgid "Volume"
+msgstr "الصوت"
+
+#: ../contents/ui/FullRepresentation.qm
+msgid "Bluetooth"
+msgstr "بلوتوث"
+
+#: ../contents/ui/FullRepresentation.qm
+msgid "Network"
+msgstr "الشبكة"
+
+#: ../contents/ui/FullRepresentation.qm
+msgid "DND"
+msgstr "عدم الإزعاج"
+
+#: ../contents/ui/js/funcs.js
+msgid "Disabled"
+msgstr "معطّل"
+
+#: ../contents/ui/js/funcs.js
+msgid "Unavailable"
+msgstr "غير متاح"
+
+#: ../contents/ui/js/funcs.js
+msgid "Offline"
+msgstr "غير متصل بالإنترنت"
+
+#: ../contents/ui/js/funcs.js
+msgid "Not Connected"
+msgstr "غير متصل"
+
+#: ../contents/ui/Brightness.qml
+msgid "Brightness"
+msgstr "السطوع"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Clear"
+msgstr "صافي"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Mainly clear"
+msgstr "صافي غالبًا"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Partly cloudy"
+msgstr "غائم جزئيًا"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Overcast"
+msgstr "غائم تمامًا"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Drizzle light intensity"
+msgstr "رذاذ خفيف"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Drizzle moderate intensity"
+msgstr "رذاذ متوسط"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Drizzle dense intensity"
+msgstr "رذاذ كثيف"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Freezing Drizzle light intensity"
+msgstr "رذاذ متجمد خفيف"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Freezing Drizzle dense intensity"
+msgstr "رذاذ متجمد كثيف"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Rain slight intensity"
+msgstr "مطر خفيف"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Rain moderate intensity"
+msgstr "مطر متوسط"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Rain heavy intensity"
+msgstr "مطر غزير"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Freezing Rain light intensity"
+msgstr "مطر متجمد خفيف"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Freezing Rain heavy intensity"
+msgstr "مطر متجمد غزير"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Snowfall slight intensity"
+msgstr "ثلوج خفيفة"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Snowfall moderate intensity"
+msgstr "ثلوج متوسطة"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Snowfall heavy intensity"
+msgstr "ثلوج غزيرة"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Snow grains"
+msgstr "حبيبات ثلجية"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Rain showers slight"
+msgstr "زخات مطر خفيفة"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Rain showers moderate"
+msgstr "زخات مطر متوسطة"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Rain showers violent"
+msgstr "زخات مطر عنيفة"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Snow showers slight"
+msgstr "زخات ثلج خفيفة"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Snow showers heavy"
+msgstr "زخات ثلج غزيرة"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Thunderstorm"
+msgstr "عاصفة رعدية"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Thunderstorm with slight hail"
+msgstr "عاصفة رعدية مع بَرَد خفيف"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Thunderstorm with heavy hail"
+msgstr "عاصفة رعدية مع بَرَد شديد"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Cloudy"
+msgstr "غائم"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Drizzle"
+msgstr "رذاذ"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Rain"
+msgstr "مطر"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Snow"
+msgstr "ثلج"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Showers"
+msgstr "زخات"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Storm"
+msgstr "عاصفة"

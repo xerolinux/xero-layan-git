@@ -1,0 +1,90 @@
+#
+# Copyright (C) 2024  Codelinsoft <info@codelinsoft.it>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+#
+# require: poppler; notify-send; libreoffice
+#
+# Version 1.5.2
+#
+
+[Desktop Entry]
+Type=Service
+ServiceTypes=KonqPopupMenu/Plugin
+MimeType=application/pdf;
+Icon=application-pdf
+Actions=odt;word;odp;powerpoint;jpg;png;html;
+X-KDE-Priority=TopLevel
+X-KDE-StartupNotify=false
+X-KDE-Submenu=Convert pdf to
+X-KDE-Submenu[it]= Converti pdf in
+X-KDE-Submenu[de]= PDF konvertieren in
+X-KDE-Submenu[fr]= Convertir un pdf en
+
+[Desktop Action odt]
+Name=ODT
+Icon=/usr/share/icons/convert_pdf/odt.png
+Exec=soffice --infilter="writer_pdf_import" --convert-to odt  %f %f;/usr/bin/notify-send -u critical --app-name="Convert ODT" --icon="/usr/share/icons/convert_pdf/odt.png" "Convert ODT successfully" "$(basename %f)"
+Exec[it]=soffice --infilter="writer_pdf_import" --convert-to odt  %f %f;/usr/bin/notify-send -u critical --app-name="Conversione ODT" --icon="/usr/share/icons/convert_pdf/odt.png" "Conversione ODT effettuata correttamente" "$(basename %f)"
+Exec[de]=soffice --infilter="writer_pdf_import" --convert-to odt  %f %f;/usr/bin/notify-send -u critical --app-name="Konvertierung ODT" --icon="/usr/share/icons/convert_pdf/odt.png" "Konvertierung ODT korrekt durchgeführt" "$(basename %f)"
+Exec[fr]=soffice --infilter="writer_pdf_import" --convert-to odt  %f %f;/usr/bin/notify-send -u critical --app-name="Conversion ODT" --icon="/usr/share/icons/convert_pdf/odt.png" "Conversion ODT effectué correctement" "$(basename %f)"
+
+[Desktop Action word]
+Name=WORD 2007/365
+Icon=/usr/share/icons/convert_pdf/word_2007.png
+Exec=soffice --infilter="writer_pdf_import" --convert-to docx:"MS Word 2007 XML"  %f %f;/usr/bin/notify-send -u critical --app-name="Convert WORD 2007/365" --icon="/usr/share/icons/convert_pdf/word_2007.png" "Convert WORD 2007/365 successfully" "$(basename %f)"
+Exec[it]=soffice --infilter="writer_pdf_import" --convert-to docx:"MS Word 2007 XML"  %f %f;/usr/bin/notify-send -u critical --app-name="Conversione WORD 2007/365" --icon="/usr/share/icons/convert_pdf/word_2007.png" "Conversione WORD 2007/365 effettuata correttamente" "$(basename %f)"
+Exec[de]=soffice --infilter="writer_pdf_import" --convert-to docx:"MS Word 2007 XML"  %f %f;/usr/bin/notify-send -u critical --app-name="Konvertierung WORD 2007/365" --icon="/usr/share/icons/convert_pdf/word_2007.png" "Konvertierung WORD 2007/365 korrekt durchgeführt" "$(basename %f)"
+Exec[fr]=soffice --infilter="writer_pdf_import" --convert-to docx:"MS Word 2007 XML"  %f %f;/usr/bin/notify-send -u critical --app-name="Conversion WORD 2007/365" --icon="/usr/share/icons/convert_pdf/word_2007.png" "Conversion WORD 2007/365 effectué correctement" "$(basename %f)"
+
+[Desktop Action odp]
+Name=ODP
+Icon=/usr/share/icons/convert_pdf/odp.png
+Exec=soffice --infilter="impress_pdf_import" --convert-to odp  %f %f;/usr/bin/notify-send -u critical --app-name="Convert ODP" --icon="/usr/share/icons/convert_pdf/odp.png" "Convert ODP successfully" "$(basename %f)"
+Exec[it]=soffice --infilter="impress_pdf_import" --convert-to odp  %f %f;/usr/bin/notify-send -u critical --app-name="Conversione ODP" --icon="/usr/share/icons/convert_pdf/odp.png" "Conversione ODP effettuata correttamente" "$(basename %f)"
+Exec[de]=soffice --infilter="impress_pdf_import" --convert-to odp  %f %f;/usr/bin/notify-send -u critical --app-name="Konvertierung ODP" --icon="/usr/share/icons/convert_pdf/odp.png" "Konvertierung ODP korrekt durchgeführt" "$(basename %f)"
+Exec[fr]=soffice --infilter="impress_pdf_import" --convert-to odp  %f %f;/usr/bin/notify-send -u critical --app-name="Conversion ODP" --icon="/usr/share/icons/convert_pdf/odp.png" "Conversion ODP effectué correctement" "$(basename %f)"
+
+[Desktop Action powerpoint]
+Name=POWERPOINT 2007/365
+Icon=/usr/share/icons/convert_pdf/powerpoint_2007.png
+Exec=soffice --infilter="impress_pdf_import" --convert-to pptx:"Impress MS PowerPoint 2007 XML"  %f %f; /usr/bin/notify-send -u critical --app-name="Convert POWERPOINT 2007/365" --icon="/usr/share/icons/convert_pdf/powerpoint_2007.png" "Convert POWERPOINT 2007/365 successfully" "$(basename %f)"
+Exec[it]=soffice --infilter="impress_pdf_import" --convert-to pptx:"Impress MS PowerPoint 2007 XML"  %f %f; /usr/bin/notify-send -u critical --app-name="Conversione POWERPOINT 2007/365" --icon="/usr/share/icons/convert_pdf/powerpoint_2007.png" "Conversione POWERPOINT 2007/365 effettuata correttamente" "$(basename %f)"
+Exec[de]=soffice --infilter="impress_pdf_import" --convert-to pptx:"Impress MS PowerPoint 2007 XML"  %f %f; /usr/bin/notify-send -u critical --app-name="Konvertierung POWERPOINT 2007/365" --icon="/usr/share/icons/convert_pdf/powerpoint_2007.png" "Konvertierung POWERPOINT 2007/365 korrekt durchgeführt" "$(basename %f)"
+Exec[fr]=soffice --infilter="impress_pdf_import" --convert-to pptx:"Impress MS PowerPoint 2007 XML"  %f %f; /usr/bin/notify-send -u critical --app-name="Conversion POWERPOINT 2007/365" --icon="/usr/share/icons/convert_pdf/powerpoint_2007.png" "Conversion POWERPOINT 2007/365 effectué correctement" "$(basename %f)"
+
+[Desktop Action jpg]
+Name=JPEG
+Icon=/usr/share/icons/convert_pdf/icon_jpg.png
+Exec=pdftoppm -r 300 -jpeg %f %f; /usr/bin/notify-send -u critical --app-name="Convert JPEG" --icon="/usr/share/icons/convert_pdf/icon_jpg.png" "Convert JPEG successfully" "$(basename %f)"
+Exec[it]=pdftoppm -r 300 -jpeg %f %f; /usr/bin/notify-send -u critical --app-name="Conversione JPEG" --icon="/usr/share/icons/convert_pdf/icon_jpg.png" "Conversione JPEG effettuata correttamente" "$(basename %f)"
+Exec[de]=pdftoppm -r 300 -jpeg %f %f; /usr/bin/notify-send -u critical --app-name="Konvertierung JPEG" --icon="/usr/share/icons/convert_pdf/icon_jpg.png" "Konvertierung JPEG korrekt durchgeführt" "$(basename %f)"
+Exec[fr]=pdftoppm -r 300 -jpeg %f %f; /usr/bin/notify-send -u critical --app-name="Conversion JPEG" --icon="/usr/share/icons/convert_pdf/icon_jpg.png" "Conversion JPEG effectué correctement" "$(basename %f)"
+
+[Desktop Action png]
+Name=PNG
+Icon=/usr/share/icons/convert_pdf/icon_png.png
+Exec=pdftoppm -r 300 -png %f %f; /usr/bin/notify-send -u critical --app-name="Convert png" --icon="/usr/share/icons/convert_pdf/icon_png.png" "Convert PNG successfully" "$(basename %f)"
+Exec[it]=pdftoppm -r 300 -png %f %f; /usr/bin/notify-send -u critical --app-name="Conversione png" --icon="/usr/share/icons/convert_pdf/icon_png.png" "Conversione PNG effettuata correttamente" "$(basename %f)"
+Exec[de]=pdftoppm -r 300 -png %f %f; /usr/bin/notify-send -u critical --app-name="Konvertierung png" --icon="/usr/share/icons/convert_pdf/icon_png.png" "Konvertierung PNG korrekt durchgeführt" "$(basename %f)"
+Exec[fr]=pdftoppm -r 300 -png %f %f; /usr/bin/notify-send -u critical --app-name="Conversion png" --icon="/usr/share/icons/convert_pdf/icon_png.png" "Conversion PNG effectué correctement" "$(basename %f)"
+
+[Desktop Action html]
+Name=HTML
+Icon=/usr/share/icons/convert_pdf/html.png
+Exec=pdftohtml -c -noframes %f %f; /usr/bin/notify-send -u critical --app-name="Convert html" --icon="/usr/share/icons/convert_pdf/html.png" "Convert HTML successfully" "$(basename %f)"
+Exec[it]=pdftohtml -c -noframes %f %f; /usr/bin/notify-send -u critical --app-name="Conversione html" --icon="/usr/share/icons/convert_pdf/html.png" "Conversione HTML effettuata correttamente" "$(basename %f)"
+Exec[de]=pdftohtml -c -noframes %f %f; /usr/bin/notify-send -u critical --app-name="Konvertierung html" --icon="/usr/share/icons/convert_pdf/html.png" "Konvertierung HTML korrekt durchgeführt" "$(basename %f)"
+Exec[fr]=pdftohtml -c -noframes %f %f; /usr/bin/notify-send -u critical --app-name="Conversion html" --icon="/usr/share/icons/convert_pdf/html.png" "Conversion HTML effectué correctement" "$(basename %f)"

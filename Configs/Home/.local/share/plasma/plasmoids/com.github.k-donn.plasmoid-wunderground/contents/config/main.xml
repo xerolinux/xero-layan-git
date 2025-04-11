@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0 http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
+    <kcfgfile name=""/>
+    <group name="Station">
+        <entry name="stationID" type="String">
+            <default/>
+        </entry>
+        <entry name="stationName" type="String">
+            <default/>
+        </entry>
+        <entry name="savedStations" type="StringList">
+            <default/>
+        </entry>
+        <entry name="longitude" type="String">
+            <default/>
+        </entry>
+        <entry name="latitude" type="String">
+            <default/>
+        </entry>
+        <entry name="refreshPeriod" type="Int">
+            <default>60</default>
+        </entry>
+    </group>
+    <group name="Appearance">
+        <entry name="showCompactTemp" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="autoFontAndSize" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="fontFamily" type="String">
+            <default></default>
+        </entry>
+        <entry name="boldText" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="italicText" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="underlineText" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="strikeoutText" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="fontWeight" type="Int">
+            <default>50</default>
+        </entry>
+        <entry name="fontStyleName" type="String">
+            <default></default>
+        </entry>
+        <entry name="fontSize" type="Int">
+            <default>10</default>
+        </entry>
+        <entry name="propHeadPointSize" type="Int">
+            <default>13</default>
+        </entry>
+        <entry name="propPointSize" type="Int">
+            <default>10</default>
+        </entry>
+        <entry name="tempPointSize" type="Int">
+            <default>30</default>
+        </entry>
+        <entry name="useSystemThemeIcons" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="applyColorScheme" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="detailsIconSize" type="Int">
+            <default>48</default>
+        </entry>
+        <entry name="topIconMargins" type="Int">
+            <default>0</default>
+        </entry>
+        <entry name="tempAutoColor" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="defaultLoadPage" type="Int">
+            <default>0</default>
+        </entry>
+        <entry name="showPresTrend" type="Bool">
+            <default>true</default>
+        </entry>
+    </group>
+    <group name="Units">
+        <entry name="dayChartTimeFormat" type="String">
+            <default>h ap</default>
+        </entry>
+        <entry name="weekForecastDateFormat" type="String">
+            <default>d</default>
+        </entry>
+        <entry name="windPrecision" type="Int">
+            <default>1</default>
+        </entry>
+        <entry name="tempPrecision" type="Int">
+            <default>1</default>
+        </entry>
+        <entry name="feelsPrecision" type="Int">
+            <default>2</default>
+        </entry>
+        <entry name="dewPrecision" type="Int">
+            <default>1</default>
+        </entry>
+        <entry name="forecastPrecision" type="Int">
+            <default>0</default>
+        </entry>
+        <entry name="unitsChoice" type="Int">
+            <default>0</default>
+        </entry>
+        <entry name="windUnitsChoice" type="Int">
+            <default>0</default>
+        </entry>
+        <entry name="rainUnitsChoice" type="Int">
+            <default>0</default>
+        </entry>
+        <entry name="snowUnitsChoice" type="Int">
+            <default>0</default>
+        </entry>
+        <entry name="tempUnitsChoice" type="Int">
+            <default>0</default>
+        </entry>
+        <entry name="presUnitsChoice" type="Int">
+            <default>0</default>
+        </entry>
+        <entry name="elevUnitsChoice" type="Int">
+            <default>0</default>
+        </entry>
+    </group>
+    <group name="Debug">
+        <entry name="logConsole" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="useLegacyAPI" type="Bool">
+            <default>false</default>
+        </entry>
+    </group>
+</kcfg>

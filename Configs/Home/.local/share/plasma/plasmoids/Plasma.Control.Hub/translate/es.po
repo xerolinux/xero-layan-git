@@ -1,0 +1,196 @@
+# Translation of dittomenu in LANGUAGE
+# Copyright (C) 2023
+# This file is distributed under the same license as the dittomenu package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: dittomenu\n"
+"Report-Msgid-Bugs-To: https://store.kde.org/p/1312669/\n"
+"POT-Creation-Date: 2023-05-01 16:59-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+
+#: ../contents/ui/UserInfo.qml
+msgid "Hi"
+msgstr "Hola"
+
+#: ../contents/ui/FullRepresentation.qml
+msgid "Settings"
+msgstr "Configuración"
+
+#: ../contents/ui/FullRepresentation.qml
+msgid "System Settings"
+msgstr "Configuracion del Sistema"
+
+#: ../contents/ui/FullRepresentation.qml
+msgid "Volume"
+msgstr "Volumen"
+
+#: ../contents/ui/FullRepresentation.qm
+msgid "Bluetooth"
+msgstr "Bluetooth"
+
+#: ../contents/ui/FullRepresentation.qm
+msgid "Network"
+msgstr "Red"
+
+#: ../contents/ui/FullRepresentation.qm
+msgid "DND"
+msgstr "DND"
+
+#: ../contents/ui/js/funcs.js
+msgid "Disabled"
+msgstr "Desactivado"
+
+#: ../contents/ui/js/funcs.js
+msgid "Unavailable"
+msgstr "No disponible"
+
+#: ../contents/ui/js/funcs.js
+msgid "Offline"
+msgstr "Sin conexión"
+
+#: ../contents/ui/js/funcs.js
+msgid "Not Connected"
+msgstr "No conectado"
+
+#: ../contents/ui/Brightness.qml
+msgid "Brightness"
+msgstr "Brillo"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Clear"
+msgstr "Despejado"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Mainly clear"
+msgstr "Mayormente despejado"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Partly cloudy"
+msgstr "Parcialmente nublado"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Overcast"
+msgstr "Nublado"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Drizzle light intensity"
+msgstr "Llovizna de intensidad ligera"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Drizzle moderate intensity"
+msgstr "Llovizna de intensidad moderada"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Drizzle dense intensity"
+msgstr "Llovizna de intensidad densa"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Freezing Drizzle light intensity"
+msgstr "Llovizna helada de intensidad ligera"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Freezing Drizzle dense intensity"
+msgstr "Llovizna helada de intensidad densa"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Rain slight intensity"
+msgstr "Lluvia de intensidad ligera"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Rain moderate intensity"
+msgstr "Lluvia de intensidad moderada"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Rain heavy intensity"
+msgstr "Lluvia de intensidad fuerte"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Freezing Rain light intensity"
+msgstr "Lluvia helada de intensidad ligera"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Freezing Rain heavy intensity"
+msgstr "Lluvia helada de intensidad fuerte"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Snowfall slight intensity"
+msgstr "Nevada de intensidad ligera"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Snowfall moderate intensity"
+msgstr "Nevada de intensidad moderada"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Snowfall heavy intensity"
+msgstr "Nevada de intensidad fuerte"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Snow grains"
+msgstr "Granos de nieve"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Rain showers slight"
+msgstr "Chubascos de lluvia ligeros"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Rain showers moderate"
+msgstr "Chubascos de lluvia moderados"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Rain showers violent"
+msgstr "Chubascos de lluvia violentos"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Snow showers slight"
+msgstr "Chubascos de nieve ligeros"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Snow showers heavy"
+msgstr "Chubascos de nieve fuertes"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Thunderstorm"
+msgstr "Tormenta eléctrica"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Thunderstorm with slight hail"
+msgstr "Tormenta eléctrica con granizo ligero"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Thunderstorm with heavy hail"
+msgstr "Tormenta eléctrica con granizo fuerte"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Cloudy"
+msgstr "Nublado"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Drizzle"
+msgstr "Llovizna"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Rain"
+msgstr "Lluvia"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Snow"
+msgstr "Nieve"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Showers"
+msgstr "Chubascos"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Storm"
+msgstr "Tormenta"
+

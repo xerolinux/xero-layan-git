@@ -1,0 +1,195 @@
+# Translation of dittomenu in LANGUAGE
+# Copyright (C) 2023
+# This file is distributed under the same license as the dittomenu package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: dittomenu\n"
+"Report-Msgid-Bugs-To: https://store.kde.org/p/1312669/\n"
+"POT-Creation-Date: 2023-05-01 16:59-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+
+#: ../contents/ui/UserInfo.qml
+msgid "Hi"
+msgstr "你好"
+
+#: ../contents/ui/FullRepresentation.qml
+msgid "Settings"
+msgstr "設定"
+
+#: ../contents/ui/FullRepresentation.qml
+msgid "System Settings"
+msgstr "系統設定"
+
+#: ../contents/ui/FullRepresentation.qml
+msgid "Volume"
+msgstr "音量"
+
+#: ../contents/ui/FullRepresentation.qm
+msgid "Bluetooth"
+msgstr "藍芽"
+
+#: ../contents/ui/FullRepresentation.qm
+msgid "Network"
+msgstr "連接"
+
+#: ../contents/ui/FullRepresentation.qm
+msgid "DND"
+msgstr "請勿打擾"
+
+#: ../contents/ui/js/funcs.js
+msgid "Disabled"
+msgstr "已禁用"
+
+#: ../contents/ui/js/funcs.js
+msgid "Unavailable"
+msgstr "不可用"
+
+#: ../contents/ui/js/funcs.js
+msgid "Offline"
+msgstr "尚未連線"
+
+#: ../contents/ui/js/funcs.js
+msgid "Not Connected"
+msgstr "未连接"
+
+#: ../contents/ui/Brightness.qml
+msgid "Brightness"
+msgstr "亮度"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Clear"
+msgstr "放晴"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Mainly clear"
+msgstr "大致放晴"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Partly cloudy"
+msgstr "局部多雲"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Overcast"
+msgstr "陰天"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Drizzle light intensity"
+msgstr "小雨"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Drizzle moderate intensity"
+msgstr "中雨"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Drizzle dense intensity"
+msgstr "大雨"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Freezing Drizzle light intensity"
+msgstr "小凍雨"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Freezing Drizzle dense intensity"
+msgstr "大凍雨"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Rain slight intensity"
+msgstr "小雨夾雪"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Rain moderate intensity"
+msgstr "中雨夾雪"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Rain heavy intensity"
+msgstr "大雨夾雪"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Freezing Rain light intensity"
+msgstr "小冰雨"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Freezing Rain heavy intensity"
+msgstr "大冰雨"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Snowfall slight intensity"
+msgstr "小雪"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Snowfall moderate intensity"
+msgstr "中雪"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Snowfall heavy intensity"
+msgstr "大雪"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Snow grains"
+msgstr "雪粒"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Rain showers slight"
+msgstr "小陣雨"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Rain showers moderate"
+msgstr "中陣雨"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Rain showers violent"
+msgstr "大陣雨"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Snow showers slight"
+msgstr "小陣雪"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Snow showers heavy"
+msgstr "大陣雪"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Thunderstorm"
+msgstr "雷暴"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Thunderstorm with slight hail"
+msgstr "雷暴併伴有小冰雹"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Thunderstorm with heavy hail"
+msgstr "雷暴併伴有大冰雹"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Cloudy"
+msgstr "多云"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Drizzle"
+msgstr "毛毛雨"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Rain"
+msgstr "雨"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Snow"
+msgstr "雪"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Showers"
+msgstr "陣雨"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Storm"
+msgstr "暴風"

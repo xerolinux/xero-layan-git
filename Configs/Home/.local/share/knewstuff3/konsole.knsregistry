@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE khotnewstuff3>
+<hotnewstuffregistry>
+ <stuff category="462">
+  <name>Apluma Dark</name>
+  <providerid>https://api.kde-look.org/ocs/v1/</providerid>
+  <author>joaopedroaats</author>
+  <homepage>https://store.kde.org/p/1507683</homepage>
+  <licence></licence>
+  <version>1.1</version>
+  <rating>50</rating>
+  <downloads>162</downloads>
+  <installedfile>/home/xero/.local/share/konsole/AplumaDark.colorscheme</installedfile>
+  <id>1507683</id>
+  <releasedate>2021-08-24</releasedate>
+  <summary>More themes available &lt;a href="https://monsene.vercel.app" target="_blank" rel="nofollow">here&lt;/a>&lt;br />
+</summary>
+  <changelog></changelog>
+  <preview>https://cn.opendesktop.org/cache/100x100-0/img/c/3/0/5/41e0456366cd20c9e934cd47609fbc5e6c15a58aacd1d2d370c32919f680f7d16229.png</preview>
+  <previewBig>https://cn.opendesktop.org/cache/770x540-0/img/c/3/0/5/41e0456366cd20c9e934cd47609fbc5e6c15a58aacd1d2d370c32919f680f7d16229.png</previewBig>
+  <payload>https://dllb2.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjE2Mjk3OTYyNzgiLCJvIjoiMSIsInMiOiIzM2UxZDFmZTVmN2YyYzI2OGMyYzBiMWVmZjQ5NzdiZjIxMGVmMDQ4YTcyMWY0ODQ4NjU1ODE5YTdhODZkNWQ0NmUwNGU3MWZjNzdhMTdjOGQ0YzUwYTM5NjEyZGE2MzMwNDMwZjIzYmQ4MjAwOTU2ZWFkNDEzODYyYTgyZjg3ZSIsInQiOjE2MzA4NjA1MDUsInN0ZnAiOm51bGwsInN0aXAiOiIxODUuMTg3Ljk0LjUifQ.Fhb4sU5yILB9BUtUiOYx7lqXFhn8JyKkahTRqmMDz8o/AplumaDark.colorscheme</payload>
+  <tags>original-product,gplv3,addon,konsole,pink,purple,dark</tags>
+  <status>installed</status>
+ </stuff>
+</hotnewstuffregistry>

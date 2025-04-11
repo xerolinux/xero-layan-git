@@ -1,0 +1,22 @@
+[Desktop Entry]
+Name=Force Decorations for GTK+ 3
+Comment=Adds KWin decorations to GTK's header bars
+Icon=preferences-system-windows-script-test
+
+X-Plasma-API=javascript
+X-Plasma-MainScript=code/main.js
+
+X-KDE-PluginInfo-Author=Jack Gandy
+X-KDE-PluginInfo-Email=scionicspectre@gmail.com
+X-KDE-PluginInfo-Name=force-decorations-gtk3
+X-KDE-PluginInfo-Version=0.1
+
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-ServiceTypes=KWin/Script,KCModule
+
+X-KDE-Library=kwin/effects/configs/kcm_kwin4_genericscripted
+X-KDE-PluginKeyword=force-decoration-gtk3
+X-KDE-ParentComponents=force-decoration-gtk3
+
+Type=Service

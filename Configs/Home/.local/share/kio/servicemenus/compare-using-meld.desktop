@@ -1,0 +1,43 @@
+# Version 1.0
+# https://www.opencode.net/ashark/compare-using-meld_dolphin-service-menu
+
+[Desktop Entry]
+Type=Service
+ServiceTypes=KonqPopupMenu/Plugin
+MimeType=inode/directory;application/octet-stream;
+Icon=org.gnome.meld
+Actions=setArg1;diff;diffsudo;_SEPARATOR_;selected;selectedsudo;
+X-KDE-StartupNotify=false
+X-KDE-Submenu=Compare using meld
+X-KDE-Submenu[ru]=Сравнить используя meld
+
+[Desktop Action setArg1]
+Icon=document-compareleft
+Exec=echo "%U" > /tmp/meld-menu-arg1
+Name=Mark for use in left column
+Name[ru]=Пометить для использования в левой колонке
+
+[Desktop Action diff]
+Icon=document-compareright
+Exec=ARG1=$(cat /tmp/meld-menu-arg1);meld "$ARG1" %U; rm /tmp/meld-menu-arg1;
+Name=Use in right column and compare
+Name[ru]=Использовать в правой колонке и сравнить
+
+[Desktop Action diffsudo]
+Icon=document-compareright
+Exec=ARG1=$(cat /tmp/meld-menu-arg1); rm /tmp/meld-menu-arg1; if [ "$XDG_SESSION_TYPE" = "wayland" ]; then xhost +si:localuser:root && pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY KDE_SESSION_VERSION=5 KDE_FULL_SESSION=true dbus-launch meld "$ARG1" %U && xhost -si:localuser:root ; else pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY KDE_SESSION_VERSION=5 KDE_FULL_SESSION=true meld "$ARG1" %U; fi;
+Name=Use in right column and compare as root
+Name[ru]=Использовать в правой колонке и сравнить как root
+
+[Desktop Action selected]
+Icon=kr_comparedirs
+Exec=meld %U; rm /tmp/meld-menu-arg1;
+Name=Compare selected (highlighted) files/folders
+Name[ru]=Сравнить выделенные (подсвеченные) файлы/папки
+
+[Desktop Action selectedsudo]
+Icon=kr_comparedirs
+# Exec=sudo meld %U; rm /tmp/meld-menu-arg1;
+Exec=if [ "$XDG_SESSION_TYPE" = "wayland" ]; then xhost +si:localuser:root && pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY KDE_SESSION_VERSION=5 KDE_FULL_SESSION=true dbus-launch meld %U && xhost -si:localuser:root ; else pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY KDE_SESSION_VERSION=5 KDE_FULL_SESSION=true meld %U; fi;
+Name=Compare selected (highlighted) files/folders as root
+Name[ru]=Сравнить выделенные (подсвеченные) файлы/папки как root

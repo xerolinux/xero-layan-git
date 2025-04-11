@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+      http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
+  <kcfgfile name=""/>
+
+  <group name="General">
+    <entry name="icon" type="String">
+      <label>Icon</label>
+      <default>dialog-layers</default>
+    </entry>
+    <entry name="menuLabel" type="string">
+      <label>Text label</label>
+      <default></default>
+    </entry>
+    <entry name="command" type="String">
+      <label>Command to execute</label>
+      <default>if [ -x "$(command -v qdbus6)" ]; then qdbus6 org.kde.kglobalaccel /component/kwin invokeShortcut Overview; elif [ -x "$(command -v qdbus)" ]; then qdbus org.kde.kglobalaccel /component/kwin invokeShortcut Overview; elif [ -x "$(command -v qdbus5)" ]; then qdbus5 org.kde.kglobalaccel /component/kwin invokeShortcut Overview; fi</default>
+    </entry>
+  </group>
+</kcfg>

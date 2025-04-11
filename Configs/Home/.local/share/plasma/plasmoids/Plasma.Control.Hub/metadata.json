@@ -1,0 +1,28 @@
+{
+  "KPlugin": {
+    "Authors": [
+      {
+        "Email": "adolfo@librepixels.com",
+        "Name": "zayronxio"
+      }
+    ],
+    "Name": "Plasma Control Hub",
+    "Id": "Plasma.Control.Hub",
+    "Description": "Plasmoid that provides direct access to various configuration aspects as well as multimedia information, inspired by the macOS Control Center",
+    "Category": "Utilities",
+    "Icon": "configure",
+    "EnabledByDefault": true,
+    "License": "GPL-3.0+",
+    "ServiceTypes": [
+      "Plasma/Applet"
+    ],
+    "Version": "0.8.6",
+    "Website": "https://github.com/zayronxio/Plasma-Control-Hub"
+  },
+  "X-Plasma-API-Minimum-Version": "6.0",
+  "X-Plasma-NotificationAreaCategory": "SystemServices",
+  "X-Plasma-Provides": "org.kde.plasma.multimediacontrols,org.kde.plasma.powermanagement,org.kde.plasma.notifications",
+  "X-Plasma-NotificationArea": "true",
+  "X-Plasma-MainScript": "ui/main.qml",
+  "KPackageStructure": "Plasma/Applet"
+}

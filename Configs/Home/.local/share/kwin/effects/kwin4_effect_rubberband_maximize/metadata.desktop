@@ -1,0 +1,18 @@
+[Desktop Entry]
+Comment=Maximize/Restore window animation similar to Windows 10
+Icon=preferences-system-windows-effect-rubberband-maximize
+Name=Rubberband Maximize
+Type=Service
+X-KDE-ParentApp=
+X-KDE-PluginInfo-Author=Alex Nemeth
+X-KDE-PluginInfo-Category=Appearance
+X-KDE-PluginInfo-Email=alex.nemeth329@gmail.com
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-Name=kwin4_effect_rubberband_maximize
+X-KDE-PluginInfo-Version=1
+X-KDE-PluginInfo-Website=
+X-KDE-ServiceTypes=KWin/Effect
+X-KDE-PluginInfo-EnabledByDefault=true
+X-KDE-Ordering=60
+X-Plasma-API=javascript
+X-Plasma-MainScript=code/main.js

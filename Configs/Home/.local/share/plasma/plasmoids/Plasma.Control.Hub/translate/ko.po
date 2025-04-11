@@ -1,0 +1,187 @@
+# Translation of plasma control hub in LANGUAGE
+# Copyright (C) 2024
+# This file is distributed under the same license as the plasma control hub package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma control hub\n"
+"Report-Msgid-Bugs-To: https://store.kde.org/p/2139890/\n"
+"POT-Creation-Date: 2024-12-01 16:59-0300\n"
+"PO-Revision-Date: 2025-01-08 01:55+0900\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.5\n"
+
+#: ../contents/ui/UserInfo.qml
+msgid "Hi"
+msgstr "안녕하세요"
+
+#: ../contents/ui/FullRepresentation.qml
+msgid "Settings"
+msgstr "설정"
+
+#: ../contents/ui/FullRepresentation.qml
+msgid "Volume"
+msgstr "음량"
+
+#: ../contents/ui/FullRepresentation.qm
+msgid "Bluetooth"
+msgstr "블루투스"
+
+#: ../contents/ui/FullRepresentation.qm
+msgid "Network"
+msgstr "네트워크"
+
+#: ../contents/ui/FullRepresentation.qm
+msgid "DND"
+msgstr "방해금지"
+
+#: ../contents/ui/js/funcs.js
+msgid "Disabled"
+msgstr "꺼짐"
+
+#: ../contents/ui/js/funcs.js
+msgid "Unavailable"
+msgstr "사용할 수 없음"
+
+#: ../contents/ui/js/funcs.js
+msgid "Offline"
+msgstr "오프라인"
+
+#: ../contents/ui/js/funcs.js
+msgid "Not Connected"
+msgstr "연결되지 않음"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Clear"
+msgstr "맑음"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Mainly clear"
+msgstr "구름 조금"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Partly cloudy"
+msgstr "부분적으로 흐림"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Overcast"
+msgstr "흐림"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Drizzle light intensity"
+msgstr "약한 이슬비"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Drizzle moderate intensity"
+msgstr "중간 강도의 이슬비"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Drizzle dense intensity"
+msgstr "짙은 이슬비"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Freezing Drizzle light intensity"
+msgstr "약한 동결 이슬비"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Freezing Drizzle dense intensity"
+msgstr "강한 동결 이슬비"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Rain slight intensity"
+msgstr "약한 비"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Rain moderate intensity"
+msgstr "중간 강도의 비"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Rain heavy intensity"
+msgstr "강한 비"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Freezing Rain light intensity"
+msgstr "약한 동결 비"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Freezing Rain heavy intensity"
+msgstr "강한 동결 비"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Snowfall slight intensity"
+msgstr "약한 눈"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Snowfall moderate intensity"
+msgstr "중간 강도의 눈"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Snowfall heavy intensity"
+msgstr "강한 눈"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Snow grains"
+msgstr "눈송이"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Rain showers slight"
+msgstr "약한 비 샤워"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Rain showers moderate"
+msgstr "중간 강도의 비 샤워"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Rain showers violent"
+msgstr "강한 비 샤워"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Snow showers slight"
+msgstr "약한 눈 샤워"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Snow showers heavy"
+msgstr "강한 눈 샤워"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Thunderstorm"
+msgstr "천둥 번개"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Thunderstorm with slight hail"
+msgstr "약한 우박을 동반한 천둥 번개"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Thunderstorm with heavy hail"
+msgstr "강한 우박을 동반한 천둥 번개"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Cloudy"
+msgstr "흐림"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Drizzle"
+msgstr "약한 이슬비"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Rain"
+msgstr "비"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Snow"
+msgstr "눈"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Showers"
+msgstr "강한 비"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Storm"
+msgstr "폭풍"

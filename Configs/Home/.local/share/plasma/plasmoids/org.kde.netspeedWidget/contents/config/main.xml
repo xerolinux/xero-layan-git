@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+      http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
+    <kcfgfile name=""/>
+
+    <group name="General">
+        <entry name="showSeparately" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="showLowSpeeds" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="speedLayout" type="String">
+            <default>auto</default>
+        </entry>
+        <entry name="swapDownUp" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="showIcons" type="Bool">
+            <default>true</default>
+        </entry>
+
+        <entry name="showUnits" type="Bool">
+            <default>true</default>
+        </entry>
+
+        <entry name="speedUnits" type="String">
+            <default>bytes</default>
+        </entry>
+
+        <entry name="shortUnits" type="Bool">
+            <default>false</default>
+        </entry>
+
+        <entry name="fontSize" type="Int">
+            <default>100</default>
+        </entry>
+
+        <entry name="updateInterval" type="Double">
+            <default>1.0</default>
+        </entry>
+
+        <entry name="customColors" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="byteColor" type="Color">
+            <default>#000000</default>
+        </entry>
+        <entry name="kilobyteColor" type="Color">
+            <default>#800080</default>
+        </entry>
+        <entry name="megabyteColor" type="Color">
+            <default>#FF0000</default>
+        </entry>
+        <entry name="gigabyteColor" type="Color">
+            <default>#FF8000</default>
+        </entry>
+    </group>
+
+    <group name="Advanced">
+        <entry name="launchApplicationEnabled" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="launchApplication" type="String">
+            <default></default>
+        </entry>
+        <entry name="interfacesWhitelistEnabled" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="interfacesWhitelist" type="StringList">
+            <default></default>
+        </entry>
+    </group>
+
+</kcfg>

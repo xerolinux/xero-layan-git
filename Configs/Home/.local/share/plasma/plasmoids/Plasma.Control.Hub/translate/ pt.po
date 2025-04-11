@@ -1,0 +1,52 @@
+# Translation of plasma control hub in LANGUAGE
+# Copyright (C) 2024
+# This file is distributed under the same license as the plasma control hub package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma control hub\n"
+"Report-Msgid-Bugs-To: https://store.kde.org/p/2139890/\n"
+"POT-Creation-Date: 2024-12-01 16:59-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+
+#: ../contents/ui/FullRepresentation.qml
+msgid "Settings"
+msgstr "Configurações"
+
+#: ../contents/ui/FullRepresentation.qml
+msgid "System Settings"
+msgstr "Configurações do sistema"
+
+#: ../contents/ui/FullRepresentation.qml
+msgid "Volume"
+msgstr "Volume"
+
+#: ../contents/ui/FullRepresentation.qml
+msgid "Bluetooth"
+msgstr "Bluetooth"
+
+#: ../contents/ui/FullRepresentation.qml
+msgid "Network"
+msgstr "Rede"
+
+#: ../contents/ui/FullRepresentation.qml
+msgid "DND"
+msgstr "DND"
+
+#: ../contents/ui/js/funcs.js
+msgid "Disabled"
+msgstr "Desligado"
+
+#: ../contents/ui/js/funcs.js
+msgid "Offline"
+msgstr "Offline"
+

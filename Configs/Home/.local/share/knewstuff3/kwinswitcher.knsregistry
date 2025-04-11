@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE khotnewstuff3>
+<hotnewstuffregistry>
+ <stuff category="211">
+  <name>Preview Reel</name>
+  <providerid>https://api.kde-look.org/ocs/v1/</providerid>
+  <author>hilmy</author>
+  <homepage>https://store.kde.org/p/1161720</homepage>
+  <licence></licence>
+  <version>0.1</version>
+  <rating>60</rating>
+  <downloads>7099</downloads>
+  <installedfile>/home/xero/.local/share/kwin/tabbox/preview_reel</installedfile>
+  <id>1161720</id>
+  <releasedate>2016-11-14</releasedate>
+  <summary>A simple task switcher that shows only one window preview at a time.</summary>
+  <changelog></changelog>
+  <preview>https://cn.opendesktop.org/cache/100x100-0/img/5/1/d/6/80cfbeeaf6edf355737bbc208f39410e5573.png</preview>
+  <previewBig>https://cn.opendesktop.org/cache/770x540-0/img/5/1/d/6/80cfbeeaf6edf355737bbc208f39410e5573.png</previewBig>
+  <payload>https://dllb2.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjE0NzkxMjc2MDQiLCJvIjoiMSIsInMiOiI4MTY3MTRlMzMxMjg4NDFmMWVlNDU3NDE1NjM0ODQzM2MzZjNhNzk0YmY2OWQyNDIzYjJlZmVhMDRmOGQ1NDk1ZDU0MWQ1MDY5OWRhYWIxMjczOWE4YTA0N2E0ZWQ4N2JkNjU0OTk1ODM5MGEzZGQ3YzkzOWIwN2ZlODdmNThlNSIsInQiOjE2MzA4NTM5MDYsInN0ZnAiOm51bGwsInN0aXAiOiIxODUuMTg3Ljk0LjUifQ.bqUQCGyGJznorVJejXujDdgSn-ciHiHymc8FHFtbQK8/preview_reel.tar.gz</payload>
+  <tags>linux,unix</tags>
+  <status>installed</status>
+ </stuff>
+</hotnewstuffregistry>

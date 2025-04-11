@@ -1,0 +1,33 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "kde@privat.broulik.de",
+                "Name": "Kai Uwe Broulik"
+            },
+            {
+                "Email": "sandona.davide@gmail.com",
+                "Name": "Davide Sandona'"
+            }
+        ],
+        "Category": "System Information",
+        "Description": "Quickly switch between different users and access shutdown options",
+        "Description[en-GB]": "Quickly switch between different users and access shutdown options",
+        "Description[it]": "Accedi alle opzioni di spegnimento o di cambio utente",
+        "Description[nl]": "Wissel snel van gebruiker of kies één van de afsluitopties",
+        "Icon": "system-shutdown",
+        "Id": "org.kde.plasma.shutdownorswitch",
+        "License": "GPL-2.0+",
+        "Name": "Shutdown or Switch",
+        "Name[en_GB]": "Shutdown or Switch",
+        "Name[it]": "Spegni o cambia utente",
+        "Name[nl]": "Afsluiten of gebruiker wisselen",
+        "ServiceTypes": [
+            "Plasma/Applet"
+        ],
+        "Version": "1.1.1",
+        "Website": "https://github.com/Davide-sd/shutdown_or_switch"
+    },
+    "X-Plasma-API-Minimum-Version": "6.0"
+}

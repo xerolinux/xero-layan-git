@@ -1,0 +1,11 @@
+[AC][Display]
+DimDisplayWhenIdle=false
+DisplayBrightness=100
+TurnOffDisplayWhenIdle=false
+UseProfileSpecificDisplayBrightness=true
+
+[AC][SuspendAndShutdown]
+AutoSuspendAction=0
+
+[General]
+pausePlayersOnSuspend=false

@@ -1,0 +1,14 @@
+[Show]
+compressfileitemaction=true
+decrypt-view=true
+encrypt=true
+extractfileitemaction=true
+installFont=true
+kactivitymanagerd_fileitem_linking_plugin=true
+kdeconnectfileitemaction=true
+mountisoaction=true
+plasmavaultfileitemaction=true
+runInKonsole=true
+sharefileitemaction=true
+slideshowfileitemaction=true
+tagsfileitemaction=true

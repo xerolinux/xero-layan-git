@@ -1,0 +1,22 @@
+[Desktop Entry]
+Type=Service
+X-KDE-ServiceTypes=KonqPopupMenu/Plugin
+#X-KDE-Submenu=KDE-Services
+#X-KDE-Priority=TopLevel
+MimeType=all/all;
+Actions=selected2newfolder
+Icon=folder-bookmark
+
+[Desktop Action selected2newfolder]
+Name=Create folder from selected
+Name[ru]=Переместить в новую папку
+Name[be]=Перамясцiць у новую тэчку
+Name[sr]=Бити премештен у нову мапу
+Name[uk]=Перемiстити в нову папку
+Name[nl]=Map aanmaken met selectie
+Name[de]=Ordner aus Auswahl erstellen
+Name[fr]=Créer un dossier de la sélection
+Name[it]=Crea cartella da selezionata
+Name[es]=Crear carpeta de seleccionado
+Exec=$HOME/.local/share/kio/servicemenus/selected2folder.sh %F .
+Icon=folder-add

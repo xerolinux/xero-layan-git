@@ -1,0 +1,21 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "mvourlakos@gmail.com",
+                "Name": "Michail Vourlakos"
+            }
+        ],
+        "Category": "Utilities",
+        "Description": "For all your separation tasks",
+        "Icon": "filename-divider",
+        "Id": "org.kde.latte.separator",
+        "License": "GPLv2",
+        "Name": "Latte Separator",
+        "Version": "0.1.1",
+        "Website": "https://github.com/psifidotos/applet-latte-separator"
+    },
+    "Keywords": "separator",
+    "X-Plasma-API-Minimum-Version": "6.0",
+    "KPackageStructure": "Plasma/Applet"
+}

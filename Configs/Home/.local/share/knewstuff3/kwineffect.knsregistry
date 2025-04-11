@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE khotnewstuff3>
+<hotnewstuffregistry>
+ <stuff category="209">
+  <name>Rubberband Maximize Animation</name>
+  <providerid>https://api.kde-look.org/ocs/v1/</providerid>
+  <author>alex2580</author>
+  <homepage>https://store.kde.org/p/1270407</homepage>
+  <licence></licence>
+  <version>v1.0</version>
+  <rating>79</rating>
+  <downloads>45380</downloads>
+  <installedfile>/home/xero/.local/share/kwin/effects/kwin4_effect_rubberband_maximize</installedfile>
+  <id>1270407</id>
+  <releasedate>2018-10-24</releasedate>
+  <summary>Window maximize/restore animation similar to Windows 10&lt;br />
+&lt;br />
+&lt;br />
+How to install:&lt;br />
+&lt;br />
+ - Step 1: Download and install the effect (choose one):&lt;br />
+    a) If you have Plasma 5.15 or later: Download the effect through the System Settings: https://i.imgur.com/LfBkcQJ.png&lt;br />
+...</summary>
+  <changelog></changelog>
+  <preview>https://cn.opendesktop.org/cache/100x100-0/img/9/5/9/f/b776d2317898af73413eb05839bc55769f6e.png</preview>
+  <previewBig>https://cn.opendesktop.org/cache/770x540-0/img/9/5/9/f/b776d2317898af73413eb05839bc55769f6e.png</previewBig>
+  <payload>https://dllb2.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjE1NDA0MTIzMjIiLCJvIjoiMSIsInMiOiJkNmIwYjU1NGNmMTNkMzgxYTUxNWE0ODZiMGUyZWViMjViNzliZjA3ZTUyOTdiZTlhNWY3OTM4NzRjMTllMTliYzkxODEzMDZjZTU4NjQ4ZDE5M2JjZjkxYTI1N2NkYWM0YWNiZGViYmE5MTJhN2Y4YzZjZmI4ZGEzMTc5ZTBlNiIsInQiOjE2MzA4NTM0OTAsInN0ZnAiOm51bGwsInN0aXAiOiIxODUuMTg3Ljk0LjUifQ.5zP-Mnd6MuQcjul2m10c7tEN2AEUagKNFMIA1uFHcXw/kwin4_effect_rubberband_maximize.tar.gz</payload>
+  <tags>linux,unix,maximize,animation,rubber,band,windows,gplv3,original-product</tags>
+  <status>installed</status>
+ </stuff>
+ <stuff category="209">
+  <name>Maximize effect for xrender</name>
+  <providerid>https://api.kde-look.org/ocs/v1/</providerid>
+  <author>koko2k</author>
+  <homepage>https://store.kde.org/p/1363233</homepage>
+  <licence></licence>
+  <version>1.0</version>
+  <rating>50</rating>
+  <downloads>6944</downloads>
+  <installedfile>/home/xero/.local/share/kwin/effects/kwin4_effect_maximize_xrender</installedfile>
+  <id>1363233</id>
+  <releasedate>2020-02-27</releasedate>
+  <summary>A modified version of the default maximize kwin effect done to reduce glitches when using xrender backend.&lt;br />
+Related bug: https://bugs.kde.org/show_bug.cgi?id=418247&lt;br />
+Video showing the problem (maybe watch it at reduced speed) https://www.youtube.com/watch?v=qKZE6icPHFo&lt;br />
+&lt;br />
+You...</summary>
+  <changelog></changelog>
+  <preview>https://cn.opendesktop.org/cache/100x100-0/img/9/7/a/3/3d0763d41dfc1ac33702eade593bfad84c76.png</preview>
+  <previewBig>https://cn.opendesktop.org/cache/770x540-0/img/9/7/a/3/3d0763d41dfc1ac33702eade593bfad84c76.png</previewBig>
+  <payload>https://dllb2.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjE1ODI4MDc1MzMiLCJvIjoiMSIsInMiOiJhYTQ2NmJjNjczMzhmYjEzYzUyMmYwYWI2NGNkYjcwNzBiNWFmODZjMTNkNWNlMjA0M2FmMGQ0M2M5MjU2N2E4ZGExZTA3MmMzYjllNjhmZWM3Zjg1ZGEzNGEwZmEyNDg4NzJhOGJkZjE3YWUxMGVkYTc4YzBhM2Y1NzAyNmM5NCIsInQiOjE2MzA4NTMzODksInN0ZnAiOm51bGwsInN0aXAiOiIxODUuMTg3Ljk0LjUifQ.y39YYQLZ30XzlETo7zZl2YwPeBMQV_NRGppIxZaeq74/kwin4_effect_maximize_xrender.tar.gz</payload>
+  <tags>linux,unix,modification-product,gplv2,kwin,effects,xrender</tags>
+  <status>installed</status>
+ </stuff>
+</hotnewstuffregistry>

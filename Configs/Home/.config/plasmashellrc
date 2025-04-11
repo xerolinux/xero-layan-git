@@ -1,0 +1,112 @@
+[Applets][197]
+immutability=1
+plugin=org.kde.plasma.weather
+
+[Applets][197][Configuration]
+PreloadWeight=80
+configMigrated=true
+
+[Applets][197][Configuration][Appearance]
+showHumidityInTooltip=false
+showTemperatureInBadge=true
+showTemperatureInCompactMode=true
+showWindInTooltip=false
+
+[Applets][197][Configuration][ConfigDialog]
+DialogHeight=540
+DialogWidth=720
+
+[Applets][197][Configuration][Units]
+pressureUnit=5029
+speedUnit=9001
+temperatureUnit=6001
+visibilityUnit=2007
+
+[Applets][197][Configuration][WeatherStation]
+source=wettercom|weather|Jdaidé, Mohafazat Mont-Liban, LB|LB0279854;Jdaidé
+
+[Applets][199]
+immutability=1
+plugin=org.kde.plasma.weather
+
+[Applets][199][Configuration]
+PreloadWeight=0
+configMigrated=true
+
+[Applets][199][Configuration][ConfigDialog]
+DialogHeight=540
+DialogWidth=720
+
+[Applets][199][Configuration][Units]
+pressureUnit=5022
+speedUnit=9001
+temperatureUnit=6001
+visibilityUnit=2007
+
+[Applets][199][Configuration][WeatherStation]
+source=wettercom|weather|Beirut, Beyrouth, LB|LB0BA0002;Beirut
+
+[KPropertiesDialog]
+3 screens: Height=524
+3 screens: Width=568
+
+[PlasmaViews][Panel 126]
+alignment=132
+floating=1
+panelLengthMode=2
+panelOpacity=2
+panelVisibility=2
+
+[PlasmaViews][Panel 126][Defaults]
+floating=0
+maxLength=2502
+minLength=2502
+thickness=40
+
+[PlasmaViews][Panel 126][Horizontal2560]
+maxLength=2502
+minLength=2502
+
+[PlasmaViews][Panel 168]
+alignment=132
+floating=1
+panelLengthMode=1
+panelOpacity=2
+panelVisibility=2
+
+[PlasmaViews][Panel 168][Defaults]
+floating=0
+maxLength=1822
+minLength=342
+thickness=46
+
+[PlasmaViews][Panel 168][Horizontal2560]
+maxLength=1822
+minLength=342
+
+[PlasmaViews][Panel 2]
+alignment=132
+floating=1
+panelLengthMode=2
+panelOpacity=2
+panelVisibility=0
+
+[PlasmaViews][Panel 2][Defaults]
+floating=0
+maxLength=1870
+minLength=1870
+thickness=0
+
+[PlasmaViews][Panel 2][Horizontal1650]
+maxLength=1875
+minLength=1875
+
+[PlasmaViews][Panel 2][Horizontal1920]
+maxLength=1870
+minLength=1870
+
+[ScreenConnectors]
+0=Virtual-1
+
+[Updates]
+performed=/usr/share/plasma/shells/org.kde.plasma.desktop/contents/updates/digitalclock_rename_timezonedisplay_key.js,/usr/share/plasma/shells/org.kde.plasma.desktop/contents/updates/klipper_clear_config.js,/usr/share/plasma/shells/org.kde.plasma.desktop/contents/updates/unlock_widgets.js,/usr/share/plasma/shells/org.kde.plasma.desktop/contents/updates/obsolete_kickoffrc.js,/usr/share/plasma/shells/org.kde.plasma.desktop/contents/updates/containmentactions_middlebutton.js,/usr/share/plasma/shells/org.kde.plasma.desktop/contents/updates/systemloadviewer_systemmonitor.js,/usr/share/plasma/shells/org.kde.plasma.desktop/contents/updates/move_desktop_layout_config.js,/usr/share/plasma/shells/org.kde.plasma.desktop/contents/updates/maintain_existing_desktop_icon_sizes.js,/usr/share/plasma/shells/org.kde.plasma.desktop/contents/updates/no_middle_click_paste_on_panels.js,/usr/share/plasma/shells/org.kde.plasma.desktop/contents/updates/digitalclock_migrate_font_settings.js,/usr/share/plasma/shells/org.kde.plasma.desktop/contents/updates/keyboardlayout_migrateiconsetting.js,/usr/share/plasma/shells/org.kde.plasma.desktop/contents/updates/keyboardlayout_remove_shortcut.js,/usr/share/plasma/shells/org.kde.plasma.desktop/contents/updates/mediaframe_migrate_useBackground_setting.js,/usr/share/plasma/shells/org.kde.plasma.desktop/contents/updates/folderview_fix_recursive_screenmapping.js,/usr/share/plasma/shells/org.kde.plasma.desktop/contents/updates/digitalclock_migrate_showseconds_setting.js,/usr/share/plasma/shells/org.kde.plasma.desktop/contents/updates/migrate_font_weights.js

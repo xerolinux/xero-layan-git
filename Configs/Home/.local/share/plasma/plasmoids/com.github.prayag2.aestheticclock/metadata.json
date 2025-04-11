@@ -1,0 +1,24 @@
+{
+  "KPlugin": {
+    "Authors": [
+      {
+        "Email": "prayagjain2@gmail.com",
+        "Name": "Prayag Jain"
+      }
+    ],
+    "Category": "Date and Time",
+    "Description": "An aesthetic looking and customizable widget with a built-in system monitor and media player!",
+    "Icon": "org.kde.plasma.digitalclock",
+    "Id": "com.github.prayag2.aestheticclock",
+    "License": "GPLv3",
+    "Name": "Aesthetic Clock",
+    "ServiceTypes": [
+      "Plasma/Applet"
+    ],
+    "Version": "0.2.2",
+    "Website": "https://github.com/prayag2/kde_aestheticclock"
+  },
+  "X-Plasma-API-Minimum-Version": "6.0",
+  "X-Plasma-Provides": "org.kde.plasma.time,org.kde.plasma.date",
+  "KPackageStructure": "Plasma/Applet"
+}

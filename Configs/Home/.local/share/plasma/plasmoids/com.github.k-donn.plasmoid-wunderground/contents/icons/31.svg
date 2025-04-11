@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   id="Layer_1"
+   x="0px"
+   y="0px"
+   width="552"
+   height="552"
+   viewBox="0 0 552 552"
+   enable-background="new 0 0 512 512"
+   xml:space="preserve"
+   sodipodi:docname="31.svg"><metadata
+   id="metadata9"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
+   id="defs7" /><sodipodi:namedview
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="0"
+   inkscape:pageshadow="2"
+   inkscape:window-width="640"
+   inkscape:window-height="480"
+   id="namedview5"
+   fit-margin-top="20"
+   fit-margin-left="20"
+   fit-margin-right="20"
+   fit-margin-bottom="20" />
+	<style
+   id="current-color-scheme" />
+	<path
+   class="ColorScheme-Text"
+   id="hint-apply-color-scheme"
+   fill-rule="evenodd"
+   clip-rule="evenodd"
+   fill="currentColor"
+   d="m 268.082,283.932 c -31.52,-31.542 -39.979,-77.105 -26.02,-116.542 -15.25,5.395 -29.668,13.833 -41.854,26.02 -43.751,43.75 -43.751,114.667 0,158.395 43.729,43.73 114.625,43.752 158.374,0 12.229,-12.186 20.646,-26.604 26.021,-41.854 -39.415,13.959 -84.999,5.5 -116.521,-26.019 z" />
+</svg>

@@ -1,0 +1,195 @@
+# Translation of plasma control hub in LANGUAGE
+# Copyright (C) 2024
+# This file is distributed under the same license as the plasma control hub package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma control hub\n"
+"Report-Msgid-Bugs-To: https://store.kde.org/p/2139890/\n"
+"POT-Creation-Date: 2024-12-01 16:59-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+
+#: ../contents/ui/UserInfo.qml
+msgid "Hi"
+msgstr ""
+
+#: ../contents/ui/FullRepresentation.qml
+msgid "Settings"
+msgstr ""
+
+#: ../contents/ui/FullRepresentation.qml
+msgid "System Settings"
+msgstr ""
+
+#: ../contents/ui/FullRepresentation.qml
+msgid "Volume"
+msgstr ""
+
+#: ../contents/ui/FullRepresentation.qm
+msgid "Bluetooth"
+msgstr ""
+
+#: ../contents/ui/FullRepresentation.qm
+msgid "Network"
+msgstr ""
+
+#: ../contents/ui/FullRepresentation.qm
+msgid "DND"
+msgstr ""
+
+#: ../contents/ui/js/funcs.js
+msgid "Disabled"
+msgstr ""
+
+#: ../contents/ui/js/funcs.js
+msgid "Unavailable"
+msgstr ""
+
+#: ../contents/ui/js/funcs.js
+msgid "Offline"
+msgstr ""
+
+#: ../contents/ui/js/funcs.js
+msgid "Not Connected"
+msgstr ""
+
+#: ../contents/ui/Brightness.qml
+msgid "Brightness"
+msgstr ""
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Clear"
+msgstr ""
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Mainly clear"
+msgstr ""
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Partly cloudy"
+msgstr ""
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Overcast"
+msgstr ""
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Drizzle light intensity"
+msgstr ""
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Drizzle moderate intensity"
+msgstr ""
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Drizzle dense intensity"
+msgstr ""
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Freezing Drizzle light intensity"
+msgstr ""
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Freezing Drizzle dense intensity"
+msgstr ""
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Rain slight intensity"
+msgstr ""
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Rain moderate intensity"
+msgstr ""
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Rain heavy intensity"
+msgstr ""
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Freezing Rain light intensity"
+msgstr ""
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Freezing Rain heavy intensity"
+msgstr ""
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Snowfall slight intensity"
+msgstr ""
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Snowfall moderate intensity"
+msgstr ""
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Snowfall heavy intensity"
+msgstr ""
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Snow grains"
+msgstr ""
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Rain showers slight"
+msgstr ""
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Rain showers moderate"
+msgstr ""
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Rain showers violent"
+msgstr ""
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Snow showers slight"
+msgstr ""
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Snow showers heavy"
+msgstr ""
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Thunderstorm"
+msgstr ""
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Thunderstorm with slight hail"
+msgstr ""
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Thunderstorm with heavy hail"
+msgstr ""
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Cloudy"
+msgstr ""
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Drizzle"
+msgstr ""
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Rain"
+msgstr ""
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Snow"
+msgstr ""
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Showers"
+msgstr ""
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Storm"
+msgstr ""

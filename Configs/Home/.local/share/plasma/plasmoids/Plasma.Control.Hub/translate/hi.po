@@ -1,0 +1,194 @@
+# Translation of plasma control hub in Hindi
+# Copyright (C) 2024
+# This file is distributed under the same license as the plasma control hub package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma control hub\n"
+"Report-Msgid-Bugs-To: https://store.kde.org/p/2139890/\n"
+"POT-Creation-Date: 2024-12-01 16:59-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Hindi <hi@li.org>\n"
+"Language: hi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../contents/ui/UserInfo.qml
+msgid "Hi"
+msgstr "नमस्ते"
+
+#: ../contents/ui/FullRepresentation.qml
+msgid "Settings"
+msgstr "सेटिंग्स"
+
+#: ../contents/ui/FullRepresentation.qml
+msgid "System Settings"
+msgstr "सिस्टम सेटिंग्स"
+
+#: ../contents/ui/FullRepresentation.qml
+msgid "Volume"
+msgstr "ध्वनि स्तर"
+
+#: ../contents/ui/FullRepresentation.qm
+msgid "Bluetooth"
+msgstr "ब्लूटूथ"
+
+#: ../contents/ui/FullRepresentation.qm
+msgid "Network"
+msgstr "नेटवर्क"
+
+#: ../contents/ui/FullRepresentation.qm
+msgid "DND"
+msgstr "परेशान न करें"
+
+#: ../contents/ui/js/funcs.js
+msgid "Disabled"
+msgstr "अक्षम"
+
+#: ../contents/ui/js/funcs.js
+msgid "Unavailable"
+msgstr "अनुपलब्ध"
+
+#: ../contents/ui/js/funcs.js
+msgid "Offline"
+msgstr "ऑफ़लाइन"
+
+#: ../contents/ui/js/funcs.js
+msgid "Not Connected"
+msgstr "कनेक्ट नहीं है"
+
+#: ../contents/ui/Brightness.qml
+msgid "Brightness"
+msgstr "प्रकाश"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Clear"
+msgstr "साफ़"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Mainly clear"
+msgstr "मुख्य रूप से साफ़"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Partly cloudy"
+msgstr "आंशिक रूप से बादल"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Overcast"
+msgstr "बादल छाए हुए"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Drizzle light intensity"
+msgstr "हल्की बूंदाबांदी"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Drizzle moderate intensity"
+msgstr "मध्यम बूंदाबांदी"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Drizzle dense intensity"
+msgstr "गहरी बूंदाबांदी"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Freezing Drizzle light intensity"
+msgstr "हल्की बर्फीली बूंदाबांदी"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Freezing Drizzle dense intensity"
+msgstr "गहरी बर्फीली बूंदाबांदी"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Rain slight intensity"
+msgstr "हल्की बारिश"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Rain moderate intensity"
+msgstr "मध्यम बारिश"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Rain heavy intensity"
+msgstr "तेज़ बारिश"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Freezing Rain light intensity"
+msgstr "हल्की बर्फीली बारिश"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Freezing Rain heavy intensity"
+msgstr "तेज़ बर्फीली बारिश"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Snowfall slight intensity"
+msgstr "हल्की बर्फबारी"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Snowfall moderate intensity"
+msgstr "मध्यम बर्फबारी"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Snowfall heavy intensity"
+msgstr "तेज़ बर्फबारी"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Snow grains"
+msgstr "बर्फ के कण"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Rain showers slight"
+msgstr "हल्की बारिश की बौछारें"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Rain showers moderate"
+msgstr "मध्यम बारिश की बौछारें"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Rain showers violent"
+msgstr "तेज़ बारिश की बौछारें"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Snow showers slight"
+msgstr "हल्की बर्फीली बौछारें"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Snow showers heavy"
+msgstr "तेज़ बर्फीली बौछारें"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Thunderstorm"
+msgstr "तूफ़ान"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Thunderstorm with slight hail"
+msgstr "हल्की ओलावृष्टि के साथ तूफ़ान"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Thunderstorm with heavy hail"
+msgstr "तेज़ ओलावृष्टि के साथ तूफ़ान"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Cloudy"
+msgstr "बादल"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Drizzle"
+msgstr "बूंदाबांदी"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Rain"
+msgstr "बारिश"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Snow"
+msgstr "बर्फ"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Showers"
+msgstr "बौछारें"
+
+#: ../contents/ui/component/WeatherData.qml
+msgid "Storm"
+msgstr "तूफ़ान"

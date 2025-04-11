@@ -1,0 +1,47 @@
+{
+  "KPackageStructure": "Plasma/Applet",
+  "KPlugin": {
+    "Authors": [
+      {
+        "Email": "k-donn@github.com",
+        "Name": "k-donn"
+      }
+    ],
+    "Category": "Environment and Weather",
+    "Description": "Wunderground Personal Weather Station viewer",
+    "Description[de_DE]": "Meine Wetterstation",
+    "Description[es_ES]": "Visor de la estación meteorológica personal Wunderground",
+    "Description[fr_FR]": "Visualisation de station météorologique personnelle Wunderground",
+    "Description[it_IT]": "La stazione meteo personale Wunderground",
+    "Description[ja_JP]": "Wunderground Personal Weather Station viewer",
+    "Description[nl_NL]": "Wunderground - Bekijk je eigen weerstation",
+    "Description[pl_PL]": "Przeglądarka Osobistej Stacji Pogodowej Wunderground",
+    "Description[pt_BR]": "Visualizador de Estação Meteorológica Pessoal Wunderground",
+    "Description[ru_RU]": "Программа просмотра персональных метеостанций Wunderground",
+    "Description[sr_Latn]": "Wunderground Prikazivač Personalnih Meteoroloških Stanica",
+    "Description[zh_CN]": "Wunderground 个人气象站查看器",
+    "Description[zh_TW]": "Wunderground 個人氣象站檢視器",
+    "Icon": "weather-clear",
+    "Id": "com.github.k-donn.plasmoid-wunderground",
+    "License": "GPL-2.0-or-later",
+    "Name": "Wunderground",
+    "Name[de_DE]": "Wunderground",
+    "Name[es_ES]": "Wunderground",
+    "Name[fr_FR]": "Wunderground",
+    "Name[it_IT]": "Wunderground",
+    "Name[ja_JP]": "Wunderground",
+    "Name[nl_NL]": "Wunderground",
+    "Name[pl_PL]": "Wunderground",
+    "Name[pt_BR]": "Wunderground",
+    "Name[ru_RU]": "Wunderground",
+    "Name[sr_Latn]": "Wunderground",
+    "Name[zh_CN]": "Wunderground",
+    "Name[zh_TW]": "Wunderground",
+    "Version": "3.4.2",
+    "Website": "https://github.com/k-donn/plasmoid-wunderground"
+  },
+  "X-KDE-ParentApp": "",
+  "X-Plasma-API-Minimum-Version": "6.0",
+  "X-Plasma-NotificationArea": "true",
+  "X-Plasma-NotificationAreaCategory": "SystemServices"
+}

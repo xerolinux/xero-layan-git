@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="32"
+   height="32"
+   viewBox="0 0 8.4666665 8.4666669"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   sodipodi:docname="rain-probability.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     units="px"
+     inkscape:zoom="8.979798"
+     inkscape:cx="-23.330146"
+     inkscape:cy="37.862767"
+     inkscape:window-width="1920"
+     inkscape:window-height="996"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1">
+    <sodipodi:guide
+       position="11.934877,154.22436"
+       orientation="0,-1"
+       id="guide1200" />
+  </sodipodi:namedview>
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Capa 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       id="path846"
+       style="stroke-width:0.0677134;stroke-linecap:round;stroke-linejoin:round;fill:#ffffff;fill-opacity:1"
+       d="M 2.5690276,1.6787812 C 0.66111718,2.780314 0.00741527,5.2199643 1.1089475,7.1278734 0.63836361,6.3127998 2.9414212,4.9831277 3.4120053,5.7982024 3.2250343,5.4743609 3.4760976,5.0693925 3.8759243,4.749877 l 1.1644873,2.01695 C 5.2502296,7.1302425 5.5399501,7.4314555 5.9140495,7.5878535 6.2881491,7.7442526 6.7469263,7.7222409 7.1470385,7.4912315 7.547151,7.2602311 7.7955568,6.8739515 7.847161,6.4717717 7.8987661,6.0695929 7.7826303,5.6681599 7.5728125,5.3047444 A 0.40948006,0.40948006 0 0 0 7.0134143,5.1548544 0.40948006,0.40948006 0 0 0 6.8635696,5.7142262 C 7.0058774,5.9607096 7.0568071,6.1967951 7.0348776,6.3677057 7.0129462,6.5386163 6.947344,6.6608722 6.737557,6.7819927 6.5277703,6.9031131 6.3888616,6.8989325 6.2298839,6.8324678 6.0709062,6.766001 5.8919617,6.6038286 5.7496539,6.3573453 L 4.5860134,4.3418612 C 5.0590188,4.1593456 5.5295023,4.1471327 5.7150626,4.4685325 5.2444791,3.6534567 7.5475366,2.3237867 8.0181204,3.1388615 6.9165874,1.2309512 4.4769379,0.57724926 2.5690276,1.6787812 Z" />
+  </g>
+</svg>

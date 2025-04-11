@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE khotnewstuff3>
+<hotnewstuffregistry>
+ <stuff category="184">
+  <name>Arc KDE Yakuake</name>
+  <providerid>https://api.kde-look.org/ocs/v1/</providerid>
+  <author>x-varlesh-x</author>
+  <homepage>https://store.kde.org/p/1167641</homepage>
+  <licence></licence>
+  <version>20170912</version>
+  <rating>57</rating>
+  <downloads>13183</downloads>
+  <installedfile>/home/xero/.local/share/yakuake/kns_skins/arc-dark/*</installedfile>
+  <id>1167641</id>
+  <releasedate>2017-09-12</releasedate>
+  <summary>Arc KDE - This is a port of the popular GTK theme Arc for Plasma 5 desktop with a few additions and extras.</summary>
+  <changelog></changelog>
+  <preview>https://cn.opendesktop.org/cache/100x100-0/img/1/3/e/d/68acaf1590cc363736372892daa06bffff78.png</preview>
+  <previewBig>https://cn.opendesktop.org/cache/770x540-0/img/1/3/e/d/68acaf1590cc363736372892daa06bffff78.png</previewBig>
+  <payload>https://dllb2.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjE1MDUxOTg3NjkiLCJvIjoiMSIsInMiOiIyNzZiYzk3MGFiYTY0YzUwNjc2YmExZWNlNmQ2NDFkN2JiYTkwODc3ZmQxNzc1MmRmOWQ3YmJkODk3ZjYxZTg3NDZkMzU1ODMwYTgxM2E5MTVmYTVmMjcxYmJmMmI0NWYxOGFjYjkzYmYzOTdkNjgxYzFjMjY2NTZiN2YyMDg5MCIsInQiOjE2MzA4NjY5ODEsInN0ZnAiOm51bGwsInN0aXAiOiIxODUuMTg3Ljk0LjUifQ.qjH6yaJ5SYB36T3ZJkXKTlT6nW_rJtoequJafzXkkDU/arc-dark-yakuake.tar.gz</payload>
+  <tags>gplv3,addon</tags>
+  <status>installed</status>
+ </stuff>
+</hotnewstuffregistry>

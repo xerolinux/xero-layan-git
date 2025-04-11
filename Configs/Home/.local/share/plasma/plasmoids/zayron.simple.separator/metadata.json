@@ -1,0 +1,25 @@
+{
+  "KPlugin": {
+    "Authors": [
+      {
+        "Email": "adolfo@librepixels.com",
+        "Name": "zayronxio"
+      }
+    ],
+    "Name": "simple separator",
+    "Id": "zayron.simple.separator",
+    "Description": "a simple separator",
+    "Category": "Utilities",
+    "Icon": "setting",
+    "EnabledByDefault": true,
+    "License": "GPL-3.0+",
+    "ServiceTypes": [
+      "Plasma/Applet"
+    ],
+    "Version": "1.2.9",
+    "Website": "https://store.kde.org/p/2137418"
+  },
+  "X-Plasma-API-Minimum-Version": "6.0",
+  "X-Plasma-MainScript": "ui/main.qml",
+  "KPackageStructure": "Plasma/Applet"
+}

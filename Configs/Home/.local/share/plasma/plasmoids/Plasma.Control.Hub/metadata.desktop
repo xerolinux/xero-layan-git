@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Plasma Control Hub
+
+Type=Service
+Icon=configure
+X-KDE-ServiceTypes=Plasma/Applet
+
+X-Plasma-API=declarativeappletscript
+X-Plasma-MainScript=ui/main.qml
+X-KDE-PluginInfo-Name=Plasma.Control.Hub
+
