@@ -162,11 +162,16 @@ echo
 echo "Applying Grub Theme...."
 echo "#######################"
 
-chmod +x Grub.sh
-sudo ./Grub.sh
-sudo sed -i "s/GRUB_GFXMODE=*.*/GRUB_GFXMODE=1920x1080x32/g" /etc/default/grub
-sudo grub-mkconfig -o /boot/grub/grub.cfg
+# Check if GRUB is installed
+if [ -d "/boot/grub" ]; then
+    echo "GRUB detected. Proceeding with theme installation..."
 
+    # Clone the repository and install the theme
+    sudo ./Grub.sh
+    sudo sed -i "s/GRUB_GFXMODE=*.*/GRUB_GFXMODE=1920x1080x32/g" /etc/default/grub
+else
+    echo "GRUB not detected. Skipping theme installation."
+fi
 sleep 2
 echo
 
