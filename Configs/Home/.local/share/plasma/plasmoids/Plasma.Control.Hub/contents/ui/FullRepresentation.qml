@@ -3,6 +3,7 @@ import QtQuick.Controls
 import QtCore
 import QtQuick.Layouts
 import Qt5Compat.GraphicalEffects
+import org.kde.plasma.private.mpris as Mpris
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.private.brightnesscontrolplugin
