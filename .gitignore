@@ -1,8 +1,8 @@
 .DS_Store
 Thumbs.db
 db.json
+gitclean.sh
 push.sh
-cleanup.sh
 *.log
 node_modules/
 .deploy*/
