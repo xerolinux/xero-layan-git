@@ -6,7 +6,7 @@ I would like to clarify one very important aspect of ricing. We use custom theme
 
 <div align="center">
 
-# [.:: Follow the Wiki ::.](https://wiki.xerolinux.xyz/rice/)
+# [.:: Follow the Wiki ::.](https://wiki.xerolinux.xyz/rices/)
 
 </div>
 
