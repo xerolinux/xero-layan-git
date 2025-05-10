@@ -10,8 +10,8 @@ Command=/bin/bash
 Name=XeroLinux
 Parent=FALLBACK/
 StartInCurrentSessionDir=true
-TerminalColumns=110
-TerminalRows=29
+TerminalColumns=105
+TerminalRows=33
 
 [Interaction Options]
 AutoCopySelectedText=true
