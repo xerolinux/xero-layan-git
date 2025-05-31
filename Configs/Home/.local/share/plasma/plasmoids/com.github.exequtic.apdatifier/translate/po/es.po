@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: apdatifier\n"
 "Report-Msgid-Bugs-To: https://github.com/exequtic/apdatifier\n"
-"POT-Creation-Date: 2025-02-26 11:07+0300\n"
+"POT-Creation-Date: 2025-05-15 21:30+0300\n"
 "PO-Revision-Date: 2024-12-04 20:21-0600\n"
 "Last-Translator: RodvinSanchez\n"
 "Language-Team: Español\n"
@@ -37,6 +37,10 @@ msgstr "Reglas"
 #: ../contents/config/config.qml
 msgid "Support me"
 msgstr "Apóyame"
+
+#: ../contents/tools/sh/messages ../contents/tools/tools.js
+msgid "Upgrade in progress"
+msgstr "Actualización en progreso"
 
 #: ../contents/tools/sh/messages
 msgid "Full system upgrade"
@@ -246,17 +250,13 @@ msgstr "Ejecutado:"
 msgid "Nothing to do"
 msgstr "Nada que hacer"
 
-#: ../contents/tools/sh/messages
+#: ../contents/tools/sh/messages ../contents/tools/tools.js ../contents/ui/configuration/General.qml ../contents/ui/configuration/Upgrade.qml
 msgid "Required installed"
 msgstr "Requerido instalado"
 
 #: ../contents/tools/tools.js
 msgid "Exit code: "
 msgstr "Código de salida:"
-
-#: ../contents/tools/tools.js
-msgid "Upgrade in progress..."
-msgstr "Actualización en progreso..."
 
 #: ../contents/tools/tools.js
 msgid "Checking latest news..."
@@ -281,10 +281,6 @@ msgstr "Verificando actualizaciones de widgets..."
 #: ../contents/tools/tools.js
 msgid "Unable check widgets: "
 msgstr "No se puede verificar los widgets: "
-
-#: ../contents/tools/tools.js
-msgid "some required utilities are not installed (curl, jq)"
-msgstr "algunas utilidades requeridas no están instaladas (curl, jq)"
 
 #: ../contents/tools/tools.js
 msgid "latest commit"
@@ -535,6 +531,30 @@ msgid "Show tab texts"
 msgstr "Mostrar textos de las pestañas"
 
 #: ../contents/ui/configuration/General.qml
+msgid "Install Development version"
+msgstr ""
+
+#: ../contents/ui/configuration/General.qml
+msgid "Install Stable version"
+msgstr ""
+
+#: ../contents/ui/configuration/General.qml
+msgid "Uninstall widget"
+msgstr ""
+
+#: ../contents/ui/configuration/General.qml
+msgid "Note: version with the latest commits may be unstable."
+msgstr ""
+
+#: ../contents/ui/configuration/General.qml
+msgid "Note: if you haven't installed the Devel version before, there's no need to install the Stable version."
+msgstr ""
+
+#: ../contents/ui/configuration/General.qml
+msgid "Removal of the widget and all related files, including the directory with its configuration."
+msgstr ""
+
+#: ../contents/ui/configuration/General.qml
 msgid "Search"
 msgstr "Buscar"
 
@@ -603,8 +623,8 @@ msgid "Plasma Widgets"
 msgstr "Widgets de Plasma"
 
 #: ../contents/ui/configuration/General.qml
-msgid "To use this feature, the following installed utilities are required:<br><b>curl, jq, unzip, tar</b>.<br><br>For widget developers:<br>Don't forget to update the metadata.json and specify the name of the applet and its version <b>exactly</b> as they appear on the KDE Store."
-msgstr "Para usar esta función, se requieren las siguientes utilidades instaladas:<br><b>curl, jq, unzip, tar</b>.<br><br>Para desarrolladores de widgets:<br>No olvides actualizar el metadata.json y especificar el nombre del applet y su versión <b>exactamente</b> como aparecen en la tienda KDE."
+msgid "<br><br>For widget developers:<br>Don't forget to update the metadata.json and specify the name of the applet and its version <b>exactly</b> as they appear on the KDE Store."
+msgstr "<br><br>Para desarrolladores de widgets:<br>No olvides actualizar el metadata.json y especificar el nombre del applet y su versión <b>exactamente</b> como aparecen en la tienda KDE."
 
 #: ../contents/ui/configuration/General.qml ../contents/ui/representation/Expanded.qml
 msgid "News"
@@ -687,10 +707,6 @@ msgstr "Desplazar hacia abajo"
 #: ../contents/ui/configuration/General.qml
 msgid "Restore hidden tooltips"
 msgstr "Restaurar las descripciones emergentes ocultas"
-
-#: ../contents/ui/configuration/General.qml
-msgid "Install development version"
-msgstr ""
 
 #: ../contents/ui/configuration/Rules.qml
 msgid "Unimportant"
@@ -777,6 +793,10 @@ msgid "If your terminal utilizes any <b>Nerd Font</b>, icons from that font will
 msgstr "Si tu terminal utiliza alguna <b>Nerd Font</b>, se usarán iconos de esa fuente."
 
 #: ../contents/ui/configuration/Upgrade.qml
+msgid "tmux session"
+msgstr ""
+
+#: ../contents/ui/configuration/Upgrade.qml
 msgid "Pre/post upgrade scripts"
 msgstr ""
 
@@ -813,10 +833,6 @@ msgid "Upgrade options"
 msgstr "Opciones de actualización"
 
 #: ../contents/ui/configuration/Upgrade.qml
-msgid "Options"
-msgstr "Opciones"
-
-#: ../contents/ui/configuration/Upgrade.qml
 msgid "Reboot system"
 msgstr ""
 
@@ -841,8 +857,8 @@ msgid "Suggest before upgrading"
 msgstr "Sugerir antes de actualizar"
 
 #: ../contents/ui/configuration/Upgrade.qml
-msgid "To use this feature, the following installed utilities are required:<br><b>curl, pacman-contrib.</b> <br><br>Also see https://archlinux.org/mirrorlist (click button to open link)"
-msgstr "Para usar esta función, se requieren las siguientes utilidades instaladas:<br><b>curl, pacman-contrib.</b> <br><br>También consulta https://archlinux.org/mirrorlist (haz clic en el botón para abrir el enlace)"
+msgid "<br><br>Also see https://archlinux.org/mirrorlist (click button to open link)"
+msgstr "<br><br>También consulta https://archlinux.org/mirrorlist (haz clic en el botón para abrir el enlace)"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Protocol"
@@ -1039,6 +1055,12 @@ msgstr "No hay noticias no leídas"
 #: ../contents/ui/scrollview/News.qml
 msgid "Restore list"
 msgstr "Restaurar lista"
+
+#~ msgid "Options"
+#~ msgstr "Opciones"
+
+#~ msgid "some required utilities are not installed (curl, jq)"
+#~ msgstr "algunas utilidades requeridas no están instaladas (curl, jq)"
 
 #~ msgid "You can also switch tabs by dragging the mouse left and right with the right mouse button held."
 #~ msgstr "También puedes cambiar de pestaña arrastrando el mouse hacia la izquierda y derecha mientras mantienes presionado el botón derecho del mouse."

@@ -1,4 +1,4 @@
-import QtQuick 2.15
+import QtQuick
 import QtQuick.Controls 2.15
 import org.kde.coreaddons 1.0 as KCoreAddons
 import Qt5Compat.GraphicalEffects

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: apdatifier\n"
 "Report-Msgid-Bugs-To: https://github.com/exequtic/apdatifier\n"
-"POT-Creation-Date: 2025-02-26 11:07+0300\n"
+"POT-Creation-Date: 2025-05-15 21:30+0300\n"
 "PO-Revision-Date: 2024-06-02 14:38+0200\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: \n"
@@ -38,6 +38,10 @@ msgstr "Regels"
 #: ../contents/config/config.qml
 msgid "Support me"
 msgstr "Doneren"
+
+#: ../contents/tools/sh/messages ../contents/tools/tools.js
+msgid "Upgrade in progress"
+msgstr ""
 
 #: ../contents/tools/sh/messages
 msgid "Full system upgrade"
@@ -256,16 +260,14 @@ msgid "Nothing to do"
 msgstr "Er valt niets te doen"
 
 # Required installed <util name>
-#: ../contents/tools/sh/messages
+#: ../contents/tools/sh/messages ../contents/tools/tools.js
+#: ../contents/ui/configuration/General.qml
+#: ../contents/ui/configuration/Upgrade.qml
 msgid "Required installed"
 msgstr "Vereist"
 
 #: ../contents/tools/tools.js
 msgid "Exit code: "
-msgstr ""
-
-#: ../contents/tools/tools.js
-msgid "Upgrade in progress..."
 msgstr ""
 
 #: ../contents/tools/tools.js
@@ -291,10 +293,6 @@ msgstr "Bezig met controleren op widgetupdates…"
 #: ../contents/tools/tools.js
 msgid "Unable check widgets: "
 msgstr "De widget-updatecontrole is mislukt: "
-
-#: ../contents/tools/tools.js
-msgid "some required utilities are not installed (curl, jq)"
-msgstr "Enkele vereiste hulpmiddelen zijn niet aangetroffen (curl, jq)"
 
 #: ../contents/tools/tools.js
 msgid "latest commit"
@@ -555,6 +553,34 @@ msgid "Show tab texts"
 msgstr ""
 
 #: ../contents/ui/configuration/General.qml
+msgid "Install Development version"
+msgstr ""
+
+#: ../contents/ui/configuration/General.qml
+msgid "Install Stable version"
+msgstr ""
+
+#: ../contents/ui/configuration/General.qml
+msgid "Uninstall widget"
+msgstr ""
+
+#: ../contents/ui/configuration/General.qml
+msgid "Note: version with the latest commits may be unstable."
+msgstr ""
+
+#: ../contents/ui/configuration/General.qml
+msgid ""
+"Note: if you haven't installed the Devel version before, there's no need to "
+"install the Stable version."
+msgstr ""
+
+#: ../contents/ui/configuration/General.qml
+msgid ""
+"Removal of the widget and all related files, including the directory with "
+"its configuration."
+msgstr ""
+
+#: ../contents/ui/configuration/General.qml
 msgid "Search"
 msgstr "Zoeken"
 
@@ -643,15 +669,13 @@ msgstr "Plasmawidgets"
 
 #: ../contents/ui/configuration/General.qml
 msgid ""
-"To use this feature, the following installed utilities are required:"
-"<br><b>curl, jq, unzip, tar</b>.<br><br>For widget developers:<br>Don't "
-"forget to update the metadata.json and specify the name of the applet and "
-"its version <b>exactly</b> as they appear on the KDE Store."
+"<br><br>For widget developers:<br>Don't forget to update the metadata.json "
+"and specify the name of the applet and its version <b>exactly</b> as they "
+"appear on the KDE Store."
 msgstr ""
-"Voor het gebruik van deze functie zijn de volgende hulpmiddelen vereist:"
-"<br><b>curl, jq, unzip, tar</b>.<br><br>Tip voor widgetontwikkelaars:"
-"<br>vergeet niet om metadata.json bij te werken en de naam van het applet en "
-"de versie <b>precies</b> zo in te vullen als in de KDE Store."
+"<br><br>Tip voor widgetontwikkelaars:<br>vergeet niet om metadata.json bij "
+"te werken en de naam van het applet en de versie <b>precies</b> zo in te "
+"vullen als in de KDE Store."
 
 #: ../contents/ui/configuration/General.qml
 #: ../contents/ui/representation/Expanded.qml
@@ -749,10 +773,6 @@ msgstr "Omlaag scrollen"
 
 #: ../contents/ui/configuration/General.qml
 msgid "Restore hidden tooltips"
-msgstr ""
-
-#: ../contents/ui/configuration/General.qml
-msgid "Install development version"
 msgstr ""
 
 #: ../contents/ui/configuration/Rules.qml
@@ -855,6 +875,10 @@ msgstr ""
 "pictogrammen daaruit gebruikt."
 
 #: ../contents/ui/configuration/Upgrade.qml
+msgid "tmux session"
+msgstr ""
+
+#: ../contents/ui/configuration/Upgrade.qml
 msgid "Pre/post upgrade scripts"
 msgstr ""
 
@@ -896,10 +920,6 @@ msgid "Upgrade options"
 msgstr ""
 
 #: ../contents/ui/configuration/Upgrade.qml
-msgid "Options"
-msgstr "Opties"
-
-#: ../contents/ui/configuration/Upgrade.qml
 msgid "Reboot system"
 msgstr ""
 
@@ -925,13 +945,10 @@ msgstr "Vragen alvorens op te waarderen"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid ""
-"To use this feature, the following installed utilities are required:"
-"<br><b>curl, pacman-contrib.</b> <br><br>Also see https://archlinux.org/"
-"mirrorlist (click button to open link)"
+"<br><br>Also see https://archlinux.org/mirrorlist (click button to open link)"
 msgstr ""
-"Voor het gebruik van deze functie zijn de volgende hulpmiddelen vereist:"
-"<br><b>curl, pacman-contrib.</b> <br><br>Zie ook https://archlinux.org/"
-"mirrorlist (klik op de knop om de link te openen)"
+"<br><br>Zie ook https://archlinux.org/mirrorlist (klik op de knop om de link "
+"te openen)"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Protocol"
@@ -1141,6 +1158,12 @@ msgstr ""
 #: ../contents/ui/scrollview/News.qml
 msgid "Restore list"
 msgstr ""
+
+#~ msgid "Options"
+#~ msgstr "Opties"
+
+#~ msgid "some required utilities are not installed (curl, jq)"
+#~ msgstr "Enkele vereiste hulpmiddelen zijn niet aangetroffen (curl, jq)"
 
 #~ msgid ""
 #~ "You can also switch tabs by dragging the mouse left and right with the "

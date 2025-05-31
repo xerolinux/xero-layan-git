@@ -626,8 +626,7 @@ Item {
         Item {
             id: mutimedia
             width: parent.width
-            height: heightCard + marginSeperator // brillo.visible ? (infoUserAvailable ? wrapper.height*.9 : wrapper.height)*.2 : (infoUserAvailable ? wrapper.height*.9 : wrapper.height)*.25
-            //visible: false
+            height: heightCard + marginSeperator
             Lib.Card {
                 id: rect
 

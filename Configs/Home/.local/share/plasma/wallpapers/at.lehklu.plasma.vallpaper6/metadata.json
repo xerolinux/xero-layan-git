@@ -1,0 +1,20 @@
+{
+    "KPackageStructure": "Plasma/Wallpaper",
+    "KPlugin": {
+        "Name": "Vallpaper 6.0.0",
+        "Description": "Slideshow wallpaper for virtual desktops",
+        "Version": "6.0.0",
+        "Id": "at.lehklu.plasma.vallpaper6",
+        "Icon": "preferences-desktop-wallpaper",
+        "Authors": [
+            {
+                "Email": "werner.lechner@lehklu.at",
+                "Name": "Werner Lechner"
+            }
+        ],
+        "Category": "Utilities",
+        "License": "GPL-2.0+"
+    },
+    "X-KDE-ParentApp": "org.kde.plasmashell",
+    "X-Plasma-API-Minimum-Version": "6.0"
+}

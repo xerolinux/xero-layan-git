@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: apdatifier\n"
 "Report-Msgid-Bugs-To: https://github.com/exequtic/apdatifier\n"
-"POT-Creation-Date: 2025-02-26 11:07+0300\n"
-"PO-Revision-Date: 2024-11-17 21:36+0300\n"
+"POT-Creation-Date: 2025-05-15 21:30+0300\n"
+"PO-Revision-Date: 2025-03-09 12:00+0300\n"
 "Last-Translator: Evgeniy Kazantsev <exequtic@gmail.com>\n"
 "Language-Team: \n"
 "Language: ru\n"
@@ -40,6 +40,10 @@ msgstr "Правила"
 msgid "Support me"
 msgstr "Поддержать меня"
 
+#: ../contents/tools/sh/messages ../contents/tools/tools.js
+msgid "Upgrade in progress"
+msgstr "Выполняется обновление"
+
 #: ../contents/tools/sh/messages
 msgid "Full system upgrade"
 msgstr "Полное обновление системы"
@@ -66,11 +70,11 @@ msgstr "Общее время выполнения:"
 
 #: ../contents/tools/sh/messages
 msgid "Critical package(s) updated, reboot may be required:"
-msgstr ""
+msgstr "Обновлены критические пакеты, может потребоваться перезагрузка:"
 
 #: ../contents/tools/sh/messages
 msgid "Do you want to reboot now?"
-msgstr ""
+msgstr "Вы хотите перезагрузиться прямо сейчас?"
 
 #: ../contents/tools/sh/messages
 msgid "Press Enter to close"
@@ -254,7 +258,9 @@ msgstr "Выполнено:"
 msgid "Nothing to do"
 msgstr "Нечего делать"
 
-#: ../contents/tools/sh/messages
+#: ../contents/tools/sh/messages ../contents/tools/tools.js
+#: ../contents/ui/configuration/General.qml
+#: ../contents/ui/configuration/Upgrade.qml
 msgid "Required installed"
 msgstr "Требуется установленная утилита"
 
@@ -263,16 +269,12 @@ msgid "Exit code: "
 msgstr "Код ошибки: "
 
 #: ../contents/tools/tools.js
-msgid "Upgrade in progress..."
-msgstr "Выполняется обновление..."
-
-#: ../contents/tools/tools.js
 msgid "Checking latest news..."
 msgstr "Проверка последних новостей..."
 
 #: ../contents/tools/tools.js
 msgid "Cannot fetch news "
-msgstr ""
+msgstr "Не удалось получить новости "
 
 #: ../contents/tools/tools.js
 msgid "Checking system updates..."
@@ -289,10 +291,6 @@ msgstr "Проверка обновлений виджетов..."
 #: ../contents/tools/tools.js
 msgid "Unable check widgets: "
 msgstr "Невозможно проверить виджеты: "
-
-#: ../contents/tools/tools.js
-msgid "some required utilities are not installed (curl, jq)"
-msgstr "некоторые из требуемых утилит не установлены (curl, jq)"
 
 #: ../contents/tools/tools.js
 msgid "latest commit"
@@ -557,6 +555,38 @@ msgid "Show tab texts"
 msgstr "Показывать имена вкладок"
 
 #: ../contents/ui/configuration/General.qml
+msgid "Install Development version"
+msgstr "Установить тестовую версию"
+
+#: ../contents/ui/configuration/General.qml
+msgid "Install Stable version"
+msgstr "Установить стабильную версию"
+
+#: ../contents/ui/configuration/General.qml
+msgid "Uninstall widget"
+msgstr "Удалить виджет"
+
+#: ../contents/ui/configuration/General.qml
+msgid "Note: version with the latest commits may be unstable."
+msgstr "Примечание: версия с последними коммитами может быть нестабильна."
+
+#: ../contents/ui/configuration/General.qml
+msgid ""
+"Note: if you haven't installed the Devel version before, there's no need to "
+"install the Stable version."
+msgstr ""
+"Примечание: если ранее не была установлена тестовая версия, то нет "
+"необходимости устанавливать стабильную версию."
+
+#: ../contents/ui/configuration/General.qml
+msgid ""
+"Removal of the widget and all related files, including the directory with "
+"its configuration."
+msgstr ""
+"Удаление виджета и всех связанных с ним файлов, включая директорию с его "
+"конфигурацией."
+
+#: ../contents/ui/configuration/General.qml
 msgid "Search"
 msgstr "Поиск"
 
@@ -644,15 +674,13 @@ msgstr "Plasma виджеты"
 
 #: ../contents/ui/configuration/General.qml
 msgid ""
-"To use this feature, the following installed utilities are required:"
-"<br><b>curl, jq, unzip, tar</b>.<br><br>For widget developers:<br>Don't "
-"forget to update the metadata.json and specify the name of the applet and "
-"its version <b>exactly</b> as they appear on the KDE Store."
+"<br><br>For widget developers:<br>Don't forget to update the metadata.json "
+"and specify the name of the applet and its version <b>exactly</b> as they "
+"appear on the KDE Store."
 msgstr ""
-"Для использования этой опции необходимы следующие установленные утилиты:"
-"<br><b>curl, jq, unzip, tar</b>.<br><br>Для разработчиков виджетов:<br>Не "
-"забывайте обновлять файл metadata.json и указывать имя виджета и его версию "
-"в точности как и на сайте KDE Store."
+"<br><br>Для разработчиков виджетов:<br>Не забывайте обновлять файл "
+"metadata.json и указывать имя виджета и его версию в точности как и на сайте "
+"KDE Store."
 
 #: ../contents/ui/configuration/General.qml
 #: ../contents/ui/representation/Expanded.qml
@@ -680,7 +708,7 @@ msgstr "Для новых обновлений"
 
 #: ../contents/ui/configuration/General.qml
 msgid "Upgrade button"
-msgstr ""
+msgstr "Кнопка обновления"
 
 #: ../contents/ui/configuration/General.qml
 msgid "For every version bump"
@@ -754,10 +782,6 @@ msgstr "Прокрутка вниз"
 #: ../contents/ui/configuration/General.qml
 msgid "Restore hidden tooltips"
 msgstr "Восстановить скрытые подсказки"
-
-#: ../contents/ui/configuration/General.qml
-msgid "Install development version"
-msgstr ""
 
 #: ../contents/ui/configuration/Rules.qml
 msgid "Unimportant"
@@ -858,16 +882,20 @@ msgstr ""
 "отображаться иконки из этого шрифта."
 
 #: ../contents/ui/configuration/Upgrade.qml
+msgid "tmux session"
+msgstr "tmux сессия"
+
+#: ../contents/ui/configuration/Upgrade.qml
 msgid "Pre/post upgrade scripts"
-msgstr ""
+msgstr "Сценарии до/после обновления"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Pre-exec"
-msgstr ""
+msgstr "До"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Command or script path"
-msgstr ""
+msgstr "Команда или путь к скрипту"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid ""
@@ -875,16 +903,21 @@ msgid ""
 "specify your command to update the mirrorlist if you have unofficial "
 "repositories."
 msgstr ""
+"Запустите свою команду или скрипт ПЕРЕД обновлением.<br>Например, вы можете "
+"указать свою команду для обновления списка зеркал, если у вас есть "
+"неофициальные репозитории."
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Post-exec"
-msgstr ""
+msgstr "После"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid ""
 "Running your command or script AFTER the upgrade.<br>For example, you can "
 "specify your command to upgrade something else."
 msgstr ""
+"Запустите свою команду или скрипт ПОСЛЕ обновления.<br>Например, вы можете "
+"указать свою команду для обновления чего-либо еще."
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Wrapper"
@@ -892,19 +925,15 @@ msgstr "Обертка"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "AUR disabled in search settings"
-msgstr ""
+msgstr "AUR отключен в настройках поиска"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Upgrade options"
 msgstr "Опции обновления"
 
 #: ../contents/ui/configuration/Upgrade.qml
-msgid "Options"
-msgstr "Опции"
-
-#: ../contents/ui/configuration/Upgrade.qml
 msgid "Reboot system"
-msgstr ""
+msgstr "Перезагрузить систему"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Suggest after upgrading"
@@ -928,13 +957,10 @@ msgstr "Предлагать перед обновлением"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid ""
-"To use this feature, the following installed utilities are required:"
-"<br><b>curl, pacman-contrib.</b> <br><br>Also see https://archlinux.org/"
-"mirrorlist (click button to open link)"
+"<br><br>Also see https://archlinux.org/mirrorlist (click button to open link)"
 msgstr ""
-"Для использования этой опции необходимы следующие установленные утилиты:"
-"<br><b>curl, pacman-contrib.</b> <br><br>Также смотрите https://"
-"archlinux.org/mirrorlist (нажмите на кнопку для открытия ссылки)"
+"<br><br>Также смотрите https://archlinux.org/mirrorlist (нажмите на кнопку "
+"для открытия ссылки)"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Protocol"
@@ -979,7 +1005,7 @@ msgstr ""
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Uninstall unused"
-msgstr ""
+msgstr "Удалять неиспользуемое"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Normal"
@@ -1068,7 +1094,7 @@ msgstr "Обновить пакет"
 
 #: ../contents/ui/scrollview/Extended.qml
 msgid "Package type"
-msgstr ""
+msgstr "Тип пакета"
 
 #: ../contents/ui/scrollview/Extended.qml
 msgid "Description"
@@ -1145,6 +1171,12 @@ msgstr "Нет непрочитанных новостей"
 #: ../contents/ui/scrollview/News.qml
 msgid "Restore list"
 msgstr "Восстановить список"
+
+#~ msgid "Options"
+#~ msgstr "Опции"
+
+#~ msgid "some required utilities are not installed (curl, jq)"
+#~ msgstr "некоторые из требуемых утилит не установлены (curl, jq)"
 
 #~ msgid ""
 #~ "You can also switch tabs by dragging the mouse left and right with the "

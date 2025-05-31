@@ -16,7 +16,7 @@ import "../scrollview" as View
 import "../../tools/tools.js" as JS
 
 Representation {
-    property string currVersion: "v2.9.2"
+    property string currVersion: "v2.9.3"
     property bool searchFieldOpen: false
 
     property string statusIcon: {
@@ -46,12 +46,10 @@ Representation {
                 spacing: Kirigami.Units.smallSpacing / 2
                 visible: cfg.showStatusText
 
-                ToolButton {
+                Item {
                     Layout.preferredWidth: Kirigami.Units.iconSizes.smallMedium
                     Layout.preferredHeight: Kirigami.Units.iconSizes.smallMedium
-                    hoverEnabled: false
-                    highlighted: false
-                    enabled: !cfg.ownIconsUI
+
                     Kirigami.Icon {
                         height: parent.height
                         width: parent.height
@@ -64,7 +62,7 @@ Representation {
                     }
                 }
 
-                DescriptiveLabel {
+                Label {
                     Layout.maximumWidth: toolBar.width - toolBarButtons.width - Kirigami.Units.iconSizes.smallMedium
                     Layout.alignment: Qt.AlignLeft
                     text: sts.statusMsg
@@ -317,7 +315,6 @@ Representation {
             Layout.fillWidth: true
             Layout.topMargin: Kirigami.Units.smallSpacing * 2
             Layout.bottomMargin: Kirigami.Units.smallSpacing * 2
-            icon.source: "apdatifier-plasmoid"
             text: "<b>" + i18n("Check out release notes")+" "+currVersion+"</b>"
             type: Kirigami.MessageType.Positive
             visible: !searchFieldOpen &&

@@ -47,22 +47,32 @@ SimpleKCM {
     property var terminals: plasmoid.configuration.terminals
     property var packageLink: "https://archlinux.org/packages/extra/x86_64/pacman-contrib"
 
+    property int installButton
+    property var dialogTitles: {
+        "0": i18n("Install Development version"),
+        "1": i18n("Install Stable version"),
+        "2": i18n("Uninstall widget")
+    }
+    property var dialogSubtitles: {
+        "0": i18n("Note: version with the latest commits may be unstable."),
+        "1": i18n("Note: if you haven't installed the Devel version before, there's no need to install the Stable version."),
+        "2": i18n("Removal of the widget and all related files, including the directory with its configuration.")
+    }
+
     property int currentTab
     signal tabChanged(currentTab: int)
     onCurrentTabChanged: tabChanged(currentTab)
 
-    property bool widgetsAvail: pkg.curl && pkg.jq && pkg.unzip && pkg.tar
-    property bool newsAvail: pkg.curl && pkg.jq
     Component.onCompleted: {
         JS.checkDependencies()
         if (arch.checked && !pkg.pacman) arch.checked = plasmoid.configuration.arch = false
         if (aur.checked && (!pkg.pacman || (!pkg.yay && !pkg.paru))) aur.checked = plasmoid.configuration.aur = false
         if (flatpak.checked && !pkg.flatpak) flatpak.checked = plasmoid.configuration.flatpak = false
-        if (widgets.checked && !widgetsAvail) widgets.checked = plasmoid.configuration.widgets = false
-        if (newsArch.checked && !newsAvail) newsArch.checked = plasmoid.configuration.newsArch = false
-        if (newsKDE.checked && !newsAvail) newsKDE.checked = plasmoid.configuration.newsKDE = false
-        if (newsTWIK.checked && !newsAvail) newsTWIK.checked = plasmoid.configuration.newsTWIK = false
-        if (newsTWIKA.checked && !newsAvail) newsTWIKA.checked = plasmoid.configuration.newsTWIKA = false
+        if (widgets.checked && !pkg.jq) widgets.checked = plasmoid.configuration.widgets = false
+        if (newsArch.checked && !pkg.jq) newsArch.checked = plasmoid.configuration.newsArch = false
+        if (newsKDE.checked && !pkg.jq) newsKDE.checked = plasmoid.configuration.newsKDE = false
+        if (newsTWIK.checked && !pkg.jq) newsTWIK.checked = plasmoid.configuration.newsTWIK = false
+        if (newsTWIKA.checked && !pkg.jq) newsTWIKA.checked = plasmoid.configuration.newsTWIKA = false
     }
  
     header: Kirigami.NavigationTabBar {
@@ -223,11 +233,11 @@ SimpleKCM {
                 CheckBox {
                     id: widgets
                     text: i18n("Plasma Widgets")
-                    enabled: widgetsAvail
+                    enabled: pkg.jq
                 }
 
                 Kirigami.ContextualHelpButton {
-                    toolTipText: i18n("To use this feature, the following installed utilities are required:<br><b>curl, jq, unzip, tar</b>.<br><br>For widget developers:<br>Don't forget to update the metadata.json and specify the name of the applet and its version <b>exactly</b> as they appear on the KDE Store.")
+                    toolTipText: i18n("Required installed") + " jq." + i18n("<br><br>For widget developers:<br>Don't forget to update the metadata.json and specify the name of the applet and its version <b>exactly</b> as they appear on the KDE Store.")
                 }
             }
 
@@ -241,26 +251,26 @@ SimpleKCM {
                 CheckBox {
                     id: newsArch
                     text: i18n("Arch Linux News")
-                    enabled: newsAvail
+                    enabled: pkg.jq
                 }
             }
 
             CheckBox {
                 id: newsKDE
-                text: "\"KDE Announcements\""
-                enabled: newsAvail
+                text: "KDE Announcements"
+                enabled: pkg.jq
             }
 
             CheckBox {
                 id: newsTWIK
-                text: "\"This Week in KDE\""
-                enabled: newsAvail
+                text: "This Week in KDE"
+                enabled: pkg.jq
             }
 
             CheckBox {
                 id: newsTWIKA
-                text: "\"This Week in KDE Apps\""
-                enabled: newsAvail
+                text: "This Week in KDE Apps"
+                enabled: pkg.jq
             }
 
             RowLayout {
@@ -436,17 +446,61 @@ SimpleKCM {
                 }
             }
 
+            Item {
+                Kirigami.FormData.isSection: true
+            }
+
             RowLayout {
                 Layout.preferredWidth: miscTab.width - Kirigami.Units.largeSpacing * 10
                 Button {
                     Layout.fillWidth: true
                     Layout.maximumWidth: 500
-
-                    icon.name: "install"
-                    icon.color: Kirigami.Theme.negativeTextColor
-                    text: i18n("Install development version")
+                    icon.name: "folder-git-symbolic"
+                    text: i18n("Install Development version")
                     onClicked: {
-                        JS.execute(JS.runInTerminal("utils", "install"))
+                        installButton = 0
+                        installDialog.open()
+                    }
+                }
+            }
+            RowLayout {
+                Layout.preferredWidth: miscTab.width - Kirigami.Units.largeSpacing * 10
+                Button {
+                    Layout.fillWidth: true
+                    Layout.maximumWidth: 500
+                    icon.name: "run-build"
+                    text: i18n("Install Stable version")
+                    onClicked: {
+                        installButton = 1
+                        installDialog.open()
+                    }
+                }
+            }
+            RowLayout {
+                Layout.preferredWidth: miscTab.width - Kirigami.Units.largeSpacing * 10
+                Button {
+                    Layout.fillWidth: true
+                    Layout.maximumWidth: 500
+                    icon.name: "delete"
+                    text: i18n("Uninstall widget")
+                    onClicked: {
+                        installButton = 2
+                        installDialog.open()
+                    }
+                }
+            }
+            Kirigami.PromptDialog {
+                id: installDialog
+                title: dialogTitles[installButton]
+                subtitle: dialogSubtitles[installButton]
+                standardButtons: Kirigami.Dialog.Ok | Kirigami.Dialog.Cancel
+                onAccepted: {
+                    if (installButton === 0) {
+                        JS.execute(JS.runInTerminal("utils", "installDev"))
+                    } else if (installButton === 1) {
+                        JS.execute(JS.runInTerminal("utils", "installStable"))
+                    } else {
+                        JS.execute(JS.runInTerminal("utils", "uninstall"))
                     }
                 }
             }

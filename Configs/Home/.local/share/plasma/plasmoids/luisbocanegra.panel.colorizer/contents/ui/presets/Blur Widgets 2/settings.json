@@ -1,0 +1,939 @@
+{
+    "globalSettings": {
+        "panel": {
+            "normal": {
+                "enabled": false,
+                "blurBehind": true,
+                "backgroundColor": {
+                    "enabled": true,
+                    "lightnessValue": 0.5,
+                    "saturationValue": 0.5,
+                    "alpha": 1,
+                    "systemColor": "backgroundColor",
+                    "systemColorSet": "View",
+                    "custom": "#013eff",
+                    "list": [
+                        "#ED8796",
+                        "#A6DA95",
+                        "#EED49F",
+                        "#8AADF4",
+                        "#F5BDE6",
+                        "#8BD5CA",
+                        "#f5a97f"
+                    ],
+                    "followColor": 0,
+                    "saturationEnabled": false,
+                    "lightnessEnabled": false,
+                    "animation": {
+                        "enabled": false,
+                        "interval": 3000,
+                        "smoothing": 800
+                    },
+                    "sourceType": 1,
+                    "gradient": {
+                        "stops": [
+                            {
+                                "color": "#ff0000",
+                                "position": 0
+                            },
+                            {
+                                "color": "#f9f54e",
+                                "position": 0.25
+                            },
+                            {
+                                "color": "#21fd00",
+                                "position": 0.5
+                            },
+                            {
+                                "color": "#0e1eff",
+                                "position": 0.75
+                            },
+                            {
+                                "color": "#fd12ff",
+                                "position": 1
+                            }
+                        ],
+                        "orientation": 0
+                    },
+                    "image": {
+                        "source": "",
+                        "fillMode": 2
+                    }
+                },
+                "foregroundColor": {
+                    "enabled": false,
+                    "lightnessValue": 0.5,
+                    "saturationValue": 0.5,
+                    "alpha": 1,
+                    "systemColor": "highlightColor",
+                    "systemColorSet": "View",
+                    "custom": "#fc0000",
+                    "list": [
+                        "#ED8796",
+                        "#A6DA95",
+                        "#EED49F",
+                        "#8AADF4",
+                        "#F5BDE6",
+                        "#8BD5CA",
+                        "#f5a97f"
+                    ],
+                    "followColor": 0,
+                    "saturationEnabled": false,
+                    "lightnessEnabled": false,
+                    "animation": {
+                        "enabled": false,
+                        "interval": 3000,
+                        "smoothing": 800
+                    },
+                    "sourceType": 1
+                },
+                "radius": {
+                    "enabled": false,
+                    "corner": {
+                        "topLeft": 5,
+                        "topRight": 5,
+                        "bottomRight": 5,
+                        "bottomLeft": 5
+                    }
+                },
+                "margin": {
+                    "enabled": false,
+                    "side": {
+                        "right": 0,
+                        "left": 0,
+                        "top": 0,
+                        "bottom": 0
+                    }
+                },
+                "padding": {
+                    "enabled": false,
+                    "side": {
+                        "right": 0,
+                        "left": 0,
+                        "top": 0,
+                        "bottom": 0
+                    }
+                },
+                "border": {
+                    "enabled": false,
+                    "customSides": false,
+                    "custom": {
+                        "widths": {
+                            "left": 0,
+                            "bottom": 3,
+                            "right": 0,
+                            "top": 0
+                        },
+                        "margin": {
+                            "enabled": false,
+                            "side": {
+                                "right": 0,
+                                "left": 0,
+                                "top": 0,
+                                "bottom": 0
+                            }
+                        },
+                        "radius": {
+                            "enabled": false,
+                            "corner": {
+                                "topLeft": 5,
+                                "topRight": 5,
+                                "bottomRight": 5,
+                                "bottomLeft": 5
+                            }
+                        }
+                    },
+                    "width": 0,
+                    "color": {
+                        "lightnessValue": 0.5,
+                        "saturationValue": 0.5,
+                        "alpha": 1,
+                        "systemColor": "highlightColor",
+                        "systemColorSet": "View",
+                        "custom": "#ff6c06",
+                        "list": [
+                            "#ED8796",
+                            "#A6DA95",
+                            "#EED49F",
+                            "#8AADF4",
+                            "#F5BDE6",
+                            "#8BD5CA",
+                            "#f5a97f"
+                        ],
+                        "followColor": 0,
+                        "saturationEnabled": false,
+                        "lightnessEnabled": false,
+                        "animation": {
+                            "enabled": false,
+                            "interval": 3000,
+                            "smoothing": 800
+                        },
+                        "sourceType": 1,
+                        "enabled": true
+                    }
+                },
+                "shadow": {
+                    "background": {
+                        "enabled": false,
+                        "color": {
+                            "lightnessValue": 0.5,
+                            "saturationValue": 0.5,
+                            "alpha": 1,
+                            "systemColor": "backgroundColor",
+                            "systemColorSet": "View",
+                            "custom": "#000000",
+                            "list": [
+                                "#ED8796",
+                                "#A6DA95",
+                                "#EED49F",
+                                "#8AADF4",
+                                "#F5BDE6",
+                                "#8BD5CA",
+                                "#f5a97f"
+                            ],
+                            "followColor": 0,
+                            "saturationEnabled": false,
+                            "lightnessEnabled": false,
+                            "animation": {
+                                "enabled": false,
+                                "interval": 3000,
+                                "smoothing": 800
+                            },
+                            "sourceType": 1,
+                            "enabled": true
+                        },
+                        "size": 5,
+                        "xOffset": 0,
+                        "yOffset": 0
+                    },
+                    "foreground": {
+                        "enabled": false,
+                        "color": {
+                            "lightnessValue": 0.5,
+                            "saturationValue": 0.5,
+                            "alpha": 1,
+                            "systemColor": "backgroundColor",
+                            "systemColorSet": "View",
+                            "custom": "#000000",
+                            "list": [
+                                "#ED8796",
+                                "#A6DA95",
+                                "#EED49F",
+                                "#8AADF4",
+                                "#F5BDE6",
+                                "#8BD5CA",
+                                "#f5a97f"
+                            ],
+                            "followColor": 0,
+                            "saturationEnabled": false,
+                            "lightnessEnabled": false,
+                            "animation": {
+                                "enabled": false,
+                                "interval": 3000,
+                                "smoothing": 800
+                            },
+                            "sourceType": 1,
+                            "enabled": true
+                        },
+                        "size": 5,
+                        "xOffset": 0,
+                        "yOffset": 0
+                    }
+                },
+                "floatingApplets": true,
+                "borderSecondary": {
+                    "enabled": false,
+                    "customSides": false,
+                    "custom": {
+                        "widths": {
+                            "left": 0,
+                            "bottom": 3,
+                            "right": 0,
+                            "top": 0
+                        },
+                        "margin": {
+                            "enabled": false,
+                            "side": {
+                                "right": 0,
+                                "left": 0,
+                                "top": 0,
+                                "bottom": 0
+                            }
+                        },
+                        "radius": {
+                            "enabled": false,
+                            "corner": {
+                                "topLeft": 5,
+                                "topRight": 5,
+                                "bottomRight": 5,
+                                "bottomLeft": 5
+                            }
+                        }
+                    },
+                    "width": 0,
+                    "color": {
+                        "lightnessValue": 0.5,
+                        "saturationValue": 0.5,
+                        "alpha": 1,
+                        "systemColor": "highlightColor",
+                        "systemColorSet": "View",
+                        "custom": "#ff6c06",
+                        "list": [
+                            "#ED8796",
+                            "#A6DA95",
+                            "#EED49F",
+                            "#8AADF4",
+                            "#F5BDE6",
+                            "#8BD5CA",
+                            "#f5a97f"
+                        ],
+                        "followColor": 0,
+                        "saturationEnabled": false,
+                        "lightnessEnabled": false,
+                        "animation": {
+                            "enabled": false,
+                            "interval": 3000,
+                            "smoothing": 800
+                        },
+                        "sourceType": 1,
+                        "enabled": true
+                    }
+                }
+            }
+        },
+        "widgets": {
+            "normal": {
+                "enabled": true,
+                "blurBehind": true,
+                "backgroundColor": {
+                    "enabled": true,
+                    "lightnessValue": 0.5,
+                    "saturationValue": 0.5,
+                    "alpha": 0.8,
+                    "systemColor": "backgroundColor",
+                    "systemColorSet": "View",
+                    "custom": "#013eff",
+                    "list": [
+                        "#ED8796",
+                        "#A6DA95",
+                        "#EED49F",
+                        "#8AADF4",
+                        "#F5BDE6",
+                        "#8BD5CA",
+                        "#f5a97f"
+                    ],
+                    "followColor": 0,
+                    "saturationEnabled": false,
+                    "lightnessEnabled": false,
+                    "animation": {
+                        "enabled": false,
+                        "interval": 3000,
+                        "smoothing": 800
+                    },
+                    "sourceType": 1,
+                    "gradient": {
+                        "stops": [
+                            {
+                                "color": "#ff0000",
+                                "position": 0
+                            },
+                            {
+                                "color": "#f9f54e",
+                                "position": 0.25
+                            },
+                            {
+                                "color": "#21fd00",
+                                "position": 0.5
+                            },
+                            {
+                                "color": "#0e1eff",
+                                "position": 0.75
+                            },
+                            {
+                                "color": "#fd12ff",
+                                "position": 1
+                            }
+                        ],
+                        "orientation": 0
+                    },
+                    "image": {
+                        "source": "",
+                        "fillMode": 2
+                    }
+                },
+                "foregroundColor": {
+                    "enabled": false,
+                    "lightnessValue": 0.5,
+                    "saturationValue": 0.5,
+                    "alpha": 1,
+                    "systemColor": "textColor",
+                    "systemColorSet": "Window",
+                    "custom": "#fc0000",
+                    "list": [
+                        "#ED8796",
+                        "#A6DA95",
+                        "#EED49F",
+                        "#8AADF4",
+                        "#F5BDE6",
+                        "#8BD5CA",
+                        "#f5a97f"
+                    ],
+                    "followColor": 0,
+                    "saturationEnabled": false,
+                    "lightnessEnabled": false,
+                    "animation": {
+                        "enabled": false,
+                        "interval": 3000,
+                        "smoothing": 800
+                    },
+                    "sourceType": 1
+                },
+                "radius": {
+                    "enabled": true,
+                    "corner": {
+                        "topLeft": 8,
+                        "topRight": 8,
+                        "bottomRight": 8,
+                        "bottomLeft": 8
+                    }
+                },
+                "margin": {
+                    "enabled": true,
+                    "side": {
+                        "right": 0,
+                        "left": 0,
+                        "top": 4,
+                        "bottom": 4
+                    }
+                },
+                "spacing": 4,
+                "border": {
+                    "enabled": true,
+                    "customSides": false,
+                    "custom": {
+                        "widths": {
+                            "left": 0,
+                            "bottom": 3,
+                            "right": 0,
+                            "top": 0
+                        },
+                        "margin": {
+                            "enabled": false,
+                            "side": {
+                                "right": 0,
+                                "left": 0,
+                                "top": 0,
+                                "bottom": 0
+                            }
+                        },
+                        "radius": {
+                            "enabled": false,
+                            "corner": {
+                                "topLeft": 5,
+                                "topRight": 5,
+                                "bottomRight": 5,
+                                "bottomLeft": 5
+                            }
+                        }
+                    },
+                    "width": 2,
+                    "color": {
+                        "lightnessValue": 0.5,
+                        "saturationValue": 0.5,
+                        "alpha": 1,
+                        "systemColor": "textColor",
+                        "systemColorSet": "View",
+                        "custom": "#ff6c06",
+                        "list": [
+                            "#ED8796",
+                            "#A6DA95",
+                            "#EED49F",
+                            "#8AADF4",
+                            "#F5BDE6",
+                            "#8BD5CA",
+                            "#f5a97f"
+                        ],
+                        "followColor": 0,
+                        "saturationEnabled": false,
+                        "lightnessEnabled": false,
+                        "animation": {
+                            "enabled": false,
+                            "interval": 3000,
+                            "smoothing": 800
+                        },
+                        "sourceType": 1,
+                        "enabled": true
+                    }
+                },
+                "shadow": {
+                    "background": {
+                        "enabled": true,
+                        "color": {
+                            "lightnessValue": 0.5,
+                            "saturationValue": 0.5,
+                            "alpha": 1,
+                            "systemColor": "backgroundColor",
+                            "systemColorSet": "View",
+                            "custom": "#000000",
+                            "list": [
+                                "#ED8796",
+                                "#A6DA95",
+                                "#EED49F",
+                                "#8AADF4",
+                                "#F5BDE6",
+                                "#8BD5CA",
+                                "#f5a97f"
+                            ],
+                            "followColor": 0,
+                            "saturationEnabled": false,
+                            "lightnessEnabled": false,
+                            "animation": {
+                                "enabled": false,
+                                "interval": 3000,
+                                "smoothing": 800
+                            },
+                            "sourceType": 0,
+                            "enabled": true
+                        },
+                        "size": 5,
+                        "xOffset": 0,
+                        "yOffset": 0
+                    },
+                    "foreground": {
+                        "enabled": false,
+                        "color": {
+                            "lightnessValue": 0.5,
+                            "saturationValue": 0.5,
+                            "alpha": 1,
+                            "systemColor": "backgroundColor",
+                            "systemColorSet": "View",
+                            "custom": "#000000",
+                            "list": [
+                                "#ED8796",
+                                "#A6DA95",
+                                "#EED49F",
+                                "#8AADF4",
+                                "#F5BDE6",
+                                "#8BD5CA",
+                                "#f5a97f"
+                            ],
+                            "followColor": 0,
+                            "saturationEnabled": false,
+                            "lightnessEnabled": false,
+                            "animation": {
+                                "enabled": false,
+                                "interval": 3000,
+                                "smoothing": 800
+                            },
+                            "sourceType": 1,
+                            "enabled": true
+                        },
+                        "size": 5,
+                        "xOffset": 0,
+                        "yOffset": 0
+                    }
+                },
+                "borderSecondary": {
+                    "enabled": false,
+                    "customSides": false,
+                    "custom": {
+                        "widths": {
+                            "left": 0,
+                            "bottom": 3,
+                            "right": 0,
+                            "top": 0
+                        },
+                        "margin": {
+                            "enabled": false,
+                            "side": {
+                                "right": 0,
+                                "left": 0,
+                                "top": 0,
+                                "bottom": 0
+                            }
+                        },
+                        "radius": {
+                            "enabled": false,
+                            "corner": {
+                                "topLeft": 5,
+                                "topRight": 5,
+                                "bottomRight": 5,
+                                "bottomLeft": 5
+                            }
+                        }
+                    },
+                    "width": 0,
+                    "color": {
+                        "lightnessValue": 0.5,
+                        "saturationValue": 0.5,
+                        "alpha": 1,
+                        "systemColor": "highlightColor",
+                        "systemColorSet": "View",
+                        "custom": "#ff6c06",
+                        "list": [
+                            "#ED8796",
+                            "#A6DA95",
+                            "#EED49F",
+                            "#8AADF4",
+                            "#F5BDE6",
+                            "#8BD5CA",
+                            "#f5a97f"
+                        ],
+                        "followColor": 0,
+                        "saturationEnabled": false,
+                        "lightnessEnabled": false,
+                        "animation": {
+                            "enabled": false,
+                            "interval": 3000,
+                            "smoothing": 800
+                        },
+                        "sourceType": 1,
+                        "enabled": true
+                    }
+                }
+            }
+        },
+        "trayWidgets": {
+            "normal": {
+                "enabled": false,
+                "blurBehind": false,
+                "backgroundColor": {
+                    "enabled": false,
+                    "lightnessValue": 0.5,
+                    "saturationValue": 0.5,
+                    "alpha": 1,
+                    "systemColor": "backgroundColor",
+                    "systemColorSet": "View",
+                    "custom": "#013eff",
+                    "list": [
+                        "#ED8796",
+                        "#A6DA95",
+                        "#EED49F",
+                        "#8AADF4",
+                        "#F5BDE6",
+                        "#8BD5CA",
+                        "#f5a97f"
+                    ],
+                    "followColor": 0,
+                    "saturationEnabled": false,
+                    "lightnessEnabled": false,
+                    "animation": {
+                        "enabled": false,
+                        "interval": 3000,
+                        "smoothing": 800
+                    },
+                    "sourceType": 1,
+                    "gradient": {
+                        "stops": [
+                            {
+                                "color": "#ff0000",
+                                "position": 0
+                            },
+                            {
+                                "color": "#f9f54e",
+                                "position": 0.25
+                            },
+                            {
+                                "color": "#21fd00",
+                                "position": 0.5
+                            },
+                            {
+                                "color": "#0e1eff",
+                                "position": 0.75
+                            },
+                            {
+                                "color": "#fd12ff",
+                                "position": 1
+                            }
+                        ],
+                        "orientation": 0
+                    },
+                    "image": {
+                        "source": "",
+                        "fillMode": 2
+                    }
+                },
+                "foregroundColor": {
+                    "enabled": false,
+                    "lightnessValue": 0.5,
+                    "saturationValue": 0.5,
+                    "alpha": 1,
+                    "systemColor": "highlightColor",
+                    "systemColorSet": "View",
+                    "custom": "#fc0000",
+                    "list": [
+                        "#ED8796",
+                        "#A6DA95",
+                        "#EED49F",
+                        "#8AADF4",
+                        "#F5BDE6",
+                        "#8BD5CA",
+                        "#f5a97f"
+                    ],
+                    "followColor": 0,
+                    "saturationEnabled": false,
+                    "lightnessEnabled": false,
+                    "animation": {
+                        "enabled": false,
+                        "interval": 3000,
+                        "smoothing": 800
+                    },
+                    "sourceType": 1
+                },
+                "radius": {
+                    "enabled": false,
+                    "corner": {
+                        "topLeft": 5,
+                        "topRight": 5,
+                        "bottomRight": 5,
+                        "bottomLeft": 5
+                    }
+                },
+                "margin": {
+                    "enabled": false,
+                    "side": {
+                        "right": 0,
+                        "left": 0,
+                        "top": 0,
+                        "bottom": 0
+                    }
+                },
+                "border": {
+                    "enabled": false,
+                    "customSides": false,
+                    "custom": {
+                        "widths": {
+                            "left": 0,
+                            "bottom": 3,
+                            "right": 0,
+                            "top": 0
+                        },
+                        "margin": {
+                            "enabled": false,
+                            "side": {
+                                "right": 0,
+                                "left": 0,
+                                "top": 0,
+                                "bottom": 0
+                            }
+                        },
+                        "radius": {
+                            "enabled": false,
+                            "corner": {
+                                "topLeft": 5,
+                                "topRight": 5,
+                                "bottomRight": 5,
+                                "bottomLeft": 5
+                            }
+                        }
+                    },
+                    "width": 0,
+                    "color": {
+                        "lightnessValue": 0.5,
+                        "saturationValue": 0.5,
+                        "alpha": 1,
+                        "systemColor": "highlightColor",
+                        "systemColorSet": "View",
+                        "custom": "#ff6c06",
+                        "list": [
+                            "#ED8796",
+                            "#A6DA95",
+                            "#EED49F",
+                            "#8AADF4",
+                            "#F5BDE6",
+                            "#8BD5CA",
+                            "#f5a97f"
+                        ],
+                        "followColor": 0,
+                        "saturationEnabled": false,
+                        "lightnessEnabled": false,
+                        "animation": {
+                            "enabled": false,
+                            "interval": 3000,
+                            "smoothing": 800
+                        },
+                        "sourceType": 1,
+                        "enabled": true
+                    }
+                },
+                "shadow": {
+                    "background": {
+                        "enabled": false,
+                        "color": {
+                            "lightnessValue": 0.5,
+                            "saturationValue": 0.5,
+                            "alpha": 1,
+                            "systemColor": "backgroundColor",
+                            "systemColorSet": "View",
+                            "custom": "#000000",
+                            "list": [
+                                "#ED8796",
+                                "#A6DA95",
+                                "#EED49F",
+                                "#8AADF4",
+                                "#F5BDE6",
+                                "#8BD5CA",
+                                "#f5a97f"
+                            ],
+                            "followColor": 0,
+                            "saturationEnabled": false,
+                            "lightnessEnabled": false,
+                            "animation": {
+                                "enabled": false,
+                                "interval": 3000,
+                                "smoothing": 800
+                            },
+                            "sourceType": 1,
+                            "enabled": true
+                        },
+                        "size": 5,
+                        "xOffset": 0,
+                        "yOffset": 0
+                    },
+                    "foreground": {
+                        "enabled": false,
+                        "color": {
+                            "lightnessValue": 0.5,
+                            "saturationValue": 0.5,
+                            "alpha": 1,
+                            "systemColor": "backgroundColor",
+                            "systemColorSet": "View",
+                            "custom": "#000000",
+                            "list": [
+                                "#ED8796",
+                                "#A6DA95",
+                                "#EED49F",
+                                "#8AADF4",
+                                "#F5BDE6",
+                                "#8BD5CA",
+                                "#f5a97f"
+                            ],
+                            "followColor": 0,
+                            "saturationEnabled": false,
+                            "lightnessEnabled": false,
+                            "animation": {
+                                "enabled": false,
+                                "interval": 3000,
+                                "smoothing": 800
+                            },
+                            "sourceType": 1,
+                            "enabled": true
+                        },
+                        "size": 5,
+                        "xOffset": 0,
+                        "yOffset": 0
+                    }
+                },
+                "borderSecondary": {
+                    "enabled": false,
+                    "customSides": false,
+                    "custom": {
+                        "widths": {
+                            "left": 0,
+                            "bottom": 3,
+                            "right": 0,
+                            "top": 0
+                        },
+                        "margin": {
+                            "enabled": false,
+                            "side": {
+                                "right": 0,
+                                "left": 0,
+                                "top": 0,
+                                "bottom": 0
+                            }
+                        },
+                        "radius": {
+                            "enabled": false,
+                            "corner": {
+                                "topLeft": 5,
+                                "topRight": 5,
+                                "bottomRight": 5,
+                                "bottomLeft": 5
+                            }
+                        }
+                    },
+                    "width": 0,
+                    "color": {
+                        "lightnessValue": 0.5,
+                        "saturationValue": 0.5,
+                        "alpha": 1,
+                        "systemColor": "highlightColor",
+                        "systemColorSet": "View",
+                        "custom": "#ff6c06",
+                        "list": [
+                            "#ED8796",
+                            "#A6DA95",
+                            "#EED49F",
+                            "#8AADF4",
+                            "#F5BDE6",
+                            "#8BD5CA",
+                            "#f5a97f"
+                        ],
+                        "followColor": 0,
+                        "saturationEnabled": false,
+                        "lightnessEnabled": false,
+                        "animation": {
+                            "enabled": false,
+                            "interval": 3000,
+                            "smoothing": 800
+                        },
+                        "sourceType": 1,
+                        "enabled": true
+                    }
+                }
+            }
+        },
+        "stockPanelSettings": {
+            "position": {
+                "enabled": false,
+                "value": "top"
+            },
+            "alignment": {
+                "enabled": false,
+                "value": "center"
+            },
+            "lengthMode": {
+                "enabled": false,
+                "value": "fill"
+            },
+            "visibility": {
+                "enabled": false,
+                "value": "none"
+            },
+            "opacity": {
+                "enabled": false,
+                "value": "adaptive"
+            },
+            "floating": {
+                "enabled": false,
+                "value": false
+            },
+            "thickness": {
+                "enabled": false,
+                "value": 48
+            },
+            "visible": {
+                "enabled": false,
+                "value": true
+            },
+            "screen": {
+                "enabled": false,
+                "value": 0
+            }
+        },
+        "configurationOverrides": {
+            "overrides": {},
+            "associations": []
+        },
+        "unifiedBackground": [],
+        "nativePanel": {
+            "background": {
+                "enabled": true,
+                "opacity": 0,
+                "shadow": false
+            },
+            "floatingDialogs": true
+        }
+    }
+}

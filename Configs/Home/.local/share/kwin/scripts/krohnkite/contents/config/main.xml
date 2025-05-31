@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+                          http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
+    <kcfgfile name=""/>
+    <group name="">
+
+      <entry name="dockOrderLeft" type="Int">
+	    <label>The order of the docked window in the dock</label>
+        <default>1</default>
+    </entry>
+
+    <entry name="dockOrderTop" type="Int">
+	    <label>The order of the docked window in the dock</label>
+        <default>2</default>
+    </entry>
+
+    <entry name="dockOrderRight" type="Int">
+	    <label>The order of the docked window in the dock</label>
+        <default>3</default>
+    </entry>
+
+    <entry name="dockOrderBottom" type="Int">
+	    <label>The order of the docked window in the dock</label>
+        <default>4</default>
+    </entry>
+
+    <entry name="dockHHeight" type="Int">
+	    <label>The default height of a horizontal docked window in percent</label>
+        <default>15</default>
+    </entry>
+
+    <entry name="dockHWide" type="Int">
+	    <label>The default width of a horizontal docked window in percent</label>
+        <default>100</default>
+    </entry>
+
+    <entry name="dockHGap" type="Int">
+	    <label>The default Gap of a horizontal docked window in pixels</label>
+        <default>0</default>
+    </entry>
+
+    <entry name="dockHEdgeGap" type="Int">
+	    <label>The default Vertical Gap of a horizontal docked window in pixels</label>
+        <default>0</default>
+    </entry>
+
+    <entry name="dockHAlignment" type="Int">
+	    <label>The default Alignment of a horizontal docked window which can be Center , Left, Right</label>
+        <default>0</default>
+    </entry>
+
+    <entry name="dockHEdgeAlignment" type="Int">
+	    <label>The default vertical Alignment of a horizontal docked window which can be Edge Screen, Middle, Center Screen</label>
+        <default>0</default>
+    </entry>
+
+    <entry name="dockVHeight" type="Int">
+	    <label>The default height of a vertical docked window in percent</label>
+        <default>100</default>
+    </entry>
+
+    <entry name="dockVWide" type="Int">
+	    <label>The default width of a vertical docked window in percent</label>
+        <default>15</default>
+    </entry>
+
+    <entry name="dockVEdgeGap" type="Int">
+	    <label>The default horizontal Gap of a vertical docked window in pixels</label>
+        <default>0</default>
+    </entry>
+
+    <entry name="dockVGap" type="Int">
+	    <label>The default Gap of a vertical docked window in pixels</label>
+        <default>0</default>
+    </entry>
+
+    <entry name="dockVEdgeAlignment" type="Int">
+	    <label>The default horizontal Alignment of a vertical docked window which can be Edge Screen, Middle or Center Screen</label>
+        <default>0</default>
+    </entry>
+
+    <entry name="dockVAlignment" type="Int">
+	    <label>The default vertical Alignment of a vertical docked window which can be Center, Top, Bottom</label>
+        <default>0</default>
+    </entry>
+
+    <entry name="dockSurfacesConfig" type="String">
+	    <label>Dock settings change the default parameters for the surface</label>
+        <default></default>
+    </entry>
+
+    <entry name="dockWindowClassConfig" type="String">
+	    <label>Dock default settings for WindowClass which with high priority.</label>
+        <default></default>
+    </entry>
+
+    <entry name="debug" type="Bool">
+	    <label>Print debug messages</label>
+        <default>false</default>
+    </entry>
+
+    <entry name="debugActiveWin" type="Bool">
+	    <label>Print only new Window</label>
+        <default>false</default>
+    </entry>
+
+    <entry name="tileLayoutOrder" type="Int">
+	    <label> Tile layout order</label>
+        <default>1</default>
+    </entry>
+
+    <entry name="tileLayoutInitialRotationAngle" type="String">
+	    <label>Tile layout initial rotation angle</label>
+        <default>0</default>
+    </entry>
+    <entry name="monocleLayoutOrder" type="Int">
+	    <label> Monocle layout order</label>
+        <default>2</default>
+    </entry>
+
+    <entry name="threeColumnLayoutOrder" type="Int">
+	    <label> Three Column layout order</label>
+        <default>3</default>
+    </entry>
+
+    <entry name="spiralLayoutOrder" type="Int">
+	    <label> Spiral layout order</label>
+        <default>4</default>
+    </entry>
+
+    <entry name="quarterLayoutOrder" type="Int">
+	    <label> Quarter layout order</label>
+        <default>5</default>
+    </entry>
+    <entry name="quarterLayoutReset" type="Bool">
+	    <label>Reset Quarter layout after closing a window</label>
+        <default>false</default>
+    </entry>
+
+    <entry name="stackedLayoutOrder" type="Int">
+	    <label> Stacked layout order</label>
+        <default>6</default>
+    </entry>
+
+    <entry name="columnsLayoutOrder" type="Int">
+	    <label> Columns layout order</label>
+        <default>7</default>
+    </entry>
+    <entry name="enableColumnsLayout" type="Bool">
+	    <label>Enable/disable Columns layout</label>
+        <default>true</default>
+    </entry>
+    <entry name="columnsLayoutInitialRotationAngle" type="String">
+	    <label>Columns layout initial rotation angle</label>
+        <default>0</default>
+    </entry>
+    <entry name="columnsBalanced" type="Bool">
+	    <label>Enable/disable creating a new window in the shortest column</label>
+        <default>false</default>
+    </entry>
+    <entry name="columnsLayerConf" type="String">
+	    <label>Columns layout default configuration.</label>
+        <default></default>
+    </entry>
+
+    <entry name="spreadLayoutOrder" type="Int">
+	    <label> Spread layout order</label>
+        <default>8</default>
+    </entry>
+
+    <entry name="floatingLayoutOrder" type="Int">
+	    <label> Floating layout order</label>
+        <default>9</default>
+    </entry>
+
+    <entry name="stairLayoutOrder" type="Int">
+	    <label> Stair layout order</label>
+        <default>10</default>
+    </entry>
+    <entry name="stairReverse" type="Bool">
+	    <label>Reverse the stair layout's orientation</label>
+        <default>false</default>
+    </entry>
+
+    <entry name="binaryTreeLayoutOrder" type="Int">
+	    <label> BTree layout order</label>
+        <default>11</default>
+    </entry>
+
+    <entry name="cascadeLayoutOrder" type="Int">
+	    <label> Cascade layout order</label>
+        <default>12</default>
+    </entry>
+
+    <entry name="ignoreActivity" type="String">
+	    <label>Do not apply tiling on some activities(comma-separated list of activity names)</label>
+        <default></default>
+    </entry>
+
+    <entry name="ignoreClass" type="String">
+	    <label>Ignore windows with certain classes(comma-separated list)</label>
+        <default>krunner,yakuake,spectacle,kded5,xwaylandvideobridge,plasmashell,ksplashqml,org.kde.plasmashell,org.kde.polkit-kde-authentication-agent-1,org.kde.kruler,kruler,kwin_wayland,ksmserver-logout-greeter</default>
+    </entry>
+
+    <entry name="ignoreRole" type="String">
+	    <label>Ignore windows with specific role(comma-separated list)</label>
+        <default>quake</default>
+    </entry>
+
+    <entry name="ignoreScreen" type="String">
+	    <label>Do not apply tiling on some screens(comma-separated list of screen names)</label>
+        <default></default>
+    </entry>
+
+    <entry name="ignoreVDesktop" type="String">
+	    <label>Do not apply tiling on some virtual desktops(comma-separated list of virtual desktops names)</label>
+        <default></default>
+    </entry>
+
+    <entry name="ignoreTitle" type="String">
+	    <label>Ignore windows with certain string in title(comma-separated list)</label>
+        <default></default>
+    </entry>
+
+    <entry name="screenDefaultLayout" type="String">
+	    <label>Assigning number of layout to screen(output) by default</label>
+        <default></default>
+    </entry>
+
+    <entry name="tileNothing" type="Bool">
+	    <label>Don't tile any windows by default</label>
+        <default>false</default>
+    </entry>
+
+    <entry name="tilingClass" type="String">
+	    <label>Tile windows with certain classes(comma-separated list)</label>
+        <default></default>
+    </entry>
+
+    <entry name="floatingClass" type="String">
+	    <label>Float windows with certain classes(comma-separated list)</label>
+        <default></default>
+    </entry>
+
+    <entry name="floatingTitle" type="String">
+	    <label>Float windows with certain string in title(comma-separated list)</label>
+        <default></default>
+    </entry>
+
+    <entry name="floatUtility" type="Bool">
+	    <label>Automatically float utility windows (Dialog, Splash, Utility)</label>
+        <default>true</default>
+    </entry>
+
+    <entry name="layoutPerActivity" type="Bool">
+        <label>Use separate layouts per activity.</label>
+        <default>true</default>
+    </entry>
+
+    <entry name="layoutPerDesktop" type="Bool">
+        <label>Use separate layouts per desktop.</label>
+        <default>true</default>
+    </entry>
+
+    <entry name="tiledWindowsLayer" type="Int">
+	    <label>What layer will have tiled windows</label>
+        <default>0</default>
+    </entry>
+
+    <entry name="floatedWindowsLayer" type="Int">
+	    <label>What layer will have floated windows</label>
+        <default>1</default>
+    </entry>
+
+    <entry name="soleWindowWidth" type="Int">
+	    <label>The sole window width in percent.</label>
+        <default>100</default>
+    </entry>
+
+    <entry name="soleWindowHeight" type="Int">
+	    <label>The sole window height in percent.</label>
+        <default>100</default>
+    </entry>
+
+    <entry name="soleWindowNoBorders" type="Bool">
+      <label>Do not draw borders around sole window</label>
+        <default>false</default>
+    </entry>
+
+    <entry name="soleWindowNoGaps" type="Bool">
+      <label>Do not draw gaps around sole window</label>
+        <default>false</default>
+    </entry>
+
+    <entry name="monocleMaximize" type="Bool">
+	    <label>Always maximize windows in Monocle layout</label>
+        <default>true</default>
+    </entry>
+
+    <entry name="monocleMinimizeRest" type="Bool">
+	    <label>Minimize other tiles than the current one in Monocle layout</label>
+        <default>false</default>
+    </entry>
+
+    <entry name="adjustLayout" type="Bool">
+	    <label>Adjust layout with mouse</label>
+        <default>true</default>
+    </entry>
+
+    <entry name="adjustLayoutLive" type="Bool">
+	    <label>Adjust as window is being resized</label>
+        <default>true</default>
+    </entry>
+
+    <entry name="keepTilingOnDrag" type="Bool">
+	    <label>Always preserve the tiling status of a window upon dragging</label>
+        <default>true</default>
+    </entry>
+
+    <entry name="noTileBorder" type="Bool">
+        <label>Remove borders of tiled windows</label>
+        <default>false</default>
+    </entry>
+
+    <entry name="preventMinimize" type="Bool">
+        <label>Prevent windows from minimizing</label>
+        <default>false</default>
+    </entry>
+
+    <entry name="preventProtrusion" type="Bool">
+        <label>Prevent windows from protruding out of screen</label>
+        <default>true</default>
+    </entry>
+
+    <entry name="notificationDuration" type="Int">
+	    <label>Duration of pop-up notifications</label>
+        <default>1000</default>
+    </entry>
+
+    <entry name="screenGapLeft" type="Int">
+        <label>Gap between tiles and screen borders (Left)</label>
+        <default>0</default>
+    </entry>
+
+    <entry name="screenGapRight" type="Int">
+        <label>Gap between tiles and screen borders (Right)</label>
+        <default>0</default>
+    </entry>
+
+    <entry name="screenGapTop" type="Int">
+        <label>Gap between tiles and screen borders (Top)</label>
+        <default>0</default>
+    </entry>
+
+    <entry name="screenGapBottom" type="Int">
+        <label>Gap between tiles and screen borders (Bottom)</label>
+        <default>0</default>
+    </entry>
+
+    <entry name="screenGapBetween" type="Int">
+        <label>Gap between tiles in Tile layout</label>
+        <default>0</default>
+    </entry>
+
+    <entry name="gapsOverrideConfig" type="String">
+	    <label>Override default screen gaps</label>
+        <default></default>
+    </entry>
+
+    <entry name="pollMouseXdotool" type="Bool">
+	    <label>Poll actual mouse position using xdotool (for tile swapping, for example)</label>
+        <default>false</default>
+    </entry>
+
+    <entry name="directionalKeyDwm" type="Bool">
+	    <label>Up, Down, Left, and Right shortcut behaves like dwm</label>
+        <default>false</default>
+    </entry>
+
+    <entry name="directionalKeyFocus" type="Bool">
+	    <label>Up, Down, Left, and Right shortcut moves focus</label>
+        <default>true</default>
+    </entry>
+
+    <entry name="limitTileWidth" type="Bool">
+	    <label>Limit the width of tiles</label>
+        <default>false</default>
+    </entry>
+
+    <entry name="limitTileWidthRatio" type="Double">
+	    <label>Ratio of maximum tile width to the height of screen</label>
+        <default>1.6</default>
+    </entry>
+
+    <entry name="newWindowPosition" type="Int">
+        <label>The position every new window in the screen window array</label>
+        <default>0</default>
+    </entry>
+  </group>
+</kcfg>

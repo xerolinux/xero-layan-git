@@ -1,0 +1,42 @@
+# Translation of Simple Separator in LANGUAGE
+# Copyright (C) 2025
+# This file is distributed under the same license as the zayron.simple.separator package.
+# ADOLFO <adolfo@librepixels.com>, 2025.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: zayron.simple.separator\n"
+"Report-Msgid-Bugs-To: https://store.kde.org/p/2137418/\n"
+"POT-Creation-Date: 2023-05-01 16:59-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+
+#: ../contents/ui/GeneralConfig.qml
+msgid "Single point mode:"
+msgstr ""
+
+#: ../contents/ui/GeneralConfig.qml
+msgid "Margin length:"
+msgstr ""
+
+#: ../contents/ui/GeneralConfig.qml
+msgid "Separator length (percentage):"
+msgstr ""
+
+#: ../contents/ui/GeneralConfig.qml
+msgid "Thickness:"
+msgstr ""
+
+#: ../contents/ui/GeneralConfig.qml
+msgid "Custom Color:"
+msgstr ""
+
+#: ../contents/ui/GeneralConfig.qml
+msgid "Opacity:"
+msgstr ""

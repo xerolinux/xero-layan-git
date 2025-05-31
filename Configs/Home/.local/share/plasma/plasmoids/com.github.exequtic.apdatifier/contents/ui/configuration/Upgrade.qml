@@ -15,11 +15,12 @@ import "../../tools/tools.js" as JS
 
 SimpleKCM {
     property string cfg_terminal: plasmoid.configuration.terminal
+    property alias cfg_tmuxSession: tmuxSession.checked
+    property alias cfg_idleInhibit: idleInhibit.checked
     property alias cfg_termFont: termFont.checked
 
     property string cfg_wrapper: plasmoid.configuration.wrapper
-    property alias cfg_upgradeFlags: upgradeFlags.checked
-    property alias cfg_upgradeFlagsText: upgradeFlagsText.text
+    property alias cfg_archFlags: archFlags.text
     property alias cfg_sudoBin: sudoBin.text
     property alias cfg_rebootSystem: rebootSystem.checked
     property alias cfg_mirrors: mirrors.checked
@@ -110,10 +111,6 @@ SimpleKCM {
             }
         }
 
-        Item {
-            Kirigami.FormData.isSection: true
-        }
-
         RowLayout {
             CheckBox {
                 id: termFont
@@ -122,6 +119,29 @@ SimpleKCM {
 
             Kirigami.ContextualHelpButton {
                 toolTipText: i18n("If your terminal utilizes any <b>Nerd Font</b>, icons from that font will be used.")
+            }
+        }
+
+        Item {
+            Kirigami.FormData.isSection: true
+        }
+
+        RowLayout {
+            CheckBox {
+                id: tmuxSession
+                text: i18n("tmux session")
+                enabled: pkg.tmux
+            }
+        }
+
+        RowLayout {
+            CheckBox {
+                id: idleInhibit
+                text: "Idle Inhibit"
+            }
+
+            Kirigami.ContextualHelpButton {
+                toolTipText: "Disables automatic sleep and screen lock while upgrading."
             }
         }
 
@@ -231,28 +251,17 @@ SimpleKCM {
 
         RowLayout {
             Kirigami.FormData.label: i18n("Upgrade options") + ":"
-            CheckBox {
-                id: upgradeFlags
-                text: i18n("Enable")
-                enabled: terminals
-            }
-        }
 
-        RowLayout {
-            Kirigami.FormData.label: i18n("Options") + ":"
-            spacing: 0
-            visible: pkg.pacman
+            Label {
+                text: plasmoid.configuration.aur ? cfg_wrapper+" "+"-Syu" : cfg_sudoBin+" "+"pacman -Syu"
+            }
 
             TextField {
-                id: upgradeFlagsText
-                placeholderText: "--noconfirm"
-                placeholderTextColor: "grey"
-                enabled: pkg.pacman && upgradeFlags.checked
-
+                id: archFlags
                 onTextChanged: {
                     var allow = /^[a-z\- ]*$/
-                    if (!allow.test(upgradeFlagsText.text))
-                        upgradeFlagsText.text = upgradeFlagsText.text.replace(/[^a-z\- ]/g, "")
+                    if (!allow.test(archFlags.text))
+                        archFlags.text = archFlags.text.replace(/[^a-z\- ]/g, "")
                 }
             }
         }
@@ -313,12 +322,12 @@ SimpleKCM {
             CheckBox {
                 id: mirrors
                 text: i18n("Suggest before upgrading")
-                enabled: pkg.pacman && pkg.checkupdates && pkg.curl
+                enabled: pkg.pacman && pkg.checkupdates
                 Component.onCompleted: if (checked && !enabled) checked = plasmoid.configuration.mirrors = false
             }
 
             Kirigami.ContextualHelpButton {
-                toolTipText: i18n("To use this feature, the following installed utilities are required:<br><b>curl, pacman-contrib.</b> <br><br>Also see https://archlinux.org/mirrorlist (click button to open link)")
+                toolTipText: i18n("Required installed") + " pacman-contrib." + i18n("<br><br>Also see https://archlinux.org/mirrorlist (click button to open link)")
                 onClicked: Qt.openUrlExternally("https://archlinux.org/mirrorlist")
             }
         }
@@ -554,6 +563,8 @@ SimpleKCM {
     }
 
     Component.onCompleted: {
+        if (tmuxSession.checked && !pkg.tmux) tmuxSession.checked = plasmoid.configuration.tmuxSession = false
+
         if(cfg_dynamicUrl) {
             var urlParams = plasmoid.configuration.dynamicUrl.split("?")[1].split("&")
 

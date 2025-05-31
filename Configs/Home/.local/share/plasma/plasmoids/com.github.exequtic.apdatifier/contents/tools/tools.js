@@ -117,7 +117,7 @@ function saveConfig() {
 }
 
 function checkDependencies() {
-    const pkgs = "pacman checkupdates flatpak paru yay jq curl unzip tar alacritty foot ghostty gnome-terminal kitty konsole lxterminal ptyxis terminator tilix wezterm xterm yakuake"
+    const pkgs = "pacman checkupdates flatpak paru yay jq tmux alacritty foot ghostty gnome-terminal kitty konsole lxterminal ptyxis terminator tilix wezterm xterm yakuake"
     const checkPkg = (pkgs) => `for pkg in ${pkgs}; do command -v $pkg || echo; done`
     const populate = (data) => data.map(item => ({ "name": item.split("/").pop(), "value": item }))
 
@@ -126,11 +126,11 @@ function checkDependencies() {
 
         const output = out.split("\n")
 
-        const [pacman, checkupdates, flatpak, paru, yay, jq, curl, unzip, tar ] = output.map(Boolean)
-        cfg.packages = { pacman, checkupdates, flatpak, paru, yay, jq, curl, unzip, tar }
+        const [pacman, checkupdates, flatpak, paru, yay, jq, tmux ] = output.map(Boolean)
+        cfg.packages = { pacman, checkupdates, flatpak, paru, yay, jq, tmux }
         if (!cfg.wrapper) cfg.wrapper = paru ? "paru" : yay ? "yay" : ""
 
-        const terminals = populate(output.slice(9).filter(Boolean))
+        const terminals = populate(output.slice(8).filter(Boolean))
         cfg.terminals = terminals.length > 0 ? terminals : null
         if (!cfg.terminal) cfg.terminal = cfg.terminals.length > 0 ? cfg.terminals[0].value : ""
     })
@@ -161,7 +161,7 @@ function enableUpgrading(state) {
         if (upgradeTimer.running) return
         upgradeTimer.start()
         searchTimer.stop()
-        sts.statusMsg = i18n("Upgrade in progress...")
+        sts.statusMsg = i18n("Upgrade in progress") + "..."
         sts.statusIco = cfg.ownIconsUI ? "toolbar_upgrade" : "akonadiconsole"
     } else {
         upgradeTimer.stop()
@@ -196,7 +196,7 @@ function postUpgrade(out) {
 }
 
 function upgradeSystem() {
-    if (sts.upgrading) return
+    if (sts.upgrading && !cfg.tmuxSession) return
     enableUpgrading(true)
     runInTerminal("upgrade", "full")
 }
@@ -279,7 +279,7 @@ function checkUpdates() {
         const getIcons = `\
             while read -r pkg file; do
                 [[ "$processed" == *"$pkg"* ]] && continue
-                icon=$(awk -F= '/^Icon=/ {print $2; exit}' "$file") && [ -n "$icon" ] || continue
+                icon=$(awk -F= '/^Icon=/ {print $2; exit}' "$file" 2>/dev/null || true) && [ -n "$icon" ] || continue
                 processed="$processed $pkg"
                 echo "$pkg $icon"
             done < <(pacman -Ql ${pkgs} | grep '/usr/share/applications/.*\.desktop$')`
@@ -317,7 +317,7 @@ function checkUpdates() {
             out = out.trim()
 
             const errorTexts = {
-                "127": i18n("Unable check widgets: ") + i18n("some required utilities are not installed (curl, jq)"),
+                "127": i18n("Unable check widgets: ") + i18n("Required installed") + " jq",
                   "1": i18n("Unable check widgets: ") + i18n("Failed to retrieve data from the API"),
                   "2": i18n("Unable check widgets: ") + i18n("Too many API requests in the last 15 minutes from your IP address, please try again later"),
                   "3": i18n("Unable check widgets: ") + i18n("Unkwnown error")

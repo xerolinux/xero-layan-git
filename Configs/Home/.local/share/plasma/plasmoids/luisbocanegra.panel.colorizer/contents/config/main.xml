@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg
+    xmlns="http://www.kde.org/standards/kcfg/1.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0 http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
+  <kcfgfile name="" />
+  <group name="General">
+    <entry
+        name="isEnabled"
+        type="Bool">
+        <default>true</default>
+    </entry>
+    <entry
+        name="hideWidget"
+        type="Bool">
+        <default>false</default>
+    </entry>
+    <entry
+        name="enableDebug"
+        type="Bool">
+        <default>false</default>
+    </entry>
+    <entry
+        name="panelWidgets"
+        type="String">
+        <default>[]</default>
+    </entry>
+    <!-- presets -->
+    <entry
+        name="lastPreset"
+        type="String">
+        <default></default>
+    </entry>
+    <entry
+        name="globalSettings"
+        type="String">
+        <default>{}</default>
+    </entry>
+    <entry
+        name="presetAutoloading"
+        type="String">
+        <default>{}</default>
+    </entry>
+    <entry
+        name="configurationOverrides"
+        type="String">
+        <default>{"overrides": {}, "associations":[]}</default>
+    </entry>
+    <entry
+        name="forceForegroundColor"
+        type="String">
+        <default>{"widgets":[], "reloadInterval": 250}</default>
+    </entry>
+    <entry name="widgetClickMode" type="Enum">
+        <choices>
+            <choice name="TogglePanelColorizer"/>
+            <choice name="SwitchPresets"/>
+            <choice name="ShowPopup"/>
+        </choices>
+        <default>0</default>
+    </entry>
+    <entry
+        name="switchPresets"
+        type="String">
+        <default>[]</default>
+    </entry>
+    <entry
+        name="switchPresetsIndex"
+        type="Int">
+        <default>0</default>
+    </entry>
+    <entry name="pythonExecutable" type="String">
+        <default>python3</default>
+    </entry>
+    <entry
+        name="enableDBusService"
+        type="Bool">
+        <default>true</default>
+    </entry>
+    <entry
+        name="animatePropertyChanges"
+        type="Bool">
+        <default>false</default>
+    </entry>
+    <entry
+        name="animationDuration"
+        type="Int">
+        <default>250</default>
+    </entry>
+    <entry
+        name="editModeGridSettings"
+        type="String">
+        <default>{"enabled":false,"spacing":4,"majorLineEvery":0,"background":{"color":"#00ffff","alpha":0.25},"minorLine":{"color":"#000000","alpha":1},"majorLine":{"color":"#ff0000","alpha":1},"mayorLineEvery":2}</default>
+    </entry>
+  </group>
+</kcfg>

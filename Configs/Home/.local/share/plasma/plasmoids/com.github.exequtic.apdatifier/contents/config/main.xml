@@ -36,8 +36,7 @@
     </group>
     <group name="Upgrade">
         <entry name="wrapper" type="string"><default></default></entry>
-        <entry name="upgradeFlags" type="bool"><default>false</default></entry>
-        <entry name="upgradeFlagsText" type="string"><default></default></entry>
+        <entry name="archFlags" type="string"><default></default></entry>
         <entry name="sudoBin" type="string"><default>sudo</default></entry>
         <entry name="rebootSystem" type="bool"><default>false</default></entry>
         <entry name="mirrors" type="bool"><default>false</default></entry>
@@ -51,6 +50,8 @@
         <entry name="preExec" type="string"><default></default></entry>
         <entry name="postExec" type="string"><default></default></entry>
         <entry name="terminal" type="string"><default></default></entry>
+        <entry name="idleInhibit" type="bool"><default>false</default></entry>
+        <entry name="tmuxSession" type="bool"><default>false</default></entry>
         <entry name="termFont" type="bool"><default>false</default></entry>
     </group>
     <group name="Appearance">
@@ -58,6 +59,7 @@
         <entry name="selectedIcon" type="string"><default>apdatifier-plasmoid</default></entry>
         <entry name="indicatorStop" type="bool"><default>true</default></entry>
         <entry name="counterEnabled" type="bool"><default>true</default></entry>
+        <entry name="counterOnLeft" type="bool"><default>false</default></entry>
         <entry name="counterColor" type="string"><default></default></entry>
         <entry name="counterSize" type="int"><default>0</default></entry>
         <entry name="counterRadius" type="int"><default>3</default></entry>
