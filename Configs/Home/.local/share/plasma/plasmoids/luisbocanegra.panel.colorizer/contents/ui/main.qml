@@ -7,6 +7,7 @@ import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.components as PlasmaComponents
 import org.kde.plasma.core as PlasmaCore
+import org.kde.plasma.extras as PlasmaExtras
 import org.kde.plasma.plasmoid
 import org.kde.taskmanager as TaskManager
 import QtQuick.Effects
@@ -48,7 +49,7 @@ PlasmoidItem {
     property bool editMode: Plasmoid.containment.corona?.editMode ?? false
     property bool onDesktop: plasmoid.location === PlasmaCore.Types.Floating
     property bool isWayland: Qt.platform.pluginName.includes("wayland")
-    property string iconName: !onDesktop ? "icon" : "error"
+    property string iconName: (onDesktop || !runningLatest) ? "error" : "icon"
     property string icon: Qt.resolvedUrl("../icons/" + iconName + ".svg").toString().replace("file://", "")
     property bool hideWidget: plasmoid.configuration.hideWidget
     property bool fixedSidePaddingEnabled: isEnabled && panelBgItem.cfg.padding.enabled
@@ -191,6 +192,14 @@ PlasmoidItem {
 
     property var switchPresets: JSON.parse(plasmoid.configuration.switchPresets)
     property QtObject panelView: null
+
+    onPanelColorizerChanged: {
+        const found = panelColorizer !== null;
+        if (plasmoid.configuration.pluginFound !== found) {
+            plasmoid.configuration.pluginFound = found;
+            plasmoid.configuration.writeConfig();
+        }
+    }
 
     onStockPanelSettingsChanged: {
         Qt.callLater(function () {
@@ -398,15 +407,21 @@ PlasmoidItem {
         property bool isTrayArrow: itemType === Enums.ItemType.TrayArrow
         property bool inTray: itemType === Enums.ItemType.TrayItem || isTrayArrow
         property bool luisbocanegraPanelColorizerBgManaged: true
-        property var widgetProperties: isTrayArrow ? {
-            "id": -1,
-            "name": "org.kde.plasma.systemtray.expand",
-            "hovered": hovered,
-            // https://github.com/KDE/plasma-workspace/blob/55ea74736ccbfc2fe97fd3634e5042002e39154c/applets/systemtray/package/contents/ui/main.qml#L111
-            "expanded": target.parent.parent.parent.systemTrayState.expanded && target.parent.parent.parent.systemTrayState.activeApplet === null,
-            "needsAttention": false,
-            "busy": false
-        } : Utils.getWidgetProperties(target, PlasmaCore.Types, hovered)
+        property var widgetProperties: {
+            if (isTrayArrow) {
+                const systemTrayState = Utils.getSystemTrayState(trayWidgetBgItem?.target?.applet, main.plasmaVersion);
+                return {
+                    "id": -1,
+                    "name": "org.kde.plasma.systemtray.expand",
+                    "hovered": hovered,
+                    "expanded": (systemTrayState?.expanded) && systemTrayState?.activeApplet === null,
+                    "needsAttention": false,
+                    "busy": false
+                };
+            } else {
+                return Utils.getWidgetProperties(target, PlasmaCore.Types, hovered, main.plasmaVersion);
+            }
+        }
         property string widgetName: widgetProperties.name
         property int widgetId: widgetProperties.id
         property var wRecolorCfg: Utils.getForceFgWidgetConfig(widgetId, widgetName, forceRecolorList)
@@ -441,7 +456,8 @@ PlasmoidItem {
         property var fgColorCfg: cfg.foregroundColor
         property int itemCount: 0
         property int maxDepth: 0
-        visible: cfgEnabled
+        opacity: cfgEnabled ? 1 : 0
+        property bool isVisible: target.visibleChildren.length > 0 && opacity !== 0
         property bool cfgEnabled: cfg.enabled && isEnabled
         property bool bgEnabled: bgColorCfg.enabled
         property bool fgEnabled: fgColorCfg.enabled
@@ -472,7 +488,7 @@ PlasmoidItem {
             if (isWidget && fgEnabled && cfgEnabled) {
                 return getColor(fgColorCfg, targetIndex, color, itemType, fgColorHolder);
             }
-            return main.panelElement.Kirigami.Theme.textColor;
+            return defaultColorHolder.Kirigami.Theme.textColor;
         }
 
         property bool throttleMaskUpdate: false
@@ -480,23 +496,19 @@ PlasmoidItem {
         // https://github.com/luisbocanegra/plasma-panel-colorizer/issues/212
         // https://bugs.kde.org/show_bug.cgi?id=502480
         Rectangle {
+            id: defaultColorHolder
+            height: 6
+            width: height
+            opacity: 0
+        }
+        Rectangle {
             id: fgColorHolder
             height: 6
             width: height
             opacity: 0
-            radius: height / 2
-            anchors.right: parent.right
             Kirigami.Theme.colorSet: Kirigami.Theme[fgColorCfg.systemColorSet]
         }
-        Rectangle {
-            id: bgColorHolder
-            height: 6
-            width: height
-            opacity: 0
-            radius: height / 2
-            anchors.right: parent.right
-            Kirigami.Theme.colorSet: Kirigami.Theme[bgColorCfg.systemColorSet]
-        }
+
         // Label {
         //     id: debugLabel
         //     text: targetIndex+","+trayIndex //maxDepth+","+itemCount
@@ -538,9 +550,10 @@ PlasmoidItem {
             }
         }
 
+        Kirigami.Theme.colorSet: Kirigami.Theme[bgColorCfg.systemColorSet]
         color: {
             if (bgEnabled && bgColorCfg.sourceType !== 5) {
-                return getColor(bgColorCfg, targetIndex, null, itemType, bgColorHolder);
+                return getColor(bgColorCfg, targetIndex, null, itemType, rect);
             } else {
                 return "transparent";
             }
@@ -1194,8 +1207,6 @@ PlasmoidItem {
             });
         }
 
-        property bool isVisible: target.visibleChildren.length > 0 && visible
-
         onBlurBehindChanged: {
             if (isWidget) {
                 widgetsDoingBlur[maskIndex] = blurBehind;
@@ -1226,7 +1237,7 @@ PlasmoidItem {
             if (borderRec.width <= 0 || borderRec.height <= 0)
                 return;
             position = Utils.getGlobalPosition(borderRec, panelElement);
-            panelColorizer.updatePanelMask(maskIndex, borderRec, rect.corners.topLeftRadius, rect.corners.topRightRadius, rect.corners.bottomLeftRadius, rect.corners.bottomRightRadius, Qt.point(rect.positionX - moveX, rect.positionY - moveY), 5, visible && blurBehind);
+            panelColorizer.updatePanelMask(maskIndex, borderRec, rect.corners.topLeftRadius, rect.corners.topRightRadius, rect.corners.bottomLeftRadius, rect.corners.bottomRightRadius, Qt.point(rect.positionX - moveX, rect.positionY - moveY), 5, isVisible && blurBehind);
         }
 
         property bool hovered: hoverHandler.hovered
@@ -1634,7 +1645,7 @@ PlasmoidItem {
             dbusKWinReconfigure.call();
         }
 
-        Plasmoid.status = hideWidget ? PlasmaCore.Types.ActiveStatus : PlasmaCore.Types.HiddenStatus;
+        Plasmoid.status = (hideWidget || !runningLatest) ? PlasmaCore.Types.ActiveStatus : PlasmaCore.Types.HiddenStatus;
         if (["autohide", "dodgewindows"].includes(stockPanelSettings.visibility.value) && panelPosition.location !== stockPanelSettings.position.value) {
             // activate the panel for a longer time if it can hide
             // to avoid plasma crash when changing its location
@@ -1883,7 +1894,7 @@ PlasmoidItem {
 
     function bindPlasmoidStatus() {
         Plasmoid.status = Qt.binding(function () {
-            return (editMode || !hideWidget) ? PlasmaCore.Types.ActiveStatus : PlasmaCore.Types.HiddenStatus;
+            return (editMode || !hideWidget || !runningLatest) ? PlasmaCore.Types.ActiveStatus : PlasmaCore.Types.HiddenStatus;
         });
     }
 
@@ -1913,10 +1924,10 @@ PlasmoidItem {
     Component {
         id: popupView
         ColumnLayout {
-            Layout.minimumWidth: main.Kirigami.Units.gridUnit * 10
-            Layout.minimumHeight: main.Kirigami.Units.gridUnit * 10
-            Layout.maximumWidth: main.Kirigami.Units.gridUnit * 20
-            Layout.maximumHeight: main.Kirigami.Units.gridUnit * 20
+            Layout.minimumWidth: main.Kirigami.Units.gridUnit * 25
+            Layout.minimumHeight: main.Kirigami.Units.gridUnit * 25
+            Layout.maximumWidth: main.Kirigami.Units.gridUnit * 25
+            Layout.maximumHeight: main.Kirigami.Units.gridUnit * 25
 
             property string presetsDir: StandardPaths.writableLocation(StandardPaths.HomeLocation).toString().substring(7) + "/.config/panel-colorizer/presets"
             property string cratePresetsDirCmd: "mkdir -p " + presetsDir
@@ -1931,15 +1942,15 @@ PlasmoidItem {
             }
 
             RunCommand {
-                id: runCommand
+                id: listPresets
             }
 
             Component.onCompleted: {
-                runCommand.run(listPresetsCmd);
+                listPresets.run(listPresetsCmd);
             }
 
             Connections {
-                target: runCommand
+                target: listPresets
                 function onExited(cmd, exitCode, exitStatus, stdout, stderr) {
                     if (exitCode !== 0) {
                         console.error(cmd, exitCode, exitStatus, stdout, stderr);
@@ -1967,41 +1978,88 @@ PlasmoidItem {
                     }
                 }
             }
+            ColumnLayout {
+                visible: main.runningLatest
+                PlasmaComponents.Label {
+                    text: i18n("Select a preset")
+                    Layout.fillWidth: true
+                    font.weight: Font.DemiBold
+                    Layout.leftMargin: Kirigami.Units.smallSpacing
+                }
 
-            PlasmaComponents.Label {
-                text: i18n("Select a preset")
-                Layout.fillWidth: true
-                font.weight: Font.DemiBold
-                Layout.leftMargin: Kirigami.Units.smallSpacing
-            }
-
-            ListView {
-                id: listView
-                clip: true
-                // Layout.preferredWidth: Kirigami.Units.gridUnit * 10
-                // Layout.preferredHeight: Kirigami.Units.gridUnit * 12
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                model: presetsModel
-                delegate: PlasmaComponents.ItemDelegate {
-                    width: ListView.view.width
-                    required property string name
-                    required property string value
-                    contentItem: RowLayout {
-                        spacing: Kirigami.Units.smallSpacing
-                        PlasmaComponents.Label {
-                            Layout.fillWidth: true
-                            text: name
-                            textFormat: Text.PlainText
-                            elide: Text.ElideRight
+                ListView {
+                    id: listView
+                    clip: true
+                    // Layout.preferredWidth: Kirigami.Units.gridUnit * 10
+                    // Layout.preferredHeight: Kirigami.Units.gridUnit * 12
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    model: presetsModel
+                    delegate: PlasmaComponents.ItemDelegate {
+                        width: ListView.view.width
+                        required property string name
+                        required property string value
+                        contentItem: RowLayout {
+                            spacing: Kirigami.Units.smallSpacing
+                            PlasmaComponents.Label {
+                                Layout.fillWidth: true
+                                text: name
+                                textFormat: Text.PlainText
+                                elide: Text.ElideRight
+                            }
                         }
-                    }
 
-                    onClicked: {
-                        applyPreset(value);
+                        onClicked: {
+                            applyPreset(value);
+                        }
                     }
                 }
             }
+
+            ColumnLayout {
+                visible: !main.runningLatest
+                PlasmaExtras.PlaceholderMessage {
+                    Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+                    Layout.margins: Kirigami.Units.gridUnit
+                    iconName: "dialog-warning"
+                    text: i18n("Running outdated version of %1", Plasmoid.metaData.name)
+                }
+
+                PlasmaComponents.Label {
+                    Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+                    Layout.margins: Kirigami.Units.gridUnit
+                    text: i18n("Running version of the widget (%1) is different to the one on disk (%2), please log out and back in (or restart plasmashell user unit) to ensure things work correctly!", Plasmoid.metaData.version, main.localVersion.version)
+                    Layout.fillWidth: true
+                    wrapMode: Text.Wrap
+                }
+            }
+        }
+    }
+
+    property var localVersion: new VersionUtil.Version("999.999.999") // to assume latest
+    property string metadataFile: Qt.resolvedUrl("../../metadata.json").toString().substring(7)
+    property string localVersionCmd: `cat '${metadataFile}' | grep \\"Version | sed 's/.* //;s/[",]//g'`
+    property bool runningLatest: true
+    RunCommand {
+        id: versionChecker
+        onExited: (cmd, exitCode, exitStatus, stdout, stderr) => {
+            if (exitCode !== 0) {
+                console.error(cmd, exitCode, exitStatus, stdout, stderr);
+                return;
+            }
+            if (stdout) {
+                main.localVersion = new VersionUtil.Version(stdout.trim());
+                main.runningLatest = main.localVersion.isEqual(Plasmoid.metaData.version);
+            }
+        }
+    }
+    Timer {
+        running: true
+        interval: 5000
+        repeat: true
+        triggeredOnStart: true
+        onTriggered: {
+            versionChecker.run(main.localVersionCmd);
         }
     }
 

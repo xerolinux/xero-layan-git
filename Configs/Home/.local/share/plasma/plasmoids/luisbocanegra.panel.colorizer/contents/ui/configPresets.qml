@@ -191,8 +191,6 @@ KCM.SimpleKCM {
     header: ColumnLayout {
         Components.Header {
             id: headerComponent
-            Layout.leftMargin: Kirigami.Units.mediumSpacing
-            Layout.rightMargin: Kirigami.Units.mediumSpacing
         }
     }
 
@@ -261,6 +259,7 @@ KCM.SimpleKCM {
                         required property int index
                         required property var modelData
                         property string dir: root.presets[content.modelData].dir
+                        property bool builtin: root.presets[content.modelData].builtin
                         contentItem: ColumnLayout {
                             width: row.implicitWidth
                             height: row.implicitHeight + scrollView.implicitHeight
@@ -276,7 +275,7 @@ KCM.SimpleKCM {
                                 }
 
                                 Rectangle {
-                                    visible: root.presets[content.modelData].builtin
+                                    visible: content.builtin
                                     color: Kirigami.Theme.highlightColor
                                     Kirigami.Theme.colorSet: root.Kirigami.Theme["Selection"]
                                     radius: parent.height / 2
@@ -315,7 +314,7 @@ KCM.SimpleKCM {
                                         root.editingPreset = content.dir;
                                         updatePresetDialog.open();
                                     }
-                                    visible: !root.presets[content.modelData].builtin
+                                    visible: !content.builtin
                                 }
                                 Button {
                                     text: i18n("Delete")
@@ -324,7 +323,7 @@ KCM.SimpleKCM {
                                         root.editingPreset = content.dir;
                                         deletePresetDialog.open();
                                     }
-                                    visible: !root.presets[content.modelData].builtin
+                                    visible: !content.builtin
                                 }
                             }
                             Button {
@@ -336,16 +335,18 @@ KCM.SimpleKCM {
                                     runCommand.run(root.spectaclePreviewCmd + "'" + content.dir + "/preview.png'");
                                 }
                             }
-                            ScrollView {
+                            Item {
                                 id: scrollView
-                                Layout.preferredWidth: 500
+                                // Layout.preferredWidth: 500
+                                Layout.fillWidth: true
                                 Layout.maximumHeight: 100
+                                Layout.alignment: Qt.AlignHCenter
                                 visible: false
-                                contentWidth: btn.implicitWidth
-                                contentHeight: btn.implicitHeight
 
                                 Image {
                                     id: image
+                                    anchors.centerIn: parent
+                                    anchors.fill: parent
                                     onStatusChanged: if (image.status == Image.Ready) {
                                         scrollView.visible = true;
                                         scrollView.height = sourceSize.height;
@@ -353,8 +354,8 @@ KCM.SimpleKCM {
                                         scrollView.visible = false;
                                     }
                                     source: content.dir + "/preview.png"
-                                    fillMode: Image.PreserveAspectCrop
-                                    horizontalAlignment: Image.AlignLeft
+                                    fillMode: Image.PreserveAspectFit
+                                    horizontalAlignment: Image.AlignHCenter
                                     cache: false
                                     asynchronous: true
                                     function refresh(presetName) {
@@ -374,7 +375,7 @@ KCM.SimpleKCM {
                                     text: i18n("Update preview")
                                     anchors.fill: parent
                                     icon.name: "edit-image-symbolic"
-                                    enabled: !root.presets[content.modelData].builtin
+                                    enabled: !content.builtin
                                     onClicked: {
                                         runCommand.run(root.spectaclePreviewCmd + "'" + content.dir + "/preview.png" + "'");
                                     }
@@ -413,7 +414,7 @@ KCM.SimpleKCM {
                                             }
                                         }
                                         TapHandler {
-                                            enabled: !root.presets[content.modelData].builtin
+                                            enabled: !content.builtin
                                             onTapped: runCommand.run(root.spectaclePreviewCmd + "'" + content.dir + "/preview.png" + "'")
                                         }
                                         Timer {

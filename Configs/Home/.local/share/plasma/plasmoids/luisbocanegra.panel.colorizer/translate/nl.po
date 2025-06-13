@@ -9,15 +9,15 @@ msgstr ""
 "Project-Id-Version: colorizer\n"
 "Report-Msgid-Bugs-To: https://github.com/luisbocanegra/plasma-panel-"
 "colorizer\n"
-"POT-Creation-Date: 2025-05-24 19:16+0000\n"
-"PO-Revision-Date: 2025-04-23 10:51+0200\n"
+"POT-Creation-Date: 2025-06-05 04:58+0000\n"
+"PO-Revision-Date: 2025-06-05 11:02+0200\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.6\n"
 
 #: ../metadata.json
 msgid "Panel colorizer"
@@ -130,8 +130,8 @@ msgid "Smoothing (ms):"
 msgstr "Vloeiend maken (in ms):"
 
 #: ../contents/ui/components/FormColors.qml
-msgid "Source:"
-msgstr "Bron:"
+msgid "Color source:"
+msgstr "Kleurbron:"
 
 #: ../contents/ui/components/FormColors.qml
 #: ../contents/ui/configStockPanelSettings.qml
@@ -139,24 +139,52 @@ msgid "Custom"
 msgstr "Aangepast"
 
 #: ../contents/ui/components/FormColors.qml
+msgid "A fixed custom color"
+msgstr "Een zelfgekozen kleur"
+
+#: ../contents/ui/components/FormColors.qml
 msgid "System"
 msgstr "Systeeminstellingen"
+
+#: ../contents/ui/components/FormColors.qml
+msgid "Color that updates with your System theme"
+msgstr "De kleur van het systeemthema"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Custom list"
 msgstr "Zelfgemaakte lijst"
 
 #: ../contents/ui/components/FormColors.qml
+msgid ""
+"Define a list of colors that will be applied to all the elements, wraps "
+"around if there are more elements than colors"
+msgstr ""
+"Stel een lijst samen met kleuren die worden toegepast op alle elementen - in "
+"herhaalde volgorde indien er meer elementen dat kleuren zijn"
+
+#: ../contents/ui/components/FormColors.qml
 msgid "Random"
 msgstr "Willekeurig"
 
 #: ../contents/ui/components/FormColors.qml
+msgid "Random color for each element"
+msgstr "Gebruik een willekeurige kleur per element"
+
+#: ../contents/ui/components/FormColors.qml
 msgid "Follow"
-msgstr "Volgen"
+msgstr "Hoofdelement volgen"
+
+#: ../contents/ui/components/FormColors.qml
+msgid "Follow the color of a parent element"
+msgstr "Gebruik de kleur van het hoofdelement"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Gradient"
 msgstr "Kleurverloop"
+
+#: ../contents/ui/components/FormColors.qml
+msgid "Horizontal or vertical customizable color gradient"
+msgstr "Een horizontaal of verticaal kleurverloop, naar eigen inzicht"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Image"
@@ -198,6 +226,10 @@ msgid "Scaled and Cropped"
 msgstr "Bijsnijden en inpassen"
 
 #: ../contents/ui/components/FormColors.qml
+msgid "Image:"
+msgstr "Afbeelding:"
+
+#: ../contents/ui/components/FormColors.qml
 msgid "Pick a image file"
 msgstr "Kies een afbeelding"
 
@@ -210,12 +242,16 @@ msgid "All files"
 msgstr "Alle bestanden"
 
 #: ../contents/ui/components/FormColors.qml
+msgid "Color:"
+msgstr "Kleur:"
+
+#: ../contents/ui/components/FormColors.qml
 msgid "Color set:"
 msgstr "Kleurenschema:"
 
 #: ../contents/ui/components/FormColors.qml
-msgid "Color:"
-msgstr "Kleur:"
+msgid "Colors:"
+msgstr "Kleuren:"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Orientation:"
@@ -228,6 +264,10 @@ msgstr "Horizontaal"
 #: ../contents/ui/components/FormColors.qml
 msgid "Vertical"
 msgstr "Verticaal"
+
+#: ../contents/ui/components/FormColors.qml
+msgid "Gradient steps:"
+msgstr "Kleurverloopstappen:"
 
 #: ../contents/ui/components/FormColors.qml ../contents/ui/configGeneral.qml
 msgid "Alpha:"
@@ -248,10 +288,6 @@ msgstr "Helderheid:"
 #: ../contents/ui/components/FormPadding.qml
 msgid "Padding"
 msgstr "Opvulling"
-
-#: ../contents/ui/components/FormPadding.qml
-msgid "Padding:"
-msgstr "Opvulling:"
 
 #: ../contents/ui/components/FormShadow.qml
 #: ../contents/ui/components/FormWidgetSettings.qml
@@ -280,31 +316,39 @@ msgstr "Marge"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "State:"
-msgstr ""
+msgstr "Status:"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Normal"
-msgstr ""
+msgstr "Normaal"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Hover"
-msgstr ""
+msgstr "Aangewezen"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Expanded"
-msgstr ""
+msgstr "Uitgeklapt"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Needs attention"
-msgstr ""
+msgstr "Aandacht benodigd"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Busy"
+msgstr "Bezig"
+
+#: ../contents/ui/components/FormWidgetSettings.qml
+msgid ""
+"Change element appearance based on their state, configuration is stacked on "
+"top of the current appearance"
 msgstr ""
+"Pas de vormgeving van elementen aan op basis van hun status - de "
+"instellingen worden bovenop de huidige vormgeving toegepast"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Native panel:"
-msgstr ""
+msgstr "Standaardpaneel:"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 #: ../contents/ui/configGeneral.qml
@@ -319,16 +363,21 @@ msgstr ""
 "vervaging te ontdoen."
 
 #: ../contents/ui/components/FormWidgetSettings.qml
+msgid "The shadow from the Plasma theme"
+msgstr "De schaduw van het Plasma-thema"
+
+#: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Opacity:"
-msgstr ""
+msgstr "Doorzichtigheid:"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Set to 0 to keep the mask required for custom background blur."
 msgstr ""
+"Stel in op 0 om slechts het vereiste masker voor vervaging toe te passen."
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Force floating dialogs"
-msgstr ""
+msgstr "Zwevende dialoogvensters afdwingen"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "customization"
@@ -336,7 +385,7 @@ msgstr "Aanpassen"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Blur custom background (Beta)"
-msgstr ""
+msgstr "Eigen achtergrond vervagen (bèta)"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid ""
@@ -350,12 +399,15 @@ msgstr ""
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid ""
-"C++ plugin not installed, <b>Blur custom background</b> will not work."
-"<br>Check the repository README on GitHub for details."
+"C++ plugin not found, this feature will not work. Install the plugin and "
+"reboot or restart plasmashell to be able to use it."
 msgstr ""
-"De C++-plug-in is niet geïnstalleerd - <b>hierdoor zal de "
-"achtergrondvervaging</b> niet werken.<br>Bekijk voor meer informatie het "
-"README-bestand op GitHub."
+"Deze functie werkt niet, omdat de C++-plug-in niet is aangetroffen. "
+"Installeer de plug-in en herstart (plasmashell) om er gebruik van te maken."
+
+#: ../contents/ui/components/FormWidgetSettings.qml
+msgid "Plugin install instructions"
+msgstr "Installatie-instructies"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Spacing:"
@@ -403,8 +455,8 @@ msgid "Foreground Shadow Color"
 msgstr "Voorgrondschaduwkleur"
 
 #: ../contents/ui/components/Header.qml
-msgid "Enable Panel Colorizer:"
-msgstr "Paneelkleuring inschakelen:"
+msgid "Enable %1:"
+msgstr "%1 inschakelen:"
 
 #: ../contents/ui/components/Header.qml ../contents/ui/main.qml
 msgid "Last preset loaded:"
@@ -413,6 +465,16 @@ msgstr "Vorige voorinstellingen:"
 #: ../contents/ui/components/Header.qml
 msgid "Version:"
 msgstr "Versie:"
+
+#: ../contents/ui/components/Header.qml ../contents/ui/main.qml
+msgid ""
+"Running version of the widget (%1) is different to the one on disk (%2), "
+"please log out and back in (or restart plasmashell user unit) to ensure "
+"things work correctly!"
+msgstr ""
+"De actieve versie van de widget (%1) komt niet overeen met de geïnstalleerde "
+"versie (%2). Meld je af en aan (of herstart plasmashell) om optimaal te "
+"kunnen werken!"
 
 #: ../contents/ui/components/SettingImportExport.qml
 msgid "Import"
@@ -499,11 +561,11 @@ msgstr ""
 
 #: ../contents/ui/configAppearance.qml
 msgid "Restore default (removes all customizations)"
-msgstr ""
+msgstr "Standaardwaarden herstellen (aanpassingen wissen)"
 
 #: ../contents/ui/configAppearance.qml
 msgid "Panel"
-msgstr ""
+msgstr "Paneel"
 
 #: ../contents/ui/configAppearance.qml
 #: ../contents/ui/configGlobalWidgetOverrides.qml
@@ -513,7 +575,7 @@ msgstr "Widgets"
 
 #: ../contents/ui/configAppearance.qml
 msgid "Tray widgets"
-msgstr ""
+msgstr "Systeemvakwidgets"
 
 #: ../contents/ui/configForeground.qml
 msgid ""
@@ -525,10 +587,19 @@ msgid ""
 "content themselves<br>To restore the <strong>Mask<strong> and <strong>Color "
 "Effect</strong> disable and restart Plasma or logout."
 msgstr ""
+"Los problemen op rond tekst- en pictogramkleuren van widgets indien de "
+"normale methode geen (blijvend) effect heeft.<br><strong>Maskeren</strong>: "
+"dwing inkleuring van pictogrammen af;<br><strong>Kleureffect</strong>: dwing "
+"inkleuring van tekst en pictogrammen af op basis van naverwerking;"
+"<br><strong>Herladen</strong>: pas de kleuren op ingestelde tijdstippen toe "
+"- handig voor widgets waarvan de inhoud zo nu en dan wijzigt.<br>Om de "
+"effecten van het <strong>masker</strong> of <strong>kleureffect</strong> "
+"ongedaan te maken, dient Plasma te worden herstart."
 
 #: ../contents/ui/configForeground.qml
 msgid "Restore default (removes all icon and text fixes)"
 msgstr ""
+"Standaardwaarden herstellen (alle pictogram- en tekstaanpassingen wissen)"
 
 #: ../contents/ui/configForeground.qml
 msgid "Force Text/Icon color"
@@ -540,7 +611,7 @@ msgstr "Herladen, elke"
 
 #: ../contents/ui/configGeneral.qml
 msgid "Hide widget:"
-msgstr "Widget verbergen"
+msgstr "Widget verbergen:"
 
 #: ../contents/ui/configGeneral.qml
 msgid "visible in Panel Edit Mode"
@@ -611,10 +682,6 @@ msgid "Required to run the D-Bus service in the background"
 msgstr "Vereist om de D-Bus-dienst op de achtergrond uit te voeren"
 
 #: ../contents/ui/configGeneral.qml
-msgid "How fast the widget reacts to D-Bus changes"
-msgstr "Hoe vaak de widget dient te reageren op D-Bus-wijzigingen"
-
-#: ../contents/ui/configGeneral.qml
 msgid "Usage:"
 msgstr "Gebruik:"
 
@@ -628,12 +695,12 @@ msgstr ""
 "Toon voorvertoningen en wissel tussen voorinstellingen met fzf + qdbus6 + jq:"
 
 #: ../contents/ui/configGeneral.qml
-msgid "Hide all panels"
-msgstr "Alle panelen verbergen"
+msgid "Hide/show this panel"
+msgstr "Paneel tonen/verbergen"
 
 #: ../contents/ui/configGeneral.qml
-msgid "Show all panels"
-msgstr "Alle panelen tonen"
+msgid "Hide/show all panels"
+msgstr "Alle panelen tonen/verbergen"
 
 #: ../contents/ui/configGlobalWidgetOverrides.qml
 msgid ""
@@ -648,7 +715,7 @@ msgstr ""
 #: ../contents/ui/configGlobalWidgetOverrides.qml
 #: ../contents/ui/configPresetWidgetOverrides.qml
 msgid "Restore default (removes all overrides)"
-msgstr ""
+msgstr "Standaardwaarden herstellen (geen afgedwongen instellingen meer)"
 
 #: ../contents/ui/configGlobalWidgetOverrides.qml
 #: ../contents/ui/configPresetWidgetOverrides.qml
@@ -698,10 +765,13 @@ msgid ""
 "<br>Disable preset auto-loading when making changes to presets, unsaved "
 "preset settings will be lost when presets change!"
 msgstr ""
+"Wissel van voorinstelling op basis van paneel- en vensterstatussen."
+"<br>Schakel automatisch laden uit tijdens het aanbrengen van wijzigingen. "
+"Niet-opgeslagen instellingen worden gewist!"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "Restore default (removes all autoloading conditions)"
-msgstr ""
+msgstr "Standaardwaarden herstellen (automatisch laden uitschakelen)"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "Environment"
@@ -721,23 +791,24 @@ msgstr ""
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "Window tracking:"
-msgstr ""
+msgstr "Vensters volgen:"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "Per screen"
-msgstr ""
+msgstr "Per beeldscherm"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "Active only"
-msgstr ""
+msgstr "Alleen op actief beeldscherm"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "Active window fallback"
-msgstr ""
+msgstr "Actieve vensterterugval"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "Track KWin's top window when there is no active one in the screen."
 msgstr ""
+"Houd het bovenste venster van KWin bij indien er geen actief venster is."
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "Fullscreen window:"
@@ -753,11 +824,11 @@ msgstr "Venster raakt paneelrand:"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "Active window:"
-msgstr ""
+msgstr "Actief venster:"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "At least one window is visible:"
-msgstr ""
+msgstr "Bij minimaal één zichtbaar venster:"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "Floating panel:"
@@ -765,7 +836,7 @@ msgstr "Zwevend paneel:"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "activity:"
-msgstr ""
+msgstr "Activiteit:"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "Normal:"
@@ -810,7 +881,7 @@ msgstr ""
 
 #: ../contents/ui/configPresets.qml
 msgid "Restore default preset"
-msgstr ""
+msgstr "Standaardwaarden herstellen"
 
 #: ../contents/ui/configPresets.qml
 msgid "New from current settings"
@@ -849,6 +920,9 @@ msgid ""
 "Changing panel position is currently unstable and may cause Plasma to crash "
 "when moving panels between non-parallel edges (e.g from top to left)."
 msgstr ""
+"Let op: het aanpassen van de paneellocatie is momenteel instabiel en kan tot "
+"Plasma-crashes leiden indien niet-parallelle randen worden aangehouden "
+"(bijv. boven naar links)."
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid ""
@@ -857,14 +931,19 @@ msgid ""
 "use <b>Panel Opacity</b> and <b>Native panel background</b> options in "
 "<b>Appearance</b> tab instead."
 msgstr ""
+"Voor de doorzichtigheids- en schermopties is <b>Plasma 6.3</b> of hoger "
+"vereist.<br>Doorzichtigheid is afhankelijk van het gekozen Plasma-thema. Om "
+"dit naar eigen hand te zetten, kunnen de opties <b>Paneeldoorzichtigheid</b> "
+"en <b>Standaard paneelachtergrond</b> op het tabblad <b>Vormgeving</b> "
+"worden gebruikt."
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Screen"
-msgstr ""
+msgstr "Beeldscherm"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Screen:"
-msgstr ""
+msgstr "Beeldscherm:"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Position"
@@ -1019,7 +1098,7 @@ msgstr ""
 
 #: ../contents/ui/configUnifiedBackground.qml
 msgid "Restore default (removes all unified areas)"
-msgstr ""
+msgstr "Standaardwaarden herstellen"
 
 #: ../contents/ui/main.qml
 msgid "Hide widget (visible in panel Edit Mode)"
@@ -1030,9 +1109,39 @@ msgid "Select a preset"
 msgstr "Kies de voorinstellingen"
 
 #: ../contents/ui/main.qml
+msgid "Running outdated version of %1"
+msgstr "Verouderde versie van ‘%1’"
+
+#: ../contents/ui/main.qml
 msgid "Panel not found, this widget must be placed on a panel to work"
 msgstr ""
 "Er is geen paneel aangetroffen - de widget dient op een paneel te staan"
+
+#~ msgid "Enable Panel Colorizer:"
+#~ msgstr "Paneelkleuring inschakelen:"
+
+#~ msgid "Source:"
+#~ msgstr "Bron:"
+
+#~ msgid "Padding:"
+#~ msgstr "Opvulling:"
+
+#~ msgid ""
+#~ "C++ plugin not installed, <b>Blur custom background</b> will not work."
+#~ "<br>Check the repository README on GitHub for details."
+#~ msgstr ""
+#~ "De C++-plug-in is niet geïnstalleerd - <b>hierdoor zal de "
+#~ "achtergrondvervaging</b> niet werken.<br>Bekijk voor meer informatie het "
+#~ "README-bestand op GitHub."
+
+#~ msgid "How fast the widget reacts to D-Bus changes"
+#~ msgstr "Hoe vaak de widget dient te reageren op D-Bus-wijzigingen"
+
+#~ msgid "Hide all panels"
+#~ msgstr "Alle panelen verbergen"
+
+#~ msgid "Show all panels"
+#~ msgstr "Alle panelen tonen"
 
 #~ msgid ""
 #~ "Force text and icon colors for specified widgets.<br><strong>Mask</"
