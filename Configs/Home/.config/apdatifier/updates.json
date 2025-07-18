@@ -1,17 +1,1 @@
-[
-  {
-    "NM": "ab-download-manager-git",
-    "DE": "A Download Manager that speeds up your downloads",
-    "LN": "https://abdownloadmanager.com",
-    "PR": "ab-download-manager",
-    "DP": "libxrender  libxtst  harfbuzz  fontconfig",
-    "CF": "ab-download-manager  abdownloadmanager-bin",
-    "IS": "133.59 MiB",
-    "DT": "Sat 31 May 2025 11:31:23 AM EEST",
-    "RN": "Explicitly installed",
-    "VO": "1.6.3.r7.gee16c46-1",
-    "VN": "latest commit",
-    "RE": "devel",
-    "IN": "/usr/share/icons/hicolor/512x512/apps/abdownloadmanager.png"
-  }
-]
+[]

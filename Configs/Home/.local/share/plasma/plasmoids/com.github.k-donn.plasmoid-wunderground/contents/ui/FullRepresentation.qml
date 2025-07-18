@@ -85,6 +85,8 @@ ColumnLayout {
     }
 
     SwitchPanel {
+        id: switchRoot
+
         visible: appState == showDATA
 
         Layout.fillWidth: true

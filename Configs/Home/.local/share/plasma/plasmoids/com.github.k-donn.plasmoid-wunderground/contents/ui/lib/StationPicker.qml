@@ -45,7 +45,7 @@ RowLayout {
             selectedStation = source;
             
             stationList = [];
-            for (let i = 0; i < stationListModel.count; i++) {
+            for (var i = 0; i < stationListModel.count; i++) {
                 stationList.push(stationListModel.get(i).name);
             }
             printDebug("Received list: " + stationList);
@@ -60,7 +60,7 @@ RowLayout {
                 selectedStation = source;
                 
                 stationList = [];
-                for (let i = 0; i < stationListModel.count; i++) {
+                for (var i = 0; i < stationListModel.count; i++) {
                     stationList.push(stationListModel.get(i).name);
                 }
                 printDebug("Received list: " + stationList);

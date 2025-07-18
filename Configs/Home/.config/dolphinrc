@@ -15,7 +15,6 @@ DirHistory[$e]=$HOME/.var/app/
 [General]
 GlobalViewProps=false
 ShowFullPath=true
-ShowToolTips=true
 SortingChoice=CaseInsensitiveSorting
 Version=202
 ViewPropsTimestamp=2021,9,5,16,41,28.639

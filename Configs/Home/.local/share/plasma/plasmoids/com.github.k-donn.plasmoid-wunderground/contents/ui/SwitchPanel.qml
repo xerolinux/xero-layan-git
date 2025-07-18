@@ -21,8 +21,6 @@ import QtQuick.Controls
 import org.kde.plasma.components as PlasmaComponents
 
 ColumnLayout {
-    id: switchRoot
-
     PlasmaComponents.TabBar {
         id: tabBar
 

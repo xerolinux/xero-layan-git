@@ -873,6 +873,7 @@ function getHourlyDataV1(callback = function() {}) {
 					}
 				}
 
+
 				callback();
 			} else {
 				errorStr = "Could not fetch forecast data";
@@ -958,6 +959,21 @@ function getHourlyDataV3(callback = function() {}) {
 						rangeValDict[modelName] = maxValDict[modelName];
 					}
 				}
+
+				// console.log("property ListModel hourlyModel: ListModel {");
+				// console.log("    dyanmicRoles: true");
+				// console.log("");
+				// for (var i = 0; i < hourlyModel.count; i++) {
+				// 	console.log("    ListElement {");
+				// 	for (var prop = 0; prop < valueNames.length; prop++) {
+				// 		console.log("        " + valueNames[prop][0] + ":" + hourlyModel.get(i)[valueNames[prop][0]]);
+				// 	}
+				// 	console.log("    }");
+				// 	console.log("");
+				// }
+				// console.log("}");
+				// console.log(JSON.stringify(maxValDict));
+				// console.log(JSON.stringify(rangeValDict));
 
 				callback();
 			} else {

@@ -17,50 +17,108 @@
 
 import QtQuick
 import QtQuick.Layouts
-import org.kde.plasma.plasmoid
 import org.kde.kirigami as Kirigami
-import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.components as PlasmaComponents
+import org.kde.plasma.core as PlasmaCore
+import org.kde.plasma.plasmoid
 import "../code/utils.js" as Utils
 
 RowLayout {
     id: bottomPanelRoot
 
-    PlasmaComponents.Label {
-        id: bottomPanelTime
+    RowLayout {
+        Layout.preferredWidth: parent.width / 3
 
-        text: weatherData["obsTimeLocal"] + " (" + plasmoid.configuration.refreshPeriod + "s)"
+        Row {
+            Layout.alignment: Qt.AlignLeft
 
-        verticalAlignment: Text.AlignBottom
+            PlasmaComponents.Label {
+                id: bottomPanelTime
 
-        Layout.fillWidth: true
-    }
-
-    Row {
-        PlasmaComponents.Label {
-            id: bottomPanelStation
-
-            Layout.fillWidth: true
-
-            text: weatherData["stationID"] + "   " + Utils.currentElevUnit(Utils.toUserElev(weatherData["details"]["elev"]))
-
-            verticalAlignment: Text.AlignBottom
-            horizontalAlignment: Text.AlignRight
-        }
-        Kirigami.Icon {
-            source: "documentinfo-symbolic"
-
-            visible: alertsModel.count > 0
-
-            height: Kirigami.Units.iconSizes.smallMedium
-
-            color: "#ff0000"
-
-            PlasmaCore.ToolTipArea {
-                anchors.fill: parent
-
-                mainText: i18n("There are weather alerts for your area!")
+                text: weatherData["obsTimeLocal"] + " (" + plasmoid.configuration.refreshPeriod + "s)"
             }
         }
+
     }
+
+    RowLayout {
+        Layout.preferredWidth: parent.width / 3
+
+        Row {
+            Layout.alignment: Qt.AlignHCenter
+            Kirigami.Icon {
+                id: locationIcon
+
+                isMask: plasmoid.configuration.applyColorScheme ? true : false
+                color: Kirigami.Theme.textColor
+
+                height: Kirigami.Units.iconSizes.small
+                source: Utils.getIcon("pin")
+            }
+
+            PlasmaComponents.Label {
+                id: locationLabel
+
+                text: plasmoid.configuration.stationName
+            }
+
+            Kirigami.Icon {
+                id: stationToolBtn
+
+                opacity: 0.25
+
+                isMask: plasmoid.configuration.applyColorScheme ? true : false
+                color: Kirigami.Theme.textColor
+
+                height: Kirigami.Units.iconSizes.small
+                source: "draw-arrow-forward"
+
+                MouseArea {
+                    anchors.fill: parent
+
+                    onClicked: Qt.openUrlExternally("https://www.wunderground.com/dashboard/pws/" + weatherData["stationID"])
+                }
+            }
+
+        }
+
+    }
+
+    RowLayout {
+        Layout.preferredWidth: parent.width / 3
+
+        Row {
+            Layout.alignment: Qt.AlignRight
+            Kirigami.Icon {
+                id: stationIcon
+
+                isMask: plasmoid.configuration.applyColorScheme ? true : false
+                color: Kirigami.Theme.textColor
+
+                height: Kirigami.Units.iconSizes.small
+                source: Utils.getIcon("weather-station-2")
+            }
+
+            PlasmaComponents.Label {
+                id: bottomPanelStation
+
+                text: weatherData["stationID"] + "   " + Utils.currentElevUnit(Utils.toUserElev(weatherData["details"]["elev"]))
+            }
+
+            Kirigami.Icon {
+                source: "documentinfo-symbolic"
+                visible: alertsModel.count > 0
+                height: Kirigami.Units.iconSizes.smallMedium
+                color: "#ff0000"
+
+                PlasmaCore.ToolTipArea {
+                    anchors.fill: parent
+                    mainText: i18n("There are weather alerts for your area!")
+                }
+            }
+
+        }
+
+    }
+
 }

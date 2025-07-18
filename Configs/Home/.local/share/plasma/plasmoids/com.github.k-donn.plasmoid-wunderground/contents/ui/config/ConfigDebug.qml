@@ -25,6 +25,7 @@ KCM.SimpleKCM {
 
     property alias cfg_logConsole: logConsole.checked
     property alias cfg_useLegacyAPI: useLegacyAPI.checked
+    property alias cfg_startupDelay: startupDelay.value
 
     Kirigami.FormLayout {
         anchors.fill: parent
@@ -39,6 +40,12 @@ KCM.SimpleKCM {
             id: useLegacyAPI
 
             Kirigami.FormData.label: i18n("Use Legacy Forecast API:")
+        }
+
+        QQC.SpinBox {
+            id: startupDelay
+
+            Kirigami.FormData.label: i18n("Startup time delay (s):")
         }
     }
 }

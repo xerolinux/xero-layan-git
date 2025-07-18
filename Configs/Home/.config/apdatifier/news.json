@@ -1,9 +1,23 @@
 [
   {
     "title": "Arch Linux: Recent news updates",
-    "article": "Valkey to replace Redis in the [extra] Repository",
-    "date": "17.04.2025 | 16:16",
-    "link": "https://archlinux.org/news/valkey-to-replace-redis-in-the-extra-repository/",
+    "article": "linux-firmware >= 20250613.12fe085f-5 upgrade requires manual intervention",
+    "date": "22.06.2025 | 02:09",
+    "link": "https://archlinux.org/news/linux-firmware-2025061312fe085f-5-upgrade-requires-manual-intervention/",
+    "removed": true
+  },
+  {
+    "title": "Arch Linux: Recent news updates",
+    "article": "Plasma 6.4.0 will need manual intervention if you are on X11",
+    "date": "20.06.2025 | 10:08",
+    "link": "https://archlinux.org/news/plasma-640-will-need-manual-intervention-if-you-are-on-x11/",
+    "removed": true
+  },
+  {
+    "title": "Arch Linux: Recent news updates",
+    "article": "Transition to the new WoW64 wine and wine-staging",
+    "date": "16.06.2025 | 19:22",
+    "link": "https://archlinux.org/news/transition-to-the-new-wow64-wine-and-wine-staging/",
     "removed": true
   }
 ]

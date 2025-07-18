@@ -134,12 +134,12 @@ Window {
         }
 
         // Populate ListModel with saved stations
-        for (let i = 0; i < plasmoid.configuration.savedStations.length; i++) {
+        for (var i = 0; i < plasmoid.configuration.savedStations.length; i++) {
             stationListModel.append({"name": plasmoid.configuration.savedStations[i]});
         }
 
         // Set selected station to force highlight
-        for (let i = 0; i < stationListModel.count; i++) {
+        for (var i = 0; i < stationListModel.count; i++) {
             if (stationListModel.get(i).name === plasmoid.configuration.stationID) {
                 dialog.source = plasmoid.configuration.stationID;
 
@@ -154,12 +154,12 @@ Window {
         stationListModel.clear();
 
         // Populate ListModel with saved stations
-        for (let i = 0; i < plasmoid.configuration.savedStations.length; i++) {
+        for (var i = 0; i < plasmoid.configuration.savedStations.length; i++) {
             stationListModel.append({"name": plasmoid.configuration.savedStations[i]});
         }
 
         // Set selected station to force highlight
-        for (let i = 0; i < stationListModel.count; i++) {
+        for (var i = 0; i < stationListModel.count; i++) {
             if (stationListModel.get(i).name === plasmoid.configuration.stationID) {
                 dialog.source = plasmoid.configuration.stationID;
 
@@ -207,7 +207,7 @@ Window {
                     var isNew = true;
 
                     // Check for duplicate
-                    for (let i = 0; i < stationListModel.count; i++) {
+                    for (var i = 0; i < stationListModel.count; i++) {
                         if (stationListModel.get(i).name === addField.text.trim()) {
                             isNew = false;
                         }

@@ -103,6 +103,8 @@ PlasmoidItem {
     // Metric units change based on precipitation type
     property bool isRain: true
 
+    property bool hasLoaded: false
+
     property var textSize: ({
         normal: plasmoid.configuration.propPointSize,
         small: plasmoid.configuration.propPointSize - 1,
@@ -194,11 +196,38 @@ PlasmoidItem {
         }
     }
 
+
+    function delay(delayTime, cb) {
+        function Timer() {
+            return Qt.createQmlObject("import QtQuick; Timer {}", root);
+        }
+        var timer = new Timer();
+        timer.interval = delayTime;
+        timer.repeat = false;
+        timer.triggered.connect(cb);
+        timer.triggered.connect(function release() {
+            timer.triggered.disconnect(cb);
+            timer.triggered.disconnect(release);
+        });
+        timer.start();
+    }
+
+
     function updateWeatherData() {
         printDebug("Getting new weather data");
-        StationAPI.getCurrentData(function() {
-            StationAPI.getForecastData(StationAPI.getHourlyData)
-        });
+        if (!hasLoaded) {
+            delay(plasmoid.configuration.startupDelay * 1000, function() {
+                printDebug("Delayed startup " + (plasmoid.configuration.startupDelay) + " s.");
+                StationAPI.getCurrentData(function() {
+                    StationAPI.getForecastData(StationAPI.getHourlyData)
+                });
+                hasLoaded = true;
+            });
+        } else {
+            StationAPI.getCurrentData(function() {
+                StationAPI.getForecastData(StationAPI.getHourlyData)
+            });
+        }
     }
 
     function updateCurrentData() {

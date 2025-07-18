@@ -28,6 +28,8 @@ import "../code/utils.js" as Utils
 GridLayout {
     id: detailsRoot
 
+    uniformCellWidths: true
+
     columns: 3
     rows: 4
 
