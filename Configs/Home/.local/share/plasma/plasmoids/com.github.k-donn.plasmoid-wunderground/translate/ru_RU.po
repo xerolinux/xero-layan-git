@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmoid-wunderground\n"
 "Report-Msgid-Bugs-To: https://github.com/k-donn/plasmoid-wunderground\n"
-"POT-Creation-Date: 2025-01-04 17:07-0500\n"
+"POT-Creation-Date: 2025-08-13 10:17-0400\n"
 "PO-Revision-Date: 2023-07-03 20:36+0100\n"
 "Last-Translator: AleksZZ <alexyvp@mail.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -219,6 +219,10 @@ msgstr "Записывать в console.log:"
 
 #: ../contents/ui/config/ConfigDebug.qml
 msgid "Use Legacy Forecast API:"
+msgstr ""
+
+#: ../contents/ui/config/ConfigDebug.qml
+msgid "Startup time delay (ms):"
 msgstr ""
 
 #: ../contents/ui/config/ConfigStation.qml

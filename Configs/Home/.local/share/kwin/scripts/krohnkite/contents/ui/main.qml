@@ -33,11 +33,6 @@ Item {
         id: activityInfo
     }
 
-    Plasma5Support.DataSource {
-        id: mousePoller
-        engine: 'executable'
-    }
-
     Loader {
         id: popupDialog
         source: "popup.qml"

@@ -96,16 +96,6 @@
         <default></default>
     </entry>
 
-    <entry name="debug" type="Bool">
-	    <label>Print debug messages</label>
-        <default>false</default>
-    </entry>
-
-    <entry name="debugActiveWin" type="Bool">
-	    <label>Print only new Window</label>
-        <default>false</default>
-    </entry>
-
     <entry name="tileLayoutOrder" type="Int">
 	    <label> Tile layout order</label>
         <default>1</default>
@@ -369,8 +359,8 @@
         <default></default>
     </entry>
 
-    <entry name="pollMouseXdotool" type="Bool">
-	    <label>Poll actual mouse position using xdotool (for tile swapping, for example)</label>
+    <entry name="floatSkipPagerWindows" type="Bool">
+	    <label>Make the window float if its property: skipPager=true (HACK)</label>
         <default>false</default>
     </entry>
 
@@ -397,6 +387,62 @@
     <entry name="newWindowPosition" type="Int">
         <label>The position every new window in the screen window array</label>
         <default>0</default>
+    </entry>
+
+    <entry name="logging" type="Bool">
+	    <label>Enable logging</label>
+        <default>false</default>
+    </entry>
+
+    <entry name="logNewWindows" type="Bool">
+	    <label>Log new windows</label>
+        <default>false</default>
+    </entry>
+
+    <entry name="logFilteredWindows" type="Bool">
+	    <label>Log filtered windows</label>
+        <default>false</default>
+    </entry>
+
+    <entry name="logUnmanagedWindows" type="Bool">
+	    <label>Log unmanaged windows</label>
+        <default>false</default>
+    </entry>
+
+    <entry name="logWorkspaceSignals" type="Bool">
+	    <label>Log signals from workspace</label>
+        <default>false</default>
+    </entry>
+    <entry name="logWorkspaceSignalsSubmodules" type="String">
+	    <label>Specify a comma separated list of numbers workspace signals submodules</label>
+        <default></default>
+    </entry>
+
+    <entry name="logWindowSignals" type="Bool">
+	    <label>Log signals from windows</label>
+        <default>false</default>
+    </entry>
+    <entry name="logWindowSignalsSubmodules" type="String">
+	    <label>Specify a comma separated list of numbers window signals submodules</label>
+        <default></default>
+    </entry>
+
+    <entry name="logOther" type="Bool">
+	    <label>Log all other modules</label>
+        <default>false</default>
+    </entry>
+    <entry name="logOtherSubmodules" type="String">
+	    <label>Specify a comma separated list of numbers all other submodules</label>
+        <default></default>
+    </entry>
+
+    <entry name="logFilter" type="Bool">
+	    <label>Enable log filters</label>
+        <default>false</default>
+    </entry>
+    <entry name="logFilterStr" type="String">
+      <label>Specify a comma separated list of filters</label>
+        <default></default>
     </entry>
   </group>
 </kcfg>

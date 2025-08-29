@@ -34,7 +34,86 @@ const Shortcut = {
     RotatePart: 31,
     ToggleDock: 32,
 };
+const ShortcutsKeys = Object.keys(Shortcut);
+const LogModules = {
+    newWindowAdded: 1,
+    newWindowFiltered: 2,
+    newWindowUnmanaged: 3,
+    screensChanged: 4,
+    virtualScreenGeometryChanged: 5,
+    currentActivityChanged: 6,
+    currentDesktopChanged: 7,
+    windowAdded: 8,
+    windowActivated: 9,
+    windowRemoved: 10,
+    activitiesChanged: 11,
+    bufferGeometryChanged: 12,
+    desktopsChanged: 13,
+    fullScreenChanged: 14,
+    interactiveMoveResizeStepped: 15,
+    maximizedAboutToChange: 16,
+    minimizedChanged: 17,
+    moveResizedChanged: 18,
+    outputChanged: 19,
+    shortcut: 20,
+    arrangeScreen: 21,
+    printConfig: 22,
+    setTimeout: 23,
+    window: 24,
+};
+const LogModulesKeys = Object.keys(LogModules);
+const LogPartitions = {
+    newWindow: {
+        number: 100,
+        name: "newWindow",
+        modules: [
+            LogModules.newWindowAdded,
+            LogModules.newWindowFiltered,
+            LogModules.newWindowUnmanaged,
+        ],
+    },
+    workspaceSignals: {
+        number: 200,
+        name: "workspaceSignal",
+        modules: [
+            LogModules.screensChanged,
+            LogModules.virtualScreenGeometryChanged,
+            LogModules.currentActivityChanged,
+            LogModules.currentDesktopChanged,
+            LogModules.windowAdded,
+            LogModules.windowActivated,
+            LogModules.windowRemoved,
+        ],
+    },
+    windowSignals: {
+        number: 300,
+        name: "windowSignal",
+        modules: [
+            LogModules.activitiesChanged,
+            LogModules.bufferGeometryChanged,
+            LogModules.desktopsChanged,
+            LogModules.fullScreenChanged,
+            LogModules.interactiveMoveResizeStepped,
+            LogModules.maximizedAboutToChange,
+            LogModules.minimizedChanged,
+            LogModules.moveResizedChanged,
+            LogModules.outputChanged,
+        ],
+    },
+    other: {
+        number: 1000,
+        name: "other",
+        modules: [
+            LogModules.shortcut,
+            LogModules.arrangeScreen,
+            LogModules.printConfig,
+            LogModules.setTimeout,
+            LogModules.window,
+        ],
+    },
+};
 let CONFIG;
+let LOG;
 class Dock {
     constructor(cfg, priority = 0) {
         this.renderedOutputId = "";
@@ -1018,24 +1097,47 @@ class DockStore {
 }
 class KWinConfig {
     constructor() {
-        function commaSeparate(str) {
+        function separate(str, separator) {
             if (!str || typeof str !== "string")
                 return [];
             return str
-                .split(",")
+                .split(separator)
                 .map((part) => part.trim())
                 .filter((part) => part != "");
         }
-        function newLineSeparate(str) {
-            if (!str || typeof str !== "string")
-                return [];
-            return str
-                .split("\n")
-                .map((part) => part.trim())
-                .filter((part) => part != "");
+        if (KWIN.readConfig("logging", false)) {
+            let logParts = [];
+            let newWindowSubmodules = [];
+            if (KWIN.readConfig("logNewWindows", false))
+                newWindowSubmodules.push("1");
+            if (KWIN.readConfig("logFilteredWindows", false))
+                newWindowSubmodules.push("2");
+            if (KWIN.readConfig("logUnmanagedWindows", false))
+                newWindowSubmodules.push("3");
+            if (newWindowSubmodules.length > 0)
+                logParts.push([LogPartitions.newWindow, newWindowSubmodules]);
+            if (KWIN.readConfig("logWorkspaceSignals", false)) {
+                let workspaceSignalsSubmodules = separate(KWIN.readConfig("logWorkspaceSignalsSubmodules", ""), ",");
+                logParts.push([
+                    LogPartitions.workspaceSignals,
+                    workspaceSignalsSubmodules,
+                ]);
+            }
+            if (KWIN.readConfig("logWindowSignals", false)) {
+                let windowSignalsSubmodules = separate(KWIN.readConfig("logWindowSignalsSubmodules", ""), ",");
+                logParts.push([LogPartitions.windowSignals, windowSignalsSubmodules]);
+            }
+            if (KWIN.readConfig("logOther", false)) {
+                let otherSubmodules = separate(KWIN.readConfig("logOtherSubmodules", ""), ",");
+                logParts.push([LogPartitions.other, otherSubmodules]);
+            }
+            const logFilters = KWIN.readConfig("logFilter", false)
+                ? separate(KWIN.readConfig("logFilterStr", ""), ",")
+                : [];
+            LOG = new Logging(logParts, logFilters);
         }
-        DEBUG.enabled = DEBUG.enabled || KWIN.readConfig("debug", false);
-        this.layoutOrder = [];
+        else
+            LOG = undefined;
         let sortedLayouts = [];
         this.layoutFactories = {};
         [
@@ -1065,6 +1167,7 @@ class KWinConfig {
         if (sortedLayouts.length === 0) {
             sortedLayouts.push({ order: 1, layoutClass: TileLayout });
         }
+        this.layoutOrder = [];
         sortedLayouts.forEach(({ layoutClass }) => {
             this.layoutOrder.push(layoutClass.id);
             this.layoutFactories[layoutClass.id] = () => new layoutClass();
@@ -1087,8 +1190,8 @@ class KWinConfig {
         this.dockVGap = KWIN.readConfig("dockVGap", 0);
         this.dockVAlignment = KWIN.readConfig("dockVAlignment", 0);
         this.dockVEdgeAlignment = KWIN.readConfig("dockVEdgeAlignment", 0);
-        this.dockSurfacesConfig = newLineSeparate(KWIN.readConfig("dockSurfacesConfig", ""));
-        this.dockWindowClassConfig = newLineSeparate(KWIN.readConfig("dockWindowClassConfig", ""));
+        this.dockSurfacesConfig = separate(KWIN.readConfig("dockSurfacesConfig", ""), "\n");
+        this.dockWindowClassConfig = separate(KWIN.readConfig("dockWindowClassConfig", ""), "\n");
         this.soleWindowWidth = KWIN.readConfig("soleWindowWidth", 100);
         this.soleWindowHeight = KWIN.readConfig("soleWindowHeight", 100);
         this.soleWindowNoBorders = KWIN.readConfig("soleWindowNoBorders", false);
@@ -1096,7 +1199,7 @@ class KWinConfig {
         this.tileLayoutInitialAngle = KWIN.readConfig("tileLayoutInitialRotationAngle", "0");
         this.columnsLayoutInitialAngle = KWIN.readConfig("columnsLayoutInitialRotationAngle", "0");
         this.columnsBalanced = KWIN.readConfig("columnsBalanced", false);
-        this.columnsLayerConf = commaSeparate(KWIN.readConfig("columnsLayerConf", ""));
+        this.columnsLayerConf = separate(KWIN.readConfig("columnsLayerConf", ""), ",");
         this.tiledWindowsLayer = getWindowLayer(KWIN.readConfig("tiledWindowsLayer", 0));
         this.floatedWindowsLayer = getWindowLayer(KWIN.readConfig("floatedWindowsLayer", 1));
         this.quarterLayoutReset = KWIN.readConfig("quarterLayoutReset", false);
@@ -1115,7 +1218,7 @@ class KWinConfig {
         this.screenGapRight = KWIN.readConfig("screenGapRight", 0);
         this.screenGapTop = KWIN.readConfig("screenGapTop", 0);
         this.screenGapBetween = KWIN.readConfig("screenGapBetween", 0);
-        this.gapsOverrideConfig = newLineSeparate(KWIN.readConfig("gapsOverrideConfig", ""));
+        this.gapsOverrideConfig = separate(KWIN.readConfig("gapsOverrideConfig", ""), "\n");
         const directionalKeyDwm = KWIN.readConfig("directionalKeyDwm", false);
         const directionalKeyFocus = KWIN.readConfig("directionalKeyFocus", true);
         this.directionalKeyMode = directionalKeyDwm ? "dwm" : "focus";
@@ -1126,23 +1229,21 @@ class KWinConfig {
         this.preventMinimize = KWIN.readConfig("preventMinimize", false);
         this.preventProtrusion = KWIN.readConfig("preventProtrusion", true);
         this.notificationDuration = KWIN.readConfig("notificationDuration", 1000);
-        this.pollMouseXdotool = KWIN.readConfig("pollMouseXdotool", false);
-        this.floatingClass = commaSeparate(KWIN.readConfig("floatingClass", ""));
-        this.floatingTitle = commaSeparate(KWIN.readConfig("floatingTitle", ""));
-        this.ignoreActivity = commaSeparate(KWIN.readConfig("ignoreActivity", ""));
-        this.ignoreClass = commaSeparate(KWIN.readConfig("ignoreClass", "krunner,yakuake,spectacle,kded5,xwaylandvideobridge,plasmashell,ksplashqml,org.kde.plasmashell,org.kde.polkit-kde-authentication-agent-1,org.kde.kruler,kruler,kwin_wayland,ksmserver-logout-greeter"));
-        this.ignoreRole = commaSeparate(KWIN.readConfig("ignoreRole", "quake"));
-        this.ignoreScreen = commaSeparate(KWIN.readConfig("ignoreScreen", ""));
-        this.ignoreVDesktop = commaSeparate(KWIN.readConfig("ignoreVDesktop", ""));
-        this.ignoreTitle = commaSeparate(KWIN.readConfig("ignoreTitle", ""));
-        this.screenDefaultLayout = commaSeparate(KWIN.readConfig("screenDefaultLayout", ""));
-        this.tilingClass = commaSeparate(KWIN.readConfig("tilingClass", ""));
+        this.floatSkipPager = KWIN.readConfig("floatSkipPagerWindows", false);
+        this.floatingClass = separate(KWIN.readConfig("floatingClass", ""), ",");
+        this.floatingTitle = separate(KWIN.readConfig("floatingTitle", ""), ",");
+        this.ignoreActivity = separate(KWIN.readConfig("ignoreActivity", ""), ",");
+        this.ignoreClass = separate(KWIN.readConfig("ignoreClass", "krunner,yakuake,spectacle,kded5,xwaylandvideobridge,plasmashell,ksplashqml,org.kde.plasmashell,org.kde.polkit-kde-authentication-agent-1,org.kde.kruler,kruler,kwin_wayland,ksmserver-logout-greeter"), ",");
+        this.ignoreRole = separate(KWIN.readConfig("ignoreRole", "quake"), ",");
+        this.ignoreScreen = separate(KWIN.readConfig("ignoreScreen", ""), ",");
+        this.ignoreVDesktop = separate(KWIN.readConfig("ignoreVDesktop", ""), ",");
+        this.ignoreTitle = separate(KWIN.readConfig("ignoreTitle", ""), ",");
+        this.screenDefaultLayout = separate(KWIN.readConfig("screenDefaultLayout", ""), ",");
+        this.tilingClass = separate(KWIN.readConfig("tilingClass", ""), ",");
         this.tileNothing = KWIN.readConfig("tileNothing", false);
         if (this.preventMinimize && this.monocleMinimizeRest) {
-            debug(() => "preventMinimize is disabled because of monocleMinimizeRest.");
             this.preventMinimize = false;
         }
-        this.debugActiveWin = KWIN.readConfig("debugActiveWin", false);
     }
     toString() {
         return "Config(" + JSON.stringify(this, undefined, 2) + ")";
@@ -1184,7 +1285,8 @@ class KWinDriver {
         return screens;
     }
     get cursorPosition() {
-        return this.mousePoller.mousePosition;
+        const workspacePos = this.workspace.cursorPos;
+        return workspacePos !== null ? [workspacePos.x, workspacePos.y] : null;
     }
     constructor(api) {
         KWIN = api.kwin;
@@ -1194,11 +1296,10 @@ class KWinDriver {
         this.control = new TilingController(this.engine);
         this.windowMap = new WrapperMap((client) => KWinWindow.generateID(client), (client) => new WindowClass(new KWinWindow(client, this.workspace)));
         this.entered = false;
-        this.mousePoller = new KWinMousePoller();
     }
     main() {
         CONFIG = KWINCONFIG = new KWinConfig();
-        debug(() => "Config: " + KWINCONFIG);
+        LOG === null || LOG === void 0 ? void 0 : LOG.send(LogModules.printConfig, undefined, `Config: ${CONFIG}`);
         this.bindEvents();
         this.bindShortcut();
         const clients = this.workspace.stackingOrder;
@@ -1213,23 +1314,28 @@ class KWinDriver {
             client.normalWindow &&
             !client.hidden &&
             client.width * client.height > 10) {
-            if (CONFIG.debugActiveWin)
-                print(debugWin(client));
             const window = this.windowMap.add(client);
             this.control.onWindowAdded(this, window);
             if (window.state !== WindowState.Unmanaged) {
                 this.bindWindowEvents(window, client);
+                if (client.maximizeMode > 0)
+                    client.setMaximize(false, false);
+                LOG === null || LOG === void 0 ? void 0 : LOG.send(LogModules.newWindowAdded, "", debugWin(client), {
+                    winClass: [`${client.resourceClass}`],
+                });
                 return window;
             }
             else {
                 this.windowMap.remove(client);
-                if (CONFIG.debugActiveWin)
-                    print("Unmanaged: " + debugWin(client));
+                LOG === null || LOG === void 0 ? void 0 : LOG.send(LogModules.newWindowUnmanaged, "", debugWin(client), {
+                    winClass: [`${client.resourceClass}`],
+                });
             }
         }
         else {
-            if (CONFIG.debugActiveWin)
-                print("Filtered: " + debugWin(client));
+            LOG === null || LOG === void 0 ? void 0 : LOG.send(LogModules.newWindowFiltered, "", debugWin(client), {
+                winClass: [`${client.resourceClass}`],
+            });
         }
         return null;
     }
@@ -1243,6 +1349,7 @@ class KWinDriver {
     bindShortcut() {
         const callbackShortcut = (shortcut) => {
             return () => {
+                LOG === null || LOG === void 0 ? void 0 : LOG.send(LogModules.shortcut, `Shortcut pressed:`, `${ShortcutsKeys[shortcut]}`);
                 this.enter(() => this.control.onShortcut(this, shortcut));
             };
         };
@@ -1320,6 +1427,7 @@ class KWinDriver {
             .activated.connect(callbackShortcut(Shortcut.SetMaster));
         const callbackShortcutLayout = (layoutClass) => {
             return () => {
+                LOG === null || LOG === void 0 ? void 0 : LOG.send(LogModules.shortcut, "shortcut layout", `${layoutClass.id}`);
                 this.enter(() => this.control.onShortcut(this, Shortcut.SetLayout, layoutClass.id));
             };
         };
@@ -1375,31 +1483,49 @@ class KWinDriver {
             callback();
         }
         catch (e) {
-            debug(() => "Error raised from line " + e.lineNumber);
-            debug(() => e);
+            warning(`ProtectFunc: Error raised line: ${e.lineNumber}. Error: ${e}`);
         }
         finally {
             this.entered = false;
         }
     }
     bindEvents() {
-        this.connect(this.workspace.screensChanged, () => this.control.onSurfaceUpdate(this, "screens (Outputs) changed"));
-        this.connect(this.workspace.virtualScreenGeometryChanged, () => {
-            this.control.onSurfaceUpdate(this, "virtualScreenGeometryChanged");
+        this.connect(this.workspace.screensChanged, () => {
+            LOG === null || LOG === void 0 ? void 0 : LOG.send(LogModules.screensChanged, "eventFired");
+            this.control.onSurfaceUpdate(this);
         });
-        this.connect(this.workspace.currentActivityChanged, (activityId) => this.control.onCurrentActivityChanged(this, activityId));
-        this.connect(this.workspace.currentDesktopChanged, (virtualDesktop) => this.control.onSurfaceUpdate(this, "currentDesktopChanged"));
+        this.connect(this.workspace.virtualScreenGeometryChanged, () => {
+            LOG === null || LOG === void 0 ? void 0 : LOG.send(LogModules.virtualScreenGeometryChanged, "eventFired");
+            this.control.onSurfaceUpdate(this);
+        });
+        this.connect(this.workspace.currentActivityChanged, (activityId) => {
+            LOG === null || LOG === void 0 ? void 0 : LOG.send(LogModules.currentActivityChanged, "eventFired", `Activity ID:${activityId}`);
+            this.control.onCurrentActivityChanged(this);
+        });
+        this.connect(this.workspace.currentDesktopChanged, (virtualDesktop) => {
+            LOG === null || LOG === void 0 ? void 0 : LOG.send(LogModules.currentDesktopChanged, "eventFired", `Virtual Desktop. name:${virtualDesktop.name}, id:${virtualDesktop.id}`);
+            this.control.onSurfaceUpdate(this);
+        });
         this.connect(this.workspace.windowAdded, (client) => {
+            if (!client)
+                return;
+            LOG === null || LOG === void 0 ? void 0 : LOG.send(LogModules.windowAdded, "eventFired", `window: caption:${client.caption} internalID:${client.internalId}`, { winClass: [`${client.resourceClass}`] });
             const window = this.addWindow(client);
             if (client.active && window !== null)
                 this.control.onWindowFocused(this, window);
         });
         this.connect(this.workspace.windowActivated, (client) => {
+            if (!client)
+                return;
+            LOG === null || LOG === void 0 ? void 0 : LOG.send(LogModules.windowActivated, "eventFired", `window: caption:${client.caption} internalID:${client.internalId}`, { winClass: [`${client.resourceClass}`] });
             const window = this.windowMap.get(client);
             if (client.active && window !== null)
                 this.control.onWindowFocused(this, window);
         });
         this.connect(this.workspace.windowRemoved, (client) => {
+            if (!client)
+                return;
+            LOG === null || LOG === void 0 ? void 0 : LOG.send(LogModules.windowRemoved, "eventFired", `window: caption:${client.caption} internalID:${client.internalId}`, { winClass: [`${client.resourceClass}`] });
             const window = this.windowMap.get(client);
             if (window) {
                 this.control.onWindowRemoved(this, window);
@@ -1410,12 +1536,43 @@ class KWinDriver {
     bindWindowEvents(window, client) {
         let moving = false;
         let resizing = false;
+        this.connect(client.activitiesChanged, () => {
+            LOG === null || LOG === void 0 ? void 0 : LOG.send(LogModules.activitiesChanged, "eventFired", `window: caption:${client.caption} internalID:${client.internalId}, activities: ${client.activities.join(",")}`, { winClass: [`${client.resourceClass}`] });
+            this.control.onWindowChanged(this, window, "activity=" + client.activities.join(","));
+        });
+        this.connect(client.bufferGeometryChanged, () => {
+            LOG === null || LOG === void 0 ? void 0 : LOG.send(LogModules.bufferGeometryChanged, "eventFired", `Window: caption:${client.caption} internalId:${client.internalId}, moving:${moving}, resizing:${resizing}, geometry:${window.geometry}`, { winClass: [`${client.resourceClass}`] });
+            if (moving)
+                this.control.onWindowMove(window);
+            else if (resizing)
+                this.control.onWindowResize(this, window);
+            else {
+                if (!window.actualGeometry.equals(window.geometry))
+                    this.control.onWindowGeometryChanged(this, window);
+            }
+        });
+        this.connect(client.desktopsChanged, () => {
+            LOG === null || LOG === void 0 ? void 0 : LOG.send(LogModules.desktopsChanged, "eventFired", `window: caption:${client.caption} internalID:${client.internalId}, desktops: ${client.desktops}`, { winClass: [`${client.resourceClass}`] });
+            this.control.onWindowChanged(this, window, "Window's desktop changed.");
+        });
+        this.connect(client.fullScreenChanged, () => {
+            LOG === null || LOG === void 0 ? void 0 : LOG.send(LogModules.fullScreenChanged, "eventFired", `window: caption:${client.caption} internalID:${client.internalId}, fullscreen: ${client.fullScreen}`, { winClass: [`${client.resourceClass}`] });
+            this.control.onWindowChanged(this, window, "fullscreen=" + client.fullScreen);
+        });
+        this.connect(client.interactiveMoveResizeStepped, (geometry) => {
+            LOG === null || LOG === void 0 ? void 0 : LOG.send(LogModules.interactiveMoveResizeStepped, "eventFired", `window: caption:${client.caption} internalID:${client.internalId},interactiveMoveResizeStepped:${geometry}`, { winClass: [`${client.resourceClass}`] });
+            if (client.resize)
+                return;
+            this.control.onWindowDragging(this, window, geometry);
+        });
         this.connect(client.maximizedAboutToChange, (mode) => {
-            const maximized = mode === 3;
-            window.window.maximized = maximized;
-            this.control.onWindowMaximizeChanged(this, window, maximized);
+            LOG === null || LOG === void 0 ? void 0 : LOG.send(LogModules.maximizedAboutToChange, "eventFired", `window: caption:${client.caption} internalID:${client.internalId},maximizedAboutToChange:${mode}`, { winClass: [`${client.resourceClass}`] });
+            window.window.maximized =
+                mode > 0 ? true : false;
+            this.control.onWindowMaximizeChanged(this, window);
         });
         this.connect(client.minimizedChanged, () => {
+            LOG === null || LOG === void 0 ? void 0 : LOG.send(LogModules.minimizedChanged, "eventFired", `window: caption:${client.caption} internalID:${client.internalId},minimized:${client.minimized}`, { winClass: [`${client.resourceClass}`] });
             if (KWINCONFIG.preventMinimize) {
                 client.minimized = false;
                 this.workspace.activeWindow = client;
@@ -1425,27 +1582,15 @@ class KWinDriver {
                 this.control.onWindowChanged(this, window, comment);
             }
         });
-        this.connect(client.fullScreenChanged, () => this.control.onWindowChanged(this, window, "fullscreen=" + client.fullScreen));
-        this.connect(client.desktopsChanged, () => this.control.onDesktopsChanged(this, window));
-        this.connect(client.interactiveMoveResizeStepped, (geometry) => {
-            if (client.resize)
-                return;
-            this.control.onWindowDragging(this, window, geometry);
-        });
         this.connect(client.moveResizedChanged, () => {
-            debugObj(() => [
-                "moveResizedChanged",
-                { window, move: client.move, resize: client.resize },
-            ]);
+            LOG === null || LOG === void 0 ? void 0 : LOG.send(LogModules.moveResizedChanged, "eventFired", `Window: caption:${client.caption} internalId:${client.internalId}, moving:${moving}, resizing:${resizing}`, { winClass: [`${client.resourceClass}`] });
             if (moving !== client.move) {
                 moving = client.move;
                 if (moving) {
-                    this.mousePoller.start();
                     this.control.onWindowMoveStart(window);
                 }
                 else {
                     this.control.onWindowMoveOver(this, window);
-                    this.mousePoller.stop();
                 }
             }
             if (resizing !== client.resize) {
@@ -1456,72 +1601,18 @@ class KWinDriver {
                     this.control.onWindowResizeOver(this, window);
             }
         });
-        this.connect(client.bufferGeometryChanged, () => {
-            if (moving)
-                this.control.onWindowMove(window);
-            else if (resizing)
-                this.control.onWindowResize(this, window);
-            else {
-                if (!window.actualGeometry.equals(window.geometry))
-                    this.control.onWindowGeometryChanged(this, window);
-            }
+        this.connect(client.outputChanged, () => {
+            LOG === null || LOG === void 0 ? void 0 : LOG.send(LogModules.outputChanged, "eventFired", `window: caption:${client.caption} internalID:${client.internalId} output: ${client.output.name}`, { winClass: [`${client.resourceClass}`] });
+            this.control.onWindowChanged(this, window, "screen=" + client.output.name);
         });
-        this.connect(client.outputChanged, () => this.control.onWindowChanged(this, window, "screen=" + client.output.name));
-        this.connect(client.activitiesChanged, () => this.control.onWindowChanged(this, window, "activity=" + client.activities.join(",")));
-        this.connect(client.desktopsChanged, () => this.control.onWindowChanged(this, window, "Window's desktop changed."));
+        if (CONFIG.floatSkipPager) {
+            this.connect(client.skipPagerChanged, () => {
+                this.control.onWindowSkipPagerChanged(this, window, client.skipPager);
+            });
+        }
     }
 }
 KWinDriver.backendName = "kwin";
-class KWinMousePoller {
-    get started() {
-        return this.startCount > 0;
-    }
-    get mousePosition() {
-        return this.parseResult();
-    }
-    constructor() {
-        this.startCount = 0;
-        this.cmdResult = null;
-        mousePoller.interval = 0;
-        mousePoller.onNewData.connect((sourceName, data) => {
-            this.cmdResult = data["exit code"] === 0 ? data["stdout"] : null;
-            mousePoller.disconnectSource(KWinMousePoller.COMMAND);
-            KWinSetTimeout(() => {
-                if (this.started)
-                    mousePoller.connectSource(KWinMousePoller.COMMAND);
-            }, KWinMousePoller.INTERVAL);
-        });
-    }
-    start() {
-        this.startCount += 1;
-        if (KWINCONFIG.pollMouseXdotool)
-            mousePoller.connectSource(KWinMousePoller.COMMAND);
-    }
-    stop() {
-        this.startCount = Math.max(this.startCount - 1, 0);
-    }
-    parseResult() {
-        if (!this.cmdResult)
-            return null;
-        let x = null;
-        let y = null;
-        this.cmdResult
-            .split(" ")
-            .slice(0, 2)
-            .forEach((part) => {
-            const [key, value, _] = part.split(":");
-            if (key === "x")
-                x = parseInt(value, 10);
-            if (key === "y")
-                y = parseInt(value, 10);
-        });
-        if (x === null || y === null)
-            return null;
-        return [x, y];
-    }
-}
-KWinMousePoller.COMMAND = "xdotool getmouselocation";
-KWinMousePoller.INTERVAL = 50;
 class KWinTimerPool {
     constructor() {
         this.timers = [];
@@ -1530,7 +1621,7 @@ class KWinTimerPool {
     setTimeout(func, timeout) {
         if (this.timers.length === 0) {
             this.numTimers++;
-            debugObj(() => ["setTimeout/newTimer", { numTimers: this.numTimers }]);
+            LOG === null || LOG === void 0 ? void 0 : LOG.send(LogModules.setTimeout, "setTimeout/newTimer", `numTimers: ${this.numTimers}`);
         }
         const timer = this.timers.pop() ||
             Qt.createQmlObject("import QtQuick 2.0; Timer {}", scriptRoot);
@@ -1622,6 +1713,7 @@ class KWinWindow {
     }
     get shouldFloat() {
         return (this.isFloatByConfig ||
+            (CONFIG.floatSkipPager && this.window.skipPager) ||
             this.window.modal ||
             this.window.transient ||
             !this.window.resizeable ||
@@ -1681,22 +1773,19 @@ class KWinWindow {
         this.noBorderManaged = false;
         this.noBorderOriginal = window.noBorder;
         this.isIgnoredByConfig =
-            this.isContain(KWINCONFIG.ignoreClass, window.resourceClass) ||
-                this.isContain(KWINCONFIG.ignoreClass, window.resourceName) ||
+            KWinWindow.isContain(KWINCONFIG.ignoreClass, window.resourceClass) ||
+                KWinWindow.isContain(KWINCONFIG.ignoreClass, window.resourceName) ||
                 matchWords(this.window.caption, KWINCONFIG.ignoreTitle) >= 0 ||
-                this.isContain(KWINCONFIG.ignoreRole, window.windowRole) ||
+                KWinWindow.isContain(KWINCONFIG.ignoreRole, window.windowRole) ||
                 (KWINCONFIG.tileNothing &&
-                    this.isContain(KWINCONFIG.tilingClass, window.resourceClass));
+                    KWinWindow.isContain(KWINCONFIG.tilingClass, window.resourceClass));
         this.isFloatByConfig =
-            this.isContain(KWINCONFIG.floatingClass, window.resourceClass) ||
-                this.isContain(KWINCONFIG.floatingClass, window.resourceName) ||
+            KWinWindow.isContain(KWINCONFIG.floatingClass, window.resourceClass) ||
+                KWinWindow.isContain(KWINCONFIG.floatingClass, window.resourceName) ||
                 matchWords(this.window.caption, KWINCONFIG.floatingTitle) >= 0;
     }
     commit(geometry, noBorder, windowLayer) {
-        debugObj(() => [
-            "KWinWindow#commit",
-            { geometry, noBorder, keepAbove: windowLayer },
-        ]);
+        LOG === null || LOG === void 0 ? void 0 : LOG.send(LogModules.window, "KwinWindow#commit", `geometry:${geometry}, noBorder:${noBorder}, windowLayer:${windowLayer}`);
         if (this.window.move || this.window.resize)
             return;
         if (noBorder !== undefined) {
@@ -1753,7 +1842,7 @@ class KWinWindow {
                 this.window.activities.indexOf(ksrf.activity) !== -1) &&
             this.window.output === ksrf.output);
     }
-    isContain(filterList, s) {
+    static isContain(filterList, s) {
         for (let filterWord of filterList) {
             if (filterWord[0] === "[" && filterWord[filterWord.length - 1] === "]") {
                 if (s
@@ -1786,6 +1875,7 @@ function debugWin(win) {
         { name: "output.name", opt: win.output.name },
         { name: "resourceName", opt: win.resourceName },
         { name: "resourceClass", opt: win.resourceClass },
+        { name: "skipPager", opt: win.skipPager },
         { name: "desktopWindow", opt: win.desktopWindow },
         { name: "windowRole", opt: win.windowRole },
         { name: "windowType", opt: win.windowType },
@@ -1825,6 +1915,7 @@ function debugWin(win) {
         { name: "transient", opt: win.transient },
         { name: "transientFor", opt: win.transientFor },
         { name: "maximizable", opt: win.maximizable },
+        { name: "maximizeMode", opt: win.maximizeMode },
         { name: "moveable", opt: win.moveable },
         { name: "moveableAcrossScreens", opt: win.moveableAcrossScreens },
         { name: "hidden", opt: win.hidden },
@@ -1832,7 +1923,7 @@ function debugWin(win) {
         { name: "keepBelow", opt: win.keepBelow },
         { name: "opacity", opt: win.opacity },
     ];
-    var s = "krohnkite:";
+    var s = "kwin window props:";
     w_props.forEach((el) => {
         if (typeof el.opt !== "undefined" &&
             (el.opt || el.opt === 0 || el.opt === "0")) {
@@ -1851,20 +1942,16 @@ class TilingController {
         this.isDragging = false;
         this.dragCompleteTime = null;
     }
-    onSurfaceUpdate(ctx, comment) {
-        debugObj(() => ["onSurfaceUpdate", { comment }]);
+    onSurfaceUpdate(ctx) {
         this.engine.arrange(ctx);
     }
-    onCurrentActivityChanged(ctx, activityId) {
-        debugObj(() => ["onCurrentActivityChanged", { activityId: activityId }]);
+    onCurrentActivityChanged(ctx) {
         this.engine.arrange(ctx);
     }
     onCurrentSurfaceChanged(ctx) {
-        debugObj(() => ["onCurrentSurfaceChanged", { srf: ctx.currentSurface }]);
         this.engine.arrange(ctx);
     }
     onWindowAdded(ctx, window) {
-        debugObj(() => ["onWindowAdded", { window }]);
         this.engine.manage(window);
         if (window.tileable) {
             const srf = ctx.currentSurface;
@@ -1880,8 +1967,14 @@ class TilingController {
         }
         this.engine.arrange(ctx);
     }
+    onWindowSkipPagerChanged(ctx, window, skipPager) {
+        if (skipPager)
+            window.state = WindowState.Floating;
+        else
+            window.state = WindowState.Undecided;
+        this.engine.arrange(ctx);
+    }
     onWindowRemoved(ctx, window) {
-        debugObj(() => ["onWindowRemoved", { window }]);
         this.engine.unmanage(window);
         this.engine.arrange(ctx);
     }
@@ -1911,9 +2004,8 @@ class TilingController {
         this.isDragging = false;
     }
     onWindowMoveOver(ctx, window) {
-        debugObj(() => ["onWindowMoveOver", { window }]);
         if (window.state === WindowState.Dragging) {
-            window.removeDraggingState(WindowState.Tiled);
+            window.setState(WindowState.Tiled);
             this.engine.arrange(ctx);
             return;
         }
@@ -1942,7 +2034,6 @@ class TilingController {
     onWindowResizeStart(window) {
     }
     onWindowResize(ctx, window) {
-        debugObj(() => ["onWindowResize", { window }]);
         if (CONFIG.adjustLayout &&
             CONFIG.adjustLayoutLive &&
             window.state === WindowState.Tiled) {
@@ -1955,7 +2046,6 @@ class TilingController {
         }
     }
     onWindowResizeOver(ctx, window) {
-        debugObj(() => ["onWindowResizeOver", { window }]);
         if (CONFIG.adjustLayout && window.tiled) {
             this.engine.adjustLayout(window);
             this.engine.arrange(ctx);
@@ -1967,16 +2057,14 @@ class TilingController {
         else if (!CONFIG.adjustLayout)
             this.engine.enforceSize(ctx, window);
     }
-    onWindowMaximizeChanged(ctx, window, maximized) {
+    onWindowMaximizeChanged(ctx, window) {
         this.engine.arrange(ctx);
     }
     onWindowGeometryChanged(ctx, window) {
-        debugObj(() => ["onWindowGeometryChanged", { window }]);
         this.engine.enforceSize(ctx, window);
     }
     onWindowChanged(ctx, window, comment) {
         if (window) {
-            debugObj(() => ["onWindowChanged", { window, comment }]);
             if (comment === "unminimized")
                 ctx.currentWindow = window;
             const workingArea = window.surface.workingArea;
@@ -2300,7 +2388,6 @@ class TilingEngine {
             this.resizeTile(window, dir, step);
     }
     arrange(ctx) {
-        debug(() => "arrange");
         ctx.screens.forEach((srf) => {
             this.arrangeScreen(ctx, srf);
         });
@@ -2308,14 +2395,7 @@ class TilingEngine {
     arrangeScreen(ctx, srf) {
         const layout = this.layouts.getCurrentLayout(srf);
         const visibles = this.windows.getVisibleWindows(srf);
-        debugObj(() => [
-            "arrangeScreen",
-            {
-                layout,
-                srf,
-                visibles: visibles.length,
-            },
-        ]);
+        LOG === null || LOG === void 0 ? void 0 : LOG.send(LogModules.arrangeScreen, "Begin", `layout: ${layout}, surface: ${srf}, visibles number: ${visibles.length}`);
         const gaps = this.getGaps(srf);
         const workingArea = this.docks.render(srf, visibles, srf.workingArea.clone());
         visibles.forEach((window) => {
@@ -2365,7 +2445,7 @@ class TilingEngine {
         else {
             visibles.forEach((window) => window.commit());
         }
-        debugObj(() => ["arrangeScreen/finished", { srf }]);
+        LOG === null || LOG === void 0 ? void 0 : LOG.send(LogModules.arrangeScreen, "Finished", `${srf}`);
     }
     enforceSize(ctx, window) {
         if (window.tiled && !window.actualGeometry.equals(window.geometry))
@@ -2596,6 +2676,9 @@ class EngineContext {
     }
     set currentWindow(window) {
         this.drvctx.currentWindow = window;
+    }
+    get cursorPos() {
+        return this.drvctx.cursorPosition;
     }
     get surfaceParams() {
         let srf = this.drvctx.currentSurface;
@@ -2975,7 +3058,7 @@ class WindowClass {
     setDraggingState() {
         this.internalState = WindowState.Dragging;
     }
-    removeDraggingState(value) {
+    setState(value) {
         this.internalState = value;
     }
     get surface() {
@@ -3021,7 +3104,7 @@ class WindowClass {
     }
     commit(noBorders) {
         const state = this.state;
-        debugObj(() => ["Window#commit", { state: WindowState[state] }]);
+        LOG === null || LOG === void 0 ? void 0 : LOG.send(LogModules.window, "commit", `state: ${WindowState[state]}`);
         switch (state) {
             case WindowState.Dragging:
                 break;
@@ -3473,17 +3556,17 @@ class ColumnsLayout {
         }
     }
     drag(ctx, draggingRect, window, workingArea) {
-        const activationPoint = draggingRect.activationPoint;
-        const middlePoint = draggingRect.center;
+        const cursorOrActivationPoint = ctx.cursorPos || draggingRect.activationPoint;
+        const cursorOrMiddlePoint = ctx.cursorPos || draggingRect.center;
         if (this.columns.length === 0 ||
             (this.columns.length === 1 && this.columns[0].windowIds.size === 1))
             return false;
         let columnId = this.getColumnId(window);
         let windowId = window.id;
-        if (((this.direction.north && workingArea.isTopZone(activationPoint)) ||
-            (this.direction.south && workingArea.isBottomZone(middlePoint)) ||
-            (this.direction.west && workingArea.isLeftZone(activationPoint)) ||
-            (this.direction.east && workingArea.isRightZone(activationPoint))) &&
+        if (((this.direction.north && workingArea.isTopZone(cursorOrActivationPoint)) ||
+            (this.direction.south && workingArea.isBottomZone(cursorOrMiddlePoint)) ||
+            (this.direction.west && workingArea.isLeftZone(cursorOrActivationPoint)) ||
+            (this.direction.east && workingArea.isRightZone(cursorOrActivationPoint))) &&
             !(this.columns[0].windowIds.size === 1 &&
                 this.columns[0].windowIds.has(windowId))) {
             if (columnId !== null)
@@ -3492,10 +3575,10 @@ class ColumnsLayout {
             column.windowIds.add(windowId);
             return true;
         }
-        if (((this.direction.north && workingArea.isBottomZone(middlePoint)) ||
-            (this.direction.south && workingArea.isTopZone(activationPoint)) ||
-            (this.direction.west && workingArea.isRightZone(activationPoint)) ||
-            (this.direction.east && workingArea.isLeftZone(activationPoint))) &&
+        if (((this.direction.north && workingArea.isBottomZone(cursorOrMiddlePoint)) ||
+            (this.direction.south && workingArea.isTopZone(cursorOrActivationPoint)) ||
+            (this.direction.west && workingArea.isRightZone(cursorOrActivationPoint)) ||
+            (this.direction.east && workingArea.isLeftZone(cursorOrActivationPoint))) &&
             !(this.columns[this.columns.length - 1].windowIds.size === 1 &&
                 this.columns[this.columns.length - 1].windowIds.has(windowId))) {
             if (columnId !== null)
@@ -3509,13 +3592,13 @@ class ColumnsLayout {
             for (let i = 0; i < column.renderedWindowsRects.length; i++) {
                 const renderedRect = column.renderedWindowsRects[i];
                 if ((this.direction.west &&
-                    renderedRect.includesPoint(activationPoint, 0)) ||
+                    renderedRect.includesPoint(cursorOrActivationPoint, 0)) ||
                     (this.direction.north &&
-                        renderedRect.includesPoint(activationPoint, 2)) ||
+                        renderedRect.includesPoint(cursorOrActivationPoint, 2)) ||
                     (this.direction.east &&
-                        renderedRect.includesPoint(activationPoint, 0)) ||
+                        renderedRect.includesPoint(cursorOrActivationPoint, 0)) ||
                     (this.direction.south &&
-                        renderedRect.includesPoint(activationPoint, 2))) {
+                        renderedRect.includesPoint(cursorOrActivationPoint, 2))) {
                     if (column.renderedWindowsIds[i] === windowId)
                         return false;
                     if (i > 0 && column.renderedWindowsIds[i - 1] === windowId)
@@ -3528,13 +3611,13 @@ class ColumnsLayout {
                     return true;
                 }
                 if ((this.direction.west &&
-                    renderedRect.includesPoint(activationPoint, 1)) ||
+                    renderedRect.includesPoint(cursorOrActivationPoint, 1)) ||
                     (this.direction.north &&
-                        renderedRect.includesPoint(activationPoint, 3)) ||
+                        renderedRect.includesPoint(cursorOrActivationPoint, 3)) ||
                     (this.direction.east &&
-                        renderedRect.includesPoint(activationPoint, 1)) ||
+                        renderedRect.includesPoint(cursorOrActivationPoint, 1)) ||
                     (this.direction.south &&
-                        renderedRect.includesPoint(activationPoint, 3))) {
+                        renderedRect.includesPoint(cursorOrActivationPoint, 3))) {
                     if (column.renderedWindowsIds[i] === windowId)
                         return false;
                     if (i < column.renderedWindowsIds.length - 1 &&
@@ -4080,12 +4163,21 @@ class LayoutUtils {
         const actualLength = length - (n - 1) * gap;
         const weightSum = weights.reduce((sum, weight) => sum + weight, 0);
         let weightAcc = 0;
-        return weights.map((weight, i) => {
+        const parts = weights.map((weight, i) => {
             const partBegin = (actualLength * weightAcc) / weightSum + i * gap;
             const partLength = (actualLength * weight) / weightSum;
             weightAcc += weight;
             return [begin + Math.floor(partBegin), Math.floor(partLength)];
         });
+        let finalLength = parts.reduce((sum, [, length]) => sum + length, 0);
+        finalLength += (n - 1) * gap;
+        let remainder = length - finalLength;
+        if (remainder > 0 && remainder < n) {
+            for (let i = 0; i < remainder; i++) {
+                parts[n - i - 1][1] += 1;
+            }
+        }
+        return parts;
     }
     static splitAreaWeighted(area, weights, gap, horizontal) {
         gap = gap !== undefined ? gap : 0;
@@ -4665,26 +4757,6 @@ class TileLayout {
 TileLayout.MIN_MASTER_RATIO = 0.2;
 TileLayout.MAX_MASTER_RATIO = 0.8;
 TileLayout.id = "TileLayout";
-const DEBUG = {
-    enabled: false,
-    started: new Date().getTime(),
-};
-function debug(f) {
-    if (DEBUG.enabled) {
-        const timestamp = (new Date().getTime() - DEBUG.started) / 1000;
-        console.log("[" + timestamp + "]", f());
-    }
-}
-function debugObj(f) {
-    if (DEBUG.enabled) {
-        const timestamp = (new Date().getTime() - DEBUG.started) / 1000;
-        const [name, obj] = f();
-        const buf = [];
-        for (const i in obj)
-            buf.push(i + "=" + obj[i]);
-        console.log("[" + timestamp + "]", name + ": " + buf.join(" "));
-    }
-}
 class Err {
     constructor(s) {
         this.error = s;
@@ -4694,7 +4766,7 @@ class Err {
     }
 }
 function warning(s) {
-    print(`Krohnkite warn: ${s}`);
+    print(`Krohnkite.WARNING: ${s}`);
 }
 function clip(value, min, max) {
     if (value < min)
@@ -4757,6 +4829,155 @@ function toQRect(rect) {
 }
 function toRect(qrect) {
     return new Rect(qrect.x, qrect.y, qrect.width, qrect.height);
+}
+class Logging {
+    constructor(modules, filters) {
+        this._isIncludeMode = true;
+        this._logModules = Logging.parseModules(modules);
+        this._filters = this.parseFilters(filters);
+        this._started = new Date().getTime();
+    }
+    send(module, action, message, filter) {
+        if (module !== undefined && !this._logModules.has(module))
+            return;
+        if (filter !== undefined) {
+            if (this.isFiltered(filter))
+                return;
+        }
+        this._print(module, action, message);
+    }
+    isFiltered(filter) {
+        if (this._filters === null)
+            return false;
+        let key;
+        for (key in filter) {
+            if (this._filters[key] == null || filter[key] == null)
+                continue;
+            const isContain = KWinWindow.isContain(this._filters[key], filter[key][0]);
+            if (this._isIncludeMode) {
+                return isContain ? false : true;
+            }
+            else {
+                return isContain ? true : false;
+            }
+        }
+        return false;
+    }
+    static parseModules(modules) {
+        let logModules = new Set();
+        for (const module of modules) {
+            const userModules = Logging._logParseUserModules(module[0], module[1]);
+            if (userModules !== null) {
+                userModules.forEach((el) => { });
+                logModules = new Set([...logModules, ...userModules]);
+            }
+        }
+        return logModules;
+    }
+    parseFilters(filters) {
+        if (filters.length === 0 || (filters.length === 1 && filters[0] === ""))
+            return null;
+        let logFilters;
+        if (filters[0] !== "" && filters[0][0] === "!") {
+            this._isIncludeMode = false;
+            filters[0] = filters[0].slice(1);
+        }
+        logFilters = { winClass: null };
+        for (const filter of filters) {
+            const filterParts = filter.split("=");
+            if (filterParts.length !== 2) {
+                warning(`Invalid Log filter: ${filter}.Every filter have contain "=" equal sign`);
+                continue;
+            }
+            if (filterParts[0].toLowerCase() === "winclass") {
+                logFilters.winClass = filterParts[1].split(":");
+                continue;
+            }
+            warning(`Unknown Log filter name:${filterParts[0]} in filter ${filter}.`);
+            continue;
+        }
+        return logFilters;
+    }
+    static _getLogModulesStr(module) {
+        return LogModulesKeys[module - 1];
+    }
+    _print(module, action, message) {
+        const timestamp = (new Date().getTime() - this._started) / 1000;
+        print(`Krohnkite.log [${timestamp}], ${module !== undefined ? `[${Logging._getLogModulesStr(module)}]` : ""} ${action !== undefined ? action : ""} ${message !== undefined ? message : ""}`);
+    }
+    static _logParseUserModules(logPartition, userStr) {
+        let submodules;
+        let includeMode = true;
+        if (userStr.length === 0) {
+            return new Set(logPartition.modules);
+        }
+        if (userStr[0] !== "" && userStr[0][0] === "!") {
+            includeMode = false;
+            userStr[0] = userStr[0].substring(1);
+            submodules = new Set(logPartition.modules);
+        }
+        else {
+            submodules = new Set();
+        }
+        for (let moduleStr of userStr) {
+            if (moduleStr.includes("-")) {
+                const range = moduleStr.split("-");
+                if (range.length !== 2) {
+                    warning(`Invalid module range:${range} in ${moduleStr}, ignoring module ${logPartition.name} `);
+                    return null;
+                }
+                const start = validateNumber(range[0]);
+                let end;
+                if (range[1] === "") {
+                    end = logPartition.modules.length;
+                }
+                else {
+                    end = validateNumber(range[1]);
+                }
+                if (start instanceof Err || end instanceof Err) {
+                    let err = start instanceof Err ? start : end;
+                    warning(`Invalid module number: ${err} in ${moduleStr}, ignoring module ${logPartition.name}`);
+                    return null;
+                }
+                if (start > end || start < 1) {
+                    warning(`Invalid module range:${range}. The start must be less than end and both must be greater than zero. Module string: ${moduleStr}, ignoring module ${logPartition.name} `);
+                    return null;
+                }
+                if (end > logPartition.modules.length) {
+                    warning(`Invalid module range:${range}. The end must be less than or equal to the number of submodules:${logPartition.modules.length} in the module. Module string: ${moduleStr}, ignoring module ${logPartition.name} `);
+                    return null;
+                }
+                if (includeMode) {
+                    for (let i = start - 1; i < end; i++) {
+                        submodules.add(logPartition.modules[i]);
+                    }
+                }
+                else {
+                    for (let i = start - 1; i < end; i++) {
+                        submodules.delete(logPartition.modules[i]);
+                    }
+                }
+            }
+            else {
+                let moduleNumber = validateNumber(moduleStr);
+                if (moduleNumber instanceof Err) {
+                    warning(`Invalid module number:${moduleNumber}. The module number must be a number. Module string: ${moduleStr}, ignoring module ${logPartition.name} `);
+                    return null;
+                }
+                if (moduleNumber < 1 || moduleNumber > logPartition.modules.length) {
+                    warning(`Invalid module number:${moduleNumber}. The module number must be >=1 and <= number of submodules:${logPartition.modules.length}. Module string: ${moduleStr}, ignoring module ${logPartition.name} `);
+                    return null;
+                }
+                if (includeMode) {
+                    submodules.add(logPartition.modules[moduleNumber - 1]);
+                }
+                else {
+                    submodules.delete(logPartition.modules[moduleNumber - 1]);
+                }
+            }
+        }
+        return submodules;
+    }
 }
 class Rect {
     constructor(x, y, width, height) {

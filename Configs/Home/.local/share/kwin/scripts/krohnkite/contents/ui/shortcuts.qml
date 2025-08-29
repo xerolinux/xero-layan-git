@@ -272,7 +272,7 @@ Item {
         id: treeColumnLayout;
 
         name: "KrohnkiteTreeColumnLayout";
-        text: "Krohnkite: Tree Column Layout";
+        text: "Krohnkite: Three Column Layout";
         sequence: "";
     }
     function getSpreadLayout() {

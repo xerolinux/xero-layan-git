@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmoid-wunderground\n"
 "Report-Msgid-Bugs-To: https://github.com/k-donn/plasmoid-wunderground\n"
-"POT-Creation-Date: 2025-01-04 17:07-0500\n"
+"POT-Creation-Date: 2025-08-13 10:17-0400\n"
 "PO-Revision-Date: 2025-02-08 14:02+0100\n"
 "Last-Translator: Ivan Todorov <ivan@globedotters.com>\n"
 "Language-Team: Serbian (Latin) <YOUR_EMAIL>\n"
@@ -220,6 +220,10 @@ msgstr "Upiši u console.log:"
 #: ../contents/ui/config/ConfigDebug.qml
 msgid "Use Legacy Forecast API:"
 msgstr "Koristi Stari API za Prognozu"
+
+#: ../contents/ui/config/ConfigDebug.qml
+msgid "Startup time delay (ms):"
+msgstr ""
 
 #: ../contents/ui/config/ConfigStation.qml
 msgid "Find Station"

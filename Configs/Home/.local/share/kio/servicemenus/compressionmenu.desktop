@@ -1,0 +1,41 @@
+[Desktop Entry]
+Type=Service
+Icon=accessories-archiver
+ServiceTypes=KonqPopupMenu/Plugin
+MimeType=all/all;
+Actions=1compressAstar;2compressAsZip;3compressAstarzst;4compressAs7z;5compressAstarxz;6compressTo;
+X-KDE-Submenu=Compress...
+X-KDE-StartupNotify=false
+X-KDE-Priority=TopLevel
+
+
+[Desktop Action 1compressAstar]
+Name=to .tar.gz
+Icon=ark
+Exec=ark --changetofirstpath --add --autofilename tar.gz %F
+
+[Desktop Action 2compressAsZip]
+Name=to .zip
+Icon=ark
+Exec=ark --changetofirstpath --add --autofilename zip %F
+
+[Desktop Action 3compressAstarzst]
+Name=to .tar.zst
+Icon=ark
+Exec=ark --changetofirstpath --add --autofilename tar.zst %F
+
+
+[Desktop Action 4compressAs7z]
+Name=to .7z
+Icon=ark
+Exec=ark --changetofirstpath --add --autofilename 7z %F
+
+[Desktop Action 5compressAstarxz]
+Name=to .tar.xz
+Icon=ark
+Exec=ark --changetofirstpath --add --autofilename tar.xz %F
+
+[Desktop Action 6compressTo]
+Name=Compress To...
+Icon=ark
+Exec=ark --add --changetofirstpath --dialog %F

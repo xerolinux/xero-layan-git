@@ -45,7 +45,7 @@ KCM.SimpleKCM {
         QQC.SpinBox {
             id: startupDelay
 
-            Kirigami.FormData.label: i18n("Startup time delay (s):")
+            Kirigami.FormData.label: i18n("Startup time delay (ms):")
         }
     }
 }

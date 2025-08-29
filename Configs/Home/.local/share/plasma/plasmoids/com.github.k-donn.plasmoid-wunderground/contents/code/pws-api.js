@@ -317,8 +317,11 @@ function getCurrentData(callback = function() {}) {
 				var details = obs[sectionName];
 
 				// The properties are assigned to weatherData explicitly to preserve
-				// its structure instead of assigning obs compvarely and breaking it
+				// its structure instead of assigning obs completely and breaking it
 				weatherData["details"] = details;
+				weatherData["details"]["pressureTrend"] = -1;
+				weatherData["details"]["pressureTrendCode"] = -1;
+				weatherData["details"]["pressureDelta"] = -1;
 
 				weatherData["stationID"] = obs["stationID"];
 				weatherData["uv"] = nullableField(obs["uv"]);
