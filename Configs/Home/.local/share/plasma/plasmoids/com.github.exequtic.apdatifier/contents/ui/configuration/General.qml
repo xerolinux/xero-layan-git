@@ -35,9 +35,10 @@ SimpleKCM {
     property string cfg_scrollDownAction: plasmoid.configuration.scrollDownAction
 
     property alias cfg_notifyUpdates: notifyUpdates.checked
-    property alias cfg_notifyAction: notifyAction.checked
+    property alias cfg_notifyUpdatesAction: notifyUpdatesAction.checked
     property alias cfg_notifyEveryBump: notifyEveryBump.checked
     property alias cfg_notifyNews: notifyNews.checked
+    property alias cfg_notifyNewsAction: notifyNewsAction.checked
     property alias cfg_notifyErrors: notifyErrors.checked
     property alias cfg_notifySound: notifySound.checked
     property alias cfg_notifyPersistent: notifyPersistent.checked
@@ -65,14 +66,6 @@ SimpleKCM {
 
     Component.onCompleted: {
         JS.checkDependencies()
-        if (arch.checked && !pkg.pacman) arch.checked = plasmoid.configuration.arch = false
-        if (aur.checked && (!pkg.pacman || (!pkg.yay && !pkg.paru))) aur.checked = plasmoid.configuration.aur = false
-        if (flatpak.checked && !pkg.flatpak) flatpak.checked = plasmoid.configuration.flatpak = false
-        if (widgets.checked && !pkg.jq) widgets.checked = plasmoid.configuration.widgets = false
-        if (newsArch.checked && !pkg.jq) newsArch.checked = plasmoid.configuration.newsArch = false
-        if (newsKDE.checked && !pkg.jq) newsKDE.checked = plasmoid.configuration.newsKDE = false
-        if (newsTWIK.checked && !pkg.jq) newsTWIK.checked = plasmoid.configuration.newsTWIK = false
-        if (newsTWIKA.checked && !pkg.jq) newsTWIKA.checked = plasmoid.configuration.newsTWIKA = false
     }
  
     header: Kirigami.NavigationTabBar {
@@ -303,14 +296,16 @@ SimpleKCM {
 
             RowLayout {
                 spacing: Kirigami.Units.largeSpacing * 2
+
                 CheckBox {
                     Kirigami.FormData.label: i18n("Notifications") + ":"
                     id: notifyUpdates
                     text: i18n("For new updates")
                 }
+
                 CheckBox {
-                    id: notifyAction
-                    text: i18n("Upgrade button")
+                    id: notifyUpdatesAction
+                    text: i18n("Action button")
                     enabled: notifyUpdates.checked
                 }
             }
@@ -327,9 +322,19 @@ SimpleKCM {
                 }
             }
 
-            CheckBox {
-                id: notifyNews
-                text: i18n("For news")
+            RowLayout {
+                spacing: Kirigami.Units.largeSpacing * 2
+
+                CheckBox {
+                    id: notifyNews
+                    text: i18n("For news")
+                }
+
+                CheckBox {
+                    id: notifyNewsAction
+                    text: i18n("Action button")
+                    enabled: notifyNews.checked
+                }
             }
 
             CheckBox {
@@ -375,7 +380,7 @@ SimpleKCM {
 
             Button {
                 anchors.horizontalCenter: notifyTip.horizontalCenter
-                enabled: notifyUpdates.checked || notifyErrors.checked
+                enabled: notifyUpdates.checked || notifyNews.checked || notifyErrors.checked
                 icon.name: "settings-configure"
                 text: i18n("Configure...")
                 onClicked: KCMLauncher.openSystemSettings("kcm_notifications")

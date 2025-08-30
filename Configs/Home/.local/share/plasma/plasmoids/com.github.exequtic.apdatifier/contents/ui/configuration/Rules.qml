@@ -20,7 +20,15 @@ ColumnLayout {
             JS.execute(JS.readFile(JS.rulesFile), (cmd, out, err, code) => {
                 if (JS.Error(code, err)) return
                 if (out && JS.validJSON(out, JS.rulesFile)) {
-                    JSON.parse(out).forEach(el => rulesModel.append({type: el.type, value: el.value, icon: el.icon, excluded: el.excluded}))
+                    JSON.parse(out).forEach(el =>
+                        rulesModel.append({
+                            type: el.type,
+                            value: el.value,
+                            icon: el.icon,
+                            excluded: el.excluded,
+                            important: ('important' in el) ? el.important : false
+                        })
+                    )
                 }
             })
         }
@@ -95,8 +103,14 @@ ColumnLayout {
                     enabled: type.currentIndex !== 0
                     onTextChanged: {
                         var allow = /^[a-z0-9_\-+.]*$/
-                        if (!allow.test(valueField.text)) valueField.text = valueField.text.replace(/[^a-z0-9_\-+.]/g, "")
-                        model.value = valueField.text
+                        var filtered = valueField.text.replace(/[^a-z0-9_\-+.]/g, "")
+                        if (valueField.text !== filtered) {
+                            valueField.text = filtered
+                            return
+                        }
+                        if (model.value !== valueField.text) {
+                            model.value = valueField.text
+                        }
                     }
                 }
 
@@ -109,6 +123,12 @@ ColumnLayout {
                         id: iconDialog
                         onIconNameChanged: model.icon = iconName
                     }
+                }
+
+                ToolButton {
+                    ToolTip { text: i18n("Mark as important") }
+                    icon.name: model.important ? "flag-red" : "flag"
+                    onClicked: model.important = !model.important
                 }
 
                 ToolButton {
@@ -163,11 +183,13 @@ ColumnLayout {
             text: i18n("Add rule")
             icon.name: "list-add"
             onClicked: {
-                var type = "name"
-                var value = ""
-                var icon = plasmoid.configuration.ownIconsUI ? "apdatifier-package" : "server-database"
-                var excluded = false
-                rulesModel.append({type: type, value: value, icon: icon, excluded: excluded})
+                rulesModel.append({
+                    type: "name",
+                    value: "",
+                    icon: plasmoid.configuration.ownIconsUI ? "apdatifier-package" : "server-database",
+                    excluded: false,
+                    important: false
+                })
             }
         }
         Button {

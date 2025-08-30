@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: apdatifier\n"
 "Report-Msgid-Bugs-To: https://github.com/exequtic/apdatifier\n"
-"POT-Creation-Date: 2025-05-15 21:30+0300\n"
+"POT-Creation-Date: 2025-08-30 18:31+0300\n"
 "PO-Revision-Date: 2024-06-15 01:04+0200\n"
 "Last-Translator: Peter Boos <mizu@posteo.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -55,25 +55,17 @@ msgid "Plasma Widgets Upgrade"
 msgstr "Plasma Widgets Upgrade"
 
 #: ../contents/tools/sh/messages
-msgid "Read the Arch Wiki - Partial Upgrades"
-msgstr "Lesen Sie das Arch Wiki - Partielle Upgrades"
-
-#: ../contents/tools/sh/messages
-msgid "Perform full system upgrade instead partial upgrade!"
-msgstr ""
-"Führen Sie ein vollständiges System-Upgrade statt eines Teil-Upgrades durch!"
-
-#: ../contents/tools/sh/messages
 msgid "Total execution time:"
 msgstr "Gesamtlaufzeit"
 
 #: ../contents/tools/sh/messages
 msgid "Critical package(s) updated, reboot may be required:"
 msgstr ""
+"Kritische(r) Paket(e) aktualisiert, ein Neustart könnte erforderlich sein:"
 
 #: ../contents/tools/sh/messages
 msgid "Do you want to reboot now?"
-msgstr ""
+msgstr "Möchten Sie jetzt neu starten?"
 
 #: ../contents/tools/sh/messages
 msgid "Press Enter to close"
@@ -280,7 +272,7 @@ msgstr "Prüfe aktuelle Nachrichten..."
 
 #: ../contents/tools/tools.js
 msgid "Cannot fetch news "
-msgstr ""
+msgstr "Nachrichten können nicht abgerufen werden "
 
 #: ../contents/tools/tools.js
 msgid "Checking system updates..."
@@ -363,6 +355,11 @@ msgstr "Intervall wechseln"
 #: ../contents/ui/representation/Expanded.qml
 msgid "Management"
 msgstr "Verwaltung"
+
+#: ../contents/ui/components/Notification.qml
+#: ../contents/ui/scrollview/News.qml
+msgid "Read article"
+msgstr "Lese Artikel"
 
 #: ../contents/ui/components/Placeholder.qml
 msgid "System updated"
@@ -507,8 +504,8 @@ msgstr ""
 "Standardsymbole von Apdatifier verwenden."
 
 #: ../contents/ui/configuration/Appearance.qml
-msgid "View"
-msgstr "Ansicht"
+msgid "Default tab"
+msgstr "Standard-Registerkarte"
 
 #: ../contents/ui/configuration/Appearance.qml
 #: ../contents/ui/representation/Expanded.qml
@@ -519,6 +516,18 @@ msgstr "Kompakt"
 #: ../contents/ui/representation/Expanded.qml
 msgid "Extended"
 msgstr "Erweitert"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Behavior"
+msgstr "Verhalten"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Always switch to default tab"
+msgstr "Immer zur Standard-Registerkarte wechseln"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Item spacing (Compact)"
+msgstr "Elementhöhe (Kompakt)"
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Sorting"
@@ -558,31 +567,35 @@ msgstr "Zeige Tab Texte"
 
 #: ../contents/ui/configuration/General.qml
 msgid "Install Development version"
-msgstr ""
+msgstr "Instalar a versão Dev"
 
 #: ../contents/ui/configuration/General.qml
 msgid "Install Stable version"
-msgstr ""
+msgstr "Stabile Version installieren"
 
 #: ../contents/ui/configuration/General.qml
 msgid "Uninstall widget"
-msgstr ""
+msgstr "Widget entfernen"
 
 #: ../contents/ui/configuration/General.qml
 msgid "Note: version with the latest commits may be unstable."
-msgstr ""
+msgstr "Hinweis: Die Version mit den neuesten Commits kann instabil sein."
 
 #: ../contents/ui/configuration/General.qml
 msgid ""
 "Note: if you haven't installed the Devel version before, there's no need to "
 "install the Stable version."
 msgstr ""
+"Hinweis: Wenn Sie die Devel-Version zuvor nicht installiert haben, ist es "
+"nicht nötig, die Stable-Version zu installieren."
 
 #: ../contents/ui/configuration/General.qml
 msgid ""
 "Removal of the widget and all related files, including the directory with "
 "its configuration."
 msgstr ""
+"Entfernung des Widgets und aller zugehörigen Dateien, einschließlich des "
+"Verzeichnisses mit seiner Konfiguration."
 
 #: ../contents/ui/configuration/General.qml
 msgid "Search"
@@ -699,16 +712,16 @@ msgstr "Behalten"
 #: ../contents/ui/configuration/General.qml
 msgid "news item from the feed"
 msgid_plural "news items from the feed"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Nachricht aus dem Feed"
+msgstr[1] "Nachrichten aus dem Feed"
 
 #: ../contents/ui/configuration/General.qml
 msgid "For new updates"
 msgstr "Für neue Updates"
 
 #: ../contents/ui/configuration/General.qml
-msgid "Upgrade button"
-msgstr ""
+msgid "Action button"
+msgstr "Aktionstaste"
 
 #: ../contents/ui/configuration/General.qml
 msgid "For every version bump"
@@ -833,6 +846,10 @@ msgstr ""
 "Liste der Regeln in dieser Reihenfolge stehen: "
 
 #: ../contents/ui/configuration/Rules.qml
+msgid "Mark as important"
+msgstr "Als wichtig markieren"
+
+#: ../contents/ui/configuration/Rules.qml
 msgid "Show in the list"
 msgstr "In der Liste anzeigen"
 
@@ -887,19 +904,19 @@ msgstr ""
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "tmux session"
-msgstr ""
+msgstr "tmux-Sitzung"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Pre/post upgrade scripts"
-msgstr ""
+msgstr "Pre-/Post-Upgrade-Skripte"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Pre-exec"
-msgstr ""
+msgstr "Pre-Ausführung"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Command or script path"
-msgstr ""
+msgstr "Befehl oder Skriptpfad"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid ""
@@ -907,16 +924,21 @@ msgid ""
 "specify your command to update the mirrorlist if you have unofficial "
 "repositories."
 msgstr ""
+"Führen Sie Ihren Befehl oder Ihr Skript VOR dem Upgrade aus.<br>Zum Beispiel "
+"können Sie einen Befehl angeben, um die Mirrorlist zu aktualisieren, wenn "
+"Sie inoffizielle Repositories haben."
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Post-exec"
-msgstr ""
+msgstr "Post-Ausführung"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid ""
 "Running your command or script AFTER the upgrade.<br>For example, you can "
 "specify your command to upgrade something else."
 msgstr ""
+"Führen Sie Ihren Befehl oder Ihr Skript NACH dem Upgrade aus.<br>Zum "
+"Beispiel können Sie einen Befehl angeben, um etwas anderes zu aktualisieren."
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Wrapper"
@@ -924,7 +946,7 @@ msgstr "Hülle"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "AUR disabled in search settings"
-msgstr ""
+msgstr "AUR in den Sucheinstellungen deaktiviert"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Upgrade options"
@@ -932,7 +954,7 @@ msgstr "Upgrade-Optionen"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Reboot system"
-msgstr ""
+msgstr "System neu starten"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Suggest after upgrading"
@@ -947,19 +969,37 @@ msgid "Only for official repositories"
 msgstr "Nur für offizielle Repositories"
 
 #: ../contents/ui/configuration/Upgrade.qml
-msgid "Generator"
-msgstr "Generator"
-
-#: ../contents/ui/configuration/Upgrade.qml
-msgid "Suggest before upgrading"
-msgstr "Vor einem Upgrade vorschlagen"
-
-#: ../contents/ui/configuration/Upgrade.qml
 msgid ""
 "<br><br>Also see https://archlinux.org/mirrorlist (click button to open link)"
 msgstr ""
 "<br><br>Siehe auch https://archlinux.org/mirrorlist (klicken Sie auf die "
 "Schaltfläche, um den Link zu öffnen)"
+
+#: ../contents/ui/configuration/Upgrade.qml
+msgid "Generator"
+msgstr "Generator"
+
+#: ../contents/ui/configuration/Upgrade.qml
+msgid "Disabled"
+msgstr "Deaktiviert"
+
+#: ../contents/ui/configuration/Upgrade.qml
+msgid "Always ask"
+msgstr "Immer fragen"
+
+#: ../contents/ui/configuration/Upgrade.qml
+msgid "Ask if older than"
+msgstr "Fragen, wenn älter als"
+
+#: ../contents/ui/configuration/Upgrade.qml
+msgid "day"
+msgid_plural "days"
+msgstr[0] "Tag"
+msgstr[1] "Tage"
+
+#: ../contents/ui/configuration/Upgrade.qml
+msgid "No ask, force refresh"
+msgstr "Nicht fragen, erzwingen aktualisieren"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Protocol"
@@ -1005,7 +1045,7 @@ msgstr ""
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Uninstall unused"
-msgstr ""
+msgstr "Nicht verwendete entfernen"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Normal"
@@ -1043,6 +1083,14 @@ msgstr ""
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Command"
 msgstr "Befehl"
+
+#: ../contents/ui/configuration/Upgrade.qml
+msgid "Apdatifier tray icon"
+msgstr "Apdatifier-Tray-Symbol"
+
+#: ../contents/ui/configuration/Upgrade.qml
+msgid "Enabled by default"
+msgstr "Standardmäßig aktiviert"
 
 #: ../contents/ui/main.qml
 msgid "Auto check disabled"
@@ -1094,7 +1142,7 @@ msgstr "Upgrade Paket"
 
 #: ../contents/ui/scrollview/Extended.qml
 msgid "Package type"
-msgstr ""
+msgstr "Pakettyp"
 
 #: ../contents/ui/scrollview/Extended.qml
 msgid "Description"
@@ -1161,16 +1209,26 @@ msgid "Install reason"
 msgstr "Installationsgrund"
 
 #: ../contents/ui/scrollview/News.qml
-msgid "Read article"
-msgstr "Lese Artikel"
-
-#: ../contents/ui/scrollview/News.qml
 msgid "No unread news"
 msgstr "Keine ungelesene Nachrichten"
 
 #: ../contents/ui/scrollview/News.qml
 msgid "Restore list"
 msgstr "Wiederherstellungs-Liste"
+
+#~ msgid "Read the Arch Wiki - Partial Upgrades"
+#~ msgstr "Lesen Sie das Arch Wiki - Partielle Upgrades"
+
+#~ msgid "Perform full system upgrade instead partial upgrade!"
+#~ msgstr ""
+#~ "Führen Sie ein vollständiges System-Upgrade statt eines Teil-Upgrades "
+#~ "durch!"
+
+#~ msgid "View"
+#~ msgstr "Ansicht"
+
+#~ msgid "Suggest before upgrading"
+#~ msgstr "Vor einem Upgrade vorschlagen"
 
 #~ msgid "Options"
 #~ msgstr "Optionen"

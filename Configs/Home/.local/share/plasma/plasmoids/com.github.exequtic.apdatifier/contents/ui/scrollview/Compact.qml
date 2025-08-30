@@ -24,6 +24,8 @@ ScrollView {
             property var column: view.width / 2
             height: heightItem + cfg.spacing
             Rectangle {
+                id: icon
+                property bool isHovering: false
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
                 height: heightItem
                 width: height
@@ -32,20 +34,28 @@ ScrollView {
                     anchors.centerIn: parent
                     height: heightItem
                     width: height
-                    source: !hoverIcon.containsMouse ? model.IC : "edit-download"
+                    source: !icon.isHovering ? model.IC : "edit-download"
                 }
-                MouseArea {
-                    id: hoverIcon
+
+                Loader {
+                    width: parent.width - (Kirigami.Units.largeSpacing * 4)
                     anchors.fill: parent
-                    hoverEnabled: true
-                    cursorShape: Qt.PointingHandCursor
-                    onClicked: JS.upgradePackage(model.NM, model.ID, model.CN)
+                    active: model.ID || model.CN
+                    sourceComponent: MouseArea {
+                        id: hoverIcon
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+                        onEntered: icon.isHovering = true
+                        onExited: icon.isHovering = false
+                        onClicked: JS.upgradePackage(model.NM, model.ID, model.CN)
+                    }
                 }
             }
             Label {
                 Layout.minimumWidth: column
                 Layout.maximumWidth: column
-                text: model.NM
+                text: model.IM ? "<font color='" + Kirigami.Theme.negativeTextColor + "'><b>" + model.NM + "</b></font>" : model.NM
                 elide: Text.ElideRight
             }
             Label {

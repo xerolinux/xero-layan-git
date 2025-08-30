@@ -1,22 +1,22 @@
-# Translation of apdatifier in pl
-# Copyright (C) 2024
+# Translation of apdatifier in Polish
+# Copyright (C) 2025
 # This file is distributed under the same license as the apdatifier package.
 # Piotr Pająk <nwknt@tutanota.de>, 2025.
+# Rygorr Mortis <rygorrmortis@gmail.com>, 2025.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: apdatifier\n"
 "Report-Msgid-Bugs-To: https://github.com/exequtic/apdatifier\n"
-"POT-Creation-Date: 2025-05-15 21:30+0300\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Piotr Pająk <nwknt@tutanota.de>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: pl_PL\n"
+"POT-Creation-Date: 2025-08-30 18:31+0300\n"
+"PO-Revision-Date: 2025-08-16 00:48+0200\n"
+"Last-Translator: Rygorr Mortis <rygorrmortis@gmail.com>\n"
+"Language-Team: Polish <pl@li.org>\n"
+"Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: ../contents/config/config.qml ../contents/ui/configuration/Upgrade.qml
 msgid "General"
@@ -55,24 +55,16 @@ msgid "Plasma Widgets Upgrade"
 msgstr "Aktualizacja widgetów Plasma"
 
 #: ../contents/tools/sh/messages
-msgid "Read the Arch Wiki - Partial Upgrades"
-msgstr "Przeczytaj Arch Wiki - Partial Upgrades"
-
-#: ../contents/tools/sh/messages
-msgid "Perform full system upgrade instead partial upgrade!"
-msgstr "Wykonaj pełną aktualizację systemu zamiast częściowej!"
-
-#: ../contents/tools/sh/messages
 msgid "Total execution time:"
 msgstr "Całkowity czas wykonania:"
 
 #: ../contents/tools/sh/messages
 msgid "Critical package(s) updated, reboot may be required:"
-msgstr ""
+msgstr "Zaktualizowano krytyczne pakiety, może być wymagany restart:"
 
 #: ../contents/tools/sh/messages
 msgid "Do you want to reboot now?"
-msgstr ""
+msgstr "Czy chcesz zrestartować teraz?"
 
 #: ../contents/tools/sh/messages
 msgid "Press Enter to close"
@@ -264,7 +256,7 @@ msgstr "Sprawdzanie najnowszych wiadomości..."
 
 #: ../contents/tools/tools.js
 msgid "Cannot fetch news "
-msgstr ""
+msgstr "Nie można pobrać wiadomości "
 
 #: ../contents/tools/tools.js
 msgid "Checking system updates..."
@@ -291,12 +283,14 @@ msgid "+%1 new update"
 msgid_plural "+%1 new updates"
 msgstr[0] "+%1 nowa aktualizacja"
 msgstr[1] "+%1 nowe aktualizacje"
+msgstr[2] "+%1 nowych aktualizacji"
 
 #: ../contents/tools/tools.js
 msgid "update is pending"
 msgid_plural "updates are pending"
 msgstr[0] "aktualizacja w toku"
 msgstr[1] "aktualizacje w toku"
+msgstr[2] "aktualizacji w toku"
 
 #: ../contents/tools/tools.js
 msgid "Last check:"
@@ -306,19 +300,22 @@ msgstr "Ostatnio sprawdzono:"
 msgid "%1 second"
 msgid_plural "%1 seconds"
 msgstr[0] "%1 sekunda"
-msgstr[1] "%1 sekund"
+msgstr[1] "%1 sekundy"
+msgstr[2] "%1 sekund"
 
 #: ../contents/tools/tools.js
 msgid "%1 minute"
 msgid_plural "%1 minutes"
 msgstr[0] "%1 minuta"
-msgstr[1] "%1 minut"
+msgstr[1] "%1 minuty"
+msgstr[2] "%1 minut"
 
 #: ../contents/tools/tools.js
 msgid "%1 hour"
 msgid_plural "%1 hours"
 msgstr[0] "%1 godzina"
-msgstr[1] "%1 godzin"
+msgstr[1] "%1 godziny"
+msgstr[2] "%1 godzin"
 
 #: ../contents/tools/tools.js
 msgid "ago"
@@ -344,6 +341,10 @@ msgstr "Zmień interwał"
 msgid "Management"
 msgstr "Zarządzanie"
 
+#: ../contents/ui/components/Notification.qml ../contents/ui/scrollview/News.qml
+msgid "Read article"
+msgstr "Przeczytaj artykuł"
+
 #: ../contents/ui/components/Placeholder.qml
 msgid "System updated"
 msgstr "System zaktualizowany"
@@ -365,6 +366,7 @@ msgid "update is pending "
 msgid_plural "updates are pending "
 msgstr[0] "aktualizacja oczekuje "
 msgstr[1] "aktualizacje oczekują "
+msgstr[2] "aktualizacji oczekuje "
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Default"
@@ -483,8 +485,8 @@ msgid "Override custom icon theme and use default Apdatifier icons instead."
 msgstr "Zastąp niestandardowy motyw ikon i użyj domyślnych ikon Apdatifier."
 
 #: ../contents/ui/configuration/Appearance.qml
-msgid "View"
-msgstr "Widok"
+msgid "Default tab"
+msgstr "Karta domyślna"
 
 #: ../contents/ui/configuration/Appearance.qml ../contents/ui/representation/Expanded.qml
 msgid "Compact"
@@ -493,6 +495,18 @@ msgstr "Kompaktowy"
 #: ../contents/ui/configuration/Appearance.qml ../contents/ui/representation/Expanded.qml
 msgid "Extended"
 msgstr "Rozszerzony"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Behavior"
+msgstr "Zachowanie"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Always switch to default tab"
+msgstr "Zawsze przełączaj na kartę domyślną"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Item spacing (Compact)"
+msgstr "Wysokość elementów (Kompaktowy)"
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Sorting"
@@ -532,27 +546,27 @@ msgstr "Pokaż teksty kart"
 
 #: ../contents/ui/configuration/General.qml
 msgid "Install Development version"
-msgstr ""
+msgstr "Zainstaluj wersję deweloperską"
 
 #: ../contents/ui/configuration/General.qml
 msgid "Install Stable version"
-msgstr ""
+msgstr "Zainstaluj wersję stabilną"
 
 #: ../contents/ui/configuration/General.qml
 msgid "Uninstall widget"
-msgstr ""
+msgstr "Odinstaluj widżet"
 
 #: ../contents/ui/configuration/General.qml
 msgid "Note: version with the latest commits may be unstable."
-msgstr ""
+msgstr "Uwaga: wersja z najnowszymi commitami może być niestabilna."
 
 #: ../contents/ui/configuration/General.qml
 msgid "Note: if you haven't installed the Devel version before, there's no need to install the Stable version."
-msgstr ""
+msgstr "Uwaga: jeśli wcześniej nie zainstalowałeś wersji deweloperskiej, nie ma potrzeby instalowania wersji stabilnej."
 
 #: ../contents/ui/configuration/General.qml
 msgid "Removal of the widget and all related files, including the directory with its configuration."
-msgstr ""
+msgstr "Usunięcie widżetu i wszystkich powiązanych plików, w tym katalogu z jego konfiguracją."
 
 #: ../contents/ui/configuration/General.qml
 msgid "Search"
@@ -643,14 +657,15 @@ msgid "news item from the feed"
 msgid_plural "news items from the feed"
 msgstr[0] "wiadomość z kanału"
 msgstr[1] "wiadomości z kanału"
+msgstr[2] "wiadomości z kanału"
 
 #: ../contents/ui/configuration/General.qml
 msgid "For new updates"
 msgstr "Dla nowych aktualizacji"
 
 #: ../contents/ui/configuration/General.qml
-msgid "Upgrade button"
-msgstr ""
+msgid "Action button"
+msgstr "Przycisk akcji"
 
 #: ../contents/ui/configuration/General.qml
 msgid "For every version bump"
@@ -718,7 +733,7 @@ msgstr "Repozytorium"
 
 #: ../contents/ui/configuration/Rules.qml
 msgid "Exact repository match"
-msgstr "okładne dopasowanie repozytorium"
+msgstr "Dokładne dopasowanie repozytorium"
 
 #: ../contents/ui/configuration/Rules.qml
 msgid "Group"
@@ -747,6 +762,10 @@ msgstr "Dokładne dopasowanie nazwy"
 #: ../contents/ui/configuration/Rules.qml
 msgid "Here you can override the default package icons and exclude them from the list. Each rule overwrites the previous one, so the list of rules should be in this order: "
 msgstr "Tutaj możesz nadpisać domyślne ikony pakietów i wykluczyć je z listy. Każda reguła nadpisuje poprzednią, więc lista reguł powinna być w następującej kolejności:"
+
+#: ../contents/ui/configuration/Rules.qml
+msgid "Mark as important"
+msgstr "Oznacz jako ważne"
 
 #: ../contents/ui/configuration/Rules.qml
 msgid "Show in the list"
@@ -794,31 +813,31 @@ msgstr "Jeśli Twój terminal używa jakiejkolwiek czcionki <b>Nerd Font</b>, b�
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "tmux session"
-msgstr ""
+msgstr "Sesja tmux"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Pre/post upgrade scripts"
-msgstr ""
+msgstr "Skrypty przed/po aktualizacji"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Pre-exec"
-msgstr ""
+msgstr "Przed wykonaniem"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Command or script path"
-msgstr ""
+msgstr "Ścieżka do polecenia lub skryptu"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Running your command or script BEFORE the upgrade.<br>For example, you can specify your command to update the mirrorlist if you have unofficial repositories."
-msgstr ""
+msgstr "Uruchamianie polecenia lub skryptu PRZED aktualizacją.<br>Na przykład, możesz określić polecenie do aktualizacji listy mirrorów, jeśli masz nieoficjalne repozytoria."
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Post-exec"
-msgstr ""
+msgstr "Po wykonaniu"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Running your command or script AFTER the upgrade.<br>For example, you can specify your command to upgrade something else."
-msgstr ""
+msgstr "Uruchamianie polecenia lub skryptu PO aktualizacji.<br>Na przykład, możesz określić polecenie do aktualizacji czegoś innego."
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Wrapper"
@@ -826,7 +845,7 @@ msgstr "Opakowanie"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "AUR disabled in search settings"
-msgstr ""
+msgstr "AUR wyłączone w ustawieniach wyszukiwania"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Upgrade options"
@@ -834,11 +853,11 @@ msgstr "Opcje aktualizacji"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Reboot system"
-msgstr ""
+msgstr "Restartuj system"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Suggest after upgrading"
-msgstr "Zalecenia po aktualizacji"
+msgstr "Sugeruj po aktualizacji"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Pacman Mirrorlist Generator"
@@ -849,16 +868,35 @@ msgid "Only for official repositories"
 msgstr "Tylko dla oficjalnych repozytoriów"
 
 #: ../contents/ui/configuration/Upgrade.qml
+msgid "<br><br>Also see https://archlinux.org/mirrorlist (click button to open link)"
+msgstr "<br><br>Zobacz także https://archlinux.org/mirrorlist (kliknij przycisk, aby otworzyć link)"
+
+#: ../contents/ui/configuration/Upgrade.qml
 msgid "Generator"
 msgstr "Generator"
 
 #: ../contents/ui/configuration/Upgrade.qml
-msgid "Suggest before upgrading"
-msgstr "Zalecenia przed aktualizacją"
+msgid "Disabled"
+msgstr "Wyłączone"
 
 #: ../contents/ui/configuration/Upgrade.qml
-msgid "<br><br>Also see https://archlinux.org/mirrorlist (click button to open link)"
-msgstr "<br><br>Zobacz także https://archlinux.org/mirrorlist (kliknij przycisk, aby otworzyć link)"
+msgid "Always ask"
+msgstr "Zawsze pytaj"
+
+#: ../contents/ui/configuration/Upgrade.qml
+msgid "Ask if older than"
+msgstr "Pytać, jeśli starsze niż"
+
+#: ../contents/ui/configuration/Upgrade.qml
+msgid "day"
+msgid_plural "days"
+msgstr[0] "dzień"
+msgstr[1] "dni"
+msgstr[2] "dni"
+
+#: ../contents/ui/configuration/Upgrade.qml
+msgid "No ask, force refresh"
+msgstr "Nie pytaj, wymuś odświeżenie"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Protocol"
@@ -894,7 +932,7 @@ msgstr "Musisz wybrać przynajmniej jeden kraj, w przeciwnym razie wszystkie zos
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Uninstall unused"
-msgstr ""
+msgstr "Odinstaluj nieużywane"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Normal"
@@ -927,6 +965,14 @@ msgstr "Po zaktualizowaniu widżetu, stara wersja nadal będzie przechowywana w 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Command"
 msgstr "Polecenie"
+
+#: ../contents/ui/configuration/Upgrade.qml
+msgid "Apdatifier tray icon"
+msgstr "Ikona Apdatifier w zasobniku systemowym"
+
+#: ../contents/ui/configuration/Upgrade.qml
+msgid "Enabled by default"
+msgstr "Domyślnie włączone"
 
 #: ../contents/ui/main.qml
 msgid "Auto check disabled"
@@ -978,7 +1024,7 @@ msgstr "Aktualizuj pakiet"
 
 #: ../contents/ui/scrollview/Extended.qml
 msgid "Package type"
-msgstr ""
+msgstr "Typ pakietu"
 
 #: ../contents/ui/scrollview/Extended.qml
 msgid "Description"
@@ -1045,16 +1091,27 @@ msgid "Install reason"
 msgstr "Powód instalacji"
 
 #: ../contents/ui/scrollview/News.qml
-msgid "Read article"
-msgstr "Przeczytaj artykuł"
-
-#: ../contents/ui/scrollview/News.qml
 msgid "No unread news"
 msgstr "Brak nieprzeczytanych wiadomości"
 
 #: ../contents/ui/scrollview/News.qml
 msgid "Restore list"
 msgstr "Przywróć listę"
+
+#~ msgid "Read the Arch Wiki - Partial Upgrades"
+#~ msgstr "Przeczytaj Arch Wiki - Partial Upgrades"
+
+#~ msgid "Perform full system upgrade instead partial upgrade!"
+#~ msgstr "Wykonaj pełną aktualizację systemu zamiast częściowej!"
+
+#~ msgid "View"
+#~ msgstr "Widok"
+
+#~ msgid "Upgrade button"
+#~ msgstr "Przycisk aktualizacji"
+
+#~ msgid "Suggest before upgrading"
+#~ msgstr "Sugeruj przed aktualizacją"
 
 #~ msgid "Options"
 #~ msgstr "Opcje"

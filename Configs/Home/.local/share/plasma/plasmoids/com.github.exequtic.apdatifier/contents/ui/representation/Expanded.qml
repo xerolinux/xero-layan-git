@@ -8,6 +8,7 @@ import QtQuick.Layouts
 
 import org.kde.kitemmodels
 import org.kde.plasma.extras
+import org.kde.plasma.plasmoid
 import org.kde.plasma.components
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.core as PlasmaCore
@@ -16,8 +17,13 @@ import "../scrollview" as View
 import "../../tools/tools.js" as JS
 
 Representation {
-    property string currVersion: "v2.9.3"
+    property string currVersion: "v2.9.4"
     property bool searchFieldOpen: false
+    property bool expanded: root.expanded
+    onExpandedChanged: {
+        if (plasmoid.configuration.switchDefaultTab && !expanded)
+            swipeView.currentIndex = plasmoid.configuration.defaultTab
+    }
 
     property string statusIcon: {
         var icons = {
@@ -32,7 +38,11 @@ Representation {
         return Qt.resolvedUrl("../assets/icons/" + icon + ".svg")
     }
 
+    property var backgroundHidden: (Plasmoid.formFactor === PlasmaCore.Types.Planar) && (Plasmoid.userBackgroundHints === PlasmaCore.Types.ShadowBackground)
+    onBackgroundHiddenChanged: topHeader.background.visible = bottomHeader.background.visible = !backgroundHidden
+
     header: PlasmoidHeading {
+        id: topHeader
         visible: cfg.showStatusText || cfg.showToolBar
         contentItem: RowLayout {
             id: toolBar
@@ -148,14 +158,14 @@ Representation {
                 }
 
                 ToolButton {
-                    ToolTip {text: i18n("Management")}
+                    ToolTip { id: managementTip; text: i18n("Management")}
                     Layout.preferredWidth: Kirigami.Units.iconSizes.smallMedium
                     Layout.preferredHeight: Kirigami.Units.iconSizes.smallMedium
                     hoverEnabled: enabled
                     highlighted: enabled
                     enabled: sts.idle && pkg.pacman !== "" && cfg.terminal
                     visible: enabled && cfg.managementButton
-                    onClicked: JS.management()
+                    onClicked: { managementTip.hide(); JS.management() }
                     Kirigami.Icon {
                         height: parent.height
                         width: parent.height
@@ -169,14 +179,14 @@ Representation {
                 }
 
                 ToolButton {
-                    ToolTip {text: i18n("Upgrade system")}
+                    ToolTip { id: upgradeTip; text: i18n("Upgrade system")}
                     Layout.preferredWidth: Kirigami.Units.iconSizes.smallMedium
                     Layout.preferredHeight: Kirigami.Units.iconSizes.smallMedium
                     hoverEnabled: enabled
                     highlighted: enabled
                     enabled: sts.pending && cfg.terminal
                     visible: enabled && cfg.upgradeButton
-                    onClicked: JS.upgradeSystem()
+                    onClicked: { upgradeTip.hide(); JS.upgradeSystem() }
                     Kirigami.Icon {
                         height: parent.height
                         width: parent.height
@@ -214,6 +224,7 @@ Representation {
     }
 
     footer: PlasmoidHeading {
+        id: bottomHeader
         spacing: 0
         topPadding: 0
         height: Kirigami.Units.iconSizes.medium
@@ -345,6 +356,7 @@ Representation {
             Layout.fillWidth: true
             Layout.fillHeight: true
             clip: true
+            currentIndex: plasmoid.configuration.defaultTab
             View.Compact {}
             View.Extended {}
             View.News {}

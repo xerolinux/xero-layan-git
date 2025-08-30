@@ -23,7 +23,7 @@ ScrollView {
         leftMargin: spacing
         bottomMargin: spacing
 
-        add: Transition { NumberAnimation { properties: "x"; from: 100; duration: Kirigami.Units.longDuration } }
+        // add: Transition { NumberAnimation { properties: "x"; from: 100; duration: Kirigami.Units.longDuration } } NEWS SPACING PATCH
         removeDisplaced: Transition { NumberAnimation { properties: "x,y"; duration: Kirigami.Units.longDuration } }
         remove: Transition { ParallelAnimation {
                 NumberAnimation { property: "opacity"; to: 0; duration: Kirigami.Units.longDuration }
@@ -80,9 +80,12 @@ ScrollView {
 
                         ColumnLayout {
                             Controls.Button {
-                                ToolTip { text: i18n("Read article") }
+                                ToolTip { id: tip; text: i18n("Read article") }
                                 icon.name: "internet-web-browser-symbolic"
-                                onClicked: Qt.openUrlExternally(model.link)
+                                onClicked: {
+                                    tip.hide()
+                                    Qt.openUrlExternally(model.link)
+                                }
                             }
                             Controls.Button {
                                 ToolTip { text: i18n("Remove") }

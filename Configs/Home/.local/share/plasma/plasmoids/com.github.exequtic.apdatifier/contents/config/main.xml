@@ -27,9 +27,10 @@
         <entry name="scrollUpAction" type="string"><default>switchInterval</default></entry>
         <entry name="scrollDownAction" type="string"><default>management</default></entry>
         <entry name="notifyUpdates" type="bool"><default>true</default></entry>
-        <entry name="notifyAction" type="bool"><default>false</default></entry>
+        <entry name="notifyUpdatesAction" type="bool"><default>false</default></entry>
         <entry name="notifyEveryBump" type="bool"><default>true</default></entry>
         <entry name="notifyNews" type="bool"><default>true</default></entry>
+        <entry name="notifyNewsAction" type="bool"><default>false</default></entry>
         <entry name="notifyErrors" type="bool"><default>true</default></entry>
         <entry name="notifySound" type="bool"><default>true</default></entry>
         <entry name="notifyPersistent" type="bool"><default>false</default></entry>
@@ -39,7 +40,8 @@
         <entry name="archFlags" type="string"><default></default></entry>
         <entry name="sudoBin" type="string"><default>sudo</default></entry>
         <entry name="rebootSystem" type="bool"><default>false</default></entry>
-        <entry name="mirrors" type="bool"><default>false</default></entry>
+        <entry name="mirrors" type="string"><default>false</default></entry>
+        <entry name="mirrorsAge" type="int"><default>7</default></entry>
         <entry name="mirrorCount" type="int"><default>5</default></entry>
         <entry name="dynamicUrl" type="string"><default>null</default></entry>
         <entry name="flatpakRemoveUnused" type="bool"><default>false</default></entry>
@@ -47,6 +49,7 @@
         <entry name="widgetConfirmation" type="bool"><default>true</default></entry>
         <entry name="restartShell" type="bool"><default>true</default></entry>
         <entry name="restartCommand" type="string"><default>systemctl --user restart plasma-plasmashell.service</default></entry>
+        <entry name="trayEnabledByDefault" type="bool"><default>false</default></entry>
         <entry name="preExec" type="string"><default></default></entry>
         <entry name="postExec" type="string"><default></default></entry>
         <entry name="terminal" type="string"><default></default></entry>
@@ -78,7 +81,8 @@
         <entry name="counterRight" type="bool"><default>true</default></entry>
         <entry name="counterLeft" type="bool"><default>false</default></entry>
         <entry name="ownIconsUI" type="bool"><default>true</default></entry>
-        <entry name="listView" type="int"><default>0</default></entry>
+        <entry name="defaultTab" type="int"><default>0</default></entry>
+        <entry name="switchDefaultTab" type="bool"><default>false</default></entry>
         <entry name="spacing" type="int"><default>6</default></entry>
         <entry name="sorting" type="bool"><default>true</default></entry>
         <entry name="showStatusText" type="bool"><default>true</default></entry>

@@ -28,19 +28,28 @@ ScrollView {
         delegate: ExpandableListItem {
             visible: sts.pending
             property var pkg: []
-            title: model.NM
+            allowStyledText: true
+            title: model.IM ? "<font color='" + Kirigami.Theme.negativeTextColor + "'><b>" + model.NM + "</b></font>" : model.NM
             subtitle: model.RE + "  " + model.VO + " → " + model.VN
             icon: model.IC
 
-            contextualActions: [
-                Action {
-                    id: updateButton
-                    icon.name: "edit-download"
-                    text: i18n("Upgrade package")
-                    enabled: cfg.terminal
-                    onTriggered: JS.upgradePackage(model.NM, model.ID, model.CN)
+            function getContextualActions() {
+                var actions = []
+                if (model.ID || model.CN) {
+                    actions.push(updateButton)
                 }
-            ]
+                return actions
+            }
+
+            Action {
+                id: updateButton
+                icon.name: "edit-download"
+                text: i18n("Upgrade package")
+                enabled: cfg.terminal
+                onTriggered: JS.upgradePackage(model.NM, model.ID, model.CN)
+            }
+
+            contextualActions: getContextualActions()
 
             customExpandedViewContent: Component {
                 ColumnLayout {
@@ -50,7 +59,7 @@ ScrollView {
                         Layout.fillWidth: true
                         imagePath: "widgets/line"
                         elementId: "horizontal-line"
-                        visible: !updateButton.enabled
+                        visible: contextualActions.length === 0
                     }
 
                     Item {
@@ -60,7 +69,7 @@ ScrollView {
                     MouseArea {
                         Layout.fillWidth: true
                         Layout.preferredHeight: details.implicitHeight
-                        acceptedButtons: Qt.RightButton
+                        // acceptedButtons: Qt.RightButton
                         activeFocusOnTab: repeater.count > 0
 
                         GridLayout {
