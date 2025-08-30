@@ -54,6 +54,7 @@ PlasmoidItem {
     property bool hideWidget: plasmoid.configuration.hideWidget
     property bool fixedSidePaddingEnabled: isEnabled && panelBgItem.cfg.padding.enabled
     property bool floatingDialogs: main.isEnabled ? cfg.nativePanel.floatingDialogs : false
+    property bool floatingDialogsAllowOverride: main.isEnabled ? cfg.nativePanel.floatingDialogsAllowOverride : false
     property bool isEnabled: plasmoid.configuration.isEnabled
     property bool nativePanelBackgroundEnabled: (isEnabled ? cfg.nativePanel.background.enabled : true) || doPanelClickFix
     property real nativePanelBackgroundOpacity: isEnabled ? cfg.nativePanel.background.opacity : 1.0
@@ -201,18 +202,24 @@ PlasmoidItem {
         }
     }
 
+    function applyStockPanelSettings() {
+        let script = Utils.setPanelModeScript(Plasmoid.containment.id, stockPanelSettings);
+        if (stockPanelSettings.visible.enabled) {
+            panelView.visible = stockPanelSettings.visible.value;
+        } else {
+            panelView.visible = true;
+        }
+        dbusEvaluateScript.arguments = [script.toString().replace(/\n/g, ' ').trim()];
+        dbusEvaluateScript.call(() => {
+            Utils.delay(250, () => {
+                reconfigure();
+            }, main);
+        });
+    }
+
     onStockPanelSettingsChanged: {
         Qt.callLater(function () {
-            // console.error(JSON.stringify(stockPanelSettings))
-            let script = Utils.setPanelModeScript(Plasmoid.containment.id, stockPanelSettings);
-            if (stockPanelSettings.visible.enabled) {
-                panelView.visible = stockPanelSettings.visible.value;
-            } else {
-                panelView.visible = true;
-            }
-            dbusEvaluateScript.arguments = [script.toString().replace(/\n/g, ' ').trim()];
-            dbusEvaluateScript.call();
-            reconfigure();
+            applyStockPanelSettings();
         });
     }
 
@@ -247,7 +254,9 @@ PlasmoidItem {
         if ((main.floatigness === 1 || main.floatigness === 0) && !editMode) {
             Utils.delay(10, () => {
                 updateMasks();
-                activatePlasmoidCycle();
+            // TODO this forces hidden panels to be always visible and is unclear
+            // if it actually helps
+            // activatePlasmoidCycle();
             }, main);
         }
     }
@@ -1465,10 +1474,19 @@ PlasmoidItem {
         setFloatigApplets();
     }
 
+    onFloatingDialogsAllowOverrideChanged: {
+        setFloatigApplets();
+    }
+
     // inspired by https://invent.kde.org/plasma/plasma-desktop/-/merge_requests/1912
     function setFloatigApplets() {
         if (!containmentItem)
             return;
+        // Plasma 6.4 now has a floating applets option, but we are overriding it,
+        // so let's require the user to enable it before forcing one state of the other
+        if (main.plasmaVersion.isGreaterThan("6.3.5") && !floatingDialogsAllowOverride) {
+            return;
+        }
         if (floatingDialogs) {
             containmentItem.Plasmoid.containmentDisplayHints |= PlasmaCore.Types.ContainmentPrefersFloatingApplets;
         } else {
@@ -1502,8 +1520,8 @@ PlasmoidItem {
             doPanelLengthFix = true;
             Utils.delay(200, () => {
                 doPanelLengthFix = false;
+                reconfigure();
             }, main);
-            reconfigure();
         }
     }
 
@@ -1621,18 +1639,6 @@ PlasmoidItem {
         useGdbus: true
     }
 
-    // temporarily show the panel
-    Timer {
-        id: tempActivationTimer
-        interval: 500
-        triggeredOnStart: true
-        onTriggered: {
-            Plasmoid.activated();
-            main.expanded = false;
-            bindPlasmoidStatusTimer.restart();
-        }
-    }
-
     function reconfigure() {
         // sometimes windows won't update when the panel visibility or height
         // (and maybe other properties) changes, this is more noticeable with
@@ -1641,19 +1647,13 @@ PlasmoidItem {
         // and org.kde.KWin.reconfigure triggers the resize we need
         // TODO figure out how the desktop edit mode informs the new available size
         if (isWayland) {
-            // X11 doesn't seem to need it and also would flicker the panel/screen
+            // X11 doesn't seem to need it and also will flicker the panel/screen
             dbusKWinReconfigure.call();
         }
+    }
 
-        Plasmoid.status = (hideWidget || !runningLatest) ? PlasmaCore.Types.ActiveStatus : PlasmaCore.Types.HiddenStatus;
-        if (["autohide", "dodgewindows"].includes(stockPanelSettings.visibility.value) && panelPosition.location !== stockPanelSettings.position.value) {
-            // activate the panel for a longer time if it can hide
-            // to avoid plasma crash when changing its location
-            tempActivationTimer.restart();
-        } else {
-            activatePlasmoidCycle();
-            bindPlasmoidStatus();
-        }
+    Label {
+        text: Plasmoid.status
     }
 
     function activatePlasmoidCycle() {
@@ -1794,7 +1794,7 @@ PlasmoidItem {
     }
 
     Component.onCompleted: {
-        bindPlasmoidStatus();
+        updatePlasmoidStatus();
         runCommand.run("plasmashell --version");
         try {
             panelColorizer = Qt.createQmlObject("import org.kde.plasma.panelcolorizer 1.0; PanelColorizer { id: panelColorizer }", main);
@@ -1802,6 +1802,9 @@ PlasmoidItem {
         } catch (err) {
             console.warn("QML Plugin org.kde.plasma.panelcolorizer not found. Custom blur background will not work.");
         }
+        Utils.delay(100, () => {
+            applyStockPanelSettings();
+        }, main);
     }
 
     TasksModel {
@@ -1892,21 +1895,11 @@ PlasmoidItem {
     }
     toolTipTextFormat: Text.PlainText
 
-    function bindPlasmoidStatus() {
-        Plasmoid.status = Qt.binding(function () {
-            return (editMode || !hideWidget || !runningLatest) ? PlasmaCore.Types.ActiveStatus : PlasmaCore.Types.HiddenStatus;
-        });
+    function updatePlasmoidStatus() {
+        Plasmoid.status = (editMode || !hideWidget || !runningLatest) ? PlasmaCore.Types.ActiveStatus : PlasmaCore.Types.HiddenStatus;
     }
 
-    onHideWidgetChanged: bindPlasmoidStatus()
-
-    Timer {
-        id: bindPlasmoidStatusTimer
-        interval: 600
-        onTriggered: {
-            bindPlasmoidStatus();
-        }
-    }
+    onHideWidgetChanged: updatePlasmoidStatus()
 
     Plasmoid.contextualActions: [
         PlasmaCore.Action {
