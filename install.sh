@@ -14,7 +14,7 @@ echo
 echo "Native Packages..."
 echo
 
-sudo pacman -S --noconfirm --needed imagemagick kvantum unzip jq xmlstarlet fastfetch gtk-engine-murrine gtk-engines ttf-hack-nerd ttf-fira-code kdeconnect ttf-terminus-nerd noto-fonts-emoji ttf-meslo-nerd kde-wallpapers
+sudo pacman -S --noconfirm --needed cava imagemagick kvantum unzip jq xmlstarlet fastfetch gtk-engine-murrine gtk-engines ttf-hack-nerd ttf-fira-code kdeconnect ttf-terminus-nerd noto-fonts-emoji ttf-meslo-nerd kde-wallpapers
 
 echo
 

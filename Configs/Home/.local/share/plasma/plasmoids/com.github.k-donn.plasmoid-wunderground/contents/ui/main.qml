@@ -33,8 +33,8 @@ PlasmoidItem {
         "obsTimeLocal": "",
         "isNight": false,
         "winddir": 0,
-        "lat": 0,
-        "lon": 0,
+        "latitude": 0,
+        "longitude": 0,
         "sunrise": "2020-08-09T07:00:10-0500",
         "sunset": "2020-08-09T20:00:10-0500",
         "solarRad": 0,
@@ -219,13 +219,17 @@ PlasmoidItem {
             delay(plasmoid.configuration.startupDelay * 1000, function() {
                 printDebug("Delayed startup " + (plasmoid.configuration.startupDelay) + " s.");
                 StationAPI.getCurrentData(function() {
-                    StationAPI.getForecastData(StationAPI.getHourlyData)
+                    StationAPI.getExtendedConditions(function() {
+                        StationAPI.getForecastData(StationAPI.getHourlyData)
+                    })
                 });
                 hasLoaded = true;
             });
         } else {
             StationAPI.getCurrentData(function() {
-                StationAPI.getForecastData(StationAPI.getHourlyData)
+                StationAPI.getExtendedConditions(function() {
+                    StationAPI.getForecastData(StationAPI.getHourlyData)
+                });
             });
         }
     }
@@ -237,15 +241,21 @@ PlasmoidItem {
 
     function updateForecastData() {
         printDebug("Getting new forecast data");
-        StationAPI.getForecastData(StationAPI.getHourlyData);
+        StationAPI.getExtendedConditions(function() {
+            StationAPI.getForecastData(StationAPI.getHourlyData)
+        });
     }
 
     onStationIDChanged: {
         printDebug("Station ID changed");
 
-        // Show loading screen after ID change
-        appState = showLOADING;
-        updateWeatherData();
+        if (stationID != "") {
+            // Show loading screen after ID change
+            appState = showLOADING;
+            updateWeatherData();
+        } else if (stationID == "") {
+            appState = showCONFIG;
+        }
     }
 
     onUnitsChoiceChanged: {
@@ -326,6 +336,10 @@ PlasmoidItem {
         inTray = plasmoid.containment.containmentType == 129 && plasmoid.formFactor == 2;
         plasmoid.configurationRequiredReason = i18n("Set the weather station to pull data from.");
         plasmoid.backgroundHints = PlasmaCore.Types.ConfigurableBackground;
+
+        if(plasmoid.configuration.refreshPeriod < 300) {
+            plasmoid.configuration.refreshPeriod = 300;
+        }
     }
 
     Timer {

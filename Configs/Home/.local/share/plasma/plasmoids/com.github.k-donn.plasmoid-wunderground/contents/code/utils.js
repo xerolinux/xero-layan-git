@@ -16,8 +16,6 @@
  * along with this program.  If not, see <http: //www.gnu.org/licenses/>.
  */
 
-var API_KEY = "e1f10a1e78da46f5b10a1e78da96f525";
-
 var UNITS_SYSTEM = {
 	METRIC: 0,
 	IMPERIAL: 1,
@@ -669,7 +667,7 @@ function toUserTemp(value) {
 
 /**
  * Return the user's choice of temperature unit with no additional data.
- * 
+ *
  * @returns {"°C"|"°F"|"°K"} User shoosen unit
  */
 function rawTempUnit() {
@@ -734,7 +732,7 @@ function toUserSpeed(value) {
 
 /**
  * Return the user's choice of wind speed unit with no additional data.
- * 
+ *
  * @returns {"kmh"|"mph"|"m/s"} User choosen unit
  */
 function rawSpeedUnit() {
@@ -796,7 +794,7 @@ function toUserElev(value) {
 
 /**
  * Return the user's choice of elevation unit with no additional data.
- * 
+ *
  * @returns {"m"|"ft"} User choosen unit
  */
 function rawElevUnit() {
@@ -829,6 +827,17 @@ function currentElevUnit(value) {
 	var res = Math.round(value);
 	var unit = rawElevUnit();
 	return res + " " + unit;
+}
+
+/**
+ * Get hostname
+ *
+ * @returns {string} hostname
+ */
+function getAPIHost() {
+	var hosts = ["aaa", "a91", "0a3", "75b", "fd6"];
+	var host = hosts[Math.floor(Math.random() * hosts.length)];
+	return "https://wps.mitchell-" + host + ".workers.dev";
 }
 
 /**
@@ -876,7 +885,7 @@ function toUserPrecip(value, isRain) {
 
 /**
  * Return the user's choice of precipitation unit with no additional data.
- * 
+ *
  * @param {boolean} isRain Whether the measured precip is rain
  * @returns {"mm"|"cm"|"in"}
  */
@@ -970,7 +979,7 @@ function toUserPres(value) {
 
 /**
  * Return the user's choice of temperature unit with no additional data.
- * 
+ *
  * @returns {"mb"|"inHG"|"mmHG"|"hPa"} User choosen unit
  */
 function rawPresUnit() {

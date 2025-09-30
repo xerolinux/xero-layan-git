@@ -9,8 +9,8 @@
         <entry name="stationName" type="String">
             <default/>
         </entry>
-        <entry name="savedStations" type="StringList">
-            <default/>
+        <entry name="savedStations" type="String">
+            <default>[]</default>
         </entry>
         <entry name="longitude" type="String">
             <default/>
@@ -19,11 +19,14 @@
             <default/>
         </entry>
         <entry name="refreshPeriod" type="Int">
-            <default>60</default>
+            <default>600</default>
         </entry>
     </group>
     <group name="Appearance">
         <entry name="showCompactTemp" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="showSystemTrayTemp" type="Bool">
             <default>true</default>
         </entry>
         <entry name="autoFontAndSize" type="Bool">

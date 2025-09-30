@@ -3,6 +3,7 @@
 # This file is distributed under the same license as the zayron.simple.separator package.
 # ADOLFO <adolfo@librepixels.com>, 2025.
 #, fuzzy
+
 msgid ""
 msgstr ""
 "Project-Id-Version: zayron.simple.separator\n"

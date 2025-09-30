@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmoid-wunderground\n"
 "Report-Msgid-Bugs-To: https://github.com/k-donn/plasmoid-wunderground\n"
-"POT-Creation-Date: 2025-08-13 10:17-0400\n"
+"POT-Creation-Date: 2025-09-26 20:05-0400\n"
 "PO-Revision-Date: 2024-10-27 22:41-0400\n"
 "Last-Translator: ekkia\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,6 +24,10 @@ msgstr "Wunderground"
 #: ../metadata.json
 msgid "Wunderground Personal Weather Station viewer"
 msgstr "Visor de la estación meteorológica personal Wunderground"
+
+#: ../contents/code/pws-api.js
+msgid "Location not found"
+msgstr ""
 
 #: ../contents/config/config.qml
 msgid "Station"
@@ -130,6 +134,10 @@ msgid "Choose a Font"
 msgstr "Elegir fuente"
 
 #: ../contents/ui/config/ConfigAppearance.qml
+msgid "System Tray Representation"
+msgstr ""
+
+#: ../contents/ui/config/ConfigAppearance.qml
 msgid "Full Representation"
 msgstr "Representación completa"
 
@@ -226,36 +234,52 @@ msgid "Startup time delay (ms):"
 msgstr ""
 
 #: ../contents/ui/config/ConfigStation.qml
-msgid "Find Station"
-msgstr "Encontrar estación"
+msgid "Saved Weather Stations"
+msgstr "Estaciones meteorológicas guardadas"
 
 #: ../contents/ui/config/ConfigStation.qml
-msgid "Enter Station"
-msgstr "Introducir estación"
+msgid "ID:"
+msgstr ""
 
-#: ../contents/ui/config/ConfigStation.qml
-msgid "Station Info"
-msgstr "Información de estación"
-
-#: ../contents/ui/config/ConfigStation.qml
-msgid "Uses WGS84 geocode coordinates"
-msgstr "Utiliza coordenadas de geocodificación WGS84"
-
-#: ../contents/ui/config/ConfigStation.qml
-msgid "Weatherstation ID:"
-msgstr "ID de la estación meteorológica"
-
-#: ../contents/ui/config/ConfigStation.qml
+#: ../contents/ui/config/ConfigStation.qml ../contents/ui/lib/StationSearcher.qml
 msgid "Weatherstation Name:"
 msgstr "Nombre de estación meteorológica"
 
-#: ../contents/ui/config/ConfigStation.qml
+#: ../contents/ui/config/ConfigStation.qml ../contents/ui/lib/StationSearcher.qml
+msgid "Latitude:"
+msgstr "Latitud:"
+
+#: ../contents/ui/config/ConfigStation.qml ../contents/ui/lib/StationSearcher.qml
 msgid "Longitude:"
 msgstr "Longitud:"
 
 #: ../contents/ui/config/ConfigStation.qml
-msgid "Latitude:"
-msgstr "Latitud:"
+msgid "Action"
+msgstr ""
+
+#: ../contents/ui/config/ConfigStation.qml ../contents/ui/lib/StationSearcher.qml
+msgid "Select"
+msgstr "Seleccionar"
+
+#: ../contents/ui/config/ConfigStation.qml
+msgid "Remove"
+msgstr "Eliminar"
+
+#: ../contents/ui/config/ConfigStation.qml ../contents/ui/lib/StationSearcher.qml
+msgid "Find Station"
+msgstr "Encontrar estación"
+
+#: ../contents/ui/config/ConfigStation.qml
+msgid "Manual Add"
+msgstr ""
+
+#: ../contents/ui/config/ConfigStation.qml
+msgid "Error"
+msgstr ""
+
+#: ../contents/ui/config/ConfigStation.qml ../contents/ui/lib/StationSearcher.qml
+msgid "Error: Bad station."
+msgstr ""
 
 #: ../contents/ui/config/ConfigStation.qml
 msgid "Refresh period (s):"
@@ -396,37 +420,89 @@ msgstr "Widget de escritorio:"
 msgid "Configure Wunderground"
 msgstr "Configurar Wunderground"
 
-#: ../contents/ui/lib/StationPickerDialog.qml
-msgid "Saved Weather Stations"
-msgstr "Estaciones meteorológicas guardadas"
+#: ../contents/ui/lib/ManualStationAdd.qml
+msgid "Add Station..."
+msgstr ""
 
-#: ../contents/ui/lib/StationPickerDialog.qml
-msgid "Remove Selected"
-msgstr "Eliminar seleccionado"
+#: ../contents/ui/lib/ManualStationAdd.qml
+msgid "Enter station ID"
+msgstr ""
 
-#: ../contents/ui/lib/StationPickerDialog.qml
-msgid "Confirm Remove %1"
-msgstr "Confirmar eliminar %1"
+#: ../contents/ui/lib/ManualStationAdd.qml ../contents/ui/lib/StationSearcher.qml
+msgid "Confirm"
+msgstr ""
 
-#: ../contents/ui/lib/StationPickerDialog.qml
-msgid "Add"
-msgstr "Añadir"
-
-#: ../contents/ui/lib/StationPickerDialog.qml
-msgid "Remove"
-msgstr "Eliminar"
-
-#: ../contents/ui/lib/StationPickerDialog.qml
-msgid "Select"
-msgstr "Seleccionar"
-
-#: ../contents/ui/lib/StationPickerDialog.qml
+#: ../contents/ui/lib/ManualStationAdd.qml ../contents/ui/lib/StationSearcher.qml
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: ../contents/ui/lib/StationPicker.qml
-msgid "Choose…"
-msgstr "Escoger"
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Error: %1 message: %2"
+msgstr ""
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Station active!"
+msgstr ""
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Reporting %1% of properties."
+msgstr ""
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Station active."
+msgstr ""
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Station unhealthy."
+msgstr ""
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Error: Station not active!"
+msgstr ""
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Search by:"
+msgstr ""
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "City Name"
+msgstr ""
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Weatherstation ID:"
+msgstr "ID de la estación meteorológica"
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Lat/Lon"
+msgstr ""
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Searching place:"
+msgstr ""
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Choose"
+msgstr ""
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Uses WGS84 geocode coordinates"
+msgstr "Utiliza coordenadas de geocodificación WGS84"
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Use Station ID, not city name. Select 'Search by: City Name' to search by city."
+msgstr ""
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Enter Station"
+msgstr "Introducir estación"
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Enter City Name"
+msgstr ""
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Test"
+msgstr ""
 
 #: ../contents/ui/main.qml
 msgid "Cloud Cover"
@@ -478,6 +554,21 @@ msgstr "Refrescar información meteorológica"
 #: ../contents/ui/TopPanel.qml
 msgid "High: %1 Low: %2"
 msgstr "Alto: %1 Bajo: %2"
+
+#~ msgid "Remove Selected"
+#~ msgstr "Eliminar seleccionado"
+
+#~ msgid "Confirm Remove %1"
+#~ msgstr "Confirmar eliminar %1"
+
+#~ msgid "Add"
+#~ msgstr "Añadir"
+
+#~ msgid "Choose…"
+#~ msgstr "Escoger"
+
+#~ msgid "Station Info"
+#~ msgstr "Información de estación"
 
 #~ msgid "DEWPOINT"
 #~ msgstr "PUNTO DE ROCÍO"

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmoid-wunderground\n"
 "Report-Msgid-Bugs-To: https://github.com/k-donn/plasmoid-wunderground\n"
-"POT-Creation-Date: 2025-08-13 10:17-0400\n"
-"PO-Revision-Date: 2023-07-03 20:36+0100\n"
+"POT-Creation-Date: 2025-09-26 20:05-0400\n"
+"PO-Revision-Date: 2025-09-24 14:11-0400\n"
 "Last-Translator: AleksZZ <alexyvp@mail.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "Language: ru_RU\n"
@@ -25,77 +25,81 @@ msgstr "Wunderground"
 msgid "Wunderground Personal Weather Station viewer"
 msgstr "Программа просмотра персональных метеостанций Wunderground"
 
+#: ../contents/code/pws-api.js
+msgid "Location not found"
+msgstr ""
+
 #: ../contents/config/config.qml
 msgid "Station"
-msgstr ""
+msgstr "Станция"
 
 #: ../contents/config/config.qml
 msgid "Appearance"
-msgstr ""
+msgstr "Появление"
 
 #: ../contents/config/config.qml ../contents/ui/config/ConfigUnits.qml
 msgid "Units"
-msgstr ""
+msgstr "Единицы"
 
 #: ../contents/config/config.qml
 msgid "Debug"
-msgstr ""
+msgstr "Отлаживать"
 
 #: ../contents/ui/AirAndSolarItem.qml
 msgid "Status Color"
-msgstr ""
+msgstr "Цвет статуса"
 
 #: ../contents/ui/AirAndSolarItem.qml
 msgid "Air quality"
-msgstr ""
+msgstr "Качество воздуха"
 
 #: ../contents/ui/AirAndSolarItem.qml
 msgid "AQI: %1"
-msgstr ""
+msgstr "АКИ: %1"
 
 #: ../contents/ui/AirAndSolarItem.qml
 msgid "AQHI: %1"
-msgstr ""
+msgstr "AQHI: %1"
 
 #: ../contents/ui/AirAndSolarItem.qml
 msgid "Primary pollutant: "
-msgstr ""
+msgstr "Основной загрязнитель: "
 
 #: ../contents/ui/AirAndSolarItem.qml
 msgid "Amount: %1 %2<br/>Description: %3<br/>Index: %4"
-msgstr ""
+msgstr "Сумма: %1 %2<br/> Описание: %3<br/> Индекс: %4"
 
 #: ../contents/ui/AirAndSolarItem.qml
 msgid "Solar info"
-msgstr ""
+msgstr "Информация о солнечной энергии"
 
 #: ../contents/ui/AirAndSolarItem.qml
 msgid "Sunrise"
-msgstr ""
+msgstr "Восход"
 
 #: ../contents/ui/AirAndSolarItem.qml
 msgid "Sunset"
-msgstr ""
+msgstr "Закат"
 
 #: ../contents/ui/AlertsItem.qml
 msgid "Alerts"
-msgstr ""
+msgstr "Оповещения"
 
 #: ../contents/ui/AlertsItem.qml
 msgid "There are no alerts for your area."
-msgstr ""
+msgstr "Для вашего региона оповещений нет."
 
 #: ../contents/ui/AlertsItem.qml
 msgid "Severity: %1"
-msgstr ""
+msgstr "Серьезность: %1"
 
 #: ../contents/ui/AlertsItem.qml
 msgid "Region: %1<br/>Action: %2<br/>Disclaimer: %3<br/>Issued by: %4"
-msgstr ""
+msgstr "Регион: %1<br/> Действие: %2<br/> Отказ от ответственности: %3<br/> Выдано: %4"
 
 #: ../contents/ui/BottomPanel.qml
 msgid "There are weather alerts for your area!"
-msgstr ""
+msgstr "Для вашего региона доступны оповещения о погоде!"
 
 #: ../contents/ui/config/ConfigAppearance.qml
 msgid "Compact Representation"
@@ -103,31 +107,35 @@ msgstr "Компактное представление"
 
 #: ../contents/ui/config/ConfigAppearance.qml
 msgid "Show temperature:"
-msgstr ""
+msgstr "Показать температуру:"
 
 #: ../contents/ui/config/ConfigAppearance.qml
 msgid "Text display:"
-msgstr ""
+msgstr "Текстовый дисплей:"
 
 #: ../contents/ui/config/ConfigAppearance.qml
 msgid "Automatic"
-msgstr ""
+msgstr "Автоматический"
 
 #: ../contents/ui/config/ConfigAppearance.qml
 msgid "Text will follow the system font and expand to fill the available space."
-msgstr ""
+msgstr "Текст будет соответствовать системному шрифту и расширяться, заполняя доступное пространство."
 
 #: ../contents/ui/config/ConfigAppearance.qml
 msgid "Manual"
-msgstr ""
+msgstr "Руководство"
 
 #: ../contents/ui/config/ConfigAppearance.qml
 msgid "Choose Style…"
-msgstr ""
+msgstr "Выберите стиль…"
 
 #: ../contents/ui/config/ConfigAppearance.qml
 msgid "Choose a Font"
-msgstr ""
+msgstr "Выберите шрифт"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "System Tray Representation"
+msgstr "Представление системного трея"
 
 #: ../contents/ui/config/ConfigAppearance.qml
 msgid "Full Representation"
@@ -147,47 +155,47 @@ msgstr "Размер текста температуры"
 
 #: ../contents/ui/config/ConfigAppearance.qml
 msgid "small (16x16)"
-msgstr ""
+msgstr "маленький (16x16)"
 
 #: ../contents/ui/config/ConfigAppearance.qml
 msgid "smallMedium (22x22)"
-msgstr ""
+msgstr "маленькийCредний (22x22)"
 
 #: ../contents/ui/config/ConfigAppearance.qml
 msgid "medium (32x32)"
-msgstr ""
+msgstr "средний (32x32)"
 
 #: ../contents/ui/config/ConfigAppearance.qml
 msgid "large (48x48)"
-msgstr ""
+msgstr "большой (48x48)"
 
 #: ../contents/ui/config/ConfigAppearance.qml
 msgid "huge (64x64)"
-msgstr ""
+msgstr "огромный (64x64)"
 
 #: ../contents/ui/config/ConfigAppearance.qml
 msgid "enormous (128x128)"
-msgstr ""
+msgstr "огромный (128x128)"
 
 #: ../contents/ui/config/ConfigAppearance.qml
 msgid "Details icon size:"
-msgstr ""
+msgstr "Размер значка «Подробности»:"
 
 #: ../contents/ui/config/ConfigAppearance.qml
 msgid "Top panel icon margins:"
-msgstr ""
+msgstr "Поля значка верхней панели:"
 
 #: ../contents/ui/config/ConfigAppearance.qml
 msgid "Use system theme icons:"
-msgstr ""
+msgstr "Используйте значки системной темы:"
 
 #: ../contents/ui/config/ConfigAppearance.qml
 msgid "Apply system colors to icons:"
-msgstr ""
+msgstr "Применить системные цвета к значкам:"
 
 #: ../contents/ui/config/ConfigAppearance.qml
 msgid "Auto-color temperature:"
-msgstr ""
+msgstr "Автоматическая цветовая температура:"
 
 #: ../contents/ui/config/ConfigAppearance.qml ../contents/ui/SwitchPanel.qml
 msgid "Weather Details"
@@ -199,19 +207,19 @@ msgstr "Прогноз"
 
 #: ../contents/ui/config/ConfigAppearance.qml ../contents/ui/SwitchPanel.qml
 msgid "Day Chart"
-msgstr ""
+msgstr "Дневной график"
 
 #: ../contents/ui/config/ConfigAppearance.qml ../contents/ui/SwitchPanel.qml
 msgid "More Info"
-msgstr ""
+msgstr "Дополнительная информация"
 
 #: ../contents/ui/config/ConfigAppearance.qml
 msgid "Default page shown:"
-msgstr ""
+msgstr "Показана страница по умолчанию:"
 
 #: ../contents/ui/config/ConfigAppearance.qml
 msgid "Show pressure trend:"
-msgstr ""
+msgstr "Показать тенденцию давления:"
 
 #: ../contents/ui/config/ConfigDebug.qml
 msgid "Write to console.log:"
@@ -219,43 +227,59 @@ msgstr "Записывать в console.log:"
 
 #: ../contents/ui/config/ConfigDebug.qml
 msgid "Use Legacy Forecast API:"
-msgstr ""
+msgstr "Используйте устаревший API прогнозов:"
 
 #: ../contents/ui/config/ConfigDebug.qml
 msgid "Startup time delay (ms):"
-msgstr ""
+msgstr "Задержка времени запуска (мс):"
 
 #: ../contents/ui/config/ConfigStation.qml
-msgid "Find Station"
-msgstr "Найти станцию"
+msgid "Saved Weather Stations"
+msgstr "Сохраненные метеостанции"
 
 #: ../contents/ui/config/ConfigStation.qml
-msgid "Enter Station"
-msgstr "Ввести станцию"
+msgid "ID:"
+msgstr "ИДЕНТИФИКАТОР:"
 
-#: ../contents/ui/config/ConfigStation.qml
-msgid "Station Info"
-msgstr ""
-
-#: ../contents/ui/config/ConfigStation.qml
-msgid "Uses WGS84 geocode coordinates"
-msgstr "Геокод в формате WGS84"
-
-#: ../contents/ui/config/ConfigStation.qml
-msgid "Weatherstation ID:"
-msgstr "ID метеостанции:"
-
-#: ../contents/ui/config/ConfigStation.qml
+#: ../contents/ui/config/ConfigStation.qml ../contents/ui/lib/StationSearcher.qml
 msgid "Weatherstation Name:"
-msgstr ""
+msgstr "Название метеостанции:"
 
-#: ../contents/ui/config/ConfigStation.qml
+#: ../contents/ui/config/ConfigStation.qml ../contents/ui/lib/StationSearcher.qml
+msgid "Latitude:"
+msgstr "Широта:"
+
+#: ../contents/ui/config/ConfigStation.qml ../contents/ui/lib/StationSearcher.qml
 msgid "Longitude:"
 msgstr "Долгота:"
 
 #: ../contents/ui/config/ConfigStation.qml
-msgid "Latitude:"
-msgstr "Широта:"
+msgid "Action"
+msgstr "Действие"
+
+#: ../contents/ui/config/ConfigStation.qml ../contents/ui/lib/StationSearcher.qml
+msgid "Select"
+msgstr "Выбирать"
+
+#: ../contents/ui/config/ConfigStation.qml
+msgid "Remove"
+msgstr "Удалять"
+
+#: ../contents/ui/config/ConfigStation.qml ../contents/ui/lib/StationSearcher.qml
+msgid "Find Station"
+msgstr "Найти станцию"
+
+#: ../contents/ui/config/ConfigStation.qml
+msgid "Manual Add"
+msgstr ""
+
+#: ../contents/ui/config/ConfigStation.qml
+msgid "Error"
+msgstr ""
+
+#: ../contents/ui/config/ConfigStation.qml ../contents/ui/lib/StationSearcher.qml
+msgid "Error: Bad station."
+msgstr ""
 
 #: ../contents/ui/config/ConfigStation.qml
 msgid "Refresh period (s):"
@@ -263,23 +287,23 @@ msgstr "Интервал обновления (сек):"
 
 #: ../contents/ui/config/ConfigUnits.qml
 msgid "Time/Date Format"
-msgstr ""
+msgstr "Формат времени/даты"
 
 #: ../contents/ui/config/ConfigUnits.qml
 msgid "Day Chart time format:"
-msgstr ""
+msgstr "Формат времени дневного графика:"
 
 #: ../contents/ui/config/ConfigUnits.qml
 msgid "Week forecast date format:"
-msgstr ""
+msgstr "Формат даты прогноза на неделю:"
 
 #: ../contents/ui/config/ConfigUnits.qml
 msgid "Precision"
-msgstr ""
+msgstr "Точность"
 
 #: ../contents/ui/config/ConfigUnits.qml ../contents/ui/main.qml
 msgid "Temperature"
-msgstr ""
+msgstr "Температура"
 
 #: ../contents/ui/config/ConfigUnits.qml ../contents/ui/DetailsItem.qml ../contents/ui/main.qml
 msgid "Wind & Gust"
@@ -311,7 +335,7 @@ msgstr "Британская"
 
 #: ../contents/ui/config/ConfigUnits.qml
 msgid "Custom"
-msgstr ""
+msgstr "Обычай"
 
 #: ../contents/ui/config/ConfigUnits.qml
 msgid "Choose:"
@@ -319,32 +343,32 @@ msgstr "Еденицы измерения:"
 
 #: ../contents/ui/config/ConfigUnits.qml
 msgid "Wind unit:"
-msgstr ""
+msgstr "Ветровой блок:"
 
 #: ../contents/ui/config/ConfigUnits.qml
 msgid "Rain unit:"
-msgstr ""
+msgstr "Дождевой блок:"
 
 #: ../contents/ui/config/ConfigUnits.qml
 msgid "Snow unit:"
-msgstr ""
+msgstr "Снежный блок:"
 
 #: ../contents/ui/config/ConfigUnits.qml
 msgid "Temperature unit:"
-msgstr ""
+msgstr "Единица измерения температуры:"
 
 #: ../contents/ui/config/ConfigUnits.qml
 msgid "Pressure unit:"
-msgstr ""
+msgstr "Единица измерения давления:"
 
 #: ../contents/ui/config/ConfigUnits.qml
 msgid "Elevation unit:"
-msgstr ""
+msgstr "Единица измерения высоты:"
 
 #: ../contents/ui/DayChartItem.qml
 msgctxt "per 12 hours, please keep it short"
 msgid "/12h"
-msgstr ""
+msgstr "/12ч"
 
 #: ../contents/ui/DetailsItem.qml
 msgid "Wind from: %1 (%2°)"
@@ -360,11 +384,11 @@ msgstr "Давление"
 
 #: ../contents/ui/DetailsItem.qml
 msgid "Pressure has risen %1 in the last three hours."
-msgstr ""
+msgstr "Давление выросло на %1 за последние три часа."
 
 #: ../contents/ui/DetailsItem.qml
 msgid "Pressure has fallen %1 in the last three hours."
-msgstr ""
+msgstr "Давление упало на %1 за последние три часа."
 
 #: ../contents/ui/DetailsItem.qml ../contents/ui/main.qml
 msgid "Humidity"
@@ -373,7 +397,7 @@ msgstr "Влажность"
 #: ../contents/ui/DetailsItem.qml
 msgctxt "Short for: 'Precipitation Accumulation'"
 msgid "Precipitation Accum."
-msgstr "Скопление Осадков"
+msgstr "Скопление Осадков."
 
 #: ../contents/ui/DetailsItem.qml ../contents/ui/main.qml
 msgid "UV"
@@ -382,7 +406,7 @@ msgstr "УФ"
 #: ../contents/ui/ForecastItem.qml
 msgctxt "Do not edit HTML tags."
 msgid "<font size='4'>Feels like: %1<br/>Thunder: %2<br/>UV: %3<br/>Snow: %4<br/>Golf: %5</font>"
-msgstr ""
+msgstr "<font size='4'>Ощущение как: %1<br/> Гром: %2<br/> УФ: %3<br/> Снег: %4<br/> Гольф: %5</font>"
 
 #: ../contents/ui/FullRepresentation.qml
 msgid "Loading data..."
@@ -390,55 +414,107 @@ msgstr "Загрузка данных ..."
 
 #: ../contents/ui/lib/BackgroundToggle.qml
 msgid "Desktop Widget:"
-msgstr ""
+msgstr "Виджет рабочего стола:"
 
 #: ../contents/ui/lib/ConfigBtn.qml
 msgid "Configure Wunderground"
+msgstr "Настроить Wunderground"
+
+#: ../contents/ui/lib/ManualStationAdd.qml
+msgid "Add Station..."
 msgstr ""
 
-#: ../contents/ui/lib/StationPickerDialog.qml
-msgid "Saved Weather Stations"
+#: ../contents/ui/lib/ManualStationAdd.qml
+msgid "Enter station ID"
 msgstr ""
 
-#: ../contents/ui/lib/StationPickerDialog.qml
-msgid "Remove Selected"
-msgstr ""
+#: ../contents/ui/lib/ManualStationAdd.qml ../contents/ui/lib/StationSearcher.qml
+msgid "Confirm"
+msgstr "Подтверждать"
 
-#: ../contents/ui/lib/StationPickerDialog.qml
-msgid "Confirm Remove %1"
-msgstr ""
-
-#: ../contents/ui/lib/StationPickerDialog.qml
-msgid "Add"
-msgstr ""
-
-#: ../contents/ui/lib/StationPickerDialog.qml
-msgid "Remove"
-msgstr ""
-
-#: ../contents/ui/lib/StationPickerDialog.qml
-msgid "Select"
-msgstr ""
-
-#: ../contents/ui/lib/StationPickerDialog.qml
+#: ../contents/ui/lib/ManualStationAdd.qml ../contents/ui/lib/StationSearcher.qml
 msgid "Cancel"
+msgstr "Отмена"
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Error: %1 message: %2"
 msgstr ""
 
-#: ../contents/ui/lib/StationPicker.qml
-msgid "Choose…"
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Station active!"
+msgstr ""
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Reporting %1% of properties."
+msgstr ""
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Station active."
+msgstr ""
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Station unhealthy."
+msgstr ""
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Error: Station not active!"
+msgstr ""
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Search by:"
+msgstr "Поиск по:"
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "City Name"
+msgstr "Название города"
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Weatherstation ID:"
+msgstr "ID метеостанции:"
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Lat/Lon"
+msgstr "Широта/Долгота"
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Searching place:"
+msgstr "Место поиска:"
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Choose"
+msgstr "Выбирать"
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Uses WGS84 geocode coordinates"
+msgstr "Геокод в формате WGS84"
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Use Station ID, not city name. Select 'Search by: City Name' to search by city."
+msgstr "Используйте идентификатор станции, а не название города. Выберите «Поиск по названию города», чтобы искать по городу."
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Enter Station"
+msgstr "Ввести станцию"
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Enter City Name"
+msgstr "Введите название города"
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Test"
 msgstr ""
 
 #: ../contents/ui/main.qml
 msgid "Cloud Cover"
-msgstr ""
+msgstr "Облачный покров"
 
 #: ../contents/ui/main.qml
 msgid "Precipitation Chance"
-msgstr ""
+msgstr "Вероятность осадков"
 
 #: ../contents/ui/main.qml
 msgid "Snow Precipitation Rate"
-msgstr ""
+msgstr "Норма выпадения снега"
 
 #: ../contents/ui/main.qml
 msgid "Set the weather station to pull data from."
@@ -459,25 +535,40 @@ msgstr "Ошибка..."
 #: ../contents/ui/main.qml
 msgctxt "Do not edit HTML tags. 'Temp' means temperature"
 msgid "<font size='4'>Temp: %1</font><br />"
-msgstr "<размер шрифта='4'>температура: %1</font><br />"
+msgstr "<font size='4'>температура: %1</font><br />"
 
 #: ../contents/ui/main.qml
 msgctxt "Do not edit HTML tags."
 msgid "<font size='4'>Feels: %1</font><br />"
-msgstr "<размер шрифта='4'>по ощущениям: %1</font><br />"
+msgstr "<font size='4'>по ощущениям: %1</font><br />"
 
 #: ../contents/ui/main.qml
 msgctxt "Do not edit HTML tags. 'Wnd Spd' means Wind Speed"
 msgid "<font size='4'>Wnd spd: %1</font><br />"
-msgstr "<размер шрифта='4'>скорость ветра: %1</font><br />"
+msgstr "<font size='4'>скорость ветра: %1</font><br />"
 
 #: ../contents/ui/main.qml
 msgid "Refresh weather"
-msgstr ""
+msgstr "Обновить погоду"
 
 #: ../contents/ui/TopPanel.qml
 msgid "High: %1 Low: %2"
 msgstr "Высокий: %1 Низкий: %2"
+
+#~ msgid "Add Station…"
+#~ msgstr "Добавить станцию…"
+
+#~ msgid "Remove Selected"
+#~ msgstr "Удалить выбранное"
+
+#~ msgid "Confirm Remove %1"
+#~ msgstr "Подтвердите удаление %1"
+
+#~ msgid "Add"
+#~ msgstr "Добавлять"
+
+#~ msgid "Choose…"
+#~ msgstr "Выбирать…"
 
 #~ msgid "DEWPOINT"
 #~ msgstr "ТОЧКА РОСЫ"

@@ -41,6 +41,7 @@ KCM.SimpleKCM {
 
 
     property alias cfg_showCompactTemp: showCompactTemp.checked
+    property alias cfg_showSystemTrayTemp: showSystemTrayTemp.checked
     property alias cfg_propHeadPointSize: propHeadPointSize.value
     property alias cfg_propPointSize: propPointSize.value
     property alias cfg_tempPointSize: tempPointSize.value
@@ -140,6 +141,18 @@ KCM.SimpleKCM {
             onAccepted: {
                 fontChosen = selectedFont;
             }
+        }
+
+        Kirigami.Separator {
+            Kirigami.FormData.label: i18n("System Tray Representation")
+            Kirigami.FormData.isSection: true
+        }
+
+        QQC.CheckBox {
+            id: showSystemTrayTemp
+
+            Kirigami.FormData.label: i18n("Show temperature:")
+
         }
 
         Kirigami.Separator {
