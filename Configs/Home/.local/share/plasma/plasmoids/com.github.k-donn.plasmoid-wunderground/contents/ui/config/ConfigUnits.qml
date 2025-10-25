@@ -39,7 +39,7 @@ KCM.SimpleKCM {
     property alias cfg_elevUnitsChoice: elevUnitsChoice.currentIndex
 
     function displayTxt(i18nStr) {
-        return i18nStr.charAt(0).toUpperCase() + i18nStr.toLowerCase().slice(1)
+        return i18nStr.charAt(0).toUpperCase() + i18nStr.toLowerCase().slice(1);
     }
 
     Kirigami.FormLayout {
@@ -99,7 +99,7 @@ KCM.SimpleKCM {
             id: feelsPrecision
 
             // Reuse existing i18n strings
-            Kirigami.FormData.label: i18n("Feels like %1", "").slice(0,-1) + ":"
+            Kirigami.FormData.label: i18n("Feels like %1", "").slice(0, -1) + ":"
 
             from: 0
             to: 15
@@ -123,7 +123,7 @@ KCM.SimpleKCM {
                 top: forecastPrecision.to
             }
         }
-        
+
         QQC.SpinBox {
             id: dewPrecision
 

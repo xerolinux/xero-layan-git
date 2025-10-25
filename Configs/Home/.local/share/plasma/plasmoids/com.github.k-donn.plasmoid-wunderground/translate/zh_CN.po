@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmoid-wunderground\n"
 "Report-Msgid-Bugs-To: https://github.com/k-donn/plasmoid-wunderground\n"
-"POT-Creation-Date: 2025-09-26 20:05-0400\n"
+"POT-Creation-Date: 2025-10-21 16:47-0400\n"
 "PO-Revision-Date: 2024-11-11 17:12+0800\n"
 "Last-Translator: CloverGit <clovergit@hotmail.com>\n"
 "Language-Team: Simplified Chinese <>\n"
@@ -409,8 +409,8 @@ msgid "<font size='4'>Feels like: %1<br/>Thunder: %2<br/>UV: %3<br/>Snow: %4<br/
 msgstr "<font size='4'>体感温度: %1<br/>雷电: %2<br/>紫外线: %3<br/>降雪: %4<br/>Golf: %5</font>"
 
 #: ../contents/ui/FullRepresentation.qml
-msgid "Loading data..."
-msgstr "加载数据中..."
+msgid "Sorry! The widget ran into a network error: "
+msgstr ""
 
 #: ../contents/ui/lib/BackgroundToggle.qml
 msgid "Desktop Widget:"
@@ -554,6 +554,9 @@ msgstr "刷新天气"
 #: ../contents/ui/TopPanel.qml
 msgid "High: %1 Low: %2"
 msgstr "最高: %1 最低: %2"
+
+#~ msgid "Loading data..."
+#~ msgstr "加载数据中..."
 
 #~ msgid "Remove Selected"
 #~ msgstr "移除所选"

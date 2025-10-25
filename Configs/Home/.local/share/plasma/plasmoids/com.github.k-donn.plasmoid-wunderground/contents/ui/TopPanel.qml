@@ -17,55 +17,58 @@
 
 import QtQuick
 import QtQuick.Layouts
-import QtQuick.Controls
 import org.kde.plasma.plasmoid
-import org.kde.ksvg as KSvg
 import org.kde.kirigami as Kirigami
-import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.components as PlasmaComponents
 import "../code/utils.js" as Utils
 
 RowLayout {
     id: topPanelRoot
 
+    Layout.preferredHeight: preferredIconSize
+
     readonly property int preferredIconSize: plasmoid.configuration.detailsIconSize
 
-    Kirigami.Icon {
-        id: topPanelIcon
+    Item {
+        Layout.alignment: Qt.AlignLeft | Qt.AlignTop
 
-        source: Utils.getConditionIcon(iconCode)
+        Layout.fillWidth: true
+        Layout.preferredWidth: 1
 
-        isMask: plasmoid.configuration.applyColorScheme ? true : false
-        color: Kirigami.Theme.textColor
+        Kirigami.Icon {
+            id: topPanelIcon
 
-        Layout.margins: plasmoid.configuration.topIconMargins
+            source: Utils.getConditionIcon(iconCode)
 
-        Layout.minimumWidth: preferredIconSize
-        Layout.minimumHeight: preferredIconSize
-        Layout.preferredWidth: Layout.minimumWidth
-        Layout.preferredHeight: Layout.minimumHeight
+            isMask: plasmoid.configuration.applyColorScheme ? true : false
+            color: Kirigami.Theme.textColor
+
+            implicitHeight: preferredIconSize
+            implicitWidth: implicitHeight
+        }
     }
 
     PlasmaComponents.Label {
         id: tempOverview
 
-        text: showForecast ? i18n("High: %1 Low: %2", Utils.currentTempUnit(Utils.toUserTemp(currDayHigh),plasmoid.configuration.forecastPrecision), Utils.currentTempUnit(Utils.toUserTemp(currDayLow),plasmoid.configuration.forecastPrecision)) : i18n("Loading...")
+        text: showForecast ? i18n("High: %1 Low: %2", Utils.currentTempUnit(Utils.toUserTemp(currDayHigh), plasmoid.configuration.forecastPrecision), Utils.currentTempUnit(Utils.toUserTemp(currDayLow), plasmoid.configuration.forecastPrecision)) : i18n("Loading...")
 
         verticalAlignment: Text.AlignBottom
         horizontalAlignment: Text.AlignHCenter
 
-        Layout.alignment: Qt.AlignHCenter
         Layout.fillWidth: true
+        Layout.preferredWidth: 1
     }
 
     PlasmaComponents.Label {
-        id: currStation
+        id: narrativeLabel
 
         text: conditionNarrative ? conditionNarrative : i18n("Loading...")
 
         verticalAlignment: Text.AlignBottom
         horizontalAlignment: Text.AlignRight
 
-        Layout.alignment: Qt.AlignRight
+        Layout.fillWidth: true
+        Layout.preferredWidth: 1
     }
 }

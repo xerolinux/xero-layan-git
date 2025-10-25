@@ -17,6 +17,7 @@ const baseBarColors = {
   systemColorSet: "Window",
   custom: "#013eff",
   list: baseColorList,
+  reverseList: false,
   followColor: 0,
   saturationEnabled: false,
   lightnessEnabled: false,
@@ -26,7 +27,9 @@ const baseBarColors = {
   image: {
     source: "",
     fillMode: 2
-  }
+  },
+  hueStart: 0,
+  hueEnd: 360,
 };
 
 const baseWaveFillColors = {
@@ -38,6 +41,7 @@ const baseWaveFillColors = {
   systemColorSet: "Window",
   custom: "#013eff",
   list: baseColorList,
+  reverseList: false,
   followColor: 0,
   saturationEnabled: false,
   lightnessEnabled: false,
@@ -47,5 +51,7 @@ const baseWaveFillColors = {
   image: {
     source: "",
     fillMode: 2
-  }
+  },
+  hueStart: 0,
+  hueEnd: 360,
 };

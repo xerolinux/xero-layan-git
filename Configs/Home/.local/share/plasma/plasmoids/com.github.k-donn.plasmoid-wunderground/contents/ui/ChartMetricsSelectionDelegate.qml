@@ -17,12 +17,8 @@
  */
 
 import QtQuick
-import QtQuick.Controls
 import QtQuick.Layouts
-import org.kde.plasma.components as PlasmaComponents
-import org.kde.plasma.core as PlasmaCore
 import org.kde.kirigami as Kirigami
-import org.kde.plasma.extras as PlasmaExtras
 import org.kde.plasma.plasmoid
 import "../code/utils.js" as Utils
 
@@ -70,7 +66,7 @@ Component {
                         majorFreq += 1;
                     }
 
-                    horizontalLines.major.frequency = majorFreq
+                    horizontalLines.major.frequency = majorFreq;
                     horizontalLines.minor.frequency = majorFreq / 2;
                 }
             }
@@ -79,9 +75,6 @@ Component {
             color: Kirigami.Theme.textColor
 
             source: Utils.getChartIcon(availableReadings[index])
-
         }
-
     }
-
 }

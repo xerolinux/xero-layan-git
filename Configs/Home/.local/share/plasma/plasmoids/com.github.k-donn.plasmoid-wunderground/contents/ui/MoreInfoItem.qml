@@ -16,8 +16,6 @@
  */
 
 import QtQuick.Layouts
-import org.kde.plasma.plasmoid
-import org.kde.plasma.components as PlasmaComponents
 
 ColumnLayout {
     id: moreInfoRoot

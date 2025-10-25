@@ -21,9 +21,7 @@ import QtQuick.Dialogs
 import org.kde.kcmutils as KCM
 import QtQuick.Controls as QQC
 import org.kde.plasma.components as PlasmaComponents
-import org.kde.plasma.core as PlasmaCore
 import org.kde.kirigami as Kirigami
-import "../../code/pws-api.js" as StationAPI
 import "../lib" as Lib
 
 KCM.SimpleKCM {
@@ -57,7 +55,6 @@ KCM.SimpleKCM {
         property string stationName: ""
         property real latitude: 0
         property real longitude: 0
-
 
         function syncSavedStations(force) {
             var stationsTxt = listModelToStr(stationListModel);
@@ -196,35 +193,38 @@ KCM.SimpleKCM {
                             if (stationsArr.length === 0 && plasmoid.configuration.stationID !== "") {
                                 printDebug("Station not saved to savedStations. Attempting to add.");
                                 stationListModel.append({
-                                    "stationID":plasmoid.configuration.stationID,
-                                    "placeName":plasmoid.configuration.stationName,
-                                    "latitude":plasmoid.configuration.latitude,
-                                    "longitude":plasmoid.configuration.longitude,
+                                    "stationID": plasmoid.configuration.stationID,
+                                    "placeName": plasmoid.configuration.stationName,
+                                    "latitude": plasmoid.configuration.latitude,
+                                    "longitude": plasmoid.configuration.longitude,
                                     "selected": true
                                 });
                                 stationPickerEl.syncSavedStations(true);
                             }
 
                             for (var i = 0; i < stationsArr.length; i++) {
+                                // FIXME: If the station has been manually added, the lat/long/placeName are not set
+                                // The individual properties are set in the xml file by the widget, but the widget
+                                // does not set the JSON.
                                 stationListModel.append({
                                     "stationID": stationsArr[i].stationID,
-                                    "placeName": stationsArr[i].placeName,
-                                    "latitude": stationsArr[i].latitude,
-                                    "longitude": stationsArr[i].longitude,
+                                    "placeName": plasmoid.configuration.stationName,
+                                    "latitude": plasmoid.configuration.latitude,
+                                    "longitude": plasmoid.configuration.longitude,
                                     "selected": stationsArr[i].selected === true
                                 });
-                                stationPickerEl.syncSavedStations();
+                                stationPickerEl.syncSavedStations(true);
                             }
                         } catch (e) {
-                            printDebug("Invalid saved stations");
+                            printDebug("Invalid saved stations: " + e);
                             printDebug("Station ID: " + plasmoid.configuration.stationID + " long: " + plasmoid.configuration.longitude + " lat: " + plasmoid.configuration.latitude + " name: " + plasmoid.configuration.stationName + " list: " + plasmoid.configuration.stationList);
                             if (plasmoid.configuration.stationID !== "") {
                                 printDebug("Attempting to fill in savedStations");
                                 stationListModel.append({
-                                    "stationID":plasmoid.configuration.stationID,
-                                    "placeName":plasmoid.configuration.stationName,
-                                    "latitude":plasmoid.configuration.latitude,
-                                    "longitude":plasmoid.configuration.longitude,
+                                    "stationID": plasmoid.configuration.stationID,
+                                    "placeName": plasmoid.configuration.stationName,
+                                    "latitude": plasmoid.configuration.latitude,
+                                    "longitude": plasmoid.configuration.longitude,
                                     "selected": true
                                 });
                                 stationPickerEl.syncSavedStations(true);
@@ -237,8 +237,7 @@ KCM.SimpleKCM {
                     height: 36
                     Rectangle {
                         anchors.fill: parent
-                        color: selected ? Kirigami.Theme.highlightColor
-                                        : (index % 2 === 0 ? Kirigami.Theme.backgroundColor : Kirigami.Theme.alternateBackgroundColor)
+                        color: selected ? Kirigami.Theme.highlightColor : (index % 2 === 0 ? Kirigami.Theme.backgroundColor : Kirigami.Theme.alternateBackgroundColor)
                         border.color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.15)
                         border.width: 1
                     }
@@ -253,7 +252,11 @@ KCM.SimpleKCM {
                             elide: Text.ElideRight
                             clip: true
                         }
-                        Rectangle { width: 1; color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.15); height: parent.height }
+                        Rectangle {
+                            width: 1
+                            color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.15)
+                            height: parent.height
+                        }
                         PlasmaComponents.Label {
                             text: placeName
                             Layout.preferredWidth: 160
@@ -262,7 +265,11 @@ KCM.SimpleKCM {
                             elide: Text.ElideRight
                             clip: true
                         }
-                        Rectangle { width: 1; color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.15); height: parent.height }
+                        Rectangle {
+                            width: 1
+                            color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.15)
+                            height: parent.height
+                        }
                         PlasmaComponents.Label {
                             text: latitude
                             Layout.preferredWidth: 80
@@ -271,7 +278,11 @@ KCM.SimpleKCM {
                             elide: Text.ElideRight
                             clip: true
                         }
-                        Rectangle { width: 1; color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.15); height: parent.height }
+                        Rectangle {
+                            width: 1
+                            color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.15)
+                            height: parent.height
+                        }
                         PlasmaComponents.Label {
                             text: longitude
                             Layout.preferredWidth: 80
@@ -280,7 +291,11 @@ KCM.SimpleKCM {
                             elide: Text.ElideRight
                             clip: true
                         }
-                        Rectangle { width: 1; color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.15); height: parent.height }
+                        Rectangle {
+                            width: 1
+                            color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.15)
+                            height: parent.height
+                        }
                         RowLayout {
                             Layout.preferredWidth: 120
                             spacing: 4
@@ -340,40 +355,18 @@ KCM.SimpleKCM {
 
             Lib.ManualStationAdd {
                 id: manualAdd
-                onStationSelected: function(station) {
+                onStationSelected: function (station) {
                     printDebug("Received manual station: " + station);
-                    // StationAPI.searchStationID(station, function(stations, error) {
-                    //     var foundStation = false;
-                    //     if (!error) {
-                    //         for (var i = 0; i < stations.length; i++) {
-                    //             var stationCandidate = stations[i];
-                    //             if (stationCandidate.stationID === station) {
-                    //                 stationListModel.append({
-                    //                     "stationID": stationCandidate.stationID,
-                    //                     "placeName": stationCandidate.placeName,
-                    //                     "latitude": stationCandidate.latitude,
-                    //                     "longitude": stationCandidate.longitude,
-                    //                     "selected": true
-                    //                 });
-                    //                 foundStation = true;
-                    //                 for (var j = 0; j < stationListModel.count; j++) {
-                    //                     stationListModel.setProperty(j, "selected", j === stationListModel.count - 1);
-                    //                 }
-                    //                 stationPickerEl.syncSavedStations();
-                    //             }
-                    //         }
-                    //     }
-                    //     if (!foundStation) {
-                    //         stationNotFound.open()
-                    //     }
-                    // })
                     stationListModel.append({
                         "stationID": station,
-                        "placeName": "",
+                        "placeName": "MANUALADD",
                         "longitude": 0,
                         "latitude": 0,
                         "selected": true
                     });
+                    for (var i = 0; i < stationListModel.count; i++) {
+                        stationListModel.setProperty(i, "selected", i === stationListModel.count - 1);
+                    }
                     stationPickerEl.syncSavedStations();
                 }
             }
@@ -389,7 +382,7 @@ KCM.SimpleKCM {
 
             Lib.StationSearcher {
                 id: stationSearcher
-                onStationSelected: function(station) {
+                onStationSelected: function (station) {
                     printDebug("Received station: " + JSON.stringify(station));
                     stationListModel.append({
                         "stationID": station.stationID,
@@ -417,14 +410,16 @@ KCM.SimpleKCM {
                     from: 300
                     to: 86400
                     editable: true
-                    validator: IntValidator { bottom: refreshPeriod.from; top: refreshPeriod.to }
+                    validator: IntValidator {
+                        bottom: refreshPeriod.from
+                        top: refreshPeriod.to
+                    }
                 }
             }
 
             PlasmaComponents.Label {
-                text: "Version 3.5.2"
+                text: "Version 3.5.4"
             }
         }
-
     }
 }

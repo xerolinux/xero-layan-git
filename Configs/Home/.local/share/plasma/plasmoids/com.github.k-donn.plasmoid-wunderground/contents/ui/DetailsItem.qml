@@ -17,9 +17,7 @@
 
 import QtQuick
 import QtQuick.Layouts
-import QtQuick.Controls
 import org.kde.plasma.plasmoid
-import org.kde.ksvg as KSvg
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.components as PlasmaComponents
@@ -35,7 +33,7 @@ GridLayout {
 
     PlasmaComponents.Label {
         id: temp
-        text: Utils.currentTempUnit(Utils.toUserTemp(weatherData["details"]["temp"]),plasmoid.configuration.tempPrecision)
+        text: Utils.currentTempUnit(Utils.toUserTemp(weatherData["details"]["temp"]), plasmoid.configuration.tempPrecision)
         font {
             bold: true
             pointSize: plasmoid.configuration.tempPointSize
@@ -54,7 +52,6 @@ GridLayout {
         // wind barb icons are 270 degrees deviated from 0 degrees (north)
         rotation: weatherData["winddir"] - 270
 
-
         Layout.minimumWidth: Kirigami.Units.iconSizes.large
         Layout.minimumHeight: Kirigami.Units.iconSizes.large
         Layout.preferredWidth: Layout.minimumWidth
@@ -72,7 +69,7 @@ GridLayout {
 
     PlasmaComponents.Label {
         id: feelsLike
-        text: i18n("Feels like %1", Utils.currentTempUnit(Utils.feelsLike(weatherData["details"]["temp"], weatherData["humidity"], weatherData["details"]["windSpeed"]),plasmoid.configuration.feelsPrecision))
+        text: i18n("Feels like %1", Utils.currentTempUnit(Utils.feelsLike(weatherData["details"]["temp"], weatherData["humidity"], weatherData["details"]["windSpeed"]), plasmoid.configuration.feelsPrecision))
         font.pointSize: plasmoid.configuration.propPointSize
     }
     PlasmaComponents.Label {
@@ -82,7 +79,7 @@ GridLayout {
     }
     PlasmaComponents.Label {
         id: wind
-        text: Utils.toUserSpeed(weatherData["details"]["windSpeed"]).toFixed(plasmoid.configuration.windPrecision) + " / " + Utils.currentSpeedUnit(Utils.toUserSpeed(weatherData["details"]["windGust"]),plasmoid.configuration.windPrecision)
+        text: Utils.toUserSpeed(weatherData["details"]["windSpeed"]).toFixed(plasmoid.configuration.windPrecision) + " / " + Utils.currentSpeedUnit(Utils.toUserSpeed(weatherData["details"]["windGust"]), plasmoid.configuration.windPrecision)
         font.pointSize: plasmoid.configuration.propPointSize
     }
 
@@ -113,7 +110,7 @@ GridLayout {
 
     PlasmaComponents.Label {
         id: dew
-        text: Utils.currentTempUnit(Utils.toUserTemp(weatherData["details"]["dewpt"]),plasmoid.configuration.dewPrecision)
+        text: Utils.currentTempUnit(Utils.toUserTemp(weatherData["details"]["dewpt"]), plasmoid.configuration.dewPrecision)
         font.pointSize: plasmoid.configuration.propPointSize
     }
     PlasmaComponents.Label {

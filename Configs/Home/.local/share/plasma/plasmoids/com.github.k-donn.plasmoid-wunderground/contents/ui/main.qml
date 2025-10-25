@@ -19,7 +19,6 @@ import QtQml
 import QtQuick
 import QtQuick.Layouts
 import org.kde.plasma.plasmoid
-import org.kde.kirigami as Kirigami
 import org.kde.plasma.core as PlasmaCore
 import "../code/utils.js" as Utils
 import "../code/pws-api.js" as StationAPI
@@ -27,54 +26,58 @@ import "../code/pws-api.js" as StationAPI
 PlasmoidItem {
     id: root
 
-    property var weatherData: {
-        "stationID": "",
-        "uv": 0,
-        "obsTimeLocal": "",
-        "isNight": false,
-        "winddir": 0,
-        "latitude": 0,
-        "longitude": 0,
-        "sunrise": "2020-08-09T07:00:10-0500",
-        "sunset": "2020-08-09T20:00:10-0500",
-        "solarRad": 0,
-        "humidity": 0,
-        "details": {
-            "temp": 0,
-            "windSpeed": 0,
-            "windGust": 0,
-            "dewpt": 0,
+    property var weatherData: ({
+            "stationID": "",
+            "neighborhood": "",
+            "uv": 0,
+            "obsTimeLocal": "",
+            "isNight": false,
+            "winddir": 0,
+            "latitude": 0,
+            "longitude": 0,
+            "sunrise": "2020-08-09T07:00:10-0500",
+            "sunset": "2020-08-09T20:00:10-0500",
             "solarRad": 0,
-            "precipRate": 0,
-            "pressure": 0,
-            "pressureTrend": "Steady",
-            "pressureTrendCode": 0,
-            "pressureDelta": 0,
-            "precipTotal": 0,
-            "elev": 0
-        },
-        "aq": {
-            "aqi": 0,
-            "aqhi": 0,
-            "aqDesc": "Good",
-            "aqColor": "FFFFFF",
-            "aqPrimary": "PM2.5",
-            "primaryDetails": {
-                "phrase": "Particulate matter <2.5 microns",
-                "amount": 0,
-                "unit": "ug/m3",
-                "desc": "Moderate",
-                "index": 0
+            "humidity": 0,
+            "details": {
+                "temp": 0,
+                "windSpeed": 0,
+                "windGust": 0,
+                "dewpt": 0,
+                "solarRad": 0,
+                "precipRate": 0,
+                "pressure": 0,
+                "pressureTrend": "Steady",
+                "pressureTrendCode": 0,
+                "pressureDelta": 0,
+                "precipTotal": 0,
+                "elev": 0
+            },
+            "aq": {
+                "aqi": 0,
+                "aqhi": 0,
+                "aqDesc": "Good",
+                "aqColor": "FFFFFF",
+                "aqPrimary": "PM2.5",
+                "primaryDetails": {
+                    "phrase": "Particulate matter <2.5 microns",
+                    "amount": 0,
+                    "unit": "ug/m3",
+                    "desc": "Moderate",
+                    "index": 0
+                }
             }
-        }
-    }
+        })
     property ListModel forecastModel: ListModel {}
     property ListModel hourlyModel: ListModel {}
     property ListModel alertsModel: ListModel {}
-
-    property string errorStr: ""
+    property int currDayHigh: 0
+    property int currDayLow: 0
     property string iconCode: "32" // 32 = sunny
     property string conditionNarrative: ""
+
+    property string errorStr: ""
+    property string errorType: ""
 
     property int showCONFIG: 1
     property int showLOADING: 2
@@ -82,11 +85,6 @@ PlasmoidItem {
     property int showDATA: 8
 
     property int appState: showCONFIG
-    // QML does not let you property bind items part of ListModels.
-    // The TopPanel shows the high/low values which are items part of forecastModel
-    // These are updated in pws-api.js to overcome that limitation
-    property int currDayHigh: 0
-    property int currDayLow: 0
 
     property bool showForecast: false
 
@@ -106,83 +104,83 @@ PlasmoidItem {
     property bool hasLoaded: false
 
     property var textSize: ({
-        normal: plasmoid.configuration.propPointSize,
-        small: plasmoid.configuration.propPointSize - 1,
-        tiny: plasmoid.configuration.propPointSize - 2
-    })
+            normal: plasmoid.configuration.propPointSize,
+            small: plasmoid.configuration.propPointSize - 1,
+            tiny: plasmoid.configuration.propPointSize - 2
+        })
 
     property var maxValDict: ({
-        temperature: -999,
-        humidity: -999,
-        cloudCover: -999,
-        precipitationChance: -999,
-        precipitationRate: -999,
-        snowPrecipitationRate: -999,
-        wind: -999,
-        pressure: -999,
-        uvIndex: -999,
-    })
+            temperature: -999,
+            humidity: -999,
+            cloudCover: -999,
+            precipitationChance: -999,
+            precipitationRate: -999,
+            snowPrecipitationRate: -999,
+            wind: -999,
+            pressure: -999,
+            uvIndex: -999
+        })
 
     property var rangeValDict: ({
-        temperature: 30,
-        humidity: 100,
-        cloudCover: 100,
-        precipitationChance: 100,
-        precipitationRate: 5,
-        snowPrecipitationRate: 5,
-        wind: 10,
-        pressure: 5,
-        uvIndex: 5,
-    })
+            temperature: 30,
+            humidity: 100,
+            cloudCover: 100,
+            precipitationChance: 100,
+            precipitationRate: 5,
+            snowPrecipitationRate: 5,
+            wind: 10,
+            pressure: 5,
+            uvIndex: 5
+        })
 
     property var propInfoDict: ({
-        temperature: {
-            unit: Utils.rawTempUnit(),
-            name: i18n("Temperature")
-        },
-        humidity: {
-            unit: "%",
-            name: i18n("Humidity")
-        },
-        cloudCover: {
-            unit: "%",
-            name: i18n("Cloud Cover")
-        },
-        precipitationChance: {
-            unit: "%",
-            name: i18n("Precipitation Chance")
-        },
-        precipitationRate: {
-            unit: Utils.rawPrecipUnit(true),
-            name: i18n("Precipitation Rate")
-        },
-        snowPrecipitationRate: {
-            unit: Utils.rawPrecipUnit(false),
-            name: i18n("Snow Precipitation Rate")
-        },
-        wind: {
-            unit: Utils.rawSpeedUnit(),
-            name: i18n("Wind & Gust")
-        },
-        pressure: {
-            unit: Utils.rawPresUnit(),
-            name: i18n("Pressure")
-        },
-        uvIndex: {
-            unit: "",
-            name: i18n("UV")
-        },
-    })
+            temperature: {
+                unit: Utils.rawTempUnit(),
+                name: i18n("Temperature")
+            },
+            humidity: {
+                unit: "%",
+                name: i18n("Humidity")
+            },
+            cloudCover: {
+                unit: "%",
+                name: i18n("Cloud Cover")
+            },
+            precipitationChance: {
+                unit: "%",
+                name: i18n("Precipitation Chance")
+            },
+            precipitationRate: {
+                unit: Utils.rawPrecipUnit(true),
+                name: i18n("Precipitation Rate")
+            },
+            snowPrecipitationRate: {
+                unit: Utils.rawPrecipUnit(false),
+                name: i18n("Snow Precipitation Rate")
+            },
+            wind: {
+                unit: Utils.rawSpeedUnit(),
+                name: i18n("Wind & Gust")
+            },
+            pressure: {
+                unit: Utils.rawPresUnit(),
+                name: i18n("Pressure")
+            },
+            uvIndex: {
+                unit: "",
+                name: i18n("UV")
+            }
+        })
 
     property Component fr: FullRepresentation {
         Layout.preferredWidth: 600
         Layout.preferredHeight: 380
     }
 
-    property Component cr: CompactRepresentation {
-        // Layout.preferredWidth: 16
-        // Layout.preferredHeight: 16
-    }
+    property Component cr:
+    // Layout.preferredWidth: 16
+    // Layout.preferredHeight: 16
+    CompactRepresentation {}
 
     function printDebug(msg) {
         if (plasmoid.configuration.logConsole) {
@@ -195,7 +193,6 @@ PlasmoidItem {
             console.log("[debug] [main.qml] " + JSON.stringify(json));
         }
     }
-
 
     function delay(delayTime, cb) {
         function Timer() {
@@ -212,37 +209,227 @@ PlasmoidItem {
         timer.start();
     }
 
-
     function updateWeatherData() {
         printDebug("Getting new weather data");
-        if (!hasLoaded) {
-            delay(plasmoid.configuration.startupDelay * 1000, function() {
-                printDebug("Delayed startup " + (plasmoid.configuration.startupDelay) + " s.");
-                StationAPI.getCurrentData(function() {
-                    StationAPI.getExtendedConditions(function() {
-                        StationAPI.getForecastData(StationAPI.getHourlyData)
-                    })
+        var delayPeriod = hasLoaded ? 0 : plasmoid.configuration.startupDelay * 1000;
+        delay(delayPeriod, function () {
+            printDebug("Delayed startup " + (plasmoid.configuration.startupDelay) + " s.");
+
+            StationAPI.getCurrentData({
+                stationID: stationID,
+                unitsChoice: unitsChoice,
+                oldWeatherData: weatherData
+            }, function (err, curRes) {
+                if (err) {
+                    errorStr = err.message || JSON.stringify(err);
+                    errorType = err.type || JSON.stringify(err);
+                    printDebug("[main.qml] " + errorStr);
+                    appState = showERROR;
+                    return;
+                }
+
+                // Apply current data
+                weatherData = curRes.weatherData;
+                plasmoid.configuration.latitude = curRes.configUpdates.latitude;
+                plasmoid.configuration.longitude = curRes.configUpdates.longitude;
+                plasmoid.configuration.stationName = curRes.configUpdates.stationName;
+                printDebug("[main.qml] Got new current data");
+
+                // Fetch extended conditions for the same location
+                StationAPI.getExtendedConditions({
+                    latitude: plasmoid.configuration.latitude,
+                    longitude: plasmoid.configuration.longitude,
+                    unitsChoice: unitsChoice,
+                    oldWeatherData: weatherData,
+                    language: Qt.locale().name.replace("_", "-")
+                }, function (err2, extRes) {
+                    if (err2) {
+                        printDebug("[main.qml] Extended conditions failed: " + (err2.message || JSON.stringify(err2)));
+                        // Do not proceed to forecast if extended conditions fail (preserves previous behaviour)
+                        return;
+                    }
+
+                    // Apply extended conditions
+                    iconCode = extRes.iconCode || iconCode;
+                    conditionNarrative = extRes.conditionNarrative || conditionNarrative;
+                    isRain = extRes.isRain;
+
+                    alertsModel.clear();
+                    if (extRes.alerts && extRes.alerts.length) {
+                        for (var ai = 0; ai < extRes.alerts.length; ai++)
+                            alertsModel.append(extRes.alerts[ai]);
+                    }
+
+                    // Merge extended info into weatherData
+                    var merged = JSON.parse(JSON.stringify(weatherData));
+                    merged.isNight = extRes.isNight;
+                    merged.sunrise = extRes.sunriseTimeLocal || merged.sunrise;
+                    merged.sunset = extRes.sunsetTimeLocal || merged.sunset;
+                    merged.details = merged.details || {};
+                    merged.details.pressureTrend = extRes.pressureTendencyTrend || merged.details.pressureTrend;
+                    merged.details.pressureTrendCode = extRes.pressureTendencyCode || merged.details.pressureTrendCode;
+                    merged.details.pressureDelta = extRes.pressureChange || merged.details.pressureDelta;
+                    merged.aq = extRes.airQuality || merged.aq;
+                    weatherData = merged;
+
+                    // Fetch forecast now that extended conditions are available
+                    StationAPI.getForecastData({
+                        latitude: plasmoid.configuration.latitude,
+                        longitude: plasmoid.configuration.longitude,
+                        unitsChoice: unitsChoice,
+                        useLegacyAPI: useLegacyAPI,
+                        language: Qt.locale().name.replace("_", "-")
+                    }, function (err3, fcRes) {
+                        if (err3) {
+                            errorStr = err3.message || JSON.stringify(err3);
+                            errorType = err3.type || JSON.stringify(err3);
+                            printDebug("[main.qml] " + errorStr);
+                            appState = showERROR;
+                            return;
+                        }
+
+                        forecastModel.clear();
+                        for (var i = 0; i < fcRes.forecast.length; i++) {
+                            forecastModel.append(fcRes.forecast[i]);
+                        }
+                        currDayHigh = fcRes.currDayHigh;
+                        currDayLow = fcRes.currDayLow;
+
+                        printDebug("[main.qml] Got new forecast data");
+                        showForecast = true;
+
+                        // Fetch hourly data after forecast is populated
+                        StationAPI.getHourlyData({
+                            latitude: plasmoid.configuration.latitude,
+                            longitude: plasmoid.configuration.longitude,
+                            unitsChoice: unitsChoice,
+                            language: Qt.locale().name.replace("_", "-")
+                        }, function (err4, hrRes) {
+                            if (err4) {
+                                errorStr = err4.message || JSON.stringify(err4);
+                                errorType = err4.type || JSON.stringify(err4);
+                                printDebug("[main.qml] " + errorStr);
+                                appState = showERROR;
+                                return;
+                            }
+
+                            hourlyModel.clear();
+                            for (var h = 0; h < hrRes.hourly.length; h++)
+                                hourlyModel.append(hrRes.hourly[h]);
+                            // update the chart metadata
+                            maxValDict = hrRes.maxValDict;
+                            rangeValDict = hrRes.rangeValDict;
+
+                            printDebug("[main.qml] Got hourly data");
+                        });
+                    });
                 });
-                hasLoaded = true;
+
+                appState = showDATA;
             });
-        } else {
-            StationAPI.getCurrentData(function() {
-                StationAPI.getExtendedConditions(function() {
-                    StationAPI.getForecastData(StationAPI.getHourlyData)
-                });
-            });
-        }
+
+            hasLoaded = true;
+        });
     }
 
     function updateCurrentData() {
         printDebug("Getting new current data");
-        StationAPI.getCurrentData();
+        StationAPI.getCurrentData({
+            stationID: stationID,
+            unitsChoice: unitsChoice,
+            oldWeatherData: weatherData
+        }, function (err, curRes) {
+            if (err) {
+                errorStr = err.message || JSON.stringify(err);
+                errorType = err.type || JSON.stringify(err);
+                appState = showERROR;
+                printDebug("[main.qml] " + errorStr);
+                return;
+            }
+            weatherData = curRes.weatherData;
+            printDebug("[main.qml] Got new current data");
+            appState = showDATA;
+        });
     }
 
     function updateForecastData() {
         printDebug("Getting new forecast data");
-        StationAPI.getExtendedConditions(function() {
-            StationAPI.getForecastData(StationAPI.getHourlyData)
+        StationAPI.getExtendedConditions({
+            latitude: plasmoid.configuration.latitude,
+            longitude: plasmoid.configuration.longitude,
+            unitsChoice: unitsChoice,
+            oldWeatherData: weatherData,
+            language: Qt.locale().name.replace("_", "-")
+        }, function (err, extRes) {
+            if (err) {
+                printDebug("[main.qml] Extended conditions fetch failed: " + (err.message || JSON.stringify(err)));
+                return;
+            }
+
+            // Apply extended conditions similar to updateWeatherData
+            iconCode = extRes.iconCode || iconCode;
+            conditionNarrative = extRes.conditionNarrative || conditionNarrative;
+            isRain = extRes.isRain;
+            alertsModel.clear();
+            if (extRes.alerts && extRes.alerts.length) {
+                for (var ai = 0; ai < extRes.alerts.length; ai++)
+                    alertsModel.append(extRes.alerts[ai]);
+            }
+            var merged = JSON.parse(JSON.stringify(weatherData));
+            merged.isNight = extRes.isNight;
+            merged.sunrise = extRes.sunriseTimeLocal || merged.sunrise;
+            merged.sunset = extRes.sunsetTimeLocal || merged.sunset;
+            merged.details = merged.details || {};
+            merged.details.pressureTrend = extRes.pressureTendencyTrend || merged.details.pressureTrend;
+            merged.details.pressureTrendCode = extRes.pressureTendencyCode || merged.details.pressureTrendCode;
+            merged.details.pressureDelta = extRes.pressureChange || merged.details.pressureDelta;
+            merged.aq = extRes.airQuality || merged.aq;
+            weatherData = merged;
+
+            StationAPI.getForecastData({
+                latitude: plasmoid.configuration.latitude,
+                longitude: plasmoid.configuration.longitude,
+                unitsChoice: unitsChoice,
+                useLegacyAPI: useLegacyAPI,
+                language: Qt.locale().name.replace("_", "-")
+            }, function (err2, fcRes) {
+                if (err2) {
+                    errorStr = err2.message || JSON.stringify(err2);
+                    errorType = err2.type || JSON.stringify(err2);
+                    printDebug("[main.qml] " + errorStr);
+                    appState = showERROR;
+                    return;
+                }
+
+                forecastModel.clear();
+                for (var k = 0; k < fcRes.forecast.length; k++)
+                    forecastModel.append(fcRes.forecast[k]);
+                currDayHigh = fcRes.currDayHigh;
+                currDayLow = fcRes.currDayLow;
+                printDebug("[main.qml] Got new forecast data");
+                showForecast = true;
+
+                StationAPI.getHourlyData({
+                    latitude: plasmoid.configuration.latitude,
+                    longitude: plasmoid.configuration.longitude,
+                    unitsChoice: unitsChoice,
+                    language: Qt.locale().name.replace("_", "-")
+                }, function (err3, hrRes) {
+                    if (err3) {
+                        errorStr = err3.message || JSON.stringify(err3);
+                        errorType = err3.type || JSON.stringify(err3);
+                        printDebug("[main.qml] " + errorStr);
+                        appState = showERROR;
+                        return;
+                    }
+                    hourlyModel.clear();
+                    for (var hh = 0; hh < hrRes.hourly.length; hh++)
+                        hourlyModel.append(hrRes.hourly[hh]);
+                    maxValDict = hrRes.maxValDict;
+                    rangeValDict = hrRes.rangeValDict;
+                    printDebug("[main.qml] Got hourly data");
+                });
+            });
         });
     }
 
@@ -337,7 +524,7 @@ PlasmoidItem {
         plasmoid.configurationRequiredReason = i18n("Set the weather station to pull data from.");
         plasmoid.backgroundHints = PlasmaCore.Types.ConfigurableBackground;
 
-        if(plasmoid.configuration.refreshPeriod < 300) {
+        if (plasmoid.configuration.refreshPeriod < 300) {
             plasmoid.configuration.refreshPeriod = 300;
         }
     }
@@ -371,7 +558,7 @@ PlasmoidItem {
     toolTipSubText: {
         var subText = "";
         if (appState == showDATA) {
-            subText += i18nc("Do not edit HTML tags. 'Temp' means temperature", "<font size='4'>Temp: %1</font><br />", Utils.currentTempUnit(Utils.toUserTemp(weatherData["details"]["temp"]),plasmoid.configuration.tempPrecision));
+            subText += i18nc("Do not edit HTML tags. 'Temp' means temperature", "<font size='4'>Temp: %1</font><br />", Utils.currentTempUnit(Utils.toUserTemp(weatherData["details"]["temp"]), plasmoid.configuration.tempPrecision));
             subText += i18nc("Do not edit HTML tags.", "<font size='4'>Feels: %1</font><br />", Utils.currentTempUnit(Utils.feelsLike(weatherData["details"]["temp"], weatherData["humidity"], weatherData["details"]["windSpeed"]), plasmoid.configuration.feelsPrecision));
             subText += i18nc("Do not edit HTML tags. 'Wnd Spd' means Wind Speed", "<font size='4'>Wnd spd: %1</font><br />", Utils.currentSpeedUnit(Utils.toUserSpeed(weatherData["details"]["windSpeed"])));
             subText += "<font size='4'>" + weatherData["obsTimeLocal"] + "</font>";

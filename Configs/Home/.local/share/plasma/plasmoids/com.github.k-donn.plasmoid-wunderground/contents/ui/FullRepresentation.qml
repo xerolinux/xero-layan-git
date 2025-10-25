@@ -1,5 +1,6 @@
 /*
  * Copyright 2025  Kevin Donnelly
+ * Copyright 2013  Marco Martin <mart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -21,14 +22,12 @@ import QtQuick.Controls
 import org.kde.plasma.plasmoid
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.components as PlasmaComponents
+import org.kde.plasma.core as PlasmaCore
 import "../code/utils.js" as Utils
 import "lib"
 
 ColumnLayout {
     id: fullRoot
-
-    height: parent.height
-    width: parent.width
 
     spacing: Kirigami.Units.smallSpacing
 
@@ -46,33 +45,81 @@ ColumnLayout {
         Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
     }
 
-    PlasmaComponents.Label {
-        id: errorMsg
-
+    ColumnLayout {
+        id: errorDisplay
         visible: appState == showERROR
-
-        verticalAlignment: Text.AlignVCenter
-        horizontalAlignment: Text.AlignHCenter
-
-        text: "Error: " + errorStr
-        wrapMode: Text.WordWrap
+        spacing: Kirigami.Units.smallSpacing
 
         Layout.fillWidth: true
         Layout.fillHeight: true
+        Layout.margins: Kirigami.Units.largeSpacing
+
+        RowLayout {
+            Layout.fillWidth: true
+            spacing: Kirigami.Units.smallSpacing
+
+            Kirigami.Icon {
+                source: "dialog-error"
+                width: Kirigami.Units.iconSizes.medium
+                height: width
+            }
+
+            PlasmaComponents.Label {
+                text: i18n("Sorry! The widget ran into a network error: ") + errorType
+                font.bold: true
+                Layout.fillWidth: true
+                wrapMode: Text.WordWrap
+            }
+        }
+
+        ConfigBtn {
+            Layout.alignment: Qt.AlignHCenter
+        }
+
+        PlasmaComponents.Button {
+            id: copyButton
+
+            text: i18nd("plasma_shell_org.kde.plasma.desktop", "Copy to Clipboard")
+            icon.name: "edit-copy"
+            onClicked: {
+                textArea.selectAll();
+                textArea.copy();
+                textArea.deselect();
+            }
+
+            PlasmaCore.ToolTipArea {
+                anchors.fill: parent
+                mainText: parent.text
+                textFormat: Text.PlainText
+            }
+        }
+
+        PlasmaComponents.ScrollView {
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+
+            PlasmaComponents.TextArea {
+                id: textArea
+                text: errorStr
+                wrapMode: Text.WordWrap
+                readOnly: true
+                selectByMouse: true
+                font.family: "monospace"
+            }
+        }
     }
 
-    PlasmaComponents.Label {
-        id: loadingMsg
-
+    Item {
+        id: loadingDisplay
         visible: appState == showLOADING
-
-        verticalAlignment: Text.AlignVCenter
-        horizontalAlignment: Text.AlignHCenter
-
-        text: i18n("Loading data...")
 
         Layout.fillWidth: true
         Layout.fillHeight: true
+
+        PlasmaComponents.BusyIndicator {
+            anchors.centerIn: parent
+            running: visible
+        }
     }
 
     TopPanel {

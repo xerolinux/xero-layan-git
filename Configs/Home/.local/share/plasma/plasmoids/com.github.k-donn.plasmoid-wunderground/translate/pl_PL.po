@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmoid-wunderground\n"
 "Report-Msgid-Bugs-To: https://github.com/k-donn/plasmoid-wunderground\n"
-"POT-Creation-Date: 2025-09-26 20:05-0400\n"
+"POT-Creation-Date: 2025-10-21 16:47-0400\n"
 "Language-Team: Polish <>\n"
 "Language: pl_PL\n"
 "MIME-Version: 1.0\n"
@@ -407,8 +407,8 @@ msgid "<font size='4'>Feels like: %1<br/>Thunder: %2<br/>UV: %3<br/>Snow: %4<br/
 msgstr "<font size='4'>Odczuwalna temperatura: %1<br/>Burza: %2<br/>UV: %3<br/>Śnieg: %4<br/>Golf: %5</font>"
 
 #: ../contents/ui/FullRepresentation.qml
-msgid "Loading data..."
-msgstr "Ładowanie danych..."
+msgid "Sorry! The widget ran into a network error: "
+msgstr ""
 
 #: ../contents/ui/lib/BackgroundToggle.qml
 msgid "Desktop Widget:"
@@ -552,6 +552,9 @@ msgstr "Odśwież pogodę"
 #: ../contents/ui/TopPanel.qml
 msgid "High: %1 Low: %2"
 msgstr "Maks: %1 Min: %2"
+
+#~ msgid "Loading data..."
+#~ msgstr "Ładowanie danych..."
 
 #~ msgid "Remove Selected"
 #~ msgstr "Usuń wybrane"

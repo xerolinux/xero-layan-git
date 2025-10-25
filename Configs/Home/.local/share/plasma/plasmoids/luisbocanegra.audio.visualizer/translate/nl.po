@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: visualizer\n"
 "Report-Msgid-Bugs-To: https://github.com/luisbocanegra/kurve\n"
-"POT-Creation-Date: 2025-09-21 09:09+0000\n"
+"POT-Creation-Date: 2025-10-21 00:45+0000\n"
 "PO-Revision-Date: 2025-08-27 11:03+0200\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: \n"
@@ -217,6 +217,10 @@ msgstr "Kleurenschema:"
 msgid "Colors:"
 msgstr "Kleuren:"
 
+#: ../contents/ui/components/FormColors.qml
+msgid "Range:"
+msgstr ""
+
 #: ../contents/ui/components/FormColors.qml ../contents/ui/configVisualizer.qml
 msgid "Orientation:"
 msgstr "Oriëntatie:"
@@ -232,6 +236,14 @@ msgstr "Verticaal"
 #: ../contents/ui/components/FormColors.qml
 msgid "Gradient:"
 msgstr "Verloop:"
+
+#: ../contents/ui/components/FormColors.qml ../contents/ui/configCava.qml
+msgid "Reverse:"
+msgstr "Verwisselen:"
+
+#: ../contents/ui/components/FormColors.qml
+msgid "Display colors the other way around"
+msgstr ""
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Alpha:"
@@ -489,10 +501,6 @@ msgid "Mono channel:"
 msgstr "Monokanaal:"
 
 #: ../contents/ui/configCava.qml
-msgid "Reverse:"
-msgstr "Verwisselen:"
-
-#: ../contents/ui/configCava.qml
 msgid "Display frequencies the other way around"
 msgstr "Verwissel de frequenties van plek"
 
@@ -543,10 +551,6 @@ msgid ""
 msgstr ""
 
 #: ../contents/ui/configGeneral.qml
-msgid "Debug mode:"
-msgstr "Foutopsporingsmodus:"
-
-#: ../contents/ui/configGeneral.qml
 msgid "Auto-hide when idle:"
 msgstr "Automatisch verbergen na inactiviteit:"
 
@@ -584,6 +588,21 @@ msgstr ""
 
 #: ../contents/ui/configGeneral.qml
 msgid "Applet popup will still be accessible from the right click menu."
+msgstr ""
+
+#: ../contents/ui/configGeneral.qml
+msgid "Troubleshooting"
+msgstr ""
+
+#: ../contents/ui/configGeneral.qml
+msgid "Debug mode:"
+msgstr "Foutopsporingsmodus:"
+
+#: ../contents/ui/configGeneral.qml
+msgid ""
+"Print additional messages to the system log. To make it easier to spot "
+"sizing issues, this will also force full height to the first visualizer bar "
+"and displays a grid over it."
 msgstr ""
 
 #: ../contents/ui/configVisualizer.qml
@@ -645,6 +664,10 @@ msgstr "Gecentreerde balken:"
 #: ../contents/ui/configVisualizer.qml
 msgid "Rounded bars:"
 msgstr "Afgeronde balken:"
+
+#: ../contents/ui/configVisualizer.qml
+msgid "Line width:"
+msgstr ""
 
 #: ../contents/ui/configVisualizer.qml
 msgid "Bar width:"

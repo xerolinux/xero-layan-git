@@ -17,13 +17,10 @@
 
 import QtQuick
 import QtQuick.Layouts
-import QtQuick.Controls
 import org.kde.plasma.plasmoid
-import org.kde.ksvg as KSvg
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.components as PlasmaComponents
-import "../code/utils.js" as Utils
 
 ColumnLayout {
 
@@ -38,7 +35,6 @@ ColumnLayout {
         text: i18n("Alerts")
     }
 
-
     PlasmaComponents.Label {
         id: noAlertsLabel
 
@@ -48,7 +44,6 @@ ColumnLayout {
 
         text: i18n("There are no alerts for your area.")
     }
-
 
     ListView {
         id: alertsRepeater

@@ -5,6 +5,7 @@ import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.plasmoid
 import "../code/utils.js" as Utils
 import "../code/enum.js" as Enum
+import "../code/drawCanvas.js" as DrawCanvas
 
 Item {
     id: root
@@ -46,16 +47,22 @@ Item {
     Canvas {
         id: canvas
         anchors.centerIn: parent
+        // renderStrategy: Canvas.Threaded
         property int visualizerStyle: root.visualizerStyle
         property int barWidth: root.barWidth
-        property int spacing: root.barGap
+        property int spacing: {
+            if (visualizerStyle === Enum.VisualizerStyles.Wave) {
+                return Math.max(1, root.barGap);
+            }
+            return root.barGap;
+        }
         property int barCount: root.values.length
         property bool centeredBars: root.centeredBars
         property bool roundedBars: root.roundedBars
         property var values: {
             if (root.debugMode) {
                 let copy = root.values.slice();
-                copy[0] = 100;
+                copy[0] = height;
                 return copy;
             }
             return root.values;
@@ -68,13 +75,28 @@ Item {
 
         property var barColorsCfg: root.barColorsCfg
         property list<color> colors: Utils.getColors(barColorsCfg, barCount, kirigamiColorItem.Kirigami.Theme[barColorsCfg.systemColor])
-        property var gradient: Utils.buildCanvasGradient(getContext("2d"), barColorsCfg.smoothGradient, colors, barColorsCfg.colorsOrientation, gradientHeight, gradientWidth)
+        property var gradient: {
+            if (canvas.available) {
+                return Utils.buildCanvasGradient(getContext("2d"), barColorsCfg.smoothGradient, colors, barColorsCfg.colorsOrientation, gradientHeight, gradientWidth);
+            }
+            return null;
+        }
 
         property var waveFillColorsCfg: root.waveFillColorsCfg
         property list<color> waveFillColors: Utils.getColors(waveFillColorsCfg, barCount, kirigamiColorItem2.Kirigami.Theme[waveFillColorsCfg.systemColor])
-        property var waveFillGradient: Utils.buildCanvasGradient(getContext("2d"), waveFillColorsCfg.smoothGradient, waveFillColors, waveFillColorsCfg.colorsOrientation, gradientHeight, gradientWidth)
+        property var waveFillGradient: {
+            if (canvas.available) {
+                return Utils.buildCanvasGradient(getContext("2d"), waveFillColorsCfg.smoothGradient, waveFillColors, waveFillColorsCfg.colorsOrientation, gradientHeight, gradientWidth);
+            }
+            return null;
+        }
 
-        width: barCount * barWidth + ((barCount - 1) * spacing)
+        width: {
+            if (visualizerStyle === Enum.VisualizerStyles.Wave) {
+                return barWidth + ((barCount - 1) * spacing);
+            }
+            return barCount * barWidth + ((barCount - 1) * spacing);
+        }
         height: parent.height
         property bool fixAlign: barWidth % 2 === 0 && centeredBars && visualizerStyle === Enum.VisualizerStyles.Wave && !root.fixVertical
 
@@ -92,102 +114,16 @@ Item {
             if (gradient) {
                 ctx.strokeStyle = gradient;
             }
-            if (visualizerStyle === Enum.VisualizerStyles.Bars) {
-                ctx.lineCap = roundedBars ? "round" : "butt";
-                ctx.lineWidth = barWidth;
-
-                let x = barWidth / 2;
-
-                // bars
-                const centerY = height / 2;
-                for (let i = 0; i < barCount; i++) {
-                    const value = Math.max(1, Math.min(100, values[i]));
-
-                    let barHeight;
-                    let yBottom;
-                    let yTop;
-                    if (centeredBars) {
-                        if (roundedBars) {
-                            barHeight = (value / 100) * ((height - barWidth) / 2);
-                        } else {
-                            barHeight = (value / 100) * (height / 2);
-                        }
-                        yBottom = centerY - barHeight;
-                        yTop = yBottom + (barHeight * 2);
-                    } else {
-                        if (roundedBars) {
-                            barHeight = (value / 100) * (height - barWidth);
-                            yBottom = height - radiusOffset;
-                        } else {
-                            barHeight = (value / 100) * height;
-                            yBottom = height;
-                        }
-                        yTop = yBottom - barHeight;
-                    }
-
-                    ctx.beginPath();
-                    ctx.moveTo(x, yBottom);
-                    ctx.lineTo(x, yTop);
-                    ctx.stroke();
-                    x += barWidth + spacing;
-                }
-            } else if (visualizerStyle === Enum.VisualizerStyles.Wave) {
-                if (barCount < 2)
-                    return;
-
-                ctx.lineCap = roundedBars ? "round" : "butt";
-                ctx.lineWidth = barWidth;
-
-                const step = width / (barCount - 1);
-                const yBottom = centeredBars ? (height / 2) : (height - barWidth / 2);
-
-                gradientHeight = yBottom;
-
-                ctx.beginPath();
-                let prevX = 0;
-                let prevY = yBottom - Math.max(0, Math.min(100, values[0])) / 100 * yBottom;
-                ctx.lineTo(prevX - 0.5, prevY);
-
-                for (let i = 1; i < barCount; i++) {
-                    const norm = Math.max(0, Math.min(100, values[i])) / 100;
-                    const x = i * step;
-                    const y = yBottom - norm * yBottom;
-                    const midX = (prevX + x) / 2;
-                    const midY = (prevY + y) / 2;
-                    ctx.quadraticCurveTo(prevX, prevY, midX, midY);
-                    prevX = x;
-                    prevY = y;
-                }
-
-                ctx.lineTo(width + 0.5, prevY);
-                ctx.stroke();
-
-                if (fillWave) {
-                    const yBottom = centeredBars ? (height / 2 + barWidth / 2) : height;
-                    ctx.beginPath();
-                    ctx.moveTo(0, yBottom);
-
-                    prevX = 0;
-                    prevY = yBottom - Math.max(0, Math.min(100, values[0])) / 100 * yBottom;
-                    ctx.lineTo(prevX, prevY);
-
-                    for (let i = 1; i < barCount; i++) {
-                        const norm = Math.max(0, Math.min(100, values[i])) / 100;
-                        const x = i * step;
-                        const y = yBottom - norm * yBottom;
-                        const midX = (prevX + x) / 2;
-                        const midY = (prevY + y) / 2;
-                        ctx.quadraticCurveTo(prevX, prevY, midX, midY);
-                        prevX = x;
-                        prevY = y;
-                    }
-
-                    ctx.lineTo(width, prevY);
-                    ctx.lineTo(width, yBottom);
-                    ctx.closePath();
-                    ctx.fillStyle = waveFillGradient;
-                    ctx.fill();
-                }
+            switch (visualizerStyle) {
+            case Enum.VisualizerStyles.Bars:
+                DrawCanvas.bars(ctx, canvas);
+                break;
+            case Enum.VisualizerStyles.Wave:
+                DrawCanvas.wave(ctx, canvas);
+                break;
+            default:
+                DrawCanvas.bars(ctx, canvas);
+                break;
             }
             if (fixAlign) {
                 ctx.translate(0.0, -0.5);

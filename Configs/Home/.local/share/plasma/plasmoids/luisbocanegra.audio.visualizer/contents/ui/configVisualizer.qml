@@ -56,7 +56,6 @@ KCM.SimpleKCM {
                     }
                 ]
                 onActivated: {
-                    console.log("v", currentValue);
                     root.cfg_visualizerStyle = currentValue;
                 }
                 Component.onCompleted: {
@@ -130,7 +129,7 @@ KCM.SimpleKCM {
 
             SpinBox {
                 id: barWidthSpinbox
-                Kirigami.FormData.label: i18n("Bar width:")
+                Kirigami.FormData.label: root.cfg_visualizerStyle === Enum.VisualizerStyles.Wave ? i18n("Line width:") : i18n("Bar width:")
                 from: 1
                 to: 999
             }
@@ -138,7 +137,7 @@ KCM.SimpleKCM {
             SpinBox {
                 id: barGapSpinbox
                 Kirigami.FormData.label: i18n("Bar gap:")
-                from: 0
+                from: root.cfg_visualizerStyle === Enum.VisualizerStyles.Wave ? 1 : 0
                 to: 999
             }
         }

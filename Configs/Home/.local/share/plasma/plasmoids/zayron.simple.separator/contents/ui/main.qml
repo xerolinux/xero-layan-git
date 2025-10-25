@@ -1,6 +1,5 @@
 import QtQuick
 import QtQuick.Layouts 1.2
-import org.kde.kirigami as Kirigami
 import org.kde.plasma.plasmoid
 import org.kde.plasma.core as PlasmaCore
 
@@ -37,7 +36,7 @@ PlasmoidItem {
              Rectangle {
                 width: pointDesing ? root.width/100*lengthPorcent : isVertical ? root.width/100*lengthPorcent : anchoDeSepardor
                 height: pointDesing ? root.width/100*lengthPorcent : isVertical ? anchoDeSepardor : root.height/100*lengthPorcent
-                color: customColorCheck ? customColor: Kirigami.Theme.textColor
+                color: customColorCheck ? customColor: PlasmaCore.Theme.textColor
                 opacity: Plasmoid.configuration.opacity/100
                 anchors.centerIn: parent
                 radius: pointDesing ? height/2 : 0

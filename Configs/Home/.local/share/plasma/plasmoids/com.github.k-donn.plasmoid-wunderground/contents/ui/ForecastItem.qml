@@ -17,9 +17,7 @@
 
 import QtQuick
 import QtQuick.Layouts
-import QtQuick.Controls
 import org.kde.plasma.plasmoid
-import org.kde.ksvg as KSvg
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.components as PlasmaComponents
@@ -72,7 +70,7 @@ RowLayout {
                     id: tooltip
 
                     mainText: longDesc
-                    subText: i18nc("Do not edit HTML tags.", "<font size='4'>Feels like: %1<br/>Thunder: %2<br/>UV: %3<br/>Snow: %4<br/>Golf: %5</font>", Utils.currentTempUnit(Utils.toUserTemp(feelsLike),plasmoid.configuration.feelsPrecision), thunderDesc, uvDesc, snowDesc, golfDesc)
+                    subText: i18nc("Do not edit HTML tags.", "<font size='4'>Feels like: %1<br/>Thunder: %2<br/>UV: %3<br/>Snow: %4<br/>Golf: %5</font>", Utils.currentTempUnit(Utils.toUserTemp(feelsLike), plasmoid.configuration.feelsPrecision), thunderDesc, uvDesc, snowDesc, golfDesc)
 
                     interactive: true
 
@@ -82,12 +80,12 @@ RowLayout {
             PlasmaComponents.Label {
                 Layout.alignment: Qt.AlignCenter
 
-                text: Utils.currentTempUnit(Utils.toUserTemp(high),plasmoid.configuration.forecastPrecision)
+                text: Utils.currentTempUnit(Utils.toUserTemp(high), plasmoid.configuration.forecastPrecision)
             }
             PlasmaComponents.Label {
                 Layout.alignment: Qt.AlignCenter
 
-                text: Utils.currentTempUnit(Utils.toUserTemp(low),plasmoid.configuration.forecastPrecision)
+                text: Utils.currentTempUnit(Utils.toUserTemp(low), plasmoid.configuration.forecastPrecision)
             }
         }
     }

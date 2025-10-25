@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: visualizer\n"
 "Report-Msgid-Bugs-To: https://github.com/luisbocanegra/kurve\n"
-"POT-Creation-Date: 2025-09-21 09:09+0000\n"
+"POT-Creation-Date: 2025-10-21 00:45+0000\n"
 "PO-Revision-Date: 2025-08-04 14:03+0000\n"
 "Last-Translator: Mathias Mårtensson <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -218,6 +218,10 @@ msgstr "Färguppsättning:"
 msgid "Colors:"
 msgstr "Färger:"
 
+#: ../contents/ui/components/FormColors.qml
+msgid "Range:"
+msgstr ""
+
 #: ../contents/ui/components/FormColors.qml ../contents/ui/configVisualizer.qml
 msgid "Orientation:"
 msgstr "Orientering:"
@@ -233,6 +237,14 @@ msgstr "Vertikal"
 #: ../contents/ui/components/FormColors.qml
 msgid "Gradient:"
 msgstr "Färgövergång:"
+
+#: ../contents/ui/components/FormColors.qml ../contents/ui/configCava.qml
+msgid "Reverse:"
+msgstr "Omvänd:"
+
+#: ../contents/ui/components/FormColors.qml
+msgid "Display colors the other way around"
+msgstr ""
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Alpha:"
@@ -411,7 +423,7 @@ msgstr "Samplingsfrekvens:"
 
 #: ../contents/ui/configCava.qml
 msgid "Only for fifo, pipewire, sndio, oss"
-msgstr ""
+msgstr "Endast för fifo, pipewire, sndio, oss"
 
 #: ../contents/ui/configCava.qml
 msgid "Sample bits:"
@@ -423,7 +435,7 @@ msgstr "Kanaler:"
 
 #: ../contents/ui/configCava.qml
 msgid "Only for pipewire & cava>=0.10.6, sndio, oss, jack"
-msgstr ""
+msgstr "Endast för pipewire & cava>=0.10.6, sndio, oss, jack"
 
 #: ../contents/ui/configCava.qml
 msgid "Auto connect:"
@@ -431,37 +443,43 @@ msgstr "Automatisk anslutning:"
 
 #: ../contents/ui/configCava.qml
 msgid "Only for jack"
-msgstr ""
+msgstr "Endast för jack"
 
 #: ../contents/ui/configCava.qml
 msgid "Active:"
-msgstr ""
+msgstr "Aktiv:"
 
 #: ../contents/ui/configCava.qml
 msgid ""
 "Only for pipewire & cava>=0.10.6. Force the node to always process. Useful "
 "for monitoring sources when no other application is active."
 msgstr ""
+"Endast för pipewire & cava>=0.10.6. Tvinga noden att alltid bearbeta. "
+"Användbart för att övervaka källor när ingen annan applikation är aktiv."
 
 #: ../contents/ui/configCava.qml
 msgid "Remix:"
-msgstr ""
+msgstr "Remix:"
 
 #: ../contents/ui/configCava.qml
 msgid ""
 "Only for pipewire & cava>=0.10.6. Allow to remix audio channels to match "
 "cava's channel count. Useful for surround sound."
 msgstr ""
+"Endast för pipewire & cava>=0.10.6. Tillåter att remixa ljudkanaler för att "
+"matcha Cavas kanalantal. Användbart för surroundljud."
 
 #: ../contents/ui/configCava.qml
 msgid "Virtual:"
-msgstr ""
+msgstr "Virtuell:"
 
 #: ../contents/ui/configCava.qml
 msgid ""
 "Only for pipewire & cava>=0.10.6. Set the node to virtual, to avoid "
 "recording notifications from the DE."
 msgstr ""
+"Endast för pipewire & cava>=0.10.6. Ställ in noden på virtuell för att "
+"undvika att spela in aviseringar från skrivbordsmiljön."
 
 #: ../contents/ui/configCava.qml
 msgid "Output"
@@ -482,10 +500,6 @@ msgstr ""
 #: ../contents/ui/configCava.qml
 msgid "Mono channel:"
 msgstr "Monokanal:"
-
-#: ../contents/ui/configCava.qml
-msgid "Reverse:"
-msgstr "Omvänd:"
 
 #: ../contents/ui/configCava.qml
 msgid "Display frequencies the other way around"
@@ -530,17 +544,15 @@ msgstr "Equalizer"
 
 #: ../contents/ui/configCava.qml
 msgid "Enabled:"
-msgstr ""
+msgstr "Aktiverad:"
 
 #: ../contents/ui/configCava.qml
 msgid ""
 "Adjust frequencies by a multiplication factor, more bands equals more "
 "precision."
 msgstr ""
-
-#: ../contents/ui/configGeneral.qml
-msgid "Debug mode:"
-msgstr "Felsökningsläge:"
+"Justera frekvenserna med en multiplikationsfaktor, desto fler band, desto "
+"högre precision."
 
 #: ../contents/ui/configGeneral.qml
 msgid "Auto-hide when idle:"
@@ -576,10 +588,26 @@ msgstr "Inaktivera verktygstips som visar widgetens namn och beskrivning."
 
 #: ../contents/ui/configGeneral.qml
 msgid "Disable left click:"
-msgstr ""
+msgstr "Inaktivera vänsterklick:"
 
 #: ../contents/ui/configGeneral.qml
 msgid "Applet popup will still be accessible from the right click menu."
+msgstr ""
+"Applet-popupen kommer fortfarande att vara tillgänglig från högerklicksmenyn."
+
+#: ../contents/ui/configGeneral.qml
+msgid "Troubleshooting"
+msgstr ""
+
+#: ../contents/ui/configGeneral.qml
+msgid "Debug mode:"
+msgstr "Felsökningsläge:"
+
+#: ../contents/ui/configGeneral.qml
+msgid ""
+"Print additional messages to the system log. To make it easier to spot "
+"sizing issues, this will also force full height to the first visualizer bar "
+"and displays a grid over it."
 msgstr ""
 
 #: ../contents/ui/configVisualizer.qml
@@ -643,6 +671,10 @@ msgid "Rounded bars:"
 msgstr "Rundade band:"
 
 #: ../contents/ui/configVisualizer.qml
+msgid "Line width:"
+msgstr ""
+
+#: ../contents/ui/configVisualizer.qml
 msgid "Bar width:"
 msgstr "Bandens bredd:"
 
@@ -664,7 +696,7 @@ msgstr "Vågfyllningsfärg"
 
 #: ../contents/ui/main.qml
 msgid "Show support information"
-msgstr ""
+msgstr "Visa supportinformation"
 
 #~ msgid ""
 #~ "The options 'sample_rate', 'sample_bits', 'channels' and 'autoconnect' "

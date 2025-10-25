@@ -22,7 +22,6 @@ import org.kde.kcmutils as KCM
 import QtQuick.Controls as QQC
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.core as PlasmaCore
-import org.kde.plasma.components as PlasmaComponents
 
 import "../lib" as Lib
 
@@ -38,7 +37,6 @@ KCM.SimpleKCM {
     property alias cfg_fontWeight: fontDialog.fontChosen.weight
     property alias cfg_fontStyleName: fontDialog.fontChosen.styleName
     property alias cfg_fontSize: fontDialog.fontChosen.pointSize
-
 
     property alias cfg_showCompactTemp: showCompactTemp.checked
     property alias cfg_showSystemTrayTemp: showSystemTrayTemp.checked
@@ -113,7 +111,7 @@ KCM.SimpleKCM {
                 checked: !cfg_autoFontAndSize
                 onClicked: {
                     if (cfg_fontFamily === "") {
-                        fontDialog.fontChosen = Kirigami.Theme.defaultFont
+                        fontDialog.fontChosen = Kirigami.Theme.defaultFont;
                     }
                 }
             }
@@ -127,7 +125,6 @@ KCM.SimpleKCM {
                     fontDialog.open();
                 }
             }
-
         }
 
         QtDialogs.FontDialog {
@@ -152,7 +149,6 @@ KCM.SimpleKCM {
             id: showSystemTrayTemp
 
             Kirigami.FormData.label: i18n("Show temperature:")
-
         }
 
         Kirigami.Separator {
@@ -188,12 +184,30 @@ KCM.SimpleKCM {
             configKey: "detailsIconSize"
 
             model: [
-                { value: 16, text: i18n("small (16x16)")},
-                { value: 22, text: i18n("smallMedium (22x22)")},
-                { value: 32, text: i18n("medium (32x32)")},
-                { value: 48, text: i18n("large (48x48)")},
-                { value: 64, text: i18n("huge (64x64)")},
-                { value: 128, text: i18n("enormous (128x128)")}
+                {
+                    value: 16,
+                    text: i18n("small (16x16)")
+                },
+                {
+                    value: 22,
+                    text: i18n("smallMedium (22x22)")
+                },
+                {
+                    value: 32,
+                    text: i18n("medium (32x32)")
+                },
+                {
+                    value: 48,
+                    text: i18n("large (48x48)")
+                },
+                {
+                    value: 64,
+                    text: i18n("huge (64x64)")
+                },
+                {
+                    value: 128,
+                    text: i18n("enormous (128x128)")
+                }
             ]
 
             Kirigami.FormData.label: i18n("Details icon size:")

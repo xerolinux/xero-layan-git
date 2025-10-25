@@ -19,10 +19,21 @@ PlasmoidItem {
     property bool stopCava: Plasmoid.configuration._stopCava
     property bool disableLeftClick: Plasmoid.configuration.disableLeftClick
 
+    property int barGap: {
+        if (Plasmoid.configuration.visualizerStyle === Enum.VisualizerStyles.Wave) {
+            return Math.max(1, Plasmoid.configuration.barGap);
+        }
+        return Plasmoid.configuration.barGap;
+    }
+
     property int barCount: {
         let bars = 1;
         const width = [Enum.Orientation.Left, Enum.Orientation.Right].includes(Plasmoid.configuration.orientation) ? main.height : main.width;
-        bars = Math.floor((width + Plasmoid.configuration.barGap) / (Plasmoid.configuration.barWidth + Plasmoid.configuration.barGap));
+        if (Plasmoid.configuration.visualizerStyle === Enum.VisualizerStyles.Wave) {
+            bars = Math.floor((width + barGap) / barGap);
+        } else {
+            bars = Math.floor((width + barGap) / (Plasmoid.configuration.barWidth + barGap));
+        }
         if (Plasmoid.configuration.outputChannels === "stereo") {
             bars = Utils.makeEven(bars);
         }
@@ -32,30 +43,62 @@ PlasmoidItem {
         return bars;
     }
 
+    property int asciiMaxRange: [Enum.Orientation.Left, Enum.Orientation.Right].includes(Plasmoid.configuration.orientation) ? main.width : main.height
+
+    property var logger: Logger.create(Plasmoid.configuration.debugMode ? LoggingCategory.Debug : LoggingCategory.Info)
+
     property bool hideWhenIdle: Plasmoid.configuration.hideWhenIdle
 
-    Plasmoid.status: PlasmaCore.Types.HiddenStatus
+    Plasmoid.status: PlasmaCore.Types.ActiveStatus
 
     function updateStatus() {
+        logger.debug("Plasmoid.status:", Plasmoid.status);
         // HACK: without this delay there is a visible margin on the right side when expanding == true
         Utils.delay(10, () => {
             if (Plasmoid.status === PlasmaCore.Types.RequiresAttentionStatus) {
                 return;
             }
             Plasmoid.status = (hideWhenIdle && cava.idle || !cava.running) && !Plasmoid.expanded && !editMode && !cava.hasError ? PlasmaCore.Types.HiddenStatus : PlasmaCore.Types.ActiveStatus;
+            logger.debug("Plasmoid.status:", Plasmoid.status);
         }, main);
     }
-    onExpandedChanged: {
+    onExpandedChanged: expanded => {
+        logger.debug("expanded:", expanded);
         Utils.delay(1000, updateStatus, main);
     }
+
     onBarCountChanged: {
         if (editMode && stopCava) {
             return;
         }
-        cava.barCount = barCount;
+        Qt.callLater(() => {
+            resizeDebounce.restart();
+        });
     }
 
-    onEditModeChanged: updateStatus()
+    onAsciiMaxRangeChanged: {
+        if (editMode && stopCava) {
+            return;
+        }
+        Qt.callLater(() => {
+            resizeDebounce.restart();
+        });
+    }
+
+    Timer {
+        id: resizeDebounce
+        interval: 50
+        onTriggered: {
+            cava.barCount = main.barCount;
+            cava.asciiMaxRange = main.asciiMaxRange;
+            logger.debug("barCount:", barCount, "asciiMaxRange:", asciiMaxRange);
+        }
+    }
+
+    onEditModeChanged: {
+        logger.debug("editMode:", editMode);
+        updateStatus();
+    }
 
     Cava {
         id: cava
@@ -84,9 +127,18 @@ PlasmoidItem {
         idleCheck: main.hideWhenIdle
         idleTimer: Plasmoid.configuration.idleTimer
         cavaSleepTimer: Plasmoid.configuration.cavaSleepTimer
-        onIdleChanged: main.updateStatus()
-        onHasErrorChanged: main.updateStatus()
-        onRunningChanged: main.updateStatus()
+        onIdleChanged: {
+            main.logger.info("cava.idle:", idle);
+            main.updateStatus();
+        }
+        onHasErrorChanged: {
+            main.logger.error("cava.hasError:", hasError, error);
+            main.updateStatus();
+        }
+        onRunningChanged: {
+            main.logger.info("cava.running:", running);
+            main.updateStatus();
+        }
     }
 
     preferredRepresentation: compactRepresentation
@@ -94,6 +146,7 @@ PlasmoidItem {
     fullRepresentation: FullRepresentation {}
 
     onStopCavaChanged: {
+        logger.debug("stopCava:", stopCava);
         if (stopCava) {
             cava.stop();
         } else {
@@ -122,4 +175,10 @@ PlasmoidItem {
     // hide default tooltip
     toolTipMainText: ""
     toolTipSubText: ""
+    Connections {
+        target: Qt.application
+        function onAboutToQuit() {
+            cava.stop();
+        }
+    }
 }

@@ -20,7 +20,6 @@ import QtQuick.Layouts
 import org.kde.plasma.plasmoid
 import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.components as PlasmaComponents
-import "../code/utils.js" as Utils
 
 RowLayout {
 
@@ -36,7 +35,8 @@ RowLayout {
         columns: 2
         rows: 4
 
-        Layout.preferredWidth: parent.width / 2
+        Layout.preferredWidth: 1
+        Layout.fillWidth: true
 
         PlasmaComponents.Label {
             id: aqLabel
@@ -135,7 +135,8 @@ RowLayout {
         columns: 2
         rows: 4
 
-        Layout.preferredWidth: parent.width / 2
+        Layout.preferredWidth: 1
+        Layout.fillWidth: true
 
         PlasmaComponents.Label {
             id: solLabel

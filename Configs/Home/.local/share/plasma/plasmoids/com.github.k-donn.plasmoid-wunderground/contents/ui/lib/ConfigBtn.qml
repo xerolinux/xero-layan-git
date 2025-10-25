@@ -16,10 +16,8 @@
  */
 
 import QtQuick
-import QtQuick.Layouts
 import QtQuick.Controls as QQC
 import org.kde.plasma.plasmoid
-import org.kde.plasma.core as PlasmaCore
 
 QQC.Button {
     text: i18n("Configure Wunderground")

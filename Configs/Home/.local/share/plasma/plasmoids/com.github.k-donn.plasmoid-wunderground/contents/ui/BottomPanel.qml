@@ -26,26 +26,27 @@ import "../code/utils.js" as Utils
 RowLayout {
     id: bottomPanelRoot
 
-    RowLayout {
-        Layout.preferredWidth: parent.width / 3
+    Layout.preferredHeight: Kirigami.Units.iconSizes.small
 
-        Row {
-            Layout.alignment: Qt.AlignLeft
+    PlasmaComponents.Label {
+        id: bottomPanelTime
 
-            PlasmaComponents.Label {
-                id: bottomPanelTime
+        text: weatherData["obsTimeLocal"] + " (" + plasmoid.configuration.refreshPeriod + "s)"
 
-                text: weatherData["obsTimeLocal"] + " (" + plasmoid.configuration.refreshPeriod + "s)"
-            }
-        }
+        horizontalAlignment: Text.AlignLeft
 
+        Layout.fillWidth: true
+        Layout.preferredWidth: 1
     }
 
-    RowLayout {
-        Layout.preferredWidth: parent.width / 3
+    Item {
+        id: centerContainer
+        Layout.fillWidth: true
+        Layout.preferredWidth: 1
 
         Row {
-            Layout.alignment: Qt.AlignHCenter
+            id: centerRow
+            anchors.centerIn: parent
             Kirigami.Icon {
                 id: locationIcon
 
@@ -59,7 +60,7 @@ RowLayout {
             PlasmaComponents.Label {
                 id: locationLabel
 
-                text: plasmoid.configuration.stationName
+                text: weatherData["neighborhood"]
             }
 
             Kirigami.Icon {
@@ -79,16 +80,20 @@ RowLayout {
                     onClicked: Qt.openUrlExternally("https://www.wunderground.com/dashboard/pws/" + weatherData["stationID"])
                 }
             }
-
         }
-
     }
 
-    RowLayout {
-        Layout.preferredWidth: parent.width / 3
+    Item {
+        id: rightContainer
+        Layout.fillWidth: true
+        Layout.preferredWidth: 1
 
         Row {
-            Layout.alignment: Qt.AlignRight
+            id: rightRow
+
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.right: parent.right
+
             Kirigami.Icon {
                 id: stationIcon
 
@@ -116,9 +121,6 @@ RowLayout {
                     mainText: i18n("There are weather alerts for your area!")
                 }
             }
-
         }
-
     }
-
 }

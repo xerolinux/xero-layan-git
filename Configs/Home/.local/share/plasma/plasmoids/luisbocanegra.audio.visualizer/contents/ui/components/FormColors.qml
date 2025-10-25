@@ -3,6 +3,10 @@ import QtQuick.Controls
 import QtQuick.Dialogs
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
+import org.kde.plasma.plasmoid
+import "../"
+import "../code/enum.js" as Enum
+import "../code/utils.js" as Utils
 
 Kirigami.FormLayout {
     id: root
@@ -39,6 +43,8 @@ Kirigami.FormLayout {
 
     twinFormLayouts: parentLayout
     Layout.fillWidth: true
+
+    property var logger: Logger.create(Plasmoid.configuration.debugMode ? LoggingCategory.Debug : LoggingCategory.Info)
 
     ListModel {
         id: themeColorSetModel
@@ -470,7 +476,7 @@ Kirigami.FormLayout {
         nameFilters: [i18n("Image files") + " (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)", i18n("All files") + " (*)"]
         onAccepted: {
             if (fileDialog.selectedFile) {
-                console.log(fileDialog.selectedFile);
+                logger.debug(fileDialog.selectedFile);
                 imgTextArea.text = fileDialog.selectedFile;
             }
         }
@@ -560,6 +566,73 @@ Kirigami.FormLayout {
         }
     }
 
+    ColumnLayout {
+        visible: root.config.sourceType === Enum.ColorSourceType.Hue
+        Kirigami.FormData.label: i18n("Range:")
+        Kirigami.FormData.buddyFor: hue
+        RowLayout{
+            id: hue
+            SpinBox {
+                id: hueStart
+                from: 0
+                to: 360
+                stepSize: 1
+                onValueModified: {
+                    if (value >= hueEnd.value - 1) {
+                        value = hueEnd.value - 1
+                    }
+                    root.config.hueStart = value;
+                    root.updateConfig();
+                }
+                Component.onCompleted: value = root.config.hueStart
+            }
+            Label {
+                text: "-"
+            }
+            SpinBox {
+                id: hueEnd
+                from: 0
+                to: 360
+                stepSize: 1
+                onValueModified: {
+                    if (value <= hueStart.value + 1) {
+                        value = hueStart.value + 1
+                    }
+                    root.config.hueEnd = value;
+                    root.updateConfig();
+                }
+                Component.onCompleted: value = root.config.hueEnd
+            }
+        }
+        Canvas {
+            id: canvas
+            property list<color> colors: {
+                let colors = [];
+                const start = hueStart.value / 360;
+                const end = hueEnd.value / 360;
+                for (let i = 0; i < canvas.width; i++) {
+                    let c = Qt.hsla(start + ((i / canvas.width) * (end - start)), 0.8, 0.7, 1.0);
+                    colors.push(c);
+                }
+                return colors
+            }
+            property var gradient: {
+                if (canvas.available) {
+                    return Utils.buildCanvasGradient(getContext("2d"), true, colors, 0, height, width);
+                }
+                return null;
+            }
+            Layout.fillWidth: true
+            Layout.preferredHeight: 8
+            onColorsChanged: canvas.requestPaint()
+            onPaint: {
+                var ctx = getContext("2d");
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, width, height);
+            }
+        }
+    }
+
     RadioButton {
         id: gradientHorizontalRadio
         Kirigami.FormData.label: i18n("Orientation:")
@@ -598,6 +671,21 @@ Kirigami.FormLayout {
             root.updateConfig();
         }
         visible: root.config.sourceType > 1
+    }
+
+    RowLayout {
+        Kirigami.FormData.label: i18n("Reverse:")
+        CheckBox {
+            checked: root.config.reverseList
+            onCheckedChanged: {
+                root.config.reverseList = checked;
+                root.updateConfig();
+            }
+            visible: root.config.sourceType > 1
+        }
+        Kirigami.ContextualHelpButton {
+            toolTipText: i18n("Display colors the other way around")
+        }
     }
 
     RowLayout {

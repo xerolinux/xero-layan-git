@@ -20,12 +20,6 @@ import QtQuick.Layouts
 import QtQuick.Controls as QQC
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.plasmoid
-import org.kde.plasma.core as PlasmaCore
-import org.kde.plasma.components as PlasmaComponents
-import "../../code/utils.js" as Utils
-import "../../code/pws-api.js" as StationAPI
-
-
 
 Window {
     id: manualAdd
@@ -69,8 +63,8 @@ Window {
             placeholderText: i18n("Enter station ID")
             onAccepted: {
                 if (text.trim().length > 0) {
-                    manualAdd.stationSelected(text.trim())
-                    manualAdd.visible = false
+                    manualAdd.stationSelected(text.trim());
+                    manualAdd.visible = false;
                 }
             }
         }
@@ -83,18 +77,17 @@ Window {
                 text: i18n("Confirm")
                 enabled: stationInput.text.trim().length > 0
                 onClicked: {
-                    manualAdd.stationSelected(stationInput.text.trim())
-                    manualAdd.visible = false
+                    manualAdd.stationSelected(stationInput.text.trim());
+                    manualAdd.visible = false;
                 }
             }
 
             QQC.Button {
                 text: i18n("Cancel")
                 onClicked: {
-                    manualAdd.visible = false
+                    manualAdd.visible = false;
                 }
             }
         }
     }
-
 }

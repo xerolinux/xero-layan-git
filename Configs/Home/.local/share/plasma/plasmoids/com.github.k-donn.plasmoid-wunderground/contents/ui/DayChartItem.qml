@@ -16,19 +16,15 @@
  * along with this program.  If not, see <http: //www.gnu.org/licenses/>.
  */
 
-import Qt5Compat.GraphicalEffects
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
-import org.kde.kquickcontrols
 import org.kde.plasma.components as PlasmaComponents
-import org.kde.plasma.core as PlasmaCore
-import org.kde.plasma.extras as PlasmaExtras
 import org.kde.plasma.plasmoid
 import org.kde.quickcharts as Charts
-import "../code/utils.js" as Utils
 import org.kde.quickcharts.controls as ChartsControls
+import "../code/utils.js" as Utils
 
 ColumnLayout {
     id: todayRoot
@@ -95,11 +91,8 @@ ColumnLayout {
                             anchors.fill: parent
                             hoverEnabled: true
                         }
-
                     }
-
                 }
-
             }
 
             ChartsControls.GridLines {
@@ -151,7 +144,7 @@ ColumnLayout {
                     text: {
                         var chunks = (ChartsControls.AxisLabels.label.toString()).split(".");
                         if (chunks.length > 1) {
-                            return chunks[0] + "." + chunks[1].substring(0,2);
+                            return chunks[0] + "." + chunks[1].substring(0, 2);
                         } else {
                             return ChartsControls.AxisLabels.label;
                         }
@@ -163,7 +156,6 @@ ColumnLayout {
                     axis: Charts.ChartAxisSource.YAxis
                     itemCount: 5
                 }
-
             }
 
             ChartsControls.AxisLabels {
@@ -183,7 +175,7 @@ ColumnLayout {
 
                     rotation: 0
                     font.pointSize: textSize.tiny
-                    text: "<b>" + Qt.formatDateTime(hourlyModel.get(ChartsControls.AxisLabels.label).time,plasmoid.configuration.dayChartTimeFormat) + "</b>"
+                    text: "<b>" + Qt.formatDateTime(hourlyModel.get(ChartsControls.AxisLabels.label).time, plasmoid.configuration.dayChartTimeFormat) + "</b>"
                 }
 
                 source: Charts.ChartAxisSource {
@@ -191,7 +183,6 @@ ColumnLayout {
                     axis: Charts.ChartAxisSource.XAxis
                     itemCount: 8
                 }
-
             }
 
             ChartsControls.AxisLabels {
@@ -224,7 +215,6 @@ ColumnLayout {
                     width: Kirigami.Units.iconSizes.smallMedium
                     height: Kirigami.Units.iconSizes.smallMedium
                 }
-
             }
 
             PlasmaComponents.Label {
@@ -245,7 +235,6 @@ ColumnLayout {
                     weight: Font.Bold
                     pointSize: textSize.small
                 }
-
             }
 
             ListView {
@@ -266,11 +255,8 @@ ColumnLayout {
                     radius: 2
                 }
 
-                delegate: ChartMetricsSelectionDelegate { }
+                delegate: ChartMetricsSelectionDelegate {}
             }
-
         }
-
     }
-
 }
