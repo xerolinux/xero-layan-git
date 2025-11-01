@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmoid-wunderground\n"
 "Report-Msgid-Bugs-To: https://github.com/k-donn/plasmoid-wunderground\n"
-"POT-Creation-Date: 2025-10-21 16:47-0400\n"
+"POT-Creation-Date: 2025-10-30 10:50-0400\n"
 "PO-Revision-Date: 2024-01-14 22:54+0900\n"
 "Last-Translator: Yuta Takahashi <y.highbridge04@gmail.com>\n"
 "Language-Team: Japanese-Team <LL@li.org>\n"
@@ -100,6 +100,90 @@ msgstr "地域: %1<br/>アクション: %2<br/>免責事項: %3<br/>発行者: %
 #: ../contents/ui/BottomPanel.qml
 msgid "There are weather alerts for your area!"
 msgstr "あなたの地域に気象警報があります!"
+
+#: ../contents/ui/DayChartItem.qml
+msgctxt "per 12 hours, please keep it short"
+msgid "/12h"
+msgstr "/12時間"
+
+#: ../contents/ui/DetailsItem.qml ../contents/ui/config/ConfigUnits.qml ../contents/ui/main.qml
+msgid "Wind & Gust"
+msgstr "風と突風"
+
+#. i18n strings
+#: ../contents/ui/DetailsItem.qml ../contents/ui/config/ConfigUnits.qml
+msgid "Feels like %1"
+msgstr "%1のような気分"
+
+#: ../contents/ui/DetailsItem.qml
+msgid "Wind from: %1 (%2°)"
+msgstr "風向: %1 (%2°)"
+
+#: ../contents/ui/DetailsItem.qml ../contents/ui/config/ConfigUnits.qml
+msgid "Dew Point"
+msgstr "露点"
+
+#: ../contents/ui/DetailsItem.qml ../contents/ui/main.qml
+msgid "Precipitation Rate"
+msgstr "降水量"
+
+#: ../contents/ui/DetailsItem.qml ../contents/ui/main.qml
+msgid "Pressure"
+msgstr "プレッシャー"
+
+#: ../contents/ui/DetailsItem.qml
+msgid "Pressure has risen %1 in the last three hours."
+msgstr "過去 3 時間で圧力が %1 上昇しました。"
+
+#: ../contents/ui/DetailsItem.qml
+msgid "Pressure has fallen %1 in the last three hours."
+msgstr "過去 3 時間で圧力が %1 低下しました。"
+
+#: ../contents/ui/DetailsItem.qml ../contents/ui/main.qml
+msgid "Humidity"
+msgstr "湿度"
+
+#: ../contents/ui/DetailsItem.qml
+msgctxt "Short for: 'Precipitation Accumulation'"
+msgid "Precipitation Accum."
+msgstr "降水量累計"
+
+#: ../contents/ui/DetailsItem.qml ../contents/ui/main.qml
+msgid "UV"
+msgstr "紫外線"
+
+#: ../contents/ui/ForecastItem.qml
+msgctxt "Do not edit HTML tags."
+msgid "<font size='4'>Feels like: %1<br/>Thunder: %2<br/>UV: %3<br/>Snow: %4<br/>Golf: %5</font>"
+msgstr "<font size='4'>体感：%1<br/>雷: %2<br/>紫外線: %3<br/>雪: %4<br/>ゴルフ: %5</font>"
+
+#: ../contents/ui/FullRepresentation.qml
+msgid "Sorry! The widget ran into a network error: "
+msgstr ""
+
+#: ../contents/ui/SwitchPanel.qml ../contents/ui/config/ConfigAppearance.qml
+msgid "Weather Details"
+msgstr "天気詳細"
+
+#: ../contents/ui/SwitchPanel.qml ../contents/ui/config/ConfigAppearance.qml ../contents/ui/config/ConfigUnits.qml
+msgid "Forecast"
+msgstr "予報"
+
+#: ../contents/ui/SwitchPanel.qml ../contents/ui/config/ConfigAppearance.qml
+msgid "Day Chart"
+msgstr "日別チャート"
+
+#: ../contents/ui/SwitchPanel.qml ../contents/ui/config/ConfigAppearance.qml
+msgid "More Info"
+msgstr "詳細情報"
+
+#: ../contents/ui/TopPanel.qml
+msgid "High: %1 Low: %2"
+msgstr "最高: %1 最低: %2"
+
+#: ../contents/ui/TopPanel.qml ../contents/ui/main.qml
+msgid "Loading..."
+msgstr "読み込み中..."
 
 #: ../contents/ui/config/ConfigAppearance.qml
 msgid "Compact Representation"
@@ -197,22 +281,6 @@ msgstr "アイコンにシステムカラーを適用します。"
 msgid "Auto-color temperature:"
 msgstr "自動色温度:"
 
-#: ../contents/ui/config/ConfigAppearance.qml ../contents/ui/SwitchPanel.qml
-msgid "Weather Details"
-msgstr "天気詳細"
-
-#: ../contents/ui/config/ConfigAppearance.qml ../contents/ui/config/ConfigUnits.qml ../contents/ui/SwitchPanel.qml
-msgid "Forecast"
-msgstr "予報"
-
-#: ../contents/ui/config/ConfigAppearance.qml ../contents/ui/SwitchPanel.qml
-msgid "Day Chart"
-msgstr "日別チャート"
-
-#: ../contents/ui/config/ConfigAppearance.qml ../contents/ui/SwitchPanel.qml
-msgid "More Info"
-msgstr "詳細情報"
-
 #: ../contents/ui/config/ConfigAppearance.qml
 msgid "Default page shown:"
 msgstr "表示されるデフォルトのページ:"
@@ -265,21 +333,17 @@ msgstr "選択"
 msgid "Remove"
 msgstr "取り除く"
 
-#: ../contents/ui/config/ConfigStation.qml ../contents/ui/lib/StationSearcher.qml
-msgid "Find Station"
-msgstr "駅を探す"
+#: ../contents/ui/config/ConfigStation.qml
+msgid "Select from Map"
+msgstr ""
 
 #: ../contents/ui/config/ConfigStation.qml
 msgid "Manual Add"
 msgstr ""
 
-#: ../contents/ui/config/ConfigStation.qml
-msgid "Error"
-msgstr ""
-
-#: ../contents/ui/config/ConfigStation.qml ../contents/ui/lib/StationSearcher.qml
-msgid "Error: Bad station."
-msgstr ""
+#: ../contents/ui/config/ConfigStation.qml ../contents/ui/lib/StationMapSearcher.qml ../contents/ui/lib/StationSearcher.qml
+msgid "Find Station"
+msgstr "駅を探す"
 
 #: ../contents/ui/config/ConfigStation.qml
 msgid "Refresh period (s):"
@@ -304,19 +368,6 @@ msgstr "精度"
 #: ../contents/ui/config/ConfigUnits.qml ../contents/ui/main.qml
 msgid "Temperature"
 msgstr "温度"
-
-#: ../contents/ui/config/ConfigUnits.qml ../contents/ui/DetailsItem.qml ../contents/ui/main.qml
-msgid "Wind & Gust"
-msgstr "風と突風"
-
-#. i18n strings
-#: ../contents/ui/config/ConfigUnits.qml ../contents/ui/DetailsItem.qml
-msgid "Feels like %1"
-msgstr "%1のような気分"
-
-#: ../contents/ui/config/ConfigUnits.qml ../contents/ui/DetailsItem.qml
-msgid "Dew Point"
-msgstr "露点"
 
 #: ../contents/ui/config/ConfigUnits.qml
 msgctxt "The unit system"
@@ -365,53 +416,6 @@ msgstr "圧力単位:"
 msgid "Elevation unit:"
 msgstr "標高単位:"
 
-#: ../contents/ui/DayChartItem.qml
-msgctxt "per 12 hours, please keep it short"
-msgid "/12h"
-msgstr "/12時間"
-
-#: ../contents/ui/DetailsItem.qml
-msgid "Wind from: %1 (%2°)"
-msgstr "風向: %1 (%2°)"
-
-#: ../contents/ui/DetailsItem.qml ../contents/ui/main.qml
-msgid "Precipitation Rate"
-msgstr "降水量"
-
-#: ../contents/ui/DetailsItem.qml ../contents/ui/main.qml
-msgid "Pressure"
-msgstr "プレッシャー"
-
-#: ../contents/ui/DetailsItem.qml
-msgid "Pressure has risen %1 in the last three hours."
-msgstr "過去 3 時間で圧力が %1 上昇しました。"
-
-#: ../contents/ui/DetailsItem.qml
-msgid "Pressure has fallen %1 in the last three hours."
-msgstr "過去 3 時間で圧力が %1 低下しました。"
-
-#: ../contents/ui/DetailsItem.qml ../contents/ui/main.qml
-msgid "Humidity"
-msgstr "湿度"
-
-#: ../contents/ui/DetailsItem.qml
-msgctxt "Short for: 'Precipitation Accumulation'"
-msgid "Precipitation Accum."
-msgstr "降水量累計"
-
-#: ../contents/ui/DetailsItem.qml ../contents/ui/main.qml
-msgid "UV"
-msgstr "紫外線"
-
-#: ../contents/ui/ForecastItem.qml
-msgctxt "Do not edit HTML tags."
-msgid "<font size='4'>Feels like: %1<br/>Thunder: %2<br/>UV: %3<br/>Snow: %4<br/>Golf: %5</font>"
-msgstr "<font size='4'>体感：%1<br/>雷: %2<br/>紫外線: %3<br/>雪: %4<br/>ゴルフ: %5</font>"
-
-#: ../contents/ui/FullRepresentation.qml
-msgid "Sorry! The widget ran into a network error: "
-msgstr ""
-
 #: ../contents/ui/lib/BackgroundToggle.qml
 msgid "Desktop Widget:"
 msgstr "デスクトップウィジェット:"
@@ -428,13 +432,85 @@ msgstr ""
 msgid "Enter station ID"
 msgstr ""
 
-#: ../contents/ui/lib/ManualStationAdd.qml ../contents/ui/lib/StationSearcher.qml
+#: ../contents/ui/lib/ManualStationAdd.qml ../contents/ui/lib/StationMapSearcher.qml ../contents/ui/lib/StationSearcher.qml
 msgid "Confirm"
 msgstr "確認する"
 
-#: ../contents/ui/lib/ManualStationAdd.qml ../contents/ui/lib/StationSearcher.qml
+#: ../contents/ui/lib/ManualStationAdd.qml ../contents/ui/lib/StationMapSearcher.qml ../contents/ui/lib/StationSearcher.qml
 msgid "Cancel"
 msgstr "キャンセル"
+
+#: ../contents/ui/lib/StationMapSearcher.qml ../contents/ui/lib/StationSearcher.qml
+msgid "Search by:"
+msgstr "検索条件:"
+
+#: ../contents/ui/lib/StationMapSearcher.qml
+msgid "Area Name"
+msgstr ""
+
+#: ../contents/ui/lib/StationMapSearcher.qml ../contents/ui/lib/StationSearcher.qml
+msgid "Weatherstation ID:"
+msgstr "気象観測所ID:"
+
+#: ../contents/ui/lib/StationMapSearcher.qml ../contents/ui/lib/StationSearcher.qml
+msgid "Lat/Lon"
+msgstr "緯度/経度"
+
+#: ../contents/ui/lib/StationMapSearcher.qml
+msgid "Search"
+msgstr ""
+
+#: ../contents/ui/lib/StationMapSearcher.qml ../contents/ui/lib/StationSearcher.qml
+msgid "Enter Station"
+msgstr "駅に入る"
+
+#: ../contents/ui/lib/StationMapSearcher.qml
+msgid "Enter city, state, locality, or address"
+msgstr ""
+
+#: ../contents/ui/lib/StationMapSearcher.qml
+msgid "Click or drag the marker on the map below."
+msgstr ""
+
+#: ../contents/ui/lib/StationMapSearcher.qml ../contents/ui/lib/StationSearcher.qml
+msgid "Searching place:"
+msgstr "検索場所:"
+
+#: ../contents/ui/lib/StationMapSearcher.qml ../contents/ui/lib/StationSearcher.qml
+msgid "Choose"
+msgstr "選ぶ"
+
+#: ../contents/ui/lib/StationMapSearcher.qml
+msgid "Searching by Weatherstation ID. Example: KGADACUL1"
+msgstr ""
+
+#: ../contents/ui/lib/StationMapSearcher.qml
+msgid "Selected latitude: %1, longitude: %2"
+msgstr ""
+
+#: ../contents/ui/lib/StationMapSearcher.qml
+msgid "Error (%1): %2"
+msgstr ""
+
+#: ../contents/ui/lib/StationMapSearcher.qml
+msgid "Warning"
+msgstr ""
+
+#: ../contents/ui/lib/StationMapSearcher.qml
+msgid "Station has failed quality checks and may provide unreliable data."
+msgstr ""
+
+#: ../contents/ui/lib/StationMapSearcher.qml
+msgid "Station Health: %1%"
+msgstr ""
+
+#: ../contents/ui/lib/StationMapSearcher.qml
+msgid "Test Station"
+msgstr ""
+
+#: ../contents/ui/lib/StationMapSearcher.qml
+msgid "Selected Station: %1 (%2)"
+msgstr ""
 
 #: ../contents/ui/lib/StationSearcher.qml
 msgid "Error: %1 message: %2"
@@ -457,32 +533,16 @@ msgid "Station unhealthy."
 msgstr ""
 
 #: ../contents/ui/lib/StationSearcher.qml
+msgid "Error: Bad station."
+msgstr ""
+
+#: ../contents/ui/lib/StationSearcher.qml
 msgid "Error: Station not active!"
 msgstr ""
 
 #: ../contents/ui/lib/StationSearcher.qml
-msgid "Search by:"
-msgstr "検索条件:"
-
-#: ../contents/ui/lib/StationSearcher.qml
 msgid "City Name"
 msgstr "都市名"
-
-#: ../contents/ui/lib/StationSearcher.qml
-msgid "Weatherstation ID:"
-msgstr "気象観測所ID:"
-
-#: ../contents/ui/lib/StationSearcher.qml
-msgid "Lat/Lon"
-msgstr "緯度/経度"
-
-#: ../contents/ui/lib/StationSearcher.qml
-msgid "Searching place:"
-msgstr "検索場所:"
-
-#: ../contents/ui/lib/StationSearcher.qml
-msgid "Choose"
-msgstr "選ぶ"
 
 #: ../contents/ui/lib/StationSearcher.qml
 msgid "Uses WGS84 geocode coordinates"
@@ -491,10 +551,6 @@ msgstr "WGS84ジオコード座標を使用"
 #: ../contents/ui/lib/StationSearcher.qml
 msgid "Use Station ID, not city name. Select 'Search by: City Name' to search by city."
 msgstr "都市名ではなくステーションIDを使用してください。都市名で検索するには、「都市名で検索」を選択してください。"
-
-#: ../contents/ui/lib/StationSearcher.qml
-msgid "Enter Station"
-msgstr "駅に入る"
 
 #: ../contents/ui/lib/StationSearcher.qml
 msgid "Enter City Name"
@@ -524,10 +580,6 @@ msgstr "データを取得する気象ステーションを設定します。"
 msgid "Please Configure"
 msgstr "設定してください"
 
-#: ../contents/ui/main.qml ../contents/ui/TopPanel.qml
-msgid "Loading..."
-msgstr "読み込み中..."
-
 #: ../contents/ui/main.qml
 msgid "Error..."
 msgstr "エラー..."
@@ -550,10 +602,6 @@ msgstr "<font size='4'>ウィンド速度: %1</font><br />"
 #: ../contents/ui/main.qml
 msgid "Refresh weather"
 msgstr "天気を更新"
-
-#: ../contents/ui/TopPanel.qml
-msgid "High: %1 Low: %2"
-msgstr "最高: %1 最低: %2"
 
 #~ msgid "Loading data..."
 #~ msgstr "データを読み込んでいます..."

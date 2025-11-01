@@ -152,7 +152,10 @@ function _httpGet(url, cb) {
 				var resJson = req.responseText
 					? JSON.parse(req.responseText)
 					: null;
-				if (resJson.hasOwnProperty("type") && resJson.hasOwnProperty("message")) {
+				if (
+					resJson.hasOwnProperty("type") &&
+					resJson.hasOwnProperty("message")
+				) {
 					parsed = resJson;
 				} else {
 					throw new Error();
@@ -360,10 +363,7 @@ function isStationActive(givenID, options, callback) {
 		var sectionName = _unitsToSection(units);
 		var obs = res && res.observations ? res.observations[0] : null;
 		if (!obs) {
-			callback(
-				{ type: "no_data", message: "No observation returned" },
-				null
-			);
+			callback({ isActive: false, healthCount: 0 }, null);
 			return;
 		}
 
@@ -391,7 +391,7 @@ function isStationActive(givenID, options, callback) {
  * Signature:
  *   searchStationID(query, { language }, cb)
  *
- * Callback: cb(err, Array<{stationID,placeName,latitude,longitude}>)
+ * Callback: cb(err, Array<{stationID,address,latitude,longitude,qcStatus}>)
  *
  * @param {string} query
  * @param {Object} options
@@ -438,9 +438,10 @@ function searchStationID(query, options, callback) {
 			for (var i = 0; i < count; i++) {
 				stationsArr.push({
 					stationID: loc.pwsId ? loc.pwsId[i] : "",
-					placeName: loc.neighborhood ? loc.neighborhood[i] : "",
+					address: loc.neighborhood ? loc.neighborhood[i] : "",
 					latitude: loc.latitude ? loc.latitude[i] : 0,
 					longitude: loc.longitude ? loc.longitude[i] : 0,
+					qcStatus: 0,
 				});
 			}
 		}
@@ -455,7 +456,7 @@ function searchStationID(query, options, callback) {
  * Signature:
  *   searchGeocode({latitude,longitude}, { language }, cb)
  *
- * Callback: cb(err, Array<{stationID,placeName,latitude,longitude}>)
+ * Callback: cb(err, Array<{stationID,address,latitude,longitude}>)
  *
  * @param {{latitude:number,longitude:number}} latLongObj
  * @param {Object} options
@@ -496,12 +497,12 @@ function searchGeocode(latLongObj, options, callback) {
 		var loc = res && res.location;
 		if (loc && Array.isArray(loc.stationId)) {
 			for (var i = 0; i < loc.stationId.length; i++) {
-				if (loc.qcStatus && loc.qcStatus[i] === -1) continue;
 				stationsArr.push({
 					stationID: loc.stationId[i],
-					placeName: loc.stationName ? loc.stationName[i] : "",
+					address: loc.stationName ? loc.stationName[i] : "",
 					latitude: loc.latitude ? loc.latitude[i] : 0,
 					longitude: loc.longitude ? loc.longitude[i] : 0,
+					qcStatus: loc.qcStatus ? loc.qcStatus[i] : 0,
 				});
 			}
 		}
@@ -537,7 +538,7 @@ function getLocations(city, options, callback) {
 	var language = options.language || _formatLanguage();
 	var url = _buildUrl("/v3/location/search", {
 		query: city,
-		locationType: "city",
+		locationType: "city,locality,state,address",
 		language: language,
 		format: "json",
 	});
@@ -568,9 +569,7 @@ function getLocations(city, options, callback) {
 			var count = Array.isArray(loc.address) ? loc.address.length : 0;
 			for (var i = 0; i < count; i++) {
 				locationsArr.push({
-					city: loc.city ? loc.city[i] : "",
-					state: loc.adminDistrict ? loc.adminDistrict[i] : "",
-					country: loc.country ? loc.country[i] : "",
+					address: loc.address ? loc.address[i] : "",
 					latitude: loc.latitude ? loc.latitude[i] : 0,
 					longitude: loc.longitude ? loc.longitude[i] : 0,
 				});
@@ -779,8 +778,7 @@ function getExtendedConditions(options, callback) {
 		var isNight = condVars && condVars["dayOrNight"] === "N";
 		var newIconCode = condVars ? condVars["iconCode"] : null;
 		var newConditionNarrative = condVars ? condVars["wxPhraseLong"] : "";
-		var newIsRain =
-			newIconCode !== null ? !_isSnowIconCode(newIconCode) : true;
+		var newIsRain = newIconCode ? !_isSnowIconCode(newIconCode) : true;
 
 		var alertsList = [];
 		if (

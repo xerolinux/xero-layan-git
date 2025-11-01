@@ -33,9 +33,18 @@ WallpaperItem {
     anchors.fill: parent
     property bool isLoading: true
     property string videoUrls: main.configuration.VideoUrls
-    property var videosConfig: getVideos()
-    property int currentVideoIndex: main.configuration.LastVideoIndex < videosConfig.length ? main.configuration.LastVideoIndex : 0
-    property var currentSource: videosConfig.length > 0 ? videosConfig[currentVideoIndex] : Utils.createVideo("")
+    property var videosConfig: {
+        const videos = getVideos();
+        return randomMode ? Utils.shuffleArray(videos) : videos;
+    }
+    property int currentVideoIndex: 0
+    property bool resumeLastVideo: main.configuration.ResumeLastVideo
+    property var currentSource: {
+        if (resumeLastVideo && main.configuration.LastVideo !== "") {
+            return Utils.getVideoByFile(main.configuration.LastVideo, videosConfig);
+        }
+        return Utils.getVideoByIndex(currentVideoIndex, videosConfig);
+    }
     property int pauseBatteryLevel: main.configuration.PauseBatteryLevel
     property bool shouldPlay: {
         if (lockScreenMode) {
@@ -50,16 +59,16 @@ WallpaperItem {
 
         let play = false;
         switch (main.configuration.PauseMode) {
-        case 0:
+        case Enum.PauseMode.MaximizedOrFullScreen:
             play = !windowModel.maximizedExists;
             break;
-        case 1:
+        case Enum.PauseMode.ActiveWindowPresent:
             play = !windowModel.activeExists;
             break;
-        case 2:
+        case Enum.PauseMode.WindowVisible:
             play = !windowModel.visibleExists;
             break;
-        case 3:
+        case Enum.PauseMode.Never:
             play = true;
         }
         return play;
@@ -70,22 +79,22 @@ WallpaperItem {
     property bool shouldBlur: {
         let blur = false;
         switch (main.configuration.BlurMode) {
-        case 0:
+        case Enum.BlurMode.MaximizedOrFullScreen:
             blur = windowModel.maximizedExists;
             break;
-        case 1:
+        case Enum.BlurMode.ActiveWindowPresent:
             blur = windowModel.activeExists;
             break;
-        case 2:
+        case Enum.BlurMode.WindowVisible:
             blur = windowModel.visibleExists;
             break;
-        case 3:
+        case Enum.BlurMode.VideoPaused:
             blur = !main.playing;
             break;
-        case 4:
+        case Enum.BlurMode.Always:
             blur = true;
             break;
-        case 5:
+        case Enum.BlurMode.Never:
             blur = false;
         }
         return blur;
@@ -119,8 +128,9 @@ WallpaperItem {
     property real volumeOutput2: 0
     property bool randomMode: main.configuration.RandomMode
     property int lastVideoPosition: main.configuration.LastVideoPosition
-    property bool restoreLastPosition: true
-    property bool slideshowEnabled: main.configuration.SlideshowEnabled
+    property int changeWallpaperMode: main.configuration.ChangeWallpaperMode
+    property int changeWallpaperTimerMinutes: main.configuration.ChangeWallpaperTimerMinutes
+    property int changeWallpaperTimerHours: main.configuration.ChangeWallpaperTimerHours
     property bool muteAudio: {
         if (muteOverride === Enum.MuteOverride.Mute) {
             return true;
@@ -130,22 +140,22 @@ WallpaperItem {
 
         let mute = false;
         switch (main.configuration.MuteMode) {
-        case 0:
+        case Enum.MuteMode.MaximizedOrFullScreen:
             mute = windowModel.maximizedExists;
             break;
-        case 1:
+        case Enum.MuteMode.ActiveWindowPresent:
             mute = windowModel.activeExists;
             break;
-        case 2:
+        case Enum.MuteMode.WindowVisible:
             mute = windowModel.visibleExists;
             break;
-        // case 3:
         //  TODO other application playing audio
+        // case Enum.MuteMode.AnotherAppPlayingAudio:
         //  break
-        case 4:
+        case Enum.MuteMode.Never:
             mute = false;
             break;
-        case 5:
+        case Enum.MuteMode.Always:
             mute = true;
         }
         return mute;
@@ -241,10 +251,13 @@ WallpaperItem {
             multipleVideos: main.videosConfig.length > 1
             targetCrossfadeDuration: main.configuration.CrossfadeDuration
             debugEnabled: main.debugEnabled
-            slideshowEnabled: main.slideshowEnabled
+            changeWallpaperMode: main.changeWallpaperMode
+            changeWallpaperTimerMinutes: main.changeWallpaperTimerMinutes
+            changeWallpaperTimerHours: main.changeWallpaperTimerHours
             fillMode: main.configuration.FillMode
             volume: main.volume
             playbackRate: main.playbackRate
+            resumeLastVideo: main.configuration.ResumeLastVideo
         }
 
         PlasmaExtras.PlaceholderMessage {
@@ -347,7 +360,7 @@ WallpaperItem {
 
     function save() {
         // Save last video and position to resume from it on next login/lock
-        main.configuration.LastVideoIndex = main.currentVideoIndex;
+        main.configuration.LastVideo = main.currentSource.filename;
         main.configuration.LastVideoPosition = player.lastVideoPosition;
         main.configuration.writeConfig();
         printLog("Bye!");
@@ -377,7 +390,7 @@ WallpaperItem {
             text: i18n("Next Video")
             icon.name: "media-skip-forward"
             onTriggered: {
-                player.next(true, false);
+                player.next(true, true);
             }
             visible: player.multipleVideos
         },

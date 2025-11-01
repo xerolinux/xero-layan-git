@@ -25,20 +25,20 @@ import QtQuick.Layouts
 import QtMultimedia
 import org.kde.kirigami as Kirigami
 import org.kde.kquickcontrols 2.0 as KQuickControls
-import org.kde.kirigami as Kirigami
 import "code/utils.js" as Utils
+import "code/enum.js" as Enum
 import "components" as Components
 
 Kirigami.FormLayout {
     id: root
     twinFormLayouts: parentLayout // required by parent
     property alias formLayout: root // required by parent
-    property alias cfg_FillMode: videoFillMode.currentIndex
-    property alias cfg_PauseMode: pauseModeCombo.currentIndex
+    property alias cfg_FillMode: videoFillMode.currentValue
+    property alias cfg_PauseMode: pauseModeCombo.currentValue
     property alias cfg_BackgroundColor: colorButton.color
     property alias cfg_PauseBatteryLevel: pauseBatteryLevel.value
     property alias cfg_BatteryPausesVideo: batteryPausesVideoCheckBox.checked
-    property int cfg_BlurMode
+    property alias cfg_BlurMode: blurModeCombo.currentValue
     property alias cfg_BatteryDisablesBlur: batteryDisablesBlurCheckBox.checked
     property alias cfg_BlurRadius: blurRadiusSpinBox.value
     property string cfg_VideoUrls
@@ -47,7 +47,7 @@ Kirigami.FormLayout {
     property alias cfg_ScreenOffPausesVideo: screenOffPausesVideoCheckbox.checked
     property alias cfg_ScreenStateCmd: screenStateCmdTextField.text
     property bool showWarningMessage: false
-    property bool cfg_CheckWindowsActiveScreen: activeScreenOnlyCheckbx.checked
+    property alias cfg_CheckWindowsActiveScreen: activeScreenOnlyCheckbx.checked
     property alias cfg_DebugEnabled: debugEnabledCheckbox.checked
     property alias cfg_EffectsPlayVideo: effectsPlayVideoInput.text
     // property string cfg_EffectsPlayVideo
@@ -60,25 +60,14 @@ Kirigami.FormLayout {
     property alias cfg_PlaybackRate: playbackRateSlider.value
     property alias cfg_Volume: volumeSlider.value
     property alias cfg_RandomMode: randomModeCheckbox.checked
-    property alias cfg_SlideshowEnabled: slideshowEnabledCheckbox.checked
+    property alias cfg_ResumeLastVideo: resumeLastVideoCheckbox.checked
+    property alias cfg_ChangeWallpaperMode: changeWallpaperModeComboBox.currentValue
+    property alias cfg_ChangeWallpaperTimerMinutes: changeWallpaperTimerMinutesSpinBox.value
+    property alias cfg_ChangeWallpaperTimerHours: changeWallpaperTimerHoursSpinBox.value
     property int currentTab
     property bool showVideosList: false
     property var isLockScreenSettings: null
-    property int cfg_MuteMode
-    property var desktopOptions: [
-        {
-            'label': i18n("Maximized or full-screen windows"),
-            'value': 0
-        },
-        {
-            'label': i18n("Active window is present"),
-            'value': 1
-        },
-        {
-            'label': i18n("At least one window is shown"),
-            'value': 2
-        }
-    ]
+    property alias cfg_MuteMode: muteModeCombo.currentValue
 
     Components.Header {
         Layout.leftMargin: Kirigami.Units.mediumSpacing
@@ -206,10 +195,10 @@ Kirigami.FormLayout {
                         icon.name: "preferences-other"
                         enabled: true
                         onClicked: {
-                            dialogPlaybackRateSpeed.value = videosConfig[modelData].playbackRate;
-                            videoConfig.filename = videosConfig[modelData].filename;
-                            videoConfig.index = index;
-                            videoConfig.open();
+                            videoConfigDialog.playbackRate = videosConfig[modelData].playbackRate;
+                            videoConfigDialog.loop = videosConfig[modelData].loop ?? false;
+                            videoConfigDialog.index = index;
+                            videoConfigDialog.open();
                         }
                     }
                 }
@@ -284,30 +273,21 @@ Kirigami.FormLayout {
         Kirigami.FormData.label: i18n("Positioning:")
         model: [
             {
-                'label': i18n("Stretch"),
-                'fillMode': VideoOutput.Stretch
+                text: i18n("Stretch"),
+                value: VideoOutput.Stretch
             },
             {
-                'label': i18n("Keep Proportions"),
-                'fillMode': VideoOutput.PreserveAspectFit
+                text: i18n("Keep Proportions"),
+                value: VideoOutput.PreserveAspectFit
             },
             {
-                'label': i18n("Scaled and Cropped"),
-                'fillMode': VideoOutput.PreserveAspectCrop
+                text: i18n("Scaled and Cropped"),
+                value: VideoOutput.PreserveAspectCrop
             }
         ]
-        textRole: "label"
-        onCurrentIndexChanged: cfg_FillMode = model[currentIndex]["fillMode"]
-        Component.onCompleted: setMethod()
+        textRole: "text"
+        valueRole: "value"
         visible: currentTab === 0
-
-        function setMethod() {
-            for (var i = 0; i < model.length; i++) {
-                if (model[i]["fillMode"] == wallpaper.configuration.FillMode) {
-                    videoFillMode.currentIndex = i;
-                }
-            }
-        }
     }
 
     KQuickControls.ColorButton {
@@ -319,18 +299,62 @@ Kirigami.FormLayout {
 
     RowLayout {
         visible: currentTab === 1
-        Kirigami.FormData.label: i18n("Slideshow:")
-        CheckBox {
-            id: slideshowEnabledCheckbox
+        Kirigami.FormData.label: i18n("Change Wallpaper:")
+        ComboBox {
+            id: changeWallpaperModeComboBox
+            model: [
+                {
+                    text: i18n("Never"),
+                    value: Enum.ChangeWallpaperMode.Never
+                },
+                {
+                    text: i18n("Slideshow"),
+                    value: Enum.ChangeWallpaperMode.Slideshow
+                },
+                {
+                    text: i18n("On a Timer"),
+                    value: Enum.ChangeWallpaperMode.OnATimer
+                }
+            ]
+            textRole: "text"
+            valueRole: "value"
         }
         Kirigami.ContextualHelpButton {
-            toolTipText: i18n("Automatically play next video when the current one ends. Disable to do it manually using <strong>Next Video</strong> from the Desktop right click menu.")
+            toolTipText: i18n("Automatically play the next video using the selected strategy. You can also change the wallpaper manually using <strong>Next Video</strong> from the Desktop right click menu.")
+        }
+    }
+
+    RowLayout {
+        visible: currentTab === 1 && changeWallpaperModeComboBox.currentIndex === Enum.ChangeWallpaperMode.OnATimer
+        Label {
+            text: i18n("Hours:")
+        }
+        SpinBox {
+            id: changeWallpaperTimerHoursSpinBox
+            from: 0
+            to: 12
+            stepSize: 1
+        }
+        Label {
+            text: i18n("Minutes:")
+        }
+        SpinBox {
+            id: changeWallpaperTimerMinutesSpinBox
+            from: changeWallpaperTimerHoursSpinBox.value > 0 ? 0 : 1
+            to: 59
+            stepSize: 1
         }
     }
 
     CheckBox {
         id: randomModeCheckbox
         Kirigami.FormData.label: i18n("Random order:")
+        visible: currentTab === 1
+    }
+
+    CheckBox {
+        id: resumeLastVideoCheckbox
+        Kirigami.FormData.label: i18n("Resume last video on startup:")
         visible: currentTab === 1
     }
 
@@ -344,13 +368,10 @@ Kirigami.FormLayout {
             value: cfg_PlaybackRate
             to: 2
             stepSize: 0.05
-            onValueChanged: {
-                cfg_PlaybackRate = value;
-            }
             Layout.fillWidth: true
         }
         Label {
-            text: parseFloat(playbackRateSlider.value).toFixed(2)
+            text: parseFloat(playbackRateSlider.value).toFixed(2) + "x"
         }
         Button {
             icon.name: "edit-undo-symbolic"
@@ -368,10 +389,6 @@ Kirigami.FormLayout {
         visible: currentTab === 1
         CheckBox {
             id: crossfadeEnabledCheckbox
-            checked: cfg_CrossfadeEnabled
-            onCheckedChanged: {
-                cfg_CrossfadeEnabled = checked;
-            }
         }
         Label {
             text: i18n("Duration:")
@@ -382,10 +399,6 @@ Kirigami.FormLayout {
             from: 0
             to: 99999
             stepSize: 100
-            value: cfg_CrossfadeDuration
-            onValueChanged: {
-                cfg_CrossfadeDuration = value;
-            }
         }
         Button {
             icon.name: "dialog-information-symbolic"
@@ -401,11 +414,7 @@ Kirigami.FormLayout {
     CheckBox {
         id: activeScreenOnlyCheckbx
         Kirigami.FormData.label: i18n("Filter windows:")
-        checked: cfg_CheckWindowsActiveScreen
         text: i18n("This screen only")
-        onCheckedChanged: {
-            cfg_CheckWindowsActiveScreen = checked;
-        }
         visible: !root.isLockScreenSettings && currentTab === 1
     }
 
@@ -414,21 +423,24 @@ Kirigami.FormLayout {
         Kirigami.FormData.label: i18n("Pause:")
         model: [
             {
-                'label': i18n("Maximized or full-screen windows")
+                text: i18n("Maximized or full-screen windows"),
+                value: Enum.PauseMode.MaximizedOrFullScreen
             },
             {
-                'label': i18n("Active window is present")
+                text: i18n("Active window"),
+                value: Enum.PauseMode.ActiveWindowPresent
             },
             {
-                'label': i18n("At least one window is shown")
+                text: i18n("At least one window is visible"),
+                value: Enum.PauseMode.WindowVisible
             },
             {
-                'label': i18n("Never")
+                text: i18n("Never"),
+                value: Enum.PauseMode.Never
             }
         ]
-        textRole: "label"
-        onCurrentIndexChanged: cfg_PauseMode = currentIndex
-        currentIndex: cfg_PauseMode
+        textRole: "text"
+        valueRole: "value"
         visible: !root.isLockScreenSettings && currentTab === 1
     }
 
@@ -437,19 +449,33 @@ Kirigami.FormLayout {
         let model = [
             // TODO implement detection
             // {
-            //     'label': i18n("Other application is playing audio"),
-            //     'value': 3
+            //     text: i18n("Other application is playing audio"),
+            //     value: 3
             // },
             {
-                'label': i18n("Never"),
-                'value': 4
+                text: i18n("Never"),
+                value: Enum.MuteMode.Never
             },
             {
-                'label': i18n("Always"),
-                'value': 5
+                text: i18n("Always"),
+                value: Enum.MuteMode.Always
             },
         ];
         // options exclusive to desktop mode
+        const desktopOptions = [
+            {
+                text: i18n("Maximized or full-screen windows"),
+                value: Enum.MuteMode.MaximizedOrFullScreen
+            },
+            {
+                text: i18n("Active window"),
+                value: Enum.MuteMode.ActiveWindowPresent
+            },
+            {
+                text: i18n("At least one window is visible"),
+                value: Enum.MuteMode.WindowVisible
+            }
+        ];
         if (!isLockScreenSettings) {
             model.unshift(...desktopOptions);
         }
@@ -460,13 +486,9 @@ Kirigami.FormLayout {
         id: muteModeCombo
         Kirigami.FormData.label: i18n("Mute:")
         model: muteModeModel
-        textRole: "label"
+        textRole: "text"
         valueRole: "value"
         visible: currentTab === 1
-        onActivated: {
-            cfg_MuteMode = currentValue;
-        }
-        Component.onCompleted: currentIndex = indexOfValue(cfg_MuteMode)
     }
 
     RowLayout {
@@ -477,11 +499,7 @@ Kirigami.FormLayout {
         Slider {
             id: volumeSlider
             from: 0
-            value: cfg_Volume
             to: 1
-            onValueChanged: {
-                cfg_Volume = value;
-            }
         }
         Label {
             text: parseFloat(volumeSlider.value).toFixed(2)
@@ -501,19 +519,33 @@ Kirigami.FormLayout {
         // options for desktop and lock screen
         let model = [
             {
-                'label': i18n("Video is paused"),
-                'value': 3
+                text: i18n("Video is paused"),
+                value: Enum.BlurMode.VideoPaused
             },
             {
-                'label': i18n("Always"),
-                'value': 4
+                text: i18n("Always"),
+                value: Enum.BlurMode.Always
             },
             {
-                'label': i18n("Never"),
-                'value': 5
+                text: i18n("Never"),
+                value: Enum.BlurMode.Never
             }
         ];
         // options exclusive to desktop mode
+        const desktopOptions = [
+            {
+                text: i18n("Maximized or full-screen windows"),
+                value: Enum.BlurMode.MaximizedOrFullScreen
+            },
+            {
+                text: i18n("Active window"),
+                value: Enum.BlurMode.ActiveWindowPresent
+            },
+            {
+                text: i18n("At least one window is visible"),
+                value: Enum.BlurMode.WindowVisible
+            }
+        ];
         if (!isLockScreenSettings) {
             model.unshift(...desktopOptions);
         }
@@ -525,13 +557,9 @@ Kirigami.FormLayout {
         id: blurModeCombo
         Kirigami.FormData.label: i18n("Blur:")
         model: blurModeModel
-        textRole: "label"
+        textRole: "text"
         valueRole: "value"
         visible: currentTab === 1
-        onActivated: {
-            cfg_BlurMode = currentValue;
-        }
-        Component.onCompleted: currentIndex = indexOfValue(cfg_BlurMode)
     }
 
     RowLayout {
@@ -543,10 +571,6 @@ Kirigami.FormLayout {
             id: blurRadiusSpinBox
             from: 0
             to: 145
-            value: cfg_BlurRadius
-            onValueChanged: {
-                cfg_BlurRadius = value;
-            }
         }
         Button {
             visible: blurRadiusSpinBox.visible && cfg_BlurRadius > 64
@@ -568,10 +592,6 @@ Kirigami.FormLayout {
             from: 0
             to: 9999
             stepSize: 100
-            value: cfg_BlurAnimationDuration
-            onValueChanged: {
-                cfg_BlurAnimationDuration = value;
-            }
         }
     }
 
@@ -582,27 +602,15 @@ Kirigami.FormLayout {
             id: pauseBatteryLevel
             from: 0
             to: 100
-            value: cfg_PauseBatteryLevel
-            onValueChanged: {
-                cfg_PauseBatteryLevel = value;
-            }
         }
         CheckBox {
             id: batteryPausesVideoCheckBox
             text: i18n("Pause video")
-            checked: cfg_BatteryPausesVideo
-            onCheckedChanged: {
-                cfg_BatteryPausesVideo = checked;
-            }
         }
 
         CheckBox {
             id: batteryDisablesBlurCheckBox
             text: i18n("Disable blur")
-            checked: cfg_BatteryDisablesBlur
-            onCheckedChanged: {
-                cfg_BatteryDisablesBlur = checked;
-            }
             visible: blurRadiusSpinBox.visible
         }
     }
@@ -611,10 +619,6 @@ Kirigami.FormLayout {
         id: screenOffPausesVideoCheckbox
         Kirigami.FormData.label: i18n("Pause on screen off:")
         text: i18n("Requires setting up command below!")
-        checked: cfg_ScreenOffPausesVideo
-        onCheckedChanged: {
-            cfg_ScreenOffPausesVideo = checked;
-        }
         visible: currentTab === 1
     }
 
@@ -642,10 +646,6 @@ Kirigami.FormLayout {
         id: debugEnabledCheckbox
         Kirigami.FormData.label: i18n("Enable debug:")
         text: i18n("Print debug messages to the system log")
-        checked: cfg_DebugEnabled
-        onCheckedChanged: {
-            cfg_DebugEnabled = checked;
-        }
         visible: currentTab === 0
     }
 
@@ -740,7 +740,7 @@ Kirigami.FormLayout {
         id: fileDialog
         fileMode: FileDialog.OpenFiles
         title: i18n("Pick a video file")
-        nameFilters: [i18n("Video files") + " (*.mp4 *.mpg *.ogg *.mov *.webm *.flv *.matroska *.avi *wmv)", i18n("All files") + " (*)"]
+        nameFilters: [i18n("Video files") + " (*.mp4 *.mpg *.ogg *.mov *.webm *.flv *.matroska *.avi *wmv *.gif)", i18n("All files") + " (*)"]
         onAccepted: {
             let currentFiles = cfg_VideoUrls.trim().split("\n");
             for (let file of fileDialog.selectedFiles) {
@@ -754,53 +754,11 @@ Kirigami.FormLayout {
         }
     }
 
-    Kirigami.Dialog {
-        id: videoConfig
-        standardButtons: Kirigami.Dialog.Ok | Kirigami.Dialog.Cancel
-        title: i18n("Video Settings")
-        padding: Kirigami.Units.largeSpacing
-
-        property int index
-        property real speed
-        property string filename: ""
-
-        Kirigami.FormLayout {
-            RowLayout {
-                Kirigami.FormData.label: i18n("Playback speed:")
-                Slider {
-                    id: dialogPlaybackRateSpeed
-                    from: 0
-                    to: 2
-                    stepSize: 0.05
-                    value: videoConfig.speed
-                    onValueChanged: {
-                        videoConfig.speed = value;
-                    }
-                    Layout.preferredWidth: 200
-                }
-                Label {
-                    text: parseFloat(dialogPlaybackRateSpeed.value).toFixed(2)
-                    font.features: {
-                        "tnum": 1
-                    }
-                }
-                Button {
-                    icon.name: "edit-undo-symbolic"
-                    flat: true
-                    onClicked: {
-                        dialogPlaybackRateSpeed.value = 0.0;
-                    }
-                    ToolTip.text: i18n("Reset to default")
-                    ToolTip.visible: hovered
-                }
-                Kirigami.ContextualHelpButton {
-                    toolTipText: i18n("A value other than 0.0 overrides the global Playback speed for this video.")
-                }
-            }
-        }
-
+    Components.VideoSettingsDialog {
+        id: videoConfigDialog
         onAccepted: {
-            videosConfig[index].playbackRate = speed;
+            root.videosConfig[index].playbackRate = playbackRate;
+            root.videosConfig[index].loop = loop;
             Utils.updateConfig();
         }
     }

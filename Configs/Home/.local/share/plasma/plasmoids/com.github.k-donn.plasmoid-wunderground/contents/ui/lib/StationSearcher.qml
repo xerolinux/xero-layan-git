@@ -20,12 +20,13 @@ import QtQuick.Layouts
 import QtQuick.Controls as QQC
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.plasmoid
+import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.components as PlasmaComponents
+import "../../code/utils.js" as Utils
 import "../../code/pws-api.js" as StationAPI
 
 Window {
     id: stationSearcher
-
     signal stationSelected(var station)
     signal open
 

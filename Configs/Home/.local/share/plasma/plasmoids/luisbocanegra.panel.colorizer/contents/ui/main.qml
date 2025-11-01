@@ -55,6 +55,7 @@ PlasmoidItem {
     property bool fixedSidePaddingEnabled: isEnabled && panelBgItem !== null && panelBgItem.cfg.padding.enabled
     property bool floatingDialogs: main.isEnabled ? cfg.nativePanel.floatingDialogs : false
     property bool floatingDialogsAllowOverride: main.isEnabled ? cfg.nativePanel.floatingDialogsAllowOverride : false
+    property bool fillAreaOnDeFloat: main.isEnabled ? cfg.nativePanel.fillAreaOnDeFloat : false
     property bool isEnabled: plasmoid.configuration.isEnabled
     property bool nativePanelBackgroundEnabled: (isEnabled ? cfg.nativePanel.background.enabled : true) || doPanelClickFix
     property real nativePanelBackgroundOpacity: isEnabled ? cfg.nativePanel.background.opacity : 1.0
@@ -90,14 +91,6 @@ PlasmoidItem {
 
     property var unifiedBackgroundTracker: []
     property var unifiedBackgroundFinal: []
-    function updateUnifiedBackgroundTracker(index, type, visible) {
-        unifiedBackgroundTracker[index] = {
-            "index": index,
-            "type": type,
-            "visible": visible
-        };
-        unifiedBackgroundFinal = Utils.getUnifyBgTypes(unifiedBackgroundTracker);
-    }
     property bool doPanelClickFix: false
     property bool doPanelLengthFix: false
 
@@ -194,14 +187,6 @@ PlasmoidItem {
     property var switchPresets: JSON.parse(plasmoid.configuration.switchPresets)
     property QtObject panelView: null
 
-    onPanelColorizerChanged: {
-        const found = panelColorizer !== null;
-        if (plasmoid.configuration.pluginFound !== found) {
-            plasmoid.configuration.pluginFound = found;
-            plasmoid.configuration.writeConfig();
-        }
-    }
-
     function applyStockPanelSettings() {
         let script = Utils.setPanelModeScript(Plasmoid.containment.id, stockPanelSettings);
         if (stockPanelSettings.visible.enabled) {
@@ -218,9 +203,7 @@ PlasmoidItem {
     }
 
     onStockPanelSettingsChanged: {
-        Qt.callLater(function () {
-            applyStockPanelSettings();
-        });
+        Qt.callLater(applyStockPanelSettings);
     }
 
     onForceRecolorCountChanged: {
@@ -261,107 +244,6 @@ PlasmoidItem {
         }
     }
 
-    function getColor(colorCfg, targetIndex, parentColor, itemType, kirigamiColorItem) {
-        let newColor = "transparent";
-        switch (colorCfg.sourceType) {
-        case 0:
-            newColor = Utils.rgbToQtColor(Utils.hexToRgb(colorCfg.custom));
-            break;
-        case 1:
-            newColor = kirigamiColorItem.Kirigami.Theme[colorCfg.systemColor];
-            break;
-        case 2:
-            const nextIndex = targetIndex % colorCfg.list.length;
-            newColor = Utils.rgbToQtColor(Utils.hexToRgb(colorCfg.list[nextIndex]));
-            break;
-        case 3:
-            newColor = Utils.getRandomColor();
-            break;
-        case 4:
-            if (colorCfg.followColor === 0) {
-                newColor = panelBgItem.color;
-            } else if (colorCfg.followColor === 1) {
-                newColor = itemType === Enums.ItemType.TrayItem || itemType === Enums.ItemType.TrayArrow ? trayWidgetBgItem.color : parentColor;
-            } else if (colorCfg.followColor === 2) {
-                newColor = parentColor;
-            }
-
-            break;
-        default:
-            newColor = Qt.hsla(0, 0, 0, 0);
-        }
-        if (colorCfg.saturationEnabled) {
-            newColor = Utils.scaleSaturation(newColor, colorCfg.saturationValue);
-        }
-        if (colorCfg.lightnessEnabled) {
-            newColor = Utils.scaleLightness(newColor, colorCfg.lightnessValue);
-        }
-        newColor = Qt.hsla(newColor.hslHue, newColor.hslSaturation, newColor.hslLightness, colorCfg.alpha);
-        return newColor;
-    }
-
-    function applyFgColor(element, newColor, fgColorCfg, depth, wRecolorCfg, fgColorModified) {
-        let count = 0;
-        let maxDepth = depth;
-        const forceMask = wRecolorCfg?.method?.mask ?? false;
-        const forceEffect = wRecolorCfg?.method?.multiEffect ?? false;
-
-        for (var i = 0; i < element.visibleChildren.length; i++) {
-            var child = element.visibleChildren[i];
-            let targetTypes = [Text, ToolButton, Label, Canvas, Kirigami.Icon];
-            if (targetTypes.some(function (type) {
-                return child instanceof type;
-            })) {
-                // before trying to apply the foreground color, we need to know if we
-                // have changed it in the first place, otherwise we have no easy way to
-                // restore the original binding for widgets that do dynamic color
-                // requires restarting plasma but is better than nothing
-                if (fgColorModified && "color" in child) {
-                    child.color = newColor;
-                }
-                if (child.Kirigami?.Theme) {
-                    child.Kirigami.Theme.textColor = newColor;
-                    child.Kirigami.Theme.colorSet = Kirigami.Theme[fgColorCfg.systemColorSet];
-                }
-
-                if ("isMask" in child && forceMask) {
-                    child.isMask = true;
-                }
-
-                if (forceEffect && [Canvas, Kirigami.Icon].some(function (type) {
-                    return child instanceof type;
-                })) {
-                    const effectItem = Utils.getEffectItem(child.parent);
-                    if (!effectItem) {
-                        colorEffectComoponent.createObject(child.parent, {
-                            "target": child,
-                            "colorizationColor": newColor
-                        });
-                    } else {
-                        effectItem.source = null;
-                        effectItem.colorizationColor = newColor;
-                        effectItem.source = child;
-                    }
-                }
-                count++;
-                if (debug) {
-                    repaintDebugComponent.createObject(child);
-                }
-            }
-            if (child.visibleChildren?.length ?? 0 > 0) {
-                const result = applyFgColor(child, newColor, fgColorCfg, depth + 1, wRecolorCfg, fgColorModified);
-                count += result.count;
-                if (result.depth > maxDepth) {
-                    maxDepth = result.depth;
-                }
-            }
-        }
-        return {
-            "count": count,
-            "depth": maxDepth
-        };
-    }
-
     property Component repaintDebugComponent: Rectangle {
         // quickly flash a small rectangle for items that have been updated
         id: speedDebugItem
@@ -382,7 +264,7 @@ PlasmoidItem {
         }
     }
 
-    property Component colorEffectComoponent: MultiEffect {
+    property Component colorEffectComponent: MultiEffect {
         // a not very effective way to recolor things that can't be recolored
         // the usual way
         id: effectRect
@@ -396,11 +278,11 @@ PlasmoidItem {
         autoPaddingEnabled: false
     }
 
-    property Component backgroundComponent: Kirigami.ShadowedRectangle {
+    property Component backgroundComponent: Rectangle {
         id: rect
         property QtObject target
         property int targetIndex
-        // use an exra id so we can track the panel and items in tray separately
+        // use an extra id so we can track the panel and items in tray separately
         // e.g panel[0, widget[1] widget[2] trayWidget[3 [widget[5], widget[6], widget[7]]] widget[4]]
         property int maskIndex: {
             if (isPanel) {
@@ -442,23 +324,17 @@ PlasmoidItem {
         // 0: default | 1: start | 2: middle | 3: end
         property int unifyBgType: unifiedBackgroundFinal.find(item => item.index === maskIndex)?.type ?? 0
         onUnifySectionChanged: {
-            Qt.callLater(function () {
-                main.updateUnified();
-            });
+            Qt.callLater(main.updateUnified);
         }
 
         function updateUnifyType() {
             if (inTray || isPanel) {
                 return;
             }
-            main.updateUnifiedBackgroundTracker(maskIndex, unifySection, isVisible);
+            main.unifiedBackgroundFinal = Utils.updateUnifiedBackgroundTracker(maskIndex, unifySection, isVisible, main.unifiedBackgroundTracker);
         }
 
-        // property string state: {
-        //     let state = "normal";
-        // }
-
-        property var itemConfig: Utils.getItemCfg(itemType, widgetName, widgetId, main.cfg, configurationOverrides, widgetProperties.busy, widgetProperties.needsAttention, widgetProperties.hovered, widgetProperties.expanded)
+        property var itemConfig: Utils.getItemCfg(itemType, widgetName, widgetId, main.cfg, main.configurationOverrides, widgetProperties.busy, widgetProperties.needsAttention, widgetProperties.hovered, widgetProperties.expanded)
         property var cfg: itemConfig.settings
         property bool cfgOverride: itemConfig.override
         property var bgColorCfg: cfg.backgroundColor
@@ -471,12 +347,12 @@ PlasmoidItem {
         property bool bgEnabled: bgColorCfg.enabled
         property bool fgEnabled: fgColorCfg.enabled
         property bool radiusEnabled: cfgEnabled && cfg.radius.enabled
-        property int topLeftRadius: !radiusEnabled || unifyBgType === 2 || unifyBgType === 3 ? 0 : cfg.radius.corner.topLeft ?? 0
-        property int topRightRadius: !radiusEnabled || (horizontal && (unifyBgType === 1 || unifyBgType === 2)) || (!horizontal && (unifyBgType === 2 || unifyBgType === 3)) ? 0 : cfg.radius.corner.topRight ?? 0
+        topLeftRadius: !radiusEnabled || unifyBgType === 2 || unifyBgType === 3 ? 0 : cfg.radius.corner.topLeft ?? 0
+        topRightRadius: !radiusEnabled || (horizontal && (unifyBgType === 1 || unifyBgType === 2)) || (!horizontal && (unifyBgType === 2 || unifyBgType === 3)) ? 0 : cfg.radius.corner.topRight ?? 0
 
-        property int bottomLeftRadius: !radiusEnabled || (horizontal && (unifyBgType === 2 || unifyBgType === 3)) || (!horizontal && (unifyBgType === 1 || unifyBgType === 2)) ? 0 : cfg.radius.corner.bottomLeft ?? 0
+        bottomLeftRadius: !radiusEnabled || (horizontal && (unifyBgType === 2 || unifyBgType === 3)) || (!horizontal && (unifyBgType === 1 || unifyBgType === 2)) ? 0 : cfg.radius.corner.bottomLeft ?? 0
 
-        property int bottomRightRadius: !radiusEnabled || unifyBgType === 1 || unifyBgType === 2 || (!horizontal && (unifyBgType === 1 || unifyBgType === 2)) ? 0 : cfg.radius.corner.bottomRight ?? 0
+        bottomRightRadius: !radiusEnabled || unifyBgType === 1 || unifyBgType === 2 || (!horizontal && (unifyBgType === 1 || unifyBgType === 2)) ? 0 : cfg.radius.corner.bottomRight ?? 0
 
         property bool marginEnabled: cfg.margin.enabled && cfgEnabled
         property bool borderEnabled: cfg.border.enabled && cfgEnabled
@@ -489,15 +365,15 @@ PlasmoidItem {
         }
         property string fgColor: {
             if (inTray && fgEnabled && cfgEnabled) {
-                return getColor(fgColorCfg, targetIndex, color, itemType, fgColorHolder);
+                return Utils.getColor(fgColorCfg, targetIndex, color, itemType, fgColorHolder);
             }
             if (inTray && (!fgEnabled || !cfgEnabled) && trayWidgetBgItem.cfgEnabled && trayWidgetBgItem.fgColorCfg.enabled) {
                 return trayWidgetBgItem.fgColor;
             }
             if (isWidget && fgEnabled && cfgEnabled) {
-                return getColor(fgColorCfg, targetIndex, color, itemType, fgColorHolder);
+                return Utils.getColor(fgColorCfg, targetIndex, color, itemType, fgColorHolder);
             }
-            return defaultColorHolder.Kirigami.Theme.textColor;
+            return defaultColorHolder.Kirigami.Theme.textColor.toString();
         }
 
         property bool throttleMaskUpdate: false
@@ -516,18 +392,6 @@ PlasmoidItem {
             width: height
             opacity: 0
             Kirigami.Theme.colorSet: Kirigami.Theme[fgColorCfg.systemColorSet]
-        }
-
-        // Label {
-        //     id: debugLabel
-        //     text: targetIndex+","+trayIndex //maxDepth+","+itemCount
-        //     font.pixelSize: 8
-        // }
-        corners {
-            topLeftRadius: topLeftRadius
-            topRightRadius: topRightRadius
-            bottomLeftRadius: bottomLeftRadius
-            bottomRightRadius: bottomRightRadius
         }
 
         Behavior on topLeftRadius {
@@ -562,7 +426,7 @@ PlasmoidItem {
         Kirigami.Theme.colorSet: Kirigami.Theme[bgColorCfg.systemColorSet]
         color: {
             if (bgEnabled && bgColorCfg.sourceType !== 5) {
-                return getColor(bgColorCfg, targetIndex, null, itemType, rect);
+                return Utils.getColor(bgColorCfg, targetIndex, null, itemType, rect);
             } else {
                 return "transparent";
             }
@@ -648,7 +512,7 @@ PlasmoidItem {
                     return;
                 if (isTray && trayWidgetSettings.normal.foregroundColor.enabled)
                     return;
-                const result = applyFgColor(target, fgColor, fgColorCfg, 0, wRecolorCfg, fgColorModified);
+                const result = Utils.applyFgColor(target, fgColor, fgColorCfg, 0, wRecolorCfg, fgColorModified, colorEffectComponent, repaintDebugComponent);
                 if (result) {
                     itemCount = result.count;
                     maxDepth = result.depth;
@@ -656,20 +520,16 @@ PlasmoidItem {
             }
         }
 
-        function recolor() {
-            recolorTimer.restart();
-        }
-
         onRequiresRefreshChanged: {
             if (requiresRefresh) {
-                main.refreshNeeded.connect(rect.recolor);
+                main.refreshNeeded.connect(recolorTimer.restart);
             } else {
-                main.refreshNeeded.disconnect(rect.recolor);
+                main.refreshNeeded.disconnect(recolorTimer.restart);
             }
         }
 
         Component.onCompleted: {
-            main.recolorCountChanged.connect(rect.recolor);
+            main.recolorCountChanged.connect(recolorTimer.restart);
             main.updateUnified.connect(updateUnifyType);
             main.updateMasks.connect(updateMaskDebounced);
             recolorTimer.start();
@@ -679,10 +539,10 @@ PlasmoidItem {
             if (main.panelColorizer) {
                 main.panelColorizer.popLastVisibleMaskRegion();
             }
-            main.recolorCountChanged.disconnect(rect.recolor);
+            main.recolorCountChanged.disconnect(recolorTimer.restart);
             main.updateUnified.disconnect(updateUnifyType);
             main.updateMasks.disconnect(updateMaskDebounced);
-            main.refreshNeeded.disconnect(rect.recolor);
+            main.refreshNeeded.disconnect(recolorTimer.restart);
         }
 
         height: inTray ? (target?.height ?? 0) : parent.height
@@ -801,16 +661,34 @@ PlasmoidItem {
         Binding {
             target: rect.target
             property: "anchors.leftMargin"
-            value: marginEnabled ? marginLeft : 0
-            when: isPanel
+            value: {
+                let margin = 0;
+                if (rect.marginEnabled && rect.marginLeft !== 0) {
+                    margin = rect.marginLeft;
+                }
+                if (main.fillAreaOnDeFloat && main.panelElement.floating && (main.panelElement.floatingness !== 1)) {
+                    margin -= (8 * (1 - main.panelElement.floatingness));
+                }
+                return margin;
+            }
+            when: rect.isPanel && main.isEnabled
             delayed: true
         }
 
         Binding {
             target: rect.target
             property: "anchors.rightMargin"
-            value: marginEnabled ? marginRight : 0
-            when: isPanel
+            value: {
+                let margin = 0;
+                if (rect.marginEnabled && rect.marginRight !== 0) {
+                    margin = rect.marginRight;
+                }
+                if (main.fillAreaOnDeFloat && main.panelElement.floating && (main.panelElement.floatingness !== 1)) {
+                    margin -= (8 * (1 - main.panelElement.floatingness));
+                }
+                return margin;
+            }
+            when: rect.isPanel && main.isEnabled
             delayed: true
         }
 
@@ -919,7 +797,7 @@ PlasmoidItem {
                 }
                 cfgBorder: cfg.border
                 borderColor: {
-                    return getColor(cfg.border.color, targetIndex, rect.color, itemType, borderRec);
+                    return Utils.getColor(cfg.border.color, targetIndex, rect.color, itemType, borderRec);
                 }
             }
 
@@ -955,67 +833,74 @@ PlasmoidItem {
                 }
                 cfgBorder: cfg.borderSecondary
                 borderColor: {
-                    return getColor(cfg.borderSecondary.color, targetIndex, rect.color, itemType, borderSecondary);
+                    return Utils.getColor(cfg.borderSecondary.color, targetIndex, rect.color, itemType, borderSecondary);
                 }
             }
 
             layer.enabled: cfg.border.customSides
-            layer.effect: MultiEffect {
-                maskEnabled: true
-                maskSpreadAtMax: 1
-                maskSpreadAtMin: 1
-                maskThresholdMin: 0.5
-                maskSource: ShaderEffectSource {
-                    sourceItem: Kirigami.ShadowedRectangle {
-                        width: rect.width
-                        height: rect.height
-                        corners {
-                            topLeftRadius: rect.topLeftRadius
-                            topRightRadius: rect.topRightRadius
-                            bottomLeftRadius: rect.bottomLeftRadius
-                            bottomRightRadius: rect.bottomRightRadius
-                        }
+            layer.effect: OpacityMask {
+                maskSource: Item {
+                    width: rect.width
+                    height: rect.height
+                    Rectangle {
+                        anchors.fill: parent
+                        topLeftRadius: rect.topLeftRadius
+                        topRightRadius: rect.topRightRadius
+                        bottomLeftRadius: rect.bottomLeftRadius
+                        bottomRightRadius: rect.bottomRightRadius
                     }
                 }
             }
         }
 
-        shadow {
-            property var shadowColorCfg: bgShadow.color
-            Kirigami.Theme.colorSet: Kirigami.Theme[shadowColorCfg.systemColorSet]
-            size: (bgShadowEnabled && Math.min(rect.height, rect.width) > 1) ? bgShadow.size : 0
-            color: {
-                return getColor(shadowColorCfg, targetIndex, rect.color, itemType, rect.shadow);
+        Kirigami.ShadowedRectangle {
+            id: backgroundShadow
+            anchors.fill: parent
+            color: "transparent"
+            z: -1
+            corners {
+                topLeftRadius: rect.topLeftRadius
+                topRightRadius: rect.topRightRadius
+                bottomLeftRadius: rect.bottomLeftRadius
+                bottomRightRadius: rect.bottomRightRadius
             }
-            xOffset: bgShadow.xOffset
-            yOffset: bgShadow.yOffset
+            shadow {
+                property var shadowColorCfg: bgShadow.color
+                Kirigami.Theme.colorSet: Kirigami.Theme[shadowColorCfg.systemColorSet]
+                size: (bgShadowEnabled && Math.min(rect.height, rect.width) > 1) ? bgShadow.size : 0
+                color: {
+                    return Utils.getColor(shadowColorCfg, targetIndex, rect.color, itemType, backgroundShadow.shadow);
+                }
+                xOffset: bgShadow.xOffset
+                yOffset: bgShadow.yOffset
 
-            Behavior on size {
-                enabled: animatePropertyChanges
-                NumberAnimation {
-                    duration: main.animationDuration
-                    easing.type: main.animationEasingType
+                Behavior on size {
+                    enabled: animatePropertyChanges
+                    NumberAnimation {
+                        duration: main.animationDuration
+                        easing.type: main.animationEasingType
+                    }
                 }
-            }
-            Behavior on xOffset {
-                enabled: animatePropertyChanges
-                NumberAnimation {
-                    duration: main.animationDuration
-                    easing.type: main.animationEasingType
+                Behavior on xOffset {
+                    enabled: animatePropertyChanges
+                    NumberAnimation {
+                        duration: main.animationDuration
+                        easing.type: main.animationEasingType
+                    }
                 }
-            }
-            Behavior on yOffset {
-                enabled: animatePropertyChanges
-                NumberAnimation {
-                    duration: main.animationDuration
-                    easing.type: main.animationEasingType
+                Behavior on yOffset {
+                    enabled: animatePropertyChanges
+                    NumberAnimation {
+                        duration: main.animationDuration
+                        easing.type: main.animationEasingType
+                    }
                 }
-            }
-            Behavior on color {
-                enabled: animatePropertyChanges
-                ColorAnimation {
-                    duration: main.animationDuration
-                    easing.type: main.animationEasingType
+                Behavior on color {
+                    enabled: animatePropertyChanges
+                    ColorAnimation {
+                        duration: main.animationDuration
+                        easing.type: main.animationEasingType
+                    }
                 }
             }
         }
@@ -1058,7 +943,7 @@ PlasmoidItem {
             samples: radius * 2 + 1
             spread: 0.35
             color: {
-                return getColor(shadowColorCfg, targetIndex, rect.color, itemType, dropShadow);
+                return Utils.getColor(shadowColorCfg, targetIndex, rect.color, itemType, dropShadow);
             }
             source: target?.applet ?? null
             visible: fgShadowEnabled
@@ -1246,7 +1131,7 @@ PlasmoidItem {
             if (borderRec.width <= 0 || borderRec.height <= 0)
                 return;
             position = Utils.getGlobalPosition(borderRec, panelElement);
-            panelColorizer.updatePanelMask(maskIndex, borderRec, rect.corners.topLeftRadius, rect.corners.topRightRadius, rect.corners.bottomLeftRadius, rect.corners.bottomRightRadius, Qt.point(rect.positionX - moveX, rect.positionY - moveY), 5, isVisible && blurBehind);
+            panelColorizer.updatePanelMask(maskIndex, borderRec, rect.topLeftRadius, rect.topRightRadius, rect.bottomLeftRadius, rect.bottomRightRadius, Qt.point(rect.positionX - moveX, rect.positionY - moveY), 5, isVisible && blurBehind);
         }
 
         property bool hovered: hoverHandler.hovered
@@ -1257,7 +1142,7 @@ PlasmoidItem {
     }
 
     // Search the actual gridLayout of the panel
-    property GridLayout panelLayout: {
+    property Item panelLayout: {
         let candidate = main.parent;
         while (candidate) {
             if (candidate instanceof GridLayout) {
@@ -1392,7 +1277,7 @@ PlasmoidItem {
     }
 
     // Search for the element containing the panel background
-    property QtObject panelElement: {
+    property var panelElement: {
         let candidate = main.parent;
         while (candidate) {
             if (candidate.hasOwnProperty("floating")) {
@@ -1471,15 +1356,15 @@ PlasmoidItem {
     }
 
     onFloatingDialogsChanged: {
-        setFloatigApplets();
+        setFloatingApplets();
     }
 
     onFloatingDialogsAllowOverrideChanged: {
-        setFloatigApplets();
+        setFloatingApplets();
     }
 
     // inspired by https://invent.kde.org/plasma/plasma-desktop/-/merge_requests/1912
-    function setFloatigApplets() {
+    function setFloatingApplets() {
         if (!containmentItem)
             return;
         // Plasma 6.4 now has a floating applets option, but we are overriding it,
@@ -1496,10 +1381,10 @@ PlasmoidItem {
 
     onContainmentItemChanged: {
         Utils.toggleTransparency(containmentItem, nativePanelBackgroundEnabled);
-        setFloatigApplets();
+        setFloatingApplets();
         if (!containmentItem)
             return;
-        containmentItem.Plasmoid.onContainmentDisplayHintsChanged.connect(setFloatigApplets);
+        containmentItem.Plasmoid.onContainmentDisplayHintsChanged.connect(setFloatingApplets);
     }
 
     // HACK: change panelLayout spacing on startup to trigger a length reload
@@ -1560,7 +1445,7 @@ PlasmoidItem {
             return;
         Qt.callLater(function () {
             trayInitTimer.restart();
-            showWidgets(panelLayout);
+            Utils.showWidgets(panelLayout, backgroundComponent, Plasmoid);
             updateCurrentWidgets();
             showPanelBg(panelBg);
         });
@@ -1610,9 +1495,9 @@ PlasmoidItem {
         interval: 100
         onTriggered: {
             if (trayGridView && trayGridViewCount !== 0) {
-                showTrayAreas(trayGridView);
+                Utils.showTrayAreas(main.trayGridView, main.backgroundComponent, main.horizontal);
             }
-            updateCurrentWidgets();
+            main.updateCurrentWidgets();
         }
     }
 
@@ -1689,88 +1574,11 @@ PlasmoidItem {
         panelWidgetsCount = panelWidgets.length;
     }
 
-    function showTrayAreas(grid) {
-        if (grid instanceof GridView) {
-            let index = 0;
-            for (let i = 0; i < grid.count; i++) {
-                const item = grid.itemAtIndex(i);
-                if (!item.visible)
-                    continue;
-                const bgItem = Utils.getBgManaged(item);
-                if (!bgItem) {
-                    backgroundComponent.createObject(item, {
-                        "z": -1,
-                        "target": item,
-                        "itemType": Enums.ItemType.TrayItem,
-                        "targetIndex": index
-                    });
-                } else {
-                    bgItem.targetIndex = index;
-                }
-                if (item.visible) {
-                    index++;
-                }
-            }
-
-            for (let i in grid.parent.children) {
-                const item = grid.parent.children[i];
-                if (!(item instanceof GridView)) {
-                    if (!item.visible)
-                        continue;
-                    const bgItem = Utils.getBgManaged(item);
-                    if (!bgItem) {
-                        backgroundComponent.createObject(item, {
-                            "z": -1,
-                            "target": item,
-                            "itemType": Enums.ItemType.TrayArrow,
-                            "targetIndex": index
-                        });
-                    } else {
-                        bgItem.targetIndex = index;
-                    }
-                    item.iconSize = horizontal ? trayGridView.cellWidth : trayGridView.cellHeight;
-                }
-            }
-        }
-    }
-
     PlasmaCore.Action {
         id: configureAction
         text: plasmoid.internalAction("configure").text
         icon.name: 'configure'
         onTriggered: plasmoid.internalAction("configure").trigger()
-    }
-
-    function showWidgets(panelLayout) {
-        if (!panelLayout)
-            return;
-        // console.log("showWidgets()")
-        for (var i in panelLayout.children) {
-            const child = panelLayout.children[i];
-            // name may not be available while gragging into the panel and
-            // other situations
-            if (!child.applet?.plasmoid?.pluginName)
-                continue;
-            // if (Utils.getBgManaged(child)) continue
-            // console.error(child.applet?.plasmoid?.pluginName)
-            if (child.applet.plasmoid.pluginName !== Plasmoid.metaData.pluginId) {
-                child.applet.plasmoid.contextualActions.push(configureAction);
-            }
-            const isTray = child.applet.plasmoid.pluginName === "org.kde.plasma.systemtray";
-            const bgItem = Utils.getBgManaged(child);
-            if (!bgItem) {
-                const comp = backgroundComponent.createObject(child, {
-                    "z": -1,
-                    "target": child,
-                    "itemType": Enums.ItemType.WidgetItem,
-                    "targetIndex": i
-                });
-                if (isTray)
-                    trayWidgetBgItem = comp;
-            } else {
-                bgItem.targetIndex = i;
-            }
-        }
     }
 
     function showPanelBg(panelBg) {
@@ -1794,11 +1602,17 @@ PlasmoidItem {
     Component.onCompleted: {
         updatePlasmoidStatus();
         runCommand.run("plasmashell --version");
+        let pluginFound = false;
         try {
             panelColorizer = Qt.createQmlObject("import org.kde.plasma.panelcolorizer 1.0; PanelColorizer { id: panelColorizer }", main);
             console.log("QML Plugin org.kde.plasma.panelcolorizer loaded");
+            pluginFound = true;
         } catch (err) {
             console.warn("QML Plugin org.kde.plasma.panelcolorizer not found. Custom blur background will not work.");
+        }
+        if (plasmoid.configuration.pluginFound !== pluginFound) {
+            plasmoid.configuration.pluginFound = pluginFound;
+            plasmoid.configuration.writeConfig();
         }
         Utils.delay(100, () => {
             applyStockPanelSettings();

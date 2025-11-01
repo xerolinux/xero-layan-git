@@ -16,9 +16,9 @@
  */
 
 import QtQuick
-import QtQuick.Controls as QQC
 import org.kde.kcmutils as KCM
 import org.kde.kirigami as Kirigami
+import org.kde.plasma.components as PlasmaComponents
 
 KCM.SimpleKCM {
     id: debugConfig
@@ -30,19 +30,19 @@ KCM.SimpleKCM {
     Kirigami.FormLayout {
         anchors.fill: parent
 
-        QQC.CheckBox {
+        PlasmaComponents.CheckBox {
             id: logConsole
 
             Kirigami.FormData.label: i18n("Write to console.log:")
         }
 
-        QQC.CheckBox {
+        PlasmaComponents.CheckBox {
             id: useLegacyAPI
 
             Kirigami.FormData.label: i18n("Use Legacy Forecast API:")
         }
 
-        QQC.SpinBox {
+        PlasmaComponents.SpinBox {
             id: startupDelay
 
             Kirigami.FormData.label: i18n("Startup time delay (ms):")

@@ -19,9 +19,10 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Dialogs as QtDialogs
 import org.kde.kcmutils as KCM
-import QtQuick.Controls as QQC
+import QtQuick.Controls as PlasmaComponents
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.core as PlasmaCore
+import org.kde.plasma.components as PlasmaComponents
 
 import "../lib" as Lib
 
@@ -65,14 +66,10 @@ KCM.SimpleKCM {
             Kirigami.FormData.isSection: true
         }
 
-        QQC.CheckBox {
+        PlasmaComponents.CheckBox {
             id: showCompactTemp
 
             Kirigami.FormData.label: i18n("Show temperature:")
-        }
-
-        QQC.ButtonGroup {
-            buttons: [autoFontAndSizeRadioButton, manualFontAndSizeRadioButton]
         }
 
         RowLayout {
@@ -80,7 +77,7 @@ KCM.SimpleKCM {
 
             Kirigami.FormData.label: i18n("Text display:")
 
-            QQC.RadioButton {
+            PlasmaComponents.RadioButton {
                 id: autoFontAndSizeRadioButton
                 text: i18n("Automatic")
             }
@@ -105,7 +102,7 @@ KCM.SimpleKCM {
         RowLayout {
             spacing: Kirigami.Units.smallSpacing
 
-            QQC.RadioButton {
+            PlasmaComponents.RadioButton {
                 id: manualFontAndSizeRadioButton
                 text: i18n("Manual")
                 checked: !cfg_autoFontAndSize
@@ -116,7 +113,7 @@ KCM.SimpleKCM {
                 }
             }
 
-            QQC.Button {
+            PlasmaComponents.Button {
                 text: i18n("Choose Style…")
                 icon.name: "settings-configure"
                 enabled: manualFontAndSizeRadioButton.checked
@@ -145,7 +142,7 @@ KCM.SimpleKCM {
             Kirigami.FormData.isSection: true
         }
 
-        QQC.CheckBox {
+        PlasmaComponents.CheckBox {
             id: showSystemTrayTemp
 
             Kirigami.FormData.label: i18n("Show temperature:")
@@ -156,7 +153,7 @@ KCM.SimpleKCM {
             Kirigami.FormData.isSection: true
         }
 
-        QQC.SpinBox {
+        PlasmaComponents.SpinBox {
             id: propHeadPointSize
 
             editable: true
@@ -164,7 +161,7 @@ KCM.SimpleKCM {
             Kirigami.FormData.label: i18n("Property header text size")
         }
 
-        QQC.SpinBox {
+        PlasmaComponents.SpinBox {
             id: propPointSize
 
             editable: true
@@ -172,7 +169,7 @@ KCM.SimpleKCM {
             Kirigami.FormData.label: i18n("Property text size")
         }
 
-        QQC.SpinBox {
+        PlasmaComponents.SpinBox {
             id: tempPointSize
 
             editable: true
@@ -213,7 +210,7 @@ KCM.SimpleKCM {
             Kirigami.FormData.label: i18n("Details icon size:")
         }
 
-        QQC.SpinBox {
+        PlasmaComponents.SpinBox {
             id: topIconMargins
 
             editable: true
@@ -221,32 +218,32 @@ KCM.SimpleKCM {
             Kirigami.FormData.label: i18n("Top panel icon margins:")
         }
 
-        QQC.CheckBox {
+        PlasmaComponents.CheckBox {
             id: useSystemIcons
 
             Kirigami.FormData.label: i18n("Use system theme icons:")
         }
 
-        QQC.CheckBox {
+        PlasmaComponents.CheckBox {
             id: applyColorScheme
 
             Kirigami.FormData.label: i18n("Apply system colors to icons:")
         }
 
-        QQC.CheckBox {
+        PlasmaComponents.CheckBox {
             id: tempAutoColor
 
             Kirigami.FormData.label: i18n("Auto-color temperature:")
         }
 
-        QQC.ComboBox {
+        PlasmaComponents.ComboBox {
             id: defaultLoadPage
 
             model: [i18n("Weather Details"), i18n("Forecast"), i18n("Day Chart"), i18n("More Info")]
 
             Kirigami.FormData.label: i18n("Default page shown:")
         }
-        QQC.CheckBox {
+        PlasmaComponents.CheckBox {
             id: showPresTrend
 
             Kirigami.FormData.label: i18n("Show pressure trend:")

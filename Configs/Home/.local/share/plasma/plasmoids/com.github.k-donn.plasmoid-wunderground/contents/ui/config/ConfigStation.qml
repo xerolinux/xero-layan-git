@@ -19,7 +19,6 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Dialogs
 import org.kde.kcmutils as KCM
-import QtQuick.Controls as QQC
 import org.kde.plasma.components as PlasmaComponents
 import org.kde.kirigami as Kirigami
 import "../lib" as Lib
@@ -73,7 +72,7 @@ KCM.SimpleKCM {
                     var station = stationListModel.get(i);
                     if (station.selected) {
                         selectedStation = station.stationID;
-                        stationName = station.placeName;
+                        stationName = station.address;
                         latitude = station.latitude;
                         longitude = station.longitude;
                     }
@@ -194,7 +193,7 @@ KCM.SimpleKCM {
                                 printDebug("Station not saved to savedStations. Attempting to add.");
                                 stationListModel.append({
                                     "stationID": plasmoid.configuration.stationID,
-                                    "placeName": plasmoid.configuration.stationName,
+                                    "address": plasmoid.configuration.stationName,
                                     "latitude": plasmoid.configuration.latitude,
                                     "longitude": plasmoid.configuration.longitude,
                                     "selected": true
@@ -203,12 +202,12 @@ KCM.SimpleKCM {
                             }
 
                             for (var i = 0; i < stationsArr.length; i++) {
-                                // FIXME: If the station has been manually added, the lat/long/placeName are not set
+                                // FIXME: If the station has been manually added, the lat/long/address are not set
                                 // The individual properties are set in the xml file by the widget, but the widget
                                 // does not set the JSON.
                                 stationListModel.append({
                                     "stationID": stationsArr[i].stationID,
-                                    "placeName": plasmoid.configuration.stationName,
+                                    "address": plasmoid.configuration.stationName,
                                     "latitude": plasmoid.configuration.latitude,
                                     "longitude": plasmoid.configuration.longitude,
                                     "selected": stationsArr[i].selected === true
@@ -222,7 +221,7 @@ KCM.SimpleKCM {
                                 printDebug("Attempting to fill in savedStations");
                                 stationListModel.append({
                                     "stationID": plasmoid.configuration.stationID,
-                                    "placeName": plasmoid.configuration.stationName,
+                                    "address": plasmoid.configuration.stationName,
                                     "latitude": plasmoid.configuration.latitude,
                                     "longitude": plasmoid.configuration.longitude,
                                     "selected": true
@@ -258,7 +257,7 @@ KCM.SimpleKCM {
                             height: parent.height
                         }
                         PlasmaComponents.Label {
-                            text: placeName
+                            text: address
                             Layout.preferredWidth: 160
                             horizontalAlignment: Text.AlignHCenter
                             verticalAlignment: Text.AlignVCenter
@@ -299,11 +298,11 @@ KCM.SimpleKCM {
                         RowLayout {
                             Layout.preferredWidth: 120
                             spacing: 4
-                            QQC.Button {
+                            PlasmaComponents.Button {
                                 icon.name: "dialog-ok-apply"
                                 enabled: !selected
-                                QQC.ToolTip.text: i18n("Select")
-                                QQC.ToolTip.visible: hovered
+                                PlasmaComponents.ToolTip.text: i18n("Select")
+                                PlasmaComponents.ToolTip.visible: hovered
                                 onClicked: {
                                     for (var i = 0; i < stationListModel.count; i++) {
                                         stationListModel.setProperty(i, "selected", i === index);
@@ -311,10 +310,10 @@ KCM.SimpleKCM {
                                     stationPickerEl.syncSavedStations();
                                 }
                             }
-                            QQC.Button {
+                            PlasmaComponents.Button {
                                 icon.name: "dialog-cancel"
-                                QQC.ToolTip.text: i18n("Remove")
-                                QQC.ToolTip.visible: hovered
+                                PlasmaComponents.ToolTip.text: i18n("Remove")
+                                PlasmaComponents.ToolTip.visible: hovered
                                 onClicked: {
                                     var wasSelected = selected;
                                     var oldIndex = index;
@@ -341,16 +340,22 @@ KCM.SimpleKCM {
                 clip: true
             }
 
-            QQC.Button {
-                text: i18n("Find Station")
-                icon.name: "find-location"
-                onClicked: stationSearcher.open()
+            PlasmaComponents.Button {
+                text: i18n("Select from Map")
+                icon.name: "earth"
+                onClicked: stationMapSearcher.open()
             }
 
-            QQC.Button {
+            PlasmaComponents.Button {
                 text: i18n("Manual Add")
                 icon.name: "list-add"
                 onClicked: manualAdd.open()
+            }
+
+            PlasmaComponents.Button {
+                text: i18n("Find Station")
+                icon.name: "find-location"
+                onClicked: stationSearcher.open()
             }
 
             Lib.ManualStationAdd {
@@ -359,7 +364,7 @@ KCM.SimpleKCM {
                     printDebug("Received manual station: " + station);
                     stationListModel.append({
                         "stationID": station,
-                        "placeName": "MANUALADD",
+                        "address": "MANUALADD",
                         "longitude": 0,
                         "latitude": 0,
                         "selected": true
@@ -371,22 +376,13 @@ KCM.SimpleKCM {
                 }
             }
 
-            MessageDialog {
-                id: stationNotFound
-                title: i18n("Error")
-                text: i18n("Error: Bad station.")
-                buttons: MessageDialog.Ok
-                onAccepted: destroy()
-                onRejected: destroy()
-            }
-
             Lib.StationSearcher {
                 id: stationSearcher
                 onStationSelected: function (station) {
                     printDebug("Received station: " + JSON.stringify(station));
                     stationListModel.append({
                         "stationID": station.stationID,
-                        "placeName": station.placeName,
+                        "address": station.address,
                         "latitude": station.latitude,
                         "longitude": station.longitude,
                         "selected": true
@@ -399,13 +395,31 @@ KCM.SimpleKCM {
                 }
             }
 
+            Lib.StationMapSearcher {
+                id: stationMapSearcher
+                onStationSelected: function (station) {
+                    printDebug("Received station from map: " + JSON.stringify(station));
+                    stationListModel.append({
+                        "stationID": station.stationID,
+                        "address": station.address,
+                        "latitude": station.latitude,
+                        "longitude": station.longitude,
+                        "selected": true
+                    });
+                    for (var i = 0; i < stationListModel.count; i++) {
+                        stationListModel.setProperty(i, "selected", i === stationListModel.count - 1);
+                    }
+                    stationPickerEl.syncSavedStations();
+                }
+            }
+
             RowLayout {
                 PlasmaComponents.Label {
                     id: refreshLabel
                     text: i18n("Refresh period (s):")
                 }
 
-                QQC.SpinBox {
+                PlasmaComponents.SpinBox {
                     id: refreshPeriod
                     from: 300
                     to: 86400
@@ -418,7 +432,7 @@ KCM.SimpleKCM {
             }
 
             PlasmaComponents.Label {
-                text: "Version 3.5.4"
+                text: "Version 3.6.0"
             }
         }
     }

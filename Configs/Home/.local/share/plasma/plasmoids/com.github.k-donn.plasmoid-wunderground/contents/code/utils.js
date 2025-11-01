@@ -239,6 +239,91 @@ function windDirToCard(deg) {
 	return directions[Math.round((deg % 3600) / 255)];
 }
 
+function degToRad(d) {
+	return (d * Math.PI) / 180.0;
+}
+
+// Web-Mercator projection (meters)
+function lonToMercX(lon) {
+	return 6378137.0 * degToRad(lon);
+}
+function latToMercY(lat) {
+	var rad = degToRad(lat);
+	return 6378137.0 * Math.log(Math.tan(Math.PI / 4 + rad / 2));
+}
+
+function zoomForBoundingBox(bbox, map, padding) {
+	if (padding === undefined) padding = 20;
+
+	var xMin = lonToMercX(bbox.minLon);
+	var xMax = lonToMercX(bbox.maxLon);
+	var yMin = latToMercY(bbox.minLat);
+	var yMax = latToMercY(bbox.maxLat);
+
+	var widthMeters = Math.abs(xMax - xMin);
+	var heightMeters = Math.abs(yMax - yMin);
+
+	var availW = Math.max(1, map.width - 2 * padding);
+	var availH = Math.max(1, map.height - 2 * padding);
+
+	var metersPerPixelNeeded = Math.max(
+		widthMeters / availW,
+		heightMeters / availH
+	);
+
+	var initialResolution = 156543.03392804097; // 2πR / 256
+
+	var zoom = Math.log(initialResolution / metersPerPixelNeeded) / Math.log(2);
+
+	return Math.min(Math.max(zoom, 0), 22);
+}
+
+function zoomForCircle(centerCoord, radiusMeters, map, padding) {
+	const EARTH_RADIUS = 6378137;
+	const lat = degToRad(centerCoord.latitude);
+	const lon = degToRad(centerCoord.longitude);
+
+	const angularRadius = radiusMeters / EARTH_RADIUS;
+
+	const latMax = Math.asin(
+		Math.sin(lat) * Math.cos(angularRadius) +
+			Math.cos(lat) * Math.sin(angularRadius)
+	);
+	const latMin = Math.asin(
+		Math.sin(lat) * Math.cos(angularRadius) -
+			Math.cos(lat) * Math.sin(angularRadius)
+	);
+
+	const latCos = Math.cos(lat);
+	const angularRadiusCos = Math.cos(angularRadius);
+	const lonDelta =
+		latCos === 0
+			? Math.PI // At poles, span all longitudes
+			: Math.acos(
+					(angularRadiusCos - Math.sin(lat) * Math.sin(latMax)) /
+						(Math.cos(lat) * Math.cos(latMax))
+			  );
+
+	const lonMin = lon - lonDelta;
+	const lonMax = lon + lonDelta;
+
+	var bbox = {
+		minLat: (latMin * 180) / Math.PI,
+		maxLat: (latMax * 180) / Math.PI,
+		minLon: (lonMin * 180) / Math.PI,
+		maxLon: (lonMax * 180) / Math.PI,
+	};
+
+	if (bbox.minLon < -180) {
+		bbox.minLon = bbox.minLon + 360;
+	}
+	if (bbox.maxLon > 180) {
+		bbox.maxLon = bbox.maxLon - 360;
+	}
+
+	return zoomForBoundingBox(bbox, map, padding);
+}
+
 function cToF(degC) {
 	return degC * 1.8 + 32;
 }

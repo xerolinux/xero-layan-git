@@ -16,9 +16,9 @@
  */
 
 import QtQuick
-import QtQuick.Controls as QQC
 import org.kde.kcmutils as KCM
 import org.kde.kirigami as Kirigami
+import org.kde.plasma.components as PlasmaComponents
 
 KCM.SimpleKCM {
     id: unitsConfig
@@ -50,13 +50,13 @@ KCM.SimpleKCM {
             Kirigami.FormData.isSection: true
         }
 
-        QQC.TextField {
+        PlasmaComponents.TextField {
             id: dayChartTimeFormat
 
             Kirigami.FormData.label: i18n("Day Chart time format:")
         }
 
-        QQC.TextField {
+        PlasmaComponents.TextField {
             id: weekForecastDateFormat
 
             Kirigami.FormData.label: i18n("Week forecast date format:")
@@ -67,7 +67,7 @@ KCM.SimpleKCM {
             Kirigami.FormData.isSection: true
         }
 
-        QQC.SpinBox {
+        PlasmaComponents.SpinBox {
             id: tempPrecision
 
             Kirigami.FormData.label: i18n("Temperature") + ":"
@@ -81,7 +81,7 @@ KCM.SimpleKCM {
             }
         }
 
-        QQC.SpinBox {
+        PlasmaComponents.SpinBox {
             id: windPrecision
 
             Kirigami.FormData.label: i18n("Wind & Gust") + ":"
@@ -95,7 +95,7 @@ KCM.SimpleKCM {
             }
         }
 
-        QQC.SpinBox {
+        PlasmaComponents.SpinBox {
             id: feelsPrecision
 
             // Reuse existing i18n strings
@@ -110,7 +110,7 @@ KCM.SimpleKCM {
             }
         }
 
-        QQC.SpinBox {
+        PlasmaComponents.SpinBox {
             id: forecastPrecision
 
             Kirigami.FormData.label: i18n("Forecast") + ":"
@@ -124,7 +124,7 @@ KCM.SimpleKCM {
             }
         }
 
-        QQC.SpinBox {
+        PlasmaComponents.SpinBox {
             id: dewPrecision
 
             Kirigami.FormData.label: i18n("Dew Point") + ":"
@@ -143,7 +143,7 @@ KCM.SimpleKCM {
             Kirigami.FormData.isSection: true
         }
 
-        QQC.ComboBox {
+        PlasmaComponents.ComboBox {
             id: unitsChoice
 
             width: 100
@@ -152,7 +152,7 @@ KCM.SimpleKCM {
             Kirigami.FormData.label: i18n("Choose:")
         }
 
-        QQC.ComboBox {
+        PlasmaComponents.ComboBox {
             id: windUnitsChoice
 
             visible: unitsChoice.currentIndex == 3
@@ -162,7 +162,7 @@ KCM.SimpleKCM {
             Kirigami.FormData.label: i18n("Wind unit:")
         }
 
-        QQC.ComboBox {
+        PlasmaComponents.ComboBox {
             id: rainUnitsChoice
 
             visible: unitsChoice.currentIndex == 3
@@ -172,7 +172,7 @@ KCM.SimpleKCM {
             Kirigami.FormData.label: i18n("Rain unit:")
         }
 
-        QQC.ComboBox {
+        PlasmaComponents.ComboBox {
             id: snowUnitsChoice
 
             visible: unitsChoice.currentIndex == 3
@@ -182,7 +182,7 @@ KCM.SimpleKCM {
             Kirigami.FormData.label: i18n("Snow unit:")
         }
 
-        QQC.ComboBox {
+        PlasmaComponents.ComboBox {
             id: tempUnitsChoice
 
             visible: unitsChoice.currentIndex == 3
@@ -192,7 +192,7 @@ KCM.SimpleKCM {
             Kirigami.FormData.label: i18n("Temperature unit:")
         }
 
-        QQC.ComboBox {
+        PlasmaComponents.ComboBox {
             id: presUnitsChoice
 
             visible: unitsChoice.currentIndex == 3
@@ -202,7 +202,7 @@ KCM.SimpleKCM {
             Kirigami.FormData.label: i18n("Pressure unit:")
         }
 
-        QQC.ComboBox {
+        PlasmaComponents.ComboBox {
             id: elevUnitsChoice
 
             visible: unitsChoice.currentIndex == 3
