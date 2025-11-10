@@ -17,6 +17,7 @@
 
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Controls as QQC
 import QtQuick.Dialogs as QtDialogs
 import org.kde.kcmutils as KCM
 import QtQuick.Controls as PlasmaComponents
@@ -70,6 +71,10 @@ KCM.SimpleKCM {
             id: showCompactTemp
 
             Kirigami.FormData.label: i18n("Show temperature:")
+        }
+
+        QQC.ButtonGroup {
+            buttons: [autoFontAndSizeRadioButton, manualFontAndSizeRadioButton]
         }
 
         RowLayout {

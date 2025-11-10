@@ -848,6 +848,20 @@ function getExtendedConditions(options, callback) {
 							index: primaryDetails["index"],
 					  }
 					: null,
+				messages: {
+					general: {
+						title: airQualVars["messages"]["General"]["title"],
+						phrase: airQualVars["messages"]["General"]["text"],
+					},
+					sensitive: {
+						title: airQualVars["messages"]["Sensitive Group"][
+							"title"
+						],
+						phrase: airQualVars["messages"]["Sensitive Group"][
+							"text"
+						],
+					},
+				},
 			};
 		}
 

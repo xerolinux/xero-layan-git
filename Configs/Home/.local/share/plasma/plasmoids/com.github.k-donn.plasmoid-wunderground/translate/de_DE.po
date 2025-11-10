@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmoid-wunderground\n"
 "Report-Msgid-Bugs-To: https://github.com/k-donn/plasmoid-wunderground\n"
-"POT-Creation-Date: 2025-10-30 10:50-0400\n"
+"POT-Creation-Date: 2025-11-09 15:00-0600\n"
 "PO-Revision-Date: DA-Mo-YEAR HO:MI+ZONE\n"
 "Last-Translator: Stefan Wannemacher <swannema@t-online.de>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -52,6 +52,10 @@ msgstr "Status"
 #: ../contents/ui/AirAndSolarItem.qml
 msgid "Air quality"
 msgstr "Luftqualität"
+
+#: ../contents/ui/AirAndSolarItem.qml
+msgid "Messages"
+msgstr ""
 
 #: ../contents/ui/AirAndSolarItem.qml
 msgid "AQI: %1"
@@ -159,7 +163,7 @@ msgstr "<font size='4'>Gefühlt wie: %1<br/>Gewitter: %2<br/>UV: %3<br/>Schnee: 
 
 #: ../contents/ui/FullRepresentation.qml
 msgid "Sorry! The widget ran into a network error: "
-msgstr ""
+msgstr "Entschuldigung! Das Widget hat einen Netzwerkfehler festgestellt: "
 
 #: ../contents/ui/SwitchPanel.qml ../contents/ui/config/ConfigAppearance.qml
 msgid "Weather Details"
@@ -175,7 +179,7 @@ msgstr "Tagesdiagramme"
 
 #: ../contents/ui/SwitchPanel.qml ../contents/ui/config/ConfigAppearance.qml
 msgid "More Info"
-msgstr "Zusätzliche Info"
+msgstr "Weitere Informationen"
 
 #: ../contents/ui/TopPanel.qml
 msgid "High: %1 Low: %2"
@@ -313,13 +317,9 @@ msgstr "ID"
 msgid "Weatherstation Name:"
 msgstr "Wetterstation Name"
 
-#: ../contents/ui/config/ConfigStation.qml ../contents/ui/lib/StationSearcher.qml
-msgid "Latitude:"
-msgstr "Breitengrad"
-
-#: ../contents/ui/config/ConfigStation.qml ../contents/ui/lib/StationSearcher.qml
-msgid "Longitude:"
-msgstr "Längengrad"
+#: ../contents/ui/config/ConfigStation.qml ../contents/ui/lib/StationMapSearcher.qml ../contents/ui/lib/StationSearcher.qml
+msgid "Lat/Lon"
+msgstr "Breiten-/Längengrad"
 
 #: ../contents/ui/config/ConfigStation.qml
 msgid "Action"
@@ -335,7 +335,7 @@ msgstr "Entfernen"
 
 #: ../contents/ui/config/ConfigStation.qml
 msgid "Select from Map"
-msgstr ""
+msgstr "Aus Karte auswählen"
 
 #: ../contents/ui/config/ConfigStation.qml
 msgid "Manual Add"
@@ -363,7 +363,7 @@ msgstr "Wettervorhersage- Datumsformat"
 
 #: ../contents/ui/config/ConfigUnits.qml
 msgid "Precision"
-msgstr "Nachkommastellen"
+msgstr "Genauigkeit/Nachkommastellen"
 
 #: ../contents/ui/config/ConfigUnits.qml ../contents/ui/main.qml
 msgid "Temperature"
@@ -414,7 +414,7 @@ msgstr "Luftdruck"
 
 #: ../contents/ui/config/ConfigUnits.qml
 msgid "Elevation unit:"
-msgstr "Stationshöhe"
+msgstr "Höhe"
 
 #: ../contents/ui/lib/BackgroundToggle.qml
 msgid "Desktop Widget:"
@@ -446,19 +446,15 @@ msgstr "Suche nach"
 
 #: ../contents/ui/lib/StationMapSearcher.qml
 msgid "Area Name"
-msgstr ""
+msgstr "Gebietsname"
 
 #: ../contents/ui/lib/StationMapSearcher.qml ../contents/ui/lib/StationSearcher.qml
 msgid "Weatherstation ID:"
 msgstr "Wetterstation ID"
 
-#: ../contents/ui/lib/StationMapSearcher.qml ../contents/ui/lib/StationSearcher.qml
-msgid "Lat/Lon"
-msgstr "Breiten-/Längengrad"
-
 #: ../contents/ui/lib/StationMapSearcher.qml
 msgid "Search"
-msgstr ""
+msgstr "Suche"
 
 #: ../contents/ui/lib/StationMapSearcher.qml ../contents/ui/lib/StationSearcher.qml
 msgid "Enter Station"
@@ -466,11 +462,11 @@ msgstr "Aktuelle Station"
 
 #: ../contents/ui/lib/StationMapSearcher.qml
 msgid "Enter city, state, locality, or address"
-msgstr ""
+msgstr "Stadt, Bundesland, Ort oder Adresse eingeben"
 
 #: ../contents/ui/lib/StationMapSearcher.qml
 msgid "Click or drag the marker on the map below."
-msgstr ""
+msgstr "Klicken oder ziehen Sie die Markierung auf der Karte unten."
 
 #: ../contents/ui/lib/StationMapSearcher.qml ../contents/ui/lib/StationSearcher.qml
 msgid "Searching place:"
@@ -482,35 +478,35 @@ msgstr "Wähle"
 
 #: ../contents/ui/lib/StationMapSearcher.qml
 msgid "Searching by Weatherstation ID. Example: KGADACUL1"
-msgstr ""
+msgstr "Suche nach Wetterstations-ID. Beispiel: KGADACUL1"
 
 #: ../contents/ui/lib/StationMapSearcher.qml
 msgid "Selected latitude: %1, longitude: %2"
-msgstr ""
+msgstr "Ausgewählter Breitengrad: %1, Längengrad: %2"
 
 #: ../contents/ui/lib/StationMapSearcher.qml
 msgid "Error (%1): %2"
-msgstr ""
+msgstr "Fehler (%1): %2"
 
 #: ../contents/ui/lib/StationMapSearcher.qml
 msgid "Warning"
-msgstr ""
+msgstr "Warnung"
 
 #: ../contents/ui/lib/StationMapSearcher.qml
 msgid "Station has failed quality checks and may provide unreliable data."
-msgstr ""
+msgstr "Die Station hat die Qualitätsprüfungen nicht bestanden und liefert möglicherweise unzuverlässige Daten."
 
 #: ../contents/ui/lib/StationMapSearcher.qml
 msgid "Station Health: %1%"
-msgstr ""
+msgstr "Zustand der Station: %1%"
 
 #: ../contents/ui/lib/StationMapSearcher.qml
 msgid "Test Station"
-msgstr ""
+msgstr "Prüfe die Station"
 
 #: ../contents/ui/lib/StationMapSearcher.qml
 msgid "Selected Station: %1 (%2)"
-msgstr ""
+msgstr "Ausgewählte Station: %1 (%2)"
 
 #: ../contents/ui/lib/StationSearcher.qml
 msgid "Error: %1 message: %2"
@@ -555,6 +551,14 @@ msgstr "Nutze Stations-ID, nicht die Stadt. Wähle 'Suche nach: Stadt' um nach d
 #: ../contents/ui/lib/StationSearcher.qml
 msgid "Enter City Name"
 msgstr "Eingabe Stadt"
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Latitude:"
+msgstr "Breitengrad"
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Longitude:"
+msgstr "Längengrad"
 
 #: ../contents/ui/lib/StationSearcher.qml
 msgid "Test"
@@ -602,9 +606,3 @@ msgstr "<font size='4'>Wind: %1</font><br />"
 #: ../contents/ui/main.qml
 msgid "Refresh weather"
 msgstr "Wetterdaten aktualisieren"
-
-#~ msgid "Error"
-#~ msgstr "Fehler"
-
-#~ msgid "Loading data..."
-#~ msgstr "Lade Daten..."

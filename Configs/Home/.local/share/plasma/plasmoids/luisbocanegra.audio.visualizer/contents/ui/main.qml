@@ -28,7 +28,12 @@ PlasmoidItem {
 
     property int barCount: {
         let bars = 1;
-        const width = [Enum.Orientation.Left, Enum.Orientation.Right].includes(Plasmoid.configuration.orientation) ? main.height : main.width;
+        let width;
+        if (Plasmoid.configuration.circleMode) {
+            width = Math.min(main.width, main.height);
+        } else {
+            width = [Enum.Orientation.Left, Enum.Orientation.Right].includes(Plasmoid.configuration.orientation) ? main.height : main.width;
+        }
         if (Plasmoid.configuration.visualizerStyle === Enum.VisualizerStyles.Wave) {
             bars = Math.floor((width + barGap) / barGap);
         } else {
@@ -107,6 +112,7 @@ PlasmoidItem {
         monstercat: Plasmoid.configuration.monstercat
         waves: Plasmoid.configuration.waves
         autoSensitivity: Plasmoid.configuration.autoSensitivity
+        sensitivityEnabled: Plasmoid.configuration.sensitivityEnabled
         sensitivity: Plasmoid.configuration.sensitivity
         lowerCutoffFreq: Plasmoid.configuration.lowerCutoffFreq
         higherCutoffFreq: Plasmoid.configuration.higherCutoffFreq

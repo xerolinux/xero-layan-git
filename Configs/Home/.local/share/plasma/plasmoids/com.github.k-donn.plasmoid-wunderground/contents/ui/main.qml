@@ -65,6 +65,16 @@ PlasmoidItem {
                     "unit": "ug/m3",
                     "desc": "Moderate",
                     "index": 0
+                },
+                "messages": {
+                    "general": {
+                        "title": "",
+                        "phrase": ""
+                    },
+                    "sensitive": {
+                        "title": "",
+                        "phrase": ""
+                    }
                 }
             }
         })

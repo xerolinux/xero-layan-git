@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmoid-wunderground\n"
 "Report-Msgid-Bugs-To: https://github.com/k-donn/plasmoid-wunderground\n"
-"POT-Creation-Date: 2025-10-30 10:50-0400\n"
+"POT-Creation-Date: 2025-11-09 15:00-0600\n"
 "PO-Revision-Date: 2024-01-14 22:54+0900\n"
 "Last-Translator: Yuta Takahashi <y.highbridge04@gmail.com>\n"
 "Language-Team: Japanese-Team <LL@li.org>\n"
@@ -52,6 +52,10 @@ msgstr "ステータスカラー"
 #: ../contents/ui/AirAndSolarItem.qml
 msgid "Air quality"
 msgstr "空気の質"
+
+#: ../contents/ui/AirAndSolarItem.qml
+msgid "Messages"
+msgstr ""
 
 #: ../contents/ui/AirAndSolarItem.qml
 msgid "AQI: %1"
@@ -313,13 +317,9 @@ msgstr "ID:"
 msgid "Weatherstation Name:"
 msgstr "気象観測所名:"
 
-#: ../contents/ui/config/ConfigStation.qml ../contents/ui/lib/StationSearcher.qml
-msgid "Latitude:"
-msgstr "緯度："
-
-#: ../contents/ui/config/ConfigStation.qml ../contents/ui/lib/StationSearcher.qml
-msgid "Longitude:"
-msgstr "経度："
+#: ../contents/ui/config/ConfigStation.qml ../contents/ui/lib/StationMapSearcher.qml ../contents/ui/lib/StationSearcher.qml
+msgid "Lat/Lon"
+msgstr "緯度/経度"
 
 #: ../contents/ui/config/ConfigStation.qml
 msgid "Action"
@@ -452,10 +452,6 @@ msgstr ""
 msgid "Weatherstation ID:"
 msgstr "気象観測所ID:"
 
-#: ../contents/ui/lib/StationMapSearcher.qml ../contents/ui/lib/StationSearcher.qml
-msgid "Lat/Lon"
-msgstr "緯度/経度"
-
 #: ../contents/ui/lib/StationMapSearcher.qml
 msgid "Search"
 msgstr ""
@@ -555,6 +551,14 @@ msgstr "都市名ではなくステーションIDを使用してください。�
 #: ../contents/ui/lib/StationSearcher.qml
 msgid "Enter City Name"
 msgstr "都市名を入力"
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Latitude:"
+msgstr "緯度："
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Longitude:"
+msgstr "経度："
 
 #: ../contents/ui/lib/StationSearcher.qml
 msgid "Test"

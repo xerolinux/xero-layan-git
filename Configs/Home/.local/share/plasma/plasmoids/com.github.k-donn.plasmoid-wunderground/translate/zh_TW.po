@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmoid-wunderground\n"
 "Report-Msgid-Bugs-To: https://github.com/k-donn/plasmoid-wunderground\n"
-"POT-Creation-Date: 2025-10-30 10:50-0400\n"
+"POT-Creation-Date: 2025-11-09 15:00-0600\n"
 "PO-Revision-Date: 2024-11-11 17:28+0800\n"
 "Last-Translator: CloverGit <clovergit@hotmail.com>\n"
 "Language-Team: Traditional Chinese <>\n"
@@ -52,6 +52,10 @@ msgstr "狀態顏色"
 #: ../contents/ui/AirAndSolarItem.qml
 msgid "Air quality"
 msgstr "空氣品質"
+
+#: ../contents/ui/AirAndSolarItem.qml
+msgid "Messages"
+msgstr ""
 
 #: ../contents/ui/AirAndSolarItem.qml
 msgid "AQI: %1"
@@ -313,13 +317,9 @@ msgstr ""
 msgid "Weatherstation Name:"
 msgstr "氣象站名稱:"
 
-#: ../contents/ui/config/ConfigStation.qml ../contents/ui/lib/StationSearcher.qml
-msgid "Latitude:"
-msgstr "緯度:"
-
-#: ../contents/ui/config/ConfigStation.qml ../contents/ui/lib/StationSearcher.qml
-msgid "Longitude:"
-msgstr "經度:"
+#: ../contents/ui/config/ConfigStation.qml ../contents/ui/lib/StationMapSearcher.qml ../contents/ui/lib/StationSearcher.qml
+msgid "Lat/Lon"
+msgstr ""
 
 #: ../contents/ui/config/ConfigStation.qml
 msgid "Action"
@@ -452,10 +452,6 @@ msgstr ""
 msgid "Weatherstation ID:"
 msgstr "氣象站 ID:"
 
-#: ../contents/ui/lib/StationMapSearcher.qml ../contents/ui/lib/StationSearcher.qml
-msgid "Lat/Lon"
-msgstr ""
-
 #: ../contents/ui/lib/StationMapSearcher.qml
 msgid "Search"
 msgstr ""
@@ -555,6 +551,14 @@ msgstr ""
 #: ../contents/ui/lib/StationSearcher.qml
 msgid "Enter City Name"
 msgstr ""
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Latitude:"
+msgstr "緯度:"
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Longitude:"
+msgstr "經度:"
 
 #: ../contents/ui/lib/StationSearcher.qml
 msgid "Test"

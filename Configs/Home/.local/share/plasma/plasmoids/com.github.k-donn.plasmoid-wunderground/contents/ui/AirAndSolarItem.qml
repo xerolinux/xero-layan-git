@@ -61,7 +61,34 @@ RowLayout {
 
             horizontalAlignment: Text.AlignHCenter
 
-            text: weatherData["aq"]["aqDesc"]
+            font.underline: true
+
+            text: i18n("Messages")
+
+            PlasmaCore.ToolTipArea {
+                anchors.fill: parent
+
+                interactive: true
+
+                mainItem: ColumnLayout {
+                    PlasmaComponents.Label {
+                        text: weatherData["aq"]["messages"]["general"]["title"]
+                        font.bold: true
+                    }
+                    PlasmaComponents.Label {
+                        text: weatherData["aq"]["messages"]["general"]["phrase"]
+                        wrapMode: Text.WordWrap
+                    }
+                    PlasmaComponents.Label {
+                        text: weatherData["aq"]["messages"]["sensitive"]["title"]
+                        font.bold: true
+                    }
+                    PlasmaComponents.Label {
+                        text: weatherData["aq"]["messages"]["sensitive"]["phrase"]
+                        wrapMode: Text.WordWrap
+                    }
+                }
+            }
         }
         PlasmaComponents.Label {
             id: aqIndex
@@ -98,7 +125,7 @@ RowLayout {
 
                 color: "#000000"
 
-                text: aqIndexTxt.text
+                text: weatherData["aq"]["aqDesc"]
             }
         }
 

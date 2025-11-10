@@ -8,27 +8,27 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmoid-wunderground\n"
 "Report-Msgid-Bugs-To: https://github.com/k-donn/plasmoid-wunderground\n"
-"POT-Creation-Date: 2025-10-30 10:50-0400\n"
-"PO-Revision-Date: 2025-09-22 21:11+0200\n"
+"POT-Creation-Date: 2025-11-09 15:00-0600\n"
+"PO-Revision-Date: 2025-11-01 22:18+0100\n"
 "Last-Translator: Martin Eilsøe <martin@eilsoe.dk>\n"
 "Language-Team: <ll@li.org>\n"
 "Language: da_DK\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.7\n"
 
 #: ../metadata.json
 msgid "Wunderground"
-msgstr "Wunderground"
+msgstr "Konfigurér Wunderground"
 
 #: ../metadata.json
 msgid "Wunderground Personal Weather Station viewer"
-msgstr "Wunderground personlige vejrstation visning"
+msgstr "Personlig vejrstation viser"
 
 #: ../contents/code/pws-api.js
 msgid "Location not found"
-msgstr ""
+msgstr "Lokation ikke fundet"
 
 #: ../contents/config/config.qml
 msgid "Station"
@@ -53,6 +53,10 @@ msgstr "Status farve"
 #: ../contents/ui/AirAndSolarItem.qml
 msgid "Air quality"
 msgstr "Luft kvalitet"
+
+#: ../contents/ui/AirAndSolarItem.qml
+msgid "Messages"
+msgstr ""
 
 #: ../contents/ui/AirAndSolarItem.qml
 msgid "AQI: %1"
@@ -100,7 +104,7 @@ msgstr "Region: %1<br/>Handling: %2<br/>Fraskrivelse: %3<br/>Udstedt af : %4"
 
 #: ../contents/ui/BottomPanel.qml
 msgid "There are weather alerts for your area!"
-msgstr "Der er varslinger for dit område!"
+msgstr "Der er varslinger for området!"
 
 #: ../contents/ui/DayChartItem.qml
 msgctxt "per 12 hours, please keep it short"
@@ -165,20 +169,20 @@ msgstr ""
 
 #: ../contents/ui/FullRepresentation.qml
 msgid "Sorry! The widget ran into a network error: "
-msgstr ""
+msgstr "Undskyld! Der opstod netværksfejl: "
 
 #: ../contents/ui/SwitchPanel.qml ../contents/ui/config/ConfigAppearance.qml
 msgid "Weather Details"
-msgstr "Vejr detaljer"
+msgstr "Vejrdata"
 
 #: ../contents/ui/SwitchPanel.qml ../contents/ui/config/ConfigAppearance.qml
 #: ../contents/ui/config/ConfigUnits.qml
 msgid "Forecast"
-msgstr "Udsigt"
+msgstr "Prognose"
 
 #: ../contents/ui/SwitchPanel.qml ../contents/ui/config/ConfigAppearance.qml
 msgid "Day Chart"
-msgstr "Dag diagram"
+msgstr "Dagdiagram"
 
 #: ../contents/ui/SwitchPanel.qml ../contents/ui/config/ConfigAppearance.qml
 msgid "More Info"
@@ -305,7 +309,7 @@ msgstr "Skriv til konsol log:"
 
 #: ../contents/ui/config/ConfigDebug.qml
 msgid "Use Legacy Forecast API:"
-msgstr "Anvend tidligere vejrudsigt API:"
+msgstr "Anvend tidligere prognose API:"
 
 #: ../contents/ui/config/ConfigDebug.qml
 msgid "Startup time delay (ms):"
@@ -325,14 +329,10 @@ msgid "Weatherstation Name:"
 msgstr "Vejrstation navn:"
 
 #: ../contents/ui/config/ConfigStation.qml
+#: ../contents/ui/lib/StationMapSearcher.qml
 #: ../contents/ui/lib/StationSearcher.qml
-msgid "Latitude:"
-msgstr "Breddegrad:"
-
-#: ../contents/ui/config/ConfigStation.qml
-#: ../contents/ui/lib/StationSearcher.qml
-msgid "Longitude:"
-msgstr "Længdegrad:"
+msgid "Lat/Lon"
+msgstr "Bred/Læng"
 
 #: ../contents/ui/config/ConfigStation.qml
 msgid "Action"
@@ -349,11 +349,11 @@ msgstr "Fjern"
 
 #: ../contents/ui/config/ConfigStation.qml
 msgid "Select from Map"
-msgstr ""
+msgstr "Vælg fra kort"
 
 #: ../contents/ui/config/ConfigStation.qml
 msgid "Manual Add"
-msgstr ""
+msgstr "Manuel tilføjelse"
 
 #: ../contents/ui/config/ConfigStation.qml
 #: ../contents/ui/lib/StationMapSearcher.qml
@@ -371,11 +371,11 @@ msgstr "Tid/dato format"
 
 #: ../contents/ui/config/ConfigUnits.qml
 msgid "Day Chart time format:"
-msgstr "Dag diagram tidsformat:"
+msgstr "Dagdiagram tidsformat:"
 
 #: ../contents/ui/config/ConfigUnits.qml
 msgid "Week forecast date format:"
-msgstr "Uge udsigt dato format:"
+msgstr "Uge prognose dato format:"
 
 #: ../contents/ui/config/ConfigUnits.qml
 msgid "Precision"
@@ -442,11 +442,11 @@ msgstr "Konfigurér Wunderground"
 
 #: ../contents/ui/lib/ManualStationAdd.qml
 msgid "Add Station..."
-msgstr ""
+msgstr "Tilføj Station..."
 
 #: ../contents/ui/lib/ManualStationAdd.qml
 msgid "Enter station ID"
-msgstr ""
+msgstr "Angiv station ID"
 
 #: ../contents/ui/lib/ManualStationAdd.qml
 #: ../contents/ui/lib/StationMapSearcher.qml
@@ -467,7 +467,7 @@ msgstr "Søg efter:"
 
 #: ../contents/ui/lib/StationMapSearcher.qml
 msgid "Area Name"
-msgstr ""
+msgstr "Områdenavn"
 
 #: ../contents/ui/lib/StationMapSearcher.qml
 #: ../contents/ui/lib/StationSearcher.qml
@@ -475,13 +475,8 @@ msgid "Weatherstation ID:"
 msgstr "Vejrstation ID:"
 
 #: ../contents/ui/lib/StationMapSearcher.qml
-#: ../contents/ui/lib/StationSearcher.qml
-msgid "Lat/Lon"
-msgstr "Bred/Læng"
-
-#: ../contents/ui/lib/StationMapSearcher.qml
 msgid "Search"
-msgstr ""
+msgstr "Søg"
 
 #: ../contents/ui/lib/StationMapSearcher.qml
 #: ../contents/ui/lib/StationSearcher.qml
@@ -490,11 +485,11 @@ msgstr "Angiv station"
 
 #: ../contents/ui/lib/StationMapSearcher.qml
 msgid "Enter city, state, locality, or address"
-msgstr ""
+msgstr "Angiv by, stat, lokalitet eller adresse"
 
 #: ../contents/ui/lib/StationMapSearcher.qml
 msgid "Click or drag the marker on the map below."
-msgstr ""
+msgstr "Klik eller træk markør på kortet nedenfor."
 
 #: ../contents/ui/lib/StationMapSearcher.qml
 #: ../contents/ui/lib/StationSearcher.qml
@@ -508,63 +503,63 @@ msgstr "Vælg"
 
 #: ../contents/ui/lib/StationMapSearcher.qml
 msgid "Searching by Weatherstation ID. Example: KGADACUL1"
-msgstr ""
+msgstr "Søger Vejrstation ID. Example: KGADACUL1"
 
 #: ../contents/ui/lib/StationMapSearcher.qml
 msgid "Selected latitude: %1, longitude: %2"
-msgstr ""
+msgstr "Valgte længdegrad: %1, breddegrad: %2"
 
 #: ../contents/ui/lib/StationMapSearcher.qml
 msgid "Error (%1): %2"
-msgstr ""
+msgstr "Fejl: (%1): %2"
 
 #: ../contents/ui/lib/StationMapSearcher.qml
 msgid "Warning"
-msgstr ""
+msgstr "Advarsel"
 
 #: ../contents/ui/lib/StationMapSearcher.qml
 msgid "Station has failed quality checks and may provide unreliable data."
-msgstr ""
+msgstr "Station fejlede kvalitetstest og kan angive upræcise data."
 
 #: ../contents/ui/lib/StationMapSearcher.qml
 msgid "Station Health: %1%"
-msgstr ""
+msgstr "Station status: %1%"
 
 #: ../contents/ui/lib/StationMapSearcher.qml
 msgid "Test Station"
-msgstr ""
+msgstr "Test Station"
 
 #: ../contents/ui/lib/StationMapSearcher.qml
 msgid "Selected Station: %1 (%2)"
-msgstr ""
+msgstr "Valgte Station: %1 (%2)"
 
 #: ../contents/ui/lib/StationSearcher.qml
 msgid "Error: %1 message: %2"
-msgstr ""
+msgstr "Fejl: %1 besked: %2"
 
 #: ../contents/ui/lib/StationSearcher.qml
 msgid "Station active!"
-msgstr ""
+msgstr "Station Aktiv!"
 
 #: ../contents/ui/lib/StationSearcher.qml
 msgid "Reporting %1% of properties."
-msgstr ""
+msgstr "Reporterer %1% af egenskaberne."
 
 #: ../contents/ui/lib/StationSearcher.qml
 msgid "Station active."
-msgstr ""
+msgstr "Stationen aktiv."
 
 #: ../contents/ui/lib/StationSearcher.qml
 msgid "Station unhealthy."
-msgstr ""
+msgstr "Stationen ustabil."
 
 #: ../contents/ui/lib/StationSearcher.qml
 msgid "Error: Bad station."
-msgstr ""
+msgstr "Fejl: Dårlig station."
 
 #: ../contents/ui/lib/StationSearcher.qml
 msgid "Error: Station not active!"
-msgstr ""
+msgstr "Fejl: Stationen er ikke aktiv!"
 
 #: ../contents/ui/lib/StationSearcher.qml
 msgid "City Name"
@@ -587,8 +582,16 @@ msgid "Enter City Name"
 msgstr "Angiv bynavn"
 
 #: ../contents/ui/lib/StationSearcher.qml
+msgid "Latitude:"
+msgstr "Breddegrad:"
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Longitude:"
+msgstr "Længdegrad:"
+
+#: ../contents/ui/lib/StationSearcher.qml
 msgid "Test"
-msgstr ""
+msgstr "Test"
 
 #: ../contents/ui/main.qml
 msgid "Cloud Cover"
@@ -632,24 +635,3 @@ msgstr "<font size='4'>Vind hastighed: %1</font><br />"
 #: ../contents/ui/main.qml
 msgid "Refresh weather"
 msgstr "Opdater vejr"
-
-#~ msgid "Loading data..."
-#~ msgstr "Indlæser data..."
-
-#~ msgid "Add Station…"
-#~ msgstr "Tilføj station…"
-
-#~ msgid "Remove Selected"
-#~ msgstr "Fjern valgte"
-
-#~ msgid "Confirm Remove %1"
-#~ msgstr "Bekræft fjern %1"
-
-#~ msgid "Add"
-#~ msgstr "Tilføj"
-
-#~ msgid "Choose…"
-#~ msgstr "Vælg…"
-
-#~ msgid "Station Info"
-#~ msgstr "Station info"

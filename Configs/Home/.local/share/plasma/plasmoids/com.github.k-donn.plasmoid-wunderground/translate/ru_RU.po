@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmoid-wunderground\n"
 "Report-Msgid-Bugs-To: https://github.com/k-donn/plasmoid-wunderground\n"
-"POT-Creation-Date: 2025-10-30 10:50-0400\n"
+"POT-Creation-Date: 2025-11-09 15:00-0600\n"
 "PO-Revision-Date: 2025-09-24 14:11-0400\n"
 "Last-Translator: AleksZZ <alexyvp@mail.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -52,6 +52,10 @@ msgstr "Цвет статуса"
 #: ../contents/ui/AirAndSolarItem.qml
 msgid "Air quality"
 msgstr "Качество воздуха"
+
+#: ../contents/ui/AirAndSolarItem.qml
+msgid "Messages"
+msgstr ""
 
 #: ../contents/ui/AirAndSolarItem.qml
 msgid "AQI: %1"
@@ -313,13 +317,9 @@ msgstr "ИДЕНТИФИКАТОР:"
 msgid "Weatherstation Name:"
 msgstr "Название метеостанции:"
 
-#: ../contents/ui/config/ConfigStation.qml ../contents/ui/lib/StationSearcher.qml
-msgid "Latitude:"
-msgstr "Широта:"
-
-#: ../contents/ui/config/ConfigStation.qml ../contents/ui/lib/StationSearcher.qml
-msgid "Longitude:"
-msgstr "Долгота:"
+#: ../contents/ui/config/ConfigStation.qml ../contents/ui/lib/StationMapSearcher.qml ../contents/ui/lib/StationSearcher.qml
+msgid "Lat/Lon"
+msgstr "Широта/Долгота"
 
 #: ../contents/ui/config/ConfigStation.qml
 msgid "Action"
@@ -452,10 +452,6 @@ msgstr ""
 msgid "Weatherstation ID:"
 msgstr "ID метеостанции:"
 
-#: ../contents/ui/lib/StationMapSearcher.qml ../contents/ui/lib/StationSearcher.qml
-msgid "Lat/Lon"
-msgstr "Широта/Долгота"
-
 #: ../contents/ui/lib/StationMapSearcher.qml
 msgid "Search"
 msgstr ""
@@ -555,6 +551,14 @@ msgstr "Используйте идентификатор станции, а н�
 #: ../contents/ui/lib/StationSearcher.qml
 msgid "Enter City Name"
 msgstr "Введите название города"
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Latitude:"
+msgstr "Широта:"
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Longitude:"
+msgstr "Долгота:"
 
 #: ../contents/ui/lib/StationSearcher.qml
 msgid "Test"

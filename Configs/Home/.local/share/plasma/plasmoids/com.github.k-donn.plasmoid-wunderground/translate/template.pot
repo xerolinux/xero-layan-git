@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmoid-wunderground\n"
 "Report-Msgid-Bugs-To: https://github.com/k-donn/plasmoid-wunderground\n"
-"POT-Creation-Date: 2025-10-30 10:50-0400\n"
+"POT-Creation-Date: 2025-11-09 15:00-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -51,6 +51,10 @@ msgstr ""
 
 #: ../contents/ui/AirAndSolarItem.qml
 msgid "Air quality"
+msgstr ""
+
+#: ../contents/ui/AirAndSolarItem.qml
+msgid "Messages"
 msgstr ""
 
 #: ../contents/ui/AirAndSolarItem.qml
@@ -313,12 +317,8 @@ msgstr ""
 msgid "Weatherstation Name:"
 msgstr ""
 
-#: ../contents/ui/config/ConfigStation.qml ../contents/ui/lib/StationSearcher.qml
-msgid "Latitude:"
-msgstr ""
-
-#: ../contents/ui/config/ConfigStation.qml ../contents/ui/lib/StationSearcher.qml
-msgid "Longitude:"
+#: ../contents/ui/config/ConfigStation.qml ../contents/ui/lib/StationMapSearcher.qml ../contents/ui/lib/StationSearcher.qml
+msgid "Lat/Lon"
 msgstr ""
 
 #: ../contents/ui/config/ConfigStation.qml
@@ -452,10 +452,6 @@ msgstr ""
 msgid "Weatherstation ID:"
 msgstr ""
 
-#: ../contents/ui/lib/StationMapSearcher.qml ../contents/ui/lib/StationSearcher.qml
-msgid "Lat/Lon"
-msgstr ""
-
 #: ../contents/ui/lib/StationMapSearcher.qml
 msgid "Search"
 msgstr ""
@@ -554,6 +550,14 @@ msgstr ""
 
 #: ../contents/ui/lib/StationSearcher.qml
 msgid "Enter City Name"
+msgstr ""
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Latitude:"
+msgstr ""
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Longitude:"
 msgstr ""
 
 #: ../contents/ui/lib/StationSearcher.qml

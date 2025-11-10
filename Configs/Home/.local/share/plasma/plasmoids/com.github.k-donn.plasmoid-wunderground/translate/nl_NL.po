@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmoid-wunderground\n"
 "Report-Msgid-Bugs-To: https://github.com/k-donn/plasmoid-wunderground\n"
-"POT-Creation-Date: 2025-10-30 10:50-0400\n"
+"POT-Creation-Date: 2025-11-09 15:00-0600\n"
 "PO-Revision-Date: 2022-04-17 14:14+0200\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: Dutch <>\n"
@@ -53,6 +53,10 @@ msgstr "Statuskleur"
 #: ../contents/ui/AirAndSolarItem.qml
 msgid "Air quality"
 msgstr "Luchtkwaliteit"
+
+#: ../contents/ui/AirAndSolarItem.qml
+msgid "Messages"
+msgstr ""
 
 #: ../contents/ui/AirAndSolarItem.qml
 msgid "AQI: %1"
@@ -325,14 +329,10 @@ msgid "Weatherstation Name:"
 msgstr "Naam weerstation:"
 
 #: ../contents/ui/config/ConfigStation.qml
+#: ../contents/ui/lib/StationMapSearcher.qml
 #: ../contents/ui/lib/StationSearcher.qml
-msgid "Latitude:"
-msgstr "Breedtegraad:"
-
-#: ../contents/ui/config/ConfigStation.qml
-#: ../contents/ui/lib/StationSearcher.qml
-msgid "Longitude:"
-msgstr "Lengtegraad:"
+msgid "Lat/Lon"
+msgstr "Breedtegraad/Lengtegraad"
 
 #: ../contents/ui/config/ConfigStation.qml
 msgid "Action"
@@ -475,11 +475,6 @@ msgid "Weatherstation ID:"
 msgstr "Weerstation-id:"
 
 #: ../contents/ui/lib/StationMapSearcher.qml
-#: ../contents/ui/lib/StationSearcher.qml
-msgid "Lat/Lon"
-msgstr "Breedtegraad/Lengtegraad"
-
-#: ../contents/ui/lib/StationMapSearcher.qml
 msgid "Search"
 msgstr ""
 
@@ -585,6 +580,14 @@ msgstr ""
 #: ../contents/ui/lib/StationSearcher.qml
 msgid "Enter City Name"
 msgstr "Voer de stadsnaam in"
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Latitude:"
+msgstr "Breedtegraad:"
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Longitude:"
+msgstr "Lengtegraad:"
 
 #: ../contents/ui/lib/StationSearcher.qml
 msgid "Test"
