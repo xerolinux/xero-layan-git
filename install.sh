@@ -75,7 +75,7 @@ header "Installing Native Packages"
 sudo pacman -Sy --noconfirm --needed \
   cava kwin-zones imagemagick kvantum unzip jq xmlstarlet fastfetch \
   ttf-hack-nerd ttf-fira-code kdeconnect ttf-terminus-nerd \
-  noto-fonts-emoji ttf-meslo-nerd kde-wallpapers
+  noto-fonts-emoji ttf-meslo-nerd kde-wallpapers falkon
 
 # Detect or install AUR helper
 setup_aur_helper() {
@@ -106,7 +106,7 @@ setup_aur_helper
 
 header "Installing AUR Packages"
 $AUR_HELPER -S --noconfirm --needed \
-  ttf-meslo-nerd-font-powerlevel10k tela-circle-icon-theme-purple oh-my-posh-bin
+  ttf-meslo-nerd-font-powerlevel10k tela-circle-icon-theme-purple oh-my-posh-bin pacseek
 
 header "Backing Up & Applying Rice"
 backup_dir="$HOME/.config-backup-$(date +%Y.%m.%d-%H.%M.%S)"

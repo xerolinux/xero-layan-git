@@ -14,13 +14,13 @@
         "break",
         {
           "type": "custom",
-          "format": "\u001b[36m┌───────────────────Eat 󰗲, Sleep , XeroLinux ───────────────────┐",
+          "format": "\u001b[36m┌───────────────────Eat 󰗲, Sleep , ArchLinux ───────────────────┐",
         },
         {
           "type": "command",
           "key": "󰖟 Web",
           "keyColor": "cyan",
-          "text": "echo WwW.XeroLinux.xYz",
+          "text": "echo WwW.ArchLinux.OrG",
           "keyWidth": 26
         },
         {
