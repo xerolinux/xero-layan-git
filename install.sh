@@ -1,207 +1,163 @@
 #!/bin/bash
 
-set -eu # Exit on error and undefined variables
+set -eu
 
-echo "##########################################"
-echo "Be Careful this will override your Rice!! "
-echo "##########################################"
-echo
+# Color variables
+BOLD="\e[1m"
+RED="\e[31m"
+GREEN="\e[32m"
+YELLOW="\e[33m"
+BLUE="\e[34m"
+MAGENTA="\e[35m"
+CYAN="\e[36m"
+RESET="\e[0m"
 
-echo "Installing Necessary Packages"
-echo "#############################"
-echo
-
-echo "Native Packages..."
-echo
-
-sudo pacman -S --noconfirm --needed cava kwin-zones imagemagick kvantum unzip jq xmlstarlet fastfetch ttf-hack-nerd ttf-fira-code kdeconnect ttf-terminus-nerd noto-fonts-emoji ttf-meslo-nerd kde-wallpapers
-
-echo
-
-echo "AUR Packages..."
-echo
-
-# Check if yay or paru is installed
-if pacman -Qs yay &> /dev/null; then
-  aur_helper="yay"
-elif pacman -Qs paru &> /dev/null; then
-  aur_helper="paru"
-else
-  echo "Neither yay nor paru is installed. Please select one to install:"
-  echo
-  echo "1. Install yay"
-  echo "2. Install paru"
-  echo
-  read -p "Enter your choice (1/2): " choice
-
-  case "$choice" in
-    1)
-      echo "Installing yay..."
-      echo
-      git clone https://aur.archlinux.org/yay.git
-      cd yay
-      makepkg -si
-      cd ..
-      rm -rf yay
-      aur_helper="yay"
-      ;;
-    2)
-      echo "Installing paru..."
-      echo
-      sudo pacman -S --noconfirm rust
-      git clone https://aur.archlinux.org/paru.git
-      cd paru
-      makepkg -si
-      cd ..
-      rm -rf paru
-      aur_helper="paru"
-      ;;
-    *)
-      echo "Invalid choice. Exiting."
-      exit 1
-      ;;
-  esac
-fi
-
-echo "Selected AUR helper: $aur_helper"
-echo
-
-# Install packages using the detected AUR helper
-$aur_helper -S --noconfirm --needed ttf-meslo-nerd-font-powerlevel10k tela-circle-icon-theme-purple
-
-sleep 2
-echo
-
-echo "Creating Backup & Applying new Rice, hold on..."
-echo "###############################################"
-
-cp -Rf ~/.config ~/.config-backup-$(date +%Y.%m.%d-%H.%M.%S) && cp -Rf Configs/Home/. ~
-sudo cp -Rf Configs/System/. / && sudo cp -Rf Configs/Home/. /root/
-
-sleep 2
-echo
-
-echo "Adding Fastfetch to your shell configuration"
-echo
-
-# Function to add fastfetch to a shell configuration file
-add_fastfetch() {
-  local shell_rc="$1"
-  if ! grep -Fxq 'fastfetch' "$HOME/$shell_rc"; then
-    echo '' >> "$HOME/$shell_rc"
-    echo 'fastfetch' >> "$HOME/$shell_rc"
-    echo
-    echo "fastfetch has been added to your $shell_rc and will run on Terminal launch."
-  else
-    echo "fastfetch is already set to run on Terminal launch in $shell_rc."
-  fi
+# Centered header box
+center_box() {
+  local msg1="$1"
+  local msg2="$2"
+  local msg3="$3"
+  echo -e "${RED}${BOLD}#############################################"
+  printf "#%*s%*s#\n" $(( (43 + ${#msg1}) / 2 )) "$msg1" $(( (43 - ${#msg1}) / 2 )) ""
+  printf "#%*s%*s#\n" $(( (43 + ${#msg2}) / 2 )) "$msg2" $(( (43 - ${#msg2}) / 2 )) ""
+  printf "#%*s%*s#\n" $(( (43 + ${#msg3}) / 2 )) "$msg3" $(( (43 - ${#msg3}) / 2 )) ""
+  echo -e "#############################################${RESET}\n"
 }
 
-# Detect the current shell
-current_shell=$(basename "$SHELL")
-
-# Prompt the user
-read -p "Do you want to enable fastfetch to run on Terminal launch? (y/n): " response
-
-case "$response" in
-  [yY])
-    if [ "$current_shell" = "zsh" ]; then
-      add_fastfetch ".zshrc"
-    elif [ "$current_shell" = "bash" ]; then
-      add_fastfetch ".bashrc"
-    else
-      echo "Unsupported shell: $current_shell"
-    fi
-    ;;
-  [nN])
-    echo "fastfetch will not be added to your shell configuration."
-    ;;
-  *)
-    echo "Invalid response. Please enter y or n."
-    ;;
-esac
-
-sleep 2
-echo
-
-echo "Oh-My-Posh Setup."
-echo
-echo "Installing Oh-My-Posh"
-$aur_helper -S --noconfirm --needed oh-my-posh-bin
-echo
-sleep 3
-
-echo "Injecting OMP to .bashrc"
-
-# Define the lines to be added
-line1='# Oh-My-Posh Config'
-line2='eval "$(oh-my-posh init bash --config $HOME/.config/ohmyposh/distrous-xero-linux.omp.json)"'
-
-# Define the .bashrc file
-bashrc_file="$HOME/.bashrc"
-
-# Function to add lines if not already present
-add_lines() {
-  if ! grep -qxF "$line1" "$bashrc_file"; then
-    echo "" >> "$bashrc_file" # Add an empty line before line1
-    echo "$line1" >> "$bashrc_file"
-  fi
-  if ! grep -qxF "$line2" "$bashrc_file"; then
-    echo "$line2" >> "$bashrc_file"
-    echo "" >> "$bashrc_file" # Add an empty line after line2
-  fi
+# Centered section title
+header() {
+  local title="$1"
+  local len=${#title}
+  local border=$(printf '=%.0s' $(seq 1 $(( (45 - len) / 2 ))))
+  echo -e "\n${CYAN}${BOLD}${border} $title ${border}${RESET}\n"
 }
 
-# Run the function to add lines
-add_lines
+# Confirm execution
+clear
+center_box "Be Careful" "This will override your Rice!!" "Proceed at your own risk!"
 
-echo "Oh-My-Posh injection complete."
-sleep 3
-echo
-
-echo "Applying Grub Theme...."
-echo "#######################"
-
-# Check if GRUB is installed
-if [ -d "/boot/grub" ]; then
-    echo "GRUB detected. Proceeding with theme installation..."
-
-    # Clone the repository and install the theme
-    sudo ./Grub.sh
-    sudo sed -i "s/GRUB_GFXMODE=*.*/GRUB_GFXMODE=1920x1080x32/g" /etc/default/grub
-else
-    echo "GRUB not detected. Skipping theme installation."
-fi
-sleep 2
-echo
-
-echo "Installing Layan Theme"
-echo "######################"
-echo
-
-if git clone https://github.com/vinceliuice/Layan-kde.git; then
-  cd Layan-kde/ && sh install.sh
-  cd ~ && rm -Rf Layan-kde/
-else
-  echo "Failed to clone Layan-kde theme"
+read -p "Are you sure you want to continue? (y/n): " confirm
+if [[ ! $confirm =~ ^[Yy]$ ]]; then
+  echo "Operation cancelled."
   exit 1
 fi
 
-sleep 2
-echo
+# Function to add XeroLinux repo
+add_xerolinux_repo() {
+  if grep -Pq '^\[xerolinux\]' /etc/pacman.conf; then
+    echo "XeroLinux repo already present."
+  else
+    echo "Adding XeroLinux repository..."
+    echo -e "\n[xerolinux]\nSigLevel = Optional TrustAll\nServer = https://repos.xerolinux.xyz/\$repo/\$arch" | sudo tee -a /etc/pacman.conf >/dev/null
+  fi
+}
 
-echo "Installing & Applying GTK4 Theme "
-echo "#################################"
+# Function to add the Chaotic-AUR repository
+add_chaotic_aur() {
+  if ! grep -q "\[chaotic-aur\]" /etc/pacman.conf; then
+    header "Adding The Chaotic-AUR Repository"
+    sudo pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
+    sudo pacman-key --lsign-key 3056513887B78AEB
+    sudo pacman -U --noconfirm 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst'
+    sudo pacman -U --noconfirm 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
+    echo -e '\n[chaotic-aur]\nInclude = /etc/pacman.d/chaotic-mirrorlist' | sudo tee -a /etc/pacman.conf
+    echo "Chaotic-AUR Repository added!"
+  else
+    echo "Chaotic-AUR Repository already added."
+  fi
+}
 
-# Check if ~/.themes directory exists, if not create it
-if [ ! -d "$HOME/.themes" ]; then
-  mkdir -p "$HOME/.themes"
-  echo "Created ~/.themes directory"
+header "Adding Repositories"
+add_xerolinux_repo
+add_chaotic_aur
+
+header "Installing Native Packages"
+sudo pacman -Sy --noconfirm --needed \
+  cava kwin-zones imagemagick kvantum unzip jq xmlstarlet fastfetch \
+  ttf-hack-nerd ttf-fira-code kdeconnect ttf-terminus-nerd \
+  noto-fonts-emoji ttf-meslo-nerd kde-wallpapers
+
+# Detect or install AUR helper
+setup_aur_helper() {
+  if command -v paru >/dev/null 2>&1; then
+    AUR_HELPER="paru"
+  elif command -v yay >/dev/null 2>&1; then
+    AUR_HELPER="yay"
+  else
+    header "AUR Helper Setup"
+    echo "Choose AUR helper to install:"
+    select choice in "paru" "yay"; do
+      case "$choice" in
+        paru|yay)
+          sudo pacman -Syy "$choice"
+          AUR_HELPER="$choice"
+          break
+          ;;
+        *)
+          echo "Invalid choice."
+          ;;
+      esac
+    done
+  fi
+  echo "Using AUR helper: $AUR_HELPER"
+}
+
+setup_aur_helper
+
+header "Installing AUR Packages"
+$AUR_HELPER -S --noconfirm --needed \
+  ttf-meslo-nerd-font-powerlevel10k tela-circle-icon-theme-purple oh-my-posh-bin
+
+header "Backing Up & Applying Rice"
+backup_dir="$HOME/.config-backup-$(date +%Y.%m.%d-%H.%M.%S)"
+echo "Backing up current config to $backup_dir"
+cp -Rf ~/.config "$backup_dir"
+cp -Rf Configs/Home/. ~
+sudo cp -Rf Configs/System/. /
+sudo cp -Rf Configs/Home/. /root/
+
+header "Setting up Fastfetch"
+read -p "Enable fastfetch on terminal launch? (y/n): " response
+if [[ $response =~ ^[Yy]$ ]]; then
+  shell_rc="$HOME/.${SHELL##*/}rc"
+  if ! grep -Fxq 'fastfetch' "$shell_rc"; then
+    echo -e "\nfastfetch" >> "$shell_rc"
+    echo "fastfetch added to $shell_rc"
+  else
+    echo "fastfetch already present in $shell_rc"
+  fi
+else
+  echo "Skipped fastfetch setup."
 fi
 
-cd ~ && git clone https://github.com/vinceliuice/Layan-gtk-theme.git && cd Layan-gtk-theme/ && sh install.sh -l -c dark -d $HOME/.themes
-cd ~ && rm -Rf Layan-gtk-theme/
+header "Injecting Oh-My-Posh into Bash"
+bashrc_file="$HOME/.bashrc"
+grep -qxF '# Oh-My-Posh Config' "$bashrc_file" || echo -e '\n# Oh-My-Posh Config' >> "$bashrc_file"
+grep -qxF 'eval "$(oh-my-posh init bash --config $HOME/.config/ohmyposh/distrous-xero-linux.omp.json)"' "$bashrc_file" || \
+  echo 'eval "$(oh-my-posh init bash --config $HOME/.config/ohmyposh/distrous-xero-linux.omp.json)"' >> "$bashrc_file"
+echo "Oh-My-Posh injection complete."
 
-echo
-echo "Plz Reboot To Apply Settings..."
-echo "###############################"
+header "Installing GRUB Theme"
+if [ -d "/boot/grub" ]; then
+  sudo ./Grub.sh
+  sudo sed -i "s/^GRUB_GFXMODE=.*/GRUB_GFXMODE=1920x1080x32/" /etc/default/grub
+else
+  echo "GRUB not detected, skipping theme."
+fi
+
+header "Installing Layan KDE Theme"
+if git clone https://github.com/vinceliuice/Layan-kde.git; then
+  cd Layan-kde && sh install.sh && cd .. && rm -rf Layan-kde
+else
+  echo "Failed to install Layan-kde"
+fi
+
+header "Installing Layan GTK Theme"
+mkdir -p ~/.themes
+if git clone https://github.com/vinceliuice/Layan-gtk-theme.git; then
+  cd Layan-gtk-theme && sh install.sh -l -c dark -d ~/.themes && cd .. && rm -rf Layan-gtk-theme
+else
+  echo "Failed to install Layan-gtk"
+fi
+
+center_box "All Done" "Setup Complete!" "Please reboot to apply settings."

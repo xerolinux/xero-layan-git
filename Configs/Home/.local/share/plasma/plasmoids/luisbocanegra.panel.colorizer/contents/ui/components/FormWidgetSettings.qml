@@ -221,6 +221,20 @@ ColumnLayout {
             visible: root.plasmaVersion.isGreaterThan("6.3.5") && root.elementName === "panel" && root.elementState === Enum.WidgetStates.Normal
         }
 
+        CheckBox {
+            id: flattenOnDeFloatCheckbox
+            Kirigami.FormData.label: i18n("Panel de-float:")
+            text: i18n("Remove custom background rounded corners and borders on screen edge when panel is not floating")
+            checked: configLocal.flattenOnDeFloat
+            onCheckedChanged: {
+                configLocal.flattenOnDeFloat = checked;
+                updateConfig();
+            }
+            Layout.maximumWidth: 400
+            Layout.alignment: Qt.AlignTop
+            visible: root.elementName === "panel" && root.elementState === Enum.WidgetStates.Normal
+        }
+
         Kirigami.Separator {
             Kirigami.FormData.isSection: true
             Kirigami.FormData.label: i18n("Customization")
@@ -359,25 +373,25 @@ ColumnLayout {
         actions: [
             Kirigami.Action {
                 icon.name: "color-picker"
-                text: "Color"
+                text: i18n("Color")
                 checked: currentTab === 0
                 onTriggered: currentTab = 0
             },
             Kirigami.Action {
                 icon.name: "rectangle-shape-symbolic"
-                text: "Shape"
+                text: i18n("Shape")
                 checked: currentTab === 1
                 onTriggered: currentTab = 1
             },
             Kirigami.Action {
                 icon.name: "bordertool-symbolic"
-                text: "Border"
+                text: i18n("Border")
                 checked: currentTab === 2
                 onTriggered: currentTab = 2
             },
             Kirigami.Action {
                 icon.name: "kstars_horizon-symbolic"
-                text: "Shadow"
+                text: i18n("Shadow")
                 checked: currentTab === 3
                 onTriggered: currentTab = 3
             }
@@ -459,6 +473,7 @@ ColumnLayout {
             root.configLocal = newConfig;
             root.updateConfig();
         }
+        elementName: root.elementName
     }
 
     FormPadding {

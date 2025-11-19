@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: colorizer\n"
 "Report-Msgid-Bugs-To: https://github.com/luisbocanegra/plasma-panel-colorizer\n"
-"POT-Creation-Date: 2025-10-25 20:31+0000\n"
+"POT-Creation-Date: 2025-11-12 07:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -73,7 +73,7 @@ msgstr "Activa"
 msgid "Widget background"
 msgstr "Fons del giny"
 
-#: ../contents/ui/components/FormBorder.qml
+#: ../contents/ui/components/FormBorder.qml ../contents/ui/components/FormWidgetSettings.qml
 msgid "Border"
 msgstr "Vora"
 
@@ -97,7 +97,7 @@ msgstr "Feu servir enters per a les <strong>Illes de ginys</strong> per a evitar
 msgid "Custom widths:"
 msgstr "Amplades personalitzades:"
 
-#: ../contents/ui/components/FormColors.qml
+#: ../contents/ui/components/FormColors.qml ../contents/ui/components/FormWidgetSettings.qml
 msgid "Color"
 msgstr "Color"
 
@@ -297,6 +297,10 @@ msgstr "Radi"
 msgid "Margin"
 msgstr "Marge"
 
+#: ../contents/ui/components/FormShape.qml
+msgid "Requires plasmashell restart after disabling to restore the default. <a href=\"#\">Restart now</a>."
+msgstr ""
+
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Native panel:"
 msgstr "Panell nadiu:"
@@ -350,6 +354,14 @@ msgid "Resize content when panel enters/exits floating state"
 msgstr "Redimensiona el contingut quan el panell entri o surti de l'estat flotant."
 
 #: ../contents/ui/components/FormWidgetSettings.qml
+msgid "Panel de-float:"
+msgstr ""
+
+#: ../contents/ui/components/FormWidgetSettings.qml
+msgid "Remove custom background rounded corners and borders on screen edge when panel is not floating"
+msgstr ""
+
+#: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Customization"
 msgstr "Personalització"
 
@@ -398,6 +410,10 @@ msgid "Plugin install instructions"
 msgstr "Instruccions d'instal·lació del complement"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
+msgid "Shape"
+msgstr "Forma"
+
+#: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Spacing:"
 msgstr "Espaiat:"
 
@@ -438,8 +454,12 @@ msgid "Foreground Shadow Color"
 msgstr "Color de l'ombra de primer pla"
 
 #: ../contents/ui/components/Header.qml
+msgid "None"
+msgstr ""
+
+#: ../contents/ui/components/Header.qml
 msgid "Enable %1:"
-msgstr "Activa %1:"
+msgstr "Activa l'%1:"
 
 #: ../contents/ui/components/Header.qml ../contents/ui/main.qml
 msgid "Last preset loaded:"
@@ -448,6 +468,70 @@ msgstr "Últim perfil carregat:"
 #: ../contents/ui/components/Header.qml
 msgid "Version:"
 msgstr "Versió:"
+
+#: ../contents/ui/components/Header.qml
+msgid "Changelog"
+msgstr "Registre de canvis"
+
+#: ../contents/ui/components/Header.qml
+msgid "Releases"
+msgstr "Publicacions"
+
+#: ../contents/ui/components/Header.qml
+msgid "Matrix chat"
+msgstr "Xat Matrix"
+
+#: ../contents/ui/components/Header.qml
+msgid "Home page"
+msgstr "Pàgina d'inici"
+
+#: ../contents/ui/components/Header.qml
+msgid "KDE Store"
+msgstr "Botiga del KDE"
+
+#: ../contents/ui/components/Header.qml
+msgid "Issues"
+msgstr "Problemes"
+
+#: ../contents/ui/components/Header.qml
+msgid "Current issues"
+msgstr "Problemes actuals"
+
+#: ../contents/ui/components/Header.qml
+msgid "Report a bug"
+msgstr "Informa d'un error"
+
+#: ../contents/ui/components/Header.qml
+msgid "Request a feature"
+msgstr "Demana una millora"
+
+#: ../contents/ui/components/Header.qml
+msgid "Help"
+msgstr "Ajuda"
+
+#: ../contents/ui/components/Header.qml
+msgid "FAQ"
+msgstr "Preguntes freqüents"
+
+#: ../contents/ui/components/Header.qml
+msgid "Discussions"
+msgstr "Discussions"
+
+#: ../contents/ui/components/Header.qml
+msgid "Send an email"
+msgstr "Envia un correu"
+
+#: ../contents/ui/components/Header.qml
+msgid "Donate"
+msgstr "Dóna"
+
+#: ../contents/ui/components/Header.qml
+msgid "GitHub sponsors"
+msgstr "Espònsors del GitHub"
+
+#: ../contents/ui/components/Header.qml
+msgid "My other projects"
+msgstr "Altres projectes meus"
 
 #: ../contents/ui/components/Header.qml ../contents/ui/main.qml
 msgid "Running version of the widget (%1) is different to the one on disk (%2), please log out and back in (or restart plasmashell user unit) to ensure things work correctly!"
@@ -650,12 +734,20 @@ msgid "Configuration overrides"
 msgstr "Configuració de la sobreescriptura"
 
 #: ../contents/ui/configGlobalWidgetOverrides.qml ../contents/ui/configPresetWidgetOverrides.qml
+msgid "New override"
+msgstr ""
+
+#: ../contents/ui/configGlobalWidgetOverrides.qml ../contents/ui/configPresetWidgetOverrides.qml
 msgid "Override settings"
 msgstr "Configuració de les sobreescriptures"
 
 #: ../contents/ui/configGlobalWidgetOverrides.qml ../contents/ui/configPresetWidgetOverrides.qml
 msgid "Override name"
 msgstr "Nom de la sobreescriptura"
+
+#: ../contents/ui/configGlobalWidgetOverrides.qml ../contents/ui/configPresetWidgetOverrides.qml
+msgid "Rename"
+msgstr ""
 
 #: ../contents/ui/configGlobalWidgetOverrides.qml
 msgid "Fallback:"
@@ -668,6 +760,18 @@ msgstr "Alternativa a la configuració Global/Perfil del giny per a opcions desa
 #: ../contents/ui/configGlobalWidgetOverrides.qml ../contents/ui/configPresetWidgetOverrides.qml
 msgid "Overrides are applied from top to bottom, if two or more configuration overrides share the same option, the last occurence replaces the value of the previous one."
 msgstr "Les sobreescriptures s'apliquen de dalt a baix. Si dues o més configuracions de sobreescriptura comparteixen la mateixa opció, l'última reemplaça el valor de l'anterior'."
+
+#: ../contents/ui/configPresetAutoload.qml
+msgid "Toggle Panel Colorizer"
+msgstr "Commuta l'Acoloridor de panells"
+
+#: ../contents/ui/configPresetAutoload.qml
+msgid "Switch presets"
+msgstr "Canvia de perfil"
+
+#: ../contents/ui/configPresetAutoload.qml
+msgid "Show popup"
+msgstr "Mostra un missatge emergent"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "Do nothing"
@@ -745,21 +849,45 @@ msgstr "Normal:"
 msgid "Widget Click"
 msgstr "Clic al giny"
 
+#: ../contents/ui/configPresetAutoload.qml
+msgid "Action:"
+msgstr "Acció:"
+
 #: ../contents/ui/configPresetWidgetOverrides.qml
 msgid "Create configuration overrides and apply them to one or multiple widgets. These overrides should be saved to a preset in <strong>Presets</strong> tab or they will be lost when presets change!"
 msgstr "Crea configuracions de sobreescriptura i les aplica a un o múltiples ginys. Aquestes sobreescriptures s'han de desar en un perfil a la pestanya <strong>Perfils</strong> o es pedran els canvis quan es canviï de perfil."
+
+#: ../contents/ui/configPresetWidgetOverrides.qml
+msgid "Name:"
+msgstr ""
+
+#: ../contents/ui/configPresets.qml
+msgid "Delete preset"
+msgstr ""
 
 #: ../contents/ui/configPresets.qml
 msgid "This will permanently delete the file from your system!"
 msgstr "Això esborrarà permanentment el fitxer del sistema."
 
 #: ../contents/ui/configPresets.qml
+msgid "Update preset"
+msgstr ""
+
+#: ../contents/ui/configPresets.qml
 msgid "Preset configuration will be overwritten!"
 msgstr "Se sobreescriurà la configuració del perfil."
 
 #: ../contents/ui/configPresets.qml
+msgid "Create preset preview?"
+msgstr ""
+
+#: ../contents/ui/configPresets.qml
 msgid "Current preview will be overwritten!"
 msgstr "Se sobreescriurà la vista actual."
+
+#: ../contents/ui/configPresets.qml
+msgid "Create preset"
+msgstr ""
 
 #: ../contents/ui/configPresets.qml
 msgid "Changes to the current preset are not synced to disk automatically. You should come back to this tab and update it manually before switching to a different preset, otherwise unsaved preset settings will be lost when presets change!"
@@ -946,7 +1074,7 @@ msgid ""
 "Fix text and icon colors for widgets where the normal method doesn't work or isn't permanent.<br> - <strong>Mask</strong>: Force color on SVG icons, useful for symbolic icons.<br> - <strong>Color Effect</strong>: Force color on text and icons using post-processing effect, useful for non-symbolic icons.<br> - <strong>Refresh</strong>: Re-apply color at a fixed interval, useful for widgets that "
 "recreate or recolor content themselves<br>To restore the <strong>Mask<strong> and <strong>Color Effect</strong> disable and restart Plasma or logout."
 msgstr ""
-"Arregla els colors de les icones i els textos dels ginys on el mètode normal no funciona o no és permanent.<br> - <strong>Màscar</strong>: Força un color a les icones SVG. Útil per a icones simbòliques.<br> - <strong>Efecte de color</strong>: Força un color al text i les icones amb un efecte de post-processat. Útil per a icones no simbòliques.<br> - <strong>Actualitza</strong>: Torna a aplicar "
+"Arregla els colors de les icones i els textos dels ginys on el mètode normal no funciona o no és permanent.<br> - <strong>Màscara</strong>: Força un color a les icones SVG. Útil per a icones simbòliques.<br> - <strong>Efecte de color</strong>: Força un color al text i les icones amb un efecte de post-processat. Útil per a icones no simbòliques.<br> - <strong>Actualitza</strong>: Torna a aplicar "
 "el color regularment cada determinat període de temps. Útil per a ginys que recreen o canvien el color per si mateixos.<br>Per a restaurar la <strong>Màscara<strong> i l'<strong>Efecte de color</strong>, desactiveu i reinicieu el Plasma o sortiu de la sessió."
 
 #: ../contents/ui/configTextIconFix.qml

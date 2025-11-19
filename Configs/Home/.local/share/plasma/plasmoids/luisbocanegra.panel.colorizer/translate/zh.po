@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: colorizer\n"
 "Report-Msgid-Bugs-To: https://github.com/luisbocanegra/plasma-panel-colorizer\n"
-"POT-Creation-Date: 2025-10-25 20:31+0000\n"
+"POT-Creation-Date: 2025-11-12 07:49+0000\n"
 "PO-Revision-Date: 2025-06-05 23:14+0800\n"
 "Last-Translator: Mill413 <mill413@outlook.com>\n"
 "Language-Team: \n"
@@ -73,7 +73,7 @@ msgstr "启用"
 msgid "Widget background"
 msgstr "挂件背景"
 
-#: ../contents/ui/components/FormBorder.qml
+#: ../contents/ui/components/FormBorder.qml ../contents/ui/components/FormWidgetSettings.qml
 msgid "Border"
 msgstr "边框"
 
@@ -97,7 +97,7 @@ msgstr ""
 msgid "Custom widths:"
 msgstr "自定义宽度："
 
-#: ../contents/ui/components/FormColors.qml
+#: ../contents/ui/components/FormColors.qml ../contents/ui/components/FormWidgetSettings.qml
 msgid "Color"
 msgstr "颜色"
 
@@ -297,6 +297,10 @@ msgstr "圆角半径"
 msgid "Margin"
 msgstr "外边距"
 
+#: ../contents/ui/components/FormShape.qml
+msgid "Requires plasmashell restart after disabling to restore the default. <a href=\"#\">Restart now</a>."
+msgstr ""
+
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Native panel:"
 msgstr "原生面板："
@@ -348,6 +352,14 @@ msgid "Resize content when panel enters/exits floating state"
 msgstr ""
 
 #: ../contents/ui/components/FormWidgetSettings.qml
+msgid "Panel de-float:"
+msgstr ""
+
+#: ../contents/ui/components/FormWidgetSettings.qml
+msgid "Remove custom background rounded corners and borders on screen edge when panel is not floating"
+msgstr ""
+
+#: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Customization"
 msgstr ""
 
@@ -396,6 +408,10 @@ msgid "Plugin install instructions"
 msgstr "插件安装说明"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
+msgid "Shape"
+msgstr ""
+
+#: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Spacing:"
 msgstr "间距："
 
@@ -436,6 +452,10 @@ msgid "Foreground Shadow Color"
 msgstr "前景阴影颜色"
 
 #: ../contents/ui/components/Header.qml
+msgid "None"
+msgstr ""
+
+#: ../contents/ui/components/Header.qml
 msgid "Enable %1:"
 msgstr "启用 %1："
 
@@ -446,6 +466,70 @@ msgstr "最后加载的预设："
 #: ../contents/ui/components/Header.qml
 msgid "Version:"
 msgstr "版本："
+
+#: ../contents/ui/components/Header.qml
+msgid "Changelog"
+msgstr ""
+
+#: ../contents/ui/components/Header.qml
+msgid "Releases"
+msgstr ""
+
+#: ../contents/ui/components/Header.qml
+msgid "Matrix chat"
+msgstr ""
+
+#: ../contents/ui/components/Header.qml
+msgid "Home page"
+msgstr ""
+
+#: ../contents/ui/components/Header.qml
+msgid "KDE Store"
+msgstr ""
+
+#: ../contents/ui/components/Header.qml
+msgid "Issues"
+msgstr ""
+
+#: ../contents/ui/components/Header.qml
+msgid "Current issues"
+msgstr ""
+
+#: ../contents/ui/components/Header.qml
+msgid "Report a bug"
+msgstr ""
+
+#: ../contents/ui/components/Header.qml
+msgid "Request a feature"
+msgstr ""
+
+#: ../contents/ui/components/Header.qml
+msgid "Help"
+msgstr ""
+
+#: ../contents/ui/components/Header.qml
+msgid "FAQ"
+msgstr ""
+
+#: ../contents/ui/components/Header.qml
+msgid "Discussions"
+msgstr ""
+
+#: ../contents/ui/components/Header.qml
+msgid "Send an email"
+msgstr ""
+
+#: ../contents/ui/components/Header.qml
+msgid "Donate"
+msgstr ""
+
+#: ../contents/ui/components/Header.qml
+msgid "GitHub sponsors"
+msgstr ""
+
+#: ../contents/ui/components/Header.qml
+msgid "My other projects"
+msgstr ""
 
 #: ../contents/ui/components/Header.qml ../contents/ui/main.qml
 msgid "Running version of the widget (%1) is different to the one on disk (%2), please log out and back in (or restart plasmashell user unit) to ensure things work correctly!"
@@ -648,12 +732,20 @@ msgid "Configuration overrides"
 msgstr "配置覆盖"
 
 #: ../contents/ui/configGlobalWidgetOverrides.qml ../contents/ui/configPresetWidgetOverrides.qml
+msgid "New override"
+msgstr ""
+
+#: ../contents/ui/configGlobalWidgetOverrides.qml ../contents/ui/configPresetWidgetOverrides.qml
 msgid "Override settings"
 msgstr "覆盖设置"
 
 #: ../contents/ui/configGlobalWidgetOverrides.qml ../contents/ui/configPresetWidgetOverrides.qml
 msgid "Override name"
 msgstr "覆盖名称"
+
+#: ../contents/ui/configGlobalWidgetOverrides.qml ../contents/ui/configPresetWidgetOverrides.qml
+msgid "Rename"
+msgstr ""
 
 #: ../contents/ui/configGlobalWidgetOverrides.qml
 msgid "Fallback:"
@@ -666,6 +758,18 @@ msgstr "对于已禁用的选项，回退到全局/预设挂件设置（<b>启�
 #: ../contents/ui/configGlobalWidgetOverrides.qml ../contents/ui/configPresetWidgetOverrides.qml
 msgid "Overrides are applied from top to bottom, if two or more configuration overrides share the same option, the last occurence replaces the value of the previous one."
 msgstr "覆盖按从上到下顺序应用。若多个覆盖共享同一选项，后出现的将覆盖先前的值。"
+
+#: ../contents/ui/configPresetAutoload.qml
+msgid "Toggle Panel Colorizer"
+msgstr ""
+
+#: ../contents/ui/configPresetAutoload.qml
+msgid "Switch presets"
+msgstr ""
+
+#: ../contents/ui/configPresetAutoload.qml
+msgid "Show popup"
+msgstr ""
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "Do nothing"
@@ -743,21 +847,45 @@ msgstr "常规："
 msgid "Widget Click"
 msgstr "点击挂件"
 
+#: ../contents/ui/configPresetAutoload.qml
+msgid "Action:"
+msgstr ""
+
 #: ../contents/ui/configPresetWidgetOverrides.qml
 msgid "Create configuration overrides and apply them to one or multiple widgets. These overrides should be saved to a preset in <strong>Presets</strong> tab or they will be lost when presets change!"
 msgstr "创建配置覆盖，并应用于一个或多个挂件。这些覆盖需保存到<strong>预设</strong>标签页的预设中，否则切换预设时将丢失！"
+
+#: ../contents/ui/configPresetWidgetOverrides.qml
+msgid "Name:"
+msgstr ""
+
+#: ../contents/ui/configPresets.qml
+msgid "Delete preset"
+msgstr ""
 
 #: ../contents/ui/configPresets.qml
 msgid "This will permanently delete the file from your system!"
 msgstr "这将从系统中永久删除该文件！"
 
 #: ../contents/ui/configPresets.qml
+msgid "Update preset"
+msgstr ""
+
+#: ../contents/ui/configPresets.qml
 msgid "Preset configuration will be overwritten!"
 msgstr "预设配置将被覆盖！"
 
 #: ../contents/ui/configPresets.qml
+msgid "Create preset preview?"
+msgstr ""
+
+#: ../contents/ui/configPresets.qml
 msgid "Current preview will be overwritten!"
 msgstr "当前预览将被覆盖！"
+
+#: ../contents/ui/configPresets.qml
+msgid "Create preset"
+msgstr ""
 
 #: ../contents/ui/configPresets.qml
 msgid "Changes to the current preset are not synced to disk automatically. You should come back to this tab and update it manually before switching to a different preset, otherwise unsaved preset settings will be lost when presets change!"

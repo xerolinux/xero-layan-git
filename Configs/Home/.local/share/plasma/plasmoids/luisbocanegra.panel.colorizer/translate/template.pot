@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: colorizer\n"
 "Report-Msgid-Bugs-To: https://github.com/luisbocanegra/plasma-panel-colorizer\n"
-"POT-Creation-Date: 2025-10-25 20:31+0000\n"
+"POT-Creation-Date: 2025-11-12 07:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -73,7 +73,7 @@ msgstr ""
 msgid "Widget background"
 msgstr ""
 
-#: ../contents/ui/components/FormBorder.qml
+#: ../contents/ui/components/FormBorder.qml ../contents/ui/components/FormWidgetSettings.qml
 msgid "Border"
 msgstr ""
 
@@ -99,7 +99,7 @@ msgstr ""
 msgid "Custom widths:"
 msgstr ""
 
-#: ../contents/ui/components/FormColors.qml
+#: ../contents/ui/components/FormColors.qml ../contents/ui/components/FormWidgetSettings.qml
 msgid "Color"
 msgstr ""
 
@@ -299,6 +299,10 @@ msgstr ""
 msgid "Margin"
 msgstr ""
 
+#: ../contents/ui/components/FormShape.qml
+msgid "Requires plasmashell restart after disabling to restore the default. <a href=\"#\">Restart now</a>."
+msgstr ""
+
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Native panel:"
 msgstr ""
@@ -350,6 +354,14 @@ msgid "Resize content when panel enters/exits floating state"
 msgstr ""
 
 #: ../contents/ui/components/FormWidgetSettings.qml
+msgid "Panel de-float:"
+msgstr ""
+
+#: ../contents/ui/components/FormWidgetSettings.qml
+msgid "Remove custom background rounded corners and borders on screen edge when panel is not floating"
+msgstr ""
+
+#: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Customization"
 msgstr ""
 
@@ -398,6 +410,10 @@ msgid "Plugin install instructions"
 msgstr ""
 
 #: ../contents/ui/components/FormWidgetSettings.qml
+msgid "Shape"
+msgstr ""
+
+#: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Spacing:"
 msgstr ""
 
@@ -438,6 +454,10 @@ msgid "Foreground Shadow Color"
 msgstr ""
 
 #: ../contents/ui/components/Header.qml
+msgid "None"
+msgstr ""
+
+#: ../contents/ui/components/Header.qml
 msgid "Enable %1:"
 msgstr ""
 
@@ -447,6 +467,70 @@ msgstr ""
 
 #: ../contents/ui/components/Header.qml
 msgid "Version:"
+msgstr ""
+
+#: ../contents/ui/components/Header.qml
+msgid "Changelog"
+msgstr ""
+
+#: ../contents/ui/components/Header.qml
+msgid "Releases"
+msgstr ""
+
+#: ../contents/ui/components/Header.qml
+msgid "Matrix chat"
+msgstr ""
+
+#: ../contents/ui/components/Header.qml
+msgid "Home page"
+msgstr ""
+
+#: ../contents/ui/components/Header.qml
+msgid "KDE Store"
+msgstr ""
+
+#: ../contents/ui/components/Header.qml
+msgid "Issues"
+msgstr ""
+
+#: ../contents/ui/components/Header.qml
+msgid "Current issues"
+msgstr ""
+
+#: ../contents/ui/components/Header.qml
+msgid "Report a bug"
+msgstr ""
+
+#: ../contents/ui/components/Header.qml
+msgid "Request a feature"
+msgstr ""
+
+#: ../contents/ui/components/Header.qml
+msgid "Help"
+msgstr ""
+
+#: ../contents/ui/components/Header.qml
+msgid "FAQ"
+msgstr ""
+
+#: ../contents/ui/components/Header.qml
+msgid "Discussions"
+msgstr ""
+
+#: ../contents/ui/components/Header.qml
+msgid "Send an email"
+msgstr ""
+
+#: ../contents/ui/components/Header.qml
+msgid "Donate"
+msgstr ""
+
+#: ../contents/ui/components/Header.qml
+msgid "GitHub sponsors"
+msgstr ""
+
+#: ../contents/ui/components/Header.qml
+msgid "My other projects"
 msgstr ""
 
 #: ../contents/ui/components/Header.qml ../contents/ui/main.qml
@@ -654,11 +738,19 @@ msgid "Configuration overrides"
 msgstr ""
 
 #: ../contents/ui/configGlobalWidgetOverrides.qml ../contents/ui/configPresetWidgetOverrides.qml
+msgid "New override"
+msgstr ""
+
+#: ../contents/ui/configGlobalWidgetOverrides.qml ../contents/ui/configPresetWidgetOverrides.qml
 msgid "Override settings"
 msgstr ""
 
 #: ../contents/ui/configGlobalWidgetOverrides.qml ../contents/ui/configPresetWidgetOverrides.qml
 msgid "Override name"
+msgstr ""
+
+#: ../contents/ui/configGlobalWidgetOverrides.qml ../contents/ui/configPresetWidgetOverrides.qml
+msgid "Rename"
 msgstr ""
 
 #: ../contents/ui/configGlobalWidgetOverrides.qml
@@ -671,6 +763,18 @@ msgstr ""
 
 #: ../contents/ui/configGlobalWidgetOverrides.qml ../contents/ui/configPresetWidgetOverrides.qml
 msgid "Overrides are applied from top to bottom, if two or more configuration overrides share the same option, the last occurence replaces the value of the previous one."
+msgstr ""
+
+#: ../contents/ui/configPresetAutoload.qml
+msgid "Toggle Panel Colorizer"
+msgstr ""
+
+#: ../contents/ui/configPresetAutoload.qml
+msgid "Switch presets"
+msgstr ""
+
+#: ../contents/ui/configPresetAutoload.qml
+msgid "Show popup"
 msgstr ""
 
 #: ../contents/ui/configPresetAutoload.qml
@@ -753,8 +857,20 @@ msgstr ""
 msgid "Widget Click"
 msgstr ""
 
+#: ../contents/ui/configPresetAutoload.qml
+msgid "Action:"
+msgstr ""
+
 #: ../contents/ui/configPresetWidgetOverrides.qml
 msgid "Create configuration overrides and apply them to one or multiple widgets. These overrides should be saved to a preset in <strong>Presets</strong> tab or they will be lost when presets change!"
+msgstr ""
+
+#: ../contents/ui/configPresetWidgetOverrides.qml
+msgid "Name:"
+msgstr ""
+
+#: ../contents/ui/configPresets.qml
+msgid "Delete preset"
 msgstr ""
 
 #: ../contents/ui/configPresets.qml
@@ -762,11 +878,23 @@ msgid "This will permanently delete the file from your system!"
 msgstr ""
 
 #: ../contents/ui/configPresets.qml
+msgid "Update preset"
+msgstr ""
+
+#: ../contents/ui/configPresets.qml
 msgid "Preset configuration will be overwritten!"
 msgstr ""
 
 #: ../contents/ui/configPresets.qml
+msgid "Create preset preview?"
+msgstr ""
+
+#: ../contents/ui/configPresets.qml
 msgid "Current preview will be overwritten!"
+msgstr ""
+
+#: ../contents/ui/configPresets.qml
+msgid "Create preset"
 msgstr ""
 
 #: ../contents/ui/configPresets.qml
