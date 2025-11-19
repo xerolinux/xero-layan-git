@@ -3,7 +3,7 @@
 # Grub2 Theme
 
 ROOT_UID=0
-THEME_DIR="/boot/grub/themes"
+THEME_DIR="/usr/share/grub/themes/"
 THEME_NAME=XeroLayan
 MAX_DELAY=20                                        # max delay for user to enter root pass
 
