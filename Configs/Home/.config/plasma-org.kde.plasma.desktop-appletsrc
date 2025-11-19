@@ -24,7 +24,7 @@ positions={"0x0":[],"1920x1080":["1","17"]}
 sortMode=-1
 
 [Containments][119][Wallpaper][org.kde.image][General]
-Image=/usr/share/logos/Plasma64.png
+Image=/usr/share/wallpapers/Xero-Plasma21.jpg
 SlidePaths=/usr/share/wallpapers
 
 [Containments][120]
@@ -54,7 +54,7 @@ positions={"1920x1080":[]}
 Color=0,0,0
 
 [Containments][120][Wallpaper][org.kde.image][General]
-Image=/usr/share/logos/Plasma64.png
+Image=/usr/share/wallpapers/Xero-Plasma21.jpg
 SlidePaths=/usr/share/wallpapers
 
 [Containments][121]
@@ -76,7 +76,7 @@ DialogWidth=800
 PreloadWeight=42
 
 [Containments][121][Wallpaper][org.kde.image][General]
-Image=/usr/share/logos/Plasma64.png
+Image=/usr/share/wallpapers/Xero-Plasma21.jpg
 SlidePaths=/usr/share/wallpapers
 
 [Containments][126]
@@ -587,9 +587,9 @@ ToolBoxButtonY=56
 positions={"1920x1080":[],"2560x1440":[]}
 
 [Containments][87][Wallpaper][org.kde.image][General]
-Image=/usr/share/logos/Plasma64.png
-PreviewImage=/usr/share/logos/Plasma64.png
-SlidePaths=/usr/share/logos/
+Image=/usr/share/wallpapers/Xero-Plasma21.jpg
+PreviewImage=/usr/share/wallpapers/Xero-Plasma21.jpg
+SlidePaths=/usr/share/wallpapers/
 
 [Containments][9][Applets][24][Configuration]
 PreloadWeight=42

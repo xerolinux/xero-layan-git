@@ -8,9 +8,14 @@ LatencyPolicy=High
 OpenGLIsUnsafe=false
 
 [Desktops]
-Id_1=290014f1-ab74-4eff-ab3d-0f5e50435119
-Id_2=459315d0-9437-4fde-9640-295bbc95ff31
-Number=2
+Id_1=ecac575c-d3ba-4d59-8c1f-84927e4e2e69
+Id_2=568cfe34-b57d-426e-bf78-028426ec16f9
+Id_3=f675b249-d2be-418d-99b6-f51a95ad7c6e
+Id_4=2474ce4d-a024-459b-b66e-66dd33ce2ccc
+Name_1=Desktop 2
+Name_2=Desktop 3
+Name_3=Desktop 4
+Number=4
 Rows=1
 
 [Effect-PresentWindows]
@@ -37,6 +42,9 @@ Drag=85
 Stiffness=10
 WobblynessLevel=1
 
+[ModifierOnlyShortcuts]
+Meta=org.kde.lattedock,/Latte,org.kde.LatteDock,activateLauncherMenu
+
 [Plugins]
 autocomposerEnabled=false
 blurEnabled=true
@@ -51,6 +59,8 @@ kwin4_effect_fadedesktopEnabled=true
 kwin4_effect_maximizeEnabled=false
 kwin4_effect_maximize_xrenderEnabled=true
 kwin4_effect_rubberband_maximizeEnabled=false
+kzonesEnabled=true
+lattewindowcolorsEnabled=true
 minimizeallEnabled=true
 movewindowtocenterEnabled=true
 opacitymenuEnabled=true
@@ -69,6 +79,9 @@ wobblywindowsEnabled=true
 blurContent=true
 patterns=dolphin\nyakuake\nurxvt\nkeepassxc\nkonsole\nthunar
 
+[Script-kzones]
+enableEdgeSnapping=true
+
 [Script-videowall]
 Whitelist=vlc, xv, vdpau, smplayer, dragon, xine, ffplay, mplayer, mpv
 
@@ -79,16 +92,85 @@ LayoutName=coverswitch
 [Tiling]
 padding=4
 
+[Tiling][0c23159b-17ae-5c14-9355-9762a3ee6e52]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][19ee4483-6337-5700-ae8e-42dcd4ca8dc0]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][2474ce4d-a024-459b-b66e-66dd33ce2ccc][f4560a92-2a9b-4856-8bf2-bfed659dc137]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][290014f1-ab74-4eff-ab3d-0f5e50435119][11d41c25-a2f5-4a3c-9136-d6135dfdfb96]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][290014f1-ab74-4eff-ab3d-0f5e50435119][1b411bc9-14b8-4fdc-b4b2-456a7860e51c]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][290014f1-ab74-4eff-ab3d-0f5e50435119][eb04bcca-ba19-4bdf-870e-1f38b5fafc84]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][290014f1-ab74-4eff-ab3d-0f5e50435119][f4560a92-2a9b-4856-8bf2-bfed659dc137]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][2bb0f5f7-1e1b-52ad-9e7b-63e20638352f]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
 [Tiling][314df312-a268-5eb8-ab43-e546e65184ba]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][39ca59d6-d2b5-485a-a39e-c5910a04fc83][f4560a92-2a9b-4856-8bf2-bfed659dc137]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][459315d0-9437-4fde-9640-295bbc95ff31][11d41c25-a2f5-4a3c-9136-d6135dfdfb96]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][459315d0-9437-4fde-9640-295bbc95ff31][1b411bc9-14b8-4fdc-b4b2-456a7860e51c]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][459315d0-9437-4fde-9640-295bbc95ff31][eb04bcca-ba19-4bdf-870e-1f38b5fafc84]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][4f9249af-4820-407d-a958-d8a34cc4f88a][eb04bcca-ba19-4bdf-870e-1f38b5fafc84]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][4f9249af-4820-407d-a958-d8a34cc4f88a][f4560a92-2a9b-4856-8bf2-bfed659dc137]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][568cfe34-b57d-426e-bf78-028426ec16f9][f4560a92-2a9b-4856-8bf2-bfed659dc137]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][58ca410b-ce44-58d6-82b9-fefe44aba0e3]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Tiling][749caefa-0993-57c7-bbd0-6a982ac70ea2]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
+[Tiling][7b112067-10a2-5fa9-b648-66525d7b70bf]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
 [Tiling][9350f969-92d0-5658-bb27-639b07d90acc]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
+[Tiling][947a768a-b066-475a-87d0-bc4a56da3ac2][11d41c25-a2f5-4a3c-9136-d6135dfdfb96]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][947a768a-b066-475a-87d0-bc4a56da3ac2][eb04bcca-ba19-4bdf-870e-1f38b5fafc84]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
 [Tiling][b3e26a43-8080-59f5-84cf-19a727763c6d]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][bae3f794-ac27-4188-81c4-ef71b662c615][11d41c25-a2f5-4a3c-9136-d6135dfdfb96]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][bae3f794-ac27-4188-81c4-ef71b662c615][1b411bc9-14b8-4fdc-b4b2-456a7860e51c]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][bae3f794-ac27-4188-81c4-ef71b662c615][eb04bcca-ba19-4bdf-870e-1f38b5fafc84]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][bae3f794-ac27-4188-81c4-ef71b662c615][f4560a92-2a9b-4856-8bf2-bfed659dc137]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Tiling][bce2cc06-f65b-5571-823c-b67750620a63]
@@ -97,7 +179,19 @@ tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"wi
 [Tiling][be49f4ee-86fd-5b3d-9cef-03175d095fce]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
+[Tiling][cfa6d691-cd18-4e4a-a9a3-a2774bcf950a][11d41c25-a2f5-4a3c-9136-d6135dfdfb96]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][cfa6d691-cd18-4e4a-a9a3-a2774bcf950a][eb04bcca-ba19-4bdf-870e-1f38b5fafc84]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][ecac575c-d3ba-4d59-8c1f-84927e4e2e69][f4560a92-2a9b-4856-8bf2-bfed659dc137]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
 [Tiling][f3633089-b0bd-59f0-a1c3-5265ab8bb0e9]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][f675b249-d2be-418d-99b6-f51a95ad7c6e][f4560a92-2a9b-4856-8bf2-bfed659dc137]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Tiling][ffbf4450-f42f-531d-be28-e14bc2ae5e70]
@@ -105,9 +199,6 @@ tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"wi
 
 [Windows]
 Placement=Centered
-
-[Xwayland]
-Scale=1
 
 [org.kde.kdecoration2]
 theme=__aurorae__svg__Layan
