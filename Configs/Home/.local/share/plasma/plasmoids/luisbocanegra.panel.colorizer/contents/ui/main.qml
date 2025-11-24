@@ -60,8 +60,8 @@ PlasmoidItem {
     property bool nativePanelBackgroundEnabled: (isEnabled ? cfg.nativePanel.background.enabled : true) || doPanelClickFix
     property real nativePanelBackgroundOpacity: isEnabled ? cfg.nativePanel.background.opacity : 1.0
     property bool nativePanelBackgroundShadowEnabled: isEnabled ? cfg.nativePanel.background.shadow : true
+    property bool configureFromAllWidgets: Plasmoid.configuration.configureFromAllWidgets
     property var panelWidgets: []
-    property int panelWidgetsCount: 0
     property real trayItemThikness: 20
     // keep track of these to allow others to follow their color
     property QtObject panelBgItem
@@ -187,6 +187,18 @@ PlasmoidItem {
 
     property var switchPresets: JSON.parse(plasmoid.configuration.switchPresets)
     property QtObject panelView: null
+
+    property var cfg_hiddenWidgets: Plasmoid.configuration.hiddenWidgets
+    property var hiddenWidgets: {
+        try {
+            return JSON.parse(cfg_hiddenWidgets);
+        } catch (e) {
+            console.error(e, e.stack);
+            return {
+                widgets: []
+            };
+        }
+    }
 
     function applyStockPanelSettings() {
         let script = Utils.setPanelModeScript(Plasmoid.containment.id, stockPanelSettings);
@@ -353,6 +365,8 @@ PlasmoidItem {
         property bool panelTouchingBottom: isPanel && main.panelElement && !main.panelIsFloating && main.panelPosition.location === "bottom"
         property bool panelTouchingLeft: isPanel && main.panelElement && !main.panelIsFloating && main.panelPosition.location === "left"
         property bool panelTouchingRight: isPanel && main.panelElement && !main.panelIsFloating && main.panelPosition.location === "right"
+
+        property var hideCfg: main.hiddenWidgets.widgets.find(widget => widget.id === widgetId && widget.name === widgetName)
 
         function cornerForcedZero(cornerName) {
             if (!isPanel || !(cfg.flattenOnDeFloat ?? false))
@@ -556,6 +570,7 @@ PlasmoidItem {
             main.updateUnified.connect(updateUnifyType);
             main.updateMasks.connect(updateMaskDebounced);
             recolorTimer.start();
+            rect.target.applet.plasmoid.globalShortcutChanged.connect(main.updateCurrentWidgets);
         }
 
         Component.onDestruction: {
@@ -796,6 +811,13 @@ PlasmoidItem {
             value: 2
             when: marginEnabled && isTrayArrow && !horizontal
             delayed: true
+        }
+
+        Binding {
+            target: rect.target.applet?.plasmoid
+            property: "status"
+            when: (rect.hideCfg?.hide ?? false) && !main.editMode
+            value: PlasmaCore.Types.HiddenStatus
         }
 
         Item {
@@ -1481,6 +1503,7 @@ PlasmoidItem {
             Utils.showWidgets(panelLayout, backgroundComponent, Plasmoid);
             updateCurrentWidgets();
             showPanelBg(panelBg);
+            updateContextualActions(configureFromAllWidgets);
         });
     }
 
@@ -1604,14 +1627,44 @@ PlasmoidItem {
             panelWidgets = Utils.findWidgetsTray(trayGridView, panelWidgets);
             panelWidgets = Utils.findWidgetsTray(trayGridView.parent, panelWidgets);
         }
-        panelWidgetsCount = panelWidgets.length;
+        plasmoid.configuration.panelWidgets = JSON.stringify(panelWidgets, null, null);
+        plasmoid.configuration.writeConfig();
     }
 
     PlasmaCore.Action {
         id: configureAction
         text: plasmoid.internalAction("configure").text
+        objectName: "panelColorizerConfigureAction"
         icon.name: 'configure'
         onTriggered: plasmoid.internalAction("configure").trigger()
+    }
+
+    onConfigureFromAllWidgetsChanged: {
+        updateContextualActions(configureFromAllWidgets);
+    }
+
+    function updateContextualActions(enabled) {
+        if (!main.panelLayout)
+            return;
+        for (var i in main.panelLayout.children) {
+            const child = main.panelLayout.children[i];
+            // may not be available while dragging into the panel and other situations
+            if (!child.applet?.plasmoid?.pluginName)
+                continue;
+
+            if (child.applet.plasmoid.pluginName === Plasmoid.metaData.pluginId) {
+                continue;
+            }
+            child.applet.plasmoid.contextualActions = child.applet.plasmoid.contextualActions.filter(item => {
+                if (item && item.objectName === "panelColorizerConfigureAction") {
+                    return false;
+                }
+                return true;
+            });
+            if (enabled) {
+                child.applet.plasmoid.contextualActions.push(configureAction);
+            }
+        }
     }
 
     function showPanelBg(panelBg) {
@@ -1623,13 +1676,6 @@ PlasmoidItem {
             "target": panelBg,
             "itemType": Enums.ItemType.PanelBgItem
         });
-    }
-
-    onPanelWidgetsCountChanged: {
-        // console.error( panelWidgetsCount ,JSON.stringify(panelWidgets, null, null))
-        plasmoid.configuration.panelWidgets = "";
-        plasmoid.configuration.panelWidgets = JSON.stringify(panelWidgets, null, null);
-        plasmoid.configuration.writeConfig();
     }
 
     Component.onCompleted: {
@@ -1649,6 +1695,9 @@ PlasmoidItem {
         }
         Utils.delay(100, () => {
             applyStockPanelSettings();
+        }, main);
+        Utils.delay(500, () => {
+            updateContextualActions(configureFromAllWidgets);
         }, main);
     }
 

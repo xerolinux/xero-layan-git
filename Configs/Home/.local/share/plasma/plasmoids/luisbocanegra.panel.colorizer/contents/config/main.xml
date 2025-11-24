@@ -97,5 +97,15 @@
         type="Bool">
         <default>false</default>
     </entry>
+    <entry
+        name="configureFromAllWidgets"
+        type="Bool">
+        <default>true</default>
+    </entry>
+    <entry
+        name="hiddenWidgets"
+        type="String">
+        <default>{"widgets":[]}</default>
+    </entry>
   </group>
 </kcfg>
