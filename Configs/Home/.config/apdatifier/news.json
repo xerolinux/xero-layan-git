@@ -1,23 +1,23 @@
 [
   {
     "title": "Arch Linux: Recent news updates",
-    "article": "linux-firmware >= 20250613.12fe085f-5 upgrade requires manual intervention",
-    "date": "22.06.2025 | 02:09",
-    "link": "https://archlinux.org/news/linux-firmware-2025061312fe085f-5-upgrade-requires-manual-intervention/",
+    "article": "waydroid >= 1.5.4-3 update may require manual intervention",
+    "date": "06.11.2025 | 01:35",
+    "link": "https://archlinux.org/news/waydroid-154-3-update-may-require-manual-intervention/",
     "removed": true
   },
   {
     "title": "Arch Linux: Recent news updates",
-    "article": "Plasma 6.4.0 will need manual intervention if you are on X11",
-    "date": "20.06.2025 | 10:08",
-    "link": "https://archlinux.org/news/plasma-640-will-need-manual-intervention-if-you-are-on-x11/",
+    "article": "dovecot >= 2.4 requires manual intervention",
+    "date": "31.10.2025 | 22:20",
+    "link": "https://archlinux.org/news/dovecot-24-requires-manual-intervention/",
     "removed": true
   },
   {
     "title": "Arch Linux: Recent news updates",
-    "article": "Transition to the new WoW64 wine and wine-staging",
-    "date": "16.06.2025 | 19:22",
-    "link": "https://archlinux.org/news/transition-to-the-new-wow64-wine-and-wine-staging/",
+    "article": "Recent service outages",
+    "date": "22.08.2025 | 01:01",
+    "link": "https://archlinux.org/news/recent-services-outages/",
     "removed": true
   }
 ]

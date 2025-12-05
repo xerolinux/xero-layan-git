@@ -20,7 +20,8 @@ import "../../tools/tools.js" as JS
 SimpleKCM {
     property alias cfg_relevantIcon: relevantIcon.value
     property string cfg_selectedIcon: plasmoid.configuration.selectedIcon
-    property alias cfg_indicatorStop: indicatorStop.checked
+    property alias cfg_badgePaused: badgePaused.checked
+    property alias cfg_badgeUpdated: badgeUpdated.checked
     property alias cfg_counterEnabled: counterEnabled.checked
     property alias cfg_counterOnLeft: counterOnLeft.checked
     property string cfg_counterColor: plasmoid.configuration.counterColor
@@ -54,10 +55,13 @@ SimpleKCM {
     property alias cfg_managementButton: managementButton.checked
     property alias cfg_upgradeButton: upgradeButton.checked
     property alias cfg_checkButton: checkButton.checked
+    property alias cfg_pinButton: pinButton.checked
+    property alias cfg_settingsButton: settingsButton.checked
     property alias cfg_tabBarVisible: tabBarVisible.checked
     property alias cfg_tabBarTexts: tabBarTexts.checked
 
     property bool inTray: (plasmoid.containmentDisplayHints & PlasmaCore.Types.ContainmentDrawsPlasmoidHeading)
+    property bool onDesktop: plasmoid.location === PlasmaCore.Types.Floating
     property bool horizontal: plasmoid.location === 3 || plasmoid.location === 4
     property bool counterOverlay: inTray || !horizontal
     property bool counterRow: !inTray && horizontal
@@ -189,8 +193,14 @@ SimpleKCM {
         }
 
         CheckBox {
-            Kirigami.FormData.label: i18n("Stopped interval") + ":"
-            id: indicatorStop
+            Kirigami.FormData.label: i18n("Pause badge") + ":"
+            id: badgePaused
+            text: i18n("Enable")
+        }
+
+        CheckBox {
+            Kirigami.FormData.label: i18n("Updated badge") + ":"
+            id: badgeUpdated
             text: i18n("Enable")
         }
 
@@ -687,13 +697,13 @@ SimpleKCM {
                 id: sortButton
                 icon.name: "sort-name"
             }
-        }
-        RowLayout {
-            enabled: showToolBar.checked
             CheckBox {
                 id: managementButton
                 icon.name: "tools"
             }
+        }
+        RowLayout {
+            enabled: showToolBar.checked
             CheckBox {
                 id: upgradeButton
                 icon.name: "akonadiconsole"
@@ -701,6 +711,16 @@ SimpleKCM {
             CheckBox {
                 id: checkButton
                 icon.name: "view-refresh"
+            }
+            CheckBox {
+                id: settingsButton
+                icon.name: "settings-configure"
+                enabled: !inTray
+            }
+            CheckBox {
+                id: pinButton
+                icon.name: "pin"
+                enabled: !inTray && !onDesktop
             }
         }
 

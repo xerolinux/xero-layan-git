@@ -11,8 +11,8 @@
     "Icon": "apdatifier-plasmoid",
     "Id": "com.github.exequtic.apdatifier",
     "Name": "Apdatifier",
-    "EnabledByDefault": false,
-    "Version": "2.9.4",
+    "EnabledByDefault": true,
+    "Version": "2.9.5",
     "License": "MIT",
     "BugReportUrl": "https://github.com/exequtic/apdatifier/issues",
     "Website": "https://github.com/exequtic/apdatifier"

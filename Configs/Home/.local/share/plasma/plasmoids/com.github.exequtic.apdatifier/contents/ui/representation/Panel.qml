@@ -19,7 +19,6 @@ MouseArea {
     id: mouseArea
 
     property bool wasExpanded: false
-    property bool inTray: (plasmoid.containmentDisplayHints & PlasmaCore.Types.ContainmentDrawsPlasmoidHeading)
     property bool horizontal: plasmoid.location === 3 || plasmoid.location === 4
     property int trayIconSize: horizontal ? trayIcon.width : trayIcon.height
     property bool counterOverlay: inTray || !horizontal
@@ -41,7 +40,7 @@ MouseArea {
     hoverEnabled: true
     acceptedButtons: cfg.rightAction ? Qt.AllButtons : Qt.LeftButton | Qt.MiddleButton
 
-    onEntered: sts.checktime = JS.getLastCheckTime()
+    onEntered: sts.checktime = JS.getCheckTime()
 
     onPressed: mouse => {
         wasExpanded = expanded
@@ -96,17 +95,17 @@ MouseArea {
                 QQC.Badge {
                     iconName: errorIcon
                     iconColor: Kirigami.Theme.negativeTextColor
-                    visible: sts.err
+                    visible: sts.error
                 }
                 QQC.Badge {
                     iconName: updatedIcon
                     iconColor: Kirigami.Theme.positiveTextColor
-                    visible: sts.updated
+                    visible: sts.updated && cfg.badgeUpdated
                 }
                 QQC.Badge {
                     iconName: pausedIcon
                     iconColor: Kirigami.Theme.neutralTextColor
-                    visible: sts.paused
+                    visible: sts.paused && cfg.checkMode !== "manual" && cfg.badgePaused
                 }
             }
         }
@@ -189,16 +188,16 @@ MouseArea {
     QQC.Badge {
         iconName: errorIcon
         iconColor: Kirigami.Theme.negativeTextColor
-        visible: counterOverlay && sts.err
+        visible: counterOverlay && sts.error
     }
     QQC.Badge {
         iconName: updatedIcon
         iconColor: Kirigami.Theme.positiveTextColor
-        visible: counterOverlay && sts.updated
+        visible: counterOverlay && sts.updated && cfg.badgeUpdated
     }
     QQC.Badge {
         iconName: pausedIcon
         iconColor: Kirigami.Theme.neutralTextColor
-        visible: counterOverlay && sts.paused
+        visible: counterOverlay && sts.paused && cfg.checkMode !== "manual" && cfg.badgePaused
     }
 }

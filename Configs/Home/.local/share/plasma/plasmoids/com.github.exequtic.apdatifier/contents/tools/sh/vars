@@ -11,7 +11,7 @@ localDir="$HOME/.local/share"
 iconsDir="$localDir/icons/breeze/status/24"
 notifDir="$localDir/knotifications6"
 appletDir="$localDir/plasma/plasmoids/$applet"
-tempDir="/tmp/apdatifier"
+tempDir="${TMPDIR:-/tmp}/apdatifier"
 
 config="$configDir/config.conf"
 icon1="apdatifier-plasmoid.svg"
@@ -50,6 +50,7 @@ declare -a var_names=(
     WIDGETS_PROCEED
     WIDGETS_RESTART
     WIDGETS_NODESC
+    WIDGETS_ERR
     WIDGETS_ERR_API
     WIDGETS_ERR_API_FAIL
     WIDGETS_ERR_UNKNOWN
@@ -60,6 +61,7 @@ declare -a var_names=(
     WIDGETS_ERR_NOTAGGED
     WIDGETS_ERR_TAGGED
     WIDGETS_ERR_PACKAGE_FAIL
+    NEWS_ERR
     MNG_OPT_01
     MNG_OPT_02
     MNG_OPT_03

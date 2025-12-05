@@ -27,18 +27,21 @@ PlasmoidItem {
     switchWidth: Kirigami.Units.gridUnit * 24
     switchHeight: Kirigami.Units.gridUnit * 16
 
-    Plasmoid.busy: plasmoid.location === PlasmaCore.Types.Floating ? false : States.busy
-    Plasmoid.status: cfg.relevantIcon > 0 ? (sts.count >= cfg.relevantIcon || sts.busy || sts.err) ? PlasmaCore.Types.ActiveStatus : PlasmaCore.Types.PassiveStatus : PlasmaCore.Types.ActiveStatus
+    Plasmoid.busy: plasmoid.location === PlasmaCore.Types.Floating ? false : sts.busy
+    Plasmoid.status: cfg.relevantIcon > 0 ? (sts.count >= cfg.relevantIcon || sts.busy || sts.error) ? PlasmaCore.Types.ActiveStatus : PlasmaCore.Types.PassiveStatus : PlasmaCore.Types.ActiveStatus
     Plasmoid.backgroundHints: PlasmaCore.Types.DefaultBackground | PlasmaCore.Types.ConfigurableBackground
     Plasmoid.icon: plasmoid.configuration.selectedIcon
 
-    toolTipMainText: !interval && sts.idle ? i18n("Auto check disabled") : ""
-    toolTipSubText: sts.busy ? sts.statusMsg : sts.err ? sts.errMsg : sts.checktime
+    toolTipMainText: sts.paused ? i18n("Auto check disabled") : ""
+    toolTipSubText: sts.busy ? sts.statusMsg : sts.checktime
 
-    property var check
+    hideOnWindowDeactivate: !pinned
+
+    property bool inTray: (plasmoid.containmentDisplayHints & PlasmaCore.Types.ContainmentDrawsPlasmoidHeading)
+    property bool onDesktop: plasmoid.location === PlasmaCore.Types.Floating
+    property bool pinned: false
     property var cache: []
-    property int time: plasmoid.configuration.time
-    property bool interval: plasmoid.configuration.interval
+    property string checkMode: plasmoid.configuration.checkMode
     property bool sorting: plasmoid.configuration.sorting
     property string rules: plasmoid.configuration.rules || ""
     property var pkg: plasmoid.configuration.packages || ""
@@ -47,18 +50,19 @@ PlasmoidItem {
 
     QtObject {
         id: sts
+        property var errors: []
         property int count: 0
         property bool busy: false
         property bool upgrading: false
-        property bool err: !!errMsg
-        property bool idle: !busy && !err
+        property bool error: !busy && errors.length > 0
+        property bool idle: !busy && !error
         property bool updated: idle && !count
         property bool pending: idle && count
-        property bool paused: idle && cfg.indicatorStop && !cfg.interval
-        property string errMsg: ""
+        property bool paused: idle && !scheduler.running
         property string statusMsg: ""
         property string statusIco: ""
         property string checktime: ""
+        property var proc: null
     }
 
     ListModel  {
@@ -99,10 +103,11 @@ PlasmoidItem {
     ]
 
     Timer {
-        id: searchTimer
-        interval: time * 1000 * 60
+        id: scheduler
+        interval: 10 * 1000
         repeat: true
-        onTriggered: JS.checkUpdates()
+        triggeredOnStart: true
+        onTriggered: JS.searchScheduler()
     }
 
     Timer {
@@ -129,8 +134,7 @@ PlasmoidItem {
         JS.refreshListModel()
     }
 
-    onTimeChanged: searchTimer.restart()
-    onIntervalChanged: interval ? searchTimer.start() : searchTimer.stop()
+    onCheckModeChanged: scheduler.restart()
     onSortingChanged: refresh()
     onRulesChanged: refresh()
     onConfigurationChanged: saveTimer.start()

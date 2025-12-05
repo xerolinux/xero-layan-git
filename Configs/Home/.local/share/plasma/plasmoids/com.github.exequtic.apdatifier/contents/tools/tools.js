@@ -9,13 +9,14 @@ const configFile = configDir + "config.conf"
 const cacheFile = configDir + "updates.json"
 const rulesFile = configDir + "rules.json"
 const newsFile = configDir + "news.json"
+const dbPath = "${TMPDIR:-/tmp}/checkup-db-${UID}"
 
 function execute(command, callback, stoppable) {
     const component = Qt.createComponent("../ui/components/Shell.qml")
     if (component.status === Component.Ready) {
         const componentObject = component.createObject(root)
         if (componentObject) {
-            if (stoppable) check = componentObject
+            if (typeof sts !== "undefined") sts.proc = componentObject
             componentObject.exec(command, callback)
         } else {
             Error(1, "Failed to create executable DataSource object")
@@ -38,9 +39,18 @@ function log(message) {
 
 function Error(code, err) {
     if (err) {
+        sts.errors = sts.errors.concat([{code: code, message: err.trim(), type: ""}])
         cfg.notifyErrors && notify.send("error", i18n("Exit code: ") + code, err.trim())
-        sts.errMsg = err.trim().substring(0, 150) + "..."
-        setStatusBar(code)
+        setStatusBar()
+        return true
+    }
+    return false
+}
+
+function handleError(code, err, type, onError) {
+    if (err) {
+        sts.errors = sts.errors.concat([{code: code, message: err.trim(), type: type}])
+        onError()
         return true
     }
     return false
@@ -100,7 +110,7 @@ function init() {
         checkDependencies()
         refreshListModel()
         updateActiveNews()
-        upgradingState(true)
+        upgradingState()
     }
 }
 
@@ -117,7 +127,7 @@ function saveConfig() {
 }
 
 function checkDependencies() {
-    const pkgs = "pacman checkupdates flatpak paru yay jq tmux alacritty foot ghostty gnome-terminal kitty konsole lxterminal ptyxis terminator tilix wezterm xterm yakuake"
+    const pkgs = "pacman flatpak paru pikaur yay jq tmux alacritty foot ghostty gnome-terminal kitty konsole lxterminal ptyxis terminator tilix wezterm xterm yakuake"
     const checkPkg = (pkgs) => `for pkg in ${pkgs}; do command -v $pkg || echo; done`
     const populate = (data) => data.map(item => ({ "name": item.split("/").pop(), "value": item }))
 
@@ -126,18 +136,17 @@ function checkDependencies() {
 
         const output = out.split("\n")
 
-        const [pacman, checkupdates, flatpak, paru, yay, jq, tmux ] = output.map(Boolean)
-        cfg.packages = { pacman, checkupdates, flatpak, paru, yay, jq, tmux }
-        if (!cfg.wrapper) cfg.wrapper = paru ? "paru" : yay ? "yay" : ""
+        const [pacman, flatpak, paru, pikaur, yay, jq, tmux ] = output.map(Boolean)
+        cfg.packages = { pacman, flatpak, paru, pikaur, yay, jq, tmux }
+        if (!cfg.wrapper) cfg.wrapper = paru ? "paru" : yay ? "yay" : pikaur ? "pikaur" : ""
 
         const terminals = populate(output.slice(7).filter(Boolean))
         cfg.terminals = terminals.length > 0 ? terminals : null
         if (!cfg.terminal) cfg.terminal = cfg.terminals.length > 0 ? cfg.terminals[0].value : ""
 
         if (!pacman) plasmoid.configuration.arch = false
-        if (!pacman || (!yay && !paru)) plasmoid.configuration.aur = false
+        if (!pacman || (!yay && !paru && !pikaur)) plasmoid.configuration.aur = false
         if (!flatpak) plasmoid.configuration.flatpak = false
-        if (!checkupdates) plasmoid.configuration.mirrors = "false"
         if (!tmux) plasmoid.configuration.tmuxSession = false
         if (!jq) {
             plasmoid.configuration.widgets = false
@@ -167,36 +176,33 @@ function management() {
 
 
 function enableUpgrading(state) {
+    if (sts.upgrading === state) return
     sts.busy = sts.upgrading = state
     if (state) {
-        if (upgradeTimer.running) return
         upgradeTimer.start()
-        searchTimer.stop()
+        scheduler.stop()
         sts.statusMsg = i18n("Upgrade in progress") + "..."
         sts.statusIco = cfg.ownIconsUI ? "toolbar_upgrade" : "akonadiconsole"
     } else {
-        upgradeTimer.stop()
-        setStatusBar()
+        execute(bash('upgrade', "postUpgrade"), (cmd, out, err, code) => {
+            upgradeTimer.stop()
+            if (!Error(code, err) && out) postUpgrade(out)
+            setStatusBar()
+            resumeScheduler()
+        })
     }
 }
 
-function upgradingState(startup) {
-    execute(`ps aux | grep "[a]pdatifier/contents/tools/sh/upgrade"`, (cmd, out, err, code) => {
-        if (out || err) {
-            enableUpgrading(true)
-        } else if (startup) {
-            if (!cfg.interval) return
-            cfg.checkOnStartup ? searchTimer.triggered() : searchTimer.start()
-        } else {
-            enableUpgrading(false)
-            execute(bash('upgrade', "postUpgrade"), (cmd, out, err, code) => postUpgrade(out))
-        }
-    })
+function upgradingState() {
+    const checkProc = `ps aux | grep "[a]pdatifier/contents/tools/sh/upgrade"`
+    execute(checkProc, (cmd, out, err, code) => enableUpgrading(!!(out || err)))
 }
 
 function postUpgrade(out) {
+    if (!out || !validJSON(out)) return
+    const updated = JSON.parse(out)
     const newList = cache.filter(cached => {
-        const current = JSON.parse(out).find(current => current.NM.replace(/ /g, "-").toLowerCase() === cached.NM)
+        const current = updated.find(pkg => pkg.NM.replace(/ /g, "-").toLowerCase() === cached.NM)
         return current && current.VO === cached.VO + cached.AC
     })
     if (JSON.stringify(cache) !== JSON.stringify(newList)) {
@@ -215,31 +221,21 @@ function upgradeSystem() {
 
 function checkUpdates() {
     if (sts.upgrading) return
+
+    sts.errors = []
+
     if (sts.busy) {
-        check.cleanup()
+        sts.busy = false
+        sts.proc.cleanup()
         setStatusBar()
+        resumeScheduler()
         return
     }
 
-    searchTimer.stop()
+    scheduler.stop()
     sts.busy = true
-    sts.errMsg = ""
 
-    const dbPath = pkg.checkupdates ? " --dbpath /tmp/apdatifier-db" : ""
-    const pkgsync = "pacman -Sl" + dbPath
-    const pkginfo = "pacman -Qi" + dbPath
-    const pkgfiles = "pacman -Ql" + dbPath
-
-    const checkupDB = "export CHECKUPDATES_DB=/tmp/apdatifier-db; checkupdates"
-    const checkupAUR = `${cfg.wrapper} -Qua` + dbPath
-
-    let arch = [], flatpak = [], widgets = []
-
-    const archCmd = 
-            !pkg.pacman || !cfg.arch ? false
-                : pkg.checkupdates
-                    ? cfg.aur ? `${checkupDB}; ${checkupAUR}` : `${checkupDB}`
-                    : cfg.aur ? `${cfg.wrapper} -Qu` : "pacman -Qu"
+    let archRepos = [], archAur = [], flatpak = [], widgets = []
 
     const feeds = [
         cfg.newsArch  && "'https://archlinux.org/feeds/news/'",
@@ -249,111 +245,87 @@ function checkUpdates() {
     ].filter(Boolean).join(' ')
 
             feeds ? checkNews() :
-          archCmd ? checkArch() :
+         cfg.arch ? checkRepos() :
+          cfg.aur ? checkAur() :
       cfg.flatpak ? checkFlatpak() :
       cfg.widgets ? checkWidgets() :
                     merge()
 
     function checkNews() {
+        const next = () => cfg.arch ? checkRepos() : cfg.aur ? checkAur() : cfg.flatpak ? checkFlatpak() : cfg.widgets ? checkWidgets() : merge()
         sts.statusIco = cfg.ownIconsUI ? "status_news" : "news-subscribe"
         sts.statusMsg = i18n("Checking latest news...")
-
         execute(bash('utils', 'rss', feeds), (cmd, out, err, code) => {
-            if (code) {
-                cfg.notifyErrors && notify.send("error", i18n("Cannot fetch news "), out)
-            } else {
-                if (out) updateNews(out)
-            }
-
-            archCmd ? checkArch() : cfg.flatpak ? checkFlatpak() : cfg.widgets ? checkWidgets() : merge()
-        }, true )
+            if (out) updateNews(out)
+            if (handleError(code, err, "news", next)) return
+            next()
+         })
     }
 
-    function checkArch() {
+    function checkRepos() {
+        const next = () => cfg.aur ? checkAur() : cfg.flatpak ? checkFlatpak() : cfg.widgets ? checkWidgets() : merge()
         sts.statusIco = cfg.ownIconsUI ? "status_package" : "apdatifier-package"
-        sts.statusMsg = i18n("Checking system updates...")
-
-        execute(archCmd, (cmd, out, err, code) => {
-            if (Error(code, err)) return
-            out ? allArch(out.split("\n")) : cfg.flatpak ? checkFlatpak() : cfg.widgets ? checkWidgets() : merge()
-        }, true )
+        sts.statusMsg = i18n("Synchronizing pacman databases...")
+        execute(bash('utils', 'syncdb'), (cmd, out, err, code) => {
+            if (handleError(code, err, "repositories", next)) return
+            sts.statusIco = cfg.ownIconsUI ? "status_package" : "apdatifier-package"
+            sts.statusMsg = i18n("Checking system updates...")
+            execute(`pacman -Qu --dbpath "${dbPath}" 2>&1`, (cmd, out, err, code) => {
+                if (handleError(code, err, "repositories", next)) return
+                const updates = out ? out.split("\n") : []
+                makeArchList(updates, "repositories").then(result => {
+                    archRepos = result
+                    next()
+                })
+            })
+        })
     }
 
-    function allArch(upd) {
-        execute(pkgsync, (cmd, out, err, code) => {
-            if (Error(code, err)) return
-            descArch(upd, out.split("\n").filter(line => /\[.*\]/.test(line)))
-        }, true )
-    }
-
-    function descArch(upd, all) {
-        const pkgs = upd.map(l => l.split(" ")[0]).join(' ')
-        execute(`${pkginfo} ${pkgs}`, (cmd, out, err, code) => {
-            if (Error(code, err)) return
-            iconsArch(upd, all, out, pkgs)
-        }, true )
-    }
-
-    function iconsArch(upd, all, desc, pkgs) {
-        const getIcons = `\
-            while read -r pkg file; do
-                [[ "$processed" == *"$pkg"* ]] && continue
-                icon=$(awk -F= '/^Icon=/ {print $2; exit}' "$file" 2>/dev/null || true) && [ -n "$icon" ] || continue
-                processed="$processed $pkg"
-                echo "$pkg $icon"
-            done < <(${pkgfiles} ${pkgs} | grep '/usr/share/applications/.*\.desktop$')`
-
-        execute(getIcons, (cmd, out, err, code) => {
-            const icons = (out && !err) ? out.split('\n').map(l => ({ NM: l.split(' ')[0], IN: l.split(' ')[1] })) : []
-            arch = makeArchList(upd, all, desc, icons)
-            cfg.flatpak ? checkFlatpak() : cfg.widgets ? checkWidgets() : merge()
-        }, true )
+    function checkAur() {
+        const next = () => cfg.flatpak ? checkFlatpak() : cfg.widgets ? checkWidgets() : merge()
+        sts.statusIco = cfg.ownIconsUI ? "status_package" : "apdatifier-package"
+        sts.statusMsg = i18n("Checking AUR updates...")
+        execute(cfg.wrapper + " -Qua", (cmd, out, err, code) => {
+            if (handleError(code, err, "aur", next)) return
+            const updates = out ? out.split("\n") : []
+            makeArchList(updates, "aur").then(result => {
+                archAur = result
+                next()
+            })
+        })
     }
 
     function checkFlatpak() {
+        const next = () => cfg.widgets ? checkWidgets() : merge()
         sts.statusIco = cfg.ownIconsUI ? "status_flatpak" : "apdatifier-flatpak"
-        sts.statusMsg = i18n("Checking flatpak updates...")
-        execute("flatpak update --appstream >/dev/null 2>&1; flatpak remote-ls --app --updates --show-details", (cmd, out, err, code) => {
-            if (Error(code, err)) return
-            out ? descFlatpak(out.trim()) : cfg.widgets ? checkWidgets() : merge()
-        }, true )
-    }
-
-    function descFlatpak(upd) {
-        execute("flatpak list --app --columns=application,version,active", (cmd, out, err, code) => {
-            if (Error(code, err)) return
-            flatpak = out ? makeFlatpakList(upd, out.trim()) : []
-            cfg.widgets ? checkWidgets() : merge()
-        }, true )
+        sts.statusMsg = i18n("Synchronizing flatpak appstream...")
+        execute("flatpak update --appstream >/dev/null 2>&1", (cmd, out, err, code) => {
+            if (handleError(code, err, "flatpak", next)) return
+            sts.statusIco = cfg.ownIconsUI ? "status_flatpak" : "apdatifier-flatpak"
+            sts.statusMsg = i18n("Checking flatpak updates...")
+            execute("flatpak remote-ls --app --updates --show-details", (cmd, out, err, code) => {
+                if (handleError(code, err, "flatpak", next)) return
+                const updates = out.trim()
+                makeFlatpakList(updates, "flatpak").then(result => {
+                    flatpak = result
+                    next()
+                })
+            })
+        })
     }
 
     function checkWidgets() {
         sts.statusIco = cfg.ownIconsUI ? "status_widgets" : "start-here-kde-plasma-symbolic"
         sts.statusMsg = i18n("Checking widgets updates...")
-
         execute(bash('widgets', 'check'), (cmd, out, err, code) => {
-            if (Error(code, err)) return
-            out = out.trim()
-
-            const errorTexts = {
-                "127": i18n("Unable check widgets: ") + i18n("Required installed") + " jq",
-                  "1": i18n("Unable check widgets: ") + i18n("Failed to retrieve data from the API"),
-                  "2": i18n("Unable check widgets: ") + i18n("Too many API requests in the last 15 minutes from your IP address, please try again later"),
-                  "3": i18n("Unable check widgets: ") + i18n("Unkwnown error")
-            }
-            
-            if (out in errorTexts) {
-                Error(out, errorTexts[out])
-                return
-            }
-
-            widgets = JSON.parse(out)
+            if (handleError(code, err, "widgets", merge)) return
+            widgets = JSON.parse(out.trim())
             merge()
-        }, true )
+        })
     }
 
     function merge() {
-        finalize(keys(arch.concat(flatpak, widgets)))
+        finalize(keys(archRepos.concat(archAur, flatpak, widgets)))
     }
 }
 
@@ -401,67 +373,93 @@ function restoreNewsList() {
 }
 
 
-function makeArchList(updates, all, description, icons) {
-    if (!updates || !all || !description) return []
-    description = description.replace(/^Installed From\s*:.+\n?/gm, '')
-    const packagesData = description.split("\n\n")
-    const skip = new Set([1, 3, 5, 9, 11, 15, 16, 19, 20])
-    const empty = new Set([6, 7, 8, 10, 12, 13])
-    const keyNames = {
-         0: "NM",  2: "DE",  4: "LN",  6: "GR",  7: "PR",  8: "DP",
-        10: "RQ", 12: "CF", 13: "RP", 14: "IS", 17: "DT", 18: "RN"
-    }
+function makeArchList(updates, source) {
+    return new Promise((resolve) => {
+        if (!updates) {
+            resolve([])
+        } else {
+            const pkgs = updates.map(l => l.split(" ")[0]).join(' ')
+            execute("pacman -Sl --dbpath " + dbPath, (cmd, out, err, code) => {
+                if (code && handleError(code, err, source, () => resolve([]))) return
+                const syncInfo = out.split("\n").filter(line => /\[.*\]/.test(line))
+                execute("pacman -Qi " + pkgs, (cmd, out, err, code) => {
+                    if (code && handleError(code, err, source, () => resolve([]))) return
+                    const desc = out.trim()
+                    execute(bash('utils', 'getIcons', pkgs), (cmd, out, err, code) => {
+                        const icons = (out && !err) ? out.split('\n').map(l => ({ NM: l.split(' ')[0], IN: l.split(' ')[1] })) : []
+                        const description = desc.replace(/^Installed From\s*:.+\n?/gm, '')
+                        const packagesData = description.split("\n\n")
+                        const skip = new Set([1, 3, 5, 9, 11, 15, 16, 19, 20])
+                        const empty = new Set([6, 7, 8, 10, 12, 13])
+                        const keyNames = {
+                            0: "NM",  2: "DE",  4: "LN",  6: "GR",  7: "PR",  8: "DP",
+                            10: "RQ", 12: "CF", 13: "RP", 14: "IS", 17: "DT", 18: "RN"
+                        }
 
-    let extendedList = packagesData.map(packageData => {
-        packageData = packageData.split('\n').filter(line => line.includes(" : "))
-        let packageObj = {}
-        packageData.forEach((line, index) => {
-            if (skip.has(index)) return
-            const [, value] = line.split(/\s* : \s*/)
-            if (empty.has(index) && value.charAt(0) === value.charAt(0).toUpperCase()) return
-            if (keyNames[index]) packageObj[keyNames[index]] = value.trim()
-        })
+                        let extendedList = packagesData.map(packageData => {
+                            packageData = packageData.split('\n').filter(line => line.includes(" : "))
+                            let packageObj = {}
+                            packageData.forEach((line, index) => {
+                                if (skip.has(index)) return
+                                const [, value] = line.split(/\s* : \s*/)
+                                if (empty.has(index) && value.charAt(0) === value.charAt(0).toUpperCase()) return
+                                if (keyNames[index]) packageObj[keyNames[index]] = value.trim()
+                            })
 
-        if (Object.keys(packageObj).length > 0) {
-            updates.forEach(str => {
-                const [name, verold, , vernew] = str.split(" ")
-                if (packageObj.NM === name) {
-                    const verNew = (vernew === "latest-commit") ? i18n("latest commit") : vernew
-                    Object.assign(packageObj, { VO: verold, VN: verNew })
-                }
+                            if (Object.keys(packageObj).length > 0) {
+                                updates.forEach(str => {
+                                    const [name, verold, , vernew] = str.split(" ")
+                                    if (packageObj.NM === name) {
+                                        const verNew = (vernew === "latest-commit") ? i18n("latest commit") : vernew
+                                        Object.assign(packageObj, { VO: verold, VN: verNew })
+                                    }
+                                })
+
+                                const foundRepo = syncInfo.find(str => packageObj.NM === str.split(" ")[1])
+                                packageObj.RE = foundRepo ? foundRepo.split(" ")[0] : (packageObj.NM.endsWith("-git") || packageObj.VN === i18n("latest commit") ? "devel" : "aur")
+
+                                const foundIcon = icons.find(item => item.NM === packageObj.NM)
+                                if (foundIcon) packageObj.IN = foundIcon.IN
+                            }
+
+                            return packageObj
+                        })
+
+                        extendedList.pop()
+
+                        resolve([...new Map(extendedList.map(item => [item.NM, item])).values()])
+                    })
+                })
             })
-
-            const foundRepo = all.find(str => packageObj.NM === str.split(" ")[1])
-            packageObj.RE = foundRepo ? foundRepo.split(" ")[0] : (packageObj.NM.endsWith("-git") || packageObj.VN === i18n("latest commit") ? "devel" : "aur")
-
-            const foundIcon = icons.find(item => item.NM === packageObj.NM)
-            if (foundIcon) packageObj.IN = foundIcon.IN
         }
-
-        return packageObj
     })
-
-    extendedList.pop()
-    return extendedList
 }
 
 
-function makeFlatpakList(updates, description) {
-    if (!updates || !description) return []
-    const list = description.split("\n").reduce((obj, line) => {
-        const [ID, VO, AC] = line.split("\t").map(entry => entry.trim())
-        obj[ID] = { VO, AC }
-        return obj
-    }, {})
-
-    return updates.split("\n").map(line => {
-        const [NM, DE, ID, VN, BR, , RE, , CM, RT, IS, DS] = line.split("\t").map(entry => entry.trim())
-        const { VO, AC } = list[ID]
-        return {
-            NM: NM.replace(/ /g, "-").toLowerCase(),
-            DE, LN: "https://flathub.org/apps/" + ID,
-            ID, BR, RE, AC, CM, RT, IS, DS, VO,
-            VN: VO === VN ? i18n("latest commit") : VN
+function makeFlatpakList(updates) {
+    return new Promise((resolve) => {
+        if (!updates) {
+            resolve([])
+        } else {
+            execute("flatpak list --app --columns=application,version,active", (cmd, out, err, code) => {
+                if (code && handleError(code, err, "flatpak", () => resolve([]))) return
+                const description = out.trim().split("\n").reduce((obj, line) => {
+                    const [ID, VO, AC] = line.split("\t").map(entry => entry.trim())
+                    obj[ID] = { VO, AC }
+                    return obj
+                }, {})
+                const extendedList = updates.split("\n").map(line => {
+                    const [NM, DE, ID, VN, BR, , RE, , CM, RT, IS, DS] = line.split("\t").map(entry => entry.trim())
+                    const { VO, AC } = description[ID]
+                    return {
+                        NM: NM.replace(/ /g, "-").toLowerCase(),
+                        DE, LN: "https://flathub.org/apps/" + ID,
+                        ID, BR, RE, AC, CM, RT, IS, DS, VO,
+                        VN: VO === VN ? i18n("latest commit") : VN
+                    }
+                })
+                resolve(extendedList)
+            })
         }
     })
 }
@@ -503,7 +501,15 @@ function refreshListModel(list) {
 
 
 function finalize(list) {
+    sts.busy = false
+    resumeScheduler()
+
     cfg.timestamp = new Date().getTime().toString()
+
+    if (cfg.notifyErrors && sts.error) {
+        const notifyMsg = sts.errors.map(err => `<b>${err.type}</b> => ${err.message} (Exit code ${err.code})`).join('\n\n')
+        notify.send("error", i18np("%1 error occurred", "%1 errors occurred", sts.errors.length), notifyMsg)
+    }
 
     if (!list) {
         listModel.clear()
@@ -512,6 +518,32 @@ function finalize(list) {
         sts.count = 0
         setStatusBar()
         return
+    }
+
+    if (sts.error && cache.length > 0) {
+        var errorTypes = {}
+        for (var i = 0; i < sts.errors.length; i++) errorTypes[sts.errors[i].type] = true
+
+        var currentNames = {}
+        for (var j = 0; j < list.length; j++) currentNames[list[j].NM] = true
+        
+        var cachedPackages = []
+        for (var k = 0; k < cache.length; k++) {
+            var cached = cache[k]
+            if (currentNames[cached.NM]) continue
+            
+            if (errorTypes.repositories && cached.RE && cached.RE !== "aur" && cached.RE !== "devel") {
+                cachedPackages.push(cached)
+            } else if (errorTypes.aur && (cached.RE === "aur" || cached.RE === "devel")) {
+                cachedPackages.push(cached)
+            } else if (errorTypes.flatpak && cached.ID) { 
+                cachedPackages.push(cached)
+            } else if (errorTypes.widgets && cached.CN) {
+                cachedPackages.push(cached)
+            }
+        }
+
+        list = list.concat(cachedPackages)
     }
 
     refreshListModel(list)
@@ -551,32 +583,95 @@ function saveCache(list) {
 }
 
 
-function setStatusBar(code) {
-    sts.statusIco = sts.err ? "0" : sts.count > 0 ? "1" : "2"
-    sts.statusMsg = sts.err ? "Exit code: " + code : sts.count > 0 ? sts.count + " " + i18np("update is pending", "updates are pending", sts.count) : ""
-    sts.busy = false
-    !cfg.interval ? searchTimer.stop() : searchTimer.restart()
+function setStatusBar() {
+    if (sts.count > 0) {
+        sts.statusIco = cfg.ownIconsUI ? "status_pending" : "accept_time_event"
+        sts.statusMsg = sts.count + " " + i18np("update is pending", "updates are pending", sts.count)
+    } else {
+        sts.statusIco = cfg.ownIconsUI ? "status_blank" : ""
+        sts.statusMsg = ""
+    }
+}
+
+function resumeScheduler() {
+    if (cfg.checkMode !== "manual") {
+        scheduler.start()
+    }
+}
+
+function searchScheduler(options) {
+    const mode = cfg.checkMode
+    if (mode === "manual") {
+        scheduler.stop()
+        return
+    }
+
+    const currTime = new Date().getTime()
+    const lastCheck = parseInt(cfg.timestamp) || 0
+    let nextCheck = null
+
+    if (mode === "interval") {
+        const interval = parseFloat(cfg.intervalMinutes)
+        const intervalMs = interval * 60 * 1000
+        nextCheck = lastCheck ? (lastCheck + intervalMs) : (currTime + intervalMs)
+    } else if (mode === "daily") {
+        const scheduled = new Date(currTime)
+        scheduled.setHours(cfg.dailyHour, cfg.dailyMinute, 0, 0)
+        if (scheduled.getTime() <= currTime) scheduled.setDate(scheduled.getDate() + 1)
+        nextCheck = scheduled.getTime()
+    } else if (mode === "weekly") {
+        const scheduled = new Date(currTime)
+        const targetDay = Number(cfg.weeklyDay)
+        const daysAhead = (targetDay - scheduled.getDay() + 7) % 7
+        scheduled.setDate(scheduled.getDate() + daysAhead)
+        scheduled.setHours(cfg.weeklyHour, cfg.weeklyMinute, 0, 0)
+        if (scheduled.getTime() <= currTime) scheduled.setDate(scheduled.getDate() + 7)
+        nextCheck = scheduled.getTime()
+    }
+
+    options = options || {}
+    if (options.simulate) return nextCheck
+
+    if (nextCheck && nextCheck <= (currTime + 10000) && nextCheck > lastCheck) {
+        checkUpdates()
+    }
+
+    return
 }
 
 
-function getLastCheckTime() {
-    if (!cfg.timestamp) return ""
+function getCheckTime() {
+    const currTime = new Date().getTime()
+    const lastCheck = parseInt(cfg.timestamp) || currTime
 
-    const diff = new Date().getTime() - parseInt(cfg.timestamp)
-    const sec = Math.round((diff / 1000) % 60)
-    const min = Math.floor((diff / (1000 * 60)) % 60)
-    const hrs = Math.floor(diff / (1000 * 60 * 60))
+    const formatDelta = (ms1, ms2) => {
+        const diff = Math.max(0, Math.floor((ms1 - ms2) / 1000))
+        const days = Math.floor(diff / 86400)
+        const hours = Math.floor((diff % 86400) / 3600)
+        const minutes = Math.floor((diff % 3600) / 60)
+        const seconds = diff % 60
+        const parts = []
+        if (days > 0) parts.push([days, i18np("%1 day", "%1 days", days)])
+        if (hours > 0) parts.push([hours, i18np("%1 hour", "%1 hours", hours)])
+        if (minutes > 0) parts.push([minutes, i18np("%1 minute", "%1 minutes", minutes)])
+        if (parts.length === 0 && seconds > 0) return i18n("less than a minute")
+        if (seconds > 0) parts.push([seconds, i18np("%1 second", "%1 seconds", seconds)])
+        const take = parts.slice(0, 2).map(p => p[1])
+        return take.join(' ')
+    }
 
-    const lastcheck = i18n("Last check:")
-    const second = i18np("%1 second", "%1 seconds", sec)
-    const minute = i18np("%1 minute", "%1 minutes", min)
-    const hour = i18np("%1 hour", "%1 hours", hrs)
-    const ago = i18n("ago")
+    const lastCheckStr = (currTime > lastCheck) ? `${i18n("Last check:")} ${formatDelta(currTime, lastCheck)} ${i18n("ago")}` : ""
 
-    if (hrs === 0 && min === 0) return `${lastcheck} ${second} ${ago}`
-    if (hrs === 0) return `${lastcheck} ${minute} ${second} ${ago}`
-    if (min === 0) return `${lastcheck} ${hour} ${ago}`
-    return `${lastcheck} ${hour} ${minute} ${ago}`
+    if (!scheduler.running) return lastCheckStr
+
+    const nextCheck = searchScheduler({ simulate: true })
+    if (!nextCheck) return lastCheckStr
+
+    const nextCheckStr = (currTime < nextCheck) ? `${i18n("Next check in:")} ${formatDelta(nextCheck, currTime)}` : ""
+
+    if (lastCheckStr && nextCheckStr) return `${lastCheckStr}\n${nextCheckStr}`
+    if (lastCheckStr && !nextCheckStr) return lastCheckStr
+    if (!lastCheckStr && nextCheckStr) return nextCheckStr
 }
 
 
@@ -645,8 +740,9 @@ function keys(list) {
 }
 
 
-function switchInterval() {
-    cfg.interval = !cfg.interval
+function switchScheduler() {
+    if (cfg.checkMode === "manual" || sts.busy) return
+    scheduler.running ? scheduler.stop() : scheduler.start()
 }
 
 function toFileFormat(obj) {

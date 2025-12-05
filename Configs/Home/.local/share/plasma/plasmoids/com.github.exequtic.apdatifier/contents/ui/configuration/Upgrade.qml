@@ -219,20 +219,26 @@ SimpleKCM {
             ButtonGroup {
                 id: wrappersGroup
             }
-
             RadioButton {
                 ButtonGroup.group: wrappersGroup
                 text: "paru"
                 enabled: pkg.paru
-                onCheckedChanged: cfg_wrapper = checked ? "paru" : "yay"
-                Component.onCompleted: checked = plasmoid.configuration.wrapper === text
+                checked: plasmoid.configuration.wrapper === text
+                onCheckedChanged: if (checked) cfg_wrapper = text
             }
-
             RadioButton {
                 ButtonGroup.group: wrappersGroup
                 text: "yay"
                 enabled: pkg.yay
-                Component.onCompleted: checked = plasmoid.configuration.wrapper === text
+                checked: plasmoid.configuration.wrapper === text
+                onCheckedChanged: if (checked) cfg_wrapper = text
+            }
+            RadioButton {
+                ButtonGroup.group: wrappersGroup
+                text: "pikaur"
+                enabled: pkg.pikaur
+                checked: plasmoid.configuration.wrapper === text
+                onCheckedChanged: if (checked) cfg_wrapper = text
             }
         }
 
@@ -315,7 +321,7 @@ SimpleKCM {
             }
 
             Kirigami.ContextualHelpButton {
-                toolTipText: i18n("Required installed") + " pacman-contrib." + i18n("<br><br>Also see https://archlinux.org/mirrorlist (click button to open link)")
+                toolTipText: i18n("Also see https://archlinux.org/mirrorlist (click button to open link)")
                 onClicked: Qt.openUrlExternally("https://archlinux.org/mirrorlist")
             }
         }
@@ -335,7 +341,7 @@ SimpleKCM {
                 ButtonGroup.group: generator
                 id: mirrors
                 text: i18n("Disabled")
-                enabled: pkg.pacman && pkg.checkupdates
+                enabled: pkg.pacman
                 checked: {
                     plasmoid.configuration.mirrors === "false"
                 }

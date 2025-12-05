@@ -195,6 +195,15 @@ combineFiles() {
     done
 }
 
+getIcons() {
+    while read -r pkg file; do
+        [[ "$processed" == *"$pkg"* ]] && continue
+        icon=$(awk -F= '/^Icon=/ {print $2; exit}' "$file" 2>/dev/null || true) && [ -n "$icon" ] || continue
+        processed="$processed $pkg"
+        echo "$pkg $icon"
+    done < <(pacman -Ql "$@" | grep '/usr/share/applications/.*\.desktop$')
+}
+
 updateJson() {
     cat <<< "$2" > "$1.tmp" && mv "$1.tmp" "$1"
 }
@@ -206,6 +215,7 @@ rss() {
     trap cleanup EXIT
 
     local newsFile="$configDir/news.json"
+    local errors=""
 
     if [[ ! -s "$newsFile" ]] \
     || ! jq -e '.' "$newsFile" >/dev/null 2>&1 \
@@ -215,15 +225,21 @@ rss() {
 
     for url in "$@"; do
         local rssFile=$(mktemp "$tempDir/XXXXXX.xml")
-        curl -s -o "$rssFile" --connect-timeout 5 --retry 2 --max-time 60 --url "$url" 2>/dev/null
-        xmllint --noout "$rssFile" 2>/dev/null || { echo $url; exit 1; }
+        curl -s -o "$rssFile" --connect-timeout 5 --retry 2 --max-time 10 --url "$url" 2>/dev/null
+        xmllint --noout "$rssFile" 2>/dev/null || {
+            errors+="$url "
+            continue
+        }
 
         local title=$(xmllint --xpath "string(/rss/channel/title)" $rssFile)
         local article=$(xmllint --xpath "string(/rss/channel/item[1]/title)" $rssFile)
         local date=$(date -d "$(xmllint --xpath 'string(/rss/channel/item[1]/pubDate)' $rssFile)" +"%d.%m.%Y | %H:%M")
         local link=$(xmllint --xpath "string(/rss/channel/item[1]/link)" $rssFile)
 
-        [[ -z "$title" || -z "$article" || -z "$date" || -z "$link" ]] && { echo $url; exit 1; }
+        [[ -z "$title" || -z "$article" || -z "$date" || -z "$link" ]] && {
+            errors+="$url "
+            continue
+        }
 
         while (( $(jq "[.[] | select(.title == \"$title\")] | length" "$newsFile") > newsKeep )); do
             index=$(jq --arg title "$title" 'to_entries | reverse | map(select(.value.title == $title)) | .[0].key' $newsFile)
@@ -239,6 +255,29 @@ rss() {
     updateJson $newsFile "$(jq 'sort_by(.date | strptime("%d.%m.%Y | %H:%M") | mktime) | reverse' $newsFile)"
 
     jq . $newsFile
+
+    if [[ -n "$errors" ]]; then
+        errors="$NEWS_ERR: ${errors// /, }"
+        errors="${errors%, }"
+        echo "$errors" >&2
+        exit 1
+    fi
+}
+
+sync_dbs() {
+    ! type -p fakeroot >/dev/null && {
+        echo "fakeroot not found" >&2
+        exit 127
+    }
+    db_conf="$(pacman-conf DBPath)"
+    dbPath="${TMPDIR:-/tmp}/checkup-db-${UID}"
+    test -f $dbPath/db.lck && rm -f $dbPath/db.lck
+    mkdir -p "$dbPath"
+    ln -sf "${db_conf}/local" "$dbPath" &> /dev/null
+    ! fakeroot -- pacman -Sy --dbpath "$dbPath" --logfile /dev/null 2>/dev/null && {
+        echo "Failed to synchronize pacman databases" >&2
+        exit 1
+    }
 }
 
 install_devel() {
@@ -374,8 +413,10 @@ uninstall() {
 }
 
 case "$1" in
+          "syncdb") sync_dbs ;;
              "rss") shift; rss "$@" ;;
     "combineFiles") shift; combineFiles $1 ;;
+        "getIcons") shift; getIcons "$@" ;;
       "installDev") install_devel ;;
    "installStable") install_stable ;;
        "uninstall") uninstall ;;

@@ -1,6 +1,7 @@
-# Traducción de apdatifier en Español
+# Translation of apdatifier in uk_UA
 # Copyright (C) 2025
-# Este archivo se distribuye bajo la misma licencia que el paquete apdatifier.
+# This file is distributed under the same license as the apdatifier package.
+# Yuriy Yasynskyy <yurij.yasinskij@gmail.com>, 2025.
 #
 #, fuzzy
 msgid ""
@@ -8,1171 +9,1181 @@ msgstr ""
 "Project-Id-Version: apdatifier\n"
 "Report-Msgid-Bugs-To: https://github.com/exequtic/apdatifier\n"
 "POT-Creation-Date: 2025-12-05 08:45+0300\n"
-"PO-Revision-Date: 2024-05-27 15:58-0600\n"
-"Last-Translator: RodvinSanchez\n"
-"Language-Team: Español\n"
-"Language: es\n"
+"PO-Revision-Date: 2025-11-14 21:00+0200\n"
+"Last-Translator: Yuriy Yasynskyy <yurij.yasinskij@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: uk_UA\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
 
 #: ../contents/config/config.qml ../contents/ui/configuration/Upgrade.qml
 msgid "General"
-msgstr "General"
+msgstr "Основне"
 
 #: ../contents/config/config.qml ../contents/tools/sh/messages
 msgid "Upgrade"
-msgstr "Actualizar"
+msgstr "Оновлення"
 
 #: ../contents/config/config.qml
 msgid "Appearance"
-msgstr "Apariencia"
+msgstr "Зовнішній вигляд"
 
 #: ../contents/config/config.qml
 msgid "Rules"
-msgstr "Reglas"
+msgstr "Правила"
 
 #: ../contents/config/config.qml
 msgid "Support me"
-msgstr "Apóyame"
+msgstr "Підтримати мене"
 
 #: ../contents/tools/sh/messages ../contents/tools/tools.js
 msgid "Upgrade in progress"
-msgstr "Actualización en progreso"
+msgstr "Виконується оновлення"
 
 #: ../contents/tools/sh/messages
 msgid "Full system upgrade"
-msgstr "Actualización completa del sistema"
+msgstr "Повне оновлення системи"
 
 #: ../contents/tools/sh/messages
 msgid "Flatpak Upgrade"
-msgstr "Actualización de Flatpak"
+msgstr "Оновлення Flatpak"
 
 #: ../contents/tools/sh/messages
 msgid "Plasma Widgets Upgrade"
-msgstr "Actualización de Widgets de Plasma"
+msgstr "Оновлення Plasma Віджетів"
 
 #: ../contents/tools/sh/messages
 msgid "Total execution time:"
-msgstr "Tiempo total de ejecución:"
+msgstr "Загальний час виконання:"
 
 #: ../contents/tools/sh/messages
 msgid "Critical package(s) updated, reboot may be required:"
-msgstr "Paquete(s) crítico(s) actualizado(s), puede ser necesario reiniciar:"
+msgstr "Оновлені критичні пакети, може знадобитися перезавантаження:"
 
 #: ../contents/tools/sh/messages
 msgid "Do you want to reboot now?"
-msgstr "¿Deseas reiniciar ahora?"
+msgstr "Ви хочете перезавантажитись зараз?"
 
 #: ../contents/tools/sh/messages
 msgid "Press Enter to close"
-msgstr "Presiona Enter para cerrar"
+msgstr "Натисніть Enter, щоб закрити"
 
 #: ../contents/tools/sh/messages
 msgid "Skipped..."
-msgstr "Omitido..."
+msgstr "Пропущено..."
 
 #: ../contents/tools/sh/messages
 msgid "Fetching the latest filtered mirror list"
-msgstr "Obteniendo la lista de espejos filtrados más reciente"
+msgstr "Отримання списку останніх дзеркал"
 
 #: ../contents/tools/sh/messages
 msgid "Ranking mirrors by their connection and opening speed"
-msgstr "Clasificando espejos por su velocidad de conexión y apertura"
+msgstr "Сортування дзеркал за швидкістю"
 
 #: ../contents/tools/sh/messages
 msgid "Check your mirrorlist generator settings..."
-msgstr "Verifica la configuración de tu generador de lista de espejos..."
+msgstr "Перевірте налаштування генератора списку дзеркал..."
 
 #: ../contents/tools/sh/messages
 msgid "was updated with the following servers:"
-msgstr "fue actualizado con los siguientes servidores:"
+msgstr "було оновлено з наступних серверів:"
 
 #: ../contents/tools/sh/messages
 msgid "To write to the mirrorlist file, sudo privileges are required"
-msgstr "Para escribir en el archivo mirrorlist, se requieren privilegios de sudo"
+msgstr "Для запису в файл mirrorlist потрібні права адміністратора"
 
 #: ../contents/tools/sh/messages
 msgid "Your current mirrorlist:"
-msgstr "Tu lista de espejos actual:"
+msgstr "Ваш поточний список дзеркал:"
 
 #: ../contents/tools/sh/messages
 msgid "For some widgets you may need to Log Out or restart plasmashell after upgrade"
-msgstr "Para algunos widgets, puede que necesites cerrar sesión o reiniciar plasmashell después de actualizar"
+msgstr "Для деяких віджетів вам може знадобитися вийти, або перезавантажити plasmashell після оновлення"
 
 #: ../contents/tools/sh/messages
 msgid "Checking widgets for updates"
-msgstr "Verificando actualizaciones de widgets"
+msgstr "Перевірка оновлень віджетів"
 
 #: ../contents/tools/sh/messages
 msgid "Fetching data from the API"
-msgstr "Obteniendo datos de la API"
+msgstr "Отримання даних з API"
 
 #: ../contents/tools/sh/messages
 msgid "Getting the download link"
-msgstr "Obteniendo el enlace de descarga"
+msgstr "Отримання посилання для завантаження"
 
 #: ../contents/tools/sh/messages
 msgid "Downloading package"
-msgstr "Descargando paquete"
+msgstr "Завантаження пакета"
 
 #: ../contents/tools/sh/messages
 msgid "Proceed with upgrade?"
-msgstr "¿Continuar con la actualización?"
+msgstr "Продовжити оновлення?"
 
 #: ../contents/tools/sh/messages
 msgid "Restart plasmashell now?"
-msgstr "¿Reiniciar plasmashell ahora?"
+msgstr "Перезавантажити plasmashell зараз?"
 
 #: ../contents/tools/sh/messages
 msgid "No description"
-msgstr "Sin descripción"
+msgstr "Немає опису"
 
 #: ../contents/tools/sh/messages
 msgid "Unable check widgets: "
-msgstr "No se pueden verificar widgets: "
+msgstr "Неможливо перевірити віджети: "
 
 #: ../contents/tools/sh/messages
 msgid "Too many API requests in the last 15 minutes from your IP address, please try again later"
-msgstr "Demasiadas solicitudes a la API en los últimos 15 minutos desde tu dirección IP, por favor intenta nuevamente más tarde"
+msgstr "Занадто багато API запитів з вашого IP за останні 15 хвилин, спробуйте пізніше"
 
 #: ../contents/tools/sh/messages
 msgid "Failed to retrieve data from the API"
-msgstr "Error al obtener datos de la API"
+msgstr "Не вдалось отримати дані API"
 
 #: ../contents/tools/sh/messages
 msgid "Unkwnown error"
-msgstr "Error desconocido"
+msgstr "Невідома помилка"
 
 #: ../contents/tools/sh/messages
 msgid "File metadata.json not found"
-msgstr "Archivo metadata.json no encontrado"
+msgstr "Файл metadata.json не знайдено"
 
 #: ../contents/tools/sh/messages
 msgid "Errors in metadata.json file"
-msgstr "Errores en el archivo metadata.json"
+msgstr "Помилки в файлі metadata.json"
 
 #: ../contents/tools/sh/messages
 msgid "Unsupported file format"
-msgstr "Formato de archivo no soportado"
+msgstr "Формат файлу не підтримується"
 
 #: ../contents/tools/sh/messages
 msgid "No files for download"
-msgstr "No hay archivos para descargar"
+msgstr "Немає файлів для завантаження"
 
 #: ../contents/tools/sh/messages
 msgid "No file tagged with version"
-msgstr "Ningún archivo etiquetado con versión"
+msgstr "Немає файлу з тегом версії"
 
 #: ../contents/tools/sh/messages
 msgid "Multiple files are tagged with version"
-msgstr "Múltiples archivos están etiquetados con versión"
+msgstr "Декілька файлів мають тег версії"
 
 #: ../contents/tools/sh/messages
 msgid "Failed to download the package"
-msgstr "Error al descargar el paquete"
+msgstr "Не вдалось завантажити пакет"
 
 #: ../contents/tools/sh/messages
 msgid "Cannot fetch news "
-msgstr "No se pueden obtener noticias "
+msgstr "Не вдалося отримати новини "
 
 #: ../contents/tools/sh/messages
 msgid "List all available packages in repositories"
-msgstr "Listar todos los paquetes disponibles en los repositorios"
+msgstr "Список всіх доступних пакетів в репозиторіях"
 
 #: ../contents/tools/sh/messages
 msgid "List all installed packages"
-msgstr "Listar todos los paquetes instalados"
+msgstr "Список всіх встановлених пакетів"
 
 #: ../contents/tools/sh/messages
 msgid "List explicitly installed packages"
-msgstr "Listar paquetes instalados explícitamente"
+msgstr "Список явно встановлених пакетів"
 
 #: ../contents/tools/sh/messages
 msgid "List explicitly installed packages and isn't a dependency of anything"
-msgstr "Listar paquetes instalados explícitamente y que no son dependencia de nada"
+msgstr "Список явно встановлених пакетів, які не є залежностями"
 
 #: ../contents/tools/sh/messages
 msgid "List installed dependencies that aren't needed anymore (orphans)"
-msgstr "Listar dependencias instaladas que ya no son necesarias (huérfanos)"
+msgstr "Список встановлених непотрібних залежностей (сироти)"
 
 #: ../contents/tools/sh/messages
 msgid "Uninstall orphan packages"
-msgstr "Desinstalar paquetes huérfanos"
+msgstr "Видалити пакети сироти"
 
 #: ../contents/tools/sh/messages
 msgid "Install (downgrade) a package from cache"
-msgstr "Instalar (revertir) un paquete desde la caché"
+msgstr "Встановити пакет (понизити версію) з кешу"
 
 #: ../contents/tools/sh/messages
 msgid "Remove ALL cached packages"
-msgstr "Eliminar TODOS los paquetes en caché"
+msgstr "Видалити ВСІ кешовані пакети"
 
 #: ../contents/tools/sh/messages
 msgid "Remove cached packages that are not currently installed"
-msgstr "Eliminar paquetes en caché que no están actualmente instalados"
+msgstr "Видалити не встановлені кешовані пакети"
 
 #: ../contents/tools/sh/messages
 msgid "Rebuild AUR python packages after python upgrade"
-msgstr "Reconstruir paquetes Python de AUR después de actualizar Python"
+msgstr "Перезбірка python пакетів з AUR після оновлення python"
 
 #: ../contents/tools/sh/messages
 msgid "Refresh mirrorlist"
-msgstr "Actualizar lista de espejos"
+msgstr "Оновити список дзеркал"
 
 #: ../contents/tools/sh/messages
 msgid "Exit"
-msgstr "Salir"
+msgstr "Вихід"
 
 #: ../contents/tools/sh/messages
 msgid "Review dependency warnings before removing"
-msgstr "Revisar advertencias de dependencias antes de eliminar"
+msgstr "Ознайомтесь з попередженнями про залежності перед видаленням"
 
 #: ../contents/tools/sh/messages
 msgid "Resume?"
-msgstr "¿Continuar?"
+msgstr "Продовжити?"
 
 #: ../contents/tools/sh/messages
 msgid "Press Enter to return menu"
-msgstr "Presiona Enter para volver al menú"
+msgstr "Натисніть Enter для повернення в меню"
 
 #: ../contents/tools/sh/messages
 msgid "Search:"
-msgstr "Buscar:"
+msgstr "Пошук:"
 
 #: ../contents/tools/sh/messages
 msgid "Executed:"
-msgstr "Ejecutado:"
+msgstr "Вконано:"
 
 #: ../contents/tools/sh/messages
 msgid "Nothing to do"
-msgstr "Nada que hacer"
+msgstr "Нічого робити"
 
 #: ../contents/tools/sh/messages ../contents/ui/configuration/General.qml
 msgid "Required installed"
-msgstr "Requerido instalado"
+msgstr "Потребує обов'язкового встановлення"
 
 #: ../contents/tools/tools.js
 msgid "Exit code: "
-msgstr "Código de salida: "
+msgstr "Код помилки: "
 
 #: ../contents/tools/tools.js
 msgid "Checking latest news..."
-msgstr "Verificando las últimas noticias..."
+msgstr "Перевірка останніх новин..."
 
 #: ../contents/tools/tools.js
 msgid "Synchronizing pacman databases..."
-msgstr "Sincronizando bases de datos de pacman..."
+msgstr "Синхронізація баз даних pacman..."
 
 #: ../contents/tools/tools.js
 msgid "Checking system updates..."
-msgstr "Verificando actualizaciones del sistema..."
+msgstr "Перевірка системних оновлень..."
 
 #: ../contents/tools/tools.js
 msgid "Checking AUR updates..."
-msgstr "Verificando actualizaciones de AUR..."
+msgstr "Перевірка оновлень AUR..."
 
 #: ../contents/tools/tools.js
 msgid "Synchronizing flatpak appstream..."
-msgstr "Sincronizando flatpak appstream..."
+msgstr "Синхронізація flatpak appstream..."
 
 #: ../contents/tools/tools.js
 msgid "Checking flatpak updates..."
-msgstr "Verificando actualizaciones de Flatpak..."
+msgstr "Перевірка flatpak оновлень..."
 
 #: ../contents/tools/tools.js
 msgid "Checking widgets updates..."
-msgstr "Verificando actualizaciones de widgets..."
+msgstr "Перевірка оновлень віджетів..."
 
 #: ../contents/tools/tools.js
 msgid "latest commit"
-msgstr "último commit"
+msgstr "останній внесок"
 
 #: ../contents/tools/tools.js ../contents/ui/representation/Expanded.qml
 msgid "%1 error occurred"
 msgid_plural "%1 errors occurred"
-msgstr[0] "Ocurrió %1 error"
-msgstr[1] "Ocurrieron %1 errores"
+msgstr[0] "Виникла %1 помилка"
+msgstr[1] "Виникло %1 помилки"
+msgstr[2] "Виникло %1 помилок"
 
 #: ../contents/tools/tools.js
 msgid "+%1 new update"
 msgid_plural "+%1 new updates"
-msgstr[0] "+%1 nueva actualización"
-msgstr[1] "+%1 nuevas actualizaciones"
+msgstr[0] "+%1 нове оновлення"
+msgstr[1] "+%1 нових оновлень"
+msgstr[2] "+%1 нових оновлень"
 
 #: ../contents/tools/tools.js
 msgid "update is pending"
 msgid_plural "updates are pending"
-msgstr[0] "actualización pendiente"
-msgstr[1] "actualizaciones pendientes"
+msgstr[0] "доступне оновлення"
+msgstr[1] "доступних оновлень"
+msgstr[2] "доступних оновлень"
 
 #: ../contents/tools/tools.js
 msgid "%1 day"
 msgid_plural "%1 days"
-msgstr[0] "%1 día"
-msgstr[1] "%1 días"
+msgstr[0] "%1 день"
+msgstr[1] "%1 дні"
+msgstr[2] "%1 днів"
 
 #: ../contents/tools/tools.js
 msgid "%1 hour"
 msgid_plural "%1 hours"
-msgstr[0] "%1 hora"
-msgstr[1] "%1 horas"
+msgstr[0] "%1 годину"
+msgstr[1] "%1 години"
+msgstr[2] "%1 годин"
 
 #: ../contents/tools/tools.js
 msgid "%1 minute"
 msgid_plural "%1 minutes"
-msgstr[0] "%1 minuto"
-msgstr[1] "%1 minutos"
+msgstr[0] "%1 хвилину"
+msgstr[1] "%1 хвилини"
+msgstr[2] "%1 хвилин"
 
 #: ../contents/tools/tools.js
 msgid "less than a minute"
-msgstr "menos de un minuto"
+msgstr "менше хвилини"
 
 #: ../contents/tools/tools.js
 msgid "%1 second"
 msgid_plural "%1 seconds"
-msgstr[0] "%1 segundo"
-msgstr[1] "%1 segundos"
+msgstr[0] "%1 секунду"
+msgstr[1] "%1 секунди"
+msgstr[2] "%1 секунд"
 
 #: ../contents/tools/tools.js
 msgid "Last check:"
-msgstr "Última verificación:"
+msgstr "Остання перевірка:"
 
 #: ../contents/tools/tools.js
 msgid "ago"
-msgstr "hace"
+msgstr "тому"
 
 #: ../contents/tools/tools.js
 msgid "Next check in:"
-msgstr "Próxima verificación en:"
+msgstr "Наступна перевірка через:"
 
 #: ../contents/ui/components/ComboBox.qml
 msgid "None"
-msgstr "Ninguno"
+msgstr "Немає"
 
 #: ../contents/ui/components/ComboBox.qml ../contents/ui/main.qml ../contents/ui/representation/Expanded.qml
 msgid "Check updates"
-msgstr "Verificar actualizaciones"
+msgstr "Перевірити оновлення"
 
 #: ../contents/ui/components/ComboBox.qml ../contents/ui/components/Notification.qml ../contents/ui/main.qml ../contents/ui/representation/Expanded.qml
 msgid "Upgrade system"
-msgstr "Actualizar sistema"
+msgstr "Оновити систему"
 
 #: ../contents/ui/components/ComboBox.qml
 msgid "Pause auto check"
-msgstr "Pausar verificación automática"
+msgstr "Призупинити автоматичну перевірку"
 
 #: ../contents/ui/components/ComboBox.qml ../contents/ui/main.qml ../contents/ui/representation/Expanded.qml
 msgid "Management"
-msgstr "Gestión"
+msgstr "Керування"
 
 #: ../contents/ui/components/Notification.qml ../contents/ui/scrollview/News.qml
 msgid "Read article"
-msgstr "Leer artículo"
+msgstr "Читати статтю"
 
 #: ../contents/ui/components/Placeholder.qml
 msgid "System updated"
-msgstr "Sistema actualizado"
+msgstr "Система оновлена"
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Panel Icon View"
-msgstr "Vista de icono en panel"
+msgstr "Вид іконки на панелі"
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "List View"
-msgstr "Vista de lista"
+msgstr "Вигляд списку"
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Shown when"
-msgstr "Mostrar cuando"
+msgstr "Показувати коли"
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "update is pending "
 msgid_plural "updates are pending "
-msgstr[0] "actualización pendiente "
-msgstr[1] "actualizaciones pendientes "
+msgstr[0] "оновлення доступне "
+msgstr[1] "оновлення доступно "
+msgstr[2] "оновлень доступно "
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Default"
-msgstr "Predeterminado"
+msgstr "Стандартно"
 
 #: ../contents/ui/configuration/Appearance.qml ../contents/ui/representation/Expanded.qml
 msgid "Select..."
-msgstr "Seleccionar..."
+msgstr "Вибрати..."
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Default icon"
-msgstr "Icono predeterminado"
+msgstr "Стандартна іконка"
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Pause badge"
-msgstr "Insignia de pausa"
+msgstr "Значок паузи"
 
 #: ../contents/ui/configuration/Appearance.qml ../contents/ui/configuration/Upgrade.qml
 msgid "Enable"
-msgstr "Habilitar"
+msgstr "Включити"
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Updated badge"
-msgstr "Insignia de actualizado"
+msgstr "Значок оновлення"
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Counter"
-msgstr "Contador"
+msgstr "Лічильник"
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Color"
-msgstr "Color"
+msgstr "Колір"
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Default color"
-msgstr "Color predeterminado"
+msgstr "Стандартний колір"
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Select counter background color"
-msgstr "Seleccionar color de fondo del contador"
+msgstr "Вибір кольру фону лічильника"
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Default background color from current theme"
-msgstr "Color de fondo predeterminado del tema actual"
+msgstr "Стандартний колір фону з поточної теми"
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Size"
-msgstr "Tamaño"
+msgstr "Розмір"
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Radius"
-msgstr "Radio"
+msgstr "Радіус"
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Opacity"
-msgstr "Opacidad"
+msgstr "Прозорість"
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Shadow"
-msgstr "Sombra"
+msgstr "Тінь"
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Font"
-msgstr "Fuente"
+msgstr "Шрифт"
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Default system font"
-msgstr "Fuente del sistema predeterminada"
+msgstr "Стандартний системний шрифт"
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Font bold"
-msgstr "Fuente en negrita"
+msgstr "Жирний шрифт"
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Font size"
-msgstr "Tamaño de fuente"
+msgstr "Розмір шрифту"
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Left spacing"
-msgstr "Espaciado izquierdo"
+msgstr "Відступ зліва"
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Side margins"
-msgstr "Márgenes laterales"
+msgstr "Відступи збоків"
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Offset"
-msgstr "Desplazamiento"
+msgstr "Зміщення"
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Position"
-msgstr "Posición"
+msgstr "Позиція"
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Center"
-msgstr "Centro"
+msgstr "По центру"
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Top-Left"
-msgstr "Arriba-Izquierda"
+msgstr "Зверху-зліва"
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Top-Right"
-msgstr "Arriba-Derecha"
+msgstr "Зверху-зправа"
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Bottom-Left"
-msgstr "Abajo-Izquierda"
+msgstr "Знизу-зліва"
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Bottom-Right"
-msgstr "Abajo-Derecha"
+msgstr "Знизу-зправа"
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Use built-in icons"
-msgstr "Usar iconos integrados"
+msgstr "Вмонтовані іконки"
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Override custom icon theme and use default Apdatifier icons instead."
-msgstr "Anular el tema de iconos personalizado y usar los iconos predeterminados de Apdatifier."
+msgstr "Використовувати іконки Apdatifier замість користувацьких іконок з теми."
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Default tab"
-msgstr "Pestaña predeterminada"
+msgstr "Вкладка за замовчуванням"
 
 #: ../contents/ui/configuration/Appearance.qml ../contents/ui/representation/Expanded.qml
 msgid "Compact"
-msgstr "Compacto"
+msgstr "Компактний"
 
 #: ../contents/ui/configuration/Appearance.qml ../contents/ui/representation/Expanded.qml
 msgid "Extended"
-msgstr "Extendido"
+msgstr "Розширений"
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Behavior"
-msgstr "Comportamiento"
+msgstr "Поведінка"
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Always switch to default tab"
-msgstr "Siempre cambiar a la pestaña predeterminada"
+msgstr "Завжди переключатись на вкладку за замовчуванням"
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Item spacing (Compact)"
-msgstr "Altura de los elementos (Compacto)"
+msgstr "Висота елементів (Компактний)"
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Sorting"
-msgstr "Ordenación"
+msgstr "Сортування"
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "By repository"
-msgstr "Por repositorio"
+msgstr "За репозиторієм"
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "By name"
-msgstr "Por nombre"
+msgstr "За іменем"
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Header"
-msgstr "Encabezado"
+msgstr "Заголовок"
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Show status"
-msgstr "Mostrar estado"
+msgstr "Показувати статус"
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Show tool bar"
-msgstr "Mostrar barra de herramientas"
+msgstr "Показувати панель інструментів"
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Footer"
-msgstr "Pie de página"
+msgstr "Нижній колонтитул"
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Show tab bar"
-msgstr "Mostrar barra de pestañas"
+msgstr "Показувати панель вкладок"
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Show tab texts"
-msgstr "Mostrar textos de pestañas"
+msgstr "Показувати імена вкладок"
 
 #: ../contents/ui/configuration/General.qml
 msgid "Install Development version"
-msgstr "Instalar versión de Desarrollo"
+msgstr "Встановлювати тестову версію"
 
 #: ../contents/ui/configuration/General.qml
 msgid "Install Stable version"
-msgstr "Instalar versión Estable"
+msgstr "Встановлювати стабільну версію"
 
 #: ../contents/ui/configuration/General.qml
 msgid "Uninstall widget"
-msgstr "Desinstalar widget"
+msgstr "Видалити віджет"
 
 #: ../contents/ui/configuration/General.qml
 msgid "Note: version with the latest commits may be unstable."
-msgstr "Nota: la versión con los últimos commits puede ser inestable."
+msgstr "Примітка: версія з останніми відповідностями може бути нестабільна."
 
 #: ../contents/ui/configuration/General.qml
 msgid "Note: if you haven't installed the Devel version before, there's no need to install the Stable version."
-msgstr "Nota: si no has instalado antes la versión Devel, no es necesario instalar la versión Estable."
+msgstr "Примітка: якщо раніше не була встановлена тестова версія, то немає необхідності встановлювати стабільну."
 
 #: ../contents/ui/configuration/General.qml
 msgid "Removal of the widget and all related files, including the directory with its configuration."
-msgstr "Eliminación del widget y todos los archivos relacionados, incluyendo el directorio con su configuración."
+msgstr "Видалення віджета і всіх зв'язаних з ним файлів, включаючи директорію з його конфігурацією."
 
 #: ../contents/ui/configuration/General.qml
 msgid "Search"
-msgstr "Buscar"
+msgstr "Пошук"
 
 #: ../contents/ui/configuration/General.qml
 msgid "Notifications"
-msgstr "Notificaciones"
+msgstr "Сповіщення"
 
 #: ../contents/ui/configuration/General.qml
 msgid "Mouse actions"
-msgstr "Acciones del ratón"
+msgstr "Дії миші"
 
 #: ../contents/ui/configuration/General.qml
 msgid "Misc"
-msgstr "Varios"
+msgstr "Різне"
 
 #: ../contents/ui/configuration/General.qml
 msgid "Configuration is automatically saved in a config file and loaded at every startup, ensuring you never lose your settings. The config file is stored in "
-msgstr "La configuración se guarda automáticamente en un archivo de configuración y se carga en cada inicio, asegurando que nunca pierdas tus ajustes. El archivo de configuración se almacena en "
+msgstr "Конфігурація автоматично зберігається в файл і завантажується при кожному запуску, що гарантує збереження ваших налаштувань. Файл налаштувань зберігається в "
 
 #: ../contents/ui/configuration/General.qml
 msgid "Check mode"
-msgstr "Modo de verificación"
+msgstr "Режим перевірки"
 
 #: ../contents/ui/configuration/General.qml
 msgid "Manual"
-msgstr "Manual"
+msgstr "Вручну"
 
 #: ../contents/ui/configuration/General.qml
 msgid "Interval"
-msgstr "Intervalo"
+msgstr "Інтервал"
 
 #: ../contents/ui/configuration/General.qml
 msgid "Daily"
-msgstr "Diario"
+msgstr "Щоденно"
 
 #: ../contents/ui/configuration/General.qml
 msgid "Weekly"
-msgstr "Semanal"
+msgstr "Щотижня"
 
 #: ../contents/ui/configuration/General.qml
 msgid "Choose how automatic checks are scheduled: manual, periodic interval (minutes, max 43200 - 30 days), daily at specific time or weekly at specific day/time."
-msgstr "Elige cómo se programan las verificaciones automáticas: manual, intervalo periódico (minutos, máx. 43200 - 30 días), diario a una hora específica o semanal en un día/hora específicos."
+msgstr "Виберіть, як плануються автоматичні перевірки: вручну, періодичний інтервал (хвилини, максимум 43200 - 30 днів), щодня в певний час або щотижня в певний день/час."
 
 #: ../contents/ui/configuration/General.qml
 msgid "minutes"
-msgstr "minutos"
+msgstr "хвилин"
 
 #: ../contents/ui/configuration/General.qml
 msgid "Daily time"
-msgstr "Hora diaria"
+msgstr "Щоденний час"
 
 #: ../contents/ui/configuration/General.qml
 msgid "Weekly schedule"
-msgstr "Programación semanal"
+msgstr "Тижневий розклад"
 
 #: ../contents/ui/configuration/General.qml
 msgid "Sunday"
-msgstr "Domingo"
+msgstr "Неділя"
 
 #: ../contents/ui/configuration/General.qml
 msgid "Monday"
-msgstr "Lunes"
+msgstr "Понеділок"
 
 #: ../contents/ui/configuration/General.qml
 msgid "Tuesday"
-msgstr "Martes"
+msgstr "Вівторок"
 
 #: ../contents/ui/configuration/General.qml
 msgid "Wednesday"
-msgstr "Miércoles"
+msgstr "Середа"
 
 #: ../contents/ui/configuration/General.qml
 msgid "Thursday"
-msgstr "Jueves"
+msgstr "Четвер"
 
 #: ../contents/ui/configuration/General.qml
 msgid "Friday"
-msgstr "Viernes"
+msgstr "П'ятниця"
 
 #: ../contents/ui/configuration/General.qml
 msgid "Saturday"
-msgstr "Sábado"
+msgstr "Субота"
 
 #: ../contents/ui/configuration/General.qml
 msgid "Updates"
-msgstr "Actualizaciones"
+msgstr "Оновлення"
 
 #: ../contents/ui/configuration/General.qml
 msgid "Arch Official Repositories"
-msgstr "Repositorios Oficiales de Arch"
+msgstr "Офіційні репозиторії Arch"
 
 #: ../contents/ui/configuration/General.qml
 msgid "Arch User Repository"
-msgstr "Repositorio de Usuario de Arch (AUR)"
+msgstr "Користувацькі репозиторії Arch"
 
 #: ../contents/ui/configuration/General.qml
 msgid "Flatpak applications"
-msgstr "Aplicaciones Flatpak"
+msgstr "Flatpak застосунки"
 
 #: ../contents/ui/configuration/General.qml ../contents/ui/configuration/Upgrade.qml
 msgid "Not installed"
-msgstr "No instalado"
+msgstr "Не встановлено"
 
 #: ../contents/ui/configuration/General.qml
 msgid "Plasma Widgets"
-msgstr "Widgets de Plasma"
+msgstr "Plasma віджети"
 
 #: ../contents/ui/configuration/General.qml
 msgid "<br><br>For widget developers:<br>Don't forget to update the metadata.json and specify the name of the applet and its version <b>exactly</b> as they appear on the KDE Store."
-msgstr "<br><br>Para desarrolladores de widgets:<br>No olvides actualizar el metadata.json y especificar el nombre del applet y su versión <b>exactamente</b> como aparecen en la KDE Store."
+msgstr "<br><br>Для розробників віджетів:<br>Не забувайте оновлювати файл metadata.json і вказувати ім'я віджета та його версію точно як на сайті KDE Store."
 
 #: ../contents/ui/configuration/General.qml ../contents/ui/representation/Expanded.qml
 msgid "News"
-msgstr "Noticias"
+msgstr "Новини"
 
 #: ../contents/ui/configuration/General.qml
 msgid "Arch Linux News"
-msgstr "Noticias de Arch Linux"
+msgstr "Новини Arch Linux"
 
 #: ../contents/ui/configuration/General.qml
 msgid "Keep"
-msgstr "Mantener"
+msgstr "Зберігати"
 
 #: ../contents/ui/configuration/General.qml
 msgid "news item from the feed"
 msgid_plural "news items from the feed"
-msgstr[0] "noticia del feed"
-msgstr[1] "noticias del feed"
+msgstr[0] "новина зі стрічки"
+msgstr[1] "новини зі стрічки"
+msgstr[2] "новин зі стрічки"
 
 #: ../contents/ui/configuration/General.qml
 msgid "For new updates"
-msgstr "Para nuevas actualizaciones"
+msgstr "Для нових оновлень"
 
 #: ../contents/ui/configuration/General.qml
 msgid "Action button"
-msgstr "Botón de acción"
+msgstr "Кнопка дії"
 
 #: ../contents/ui/configuration/General.qml
 msgid "For every version bump"
-msgstr "Para cada cambio de versión"
+msgstr "При кожній зміні версії"
 
 #: ../contents/ui/configuration/General.qml
 msgid "If the option is <b>enabled</b>, notifications will be sent when a new version of the package is bumped, even if the package is already on the list. <b>More notifications.</b> <br><br>If the option is <b>disabled</b>, notifications will only be sent for packages that are not yet on the list. <b>Less notifications.</b>"
-msgstr "Si la opción está <b>habilitada</b>, se enviarán notificaciones cuando haya un nuevo cambio de versión del paquete, incluso si el paquete ya está en la lista. <b>Más notificaciones.</b> <br><br>Si la opción está <b>deshabilitada</b>, las notificaciones solo se enviarán para paquetes que aún no están en la lista. <b>Menos notificaciones.</b>"
+msgstr "Якщо параметр <b>увімкнуто</b>, сповіщення будуть приходити коли версія пакета підвищується, навть якщо цей пакет вже є в списку. <b>Більше сповіщень.</b> <br><br>Якщо параметр <b>вимкнений</b>, сповіщення будуть приходити тільки якщо пакета ще немає в списку. <b>Менше сповіщень.</b>"
 
 #: ../contents/ui/configuration/General.qml
 msgid "For news"
-msgstr "Para noticias"
+msgstr "Для новин"
 
 #: ../contents/ui/configuration/General.qml
 msgid "For errors"
-msgstr "Para errores"
+msgstr "При помилці"
 
 #: ../contents/ui/configuration/General.qml
 msgid "With sound"
-msgstr "Con sonido"
+msgstr "Зі звуком"
 
 #: ../contents/ui/configuration/General.qml
 msgid "Persistent"
-msgstr "Persistente"
+msgstr "Постійне"
 
 #: ../contents/ui/configuration/General.qml
 msgid "To further configure, click the button below -> Application Settings -> Apdatifier"
-msgstr "Para configurar más, haz clic en el botón de abajo -> Configuración de la aplicación -> Apdatifier"
+msgstr "Для додаткових налаштувань, натисніть кнопку нижче -> Параметри застосунку -> Apdatifier"
 
 #: ../contents/ui/configuration/General.qml
 msgid "Configure..."
-msgstr "Configurar..."
+msgstr "Налаштувати..."
 
 #: ../contents/ui/configuration/General.qml
 msgid "Middle click"
-msgstr "Clic medio"
+msgstr "Середня кнопка"
 
 #: ../contents/ui/configuration/General.qml
 msgid "Right click"
-msgstr "Clic derecho"
+msgstr "Права кнопка"
 
 #: ../contents/ui/configuration/General.qml
 msgid "Do not enable this option if the widget is not used in the system tray; otherwise, you will not be able to open the settings by right-clicking."
-msgstr "No habilites esta opción si el widget no se usa en la bandeja del sistema; de lo contrario, no podrás abrir la configuración haciendo clic derecho."
+msgstr "Не включайте цей параметр, якщо віджет не використовується в системному треї; інакше ви не зможете відкрити налаштування, клацнувши правою кнопкою миші."
 
 #: ../contents/ui/configuration/General.qml
 msgid "Scroll up"
-msgstr "Desplazar arriba"
+msgstr "Прокрутка вгору"
 
 #: ../contents/ui/configuration/General.qml
 msgid "Scroll down"
-msgstr "Desplazar abajo"
+msgstr "Прокрутка вниз"
 
 #: ../contents/ui/configuration/General.qml
 msgid "Restore hidden tooltips"
-msgstr "Restaurar tooltips ocultos"
+msgstr "Відновити приховані підказки"
 
 #: ../contents/ui/configuration/Rules.qml
 msgid "Unimportant"
-msgstr "Poco importante"
+msgstr "Не має значення"
 
 #: ../contents/ui/configuration/Rules.qml
 msgid "Repository"
-msgstr "Repositorio"
+msgstr "Репозиторій"
 
 #: ../contents/ui/configuration/Rules.qml
 msgid "Exact repository match"
-msgstr "Coincidencia exacta de repositorio"
+msgstr "Точний збіг репозиторію"
 
 #: ../contents/ui/configuration/Rules.qml
 msgid "Group"
-msgstr "Grupo"
+msgstr "Група"
 
 #: ../contents/ui/configuration/Rules.qml
 msgid "Substring group match"
-msgstr "Coincidencia parcial de grupo"
+msgstr "Збіг з підрядком в групі"
 
 #: ../contents/ui/configuration/Rules.qml
 msgid "Substring"
-msgstr "Subcadena"
+msgstr "Збіг"
 
 #: ../contents/ui/configuration/Rules.qml
 msgid "Substring name match"
-msgstr "Coincidencia parcial de nombre"
+msgstr "Збіг з підрядком в імені"
 
 #: ../contents/ui/configuration/Rules.qml
 msgid "Name"
-msgstr "Nombre"
+msgstr "Ім'я"
 
 #: ../contents/ui/configuration/Rules.qml
 msgid "Exact name match"
-msgstr "Coincidencia exacta de nombre"
+msgstr "Точний збіг імені"
 
 #: ../contents/ui/configuration/Rules.qml
 msgid "Here you can override the default package icons and exclude them from the list. Each rule overwrites the previous one, so the list of rules should be in this order: "
-msgstr "Aquí puedes anular los iconos predeterminados de los paquetes y excluirlos de la lista. Cada regla sobrescribe la anterior, por lo que la lista de reglas debe estar en este orden: "
+msgstr "Тут ви можете перевизначити значки пакетів і виключити їх зі списку. Кожне правило перезаписує попереднє, тому список правил повинен бути в такому порядку: "
 
 #: ../contents/ui/configuration/Rules.qml
 msgid "Mark as important"
-msgstr "Marcar como importante"
+msgstr "Позначити як важливе"
 
 #: ../contents/ui/configuration/Rules.qml
 msgid "Show in the list"
-msgstr "Mostrar en la lista"
+msgstr "Показувати в списку"
 
 #: ../contents/ui/configuration/Rules.qml
 msgid "Exclude from the list"
-msgstr "Excluir de la lista"
+msgstr "Виключити зі списку"
 
 #: ../contents/ui/configuration/Rules.qml ../contents/ui/scrollview/News.qml
 msgid "Remove"
-msgstr "Eliminar"
+msgstr "Видалити"
 
 #: ../contents/ui/configuration/Rules.qml
 msgid "Add rule"
-msgstr "Añadir regla"
+msgstr "Додати правило"
 
 #: ../contents/ui/configuration/Rules.qml
 msgid "Apply"
-msgstr "Aplicar"
+msgstr "Застосувати"
 
 #: ../contents/ui/configuration/Support.qml
 msgid "Thanks for using my widget! If you appreciate my work, you can support me by starring the GitHub repository or buying me a coffee ;)"
-msgstr "¡Gracias por usar mi widget! Si aprecias mi trabajo, puedes apoyarme dándole una estrella al repositorio en GitHub o invitándome un café ;)"
+msgstr "Дякую, що користуєтесь моїм віджетом! Якщо він сподобався, Ви можете підтримати мене, відвідавши GitHub, або купивши мені філіжанку кави ;)"
 
 #: ../contents/ui/configuration/Support.qml
 msgid "Visit %1"
-msgstr "Visitar %1"
+msgstr "Відвідайте %1"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Widgets"
-msgstr "Widgets"
+msgstr "Віджети"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Terminal"
-msgstr "Terminal"
+msgstr "Термінал"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Use NerdFont icons"
-msgstr "Usar iconos NerdFont"
+msgstr "Використовувати NerdFont символи"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "If your terminal utilizes any <b>Nerd Font</b>, icons from that font will be used."
-msgstr "Si tu terminal utiliza alguna <b>Nerd Font</b>, se usarán los iconos de esa fuente."
+msgstr "Якщо ваш термінал викристовує будь-який <b>Nerd Font</b>, то будуть відображатись символи цього шрифту."
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "tmux session"
-msgstr "sesión de tmux"
+msgstr "tmux сесія"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Pre/post upgrade scripts"
-msgstr "Scripts pre/post actualización"
+msgstr "Сценариї до/після оновлення"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Pre-exec"
-msgstr "Pre-ejecución"
+msgstr "До"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Command or script path"
-msgstr "Ruta de comando o script"
+msgstr "Команда або шлях скрипту"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Running your command or script BEFORE the upgrade.<br>For example, you can specify your command to update the mirrorlist if you have unofficial repositories."
-msgstr "Ejecutar tu comando o script ANTES de la actualización.<br>Por ejemplo, puedes especificar tu comando para actualizar la lista de espejos si tienes repositorios no oficiales."
+msgstr "Запустіть свою команду чи скрипт ПЕРЕД оновленням.<br>Наприклад, ви можете вказати свою команду для оновлення списку дзеркал, якщо у вас є  неофіційне репозиторії."
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Post-exec"
-msgstr "Post-ejecución"
+msgstr "Після"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Running your command or script AFTER the upgrade.<br>For example, you can specify your command to upgrade something else."
-msgstr "Ejecutar tu comando o script DESPUÉS de la actualización.<br>Por ejemplo, puedes especificar tu comando para actualizar algo más."
+msgstr "Запустіть свою команду чи скрипт ПІСЛЯ оновлення.<br>Наприклад, ви можете вказати свою команду для оновлення ще чогось."
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Wrapper"
-msgstr "Wrapper"
+msgstr "Обкладинка"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "AUR disabled in search settings"
-msgstr "AUR deshabilitado en configuración de búsqueda"
+msgstr "AUR відключений в налаштуваннях пошуку"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Upgrade options"
-msgstr "Opciones de actualización"
+msgstr "Параметри оновлення"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Reboot system"
-msgstr "Reiniciar sistema"
+msgstr "Перезавантажити систему"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Suggest after upgrading"
-msgstr "Sugerir después de actualizar"
+msgstr "Пропонувати після оновлення"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Pacman Mirrorlist Generator"
-msgstr "Generador de lista de espejos de Pacman"
+msgstr "Генератор списку дзеркал"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Only for official repositories"
-msgstr "Solo para repositorios oficiales"
+msgstr "Тільки для офіційних репозиторіїв"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Also see https://archlinux.org/mirrorlist (click button to open link)"
-msgstr "Ver también https://archlinux.org/mirrorlist (haz clic en el botón para abrir el enlace)"
+msgstr "Також дивіться https://archlinux.org/mirrorlist (натисніть на кнопку для відкриття посилання)"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Generator"
-msgstr "Generador"
+msgstr "Генератор"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Disabled"
-msgstr "Desactivado"
+msgstr "Відключено"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Always ask"
-msgstr "Preguntar siempre"
+msgstr "Завжди питати"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Ask if older than"
-msgstr "Preguntar si es más antiguo que"
+msgstr "Питати, якщо старіше ніж"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "day"
 msgid_plural "days"
-msgstr[0] "día"
-msgstr[1] "días"
+msgstr[0] "день"
+msgstr[1] "дні"
+msgstr[2] "днів"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "No ask, force refresh"
-msgstr "No preguntar, forzar actualización"
+msgstr "Оновлювати без запитань"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Protocol"
-msgstr "Protocolo"
+msgstr "Протокол"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "IP version"
-msgstr "Versión IP"
+msgstr "IP версія"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Mirror status"
-msgstr "Estado del espejo"
+msgstr "Статус дзеркал"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Number output"
-msgstr "Número de salida"
+msgstr "Кількість"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Number of servers to write to mirrorlist file. 0 for all."
-msgstr "Número de servidores para escribir en el archivo mirrorlist. 0 para todos."
+msgstr "Кількість серверів, які будуть записані у файл mirrorlist. 0 - всі доступні."
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Country"
-msgstr "País"
+msgstr "Країна"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Select at least one!"
-msgstr "¡Selecciona al menos uno!"
+msgstr "Виберіть хоча б одну!"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "You must select at least one country, otherwise all will be chosen by default. <br><br><b>The more countries you select, the longer it will take to generate the mirrors!</b> <br><br>It is optimal to choose <b>1-2</b> countries closest to you."
-msgstr "Debes seleccionar al menos un país, de lo contrario, se elegirán todos por defecto. <br><br><b>¡Cuantos más países selecciones, más tiempo tardará en generar los espejos!</b> <br><br>Es óptimo elegir <b>1-2</b> países más cercanos a ti."
+msgstr "Ви повинні вибрати хоча б одну країну, інакше будуть вибрані всі. <br><br><b>Чим більше країн ви виберете, тим довше будуть генеруватись дзеркала!</b><br><br>Оптимально вибрати <b>1-2</b> найближчі до вас країни."
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Uninstall unused"
-msgstr "Desinstalar no utilizados"
+msgstr "Видалити невикористовуване"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Normal"
-msgstr "Normal"
+msgstr "Нормально"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Normal, skip questions"
-msgstr "Normal, omitir preguntas"
+msgstr "Нормально, пропуск питань"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Non interactive, skip questions"
-msgstr "No interactivo, omitir preguntas"
+msgstr "Не інтерактивно, пропуск питань"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Verbose"
-msgstr "Detallado"
+msgstr "Дослівно"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Upgrade confirmation"
-msgstr "Confirmación de actualización"
+msgstr "Підтвердження оновлення"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Restart plasmashell"
-msgstr "Reiniciar plasmashell"
+msgstr "Перезапуск plasmashell"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "After upgrading widget, the old version will still remain in memory until you restart plasmashell. To avoid doing this manually, enable this option."
-msgstr "Después de actualizar el widget, la versión antigua permanecerá en memoria hasta que reinicies plasmashell. Para evitar hacer esto manualmente, activa esta opción."
+msgstr "Після оновлення віджета, стара версія буде в пам'яті до того, поки не  буде перезапущений plasmashell. Щоб не робити цього вручну, включіть цей параметр."
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Command"
-msgstr "Comando"
+msgstr "Команда"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Apdatifier tray icon"
-msgstr "Icono de Apdatifier en la bandeja del sistema"
+msgstr "Значок Apdatifier в системному треї"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Enabled by default"
-msgstr "Activado por defecto"
+msgstr "Увімкнено за замовчуванням"
 
 #: ../contents/ui/main.qml
 msgid "Auto check disabled"
-msgstr "Verificación automática desactivada"
+msgstr "Автоперевірка вимкнена"
 
 #: ../contents/ui/representation/Expanded.qml
 msgid "Filter by package name"
-msgstr "Filtrar por nombre de paquete"
+msgstr "Фільтрувати за назвою пакета"
 
 #: ../contents/ui/representation/Expanded.qml
 msgid "Disable auto search updates"
-msgstr "Desactivar búsqueda automática de actualizaciones"
+msgstr "Відключити автоперевірку оновлень"
 
 #: ../contents/ui/representation/Expanded.qml
 msgid "Enable auto search updates"
-msgstr "Activar búsqueda automática de actualizaciones"
+msgstr "Включити автоперевірку оновлень"
 
 #: ../contents/ui/representation/Expanded.qml
 msgid "Sort packages by name"
-msgstr "Ordenar paquetes por nombre"
+msgstr "Сортувати пакети за іменем"
 
 #: ../contents/ui/representation/Expanded.qml
 msgid "Sort packages by repository"
-msgstr "Ordenar paquetes por repositorio"
+msgstr "Сортувати пакети за репозиторієм"
 
 #: ../contents/ui/representation/Expanded.qml
 msgid "Stop checking"
-msgstr "Detener verificación"
+msgstr "Зупинити перевірку"
 
 #: ../contents/ui/representation/Expanded.qml
 msgid "Open settings"
-msgstr "Abrir configuración"
+msgstr "Відкрити налаштування"
 
 #: ../contents/ui/representation/Expanded.qml
 msgid "Unpin window"
-msgstr "Desanclar ventana"
+msgstr "Відкріпити вікно"
 
 #: ../contents/ui/representation/Expanded.qml
 msgid "Keep open"
-msgstr "Mantener abierto"
+msgstr "Тримати відкритим"
 
 #: ../contents/ui/representation/Expanded.qml
 msgid "Compact view"
-msgstr "Vista compacta"
+msgstr "Компактний вигляд"
 
 #: ../contents/ui/representation/Expanded.qml
 msgid "Extended view"
-msgstr "Vista extendida"
+msgstr "Розширений вигляд"
 
 #: ../contents/ui/representation/Expanded.qml
 msgid "Check out release notes"
-msgstr "Consultar notas de la versión"
+msgstr "Гляньте список змін"
 
 #: ../contents/ui/representation/Expanded.qml
 msgid "Dismiss"
-msgstr "Descartar"
+msgstr "Відхилити"
 
 #: ../contents/ui/scrollview/Extended.qml
 msgid "Upgrade package"
-msgstr "Actualizar paquete"
+msgstr "Оновити пакет"
 
 #: ../contents/ui/scrollview/Extended.qml
 msgid "Package type"
-msgstr "Tipo de paquete"
+msgstr "Тип пакету"
 
 #: ../contents/ui/scrollview/Extended.qml
 msgid "Description"
-msgstr "Descripción"
+msgstr "Опис"
 
 #: ../contents/ui/scrollview/Extended.qml
 msgid "Author"
-msgstr "Autor"
+msgstr "Автор"
 
 #: ../contents/ui/scrollview/Extended.qml
 msgid "App ID"
-msgstr "ID de aplicación"
+msgstr "ID застосунку"
 
 #: ../contents/ui/scrollview/Extended.qml
 msgid "Branch"
-msgstr "Rama"
+msgstr "Гілка"
 
 #: ../contents/ui/scrollview/Extended.qml
 msgid "Commit"
-msgstr "Commit"
+msgstr "Внесок"
 
 #: ../contents/ui/scrollview/Extended.qml
 msgid "Runtime"
-msgstr "Tiempo de ejecución"
+msgstr "Середовище виконання"
 
 #: ../contents/ui/scrollview/Extended.qml
 msgid "Groups"
-msgstr "Grupos"
+msgstr "Групи"
 
 #: ../contents/ui/scrollview/Extended.qml
 msgid "Provides"
-msgstr "Proporciona"
+msgstr "Постачальники"
 
 #: ../contents/ui/scrollview/Extended.qml
 msgid "Depends on"
-msgstr "Depende de"
+msgstr "Залежить від"
 
 #: ../contents/ui/scrollview/Extended.qml
 msgid "Required by"
-msgstr "Requerido por"
+msgstr "Потрібен для"
 
 #: ../contents/ui/scrollview/Extended.qml
 msgid "Conflicts with"
-msgstr "Entra en conflicto con"
+msgstr "Конфліктує з"
 
 #: ../contents/ui/scrollview/Extended.qml
 msgid "Replaces"
-msgstr "Reemplaza"
+msgstr "Заміняє"
 
 #: ../contents/ui/scrollview/Extended.qml
 msgid "Installed size"
-msgstr "Tamaño instalado"
+msgstr "Розмір"
 
 #: ../contents/ui/scrollview/Extended.qml
 msgid "Download size"
-msgstr "Tamaño de descarga"
+msgstr "Розмір завантаження"
 
 #: ../contents/ui/scrollview/Extended.qml
 msgid "Install date"
-msgstr "Fecha de instalación"
+msgstr "Дата встановлення"
 
 #: ../contents/ui/scrollview/Extended.qml
 msgid "Install reason"
-msgstr "Motivo de instalación"
+msgstr "Причина встановлення"
 
 #: ../contents/ui/scrollview/News.qml
 msgid "No unread news"
-msgstr "No hay noticias sin leer"
+msgstr "Немає непрочитаних новин"
 
 #: ../contents/ui/scrollview/News.qml
 msgid "Restore list"
-msgstr "Restaurar lista"
+msgstr "Відновити список"
