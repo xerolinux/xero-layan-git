@@ -14,11 +14,6 @@ returnMenu() {
     exit
 }
 
-rankmirrors_mirrorlist="$tempDir/rankmirrors_mirrorlist"
-rankmirrors_time="$tempDir/rankmirrors_time"
-
-trap 'rm -f $rankmirrors_mirrorlist $rankmirrors_time' INT TERM EXIT
-
 rank_mirrors() {
     while IFS= read -r line <&3; do
         [[ "$line" =~ ^[[:space:]]*#?[[:space:]]*Server[[:space:]]*=[[:space:]]*(.+) ]] || continue
@@ -50,11 +45,15 @@ rank_mirrors() {
         fi
         
         if [[ -n "$status" ]]; then
-            # echo "$status - $domain" >&2
+            if [ "$mirrorProgress" = true ]; then
+                echo "$status - $domain" >&2
+            fi
             continue
         fi
 
-        # echo "$time - $domain" >&2
+        if [ "$mirrorProgress" = true ]; then
+            echo "$time - $domain" >&2
+        fi
         echo "$time $server" >> "$rankmirrors_time"
     done 3< "$rankmirrors_mirrorlist"
 
@@ -101,6 +100,11 @@ OUTDATED=false
     done
 }
 
+rankmirrors_mirrorlist="$(mktemp)"
+rankmirrors_time="$(mktemp)"
+
+trap 'rm -f $rankmirrors_mirrorlist $rankmirrors_time' INT TERM EXIT
+
 curl -s -m 10 -o $rankmirrors_mirrorlist "$dynamicUrl" 2>/dev/null & printWhile $! "$MIRRORS_FETCH"
 if ! validate "$rankmirrors_mirrorlist"; then
     printError "$MIRRORS_ERR"
@@ -108,12 +112,18 @@ if ! validate "$rankmirrors_mirrorlist"; then
     (( MENU )) && returnMenu || exit
 fi
 
-rank_mirrors & printWhile $! "$MIRRORS_RANK"
+if [ "$mirrorProgress" = true ]; then
+    echo -e "$(colorize blue bold "$ICO_MIRRORS $MIRRORS_RANK")"
+    rank_mirrors
+else
+    rank_mirrors & printWhile $! "$MIRRORS_RANK"
+fi
+
 if ! validate "$rankmirrors_mirrorlist"; then
     (( MENU )) && returnMenu || exit
 fi
 
-${sudoBin} -n true 2>/dev/null || printImportant "$MIRRORS_SUDO"
+${sudoBin} -n true 2>/dev/null || { echo; printImportant "$MIRRORS_SUDO"; }
 cat $rankmirrors_mirrorlist | ${sudoBin} tee $mirrorfile > /dev/null
 
 if [ $? -eq 0 ]; then

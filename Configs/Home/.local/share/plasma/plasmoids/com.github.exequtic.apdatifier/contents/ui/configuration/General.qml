@@ -6,6 +6,7 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
+import QtQuick.Dialogs
 
 import org.kde.kcmutils
 import org.kde.kirigami as Kirigami
@@ -50,6 +51,7 @@ SimpleKCM {
     property var cfg: plasmoid.configuration
     property var pkg: plasmoid.configuration.packages
     property var terminals: plasmoid.configuration.terminals
+    property alias cfg_dbPath: dbPath.text
 
     property int installButton
     property var dialogTitles: {
@@ -563,6 +565,58 @@ SimpleKCM {
                     }
                 }
             }
+
+            Item {
+                Kirigami.FormData.isSection: true
+            }
+
+            RowLayout {
+                Layout.preferredWidth: miscTab.width - Kirigami.Units.largeSpacing * 10
+                Label {
+                    text: "pacman DBPath:"
+                }
+                TextArea {
+                    id: dbPath
+                    Layout.fillWidth: true
+                    Layout.maximumWidth: 320
+                    readOnly: true
+                    Component.onCompleted: dbPath.text = plasmoid.configuration.dbPath
+                }
+                Button {
+                    icon.name: "document-open"
+                    onClicked: folderDialog.open()
+                }
+                Button {
+                    icon.name: "edit-reset"
+                    ToolTip.delay: 0
+                    ToolTip.visible: hovered
+                    ToolTip.text: i18n("Reset to default. By default, the path is the same as for checkupdates.")
+                    onClicked: {
+                        dbPath.text = plasmoid.configuration.dbPathDefault
+                        pathError.visible = false
+                    }
+                }
+                FolderDialog {
+                    id: folderDialog
+                    onAccepted: {
+                        const path = selectedFolder.toString().substring(7)
+                        if (path.includes(' ')) {
+                            pathError.visible = true
+                        } else {
+                            dbPath.text = path
+                            pathError.visible = false
+                        }
+                    }
+                }
+            }
+
+            Label {
+                id: pathError
+                text: i18n("Path must not contain spaces")
+                color: Kirigami.Theme.negativeTextColor
+                visible: false
+            }
+
             Kirigami.PromptDialog {
                 id: installDialog
                 title: dialogTitles[installButton]

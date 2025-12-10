@@ -47,6 +47,7 @@
         <entry name="mirrors" type="string"><default>false</default></entry>
         <entry name="mirrorsAge" type="int"><default>7</default></entry>
         <entry name="mirrorCount" type="int"><default>5</default></entry>
+        <entry name="mirrorProgress" type="bool"><default>false</default></entry>
         <entry name="dynamicUrl" type="string"><default>null</default></entry>
         <entry name="flatpakRemoveUnused" type="bool"><default>false</default></entry>
         <entry name="flatpakFlags" type="string"><default></default></entry>
@@ -108,5 +109,6 @@
         <entry name="timestamp" type="string"><default></default></entry>
         <entry name="configMsg" type="bool"><default>true</default></entry>
         <entry name="rulesMsg" type="bool"><default>true</default></entry>
+        <entry name="dbPath" type="string"><default>${TMPDIR:-/tmp}/checkup-db-$(id -u)</default></entry>
     </group>
 </kcfg>

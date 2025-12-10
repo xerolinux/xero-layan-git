@@ -1,7 +1,5 @@
 import QtQuick
-import QtQuick.Layouts
 import QtMultimedia
-import org.kde.kirigami as Kirigami
 import "code/utils.js" as Utils
 import "code/enum.js" as Enum
 
@@ -19,9 +17,10 @@ Item {
     property bool restoreLastPosition: true
     property bool debugEnabled: false
     property int changeWallpaperMode: Enum.ChangeWallpaperMode.Slideshow
+    property int changeWallpaperTimerSeconds: 0
     property int changeWallpaperTimerMinutes: 10
     property int changeWallpaperTimerHours: 0
-    property int changeWallpaperTimerTime: (changeWallpaperTimerHours * 60 + changeWallpaperTimerMinutes) * 60 * 1000
+    property int changeWallpaperTimerMs: ((changeWallpaperTimerHours * 60 * 60) + (changeWallpaperTimerMinutes * 60) + changeWallpaperTimerSeconds) * 1000
     property bool resumeLastVideo: true
 
     // Crossfade must not be longer than the shortest video or the fade becomes glitchy
@@ -35,7 +34,7 @@ Item {
         if (!root.crossfadeEnabled) {
             return 0;
         } else if (root.changeWallpaperMode === Enum.ChangeWallpaperMode.OnATimer) {
-            return Math.min(root.targetCrossfadeDuration, changeWallpaperTimerTime / 3 * 2);
+            return Math.min(root.targetCrossfadeDuration, changeWallpaperTimerMs / 3 * 2);
         } else {
             return crossfadeMinDurationLast + crossfadeMinDurationCurrent;
         }
@@ -71,18 +70,15 @@ Item {
             root.primaryPlayer = true;
             videoPlayer1.opacity = 1;
         }
-
-        if (root.changeWallpaperMode === Enum.ChangeWallpaperMode.OnATimer) {
-            changeTimer.restart();
-        }
     }
     signal setNextSource
 
-    Timer {
+    PausableTimer {
         id: changeTimer
         running: root.changeWallpaperMode === Enum.ChangeWallpaperMode.OnATimer && root.player.playing
-        interval: !running ? 0 : changeWallpaperTimerTime - (root.crossfadeEnabled ? root.crossfadeMinDurationCurrent : 0)
+        interval: root.changeWallpaperTimerMs - (root.crossfadeEnabled ? root.crossfadeMinDurationCurrent : 0)
         repeat: true
+        useNewIntervalImmediately: true
         onTriggered: {
             if (root.debugEnabled) {
                 console.log("Timer triggered, changing wallpaper");
@@ -90,11 +86,8 @@ Item {
             root.next(true);
         }
         onIntervalChanged: {
-            if (running) {
-                if (root.debugEnabled) {
-                    console.log("Timer started. Interval:", interval);
-                }
-                changeTimer.restart();
+            if (root.debugEnabled) {
+                console.log("Timer changed:", interval);
             }
         }
     }
