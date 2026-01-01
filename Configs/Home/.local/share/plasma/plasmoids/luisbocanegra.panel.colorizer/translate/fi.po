@@ -1,71 +1,68 @@
-# Translation of colorizer in nl
+# Translation of colorizer in Finnish
 # Copyright (C) 2025
 # This file is distributed under the same license as the colorizer package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: colorizer\n"
 "Report-Msgid-Bugs-To: https://github.com/luisbocanegra/plasma-panel-"
 "colorizer\n"
 "POT-Creation-Date: 2025-12-29 08:18+0000\n"
-"PO-Revision-Date: 2025-11-25 10:50+0100\n"
-"Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
-"Language-Team: \n"
-"Language: nl\n"
+"PO-Revision-Date: 2025-12-25 13:03+0200\n"
+"Last-Translator: \n"
+"Language-Team: Finnish\n"
+"Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Gemini\n"
 
 #: ../metadata.json
 msgid "Panel colorizer"
-msgstr "Paneelkleuring"
+msgstr "Paneelin värittäjä"
 
 #: ../metadata.json
 msgid ""
 "Latte-Dock and WM status bar customization features for the default Plasma "
 "panel"
 msgstr ""
-"Aanpassingsmogelijkheden voor het standaard Plasma-paneel, gebaseerd op die "
-"van Latte-Dock en WM-statusbalk"
+"Latte-Dock- ja WM-tilarivin mukautusominaisuudet Plasman oletuspaneelille"
 
 #: ../contents/config/config.qml
 msgid "Presets"
-msgstr "Voorinstellingen"
+msgstr "Esiasetukset"
 
 #: ../contents/config/config.qml
 msgid "Presets auto-loading"
-msgstr "Voorinstellingen automatisch laden"
+msgstr "Esiasetusten automaattinen lataus"
 
 #: ../contents/config/config.qml
 msgid "Appearance"
-msgstr "Vormgeving"
+msgstr "Ulkoasu"
 
 #: ../contents/config/config.qml
 msgid "Stock Panel Settings"
-msgstr "Standaardinstellingen"
+msgstr "Paneelin vakioasetukset"
 
 #: ../contents/config/config.qml
 msgid "Widget Islands"
-msgstr "Widgeteilanden"
+msgstr "Pienoisohjelmasaaret"
 
 #: ../contents/config/config.qml
 msgid "Preset Overrides"
-msgstr "Voorrangsregels"
+msgstr "Esiasetusten ohitukset"
 
 #: ../contents/config/config.qml
 msgid "Global Overrides"
-msgstr "Globale voorrangsregels"
+msgstr "Globaalit ohitukset"
 
 #: ../contents/config/config.qml
 msgid "Text/Icon Fixes"
-msgstr "Tekst- en pictogramoplossingen"
+msgstr "Teksti- ja ikonikorjaukset"
 
 #: ../contents/config/config.qml
 msgid "Hide Widgets"
-msgstr "Widgets verbergen"
+msgstr "Piilota pienoisohjelmia"
 
 #: ../contents/config/config.qml
 msgid "System Tray Icons Replacer"
@@ -73,27 +70,27 @@ msgstr ""
 
 #: ../contents/config/config.qml
 msgid "General"
-msgstr "Algemeen"
+msgstr "Yleiset"
 
 #: ../contents/ui/components/CategoryDisabled.qml
 msgid "Panel Colorizer is disabled"
-msgstr "Paneelkleuring is uitgeschakeld"
+msgstr "Panel Colorizer on poissa käytöstä"
 
 #: ../contents/ui/components/CategoryDisabled.qml
 #: ../contents/ui/configTrayIconsReplacer.qml
 msgid "Enable"
-msgstr "Inschakelen"
+msgstr "Ota käyttöön"
 
 #: ../contents/ui/components/ColorPickerGradientList.qml
 #: ../contents/ui/components/ColorPickerList.qml
 #: ../contents/ui/components/FormColors.qml
 msgid "Widget background"
-msgstr "Widgetachtergrond"
+msgstr "Pienoisohjelman tausta"
 
 #: ../contents/ui/components/FormBorder.qml
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Border"
-msgstr "Rand"
+msgstr "Reunaviiva"
 
 #: ../contents/ui/components/FormBorder.qml
 #: ../contents/ui/components/FormPadding.qml
@@ -102,18 +99,18 @@ msgstr "Rand"
 #: ../contents/ui/configPresetAutoload.qml
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Enabled:"
-msgstr "Ingeschakeld:"
+msgstr "Käytössä:"
 
 #: ../contents/ui/components/FormBorder.qml
 #: ../contents/ui/components/FormColors.qml
 #: ../contents/ui/components/FormShadow.qml
 #: ../contents/ui/components/FormShape.qml
 msgid "Disabled"
-msgstr "Uitgeschakeld"
+msgstr "Ei käytössä"
 
 #: ../contents/ui/components/FormBorder.qml
 msgid "Width:"
-msgstr "Breedte:"
+msgstr "Leveys:"
 
 #: ../contents/ui/components/FormBorder.qml
 msgid ""
@@ -121,274 +118,275 @@ msgid ""
 "issues! <a href=\"https://github.com/luisbocanegra/plasma-panel-colorizer/"
 "issues/64\">See #64<a/>"
 msgstr ""
-"Let op: kies altijd voor een geheel getal bij het gebruik van "
-"<strong>widgeteislanden</strong> om problemen te voorkomen! <a "
-"href=\"https://github.com/luisbocanegra/plasma-panel-colorizer/"
-"issues/64\">Zie #64 (Engels)<a/>"
+"Käytä kokonaislukua <strong>pienoisohjelmasaarten</strong> kanssa "
+"välttääksesi piirtovirheitä! <a href=\"https://github.com/luisbocanegra/"
+"plasma-panel-colorizer/issues/64\">Katso #64<a/>"
 
 #: ../contents/ui/components/FormBorder.qml
 msgid "Custom widths:"
-msgstr "Aangepaste breedtes:"
+msgstr "Mukautetut leveydet:"
 
 #: ../contents/ui/components/FormColors.qml
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Color"
-msgstr "Kleur"
+msgstr "Väri"
 
 #: ../contents/ui/components/FormColors.qml
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Enable:"
-msgstr "Inschakelen:"
+msgstr "Ota käyttöön:"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Animation:"
-msgstr "Animatie:"
+msgstr "Animaatio:"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Interval (ms):"
-msgstr "Tussenpoos (in ms):"
+msgstr "Väli (ms):"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Smoothing (ms):"
-msgstr "Vloeiend maken (in ms):"
+msgstr "Pehmennys (ms):"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Color source:"
-msgstr "Kleurbron:"
+msgstr "Värin lähde:"
 
 #: ../contents/ui/components/FormColors.qml
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Custom"
-msgstr "Aangepast"
+msgstr "Mukautettu"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "A fixed custom color"
-msgstr "Een zelfgekozen kleur"
+msgstr "Kiinteä mukautettu väri"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "System"
-msgstr "Systeeminstellingen"
+msgstr "Järjestelmä"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Color that updates with your System theme"
-msgstr "De kleur van het systeemthema"
+msgstr "Väri, joka päivittyy järjestelmän teeman mukana"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Custom list"
-msgstr "Zelfgemaakte lijst"
+msgstr "Mukautettu lista"
 
 #: ../contents/ui/components/FormColors.qml
 msgid ""
 "Define a list of colors that will be applied to all the elements, wraps "
 "around if there are more elements than colors"
 msgstr ""
-"Stel een lijst samen met kleuren die worden toegepast op alle elementen - in "
-"herhaalde volgorde indien er meer elementen dat kleuren zijn"
+"Määritä lista väreistä, joita sovelletaan kaikkiin elementteihin (kiertää "
+"alusta, jos elementtejä on enemmän kuin värejä)"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Random"
-msgstr "Willekeurig"
+msgstr "Satunnainen"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Random color for each element"
-msgstr "Gebruik een willekeurige kleur per element"
+msgstr "Satunnainen väri jokaiselle elementille"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Follow"
-msgstr "Hoofdelement volgen"
+msgstr "Seuraa"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Follow the color of a parent element"
-msgstr "Gebruik de kleur van het hoofdelement"
+msgstr "Seuraa yläelementin väriä"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Gradient"
-msgstr "Kleurverloop"
+msgstr "Liukuväri"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Horizontal or vertical customizable color gradient"
-msgstr "Een horizontaal of verticaal kleurverloop, naar eigen inzicht"
+msgstr "Vaakasuuntainen tai pystysuuntainen mukautettava liukuväri"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Image"
-msgstr "Afbeelding"
+msgstr "Kuva"
 
 #: ../contents/ui/components/FormColors.qml
 msgid ""
 "High resolution images can slow down the desktop when the panel or widget "
 "size changes!"
 msgstr ""
-"Let op: afbeeldingen met een hoge resolutie kunnen voor vertraging zorgen!"
+"Korkearesoluutioiset kuvat voivat hidastaa työpöytää, kun paneelin tai "
+"pienoisohjelman koko muuttuu!"
 
 #: ../contents/ui/components/FormColors.qml ../contents/ui/configAppearance.qml
 msgid "Element:"
-msgstr "Element:"
+msgstr "Elementti:"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Panel background"
-msgstr "Paneelachtergrond"
+msgstr "Paneelin tausta"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Tray widget background"
-msgstr "Systeemvakachtergrond"
+msgstr "Ilmoitusalueen pienoisohjelman tausta"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Positioning:"
-msgstr "Uitlijning:"
+msgstr "Sijoittelu:"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Stretch"
-msgstr "Uitrekken"
+msgstr "Venytä"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Tile"
-msgstr "Tegelen"
+msgstr "Toista (tiili)"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Scaled and Cropped"
-msgstr "Bijsnijden en inpassen"
+msgstr "Skaalattu ja rajattu"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Image:"
-msgstr "Afbeelding:"
+msgstr "Kuva:"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Pick a image file"
-msgstr "Kies een afbeelding"
+msgstr "Valitse kuvatiedosto"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Image files"
-msgstr "Afbeeldingsbestanden"
+msgstr "Kuvatiedostot"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "All files"
-msgstr "Alle bestanden"
+msgstr "Kaikki tiedostot"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Color:"
-msgstr "Kleur:"
+msgstr "Väri:"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Color set:"
-msgstr "Kleurenschema:"
+msgstr "Värisarja:"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Colors:"
-msgstr "Kleuren:"
+msgstr "Värit:"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Orientation:"
-msgstr "Oriëntatie:"
+msgstr "Suunta:"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Horizontal"
-msgstr "Horizontaal"
+msgstr "Vaakasuuntainen"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Vertical"
-msgstr "Verticaal"
+msgstr "Pystysuuntainen"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Gradient steps:"
-msgstr "Kleurverloopstappen:"
+msgstr "Liukuvärin askeleet:"
 
 #: ../contents/ui/components/FormColors.qml ../contents/ui/configGeneral.qml
 msgid "Alpha:"
-msgstr "Alfa:"
+msgstr "Peittävyys (Alpha):"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Contrast Correction"
-msgstr "Contrastaanpassing"
+msgstr "Kontrastin korjaus"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Saturation:"
-msgstr "Verzadiging:"
+msgstr "Kylläisyys:"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Lightness:"
-msgstr "Helderheid:"
+msgstr "Valoisuus:"
 
 #: ../contents/ui/components/FormPadding.qml
 msgid "Padding"
-msgstr "Opvulling"
+msgstr "Sisämarginaali"
 
 #: ../contents/ui/components/FormPadding.qml
 msgid ""
 "Horizontal and vertical padding only work properly when the panel is on the "
 "same orientation."
 msgstr ""
-"Horizontale en verticale opvulling werkt alleen als het paneel "
-"overeenkomstig georiënteerd is."
+"Vaaka- ja pystysuuntainen sisämarginaali toimivat kunnolla vain, kun paneeli "
+"on samassa suunnassa."
 
 #: ../contents/ui/components/FormShadow.qml
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Shadow"
-msgstr "Schaduw"
+msgstr "Varjo"
 
 #: ../contents/ui/components/FormShadow.qml
 msgid "Size:"
-msgstr "Afmetingen:"
+msgstr "Koko:"
 
 #: ../contents/ui/components/FormShadow.qml
 msgid "X offset:"
-msgstr "X-verschuiving:"
+msgstr "X-siirtymä:"
 
 #: ../contents/ui/components/FormShadow.qml
 msgid "Y offset:"
-msgstr "Y-verschuiving:"
+msgstr "Y-siirtymä:"
 
 #: ../contents/ui/components/FormShape.qml
 msgid "Radius"
-msgstr "Straal"
+msgstr "Pyöristys"
 
 #: ../contents/ui/components/FormShape.qml
 msgid "Margin"
-msgstr "Marge"
+msgstr "Marginaali"
 
 #: ../contents/ui/components/FormShape.qml
 msgid ""
 "Requires plasmashell restart after disabling to restore the default. <a "
 "href=\"#\">Restart now</a>."
 msgstr ""
-"Herstart plasmashell na het uitschakelen hiervan of om de standaardwaarden "
-"te herstellen. <a href=\"#\">Nu herstarten</a>."
+"Vaatii plasmashellin uudelleenkäynnistyksen poistamisen jälkeen "
+"oletusasetusten palauttamiseksi. <a href=\"#\">Käynnistä uudelleen nyt</a>."
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Native panel:"
-msgstr "Standaardpaneel:"
+msgstr "Alkuperäinen paneeli:"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 #: ../contents/ui/configGeneral.qml
 msgid "Background"
-msgstr "Achtergrond"
+msgstr "Tausta"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid ""
 "Disable to make panel fully transparent, removes contrast and blur effects."
 msgstr ""
-"Schakel uit om het paneel volledig doorzichtig te maken en van contrast en "
-"vervaging te ontdoen."
+"Poista käytöstä tehdäksesi paneelista täysin läpinäkyvän (poistaa myös "
+"kontrasti- ja sumennusefektit)."
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "The shadow from the Plasma theme"
-msgstr "De schaduw van het Plasma-thema"
+msgstr "Plasma-teeman mukainen varjo"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Opacity:"
-msgstr "Doorzichtigheid:"
+msgstr "Peittävyys:"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Set to 0 to keep the mask required for custom background blur."
 msgstr ""
-"Stel in op 0 om slechts het vereiste masker voor vervaging toe te passen."
+"Aseta arvoksi 0 säilyttääksesi maskin, jota tarvitaan mukautettuun taustan "
+"sumennukseen."
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Floating applets:"
-msgstr "Zwevende applets:"
+msgstr "Kelluvat sovelmat:"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Allow changes (Plasma 6.4.0 and later)"
-msgstr "Wijzigingen toestaan (Plasma 6.4.0 en nieuwer)"
+msgstr "Salli muutokset (Plasma 6.4.0 tai uudempi)"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid ""
@@ -397,85 +395,86 @@ msgid ""
 "⚠️Changing <b>Floating</b> from the panel configuration will not work with "
 "this is enabled!"
 msgstr ""
-"Sinds versie 6.4.0 heeft Plasma ondersteuning voor <b>zwevende applets op "
-"zwevende panelen</b>. Schakel deze optie in om de paneelinstelling te "
-"omzeilen.\n"
-"⚠️Let op: door het inschakelen van de optie omtrent <b>zwevende applets</b> "
-"werkt de paneelinstelling niet!"
+"Versiosta 6.4.0 lähtien Plasmassa on sisäänrakennettu <b>Kelluva paneeli ja "
+"sovelmat</b> -asetus. Tämän käyttö ohittaa kyseisen asetuksen.\n"
+"⚠️<b>Kelluva</b>-asetuksen muuttaminen paneelin omista asetuksista ei toimi, "
+"kun tämä on käytössä!"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Wide expand button:"
-msgstr ""
+msgstr "Leveä laajennuspainike:"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid ""
 "Make the System Tray expand button be the same width as the other tray items"
 msgstr ""
+"Aseta ilmoitusalueen laajennuspainike samanlevuiseksi muiden kuvakkeiden "
+"kanssa"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Force floating applets"
-msgstr "Zwevende applets afdwingen"
+msgstr "Pakota kelluvat sovelmat"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Anchor to edges:"
-msgstr "Vastmaken aan randen:"
+msgstr "Ankkuroi reunoihin:"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Resize content when panel enters/exits floating state"
 msgstr ""
-"Pas de inhoudsgrootte aan als een paneel zwevend of juist niet wordt gemaakt"
+"Muuta sisällön kokoa, kun paneeli siirtyy kelluvaan tilaan tai poistuu siitä"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Panel de-float:"
-msgstr "Niet-zwevend paneel:"
+msgstr "Paneelin kellunnan poisto:"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid ""
 "Remove custom background rounded corners and borders on screen edge when "
 "panel is not floating"
 msgstr ""
-"Verwijder de zelfgekozen achtergrond, afgeronde hoeken en kaders op de "
-"schermrand als een paneel niet zweeft"
+"Poista mukautetun taustan pyöristetyt kulmat ja reunat näytön reunalta, kun "
+"paneeli ei kellu"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Customization"
-msgstr "Aanpassing"
+msgstr "Mukautus"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "State:"
-msgstr "Status:"
+msgstr "Tila:"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Normal"
-msgstr "Normaal"
+msgstr "Normaali"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Hover"
-msgstr "Aangewezen"
+msgstr "Hiiri päällä"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Expanded"
-msgstr "Uitgeklapt"
+msgstr "Laajennettu"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Needs attention"
-msgstr "Aandacht benodigd"
+msgstr "Vaatii huomiota"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Busy"
-msgstr "Bezig"
+msgstr "Varattu"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid ""
 "Change element appearance based on their state, configuration is stacked on "
 "top of the current appearance"
 msgstr ""
-"Pas de vormgeving van elementen aan op basis van hun status - de "
-"instellingen worden bovenop de huidige vormgeving toegepast"
+"Muuta elementin ulkoasua sen tilan perusteella. Asetukset lisätään nykyisen "
+"ulkoasun päälle."
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Blur custom background (Beta)"
-msgstr "Eigen achtergrond vervagen (bèta)"
+msgstr "Sumenna mukautettu tausta (Beta)"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid ""
@@ -483,94 +482,94 @@ msgid ""
 "panel background must be enabled with opacity of 0 for this to work as "
 "intended.</strong>"
 msgstr ""
-"Voorzie de eigen achtergrond(en) van een zelfgekozen vervagingsniveau."
-"<br><strong>Let op: de standaardachtergrond dient ingeschakeld te zijn met "
-"een doorzichtigheidsniveau van 0.</strong>"
+"Piirtää mukautetun sumennusmaskin mukautetun taustan taakse."
+"<br><strong>Paneelin natiivin taustan on oltava käytössä ja sen peittävyyden "
+"0, jotta tämä toimii oikein.</strong>"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid ""
 "C++ plugin not found, this feature will not work. Install the plugin and "
 "reboot or restart plasmashell to be able to use it."
 msgstr ""
-"Deze functie werkt niet, omdat de C++-plug-in niet is aangetroffen. "
-"Installeer de plug-in en herstart (plasmashell) om er gebruik van te maken."
+"C++-liitännäistä ei löytynyt, tämä ominaisuus ei toimi. Asenna liitännäinen "
+"ja käynnistä tietokone tai plasmashell uudelleen käyttääksesi sitä."
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Plugin install instructions"
-msgstr "Installatie-instructies"
+msgstr "Liitännäisen asennusohjeet"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Shape"
-msgstr "Vorm"
+msgstr "Muoto"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Spacing:"
-msgstr "Afstand:"
+msgstr "Välistys:"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid ""
 "<strong>Odd</strong> values are automatically converted to <strong>evens</"
 "strong> if <strong>Unified Background</strong> feature is used."
 msgstr ""
-"<strong>Oneven</strong> waarden worden automatisch omgezet in <strong>even</"
-"strong> waarden indien de optie <strong>Gelijke achtergronden</strong> is "
-"ingeschakeld."
+"<strong>Parittomat</strong> arvot muutetaan automaattisesti "
+"<strong>parillisiksi</strong>, jos <strong>Yhdistetty tausta</strong> -"
+"ominaisuus on käytössä."
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Background Color"
-msgstr "Achtergrondkleur"
+msgstr "Taustaväri"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Foreground Color"
-msgstr "Voorgrondkleur"
+msgstr "Etualaväri"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Primary Border"
-msgstr "Primaire rand"
+msgstr "Ensisijainen reunus"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Secondary Border"
-msgstr "Secundaire rand"
+msgstr "Toissijainen reunus"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Background Shadow"
-msgstr "Achtergrondschaduw"
+msgstr "Taustan varjo"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Background Shadow Color"
-msgstr "Achtergrondschaduwkleur"
+msgstr "Taustavarjon väri"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Foreground Shadow"
-msgstr "Voorgrondschaduw"
+msgstr "Etualan varjo"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Foreground Shadow Color"
-msgstr "Voorgrondschaduwkleur"
+msgstr "Etualavarjon väri"
 
 #: ../contents/ui/components/Header.qml
 msgid "None"
-msgstr "Geen"
+msgstr "Ei mitään"
 
 #: ../contents/ui/components/Header.qml
 msgid "Enable %1:"
-msgstr "%1 inschakelen:"
+msgstr "Ota käyttöön %1:"
 
 #: ../contents/ui/components/Header.qml ../contents/ui/main.qml
 msgid "Last preset loaded:"
-msgstr "Vorige voorinstellingen:"
+msgstr "Viimeksi ladattu esiasetus:"
 
 #: ../contents/ui/components/Header.qml
 msgid "Version:"
-msgstr "Versie:"
+msgstr "Versio:"
 
 #: ../contents/ui/components/Header.qml
 msgid "Changelog"
-msgstr "Wijzigingslog"
+msgstr "Muutosloki"
 
 #: ../contents/ui/components/Header.qml
 msgid "Releases"
-msgstr "Uitgaven"
+msgstr "Julkaisut"
 
 #: ../contents/ui/components/Header.qml
 msgid "Matrix chat"
@@ -578,7 +577,7 @@ msgstr "Matrix-chat"
 
 #: ../contents/ui/components/Header.qml
 msgid "Home page"
-msgstr "Website"
+msgstr "Kotisivu"
 
 #: ../contents/ui/components/Header.qml
 msgid "KDE Store"
@@ -586,47 +585,47 @@ msgstr "KDE Store"
 
 #: ../contents/ui/components/Header.qml
 msgid "Issues"
-msgstr "Problemen"
+msgstr "Ongelmat"
 
 #: ../contents/ui/components/Header.qml
 msgid "Current issues"
-msgstr "Huidige problemen"
+msgstr "Nykyiset ongelmat"
 
 #: ../contents/ui/components/Header.qml
 msgid "Report a bug"
-msgstr "Bug melden"
+msgstr "Ilmoita virheestä"
 
 #: ../contents/ui/components/Header.qml
 msgid "Request a feature"
-msgstr "Idee delen"
+msgstr "Pyydä ominaisuutta"
 
 #: ../contents/ui/components/Header.qml
 msgid "Help"
-msgstr "Hulp"
+msgstr "Ohje"
 
 #: ../contents/ui/components/Header.qml
 msgid "FAQ"
-msgstr "Veelgestelde vragen"
+msgstr "UKK"
 
 #: ../contents/ui/components/Header.qml
 msgid "Discussions"
-msgstr "Discussies"
+msgstr "Keskustelut"
 
 #: ../contents/ui/components/Header.qml
 msgid "Send an email"
-msgstr "E-mail sturen"
+msgstr "Lähetä sähköpostia"
 
 #: ../contents/ui/components/Header.qml
 msgid "Donate"
-msgstr "Doneren"
+msgstr "Lahjoita"
 
 #: ../contents/ui/components/Header.qml
 msgid "GitHub sponsors"
-msgstr "GitHub-sponsors"
+msgstr "GitHub-sponsorit"
 
 #: ../contents/ui/components/Header.qml
 msgid "My other projects"
-msgstr "Mijn andere projecten"
+msgstr "Muut projektini"
 
 #: ../contents/ui/components/Header.qml ../contents/ui/main.qml
 msgid ""
@@ -634,89 +633,89 @@ msgid ""
 "please log out and back in (or restart plasmashell user unit) to ensure "
 "things work correctly!"
 msgstr ""
-"De actieve versie van de widget (%1) komt niet overeen met de geïnstalleerde "
-"versie (%2). Meld je af en aan (of herstart plasmashell) om optimaal te "
-"kunnen werken!"
+"Pienoisohjelman käynnissä oleva versio (%1) eroaa levyllä olevasta versiosta "
+"(%2). Kirjaudu ulos ja takaisin sisään varmistaaksesi, että kaikki toimii "
+"oikein!"
 
 #: ../contents/ui/components/SettingImportExport.qml
 msgid "Import"
-msgstr "Importeren"
+msgstr "Tuo"
 
 #: ../contents/ui/components/SettingImportExport.qml
 msgid "Export"
-msgstr "Exporteren"
+msgstr "Vie"
 
 #: ../contents/ui/components/SettingImportExport.qml
 msgid ""
 "Export these settings to the default configuration folder and import them in "
 "other instances of Panel Colorizer"
 msgstr ""
-"Exporteer de instellingen naar de standaard instellingenmap en importeer ze "
-"op andere apparaten met dit programma"
+"Vie nämä asetukset oletusasetuskansioon ja tuo ne muihin Panel Colorizer -"
+"instansseihin"
 
 #: ../contents/ui/components/SettingImportExport.qml
 msgid "Export current settings?"
-msgstr "Huidige instellingen exporteren?"
+msgstr "Vie nykyiset asetukset?"
 
 #: ../contents/ui/components/SettingImportExport.qml
 msgid "Import saved settings?"
-msgstr "Opgeslagen instellingen importeren?"
+msgstr "Tuo tallennetut asetukset?"
 
 #: ../contents/ui/components/SettingImportExport.qml
 msgid "This will overwrite any previous export!"
-msgstr "Let op: de vorige export wordt overschreven!"
+msgstr "Tämä ylikirjoittaa aiemman viennin!"
 
 #: ../contents/ui/components/SettingImportExport.qml
 msgid "This will replace your current settings!"
-msgstr "Let op: de huidige instellingen worden vervangen!"
+msgstr "Tämä korvaa nykyiset asetuksesi!"
 
 #: ../contents/ui/components/WidgetCardConfig.qml
 #: ../contents/ui/components/WidgetCardHide.qml
 #: ../contents/ui/components/WidgetCardTextIconFixes.qml
 #: ../contents/ui/components/WidgetCardUnifiedBg.qml
 msgid "System Tray"
-msgstr "Systeemvak"
+msgstr "Ilmoitusalue"
 
 #: ../contents/ui/components/WidgetCardConfig.qml
 msgid "Add"
-msgstr "Toevoegen"
+msgstr "Lisää"
 
 #: ../contents/ui/components/WidgetCardHide.qml
 msgid "Hide"
-msgstr "Verbergen"
+msgstr "Piilota"
 
 #: ../contents/ui/components/WidgetCardOverride.qml
 msgid "Edit"
-msgstr "Bewerken"
+msgstr "Muokkaa"
 
 #: ../contents/ui/components/WidgetCardOverride.qml
 #: ../contents/ui/configPresets.qml
 msgid "Delete"
-msgstr "Verwĳderen"
+msgstr "Poista"
 
 #: ../contents/ui/components/WidgetCardTextIconFixes.qml
 msgid "Mask"
-msgstr "Maskeren"
+msgstr "Maski"
 
 #: ../contents/ui/components/WidgetCardTextIconFixes.qml
 msgid "Effect"
-msgstr "Effect"
+msgstr "Efekti"
 
 #: ../contents/ui/components/WidgetCardTextIconFixes.qml
 msgid "Refresh"
-msgstr "Herladen"
+msgstr "Päivitä"
 
 #: ../contents/ui/components/WidgetCardUnifiedBg.qml
 msgid "Disable"
-msgstr "Uitschakelen"
+msgstr "Poista käytöstä"
 
 #: ../contents/ui/components/WidgetCardUnifiedBg.qml
 msgid "Start"
-msgstr "Begin"
+msgstr "Alku"
 
 #: ../contents/ui/components/WidgetCardUnifiedBg.qml
 msgid "End"
-msgstr "Einde"
+msgstr "Loppu"
 
 #: ../contents/ui/configAppearance.qml
 msgid ""
@@ -726,139 +725,137 @@ msgid ""
 "plasma-panel-colorizer#build-from-source-with-c-plugin\">see instructions</"
 "a>."
 msgstr ""
-"Niet het verwachte resultaat? Zorg er voor dat je het juiste element bewerkt."
-"<br>Werkt aangepaste vervaging niet? Probeer dan om de C++-plug-in te "
-"herinstalleren aan de hand van de nieuwste broncode (<a href=\"https://"
-"github.com/luisbocanegra/plasma-panel-colorizer#build-from-source-with-c-"
-"plugin\">instructies</a>)."
+"Etkö saa odotettua tulosta? Varmista, että muokkaat oikeaa elementtiä."
+"<br>Eikö mukautettu sumennus toimi? Kokeile asentaa C++-liitännäinen "
+"uudelleen uusimmasta lähdekoodista, <a href=\"https://github.com/"
+"luisbocanegra/plasma-panel-colorizer#build-from-source-with-c-plugin\">katso "
+"ohjeet</a>."
 
 #: ../contents/ui/configAppearance.qml
 msgid "Restore default (removes all customizations)"
-msgstr "Standaardwaarden herstellen (aanpassingen wissen)"
+msgstr "Palauta oletukset (poistaa kaikki mukautukset)"
 
 #: ../contents/ui/configAppearance.qml
 msgid "Panel"
-msgstr "Paneel"
+msgstr "Paneeli"
 
 #: ../contents/ui/configAppearance.qml
 #: ../contents/ui/configGlobalWidgetOverrides.qml
 #: ../contents/ui/configPresetWidgetOverrides.qml
 msgid "Widgets"
-msgstr "Widgets"
+msgstr "Pienoisohjelmat"
 
 #: ../contents/ui/configAppearance.qml
 msgid "Tray widgets"
-msgstr "Systeemvakwidgets"
+msgstr "Ilmoitusalueen pienoisohjelmat"
 
 #: ../contents/ui/configAppearance.qml
 msgid "Part of the panel on which the options below will be applied."
-msgstr ""
-"Het gedeelte van het paneel waarop onderstaande opties van toepassing zijn."
+msgstr "Paneelin osa, johon alla olevia asetuksia sovelletaan."
 
 #: ../contents/ui/configGeneral.qml
 msgid "Hide widget:"
-msgstr "Widget verbergen:"
+msgstr "Piilota pienoisohjelma:"
 
 #: ../contents/ui/configGeneral.qml
 msgid "Visible in Panel Edit Mode"
-msgstr "Zichtbaar in paneelbewerkmodus"
+msgstr "Näkyvissä paneelin muokkaustilassa"
 
 #: ../contents/ui/configGeneral.qml
 msgid "Configure from any widget:"
-msgstr "Instellen vanaf elke widget:"
+msgstr "Määritä mistä tahansa pienoisohjelmasta:"
 
 #: ../contents/ui/configGeneral.qml
 msgid ""
 "Disable to remove <b>%1</b> option from other widget's context (right-click) "
 "menu."
 msgstr ""
-"Schakel uit om de optie <b>%1</b> te verbergen uit het rechtermuisknopmenu "
-"van andere widgets."
+"Poista käytöstä poistaaksesi <b>%1</b> -vaihtoehdon muiden pienoisohjelmien "
+"valikosta (oikea klikkaus)."
 
 #: ../contents/ui/configGeneral.qml
 msgid "Debug mode:"
-msgstr "Foutopsporingsmodus:"
+msgstr "Vianetsintätila:"
 
 #: ../contents/ui/configGeneral.qml
 msgid "Show debugging information"
-msgstr "Foutopsporingsinformatie tonen"
+msgstr "Näytä vianetsintätiedot"
 
 #: ../contents/ui/configGeneral.qml
 msgid "Grid"
-msgstr "Rooster"
+msgstr "Ruudukko"
 
 #: ../contents/ui/configGeneral.qml
 msgid "Enabled"
-msgstr "Ingeschakeld"
+msgstr "Käytössä"
 
 #: ../contents/ui/configGeneral.qml
 msgid "Visible while configuring"
-msgstr "Zichtbaar tijdens het instellen"
+msgstr "Näkyvissä asetuksia muokattaessa"
 
 #: ../contents/ui/configGeneral.qml
 msgid "Minor line:"
-msgstr "Dunne lijn:"
+msgstr "Apuviiva:"
 
 #: ../contents/ui/configGeneral.qml
 msgid "spacing"
-msgstr "Afstand"
+msgstr "väli"
 
 #: ../contents/ui/configGeneral.qml
 msgid "Major line:"
-msgstr "Dikke lijn:"
+msgstr "Pääviiva:"
 
 #: ../contents/ui/configGeneral.qml
 msgid "every"
-msgstr "iedere"
+msgstr "välein"
 
 #: ../contents/ui/configGeneral.qml
 msgid "Property change animations"
-msgstr "Animaties bij aanpassen van afmetingen"
+msgstr "Ominaisuuksien muutosanimaatiot"
 
 #: ../contents/ui/configGeneral.qml
 msgid "Duration:"
-msgstr "Duur:"
+msgstr "Kesto:"
 
 #: ../contents/ui/configGeneral.qml
 msgid "D-Bus Service"
-msgstr "D-Bus-dienst"
+msgstr "D-Bus-palvelu"
 
 #: ../contents/ui/configGeneral.qml
 msgid "D-Bus name:"
-msgstr "D-Bus-naam:"
+msgstr "D-Bus-nimi:"
 
 #: ../contents/ui/configGeneral.qml
 msgid "Each Panel Colorizer instance has its own D-Bus name."
-msgstr "Iedere paneelkleuringsinstantie is voorzien van een eigen D-Bus-naam."
+msgstr "Jokaisella Panel Colorizer -instanssilla on oma D-Bus-nimensä."
 
 #: ../contents/ui/configGeneral.qml
 msgid "Python 3 executable:"
-msgstr "Uitvoerbaar Python 3-bestand:"
+msgstr "Python 3 -suoritustiedosto:"
 
 #: ../contents/ui/configGeneral.qml
 msgid "Required to run the D-Bus service in the background"
-msgstr "Vereist om de D-Bus-dienst op de achtergrond uit te voeren"
+msgstr "Vaaditaan D-Bus-palvelun ajamiseen taustalla"
 
 #: ../contents/ui/configGeneral.qml
 msgid "Usage examples:"
-msgstr "Voorbeelden:"
+msgstr "Käyttöesimerkkejä:"
 
 #: ../contents/ui/configGeneral.qml
 msgid "Apply a preset:"
-msgstr "Voorinstellingen toepassen:"
+msgstr "Käytä esiasetusta:"
 
 #: ../contents/ui/configGeneral.qml
 msgid "Preview and switch presets using fzf + qdbus6 + jq:"
-msgstr ""
-"Toon voorvertoningen en wissel tussen voorinstellingen met fzf + qdbus6 + jq:"
+msgstr "Esikatsele ja vaihda esiasetuksia käyttäen fzf + qdbus6 + jq:"
 
 #: ../contents/ui/configGeneral.qml
 msgid "Hide/show this panel"
-msgstr "Paneel tonen/verbergen"
+msgstr "Piilota/näytä tämä paneeli"
 
 #: ../contents/ui/configGeneral.qml
 msgid "Hide/show all panels"
-msgstr "Alle panelen tonen/verbergen"
+msgstr "Piilota/näytä kaikki paneelit"
 
 #: ../contents/ui/configGlobalWidgetOverrides.qml
 msgid ""
@@ -868,54 +865,53 @@ msgid ""
 "modifications, <b>uncheck</b> options <b>Enable</b> and <b>Fallback</b>, and "
 "apply the override to the widget."
 msgstr ""
-"Stel voorrangsregelingen in en pas ze toe op een of meerdere widgets. Deze "
-"voorrangsinstellingen staan los van andere voorinstellingen en worden "
-"toegepast bovenop de huidige instellingen.<br>Om een widget aan de zwarte "
-"lijst toe te voegen, volstaat het <b>uitvinken</b> van de opties en het "
-"<b>inschakelen</b> en instellen van de <b>terugvaloptie</b>, om vervolgens "
-"de voorrangsregeling toe te passen."
+"Luo asetusohituksia ja sovella niitä yhteen tai useampaan pienoisohjelmaan. "
+"Nämä ohitukset ovat riippumattomia esiasetuksista ja ne sovelletaan "
+"nykyisten asetusten päälle.<br>Estääksesi muutokset tiettyyn "
+"pienoisohjelmaan, <b>poista valinta</b> kohdista <b>Käytössä</b> ja "
+"<b>Varavaihtoehto</b>, ja sovelta ohitus kyseiseen pienoisohjelmaan."
 
 #: ../contents/ui/configGlobalWidgetOverrides.qml
 #: ../contents/ui/configPresetWidgetOverrides.qml
 msgid "Restore default (removes all overrides)"
-msgstr "Standaardwaarden herstellen (geen afgedwongen instellingen meer)"
+msgstr "Palauta oletukset (poistaa kaikki ohitukset)"
 
 #: ../contents/ui/configGlobalWidgetOverrides.qml
 #: ../contents/ui/configPresetWidgetOverrides.qml
 msgid "Configuration overrides"
-msgstr "Voorrangsregels"
+msgstr "Asetusohitukset"
 
 #: ../contents/ui/configGlobalWidgetOverrides.qml
 #: ../contents/ui/configPresetWidgetOverrides.qml
 msgid "New override"
-msgstr "Voorrangsregeling toevoegen"
+msgstr "Uusi ohitus"
 
 #: ../contents/ui/configGlobalWidgetOverrides.qml
 #: ../contents/ui/configPresetWidgetOverrides.qml
 msgid "Override settings"
-msgstr "Voorrangsregelinstellingen"
+msgstr "Ohituksen asetukset"
 
 #: ../contents/ui/configGlobalWidgetOverrides.qml
 #: ../contents/ui/configPresetWidgetOverrides.qml
 msgid "Override name"
-msgstr "Naam van voorrangsregel"
+msgstr "Ohituksen nimi"
 
 #: ../contents/ui/configGlobalWidgetOverrides.qml
 #: ../contents/ui/configPresetWidgetOverrides.qml
 msgid "Rename"
-msgstr "Naam wĳzigen"
+msgstr "Nimeä uudelleen"
 
 #: ../contents/ui/configGlobalWidgetOverrides.qml
 msgid "Fallback:"
-msgstr "Terugvallen op:"
+msgstr "Varavaihtoehto:"
 
 #: ../contents/ui/configGlobalWidgetOverrides.qml
 msgid ""
 "Fallback to the Global/Preset widget settings for disabled options, except "
 "for <b>Enable</b> and <b>Blur</>."
 msgstr ""
-"Val bij uitgeschakelde opties terug op globale of voorinstellingen, met "
-"uitzondering van <b>Inschakelen</b> en <b>Vervagen</b>."
+"Käytä globaaleja tai esiasetuksen pienoisohjelma-asetuksia poissa käytöstä "
+"oleville valinnoille, paitsi kohdissa <b>Käytössä</b> ja <b>Sumennus</b>."
 
 #: ../contents/ui/configGlobalWidgetOverrides.qml
 #: ../contents/ui/configPresetWidgetOverrides.qml
@@ -924,9 +920,8 @@ msgid ""
 "overrides share the same option, the last occurence replaces the value of "
 "the previous one."
 msgstr ""
-"Voorrangsregels worden van boven naar beneden uitgevoerd. Als twee of meer "
-"regels betrekking hebben op dezelfde optie, dan wordt de voorgaande regel "
-"afgedwongen."
+"Ohitukset sovelletaan ylhäältä alas. Jos kaksi tai useampi ohitus sisältää "
+"saman asetuksen, viimeisin niistä jää voimaan."
 
 #: ../contents/ui/configHideWidgets.qml
 msgid ""
@@ -935,29 +930,29 @@ msgid ""
 "configured from the <b>Keyboard Shortcuts</b> page on each widget's "
 "configuration window."
 msgstr ""
-"Verborgen widgets kunnen nog worden geactiveerd met sneltoetsen en zijn "
-"altijd zichtbaar in de paneelbewerkmodus.<br>De activatiesneltoets kan "
-"worden ingesteld op het scherm <b>Sneltoetsen</b> van de widgetinstellingen."
+"Piilotetut pienoisohjelmat voidaan edelleen aktivoida pikanäppäimillä ja ne "
+"ovat aina näkyvissä työpöydän muokkaustilassa.<br>Aktivointinäppäin voidaan "
+"asettaa kunkin pienoisohjelman omien asetusten <b>Pikanäppäimet</b>-sivulta."
 
 #: ../contents/ui/configHideWidgets.qml
 msgid "Restore default (controlled by each widget)"
-msgstr "Standaardwaarden herstellen (widgetbediening)"
+msgstr "Palauta oletus (pienoisohjelmien omien asetusten mukaan)"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "Toggle Panel Colorizer"
-msgstr "Paneelkleuring tonen/verbergen"
+msgstr "Kytke Panel Colorizer päälle/pois"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "Switch presets"
-msgstr "Wisselen tussen voorinstellingen"
+msgstr "Vaihda esiasetuksia"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "Show popup"
-msgstr "Pop-up tonen"
+msgstr "Näytä ponnahdusikkuna"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "Do nothing"
-msgstr "Niets doen"
+msgstr "Älä tee mitään"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid ""
@@ -966,18 +961,18 @@ msgid ""
 "unsaved preset settings will be lost when auto-loading switches to other "
 "preset!"
 msgstr ""
-"Schakel automatisch tussen de diverse voorinstellingen op basis van paneel- "
-"en vensterstatussen.<br>Let op: schakel automatisch laden uit voordat je "
-"wijzigingen aanbrengt - niet-opgeslagen instellingen gaan verloren tijdens "
-"het automatisch schakelen!"
+"Vaihda esiasetusten välillä automaattisesti paneelin ja ikkunoiden tilan "
+"perusteella.<br>Poista automaattinen lataus käytöstä ennen kuin teet "
+"muutoksia esiasetuksiin; tallentamattomat muutokset menetetään, jos "
+"automaattinen lataus vaihtaa esiasetusta!"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "Remove all auto-loading conditions"
-msgstr "Alle voorwaarden omtrent automatisch laden verwijderen"
+msgstr "Poista kaikki automaattisen latauksen ehdot"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "Auto-loading conditions"
-msgstr "Voorwaarden omtrent automatisch laden"
+msgstr "Automaattisen latauksen ehdot"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid ""
@@ -986,71 +981,69 @@ msgid ""
 "is a maximized window on the screen, the <b>Maximized</b> preset will be "
 "applied."
 msgstr ""
-"Prioriteiten werken op basis van aflopende volgorde. Voorbeeld: als zowel "
-"<b>Gemaximaliseerd venster</b> en <b>Venster raakt paneelrand</b> een "
-"voorinstelling hebben en er is een gemaximaliseerd venster op het scherm, "
-"dan worden de <b>maximalisatieinstellingen</b> toegepast."
+"Prioriteetit ovat laskevassa järjestyksessä. Esim. jos sekä <b>Maksimoitu "
+"ikkuna on näkyvissä</b> että <b>Paneeli koskettaa ikkunaa</b> on valittu, ja "
+"näytöllä on maksimoitu ikkuna, sovelletaan <b>Maksimoitu</b>-esiasetusta."
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "Window tracking:"
-msgstr "Vensters volgen:"
+msgstr "Ikkunoiden seuranta:"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "Per screen"
-msgstr "Per beeldscherm"
+msgstr "Näyttökohtainen"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "Active only"
-msgstr "Alleen op actief beeldscherm"
+msgstr "Vain aktiivinen"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "Active window fallback"
-msgstr "Actieve vensterterugval"
+msgstr "Aktiivisen ikkunan varatoiminto"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "Track KWin's top window when there is no active one in the screen."
-msgstr ""
-"Houd het bovenste venster van KWin bij indien er geen actief venster is."
+msgstr "Seuraa KWinin ylintä ikkunaa, kun näytöllä ei ole aktiivista ikkunaa."
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "Fullscreen window:"
-msgstr "Schermvullend venster:"
+msgstr "Koko näytön ikkuna:"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "Maximized window:"
-msgstr "Gemaximaliseerd venster:"
+msgstr "Maksimoitu ikkuna:"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "Window touching panel:"
-msgstr "Venster raakt paneelrand:"
+msgstr "Ikkuna koskettaa paneelia:"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "Active window:"
-msgstr "Actief venster:"
+msgstr "Aktiivinen ikkuna:"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "At least one window is visible:"
-msgstr "Bij minimaal één zichtbaar venster:"
+msgstr "Vähintään yksi ikkuna on näkyvissä:"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "Floating panel:"
-msgstr "Zwevend paneel:"
+msgstr "Kelluva paneeli:"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "activity:"
-msgstr "Activiteit:"
+msgstr "aktiviteetti:"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "Normal:"
-msgstr "Normaal:"
+msgstr "Normaali:"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "Widget Click"
-msgstr "Aanklikken van widget"
+msgstr "Pienoisohjelman klikkaus"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "Action:"
-msgstr "Actie:"
+msgstr "Toiminto:"
 
 #: ../contents/ui/configPresetWidgetOverrides.qml
 msgid ""
@@ -1058,41 +1051,41 @@ msgid ""
 "These overrides should be saved to a preset in <strong>Presets</strong> tab "
 "or they will be lost when presets change!"
 msgstr ""
-"Stel voorrangsregels samen en pas ze toe op een of meerdere widgets. Deze "
-"regels kunnen het beste worden opgeslagen als <strong>voorinstellingen</"
-"strong>, anders worden ze gewist na het wisselen van voorinstellingen!"
+"Luo asetusohituksia ja sovella niitä yhteen tai useampaan pienoisohjelmaan. "
+"Nämä ohitukset tulisi tallentaa esiasetukseen <strong>Esiasetukset</strong>-"
+"välilehdellä, muuten ne menetetään esiasetuksen vaihtuessa!"
 
 #: ../contents/ui/configPresetWidgetOverrides.qml
 msgid "Name:"
-msgstr "Naam:"
+msgstr "Nimi:"
 
 #: ../contents/ui/configPresets.qml
 msgid "Delete preset"
-msgstr "Voorinstelling verwijderen"
+msgstr "Poista esiasetus"
 
 #: ../contents/ui/configPresets.qml
 msgid "This will permanently delete the file from your system!"
-msgstr "Let op: het bestand wordt permanent verwijderd!"
+msgstr "Tämä poistaa tiedoston pysyvästi järjestelmästäsi!"
 
 #: ../contents/ui/configPresets.qml
 msgid "Update preset"
-msgstr "Voorinstelling bijwerken"
+msgstr "Päivitä esiasetus"
 
 #: ../contents/ui/configPresets.qml
 msgid "Preset configuration will be overwritten!"
-msgstr "Let op: de instellingen worden overschreven!"
+msgstr "Esiasetuksen asetukset ylikirjoitetaan!"
 
 #: ../contents/ui/configPresets.qml
 msgid "Create preset preview?"
-msgstr "Voorvertoning samenstellen?"
+msgstr "Luodaanko esiasetuksen esikatselu?"
 
 #: ../contents/ui/configPresets.qml
 msgid "Current preview will be overwritten!"
-msgstr "Let op: de voorvertoning wordt overschreven!"
+msgstr "Nykyinen esikatselu ylikirjoitetaan!"
 
 #: ../contents/ui/configPresets.qml
 msgid "Create preset"
-msgstr "Voorinstellingen samenstellen"
+msgstr "Luo esiasetus"
 
 #: ../contents/ui/configPresets.qml
 msgid ""
@@ -1101,54 +1094,54 @@ msgid ""
 "different preset, otherwise unsaved preset settings will be lost when "
 "presets change!"
 msgstr ""
-"Let op: wijzigingen aan de huidige voorinstellingen worden niet automatisch "
-"opgeslagen. Keer terug naar dit tabblad en werk ze bij alvorens een andere "
-"set voorinstellingen te kiezen, anders worden ze gewist!"
+"Muutoksia nykyiseen esiasetukseen ei tallenneta levylle automaattisesti. "
+"Palaa tälle välilehdelle ja päivitä se manuaalisesti ennen toiseen "
+"esiasetukseen vaihtamista, muuten tallentamattomat asetukset menetetään!"
 
 #: ../contents/ui/configPresets.qml
 msgid "Restore default preset"
-msgstr "Standaardwaarden herstellen"
+msgstr "Palauta oletusesiasetus"
 
 #: ../contents/ui/configPresets.qml
 msgid "New from current settings"
-msgstr "Nieuw op basis van huidige instellingen"
+msgstr "Uusi nykyisistä asetuksista"
 
 #: ../contents/ui/configPresets.qml
 msgid "Save"
-msgstr "Opslaan"
+msgstr "Tallenna"
 
 #: ../contents/ui/configPresets.qml
 msgid "Refresh presets"
-msgstr "Voorinstellingen herladen"
+msgstr "Päivitä esiasetukset"
 
 #: ../contents/ui/configPresets.qml
 msgid "Built-in"
-msgstr "Meegeleverd"
+msgstr "Sisäänrakennettu"
 
 #: ../contents/ui/configPresets.qml
 msgid "Load"
-msgstr "Laden"
+msgstr "Lataa"
 
 #: ../contents/ui/configPresets.qml
 msgid "Update"
-msgstr "Bijwerken"
+msgstr "Päivitä"
 
 #: ../contents/ui/configPresets.qml
 msgid "Create preview"
-msgstr "Voorvertonen"
+msgstr "Luo esikatselu"
 
 #: ../contents/ui/configPresets.qml
 msgid "Update preview"
-msgstr "Voorvertoning bijwerken"
+msgstr "Päivitä esikatselu"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid ""
 "Changing panel position is currently unstable and may cause Plasma to crash "
 "when moving panels between non-parallel edges (e.g from top to left)."
 msgstr ""
-"Let op: het aanpassen van de paneellocatie is momenteel instabiel en kan tot "
-"Plasma-crashes leiden indien niet-parallelle randen worden aangehouden "
-"(bijv. boven naar links)."
+"Paneelin sijainnin muuttaminen on tällä hetkellä epävakaata ja voi kaataa "
+"Plasman, kun paneelia siirretään kohtisuorien reunojen välillä (esim. "
+"ylhäältä vasemmalle)."
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid ""
@@ -1157,131 +1150,130 @@ msgid ""
 "use <b>Panel Opacity</b> and <b>Native panel background</b> options in "
 "<b>Appearance</b> tab instead."
 msgstr ""
-"Voor de doorzichtigheids- en schermopties is <b>Plasma 6.3</b> of hoger "
-"vereist.<br>Doorzichtigheid is afhankelijk van het gekozen Plasma-thema. Om "
-"dit naar eigen hand te zetten, kunnen de opties <b>Paneeldoorzichtigheid</b> "
-"en <b>Standaard paneelachtergrond</b> op het tabblad <b>Vormgeving</b> "
-"worden gebruikt."
+"Peittävyys- ja Näyttö-asetukset vaativat <b>Plasma 6.3</b> -version tai "
+"uudemman.<br>Peittävyys riippuu nykyisestä Plasma-teemasta. Tarkempaa säätöä "
+"tai täyttä läpinäkyvyyttä varten käytä <b>Paneelin peittävyys</b> ja "
+"<b>Alkuperäinen paneelin tausta</b> -asetuksia <b>Ulkoasu</b>-välilehdellä."
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Screen"
-msgstr "Beeldscherm"
+msgstr "Näyttö"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Screen:"
-msgstr "Beeldscherm:"
+msgstr "Näyttö:"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Position"
-msgstr "Locatie"
+msgstr "Sijainti"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Position:"
-msgstr "Locatie:"
+msgstr "Sijainti:"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Top"
-msgstr "Bovenaan"
+msgstr "Ylhäällä"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Bottom"
-msgstr "Onderaan"
+msgstr "Alhaalla"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Left"
-msgstr "Links"
+msgstr "Vasemmalla"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Right"
-msgstr "Rechts"
+msgstr "Oikealla"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Alignment"
-msgstr "Uitlijning"
+msgstr "Tasaus"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Alignment:"
-msgstr "Uitlijning:"
+msgstr "Tasaus:"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Center"
-msgstr "Midden"
+msgstr "Keskellä"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Length mode"
-msgstr "Lengtemodus"
+msgstr "Pituustila"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Mode:"
-msgstr "Modus:"
+msgstr "Tila:"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Fill"
-msgstr "Uitrekken"
+msgstr "Täytä"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Fit content"
-msgstr "Aanpassen aan inhoud"
+msgstr "Sovita sisältöön"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Visibility"
-msgstr "Zichtbaarheid"
+msgstr "Näkyvyys"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Always visible"
-msgstr "Altijd tonen"
+msgstr "Aina näkyvissä"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Auto hide"
-msgstr "Automatisch verbergen"
+msgstr "Piilota automaattisesti"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Dodge windows"
-msgstr "Vensters ontwijken"
+msgstr "Väistä ikkunoita"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Windows go below"
-msgstr "Vensters mogen eronder gaan"
+msgstr "Ikkunat menevät alle"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Opacity"
-msgstr "Doorzichtigheid"
+msgstr "Peittävyys"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Adaptive"
-msgstr "Aanpasbaar"
+msgstr "Mukautuva"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Opaque"
-msgstr "Ondoorzichtig"
+msgstr "Peittävä"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Translucent"
-msgstr "Doorzichtig"
+msgstr "Läpikuultava"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Floating"
-msgstr "Zweven"
+msgstr "Kelluva"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Floating:"
-msgstr "Zweven:"
+msgstr "Kelluva:"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Thickness"
-msgstr "Dikte"
+msgstr "Paksuus"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Thickness:"
-msgstr "Dikte:"
+msgstr "Paksuus:"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Show/Hide"
-msgstr "Tonen/Verbergen"
+msgstr "Näytä/Piilota"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Show:"
-msgstr "Tonen:"
+msgstr "Näytä:"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid ""
@@ -1293,12 +1285,11 @@ msgid ""
 "configuration from all Panel Colorizer instances so make sure to save the "
 "others first"
 msgstr ""
-"WAARSCHUWING: wees terughoudend met het gebruik van tonen/verbergen! Als het "
-"paneel verborgen wordt en je hebt het automatisch laden van voorinstellingen "
-"niet ingesteld, of je weet hoe je dit kan doen met behulp van D-Bus, dan is "
-"er geen methode om een en ander weer zichtbaar te maken. In dat geval dien "
-"je onderstaande opdracht uit te voeren in een terminalvenster en vervolgens "
-"af- een aan te melden."
+"VAROITUS: Käytä Näytä/Piilota-toimintoa varoen. Jos piilotat paneelin etkä "
+"ole määrittänyt automaattista latausta tai tiedä miten vaihtaa esiasetuksia "
+"D-Busin kautta, et saa paneelia enää näkyviin ilman asetusten manuaalista "
+"poistamista. Alla oleva komento terminaalissa poistaa asetukset kaikilta "
+"instansseilta, joten tallenna muut ensin."
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid ""
@@ -1306,9 +1297,8 @@ msgid ""
 "instead. Consult the README to learn more or see the General tab for some "
 "examples."
 msgstr ""
-"Als je D-Bus ingeschakeld hebt, is het aanbevolen om D-Bus met sneltoetsen "
-"aan te roepen. Bekijk voor meer informatie de README of de voorbeelden op "
-"het tabblad <b>Algemeen</b>."
+"Jos D-Bus on käytössä, on suositeltavaa käyttää sitä pikanäppäinten kanssa. "
+"Lue README-tiedosto tai katso esimerkkejä Yleiset-välilehdeltä."
 
 #: ../contents/ui/configTextIconFix.qml
 msgid ""
@@ -1321,28 +1311,24 @@ msgid ""
 "the <strong>Mask<strong> and <strong>Color Effect</strong> disable and "
 "restart Plasma or logout."
 msgstr ""
-"Verbeter tekst- en pictogramkleuren van widgets die niet volgens de gangbare "
-"werken.<br> - <strong>Maskeren</strong>: dwing kleuren op svg-pictogrammen "
-"af - vooral handig voor symbolische pictogrammen.<br> - <strong>Kleureffect</"
-"strong>: dwing tekst en pictogrammen af aan de hand van een "
-"naverwerkingseffect - vooral handig voor niet-symbolische pictogrammen.<br> "
-"- <strong>Herladen</strong>: pas kleuren op een vooraf ingesteld moment toe "
-"- vooral handig voor widgets die inhoud opnieuw samenstellen of kleuren."
-"<br>Herstart Plasma of meld je af om de oorspronkelijke <strong>maskeer-"
-"<strong> en <strong>kleureffect</strong>instellingen uit te schakelen."
+"Korjaa tekstin ja ikonien värit pienoisohjelmissa, joissa normaali tapa ei "
+"toimi.<br> - <strong>Maski</strong>: Pakota väri SVG-ikoneille (hyödyllinen "
+"symbolisille ikoneille).<br> - <strong>Väriefekti</strong>: Pakota väri "
+"jälkikäsittelyllä (hyödyllinen tavallisille ikoneille).<br> - "
+"<strong>Päivitä</strong>: Käytä väriä uudelleen tietyin väliajoin."
+"<br>Palauttaaksesi muutokset, poista asetukset ja käynnistä Plasma uudelleen."
 
 #: ../contents/ui/configTextIconFix.qml
 msgid "Restore default (removes all icon and text fixes)"
-msgstr ""
-"Standaardwaarden herstellen (alle pictogram- en tekstaanpassingen wissen)"
+msgstr "Palauta oletukset (poistaa kaikki ikoni- ja tekstikorjaukset)"
 
 #: ../contents/ui/configTextIconFix.qml
 msgid "Force Text/Icon color"
-msgstr "Tekst- en pictogramkleuren afdwingen"
+msgstr "Pakota tekstin/ikonin väri"
 
 #: ../contents/ui/configTextIconFix.qml
 msgid "Refresh interval:"
-msgstr "Herladen, elke"
+msgstr "Päivitysväli:"
 
 #: ../contents/ui/configTrayIconsReplacer.qml
 msgid "Add new"
@@ -1460,244 +1446,27 @@ msgid ""
 "<b>End</b> must be left <b>disabled</b>. Widget custom background or border "
 "is required for this option to have an effect."
 msgstr ""
-"Kies het begin en einde van widgeteilanden. Widgets tussen <b>begin</b> en "
-"<b>einde</b> dienen <b>uitgeschakeld</b> te blijven. Voorzie widgets van een "
-"zelfgekozen achtergrond of kader om deze optie te kunnen gebruiken."
+"Valitse pienoisohjelmasaarten alku ja loppu. Ohjelmien, jotka ovat <b>Alun</"
+"b> ja <b>Lopun</b> välissä, on oltava <b>pois käytöstä</b>. Tämä vaatii "
+"mukautetun taustan tai reunuksen toimiakseen."
 
 #: ../contents/ui/configUnifiedBackground.qml
 msgid "Remove all unified areas"
-msgstr "Alle samengetrokken gebieden verwijderen"
+msgstr "Poista kaikki yhdistetyt alueet"
 
 #: ../contents/ui/main.qml
 msgid "Hide widget (visible in panel Edit Mode)"
-msgstr "Widget verbergen (zichtbaar in paneelbewerkmodus)"
+msgstr "Piilota pienoisohjelma (näkyvissä paneelin muokkaustilassa)"
 
 #: ../contents/ui/main.qml
 msgid "Select a preset"
-msgstr "Kies de voorinstellingen"
+msgstr "Valitse esiasetus"
 
 #: ../contents/ui/main.qml
 msgid "Running outdated version of %1"
-msgstr "Verouderde versie van ‘%1’"
+msgstr "Käytössä on vanhentunut versio ohjelmasta %1"
 
 #: ../contents/ui/main.qml
 msgid "Panel not found, this widget must be placed on a panel to work"
 msgstr ""
-"Er is geen paneel aangetroffen - de widget dient op een paneel te staan"
-
-#~ msgid "Text and icon fixes"
-#~ msgstr "Tekst- en pictogramoplossingen"
-
-#~ msgid "visible in Panel Edit Mode"
-#~ msgstr "Zichtbaar in de paneelbewerkmodus"
-
-#~ msgid "Unified widget backgrounds"
-#~ msgstr "Gelijke widgetachtergronden"
-
-#~ msgid "Text and icons"
-#~ msgstr "Tekst en pictogrammen"
-
-#~ msgid "customization"
-#~ msgstr "Aanpassen"
-
-#~ msgid ""
-#~ "Not getting the expected result? Make sure you're editing the correct "
-#~ "element."
-#~ msgstr ""
-#~ "Toch niet het verwachte resultaat behaald? Controleer dan of je het "
-#~ "juiste element bewerkt."
-
-#~ msgid ""
-#~ "Fix text and icon colors for widgets where the normal method doesn't work "
-#~ "or isn't permanent.<br><strong>Mask</strong>: Force Icon colorization "
-#~ "(symbolic icons).<br><strong>Color Effect</strong>: Force Text/Icons "
-#~ "colorization using post-processing effect (any icon).<br><strong>Refresh</"
-#~ "strong>: Re-apply colorization at a fixed interval, for widgets that "
-#~ "recreate or recolor content themselves<br>To restore the "
-#~ "<strong>Mask<strong> and <strong>Color Effect</strong> disable and "
-#~ "restart Plasma or logout."
-#~ msgstr ""
-#~ "Los problemen op rond tekst- en pictogramkleuren van widgets indien de "
-#~ "normale methode geen (blijvend) effect heeft.<br><strong>Maskeren</"
-#~ "strong>: dwing inkleuring van pictogrammen af;<br><strong>Kleureffect</"
-#~ "strong>: dwing inkleuring van tekst en pictogrammen af op basis van "
-#~ "naverwerking;<br><strong>Herladen</strong>: pas de kleuren op ingestelde "
-#~ "tijdstippen toe - handig voor widgets waarvan de inhoud zo nu en dan "
-#~ "wijzigt.<br>Om de effecten van het <strong>masker</strong> of "
-#~ "<strong>kleureffect</strong> ongedaan te maken, dient Plasma te worden "
-#~ "herstart."
-
-#~ msgid "Each Panel Colorizer instance has its D-Bus name."
-#~ msgstr "Iedere instantie van Paneelkleuring heeft een eigen D-Bus-naam."
-
-#~ msgid "Usage:"
-#~ msgstr "Gebruik:"
-
-#~ msgid ""
-#~ "Create configuration overrides and apply them to one or multiple widgets. "
-#~ "These overrides are independent and will be applied on top of the current "
-#~ "settings and across presets."
-#~ msgstr ""
-#~ "Stel voorrangsregels in en pas die toe op een of meerdere widgets. De "
-#~ "voorrangsregels werken los van elkaar en worden toegepast bovenop de "
-#~ "huidige (voor)instellingen."
-
-#~ msgid ""
-#~ "Switch between different presets based on the Panel and window states."
-#~ "<br>Disable preset auto-loading when making changes to presets, unsaved "
-#~ "preset settings will be lost when presets change!"
-#~ msgstr ""
-#~ "Wissel van voorinstelling op basis van paneel- en vensterstatussen."
-#~ "<br>Schakel automatisch laden uit tijdens het aanbrengen van wijzigingen. "
-#~ "Niet-opgeslagen instellingen worden gewist!"
-
-#~ msgid "Restore default (removes all autoloading conditions)"
-#~ msgstr "Standaardwaarden herstellen (automatisch laden uitschakelen)"
-
-#~ msgid "Environment"
-#~ msgstr "Omgeving"
-
-#~ msgid ""
-#~ "WARNING: Use with caution, if you hide the panel and have not configured "
-#~ "preset auto-loading or know how to switch presets using D-Bus (or have "
-#~ "disabled it), you will have no way to make it visible again without "
-#~ "manually removing the configuration, use the command below in terminal/"
-#~ "tty then log out or reboot, it will renove the configuratiob from all "
-#~ "Panel Colorizer instances so make sure to save the others first"
-#~ msgstr ""
-#~ "WAARSCHUWING: wees voorzichtig met het gebruik hiervan als je het paneel "
-#~ "verbergt en automatisch laden hebt uitgeschakeld of niet weet hoe "
-#~ "instellingen aan te roepen met D-Bus. Er is dan geen methode om het "
-#~ "paneel weer zichtbaar te maken, anders dan het verwijderen van de "
-#~ "instellingen en onderstaande terminalopdracht te gebruiken en af en aan "
-#~ "te melden. Ook worden alle instellingen van andere "
-#~ "Paneelkleuringsvensters gewist indien niet opgeslagen."
-
-#~ msgid ""
-#~ "Select start and end of unified background areas, widgets between "
-#~ "<b>Start</b> and <b>End</b> must be left <b>disabled</b>. Note: "
-#~ "<strong>odd</strong> widget spacing values are automatically converted to "
-#~ "<strong>evens</strong> when this feature is used."
-#~ msgstr ""
-#~ "Kies het begin en einde van de achtergrondgebieden. Widgets tussen "
-#~ "<b>Begin</b> en <b>Einde</b> dienen <b>uitgeschakeld</b> te blijven. Let "
-#~ "op: <strong>oneven</strong> widgetafstanden worden automatisch omgezet in "
-#~ "<strong>even</strong> afstanden."
-
-#~ msgid "Restore default (removes all unified areas)"
-#~ msgstr "Standaardwaarden herstellen"
-
-#~ msgid "Force floating dialogs"
-#~ msgstr "Zwevende dialoogvensters afdwingen"
-
-#~ msgid "Enable Panel Colorizer:"
-#~ msgstr "Paneelkleuring inschakelen:"
-
-#~ msgid "Source:"
-#~ msgstr "Bron:"
-
-#~ msgid "Padding:"
-#~ msgstr "Opvulling:"
-
-#~ msgid ""
-#~ "C++ plugin not installed, <b>Blur custom background</b> will not work."
-#~ "<br>Check the repository README on GitHub for details."
-#~ msgstr ""
-#~ "De C++-plug-in is niet geïnstalleerd - <b>hierdoor zal de "
-#~ "achtergrondvervaging</b> niet werken.<br>Bekijk voor meer informatie het "
-#~ "README-bestand op GitHub."
-
-#~ msgid "How fast the widget reacts to D-Bus changes"
-#~ msgstr "Hoe vaak de widget dient te reageren op D-Bus-wijzigingen"
-
-#~ msgid "Hide all panels"
-#~ msgstr "Alle panelen verbergen"
-
-#~ msgid "Show all panels"
-#~ msgstr "Alle panelen tonen"
-
-#~ msgid ""
-#~ "Force text and icon colors for specified widgets.<br><strong>Mask</"
-#~ "strong>: Force Icon colorization (symbolic icons).<br><strong>Color "
-#~ "Effect</strong>: Force Text/Icons colorization using post-processing "
-#~ "effect (any icon).<br><strong>Refresh</strong>: Re-apply colorization at "
-#~ "a fixed interval, for widgets that recreate or recolor content "
-#~ "themselves<br>To restore the <strong>Mask<strong> and <strong>Color "
-#~ "Effect</strong> disable and restart Plasma or logout."
-#~ msgstr ""
-#~ "Dwing tekst- en pictogramkleuren af op bepaalde widgets."
-#~ "<br><strong>Maskeren</strong>: dwing inkleuring van symbolische "
-#~ "pictogrammen af.<br><strong>Kleureffect</strong>: pas tekst- en "
-#~ "pictogramkleuren toe met behulp van voorverwerking.<br><strong>Herladen</"
-#~ "strong>: pas kleuring na een ingestelde tussenpoos telkens opnieuw toe. "
-#~ "Handig voor widgets die bij wijzigingen zelf kleuren instellen.<br>Alles "
-#~ "herstellen kan door het <strong>masker<strong> en <strong>kleureffect</"
-#~ "strong> uit te schakelen en Plasma te herstarten of af en aan te melden."
-
-#~ msgid ""
-#~ "Disable preset auto-loading when making changes to presets, unsaved "
-#~ "preset settings will be lost when presets change!"
-#~ msgstr ""
-#~ "Schakel het automatisch laden na het aanpassen van de voorinstellingen "
-#~ "uit. Let op: niet-opgeslagen instellingen worden hierdoor gewist!"
-
-#~ msgid ""
-#~ "Switch between different panel presets based on the Panel and window "
-#~ "states"
-#~ msgstr ""
-#~ "Schakelen tussen voorinstellingen op basis van paneel- en vensterstatus"
-
-#~ msgid "Restore default panel appearance"
-#~ msgstr "Standaard paneelvormgeving herstellen"
-
-#~ msgid "Native panel background:"
-#~ msgstr "Standaard paneelachtergrond:"
-
-#~ msgid "Native panel background shadow:"
-#~ msgstr "Achtergrondschaduw van paneel:"
-
-#~ msgid "Native panel background opacity:"
-#~ msgstr "Doorzichtigheid van paneel:"
-
-#~ msgid ""
-#~ "Set Opacity to 0 to keep just the mask required by Blur custom background."
-#~ msgstr ""
-#~ "Stel in op 0 om slechts het vereiste masker voor vervaging toe te passen."
-
-#~ msgid "Blur custom background (Beta):"
-#~ msgstr "Eigen achtergrond vervagen (bèta):"
-
-#~ msgid "Force floating dialogs:"
-#~ msgstr "Zwevende dialoogvensters afdwingen:"
-
-#~ msgid ""
-#~ "Changing panel position is currently unstable and may cause Plasma to "
-#~ "crash when moving panels between non-parallel edges (e.g top to left)."
-#~ msgstr ""
-#~ "Let op: het aanpassen van de paneellocatie is momenteel instabiel en kan "
-#~ "tot Plasma-crashes leiden indien niet-parallelle randen worden "
-#~ "aangehouden (bijv. boven naar links)."
-
-#~ msgid ""
-#~ "Opacity control here <b>requires Plasma 6.3</b> and depends on the "
-#~ "current Plasma Theme, for finer control or full transparency use <b>Panel "
-#~ "Opacity</b> and <b>Native panel background</b> options in <b>Appearance</"
-#~ "b> tab instead."
-#~ msgstr ""
-#~ "Voor het gebruik van de doorzichtigheidsopties is <b>Plasma 6.3 vereist</"
-#~ "b>. De opties werken afhankelijk van het gekozen Plasma-thema. Voor "
-#~ "nauwkeuriger afstellingen of volledige doorzichtigheid kunnen de opties "
-#~ "<b>Paneeldoorzichtigheid</b> en <b>Standaard paneelachtergrond</b> op het "
-#~ "tabblad <b>Vormgeving</b> worden gebruikt."
-
-#~ msgid "Active window only"
-#~ msgstr "Alleen actief venster"
-
-#~ msgid "At least one window is shown:"
-#~ msgstr "Er wordt minimaal één venster getoond:"
-
-#~ msgid "Panel Opacity:"
-#~ msgstr "Doorzichtigheid:"
-
-#~ msgid "Polling rate:"
-#~ msgstr "Controleren, elke"
+"Paneelia ei löytynyt; tämän pienoisohjelman on oltava paneelissa toimiakseen"

@@ -77,6 +77,7 @@ Loader {
 
         onClicked: {
             root.expanded = !root.expanded;
+            
         }
     }
 

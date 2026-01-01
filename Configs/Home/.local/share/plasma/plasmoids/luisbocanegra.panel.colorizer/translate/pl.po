@@ -1,25 +1,24 @@
 # Translation of colorizer in pl
 # Copyright (C) 2025
 # This file is distributed under the same license as the colorizer package.
-# RygorrMortis <rygorrmortis@github.com>, 2025.
+# SPDX-FileCopyrightText: 2025 RygorrMortis <rygorrmortis@github.com>
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: colorizer\n"
 "Report-Msgid-Bugs-To: https://github.com/luisbocanegra/plasma-panel-"
 "colorizer\n"
-"POT-Creation-Date: 2025-11-23 21:10+0000\n"
-"PO-Revision-Date: 2025-11-12 12:00+0100\n"
+"POT-Creation-Date: 2025-12-29 08:18+0000\n"
+"PO-Revision-Date: 2025-12-07 21:22+0100\n"
 "Last-Translator: RygorrMortis <rygorrmortis@github.com>\n"
-"Language-Team: Polish <pl@li.org>\n"
+"Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Manual\n"
+"X-Generator: Lokalize 25.08.3\n"
 
 #: ../metadata.json
 msgid "Panel colorizer"
@@ -63,10 +62,14 @@ msgstr "Globalne nadpisywanie"
 
 #: ../contents/config/config.qml
 msgid "Text/Icon Fixes"
-msgstr ""
+msgstr "Poprawki tekstu/ikon"
 
 #: ../contents/config/config.qml
 msgid "Hide Widgets"
+msgstr "Ukryj widżety"
+
+#: ../contents/config/config.qml
+msgid "System Tray Icons Replacer"
 msgstr ""
 
 #: ../contents/config/config.qml
@@ -78,6 +81,7 @@ msgid "Panel Colorizer is disabled"
 msgstr "Koloryzator panelu jest wyłączony"
 
 #: ../contents/ui/components/CategoryDisabled.qml
+#: ../contents/ui/configTrayIconsReplacer.qml
 msgid "Enable"
 msgstr "Włącz"
 
@@ -104,7 +108,7 @@ msgstr "Włączone:"
 #: ../contents/ui/components/FormBorder.qml
 #: ../contents/ui/components/FormColors.qml
 #: ../contents/ui/components/FormShadow.qml
-#: ../contents/ui/components/FormShape.qml ../contents/ui/components/Header.qml
+#: ../contents/ui/components/FormShape.qml
 msgid "Disabled"
 msgstr "Wyłączone"
 
@@ -400,6 +404,17 @@ msgstr ""
 "jest włączone!"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
+msgid "Wide expand button:"
+msgstr "Szeroki przycisk rozwijania:"
+
+#: ../contents/ui/components/FormWidgetSettings.qml
+msgid ""
+"Make the System Tray expand button be the same width as the other tray items"
+msgstr ""
+"Spraw, aby przycisk rozwijania zasobnika systemowego miał taką samą "
+"szerokość jak inne elementy zasobnika"
+
+#: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Force floating applets"
 msgstr "Wymuś pływające aplety"
 
@@ -671,7 +686,7 @@ msgstr "Dodaj"
 
 #: ../contents/ui/components/WidgetCardHide.qml
 msgid "Hide"
-msgstr ""
+msgstr "Ukryj"
 
 #: ../contents/ui/components/WidgetCardOverride.qml
 msgid "Edit"
@@ -748,17 +763,19 @@ msgstr "Ukryj widżet:"
 
 #: ../contents/ui/configGeneral.qml
 msgid "Visible in Panel Edit Mode"
-msgstr ""
+msgstr "Widoczny w trybie edycji panelu"
 
 #: ../contents/ui/configGeneral.qml
 msgid "Configure from any widget:"
-msgstr ""
+msgstr "Konfiguruj z dowolnego widżetu:"
 
 #: ../contents/ui/configGeneral.qml
 msgid ""
 "Disable to remove <b>%1</b> option from other widget's context (right-click) "
 "menu."
 msgstr ""
+"Wyłącz, aby usunąć opcję <b>%1</b> z menu kontekstowego (prawoklik) innych "
+"widżetów."
 
 #: ../contents/ui/configGeneral.qml
 msgid "Debug mode:"
@@ -918,10 +935,14 @@ msgid ""
 "configured from the <b>Keyboard Shortcuts</b> page on each widget's "
 "configuration window."
 msgstr ""
+"Ukryte widżety nadal mogą być aktywowane za pomocą skrótów klawiaturowych i "
+"są zawsze widoczne w trybie edycji pulpitu.<br>Skrót aktywacji można "
+"skonfigurować na stronie <b>Skróty klawiaturowe</b> w oknie konfiguracji "
+"każdego widżetu."
 
 #: ../contents/ui/configHideWidgets.qml
 msgid "Restore default (controlled by each widget)"
-msgstr ""
+msgstr "Przywróć domyślne (kontrolowane przez każdy widżet)"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "Toggle Panel Colorizer"
@@ -1324,6 +1345,116 @@ msgstr "Wymuś kolor tekstu/ikony"
 #: ../contents/ui/configTextIconFix.qml
 msgid "Refresh interval:"
 msgstr "Interwał odświeżania:"
+
+#: ../contents/ui/configTrayIconsReplacer.qml
+msgid "Add new"
+msgstr ""
+
+#: ../contents/ui/configTrayIconsReplacer.qml
+msgid "Remove all"
+msgstr ""
+
+#: ../contents/ui/configTrayIconsReplacer.qml
+msgid ""
+"Replace System Tray icons with icons from the current icon theme or a local "
+"file. The built-in rules icons are part of <a href=\"https://github.com/"
+"PapirusDevelopmentTeam/papirus-icon-theme\">Papirus icon theme</a>."
+msgstr ""
+
+#: ../contents/ui/configTrayIconsReplacer.qml
+msgid ""
+"C++ plugin not found, this feature will not work. Install the plugin and "
+"reboot or restart plasmashell to be able to use it <a href=\"https://github."
+"com/luisbocanegra/plasma-panel-colorizer?tab=readme-ov-"
+"file#manually\">Install instructions</a>."
+msgstr ""
+
+#: ../contents/ui/configTrayIconsReplacer.qml
+msgid ""
+"The installed version of the C++ plugin doesn't support this feature, update "
+"the plugin and reboot or restart plasmashell to be able to use it <a "
+"href=\"https://github.com/luisbocanegra/plasma-panel-colorizer?tab=readme-ov-"
+"file#manually\">Install instructions</a>."
+msgstr ""
+
+#: ../contents/ui/configTrayIconsReplacer.qml
+msgid "Log icon changes:"
+msgstr ""
+
+#: ../contents/ui/configTrayIconsReplacer.qml
+msgid "Icon hashes will be printed to the system log"
+msgstr ""
+
+#: ../contents/ui/configTrayIconsReplacer.qml
+msgid "Enable built-in rules:"
+msgstr ""
+
+#: ../contents/ui/configTrayIconsReplacer.qml
+msgid "Show"
+msgstr ""
+
+#: ../contents/ui/configTrayIconsReplacer.qml
+msgid "How to use"
+msgstr ""
+
+#: ../contents/ui/configTrayIconsReplacer.qml
+msgid "Built-in Rules (read only)"
+msgstr ""
+
+#: ../contents/ui/configTrayIconsReplacer.qml
+msgid "User Rules"
+msgstr ""
+
+#: ../contents/ui/configTrayIconsReplacer.qml
+msgid "Whether or not this replacement is enabled"
+msgstr ""
+
+#: ../contents/ui/configTrayIconsReplacer.qml
+msgid "Description (optional)"
+msgstr ""
+
+#: ../contents/ui/configTrayIconsReplacer.qml
+msgid "Description"
+msgstr ""
+
+#: ../contents/ui/configTrayIconsReplacer.qml
+msgid "SHA1"
+msgstr ""
+
+#: ../contents/ui/configTrayIconsReplacer.qml
+msgid "Original icon SHA1"
+msgstr ""
+
+#: ../contents/ui/configTrayIconsReplacer.qml
+msgid "Custom icon"
+msgstr ""
+
+#: ../contents/ui/configTrayIconsReplacer.qml
+msgid "Icon name or file"
+msgstr ""
+
+#: ../contents/ui/configTrayIconsReplacer.qml
+msgctxt "@info:tooltip"
+msgid "Icon name is \"%1\""
+msgstr ""
+
+#: ../contents/ui/configTrayIconsReplacer.qml
+msgctxt "@item:inmenu Open icon chooser dialog"
+msgid "Choose…"
+msgstr ""
+
+#: ../contents/ui/configTrayIconsReplacer.qml
+msgctxt "@action:inmenu"
+msgid "Remove icon"
+msgstr ""
+
+#: ../contents/ui/configTrayIconsReplacer.qml
+msgid "Copy to User Rules"
+msgstr ""
+
+#: ../contents/ui/configTrayIconsReplacer.qml
+msgid "Copy rule"
+msgstr ""
 
 #: ../contents/ui/configUnifiedBackground.qml
 msgid ""

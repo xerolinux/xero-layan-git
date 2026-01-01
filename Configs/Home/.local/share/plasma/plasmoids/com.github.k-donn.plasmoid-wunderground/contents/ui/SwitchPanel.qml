@@ -21,12 +21,25 @@ import QtQuick.Controls
 import org.kde.plasma.components as PlasmaComponents
 
 ColumnLayout {
+
+    Component.onCompleted: {
+        tabBar.currentIndex = plasmoid.configuration.defaultLoadPage;
+    }
+
+    Connections {
+        target: root
+
+        function onExpandedChanged() {
+            if (root.expanded && plasmoid.configuration.useDefaultPage) {
+                tabBar.currentIndex = plasmoid.configuration.defaultLoadPage;
+            }
+        }
+    }
+
     PlasmaComponents.TabBar {
         id: tabBar
 
         Layout.fillWidth: true
-
-        currentIndex: plasmoid.configuration.defaultLoadPage
 
         PlasmaComponents.TabButton {
             id: detailsTabButton

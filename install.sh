@@ -75,7 +75,7 @@ header "Installing Native Packages"
 sudo pacman -Sy --noconfirm --needed \
   cava kwin-zones imagemagick kvantum unzip jq xmlstarlet fastfetch \
   ttf-hack-nerd ttf-fira-code kdeconnect ttf-terminus-nerd \
-  noto-fonts-emoji ttf-meslo-nerd kde-wallpapers falkon
+  noto-fonts-emoji ttf-meslo-nerd kde-wallpapers falkon adw-gtk-theme
 
 # Detect or install AUR helper
 setup_aur_helper() {
@@ -150,14 +150,6 @@ if git clone https://github.com/vinceliuice/Layan-kde.git; then
   cd Layan-kde && sh install.sh && cd .. && rm -rf Layan-kde
 else
   echo "Failed to install Layan-kde"
-fi
-
-header "Installing Layan GTK Theme"
-mkdir -p ~/.themes
-if git clone https://github.com/vinceliuice/Layan-gtk-theme.git; then
-  cd Layan-gtk-theme && sh install.sh -l -c dark -d ~/.themes && cd .. && rm -rf Layan-gtk-theme
-else
-  echo "Failed to install Layan-gtk"
 fi
 
 center_box "All Done" "Setup Complete!" "Please reboot to apply settings."

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmoid-wunderground\n"
 "Report-Msgid-Bugs-To: https://github.com/k-donn/plasmoid-wunderground\n"
-"POT-Creation-Date: 2025-11-09 15:00-0600\n"
+"POT-Creation-Date: 2025-12-22 19:50-0600\n"
 "PO-Revision-Date: 2028-15-03 21:20+0100\n"
 "Last-Translator: foXaCe <>\n"
 "Language-Team: French <>\n"
@@ -284,6 +284,10 @@ msgstr "Appliquer les couleurs système aux icônes :"
 #: ../contents/ui/config/ConfigAppearance.qml
 msgid "Auto-color temperature:"
 msgstr "Couleur automatique de la température :"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Use default page:"
+msgstr ""
 
 #: ../contents/ui/config/ConfigAppearance.qml
 msgid "Default page shown:"

@@ -61,7 +61,6 @@ Item {
                 from: 10
                 to: 100
                 stepSize: 10
-                // suffix: " " + i18nc("pixels","px.")
             }
             Label {
                 Layout.minimumWidth: configRoot.width/2
@@ -75,7 +74,6 @@ Item {
                 from: 1
                 to: 4
                 stepSize: 1
-                // suffix: " " + i18nc("pixels","px.")
                 visible: !checkPoinDesing.checked
             }
             Label {

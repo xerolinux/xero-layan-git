@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmoid-wunderground\n"
 "Report-Msgid-Bugs-To: https://github.com/k-donn/plasmoid-wunderground\n"
-"POT-Creation-Date: 2025-11-09 15:00-0600\n"
-"PO-Revision-Date: 2025-11-01 22:18+0100\n"
+"POT-Creation-Date: 2025-12-22 19:50-0600\n"
+"PO-Revision-Date: 2025-11-12 16:54+0100\n"
 "Last-Translator: Martin Eilsøe <martin@eilsoe.dk>\n"
 "Language-Team: <ll@li.org>\n"
 "Language: da_DK\n"
@@ -56,7 +56,7 @@ msgstr "Luft kvalitet"
 
 #: ../contents/ui/AirAndSolarItem.qml
 msgid "Messages"
-msgstr ""
+msgstr "Meddelelser"
 
 #: ../contents/ui/AirAndSolarItem.qml
 msgid "AQI: %1"
@@ -294,6 +294,10 @@ msgstr "Anvend  system farver til ikoner:"
 #: ../contents/ui/config/ConfigAppearance.qml
 msgid "Auto-color temperature:"
 msgstr "Automatisk farve temperatur:"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Use default page:"
+msgstr ""
 
 #: ../contents/ui/config/ConfigAppearance.qml
 msgid "Default page shown:"

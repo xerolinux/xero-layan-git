@@ -49,6 +49,7 @@ KCM.SimpleKCM {
     property alias cfg_applyColorScheme: applyColorScheme.checked
     property alias cfg_topIconMargins: topIconMargins.value
     property alias cfg_tempAutoColor: tempAutoColor.checked
+    property alias cfg_useDefaultPage: useDefaultPage.checked
     property alias cfg_defaultLoadPage: defaultLoadPage.currentIndex
     property alias cfg_showPresTrend: showPresTrend.checked
 
@@ -241,8 +242,16 @@ KCM.SimpleKCM {
             Kirigami.FormData.label: i18n("Auto-color temperature:")
         }
 
+        PlasmaComponents.CheckBox {
+            id: useDefaultPage
+
+            Kirigami.FormData.label: i18n("Use default page:")
+        }
+
         PlasmaComponents.ComboBox {
             id: defaultLoadPage
+
+            enabled: useDefaultPage.checked
 
             model: [i18n("Weather Details"), i18n("Forecast"), i18n("Day Chart"), i18n("More Info")]
 

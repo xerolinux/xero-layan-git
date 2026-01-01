@@ -80,6 +80,9 @@
         <entry name="tempAutoColor" type="Bool">
             <default>true</default>
         </entry>
+        <entry name="useDefaultPage" type="Bool">
+            <default>true</default>
+        </entry>
         <entry name="defaultLoadPage" type="Int">
             <default>0</default>
         </entry>
