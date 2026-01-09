@@ -1,0 +1,25 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "catterina.claudio@gmail.com",
+                "Name": "Claudio Catterina"
+            }
+        ],
+        "Description": "Show currently playing song information and provide playback controls",
+        "BugReportUrl": "https://github.com/ccatterina/plasmusic-toolbar/issues",
+        "Website": "https://github.com/ccatterina/plasmusic-toolbar",
+        "Icon": "view-media-track",
+        "Id": "plasmusic-toolbar",
+        "License": "GPL3",
+        "Name": "PlasMusic Toolbar",
+        "Version": "3.7.0",
+        "Category": "Multimedia"
+    },
+    "X-Plasma-API-Minimum-Version": "6.0",
+    "X-Plasma-Provides": [
+        "org.kde.plasma.multimediacontrols"
+    ]
+}
+

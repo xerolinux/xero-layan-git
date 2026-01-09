@@ -3,6 +3,7 @@ update_info=delete_cursor_old_default_size.upd:DeleteCursorOldDefaultSize,kcminp
 
 [Keyboard]
 KeyRepeat=repeat
+NumLock=0
 RepeatDelay=300
 RepeatRate=35
 

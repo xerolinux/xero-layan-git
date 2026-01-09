@@ -1,6 +1,6 @@
 <?xml version='1.0'?>
 <!DOCTYPE gui SYSTEM 'kpartgui.dtd'>
-<gui name="dolphin" version="38">
+<gui name="dolphin" version="48">
  <MenuBar>
   <Menu name="file">
    <Action name="new_menu"/>
@@ -21,8 +21,6 @@
    <Action name="properties"/>
   </Menu>
   <Menu name="edit">
-   <Action name="edit_undo"/>
-   <Separator/>
    <Action name="edit_cut"/>
    <Action name="edit_copy"/>
    <Action name="copy_location"/>
@@ -48,8 +46,10 @@
    <Action name="show_preview"/>
    <Action name="show_in_groups"/>
    <Action name="show_hidden_files"/>
+   <Action name="act_as_admin"/>
    <Separator/>
-   <Action name="split_view"/>
+   <Action name="split_view_menu"/>
+   <Action name="popout_split_view"/>
    <Action name="split_stash"/>
    <Action name="redisplay"/>
    <Action name="stop"/>
@@ -71,13 +71,16 @@
    <Action name="open_preferred_search_tool"/>
    <Action name="open_terminal"/>
    <Action name="open_terminal_here"/>
-   <Action name="focus_terminal_panel"/>
+   <Action name="manage_disk_space"/>
    <Action name="compare_files"/>
    <Action name="change_remote_encoding"/>
   </Menu>
+  <Menu name="settings">
+   <Action name="window_color_sheme"/>
+  </Menu>
  </MenuBar>
- <ToolBar noMerge="1" name="mainToolBar" alreadyVisited="1">
-  <text translationDomain="dolphin" context="@title:menu">Main Toolbar</text>
+ <ToolBar alreadyVisited="1" name="mainToolBar" noMerge="1">
+  <text context="@title:menu" translationDomain="dolphin">Main Toolbar</text>
   <Action name="go_back"/>
   <Action name="go_up"/>
   <Action name="go_forward"/>
@@ -121,23 +124,25 @@
   </disable>
  </State>
  <ActionProperties scheme="Default">
-  <Action priority="0" name="compact"/>
-  <Action priority="0" name="details"/>
-  <Action priority="0" name="edit_copy"/>
-  <Action priority="0" name="edit_cut"/>
-  <Action priority="0" name="edit_paste"/>
-  <Action priority="0" name="go_back"/>
-  <Action priority="0" name="go_forward"/>
-  <Action priority="0" name="go_home"/>
-  <Action priority="0" name="go_up"/>
-  <Action priority="0" name="icons"/>
-  <Action iconText="Terminal" priority="0" name="open_terminal"/>
-  <Action iconText="Hidden Files" priority="0" name="show_hidden_files"/>
-  <Action priority="0" name="stop"/>
-  <Action priority="0" name="toggle_filter"/>
-  <Action priority="0" name="toggle_search"/>
-  <Action priority="0" name="view_zoom_in"/>
-  <Action priority="0" name="view_zoom_out"/>
-  <Action priority="0" name="view_zoom_reset"/>
+  <Action name="view_mode" priority="0"/>
+  <Action name="view_settings" priority="0"/>
+  <Action name="compact" priority="0"/>
+  <Action name="details" priority="0"/>
+  <Action name="edit_copy" priority="0"/>
+  <Action name="edit_cut" priority="0"/>
+  <Action name="edit_paste" priority="0"/>
+  <Action name="go_back" priority="0"/>
+  <Action name="go_forward" priority="0"/>
+  <Action name="go_home" priority="0"/>
+  <Action name="go_up" priority="0"/>
+  <Action name="icons" priority="0"/>
+  <Action iconText="Terminal" name="open_terminal" priority="0"/>
+  <Action iconText="Hidden Files" name="show_hidden_files" priority="0"/>
+  <Action name="stop" priority="0"/>
+  <Action name="toggle_filter" priority="0"/>
+  <Action name="toggle_search" priority="0"/>
+  <Action name="view_zoom_in" priority="0"/>
+  <Action name="view_zoom_out" priority="0"/>
+  <Action name="view_zoom_reset" priority="0"/>
  </ActionProperties>
 </gui>

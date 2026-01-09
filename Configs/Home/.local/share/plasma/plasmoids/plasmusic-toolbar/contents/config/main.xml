@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0 http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
+    <kcfgfile name=""/>
+
+    <group name="General">
+        <entry name="panelIcon" type="String">
+            <default>view-media-track</default>
+        </entry>
+        <entry name="useAlbumCoverAsPanelIcon" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="fallbackToIconWhenArtNotAvailable" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="albumCoverRadius" type="Int">
+            <default>8</default>
+        </entry>
+        <entry name="choosePlayerAutomatically" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="preferredPlayerIdentity" type="String">
+            <default></default>
+        </entry>
+        <entry name="maxSongWidthInPanel" type="Int">
+            <default>200</default>
+        </entry>
+        <entry name="skipBackwardControlInPanel" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="playPauseControlInPanel" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="skipForwardControlInPanel" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="songTextInPanel" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="iconInPanel" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="textScrollingSpeed" type="Int">
+            <default>3</default>
+        </entry>
+        <entry name="textScrollingBehaviour" type="Int">
+            <default>0</default>
+        </entry>
+        <entry name="pauseTextScrollingWhileMediaIsNotPlaying" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="useCustomFont" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="customFont" type="Font">
+            <default></default>
+        </entry>
+        <entry name="textScrollingEnabled" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="textScrollingResetOnPause" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="volumeStep" type="Int">
+            <default>5</default>
+        </entry>
+        <entry name="desktopWidgetBg" type="Int">
+            <default>1</default>
+        </entry>
+        <entry name="albumPlaceholder" type="String">
+            <default></default>
+        </entry>
+        <entry name="colorsFromAlbumCover" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="panelBackgroundRadius" type="Int">
+            <default>8</default>
+        </entry>
+        <entry name="fillAvailableSpace" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="songTextAlignment" type="Int">
+            <default>1</default>
+        </entry>
+        <entry name="songTextFixedWidth" type="Int">
+            <default>200</default>
+        </entry>
+        <entry name="useSongTextFixedWidth" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="fullViewTextScrollingSpeed" type="Int">
+            <default>3</default>
+        </entry>
+        <entry name="panelIconSizeRatio" type="Double">
+            <default>0.75</default>
+        </entry>
+        <entry name="panelControlsSizeRatio" type="Double">
+            <default>0.75</default>
+        </entry>
+        <entry name="spaceBetweenControlsInPanel" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="titlePosition" type="Int">
+            <default>1</default>
+        </entry>
+        <entry name="artistsPosition" type="Int">
+            <default>1</default>
+        </entry>
+        <entry name="albumPosition" type="Int">
+            <default>0</default>
+        </entry>
+        <entry name="fullTitlePosition" type="Int">
+            <default>1</default>
+        </entry>
+        <entry name="fullArtistsPosition" type="Int">
+            <default>2</default>
+        </entry>
+        <entry name="fullAlbumPosition" type="Int">
+            <default>2</default>
+        </entry>
+        <entry name="fullAlbumCoverAsBackground" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="noMediaText" type="String">
+            <default>No media found</default>
+        </entry>
+        <entry name="showWhenNoMedia" type="Bool">
+            <default>False</default>
+        </entry>
+        <entry name="compactTruncatedTextStyle" type="Int">
+            <default>1</default>
+        </entry>
+        <entry name="mediaProgressInPanel" type="Bool">
+            <default>false</default>
+        </entry>
+    </group>
+</kcfg>

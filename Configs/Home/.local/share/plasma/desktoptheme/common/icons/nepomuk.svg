@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   id="svg7384"
+   width="22"
+   height="22"
+   enable-background="new"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   sodipodi:docname="nepomuk.svg"
+   version="1.1"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview9"
+     bordercolor="#999999"
+     borderopacity="1"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:bbox-nodes="true"
+     inkscape:current-layer="nepomuk"
+     inkscape:cx="53.927965"
+     inkscape:cy="20.834745"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:snap-bbox="true"
+     inkscape:snap-nodes="false"
+     inkscape:window-height="698"
+     inkscape:window-maximized="1"
+     inkscape:window-width="1368"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:zoom="10.727273"
+     objecttolerance="10"
+     pagecolor="#ffffff"
+     showgrid="true"
+     inkscape:showpageshadow="2"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#e5e5e5">
+    <inkscape:grid
+       id="grid818"
+       type="xygrid" />
+  </sodipodi:namedview>
+  <defs
+     id="defs7386">
+    <style
+       id="current-color-scheme"
+       type="text/css">.ColorScheme-Text { color:#363636; } .ColorScheme-Highlight { color:#5294e2; } .ColorScheme-ButtonBackground { color:#363636; }</style>
+  </defs>
+  <g
+     id="22-22-nepomuk"
+     class="ColorScheme-Text"
+     style="fill:currentColor">
+    <rect
+       id="rect4150"
+       width="22"
+       height="22"
+       opacity="0" />
+    <path
+       id="path824"
+       d="M 9.5 3 A 6.5 6.5 0 0 0 3 9.5 A 6.5 6.5 0 0 0 9.5 16 A 6.5 6.5 0 0 0 13.322266 14.738281 L 17.244141 18.658203 C 17.635877 19.04994 18.266466 19.04994 18.658203 18.658203 C 19.04994 18.266466 19.04994 17.635877 18.658203 17.244141 L 14.738281 13.322266 A 6.5 6.5 0 0 0 16 9.5 A 6.5 6.5 0 0 0 9.5 3 z M 9.5 5 A 4.5 4.5 0 0 1 14 9.5 A 4.5 4.5 0 0 1 9.5 14 A 4.5 4.5 0 0 1 5 9.5 A 4.5 4.5 0 0 1 9.5 5 z " />
+  </g>
+  <g
+     id="16-16-nepomuk"
+     class="ColorScheme-Text"
+     style="fill:currentColor">
+    <rect
+       id="rect572"
+       width="16"
+       height="16"
+       opacity="0"
+       x="-25"
+       y="4"
+       style="opacity:1;fill:none;stroke-width:0.727273" />
+    <path
+       id="path574"
+       d="M -18.5 4 A 6.5 6.5 0 0 0 -25 10.5 A 6.5 6.5 0 0 0 -18.5 17 A 6.5 6.5 0 0 0 -14.677734 15.738281 L -10.755859 19.658203 C -10.364122 20.04994 -9.7335336 20.04994 -9.3417969 19.658203 C -8.9500601 19.266467 -8.9500601 18.635877 -9.3417969 18.244141 L -13.261719 14.322266 A 6.5 6.5 0 0 0 -12 10.5 A 6.5 6.5 0 0 0 -18.5 4 z M -18.5 6 A 4.5 4.5 0 0 1 -14 10.5 A 4.5 4.5 0 0 1 -18.5 15 A 4.5 4.5 0 0 1 -23 10.5 A 4.5 4.5 0 0 1 -18.5 6 z " />
+  </g>
+  <g
+     id="nepomuk"
+     class="ColorScheme-Text"
+     style="fill:currentColor">
+    <rect
+       id="rect588"
+       width="32"
+       height="32"
+       opacity="0"
+       x="36"
+       y="0"
+       style="color:#363636;fill:#363636;stroke-width:1.45455" />
+    <path
+       id="path651"
+       d="M 49.5 4 A 9.5 9.5 0 0 0 40 13.5 A 9.5 9.5 0 0 0 49.5 23 A 9.5 9.5 0 0 0 55.460938 20.875 L 61.875 27.289062 C 62.266737 27.680799 62.897326 27.680799 63.289062 27.289062 C 63.680799 26.897326 63.680799 26.266737 63.289062 25.875 L 56.875 19.460938 A 9.5 9.5 0 0 0 59 13.5 A 9.5 9.5 0 0 0 49.5 4 z M 49.5 6 A 7.5 7.5 0 0 1 57 13.5 A 7.5 7.5 0 0 1 54.802734 18.802734 A 7.5 7.5 0 0 1 49.5 21 A 7.5 7.5 0 0 1 42 13.5 A 7.5 7.5 0 0 1 49.5 6 z " />
+  </g>
+</svg>
