@@ -74,7 +74,7 @@ add_chaotic_aur
 header "Installing Native Packages"
 sudo pacman -Sy --noconfirm --needed \
   cava kwin-zones btop imagemagick kvantum unzip jq xmlstarlet fastfetch \
-  ttf-hack-nerd ttf-fira-code kdeconnect ttf-terminus-nerd \
+  ttf-hack-nerd ttf-fira-code kdeconnect ttf-terminus-nerd python-websockets \
   noto-fonts-emoji ttf-meslo-nerd kde-wallpapers cava qt6-websockets adw-gtk-theme
 
 # Detect or install AUR helper
