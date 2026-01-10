@@ -10,4 +10,4 @@ I would like to clarify one very important aspect of ricing. We use custom theme
 
 </div>
 
-![XeroLayan](https://i.imgur.com/VA2tycb.jpeg)
+![XeroLayan](https://i.imgur.com/mEjZTmG.jpeg)
