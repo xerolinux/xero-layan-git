@@ -591,7 +591,7 @@ immutability=1
 plugin=org.kde.plasma.icon
 
 [Containments][168][Applets][233][Configuration]
-url=file:///usr/share/applications/xero-toolkit.desktop
+url=file:///usr/share/applications/btop.desktop
 
 [Containments][168][Applets][235]
 immutability=1

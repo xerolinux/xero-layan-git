@@ -73,7 +73,7 @@ add_chaotic_aur
 
 header "Installing Native Packages"
 sudo pacman -Sy --noconfirm --needed \
-  cava kwin-zones imagemagick kvantum unzip jq xmlstarlet fastfetch \
+  cava kwin-zones btop imagemagick kvantum unzip jq xmlstarlet fastfetch \
   ttf-hack-nerd ttf-fira-code kdeconnect ttf-terminus-nerd \
   noto-fonts-emoji ttf-meslo-nerd kde-wallpapers falkon adw-gtk-theme
 
