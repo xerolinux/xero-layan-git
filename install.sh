@@ -133,7 +133,7 @@ fi
 header "Injecting Oh-My-Posh into Bash"
 bashrc_file="$HOME/.bashrc"
 grep -qxF '# Oh-My-Posh Config' "$bashrc_file" || echo -e '\n# Oh-My-Posh Config' >> "$bashrc_file"
-grep -qxF 'eval "$(oh-my-posh init bash --config $HOME/.config/ohmyposh/distrous-xero-linux.omp.json)"' "$bashrc_file" || \
+grep -qxF 'eval "$(oh-my-posh init bash --config $HOME/.config/ohmyposh/xero.omp.json)"' "$bashrc_file" || \
   echo 'eval "$(oh-my-posh init bash --config $HOME/.config/ohmyposh/distrous-xero-linux.omp.json)"' >> "$bashrc_file"
 echo "Oh-My-Posh injection complete."
 
