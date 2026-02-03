@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0 http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
+    <kcfgfile name="kwinrc" />
+    <group name="">
+        <entry name="gapsOuterTop" type="UInt">
+            <default>16</default>
+        </entry>
+        <entry name="gapsOuterBottom" type="UInt">
+            <default>16</default>
+        </entry>
+        <entry name="gapsOuterLeft" type="UInt">
+            <default>16</default>
+        </entry>
+        <entry name="gapsOuterRight" type="UInt">
+            <default>16</default>
+        </entry>
+        <entry name="gapsInnerHorizontal" type="UInt">
+            <default>8</default>
+        </entry>
+        <entry name="gapsInnerVertical" type="UInt">
+            <default>8</default>
+        </entry>
+        <entry name="stackOffsetX" type="UInt">
+            <default>8</default>
+        </entry>
+        <entry name="stackOffsetY" type="UInt">
+            <default>32</default>
+        </entry>
+        <entry name="manualScrollStep" type="UInt">
+            <default>200</default>
+        </entry>
+        <entry name="presetWidths" type="String">
+            <default>50%, 100%</default>
+        </entry>
+        <entry name="offScreenOpacity" type="UInt">
+            <default>100</default>
+        </entry>
+        <entry name="untileOnDrag" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="cursorFollowsFocus" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="stackColumnsByDefault" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="resizeNeighborColumn" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="reMaximize" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="skipSwitcher" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="scrollingLazy" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="scrollingCentered" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="scrollingGrouped" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="gestureScroll" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="gestureScrollInvert" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="gestureScrollStep" type="UInt">
+            <default>1920</default>
+        </entry>
+        <entry name="tiledKeepBelow" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="floatingKeepAbove" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="noLayering" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="windowRules" type="String">
+            <default>[
+    {
+        "class": "(org\\.kde\\.)?plasmashell",
+        "tile": false
+    },
+    {
+        "class": "(org\\.kde\\.)?polkit-kde-authentication-agent-1",
+        "tile": false
+    },
+    {
+        "class": "(org\\.kde\\.)?kded6",
+        "tile": false
+    },
+    {
+        "class": "(org\\.kde\\.)?kcalc",
+        "tile": false
+    },
+    {
+        "class": "(org\\.kde\\.)?kfind",
+        "tile": true
+    },
+    {
+        "class": "(org\\.kde\\.)?kruler",
+        "tile": false
+    },
+    {
+        "class": "(org\\.kde\\.)?krunner",
+        "tile": false
+    },
+    {
+        "class": "(org\\.kde\\.)?yakuake",
+        "tile": false
+    },
+    {
+        "class": "steam",
+        "caption": "Steam Big Picture Mode",
+        "tile": false
+    },
+    {
+        "class": "zoom",
+        "caption": "Zoom Cloud Meetings|zoom|zoom &lt;2&gt;",
+        "tile": false
+    },
+    {
+        "class": "jetbrains-.*",
+        "caption": "splash",
+        "tile": false
+    },
+    {
+        "class": "jetbrains-.*",
+        "caption": "Unstash Changes|Paths Affected by stash@.*",
+        "tile": true
+    }
+]</default>
+        </entry>
+        <entry name="tiledDesktops" type="String">
+            <default>.*</default>
+        </entry>
+    </group>
+</kcfg>

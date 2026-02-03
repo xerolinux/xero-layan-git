@@ -1,0 +1,510 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+    <class>KWin::KarouselConfigForm</class>
+    <widget class="QWidget" name="KWin::KarouselConfigForm">
+        <property name="windowTitle">
+            <string>Karousel</string>
+        </property>
+        <property name="autoFillBackground">
+            <bool>false</bool>
+        </property>
+        <layout class="QVBoxLayout" name="layout_main">
+            <item>
+                <widget class="QTabWidget" name="tabContainer">
+                    <widget class="QWidget" name="tab_behavior">
+                        <attribute name="title">
+                            <string>Behavior</string>
+                        </attribute>
+                        <layout class="QVBoxLayout">
+                            <item>
+                                <widget class="QGroupBox">
+                                    <property name="flat">
+                                        <bool>true</bool>
+                                    </property>
+                                    <layout class="QVBoxLayout">
+                                        <item>
+                                            <widget class="QCheckBox" name="kcfg_untileOnDrag">
+                                                <property name="text">
+                                                    <string>Un-tile windows by dragging them</string>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                        <item>
+                                            <widget class="QCheckBox" name="kcfg_cursorFollowsFocus">
+                                                <property name="text">
+                                                    <string>Cursor follows focus (experimental)</string>
+                                                </property>
+                                                <property name="toolTip">
+                                                    <string>When a window gains focus, move the cursor to it</string>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                        <item>
+                                            <widget class="QCheckBox" name="kcfg_stackColumnsByDefault">
+                                                <property name="text">
+                                                    <string>Stack columns by default</string>
+                                                </property>
+                                                <property name="toolTip">
+                                                    <string>New columns start in stacked mode (only the active window visible)</string>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                        <item>
+                                            <widget class="QCheckBox" name="kcfg_resizeNeighborColumn">
+                                                <property name="text">
+                                                    <string>Resize neighbor column on edge resize</string>
+                                                </property>
+                                                <property name="toolTip">
+                                                    <string>When resizing a column by dragging its edge, also inversely resize the column on the other side of the edge</string>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                        <item>
+                                            <widget class="QCheckBox" name="kcfg_reMaximize">
+                                                <property name="text">
+                                                    <string>Re-maximize tiled windows</string>
+                                                </property>
+                                                <property name="toolTip">
+                                                    <string>Restore maximized and full-screen states of tiled windows on focus</string>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                        <item>
+                                            <widget class="QCheckBox" name="kcfg_skipSwitcher">
+                                                <property name="text">
+                                                    <string>Tiled windows skip switcher</string>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                    </layout>
+                                </widget>
+                            </item>
+
+                            <item>
+                                <widget class="QGroupBox">
+                                    <property name="title">
+                                        <string>Scrolling mode</string>
+                                    </property>
+                                    <layout class="QVBoxLayout">
+                                        <item>
+                                            <widget class="QRadioButton" name="kcfg_scrollingLazy">
+                                                <property name="text">
+                                                    <string>Only scroll as necessary</string>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                        <item>
+                                            <widget class="QRadioButton" name="kcfg_scrollingCentered">
+                                                <property name="text">
+                                                    <string>Center focused column</string>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                        <item>
+                                            <widget class="QRadioButton" name="kcfg_scrollingGrouped">
+                                                <property name="text">
+                                                    <string>Center visible columns</string>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                    </layout>
+                                </widget>
+                            </item>
+
+                            <item>
+                                <widget class="QGroupBox">
+                                    <property name="title">
+                                        <string>Touchpad scrolling (Wayland only)</string>
+                                    </property>
+                                    <layout class="QVBoxLayout">
+                                        <item>
+                                            <widget class="QCheckBox" name="kcfg_gestureScroll">
+                                                <property name="text">
+                                                    <string>Enable scrolling with touchpad gestures
+(please don't forget to disable KDE's workspace switching gestures)</string>
+                                                </property>
+                                                <property name="toolTip">
+                                                    <string>Scroll with a three-finger horizontal swipe gesture</string>
+                                                </property>
+                                            </widget>
+                                        </item>
+
+                                        <item>
+                                            <widget class="QCheckBox" name="kcfg_gestureScrollInvert">
+                                                <property name="text">
+                                                    <string>Invert scroll direction (Natural scrolling)</string>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                    </layout>
+                                </widget>
+                            </item>
+
+                            <item>
+                                <widget class="QGroupBox">
+                                    <property name="title">
+                                        <string>Layering mode</string>
+                                    </property>
+                                    <layout class="QVBoxLayout">
+                                        <item>
+                                            <widget class="QRadioButton" name="kcfg_tiledKeepBelow">
+                                                <property name="text">
+                                                    <string>Keep tiled windows below</string>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                        <item>
+                                            <widget class="QRadioButton" name="kcfg_floatingKeepAbove">
+                                                <property name="text">
+                                                    <string>Keep floating windows above</string>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                        <item>
+                                            <widget class="QRadioButton" name="kcfg_noLayering">
+                                                <property name="text">
+                                                    <string>No layering</string>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                    </layout>
+                                </widget>
+                            </item>
+
+                            <item>
+                                <spacer name="spacer_footer">
+                                    <property name="orientation">
+                                        <enum>Qt::Vertical</enum>
+                                    </property>
+                                    <property name="sizeHint" stdset="0">
+                                        <size>
+                                            <width>0</width>
+                                            <height>0</height>
+                                        </size>
+                                    </property>
+                                </spacer>
+                            </item>
+                        </layout>
+                    </widget>
+
+                    <widget class="QWidget" name="tab_parameters">
+                        <attribute name="title">
+                            <string>Parameters</string>
+                        </attribute>
+                        <layout class="QFormLayout">
+                            <item row="0" column="0">
+                                <widget class="QLabel" name="label_gapsOuterTop">
+                                    <property name="text">
+                                        <string>Top margin:</string>
+                                    </property>
+                                </widget>
+                            </item>
+                            <item row="0" column="1">
+                                <widget class="QSpinBox" name="kcfg_gapsOuterTop">
+                                    <property name="suffix">
+                                        <string> px</string>
+                                    </property>
+                                    <property name="maximum">
+                                        <number>999</number>
+                                    </property>
+                                    <property name="value">
+                                        <number>0</number>
+                                    </property>
+                                </widget>
+                            </item>
+
+                            <item row="1" column="0">
+                                <widget class="QLabel" name="label_gapsOuterBottom">
+                                    <property name="text">
+                                        <string>Bottom margin:</string>
+                                    </property>
+                                </widget>
+                            </item>
+                            <item row="1" column="1">
+                                <widget class="QSpinBox" name="kcfg_gapsOuterBottom">
+                                    <property name="suffix">
+                                        <string> px</string>
+                                    </property>
+                                    <property name="maximum">
+                                        <number>999</number>
+                                    </property>
+                                    <property name="value">
+                                        <number>0</number>
+                                    </property>
+                                </widget>
+                            </item>
+
+                            <item row="2" column="0">
+                                <widget class="QLabel" name="label_gapsOuterLeft">
+                                    <property name="text">
+                                        <string>Left margin:</string>
+                                    </property>
+                                </widget>
+                            </item>
+                            <item row="2" column="1">
+                                <widget class="QSpinBox" name="kcfg_gapsOuterLeft">
+                                    <property name="suffix">
+                                        <string> px</string>
+                                    </property>
+                                    <property name="maximum">
+                                        <number>999</number>
+                                    </property>
+                                    <property name="value">
+                                        <number>0</number>
+                                    </property>
+                                </widget>
+                            </item>
+
+                            <item row="3" column="0">
+                                <widget class="QLabel" name="label_gapsOuterRight">
+                                    <property name="text">
+                                        <string>Right margin:</string>
+                                    </property>
+                                </widget>
+                            </item>
+                            <item row="3" column="1">
+                                <widget class="QSpinBox" name="kcfg_gapsOuterRight">
+                                    <property name="suffix">
+                                        <string> px</string>
+                                    </property>
+                                    <property name="maximum">
+                                        <number>999</number>
+                                    </property>
+                                    <property name="value">
+                                        <number>0</number>
+                                    </property>
+                                </widget>
+                            </item>
+
+                            <item row="4" column="0">
+                                <widget class="QLabel" name="label_gapsInnerHorizontal">
+                                    <property name="text">
+                                        <string>Horizontal gaps between windows:</string>
+                                    </property>
+                                </widget>
+                            </item>
+                            <item row="4" column="1">
+                                <widget class="QSpinBox" name="kcfg_gapsInnerHorizontal">
+                                    <property name="suffix">
+                                        <string> px</string>
+                                    </property>
+                                    <property name="maximum">
+                                        <number>999</number>
+                                    </property>
+                                    <property name="value">
+                                        <number>0</number>
+                                    </property>
+                                </widget>
+                            </item>
+
+                            <item row="5" column="0">
+                                <widget class="QLabel" name="label_gapsInnerVertical">
+                                    <property name="text">
+                                        <string>Vertical gaps between windows:</string>
+                                    </property>
+                                </widget>
+                            </item>
+                            <item row="5" column="1">
+                                <widget class="QSpinBox" name="kcfg_gapsInnerVertical">
+                                    <property name="suffix">
+                                        <string> px</string>
+                                    </property>
+                                    <property name="maximum">
+                                        <number>999</number>
+                                    </property>
+                                    <property name="value">
+                                        <number>0</number>
+                                    </property>
+                                </widget>
+                            </item>
+
+                            <item row="6" column="0">
+                                <widget class="QLabel" name="label_stackOffsetX">
+                                    <property name="text">
+                                        <string>Horizontal offset for stacked columns:</string>
+                                    </property>
+                                </widget>
+                            </item>
+                            <item row="6" column="1">
+                                <widget class="QSpinBox" name="kcfg_stackOffsetX">
+                                    <property name="suffix">
+                                        <string> px</string>
+                                    </property>
+                                    <property name="maximum">
+                                        <number>999</number>
+                                    </property>
+                                    <property name="value">
+                                        <number>0</number>
+                                    </property>
+                                </widget>
+                            </item>
+
+                            <item row="7" column="0">
+                                <widget class="QLabel" name="label_stackOffsetY">
+                                    <property name="text">
+                                        <string>Vertical offset for stacked columns:</string>
+                                    </property>
+                                </widget>
+                            </item>
+                            <item row="7" column="1">
+                                <widget class="QSpinBox" name="kcfg_stackOffsetY">
+                                    <property name="suffix">
+                                        <string> px</string>
+                                    </property>
+                                    <property name="maximum">
+                                        <number>999</number>
+                                    </property>
+                                    <property name="value">
+                                        <number>0</number>
+                                    </property>
+                                </widget>
+                            </item>
+
+                            <item row="8" column="0">
+                                <widget class="QLabel" name="label_manualScrollStep">
+                                    <property name="text">
+                                        <string>Manual scroll step size:</string>
+                                    </property>
+                                </widget>
+                            </item>
+                            <item row="8" column="1">
+                                <widget class="QSpinBox" name="kcfg_manualScrollStep">
+                                    <property name="suffix">
+                                        <string> px</string>
+                                    </property>
+                                    <property name="maximum">
+                                        <number>999</number>
+                                    </property>
+                                    <property name="value">
+                                        <number>0</number>
+                                    </property>
+                                </widget>
+                            </item>
+
+                            <item row="9" column="0">
+                                <widget class="QLabel" name="label_gestureScrollStep">
+                                    <property name="text">
+                                        <string>Touchpad gesture scrolling speed:</string>
+                                    </property>
+                                    <property name="toolTip">
+                                        <string>The amount to scroll per edge-to-edge gesture</string>
+                                    </property>
+                                </widget>
+                            </item>
+                            <item row="9" column="1">
+                                <widget class="QSpinBox" name="kcfg_gestureScrollStep">
+                                    <property name="suffix">
+                                        <string> px</string>
+                                    </property>
+                                    <property name="maximum">
+                                        <number>10000</number>
+                                    </property>
+                                    <property name="minimum">
+                                        <number>100</number>
+                                    </property>
+                                    <property name="singleStep">
+                                        <number>100</number>
+                                    </property>
+                                    <property name="value">
+                                        <number>1920</number>
+                                    </property>
+                                </widget>
+                            </item>
+
+                            <item row="10" column="0">
+                                <widget class="QLabel" name="label_presetWidths">
+                                    <property name="text">
+                                        <string>Preset widths:</string>
+                                    </property>
+                                    <property name="toolTip">
+                                        <string>Widths used for cycling through widths</string>
+                                    </property>
+                                </widget>
+                            </item>
+                            <item row="10" column="1">
+                                <widget class="QLineEdit" name="kcfg_presetWidths">
+                                    <property name="toolTip">
+                                        <string>Comma-separated list of widths. Supported units: "px" and "%".</string>
+                                    </property>
+                                </widget>
+                            </item>
+
+                            <item row="11" column="0">
+                                <widget class="QLabel" name="label_offScreenOpacity">
+                                    <property name="text">
+                                        <string>Obscured window opacity:</string>
+                                    </property>
+                                </widget>
+                            </item>
+                            <item row="11" column="1">
+                                <widget class="QSpinBox" name="kcfg_offScreenOpacity">
+                                    <property name="suffix">
+                                        <string> %</string>
+                                    </property>
+                                    <property name="maximum">
+                                        <number>100</number>
+                                    </property>
+                                    <property name="value">
+                                        <number>0</number>
+                                    </property>
+                                </widget>
+                            </item>
+
+                        </layout>
+                    </widget>
+
+                    <widget class="QWidget" name="tab_windowRules">
+                        <attribute name="title">
+                            <string>Window Rules</string>
+                        </attribute>
+                        <layout class="QVBoxLayout">
+                            <item>
+                                <layout class="QHBoxLayout">
+                                    <item>
+                                        <widget class="QLabel" name="label_desktops">
+                                            <property name="text">
+                                                <string>Tiled desktops:</string>
+                                            </property>
+                                            <property name="wordWrap">
+                                                <bool>true</bool>
+                                            </property>
+                                        </widget>
+                                    </item>
+                                    <item>
+                                        <widget class="QLineEdit" name="kcfg_tiledDesktops">
+                                            <property name="toolTip">
+                                                <string>Regex string to match desktops by desktop name"</string>
+                                            </property>
+                                        </widget>
+                                    </item>
+                                </layout>
+                            </item>
+                            <item>
+                                <widget class="QPlainTextEdit" name="kcfg_windowRules">
+                                    <property name="tabChangesFocus">
+                                        <bool>true</bool>
+                                    </property>
+                                    <property name="lineWrapMode">
+                                        <enum>QPlainTextEdit::NoWrap</enum>
+                                    </property>
+                                    <property name="font">
+                                        <font><family>Monospace</family></font>
+                                    </property>
+                                </widget>
+                            </item>
+                        </layout>
+                    </widget>
+                </widget>
+            </item>
+         <item>
+            <widget class="QLabel" name="label">
+                <property name="text">
+                    <string>Karousel script needs to be restarted for changes to take effect.</string>
+                </property>
+            </widget>
+        </item>
+        </layout>
+    </widget>
+    <resources/>
+    <connections/>
+</ui>

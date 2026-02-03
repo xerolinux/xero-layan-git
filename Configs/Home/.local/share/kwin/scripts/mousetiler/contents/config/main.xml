@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0 http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
+    <kcfgfile name=""/>
+    <group name="">
+        <entry name="defaultTiler" type="Int">
+            <default>0</default>
+        </entry>
+        <entry name="centerInTileMode" type="Int">
+            <default>0</default>
+        </entry>
+        <entry name="rememberTiler" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="restoreSize" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="tilerVisibility" type="Int">
+            <default>0</default>
+        </entry>
+        <entry name="revealMargin" type="Int">
+            <default>200</default>
+        </entry>
+        <entry name="windowVisibility" type="Int">
+            <default>0</default>
+        </entry>
+        <entry name="theme" type="Int">
+            <default>0</default>
+        </entry>
+        <entry name="tileMargin" type="Int">
+            <default>0</default>
+        </entry>
+        <entry name="screenMargin" type="Int">
+            <default>0</default>
+        </entry>
+        <entry name="defaultInput" type="Int">
+            <default>0</default>
+        </entry>
+        <entry name="showOverlayTextHint" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="overlayLayout" type="String">
+            <default>4x2</default>
+        </entry>
+        <entry name="overlayScreenEdgeMargin" type="Int">
+            <default>0</default>
+        </entry>
+        <entry name="overlayPollingRate" type="Int">
+            <default>100</default>
+        </entry>
+        <entry name="rememberAllLayouts" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="showTargetTileHint" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="showTextHint" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="popupGridAt" type="Int">
+            <default>0</default>
+        </entry>
+        <entry name="horizontalAlignment" type="Int">
+            <default>1</default>
+        </entry>
+        <entry name="verticalAlignment" type="Int">
+            <default>1</default>
+        </entry>
+        <entry name="gridColumns" type="Int">
+            <default>3</default>
+        </entry>
+        <entry name="gridAllColumns" type="Int">
+            <default>6</default>
+        </entry>
+        <entry name="gridSpacing" type="Int">
+            <default>10</default>
+        </entry>
+        <entry name="gridWidth" type="Int">
+            <default>130</default>
+        </entry>
+        <entry name="gridHeight" type="Int">
+            <default>70</default>
+        </entry>
+        <entry name="popupGridPollingRate" type="Int">
+            <default>100</default>
+        </entry>
+        <entry name="virtualDesktopVisibility" type="Int">
+            <default>0</default>
+        </entry>
+        <entry name="virtualDesktopDropAction" type="Int">
+            <default>0</default>
+        </entry>
+        <entry name="virtualDesktopHoverTime" type="Int">
+            <default>500</default>
+        </entry>
+        <entry name="moveBackOnDrop" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="moveBackOnTile" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="showAddVirtualDesktopButton" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="autoRemoveEmptyVirtualDesktops" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="popupLayout" type="String">
+            <default>1x1
+2x1
+3x1
+SPECIAL_SPLIT_HORIZONTAL
+0,0,75,100+25,0,75,100+25,0,50,100
+4x1
+2x2
+SPECIAL_FILL
+4x2</default>
+        </entry>
+        <entry name="allPopupLayouts" type="String">
+            <default>SPECIAL_FILL
+SPECIAL_SPLIT_VERTICAL
+SPECIAL_SPLIT_HORIZONTAL
+SPECIAL_MAXIMIZE
+SPECIAL_MINIMIZE
+SPECIAL_FULLSCREEN
+0,0,50,100+50,0,50,50+50,50,50,50
+0,0,50,50+0,50,50,50+50,0,50,100
+0,0,25,50+0,50,25,50+25,0,50,100+75,0,25,50+75,50,25,50
+0,0,25,50+0,50,25,50+25,0,50,50+25,50,50,50+75,0,25,50+75,50,25,50
+SPECIAL_KEEP_ABOVE
+SPECIAL_KEEP_BELOW
+0,0,50,100+50,0,25,50+50,50,25,50+75,0,25,50+75,50,25,50
+0,0,25,50+0,50,25,50+25,0,25,50+25,50,25,50+50,0,50,100
+0,0,50,50+0,50,50,50+50,0,25,50+50,50,25,50+75,0,25,50+75,50,25,50
+0,0,25,50+0,50,25,50+25,0,25,50+25,50,25,50+50,0,50,50+50,50,50,50
+SPECIAL_NO_TITLEBAR_AND_FRAME
+SPECIAL_CLOSE
+1x1
+2x1
+3x1
+4x1
+5x1
+6x1
+1x2
+1x3
+1x4
+1x5
+0,0,75,100+25,0,75,100+25,0,50,100
+0,0,75,50+25,0,75,50+25,0,50,50+0,50,75,50+25,50,75,50+25,50,50,50
+2x2
+3x2
+4x2
+5x2
+0,0,67,100+33,0,67,100+17,0,66,100
+0,0,67,50+33,0,67,50+17,0,66,50+0,50,67,50+33,50,67,50+17,50,66,50
+2x3
+3x3
+4x3
+5x3
+1x1+17,0,66,100+33,0,34,100
+1x2+17,0,66,50+33,0,34,50+17,50,66,50+33,50,34,50
+11,25,26,50+37,25,26,50+63,25,26,50
+11,0,26,100+37,0,26,100+63,0,26,100
+11,0,26,50+37,0,26,50+63,0,26,50 + 11,50,26,50+37,50,26,50+63,50,26,50
+11,0,26,100+37,0,26,100+63,0,26,100 + 11,12,26,76+37,12,26,76+63,12,26,76 + 11,25,26,50+37,25,26,50+63,25,26,50
+1x1+12,0,76,100+25,0,50,100+37,0,26,100
+1x2+12,0,76,50+25,0,50,50+37,0,26,50+12,50,76,50+25,50,50,50+37,50,26,50
+0,25,37,50+37,25,26,50+63,25,37,50
+0,0,37,100+37,0,26,100+63,0,37,100
+0,0,37,50+37,0,26,50+63,0,37,50 + 0,50,37,50+37,50,26,50+63,50,37,50
+0,0,37,100+37,0,26,100+63,0,37,100 + 0,12,37,76+37,12,26,76+63,12,37,76 + 0,25,37,50+37,25,26,50+63,25,37,50
+1x1+17,17,66,66+33,33,34,34
+1x1+12,12,76,76+25,25,50,50+37,37,26,26
+0,0,25,100+75,0,25,100+25,0,50,100
+0,0,25,67+75,0,25,67+25,0,50,67+0,67,25,33+75,67,25,33+25,67,50,33
+0,0,25,33+75,0,25,33+25,0,50,33+0,33,25,67+75,33,25,67+25,33,50,67
+0,0,25,67+75,0,25,67+25,0,50,67+0,33,25,67+75,33,25,67+25,33,50,67
+0,0,33,67+33,0,34,67+67,0,33,67+0,67,33,33+33,67,34,33+67,67,33,33
+0,0,33,33+33,0,34,33+67,0,33,33+0,33,33,67+33,33,34,67+67,33,33,67
+0,0,67,100+67,0,33,100
+0,0,33,100+33,0,67,100
+0,0,67,100+67,0,33,50+67,50,33,50
+0,0,33,50+0,50,33,50+33,0,67,100
+0,0,67,50+67,0,33,50+0,50,67,50+67,50,33,50
+0,0,33,50+33,0,67,50+0,50,33,50+33,50,67,50</default>
+        </entry>
+        <entry name="shortcutChangeMode" type="String">
+            <default>Meta+Ctrl+Space</default>
+        </entry>
+        <entry name="shortcutShowAllSpan" type="String">
+            <default>Ctrl+Space</default>
+        </entry>
+        <entry name="shortcutVisibility" type="String">
+            <default>Meta+Space</default>
+        </entry>
+        <entry name="shortcutInputType" type="String">
+            <default>Ctrl+Alt+I</default>
+        </entry>
+        <entry name="shortcutCenterInTile" type="String">
+            <default>Meta+Ctrl+C</default>
+        </entry>
+        <entry name="shortcutMoveOnDrop" type="String">
+            <default>Meta+Ctrl+V</default>
+        </entry>
+        <entry name="hintChangeMode" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="hintShowAllSpan" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="hintVisibility" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="hintInputType" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="hintCenterInTile" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="hintMoveOnDrop" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="showHintHint" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="debugLogs" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="showPositionHint" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="positionHintFormat" type="Int">
+            <default>0</default>
+        </entry>
+        <entry name="showSizeHint" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="sizeHintFormat" type="Int">
+            <default>0</default>
+        </entry>
+    </group>
+</kcfg>
