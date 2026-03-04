@@ -137,7 +137,7 @@
         {
           "foreground": "#CA7EF0",
           "properties": {
-            "time_format": " <#F07ED9>\uf017 03:04:05 PM</> <#17B5C8>|</> \uf073 06/01/02 \uf104 January \uf142 Wednesday \uf105"
+            "time_format": " <#F07ED9>\uf017 03:04:05 PM</> <#17B5C8>|</> \uf073 06/01/02 \uf104 January \uf142 Monday \uf105"
           },
           "style": "plain",
           "template": "{{ .CurrentDate | date .Format }}",
