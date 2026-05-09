@@ -2,11 +2,12 @@ import QtQuick
 import org.kde.kwin
 import org.kde.plasma.core as PlasmaCore
 
+// Window {
 PlasmaCore.Dialog {
     id: overlayTiler
 
     property var activeScreen: null
-    property var clientArea: ({width: 0, height: 0, x: 0, y: 0})
+    property var clientArea: ({width: 1, height: 1, x: 0, y: 0})
     property var tilePadding: 2
     property int activeIndex: -1
     property int spanFromIndex: -1
@@ -16,16 +17,22 @@ PlasmaCore.Dialog {
     property int maxSpanY: -1
     property var convertedOverlay: ([])
 
+    // Workaround for plasma 6.6 and earlier - needed by Window and Plasma Dialog - replaced by Qt.WindowTransparentForInput in Plasma 6.7
+    property bool outputOnly: true
+
     width: clientArea.width - root.config.overlayScreenEdgeMargin * 2
     height: clientArea.height - root.config.overlayScreenEdgeMargin * 2
     x: clientArea.x + root.config.overlayScreenEdgeMargin
     y: clientArea.y + root.config.overlayScreenEdgeMargin
-    flags: Qt.Popup | Qt.BypassWindowManagerHint | Qt.FramelessWindowHint
+    // flags: Qt.Popup | Qt.BypassWindowManagerHint | Qt.FramelessWindowHint
+    // flags: Qt.Tool | Qt.BypassWindowManagerHint | Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint | Qt.WindowDoesNotAcceptFocus
+    flags: (root.config.displayAs == 0 ? 0 : Qt.Popup) | (Qt.BypassWindowManagerHint | Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint | Qt.WindowDoesNotAcceptFocus | Qt.WindowTransparentForInput)
+    // color: "transparent" // Window
     visible: false
-    backgroundHints: PlasmaCore.Types.NoBackground
-    outputOnly: true
+    backgroundHints: PlasmaCore.Types.NoBackground // PlasmaCore.Dialog
+    // outputOnly: true // PlasmaCore.Dialog
     // type: PlasmaCore.Dialog.OnScreenDisplay
-    location: PlasmaCore.Types.Desktop
+    location: PlasmaCore.Types.Desktop // PlasmaCore.Dialog
 
     function reset() {
         activeScreen = null;
@@ -41,6 +48,7 @@ PlasmaCore.Dialog {
 
     function updateScreen() {
         if (activeScreen != Workspace.activeScreen) {
+            autoTiler.updateShouldShowScreenEdges();
             root.logE('updateScreen ' + Workspace.virtualScreenSize);
             reset();
             activeScreen = Workspace.activeScreen;
@@ -54,11 +62,11 @@ PlasmaCore.Dialog {
         let converted = [];
         for (let i = 0; i < layout.length; i++) {
             let tile = layout[i];
-            let width = (tile.pxW == undefined ? tile.w / 100 * tiles.width : tile.pxW);
-            let height = (tile.pxH == undefined ? tile.h / 100 * tiles.height : tile.pxH);
+            let width = (tile.pxW == undefined ? tile.w / 100 * mainItem.width : tile.pxW);
+            let height = (tile.pxH == undefined ? tile.h / 100 * mainItem.height : tile.pxH);
             converted.push({
-                pxX: (tile.pxX == undefined ? tile.x / 100 * tiles.width : tile.pxX) - (tile.aX == undefined ? 0 : tile.aX * width / 100),
-                pxY: (tile.pxY == undefined ? tile.y / 100 * tiles.height : tile.pxY) - (tile.aY == undefined ? 0 : tile.aY * height / 100),
+                pxX: (tile.pxX == undefined ? tile.x / 100 * mainItem.width : tile.pxX) - (tile.aX == undefined ? 0 : tile.aX * width / 100),
+                pxY: (tile.pxY == undefined ? tile.y / 100 * mainItem.height : tile.pxY) - (tile.aY == undefined ? 0 : tile.aY * height / 100),
                 pxW: width,
                 pxH: height
             });
@@ -132,8 +140,9 @@ PlasmaCore.Dialog {
     }
 
     Item {
-        id: tiles
-        anchors.fill: parent
+        id: mainItem
+        width: popupTiler.width
+        height: popupTiler.height
 
         SequentialAnimation {
             id: showOverlayTilerAnimation

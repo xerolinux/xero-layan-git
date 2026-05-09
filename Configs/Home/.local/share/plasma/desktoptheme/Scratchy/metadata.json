@@ -1,0 +1,19 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "gicalucejo@gmail.com",
+                "Name": "jomada"
+            }
+        ],
+        "Category": "",
+        "Description": "Scratchy for Plasma",
+        "EnabledByDefault": true,
+        "Id": "Scratchy",
+        "License": "LGPL",
+        "Name": "Scratchy",
+        "Version": "1.8",
+        "Website": "https://seduccionlinux.wordpress.com"
+    },
+    "X-Plasma-API": "5.0"
+}

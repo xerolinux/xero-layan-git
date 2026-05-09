@@ -1,5 +1,5 @@
 # Translation of plasmoid-wunderground in LANGUAGE
-# Copyright (C) 2025
+# Copyright (C) 2026
 # This file is distributed under the same license as the plasmoid-wunderground package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmoid-wunderground\n"
 "Report-Msgid-Bugs-To: https://github.com/k-donn/plasmoid-wunderground\n"
-"POT-Creation-Date: 2025-12-22 19:50-0600\n"
+"POT-Creation-Date: 2026-04-26 18:46-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,12 +29,29 @@ msgstr ""
 msgid "Location not found"
 msgstr ""
 
+#: ../contents/code/utils.js
+msgid "To sunrise"
+msgstr ""
+
+#: ../contents/code/utils.js
+msgctxt "Daylight remaining time, keep short"
+msgid "Remaining"
+msgstr ""
+
+#: ../contents/code/utils.js
+msgid "Since sunset"
+msgstr ""
+
 #: ../contents/config/config.qml
 msgid "Station"
 msgstr ""
 
 #: ../contents/config/config.qml
 msgid "Appearance"
+msgstr ""
+
+#: ../contents/config/config.qml
+msgid "Layout"
 msgstr ""
 
 #: ../contents/config/config.qml ../contents/ui/config/ConfigUnits.qml
@@ -46,7 +63,15 @@ msgid "Debug"
 msgstr ""
 
 #: ../contents/ui/AirAndSolarItem.qml
-msgid "Status Color"
+msgid "Comfortable"
+msgstr ""
+
+#: ../contents/ui/AirAndSolarItem.qml
+msgid "Moderate"
+msgstr ""
+
+#: ../contents/ui/AirAndSolarItem.qml
+msgid "Unfavorable"
 msgstr ""
 
 #: ../contents/ui/AirAndSolarItem.qml
@@ -54,23 +79,19 @@ msgid "Air quality"
 msgstr ""
 
 #: ../contents/ui/AirAndSolarItem.qml
-msgid "Messages"
+msgid "AQI"
 msgstr ""
 
 #: ../contents/ui/AirAndSolarItem.qml
-msgid "AQI: %1"
+msgid "AQHI"
+msgstr ""
+
+#: ../contents/ui/AirAndSolarItem.qml ../contents/ui/AlertsItem.qml
+msgid "Alerts"
 msgstr ""
 
 #: ../contents/ui/AirAndSolarItem.qml
-msgid "AQHI: %1"
-msgstr ""
-
-#: ../contents/ui/AirAndSolarItem.qml
-msgid "Primary pollutant: "
-msgstr ""
-
-#: ../contents/ui/AirAndSolarItem.qml
-msgid "Amount: %1 %2<br/>Description: %3<br/>Index: %4"
+msgid "Info"
 msgstr ""
 
 #: ../contents/ui/AirAndSolarItem.qml
@@ -78,15 +99,15 @@ msgid "Solar info"
 msgstr ""
 
 #: ../contents/ui/AirAndSolarItem.qml
-msgid "Sunrise"
+msgid "Kp-index"
 msgstr ""
 
 #: ../contents/ui/AirAndSolarItem.qml
-msgid "Sunset"
+msgid "Power"
 msgstr ""
 
-#: ../contents/ui/AlertsItem.qml
-msgid "Alerts"
+#: ../contents/ui/AirAndSolarItem.qml
+msgid "Health index"
 msgstr ""
 
 #: ../contents/ui/AlertsItem.qml
@@ -110,25 +131,37 @@ msgctxt "per 12 hours, please keep it short"
 msgid "/12h"
 msgstr ""
 
-#: ../contents/ui/DetailsItem.qml ../contents/ui/config/ConfigUnits.qml ../contents/ui/main.qml
-msgid "Wind & Gust"
-msgstr ""
-
 #. i18n strings
 #: ../contents/ui/DetailsItem.qml ../contents/ui/config/ConfigUnits.qml
 msgid "Feels like %1"
 msgstr ""
 
 #: ../contents/ui/DetailsItem.qml
+msgid "Wind Barb"
+msgstr ""
+
+#: ../contents/ui/DetailsItem.qml
+msgid "Wind direction and speed indicator"
+msgstr ""
+
+#: ../contents/ui/DetailsItem.qml
+msgid "Learn more"
+msgstr ""
+
+#: ../contents/ui/DetailsItem.qml
 msgid "Wind from: %1 (%2°)"
+msgstr ""
+
+#: ../contents/ui/DetailsItem.qml ../contents/ui/config/ConfigUnits.qml ../contents/ui/main.qml
+msgid "Wind & Gust"
 msgstr ""
 
 #: ../contents/ui/DetailsItem.qml ../contents/ui/config/ConfigUnits.qml
 msgid "Dew Point"
 msgstr ""
 
-#: ../contents/ui/DetailsItem.qml ../contents/ui/main.qml
-msgid "Precipitation Rate"
+#: ../contents/ui/DetailsItem.qml
+msgid "Precip Rate"
 msgstr ""
 
 #: ../contents/ui/DetailsItem.qml ../contents/ui/main.qml
@@ -148,8 +181,7 @@ msgid "Humidity"
 msgstr ""
 
 #: ../contents/ui/DetailsItem.qml
-msgctxt "Short for: 'Precipitation Accumulation'"
-msgid "Precipitation Accum."
+msgid "Precip Accum"
 msgstr ""
 
 #: ../contents/ui/DetailsItem.qml ../contents/ui/main.qml
@@ -163,6 +195,10 @@ msgstr ""
 
 #: ../contents/ui/FullRepresentation.qml
 msgid "Sorry! The widget ran into a network error: "
+msgstr ""
+
+#: ../contents/ui/FullRepresentation.qml
+msgid "Refresh Weather"
 msgstr ""
 
 #: ../contents/ui/SwitchPanel.qml ../contents/ui/config/ConfigAppearance.qml
@@ -190,87 +226,12 @@ msgid "Loading..."
 msgstr ""
 
 #: ../contents/ui/config/ConfigAppearance.qml
-msgid "Compact Representation"
+msgctxt "Use default font"
+msgid "Default"
 msgstr ""
 
-#: ../contents/ui/config/ConfigAppearance.qml
-msgid "Show temperature:"
-msgstr ""
-
-#: ../contents/ui/config/ConfigAppearance.qml
-msgid "Text display:"
-msgstr ""
-
-#: ../contents/ui/config/ConfigAppearance.qml
-msgid "Automatic"
-msgstr ""
-
-#: ../contents/ui/config/ConfigAppearance.qml
-msgid "Text will follow the system font and expand to fill the available space."
-msgstr ""
-
-#: ../contents/ui/config/ConfigAppearance.qml
-msgid "Manual"
-msgstr ""
-
-#: ../contents/ui/config/ConfigAppearance.qml
-msgid "Choose Style…"
-msgstr ""
-
-#: ../contents/ui/config/ConfigAppearance.qml
-msgid "Choose a Font"
-msgstr ""
-
-#: ../contents/ui/config/ConfigAppearance.qml
-msgid "System Tray Representation"
-msgstr ""
-
-#: ../contents/ui/config/ConfigAppearance.qml
-msgid "Full Representation"
-msgstr ""
-
-#: ../contents/ui/config/ConfigAppearance.qml
-msgid "Property header text size"
-msgstr ""
-
-#: ../contents/ui/config/ConfigAppearance.qml
-msgid "Property text size"
-msgstr ""
-
-#: ../contents/ui/config/ConfigAppearance.qml
-msgid "Temperature text size"
-msgstr ""
-
-#: ../contents/ui/config/ConfigAppearance.qml
-msgid "small (16x16)"
-msgstr ""
-
-#: ../contents/ui/config/ConfigAppearance.qml
-msgid "smallMedium (22x22)"
-msgstr ""
-
-#: ../contents/ui/config/ConfigAppearance.qml
-msgid "medium (32x32)"
-msgstr ""
-
-#: ../contents/ui/config/ConfigAppearance.qml
-msgid "large (48x48)"
-msgstr ""
-
-#: ../contents/ui/config/ConfigAppearance.qml
-msgid "huge (64x64)"
-msgstr ""
-
-#: ../contents/ui/config/ConfigAppearance.qml
-msgid "enormous (128x128)"
-msgstr ""
-
-#: ../contents/ui/config/ConfigAppearance.qml
-msgid "Details icon size:"
-msgstr ""
-
-#: ../contents/ui/config/ConfigAppearance.qml
-msgid "Top panel icon margins:"
+#: ../contents/ui/config/ConfigAppearance.qml ../contents/ui/config/ConfigLayout.qml
+msgid "General"
 msgstr ""
 
 #: ../contents/ui/config/ConfigAppearance.qml
@@ -278,11 +239,35 @@ msgid "Use system theme icons:"
 msgstr ""
 
 #: ../contents/ui/config/ConfigAppearance.qml
-msgid "Apply system colors to icons:"
+msgid "Shown in tooltip:"
+msgstr ""
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Station ID"
+msgstr ""
+
+#: ../contents/ui/config/ConfigAppearance.qml ../contents/ui/config/ConfigStation.qml
+msgid "Station Name"
+msgstr ""
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Both"
+msgstr ""
+
+#: ../contents/ui/config/ConfigAppearance.qml ../contents/ui/config/ConfigLayout.qml
+msgid "Full Representation"
 msgstr ""
 
 #: ../contents/ui/config/ConfigAppearance.qml
 msgid "Auto-color temperature:"
+msgstr ""
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Show time seconds:"
+msgstr ""
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Show blurb:"
 msgstr ""
 
 #: ../contents/ui/config/ConfigAppearance.qml
@@ -297,6 +282,68 @@ msgstr ""
 msgid "Show pressure trend:"
 msgstr ""
 
+#: ../contents/ui/config/ConfigAppearance.qml ../contents/ui/config/ConfigLayout.qml
+msgid "Compact Representation"
+msgstr ""
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Choose a Font:"
+msgstr ""
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Text size mode:"
+msgstr ""
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Automatic fit"
+msgstr ""
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Exact size"
+msgstr ""
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Text size"
+msgstr ""
+
+#: ../contents/ui/config/ConfigAppearance.qml ../contents/ui/config/ConfigLayout.qml
+msgctxt "pixels"
+msgid "px"
+msgstr ""
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Text visible"
+msgstr ""
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Text drop shadow"
+msgstr ""
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Icon size mode:"
+msgstr ""
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Icon size"
+msgstr ""
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Icon visible"
+msgstr ""
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Icon drop shadow"
+msgstr ""
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "System tray active timeout"
+msgstr ""
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgctxt "Abbreviation for seconds"
+msgid "sec"
+msgstr ""
+
 #: ../contents/ui/config/ConfigDebug.qml
 msgid "Write to console.log:"
 msgstr ""
@@ -309,44 +356,148 @@ msgstr ""
 msgid "Startup time delay (ms):"
 msgstr ""
 
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "Planar layout"
+msgstr ""
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "Used on the desktop or in a desktop grouper"
+msgstr ""
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "Property header text size"
+msgstr ""
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "Property text size"
+msgstr ""
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "Temperature text size"
+msgstr ""
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "small (16x16)"
+msgstr ""
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "smallMedium (22x22)"
+msgstr ""
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "medium (32x32)"
+msgstr ""
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "large (48x48)"
+msgstr ""
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "huge (64x64)"
+msgstr ""
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "enormous (128x128)"
+msgstr ""
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "Forecast icon size:"
+msgstr ""
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "Property icon size:"
+msgstr ""
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "Top panel icon margins:"
+msgstr ""
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "Layout type"
+msgstr ""
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "Horizontal"
+msgstr ""
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "Vertical"
+msgstr ""
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "Compressed"
+msgstr ""
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "Layout type is not available in the system tray"
+msgstr ""
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "Widget order"
+msgstr ""
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "Icon first"
+msgstr ""
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "Text first"
+msgstr ""
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "Widget order is not available in the system tray"
+msgstr ""
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "Top Margin"
+msgstr ""
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "Bottom Margin"
+msgstr ""
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "Left Margin"
+msgstr ""
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "Right Margin"
+msgstr ""
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "Inner Margin"
+msgstr ""
+
 #: ../contents/ui/config/ConfigStation.qml
 msgid "Saved Weather Stations"
 msgstr ""
 
 #: ../contents/ui/config/ConfigStation.qml
-msgid "ID:"
-msgstr ""
-
-#: ../contents/ui/config/ConfigStation.qml ../contents/ui/lib/StationSearcher.qml
-msgid "Weatherstation Name:"
-msgstr ""
-
-#: ../contents/ui/config/ConfigStation.qml ../contents/ui/lib/StationMapSearcher.qml ../contents/ui/lib/StationSearcher.qml
-msgid "Lat/Lon"
+msgid "ID"
 msgstr ""
 
 #: ../contents/ui/config/ConfigStation.qml
-msgid "Action"
-msgstr ""
-
-#: ../contents/ui/config/ConfigStation.qml ../contents/ui/lib/StationSearcher.qml
-msgid "Select"
+msgid "Latitude"
 msgstr ""
 
 #: ../contents/ui/config/ConfigStation.qml
-msgid "Remove"
+msgid "Longitude"
+msgstr ""
+
+#: ../contents/ui/config/ConfigStation.qml
+msgid "Actions"
 msgstr ""
 
 #: ../contents/ui/config/ConfigStation.qml
 msgid "Select from Map"
 msgstr ""
 
-#: ../contents/ui/config/ConfigStation.qml
-msgid "Manual Add"
-msgstr ""
-
 #: ../contents/ui/config/ConfigStation.qml ../contents/ui/lib/StationMapSearcher.qml ../contents/ui/lib/StationSearcher.qml
 msgid "Find Station"
+msgstr ""
+
+#: ../contents/ui/config/ConfigStation.qml
+msgid "Manual Add"
 msgstr ""
 
 #: ../contents/ui/config/ConfigStation.qml
@@ -358,7 +509,27 @@ msgid "Time/Date Format"
 msgstr ""
 
 #: ../contents/ui/config/ConfigUnits.qml
+msgid "Sun/Moon time format:"
+msgstr ""
+
+#: ../contents/ui/config/ConfigUnits.qml
+msgid "12hr time"
+msgstr ""
+
+#: ../contents/ui/config/ConfigUnits.qml
+msgid "24hr time"
+msgstr ""
+
+#: ../contents/ui/config/ConfigUnits.qml
+msgid "Custom"
+msgstr ""
+
+#: ../contents/ui/config/ConfigUnits.qml
 msgid "Day Chart time format:"
+msgstr ""
+
+#: ../contents/ui/config/ConfigUnits.qml
+msgid "Time format"
 msgstr ""
 
 #: ../contents/ui/config/ConfigUnits.qml
@@ -366,7 +537,23 @@ msgid "Week forecast date format:"
 msgstr ""
 
 #: ../contents/ui/config/ConfigUnits.qml
+msgid "Day"
+msgstr ""
+
+#: ../contents/ui/config/ConfigUnits.qml
+msgid "Day/Month"
+msgstr ""
+
+#: ../contents/ui/config/ConfigUnits.qml
+msgid "Date format"
+msgstr ""
+
+#: ../contents/ui/config/ConfigUnits.qml
 msgid "Precision"
+msgstr ""
+
+#: ../contents/ui/config/ConfigUnits.qml
+msgid "Compact Rep Temperature"
 msgstr ""
 
 #: ../contents/ui/config/ConfigUnits.qml ../contents/ui/main.qml
@@ -386,10 +573,6 @@ msgstr ""
 #: ../contents/ui/config/ConfigUnits.qml
 msgctxt "The unit system"
 msgid "Hybrid (UK)"
-msgstr ""
-
-#: ../contents/ui/config/ConfigUnits.qml
-msgid "Custom"
 msgstr ""
 
 #: ../contents/ui/config/ConfigUnits.qml
@@ -436,12 +619,28 @@ msgstr ""
 msgid "Enter station ID"
 msgstr ""
 
+#: ../contents/ui/lib/ManualStationAdd.qml
+msgid "Enter station name (optional)"
+msgstr ""
+
 #: ../contents/ui/lib/ManualStationAdd.qml ../contents/ui/lib/StationMapSearcher.qml ../contents/ui/lib/StationSearcher.qml
 msgid "Confirm"
 msgstr ""
 
 #: ../contents/ui/lib/ManualStationAdd.qml ../contents/ui/lib/StationMapSearcher.qml ../contents/ui/lib/StationSearcher.qml
 msgid "Cancel"
+msgstr ""
+
+#: ../contents/ui/lib/StationListDelegate.qml ../contents/ui/lib/StationSearcher.qml
+msgid "Select"
+msgstr ""
+
+#: ../contents/ui/lib/StationListDelegate.qml
+msgid "Edit Name"
+msgstr ""
+
+#: ../contents/ui/lib/StationListDelegate.qml
+msgid "Remove"
 msgstr ""
 
 #: ../contents/ui/lib/StationMapSearcher.qml ../contents/ui/lib/StationSearcher.qml
@@ -454,6 +653,10 @@ msgstr ""
 
 #: ../contents/ui/lib/StationMapSearcher.qml ../contents/ui/lib/StationSearcher.qml
 msgid "Weatherstation ID:"
+msgstr ""
+
+#: ../contents/ui/lib/StationMapSearcher.qml ../contents/ui/lib/StationSearcher.qml
+msgid "Lat/Lon"
 msgstr ""
 
 #: ../contents/ui/lib/StationMapSearcher.qml
@@ -565,6 +768,10 @@ msgid "Longitude:"
 msgstr ""
 
 #: ../contents/ui/lib/StationSearcher.qml
+msgid "Weatherstation Name:"
+msgstr ""
+
+#: ../contents/ui/lib/StationSearcher.qml
 msgid "Test"
 msgstr ""
 
@@ -574,6 +781,10 @@ msgstr ""
 
 #: ../contents/ui/main.qml
 msgid "Precipitation Chance"
+msgstr ""
+
+#: ../contents/ui/main.qml
+msgid "Precipitation Rate"
 msgstr ""
 
 #: ../contents/ui/main.qml
@@ -590,21 +801,6 @@ msgstr ""
 
 #: ../contents/ui/main.qml
 msgid "Error..."
-msgstr ""
-
-#: ../contents/ui/main.qml
-msgctxt "Do not edit HTML tags. 'Temp' means temperature"
-msgid "<font size='4'>Temp: %1</font><br />"
-msgstr ""
-
-#: ../contents/ui/main.qml
-msgctxt "Do not edit HTML tags."
-msgid "<font size='4'>Feels: %1</font><br />"
-msgstr ""
-
-#: ../contents/ui/main.qml
-msgctxt "Do not edit HTML tags. 'Wnd Spd' means Wind Speed"
-msgid "<font size='4'>Wnd spd: %1</font><br />"
 msgstr ""
 
 #: ../contents/ui/main.qml

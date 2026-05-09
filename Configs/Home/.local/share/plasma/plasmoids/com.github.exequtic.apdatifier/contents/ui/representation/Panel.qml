@@ -1,8 +1,3 @@
-/*
-    SPDX-FileCopyrightText: 2024 Evgeny Kazantsev <exequtic@gmail.com>
-    SPDX-License-Identifier: MIT
-*/
-
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
@@ -19,23 +14,38 @@ MouseArea {
     id: mouseArea
 
     property bool wasExpanded: false
-    property bool horizontal: plasmoid.location === 3 || plasmoid.location === 4
-    property int trayIconSize: horizontal ? trayIcon.width : trayIcon.height
-    property bool counterOverlay: inTray || !horizontal
-    property bool counterRow: !inTray && horizontal
+
+    readonly property bool counterSide: !inTray && horizontal && plasmoid.configuration.counterMode === "side"
+    readonly property bool counterEnabled: plasmoid.configuration.counterMode !== "disabled"
+    readonly property bool counterCenter: plasmoid.configuration.counterBadgePosition === "center"
+    readonly property bool pauseBadgeEnabled: plasmoid.configuration.pauseBadgePosition !== "disabled"
+    readonly property bool updatedBadgeEnabled: plasmoid.configuration.updatedBadgePosition !== "disabled"
+
+    readonly property bool onDesktop: plasmoid.location === PlasmaCore.Types.Floating
+    readonly property bool pulseActive: (plasmoid.configuration.busyIndicator === "pulse") && sts.busy && !onDesktop
 
     function darkColor(color) {
         return Kirigami.ColorUtils.brightnessForColor(color) === Kirigami.ColorUtils.Dark
     }
-    property var isDarkText: darkColor(Kirigami.Theme.textColor)
-    property var lightText: isDarkText ? Kirigami.Theme.backgroundColor : Kirigami.Theme.textColor
-    property var darkText: isDarkText ? Kirigami.Theme.textColor : Kirigami.Theme.backgroundColor
+    readonly property bool isDarkText: darkColor(Kirigami.Theme.textColor)
+    readonly property color lightText: isDarkText ? Kirigami.Theme.backgroundColor : Kirigami.Theme.textColor
+    readonly property color darkText: isDarkText ? Kirigami.Theme.textColor : Kirigami.Theme.backgroundColor
 
-    property var errorIcon: cfg.ownIconsUI ? "status_error" : "error"
-    property var updatedIcon: cfg.ownIconsUI ? "status_updated" : "checkmark"
-    property var pausedIcon: cfg.ownIconsUI ? "toolbar_pause" : "media-playback-paused"
+    readonly property string errorIcon: cfg.ownIconsUI ? "status_error" : "error"
+    readonly property string updatedIcon: cfg.ownIconsUI ? "status_updated" : "checkmark"
+    readonly property string pausedIcon: cfg.ownIconsUI ? "toolbar_pause" : "media-playback-paused"
 
-    Layout.preferredWidth: counterOverlay ? trayIcon.width : panelRow.width
+    readonly property real panelIconSize: horizontal ? parent.height : parent.width
+    readonly property real iconSize: inTray ? Math.min(parent.width, parent.height) : panelIconSize
+    readonly property real counterPixelSize: Math.max(iconSize / 4, iconSize * (cfg.counterFontSize / 10))
+
+    implicitHeight: iconSize
+    implicitWidth: viewLoader.item ? viewLoader.item.implicitWidth : iconSize
+
+    Layout.preferredHeight: implicitHeight
+    Layout.minimumHeight: implicitHeight
+    Layout.preferredWidth: implicitWidth
+    Layout.minimumWidth: implicitWidth
 
     hoverEnabled: true
     acceptedButtons: cfg.rightAction ? Qt.AllButtons : Qt.LeftButton | Qt.MiddleButton
@@ -56,8 +66,8 @@ MouseArea {
     WheelHandler {
         acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
         onWheel: (event) => {
-            if (srollTimer.running) return
-            srollTimer.start()
+            if (scrollTimer.running) return
+            scrollTimer.start()
             var action = event.angleDelta.y > 0 ? cfg.scrollUpAction : cfg.scrollDownAction
             if (!action) return
             JS[action]()
@@ -65,139 +75,197 @@ MouseArea {
     }
 
     Timer {
-        id: srollTimer
+        id: scrollTimer
         interval: 500
     }
 
-    RowLayout {
-        id: panelRow
+    Loader {
+        id: viewLoader
+        anchors.fill: parent
+        sourceComponent: counterSide ? iconWithCounterSide : iconWithCounterBadge
+    }
 
-        layoutDirection: cfg.counterOnLeft ? Qt.RightToLeft : Qt.LeftToRight
-        visible: counterRow
-        spacing: 0
-        anchors.centerIn: mouseArea
+    Component {
+        id: iconWithCounterSide
 
-        Item {
-            Layout.preferredWidth: Kirigami.Units.smallSpacing + cfg.counterMargins
+        RowLayout {
+            implicitHeight: mouseArea.iconSize
+            layoutDirection: cfg.counterSidePosition === "left" ? Qt.RightToLeft : Qt.LeftToRight
+            spacing: 0
+            anchors.centerIn: parent
+
+            Item { Layout.preferredWidth: Kirigami.Units.smallSpacing + cfg.counterGapsOuter }
+
+            Item {
+                Layout.preferredHeight: mouseArea.iconSize
+                Layout.preferredWidth: mouseArea.iconSize
+
+                Kirigami.Icon {
+                    id: panelIcon
+                    width: parent.width
+                    height: parent.height
+                    source: JS.setIcon(plasmoid.icon)
+                    active: mouseArea.containsMouse
+
+                    layer.enabled: sts.error
+                    layer.effect: sts.error ? errorShadowEffect : null
+
+                    Loader {
+                        anchors.fill: parent
+                        sourceComponent: badgesLayer
+                        active: sts.init
+                    }
+                }
+
+                QQC.Pulse {
+                    target: panelIcon
+                    running: mouseArea.pulseActive
+                }
+            }
+
+            Item {
+                Layout.preferredWidth: cfg.counterGapsInner
+                visible: counterText.visible
+            }
+
+            Label {
+                id: counterText
+                visible: mouseArea.counterEnabled && !sts.busy && sts.count
+                font.family: plasmoid.configuration.counterFontFamily || Kirigami.Theme.defaultFont.family
+                font.pixelSize: Math.round(mouseArea.counterPixelSize)
+                font.bold: cfg.counterFontBold
+                fontSizeMode: Text.FixedSize
+                text: sts.count
+            }
+
+            Item { Layout.preferredWidth: Kirigami.Units.smallSpacing + cfg.counterGapsOuter }
         }
+    }
+
+    Component {
+        id: iconWithCounterBadge
 
         Item {
-            Layout.preferredHeight: mouseArea.height
-            Layout.preferredWidth: mouseArea.height
+            implicitWidth: mouseArea.iconSize
+            implicitHeight: mouseArea.iconSize
 
-            Kirigami.Icon {
-                id: panelIcon
-                width: parent.width
-                height: parent.height
-                source: JS.setIcon(plasmoid.icon)
-                active: mouseArea.containsMouse
+            Item {
+                width: mouseArea.iconSize
+                height: mouseArea.iconSize
+                anchors.centerIn: parent
 
-                QQC.Badge {
-                    iconName: errorIcon
-                    iconColor: Kirigami.Theme.negativeTextColor
-                    visible: sts.error
+                Kirigami.Icon {
+                    id: trayIcon
+                    anchors.fill: parent
+                    source: JS.setIcon(plasmoid.icon)
+                    active: mouseArea.containsMouse
+
+                    layer.enabled: sts.error
+                    layer.effect: sts.error ? errorShadowEffect : null
                 }
-                QQC.Badge {
-                    iconName: updatedIcon
-                    iconColor: Kirigami.Theme.positiveTextColor
-                    visible: sts.updated && cfg.badgeUpdated
+
+                QQC.Pulse {
+                    target: trayIcon
+                    running: mouseArea.pulseActive
                 }
-                QQC.Badge {
-                    iconName: pausedIcon
-                    iconColor: Kirigami.Theme.neutralTextColor
-                    visible: sts.paused && cfg.checkMode !== "manual" && cfg.badgePaused
+
+                Rectangle {
+                    id: frame
+                    anchors.centerIn: parent
+                    width: parent.width
+                    height: parent.height
+                    opacity: 0
+                }
+
+                Rectangle {
+                    id: counterFrame
+                    width: mouseArea.counterCenter ? frame.width : counter.implicitWidth + 2
+                    height: mouseArea.counterCenter ? frame.height : counter.implicitHeight
+                    radius: cfg.counterRadius
+                    opacity: cfg.counterOpacity / 10
+                    color: cfg.counterColor ? cfg.counterColor : Kirigami.Theme.backgroundColor
+                    visible: mouseArea.counterEnabled && !sts.busy && sts.count
+
+                    layer.enabled: true
+                    layer.effect: DropShadow {
+                        horizontalOffset: 0
+                        verticalOffset: 0
+                        radius: 2
+                        samples: radius * 2
+                        color: Qt.rgba(0, 0, 0, 0.5)
+                    }
+
+                    state: cfg.counterBadgePosition
+            
+                    states: [
+                        State { name: "center";      AnchorChanges { target: counterFrame; anchors.horizontalCenter: frame.horizontalCenter; anchors.verticalCenter: frame.verticalCenter } },
+                        State { name: "topLeft";     AnchorChanges { target: counterFrame; anchors.top: frame.top; anchors.left: frame.left } },
+                        State { name: "topRight";    AnchorChanges { target: counterFrame; anchors.top: frame.top; anchors.right: frame.right } },
+                        State { name: "bottomLeft";  AnchorChanges { target: counterFrame; anchors.bottom: frame.bottom; anchors.left: frame.left } },
+                        State { name: "bottomRight"; AnchorChanges { target: counterFrame; anchors.bottom: frame.bottom; anchors.right: frame.right } }
+                    ]
+
+                    anchors {
+                        topMargin:    state.includes("top") ? cfg.counterOffsetX : 0
+                        leftMargin:   state.includes("Left") ? cfg.counterOffsetY : 0
+                        rightMargin:  state.includes("Right") ? cfg.counterOffsetY : 0
+                        bottomMargin: state.includes("bottom") ? cfg.counterOffsetX : 0
+                    }
+
+                    transitions: Transition { AnchorAnimation { duration: 120 } }
+                }
+
+                Label {
+                    id: counter
+                    anchors.centerIn: counterFrame
+                    text: sts.count
+                    font.family: plasmoid.configuration.counterFontFamily || Kirigami.Theme.defaultFont.family
+                    font.pixelSize: Math.round(mouseArea.counterPixelSize)
+                    font.bold: cfg.counterFontBold
+                    color: cfg.counterColor ? (mouseArea.darkColor(counterFrame.color) ? mouseArea.lightText : mouseArea.darkText) : Kirigami.Theme.textColor
+                    visible: counterFrame.visible
+                }
+
+                Loader {
+                    anchors.fill: parent
+                    sourceComponent: badgesLayer
+                    active: sts.init
                 }
             }
         }
-        Item {
-            Layout.preferredWidth: cfg.counterSpacing
-            visible: counterText.visible
-        }
-        Label {
-            id: counterText
-            visible: cfg.counterEnabled && sts.pending
-            font.family: plasmoid.configuration.counterFontFamily || Kirigami.Theme.defaultFont
-            font.pixelSize: mouseArea.height * (cfg.counterFontSize / 10)
-            font.bold: cfg.counterFontBold
-            fontSizeMode: Text.FixedSize
-            smooth: true
-            text: sts.count
-        }
+    }
+
+    Component {
+        id: badgesLayer
 
         Item {
-            Layout.preferredWidth: Kirigami.Units.smallSpacing + cfg.counterMargins
+            anchors.fill: parent
+
+            QQC.Badge {
+                iconName: updatedIcon
+                position: cfg.updatedBadgePosition
+                iconColor: Kirigami.Theme.positiveTextColor
+                visible: !sts.busy && !sts.count && updatedBadgeEnabled
+            }
+            QQC.Badge {
+                iconName: pausedIcon
+                position: cfg.pauseBadgePosition
+                iconColor: Kirigami.Theme.neutralTextColor
+                visible: sts.paused && pauseBadgeEnabled
+            }
         }
     }
 
-    Kirigami.Icon {
-        id: trayIcon
-        anchors.fill: parent
-        source: JS.setIcon(plasmoid.icon)
-        active: mouseArea.containsMouse
-        visible: counterOverlay
-    }
-
-    Rectangle {
-        id: frame
-        anchors.centerIn: trayIcon
-        width: trayIconSize + cfg.counterOffsetX
-        height: trayIconSize + cfg.counterOffsetY
-        opacity: 0
-        visible: counterOverlay
-    }
-
-    Rectangle {
-        id: counterFrame
-        width: cfg.counterCenter ? frame.width : counter.width + 2
-        height: cfg.counterCenter ? frame.height : counter.height
-        radius: cfg.counterRadius
-        opacity: cfg.counterOpacity / 10
-        color: cfg.counterColor ? cfg.counterColor : Kirigami.Theme.backgroundColor
-        visible: counterOverlay && cfg.counterEnabled && sts.pending
-
-        layer.enabled: cfg.counterShadow
-        layer.effect: DropShadow {
+    Component {
+        id: errorShadowEffect
+        DropShadow {
             horizontalOffset: 0
             verticalOffset: 0
-            radius: 2
-            samples: radius * 2
-            color: Qt.rgba(0, 0, 0, 0.5)
+            radius: 6
+            samples: 16
+            color: "red"
+            spread: 0.35
+            // transparentBorder: true
         }
-
-        anchors {
-            centerIn: cfg.counterCenter ? parent : undefined
-            top:    (!cfg.counterCenter && cfg.counterTop && !cfg.counterBottom) ? frame.top : undefined
-            bottom: (!cfg.counterCenter && cfg.counterBottom && !cfg.counterTop) ? frame.bottom : undefined
-            left:   (!cfg.counterCenter && cfg.counterLeft && !cfg.counterRight) ? frame.left : undefined
-            right:  (!cfg.counterCenter && cfg.counterRight && !cfg.counterLeft) ? frame.right : undefined
-        }
-    }
-
-    Label {
-        id: counter
-        anchors.centerIn: counterFrame
-        text: sts.count
-        font.family: plasmoid.configuration.counterFontFamily || Kirigami.Theme.defaultFont
-        font.pixelSize: Math.max(trayIcon.height / 4, Kirigami.Theme.smallFont.pixelSize + cfg.counterSize)
-        font.bold: cfg.counterFontBold
-        color: cfg.counterColor ? darkColor(counterFrame.color) ? lightText : darkText : Kirigami.Theme.textColor
-        smooth: true
-        visible: counterFrame.visible
-    }
-
-    QQC.Badge {
-        iconName: errorIcon
-        iconColor: Kirigami.Theme.negativeTextColor
-        visible: counterOverlay && sts.error
-    }
-    QQC.Badge {
-        iconName: updatedIcon
-        iconColor: Kirigami.Theme.positiveTextColor
-        visible: counterOverlay && sts.updated && cfg.badgeUpdated
-    }
-    QQC.Badge {
-        iconName: pausedIcon
-        iconColor: Kirigami.Theme.neutralTextColor
-        visible: counterOverlay && sts.paused && cfg.checkMode !== "manual" && cfg.badgePaused
     }
 }

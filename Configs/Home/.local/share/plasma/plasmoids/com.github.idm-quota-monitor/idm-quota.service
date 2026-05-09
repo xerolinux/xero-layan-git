@@ -1,0 +1,12 @@
+[Unit]
+Description=Fetch IDM quota usage (ADSL + LTE)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/usr/bin/python3 \
+  /home/PLACEHOLDER_USER/.local/share/plasma/plasmoids/com.github.idm-quota-monitor/fetch_quota.py
+StandardOutput=journal
+StandardError=journal

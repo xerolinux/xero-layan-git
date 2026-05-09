@@ -1,5 +1,5 @@
 /*
- * Copyright 2025  Kevin Donnelly
+ * Copyright 2026  Kevin Donnelly
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -18,237 +18,197 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as QQC
-import QtQuick.Dialogs as QtDialogs
-import org.kde.kcmutils as KCM
-import QtQuick.Controls as PlasmaComponents
 import org.kde.kirigami as Kirigami
-import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.components as PlasmaComponents
-
+import org.kde.kcmutils as KCM
 import "../lib" as Lib
 
 KCM.SimpleKCM {
-    id: appearanceConfig
 
-    property alias cfg_autoFontAndSize: autoFontAndSizeRadioButton.checked
-    property alias cfg_fontFamily: fontDialog.fontChosen.family
-    property alias cfg_boldText: fontDialog.fontChosen.bold
-    property alias cfg_italicText: fontDialog.fontChosen.italic
-    property alias cfg_underlineText: fontDialog.fontChosen.underline
-    property alias cfg_strikeoutText: fontDialog.fontChosen.strikeout
-    property alias cfg_fontWeight: fontDialog.fontChosen.weight
-    property alias cfg_fontStyleName: fontDialog.fontChosen.styleName
-    property alias cfg_fontSize: fontDialog.fontChosen.pointSize
+    id: appearancePage
 
-    property alias cfg_showCompactTemp: showCompactTemp.checked
-    property alias cfg_showSystemTrayTemp: showSystemTrayTemp.checked
-    property alias cfg_propHeadPointSize: propHeadPointSize.value
-    property alias cfg_propPointSize: propPointSize.value
-    property alias cfg_tempPointSize: tempPointSize.value
-    property alias cfg_useSystemThemeIcons: useSystemIcons.checked
-    property alias cfg_applyColorScheme: applyColorScheme.checked
-    property alias cfg_topIconMargins: topIconMargins.value
+    property alias cfg_inTrayActiveTimeoutSec: inTrayActiveTimeoutSec.value
+    property string cfg_widgetFontName: plasmoid.configuration.widgetFontName
+    property string cfg_widgetFontSize: plasmoid.configuration.widgetFontSize
+    property string cfg_widgetIconSize: plasmoid.configuration.widgetIconSize
+
+    property alias cfg_useSystemThemeIcons: useSystemThemeIcons.checked
+    property alias cfg_textVisible: textVisible.checked
+    property alias cfg_iconVisible: iconVisible.checked
+    property alias cfg_textDropShadow: textDropShadow.checked
+    property alias cfg_iconDropShadow: iconDropShadow.checked
+
+    property int cfg_iconSizeMode
+    property int cfg_textSizeMode
+    property int cfg_shownInTooltip
+
     property alias cfg_tempAutoColor: tempAutoColor.checked
+    property alias cfg_showTimeSeconds: showTimeSeconds.checked
     property alias cfg_useDefaultPage: useDefaultPage.checked
+    property alias cfg_showBlurb: showBlurb.checked
     property alias cfg_defaultLoadPage: defaultLoadPage.currentIndex
     property alias cfg_showPresTrend: showPresTrend.checked
+
+
+    ListModel {
+        id: fontsModel
+        Component.onCompleted: {
+            var arr = []
+            arr.push({text: i18nc("Use default font", "Default"), value: ""})
+
+            var fonts = Qt.fontFamilies()
+            var foundIndex = 0
+            for (var i = 0, j = fonts.length; i < j; ++i) {
+                if (fonts[i] === cfg_widgetFontName) {
+                    foundIndex = i
+                }
+                arr.push({text: fonts[i], value: fonts[i]})
+            }
+            append(arr)
+            if (foundIndex > 0) {
+                fontFamilyComboBox.currentIndex = foundIndex + 1
+            }
+        }
+    }
+
+    QQC.ButtonGroup {
+        id: iconSizeModeGroup
+
+        Component.onCompleted: {
+            cfg_iconSizeModeChanged()
+        }
+    }
+
+    onCfg_iconSizeModeChanged: {
+        switch (cfg_iconSizeMode) {
+            case 0:
+                iconSizeModeGroup.checkedButton = iconSizeModeFit;
+                break;
+            case 1:
+                iconSizeModeGroup.checkedButton = iconSizeModeFixed;
+                break;
+            default:
+        }
+    }
+
+    QQC.ButtonGroup {
+        id: textSizeModeGroup
+
+        Component.onCompleted: {
+            cfg_textSizeModeChanged()
+        }
+    }
+
+    onCfg_textSizeModeChanged: {
+        switch (cfg_textSizeMode) {
+            case 0:
+                textSizeModeGroup.checkedButton = textSizeModeFit;
+                break;
+            case 1:
+                textSizeModeGroup.checkedButton = textSizeModeFixed;
+                break;
+            default:
+        }
+    }
+
+    QQC.ButtonGroup {
+        id: shownInTooltipGroup
+
+        Component.onCompleted: {
+            cfg_shownInTooltipChanged()
+        }
+    }
+
+    onCfg_shownInTooltipChanged: {
+        switch (cfg_shownInTooltip) {
+            case 0:
+                shownInTooltipGroup.checkedButton = showIDInTooltip;
+                break;
+            case 1:
+                shownInTooltipGroup.checkedButton = showNameInTooltip;
+                break;
+            case 2:
+                shownInTooltipGroup.checkedButton = showBothInTooltip;
+                break;
+            default:
+        }
+    }
 
     Kirigami.FormLayout {
         anchors.fill: parent
 
         Kirigami.Separator {
-            Kirigami.FormData.label: i18nd("plasma_applet_org.kde.desktopcontainment", "Show Background")
+            Kirigami.FormData.label: i18n("General")
             Kirigami.FormData.isSection: true
         }
 
         Lib.BackgroundToggle {}
 
-        Kirigami.Separator {
-            Kirigami.FormData.label: i18n("Compact Representation")
-            Kirigami.FormData.isSection: true
+        QQC.CheckBox {
+            id: useSystemThemeIcons
+
+            Kirigami.FormData.label: i18n("Use system theme icons:")
         }
 
-        PlasmaComponents.CheckBox {
-            id: showCompactTemp
-
-            Kirigami.FormData.label: i18n("Show temperature:")
-        }
-
-        QQC.ButtonGroup {
-            buttons: [autoFontAndSizeRadioButton, manualFontAndSizeRadioButton]
-        }
-
-        RowLayout {
+        ColumnLayout {
             spacing: Kirigami.Units.smallSpacing
 
-            Kirigami.FormData.label: i18n("Text display:")
+            Kirigami.FormData.label: i18n("Shown in tooltip:")
+            Kirigami.FormData.labelAlignment: Qt.AlignTop
 
-            PlasmaComponents.RadioButton {
-                id: autoFontAndSizeRadioButton
-                text: i18n("Automatic")
+            QQC.RadioButton {
+                id: showIDInTooltip
+                QQC.ButtonGroup.group: shownInTooltipGroup
+                text: i18n("Station ID")
+                onCheckedChanged: if (checked) cfg_shownInTooltip = 0;
             }
 
-            Kirigami.Icon {
-                source: "dialog-question-symbolic"
-
-                isMask: plasmoid.configuration.applyColorScheme ? true : false
-                color: Kirigami.Theme.textColor
-
-                Layout.maximumHeight: autoFontAndSizeRadioButton.height * 0.8
-
-                PlasmaCore.ToolTipArea {
-                    anchors.fill: parent
-
-                    interactive: true
-                    subText: i18n("Text will follow the system font and expand to fill the available space.")
-                }
-            }
-        }
-
-        RowLayout {
-            spacing: Kirigami.Units.smallSpacing
-
-            PlasmaComponents.RadioButton {
-                id: manualFontAndSizeRadioButton
-                text: i18n("Manual")
-                checked: !cfg_autoFontAndSize
-                onClicked: {
-                    if (cfg_fontFamily === "") {
-                        fontDialog.fontChosen = Kirigami.Theme.defaultFont;
-                    }
-                }
+            QQC.RadioButton {
+                id: showNameInTooltip
+                QQC.ButtonGroup.group: shownInTooltipGroup
+                text: i18n("Station Name")
+                onCheckedChanged: if (checked) cfg_shownInTooltip = 1;
             }
 
-            PlasmaComponents.Button {
-                text: i18n("Choose Style…")
-                icon.name: "settings-configure"
-                enabled: manualFontAndSizeRadioButton.checked
-                onClicked: {
-                    fontDialog.selectedFont = fontDialog.fontChosen;
-                    fontDialog.open();
-                }
+            QQC.RadioButton {
+                id: showBothInTooltip
+                QQC.ButtonGroup.group: shownInTooltipGroup
+                text: i18n("Both")
+                onCheckedChanged: if (checked) cfg_shownInTooltip = 2;
             }
         }
-
-        QtDialogs.FontDialog {
-            id: fontDialog
-            title: i18n("Choose a Font")
-            modality: Qt.WindowModal
-            parentWindow: appearanceConfig.Window.window
-
-            property font fontChosen: Qt.font()
-
-            onAccepted: {
-                fontChosen = selectedFont;
-            }
-        }
-
-        Kirigami.Separator {
-            Kirigami.FormData.label: i18n("System Tray Representation")
-            Kirigami.FormData.isSection: true
-        }
-
-        PlasmaComponents.CheckBox {
-            id: showSystemTrayTemp
-
-            Kirigami.FormData.label: i18n("Show temperature:")
-        }
-
+        
         Kirigami.Separator {
             Kirigami.FormData.label: i18n("Full Representation")
             Kirigami.FormData.isSection: true
         }
 
-        PlasmaComponents.SpinBox {
-            id: propHeadPointSize
 
-            editable: true
-
-            Kirigami.FormData.label: i18n("Property header text size")
-        }
-
-        PlasmaComponents.SpinBox {
-            id: propPointSize
-
-            editable: true
-
-            Kirigami.FormData.label: i18n("Property text size")
-        }
-
-        PlasmaComponents.SpinBox {
-            id: tempPointSize
-
-            editable: true
-
-            Kirigami.FormData.label: i18n("Temperature text size")
-        }
-
-        Lib.ConfigComboBox {
-            configKey: "detailsIconSize"
-
-            model: [
-                {
-                    value: 16,
-                    text: i18n("small (16x16)")
-                },
-                {
-                    value: 22,
-                    text: i18n("smallMedium (22x22)")
-                },
-                {
-                    value: 32,
-                    text: i18n("medium (32x32)")
-                },
-                {
-                    value: 48,
-                    text: i18n("large (48x48)")
-                },
-                {
-                    value: 64,
-                    text: i18n("huge (64x64)")
-                },
-                {
-                    value: 128,
-                    text: i18n("enormous (128x128)")
-                }
-            ]
-
-            Kirigami.FormData.label: i18n("Details icon size:")
-        }
-
-        PlasmaComponents.SpinBox {
-            id: topIconMargins
-
-            editable: true
-
-            Kirigami.FormData.label: i18n("Top panel icon margins:")
-        }
-
-        PlasmaComponents.CheckBox {
-            id: useSystemIcons
-
-            Kirigami.FormData.label: i18n("Use system theme icons:")
-        }
-
-        PlasmaComponents.CheckBox {
-            id: applyColorScheme
-
-            Kirigami.FormData.label: i18n("Apply system colors to icons:")
-        }
-
-        PlasmaComponents.CheckBox {
+        QQC.CheckBox {
             id: tempAutoColor
 
             Kirigami.FormData.label: i18n("Auto-color temperature:")
         }
 
-        PlasmaComponents.CheckBox {
+        QQC.CheckBox {
+            id: showTimeSeconds
+
+            Kirigami.FormData.label: i18n("Show time seconds:")
+        }
+
+        QQC.CheckBox {
+            id: showBlurb
+
+            Kirigami.FormData.label: i18n("Show blurb:")
+        }
+
+        QQC.CheckBox {
             id: useDefaultPage
 
             Kirigami.FormData.label: i18n("Use default page:")
         }
 
-        PlasmaComponents.ComboBox {
+        QQC.ComboBox {
             id: defaultLoadPage
 
             enabled: useDefaultPage.checked
@@ -257,10 +217,151 @@ KCM.SimpleKCM {
 
             Kirigami.FormData.label: i18n("Default page shown:")
         }
-        PlasmaComponents.CheckBox {
+        QQC.CheckBox {
             id: showPresTrend
 
             Kirigami.FormData.label: i18n("Show pressure trend:")
+        }
+
+        Kirigami.Separator {
+            Kirigami.FormData.label: i18n("Compact Representation")
+            Kirigami.FormData.isSection: true
+        }
+
+        QQC.ComboBox {
+            id: fontFamilyComboBox
+            currentIndex: 0
+
+            model: fontsModel
+            textRole: "text"
+
+            Kirigami.FormData.label: i18n("Choose a Font:")
+
+            onCurrentIndexChanged: {
+                var current = model.get(currentIndex)
+                if (current) {
+                    cfg_widgetFontName = currentIndex === 0 ? Kirigami.Theme.defaultFont.family : current.value
+                }
+            }
+        }
+
+        ColumnLayout {
+            spacing: Kirigami.Units.smallSpacing
+
+            Kirigami.FormData.label: i18n("Text size mode:")
+            Kirigami.FormData.labelAlignment: Qt.AlignTop
+
+            QQC.RadioButton {
+                id: textSizeModeFit
+                QQC.ButtonGroup.group: textSizeModeGroup
+                text: i18n("Automatic fit")
+                onCheckedChanged: if (checked) cfg_textSizeMode = 0;
+            }
+
+            QQC.RadioButton {
+                id: textSizeModeFixed
+                QQC.ButtonGroup.group: textSizeModeGroup
+                text: i18n("Exact size")
+                onCheckedChanged: if (checked) cfg_textSizeMode = 1;
+            }
+        }
+
+        Row {
+            Kirigami.FormData.label: i18n("Text size") + ":"
+
+            QQC.SpinBox {
+                id: widgetFontSize
+                stepSize: 1
+                from: 4
+                value: cfg_widgetFontSize
+                to: 512
+                onValueChanged: {
+                    cfg_widgetFontSize = widgetFontSize.value
+                }
+            }
+            PlasmaComponents.Label {
+                text: i18nc("pixels", "px")
+                anchors.verticalCenter: parent.verticalCenter
+            }
+        }
+
+        QQC.CheckBox {
+            id: textVisible
+            
+            Kirigami.FormData.label: i18n("Text visible") + ":"
+        }
+
+        QQC.CheckBox {
+            id: textDropShadow
+
+            Kirigami.FormData.label: i18n("Text drop shadow") + ":"
+        }
+
+        ColumnLayout {
+            spacing: Kirigami.Units.smallSpacing
+
+            Kirigami.FormData.label: i18n("Icon size mode:")
+            Kirigami.FormData.labelAlignment: Qt.AlignTop
+
+            QQC.RadioButton {
+                id: iconSizeModeFit
+                QQC.ButtonGroup.group: iconSizeModeGroup
+                text: i18n("Automatic fit")
+                onCheckedChanged: if (checked) cfg_iconSizeMode = 0;
+            }
+
+            QQC.RadioButton {
+                id: iconSizeModeFixed
+                QQC.ButtonGroup.group: iconSizeModeGroup
+                text: i18n("Exact size")
+                onCheckedChanged: if (checked) cfg_iconSizeMode = 1;
+            }
+        }
+
+        Row {
+            Kirigami.FormData.label: i18n("Icon size") + ":"
+
+            QQC.SpinBox {
+                id: widgetIconSize
+                stepSize: 1
+                from: 4
+                value: cfg_widgetIconSize
+                to: 512
+                onValueChanged: {
+                    cfg_widgetIconSize = widgetIconSize.value
+                }
+            }
+            PlasmaComponents.Label {
+                text: i18nc("pixels", "px")
+                anchors.verticalCenter: parent.verticalCenter
+            }
+        }
+
+        QQC.CheckBox {
+            id: iconVisible
+
+            Kirigami.FormData.label: i18n("Icon visible") + ":"
+        }
+        QQC.CheckBox {
+            id: iconDropShadow
+
+            Kirigami.FormData.label: i18n("Icon drop shadow") + ":"
+        }
+
+        Row {
+            Kirigami.FormData.label: i18n("System tray active timeout") + ":"
+
+            QQC.SpinBox {
+                id: inTrayActiveTimeoutSec
+                stepSize: 10
+                from: 10
+                to: 8000
+                anchors.verticalCenter: parent.verticalCenter
+            }
+            PlasmaComponents.Label {
+                text: i18nc("Abbreviation for seconds", "sec")
+                anchors.verticalCenter: parent.verticalCenter
+            }
         }
     }
 }

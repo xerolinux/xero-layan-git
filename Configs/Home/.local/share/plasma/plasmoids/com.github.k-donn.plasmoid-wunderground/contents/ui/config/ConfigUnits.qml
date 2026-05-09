@@ -1,5 +1,5 @@
 /*
- * Copyright 2025  Kevin Donnelly
+ * Copyright 2026  Kevin Donnelly
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -16,6 +16,8 @@
  */
 
 import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls as QQC
 import org.kde.kcmutils as KCM
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.components as PlasmaComponents
@@ -23,10 +25,16 @@ import org.kde.plasma.components as PlasmaComponents
 KCM.SimpleKCM {
     id: unitsConfig
 
+    property alias cfg_sunMoonFormatIndex: sunMoonFormatChoice.currentIndex
+    property alias cfg_dayChartFormatIndex: dayChartFormatChoice.currentIndex
+    property alias cfg_weekForecastFormatIndex: weekForecastFormatChoice.currentIndex
+
     property alias cfg_dayChartTimeFormat: dayChartTimeFormat.text
     property alias cfg_weekForecastDateFormat: weekForecastDateFormat.text
+    property alias cfg_sunMoonTimeFormat: sunMoonTimeFormat.text
     property alias cfg_windPrecision: windPrecision.value
     property alias cfg_tempPrecision: tempPrecision.value
+    property alias cfg_compactTempPrecision: compactTempPrecision.value
     property alias cfg_feelsPrecision: feelsPrecision.value
     property alias cfg_dewPrecision: dewPrecision.value
     property alias cfg_forecastPrecision: forecastPrecision.value
@@ -37,6 +45,48 @@ KCM.SimpleKCM {
     property alias cfg_tempUnitsChoice: tempUnitsChoice.currentIndex
     property alias cfg_presUnitsChoice: presUnitsChoice.currentIndex
     property alias cfg_elevUnitsChoice: elevUnitsChoice.currentIndex
+
+    onCfg_sunMoonFormatIndexChanged: {
+        if (cfg_sunMoonFormatIndex === 0) {
+            cfg_sunMoonTimeFormat = "h:mm AP";
+        } else if (cfg_sunMoonFormatIndex === 1) {
+            cfg_sunMoonTimeFormat = "HH:mm";
+        }
+    }
+
+    onCfg_dayChartFormatIndexChanged: {
+        if (cfg_dayChartFormatIndex === 0) {
+            cfg_dayChartTimeFormat = "h AP";
+        } else if (cfg_dayChartFormatIndex === 1) {
+            cfg_dayChartTimeFormat = "HH:mm";
+        }
+    }
+
+    onCfg_weekForecastFormatIndexChanged: {
+        if (cfg_weekForecastFormatIndex === 0) {
+            cfg_weekForecastDateFormat = "d";
+        } else if (cfg_weekForecastFormatIndex === 1) {
+            cfg_weekForecastDateFormat = "dd/MM";
+        }
+    }
+
+    onCfg_sunMoonTimeFormatChanged: {
+        if (cfg_sunMoonTimeFormat !== "h:mm AP" && cfg_sunMoonTimeFormat !== "HH:mm" && cfg_sunMoonFormatIndex !== 2) {
+            cfg_sunMoonFormatIndex = 2;
+        }
+    }
+
+    onCfg_dayChartTimeFormatChanged: {
+        if (cfg_dayChartTimeFormat !== "h AP" && cfg_dayChartTimeFormat !== "HH:mm" && cfg_dayChartFormatIndex !== 2) {
+            cfg_dayChartFormatIndex = 2;
+        }
+    }
+
+    onCfg_weekForecastDateFormatChanged: {
+        if (cfg_weekForecastDateFormat !== "d" && cfg_weekForecastDateFormat !== "dd/MM" && cfg_weekForecastFormatIndex !== 2) {
+            cfg_weekForecastFormatIndex = 2;
+        }
+    }
 
     function displayTxt(i18nStr) {
         return i18nStr.charAt(0).toUpperCase() + i18nStr.toLowerCase().slice(1);
@@ -50,24 +100,121 @@ KCM.SimpleKCM {
             Kirigami.FormData.isSection: true
         }
 
-        PlasmaComponents.TextField {
-            id: dayChartTimeFormat
+        ColumnLayout {
+            Kirigami.FormData.label: i18n("Sun/Moon time format:")
+            Kirigami.FormData.labelAlignment: Qt.AlignTop
 
-            Kirigami.FormData.label: i18n("Day Chart time format:")
+            QQC.ComboBox {
+                id: sunMoonFormatChoice
+
+                model: [i18n("12hr time"),i18n("24hr time"),i18n("Custom")]
+            }
+
+            QQC.TextField {
+                id: sunMoonTimeFormat
+
+                enabled: sunMoonFormatChoice.currentIndex == 2
+            }
         }
 
-        PlasmaComponents.TextField {
-            id: weekForecastDateFormat
+        ColumnLayout {
+            Kirigami.FormData.label: i18n("Day Chart time format:")
+            Kirigami.FormData.labelAlignment: Qt.AlignTop
 
+            QQC.ComboBox {
+                id: dayChartFormatChoice
+
+                model: [i18n("12hr time"),i18n("24hr time"),i18n("Custom")]
+            }
+
+            QQC.TextField {
+                id: dayChartTimeFormat
+
+                enabled: dayChartFormatChoice.currentIndex == 2
+            }
+
+            PlasmaComponents.Label {
+                text: i18n("Time format")
+
+                color: Kirigami.Theme.linkColor
+
+                MouseArea {
+                    anchors.fill: parent
+
+                    hoverEnabled: true
+
+                    onEntered: {
+                        parent.font.underline = true;
+                    }
+
+                    onExited: {
+                        parent.font.underline = false;
+                    }
+
+                    onClicked: Qt.openUrlExternally("https://doc.qt.io/qt-6/qdate.html#toString")
+                }
+            }
+        }
+
+        ColumnLayout {
             Kirigami.FormData.label: i18n("Week forecast date format:")
+            Kirigami.FormData.labelAlignment: Qt.AlignTop
+
+            QQC.ComboBox {
+                id: weekForecastFormatChoice
+
+                model: [i18n("Day"),i18n("Day/Month"),i18n("Custom")]
+            }
+
+            QQC.TextField {
+                id: weekForecastDateFormat
+
+                enabled: weekForecastFormatChoice.currentIndex == 2
+            }
+
+            PlasmaComponents.Label {
+                text: i18n("Date format")
+
+                color: Kirigami.Theme.linkColor
+
+                MouseArea {
+                    anchors.fill: parent
+
+                    hoverEnabled: true
+
+                    onEntered: {
+                        parent.font.underline = true;
+                    }
+
+                    onExited: {
+                        parent.font.underline = false;
+                    }
+
+                    onClicked: Qt.openUrlExternally("https://doc.qt.io/qt-6/qtime.html#toString-1")
+                }
+            }
         }
 
         Kirigami.Separator {
             Kirigami.FormData.label: i18n("Precision")
             Kirigami.FormData.isSection: true
         }
+        
+        QQC.SpinBox {
+            id: compactTempPrecision
 
-        PlasmaComponents.SpinBox {
+            Kirigami.FormData.label: i18n("Compact Rep Temperature") + ":"
+
+            from: 0
+            to: 5
+
+            validator: IntValidator {
+                bottom: compactTempPrecision.from
+                top: compactTempPrecision.to
+            }
+        }
+
+        QQC.SpinBox {
             id: tempPrecision
 
             Kirigami.FormData.label: i18n("Temperature") + ":"
@@ -81,7 +228,8 @@ KCM.SimpleKCM {
             }
         }
 
-        PlasmaComponents.SpinBox {
+
+        QQC.SpinBox {
             id: windPrecision
 
             Kirigami.FormData.label: i18n("Wind & Gust") + ":"
@@ -95,7 +243,7 @@ KCM.SimpleKCM {
             }
         }
 
-        PlasmaComponents.SpinBox {
+        QQC.SpinBox {
             id: feelsPrecision
 
             // Reuse existing i18n strings
@@ -110,7 +258,7 @@ KCM.SimpleKCM {
             }
         }
 
-        PlasmaComponents.SpinBox {
+        QQC.SpinBox {
             id: forecastPrecision
 
             Kirigami.FormData.label: i18n("Forecast") + ":"
@@ -124,7 +272,7 @@ KCM.SimpleKCM {
             }
         }
 
-        PlasmaComponents.SpinBox {
+        QQC.SpinBox {
             id: dewPrecision
 
             Kirigami.FormData.label: i18n("Dew Point") + ":"
@@ -143,7 +291,7 @@ KCM.SimpleKCM {
             Kirigami.FormData.isSection: true
         }
 
-        PlasmaComponents.ComboBox {
+        QQC.ComboBox {
             id: unitsChoice
 
             width: 100
@@ -152,7 +300,7 @@ KCM.SimpleKCM {
             Kirigami.FormData.label: i18n("Choose:")
         }
 
-        PlasmaComponents.ComboBox {
+        QQC.ComboBox {
             id: windUnitsChoice
 
             visible: unitsChoice.currentIndex == 3
@@ -162,7 +310,7 @@ KCM.SimpleKCM {
             Kirigami.FormData.label: i18n("Wind unit:")
         }
 
-        PlasmaComponents.ComboBox {
+        QQC.ComboBox {
             id: rainUnitsChoice
 
             visible: unitsChoice.currentIndex == 3
@@ -172,7 +320,7 @@ KCM.SimpleKCM {
             Kirigami.FormData.label: i18n("Rain unit:")
         }
 
-        PlasmaComponents.ComboBox {
+        QQC.ComboBox {
             id: snowUnitsChoice
 
             visible: unitsChoice.currentIndex == 3
@@ -182,7 +330,7 @@ KCM.SimpleKCM {
             Kirigami.FormData.label: i18n("Snow unit:")
         }
 
-        PlasmaComponents.ComboBox {
+        QQC.ComboBox {
             id: tempUnitsChoice
 
             visible: unitsChoice.currentIndex == 3
@@ -192,17 +340,17 @@ KCM.SimpleKCM {
             Kirigami.FormData.label: i18n("Temperature unit:")
         }
 
-        PlasmaComponents.ComboBox {
+        QQC.ComboBox {
             id: presUnitsChoice
 
             visible: unitsChoice.currentIndex == 3
 
-            model: ["mb", "inHG", "mmHG", "hPa"]
+            model: ["mb", "inHG", "mmHG", "hPa", "psi"]
 
             Kirigami.FormData.label: i18n("Pressure unit:")
         }
 
-        PlasmaComponents.ComboBox {
+        QQC.ComboBox {
             id: elevUnitsChoice
 
             visible: unitsChoice.currentIndex == 3

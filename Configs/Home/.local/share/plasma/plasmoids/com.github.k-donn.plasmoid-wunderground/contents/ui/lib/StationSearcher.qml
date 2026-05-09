@@ -1,5 +1,5 @@
 /*
- * Copyright 2025  Kevin Donnelly
+ * Copyright 2026  Kevin Donnelly
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -20,9 +20,7 @@ import QtQuick.Layouts
 import QtQuick.Controls as QQC
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.plasmoid
-import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.components as PlasmaComponents
-import "../../code/utils.js" as Utils
 import "../../code/pws-api.js" as StationAPI
 
 Window {
@@ -161,7 +159,7 @@ Window {
                                 for (var i = 0; i < stations.length; i++) {
                                     stationSearcher.searchResults.append({
                                         "stationID": stations[i].stationID,
-                                        "placeName": stations[i].placeName,
+                                        "placeName": stations[i].address,
                                         "latitude": stations[i].latitude,
                                         "longitude": stations[i].longitude,
                                         "selected": false
@@ -179,10 +177,14 @@ Window {
                                 clearError();
                                 for (var i = 0; i < places.length; i++) {
                                     availableCitiesModel.append({
-                                        "placeName": places[i].city + "," + places[i].state + " (" + places[i].country + ")",
+                                        "placeName": places[i].address,
                                         "latitude": places[i].latitude,
                                         "longitude": places[i].longitude
                                     });
+                                }
+
+                                if (places.length > 0) {
+                                    searchHelpLoader.children[0].children[1].currentIndex = 0;
                                 }
                             }
                         });
@@ -200,7 +202,7 @@ Window {
                                 for (var i = 0; i < stations.length; i++) {
                                     stationSearcher.searchResults.append({
                                         "stationID": stations[i].stationID,
-                                        "placeName": stations[i].placeName,
+                                        "placeName": stations[i].address,
                                         "latitude": stations[i].latitude,
                                         "longitude": stations[i].longitude,
                                         "selected": false
@@ -262,7 +264,7 @@ Window {
                             for (var i = 0; i < stations.length; i++) {
                                 stationSearcher.searchResults.append({
                                     "stationID": stations[i].stationID,
-                                    "placeName": stations[i].placeName,
+                                    "placeName": stations[i].address,
                                     "latitude": stations[i].latitude,
                                     "longitude": stations[i].longitude,
                                     "selected": false

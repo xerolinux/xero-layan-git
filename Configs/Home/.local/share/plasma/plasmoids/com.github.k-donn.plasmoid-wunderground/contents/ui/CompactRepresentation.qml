@@ -1,151 +1,106 @@
 /*
- * SPDX-FileCopyrightText: 2018 Friedrich W. H. Kossebau <kossebau@kde.org>
- * Copyright               2025 Kevin Donnelly
+ * Copyright 2015  Martin Kotelnik <clearmartin@seznam.cz>
  *
- * SPDX-License-Identifier: GPL-2.0-or-later
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http: //www.gnu.org/licenses/>.
  */
-
 import QtQuick
+import org.kde.plasma.components as PlasmaComponents
+import org.kde.plasma.core as PlasmaCore
 import QtQuick.Layouts
 import org.kde.plasma.plasmoid
-import org.kde.kirigami as Kirigami
-import org.kde.plasma.core as PlasmaCore
-import "../code/utils.js" as Utils
 
 Loader {
-    id: compactRoot
+    id: compactRepresentation
 
-    sourceComponent: inTray ? (plasmoid.configuration.showSystemTrayTemp ? iconAndTextTrayComponent : iconComponent) : (plasmoid.configuration.showCompactTemp ? iconAndTextComponent : iconComponent)
+    anchors.fill: parent
 
-    function printDebug(msg) {
-        if (plasmoid.configuration.logConsole) {
-            console.log("[debug] [CompactRep.qml] " + msg);
-        }
-    }
+    readonly property bool vertical: (Plasmoid.formFactor == PlasmaCore.Types.Vertical)
 
+    property int defaultWidgetSize: -1
+    property int widgetOrder: root.widgetOrder
+    property int layoutType: root.layoutType
+
+    sourceComponent: layoutType === 2 ? compactItem : widgetOrder === 1 ? compactItemReverse : compactItem
+
+    Layout.fillWidth: compactRepresentation.vertical
+    Layout.fillHeight: !compactRepresentation.vertical
     Layout.minimumWidth: item.Layout.minimumWidth
     Layout.minimumHeight: item.Layout.minimumHeight
 
-    states: [
-        State {
-            name: "horizontalPanel"
-            when: plasmoid.formFactor === PlasmaCore.Types.Horizontal
-
-            PropertyChanges {
-                target: compactRoot
-
-                Layout.fillWidth: false
-                Layout.fillHeight: true
-            }
-
-            PropertyChanges {
-                target: soleIcon
-
-                minIconSize: Math.max(compactRoot.height, Kirigami.Units.iconSizes.small)
-
-                Layout.minimumWidth: minIconSize
-                Layout.minimumHeight: Kirigami.Units.iconSizes.small
-            }
-        },
-        State {
-            name: "verticalPanel"
-            when: plasmoid.formFactor === PlasmaCore.Types.Vertical
-
-            PropertyChanges {
-                target: compactRoot
-
-                Layout.fillWidth: false
-                Layout.fillHeight: true
-            }
-
-            PropertyChanges {
-                target: soleIcon
-
-                minIconSize: Math.max(compactRoot.width, Kirigami.Units.iconSizes.small)
-
-                Layout.minimumWidth: Kirigami.Units.iconSizes.small
-                Layout.minimumHeight: minIconSize
-            }
+    Component {
+        id: compactItem
+        CompactItem {
+            vertical: compactRepresentation.vertical
         }
-    ]
+    }
+
+    Component {
+        id: compactItemReverse
+        CompactItemReverse {
+            vertical: compactRepresentation.vertical
+        }
+    }
+
+    PlasmaComponents.BusyIndicator {
+        id: busyIndicator
+        anchors.fill: parent
+        visible: false
+        running: false
+
+        states: [
+            State {
+                name: 'loading'
+                when: root.appState === showLOADING
+
+                PropertyChanges {
+                    target: busyIndicator
+                    visible: true
+                    running: true
+                }
+
+                PropertyChanges {
+                    target: compactItem
+                }
+            }
+        ]
+    }
 
     MouseArea {
-        id: compactMouseArea
         anchors.fill: parent
+
+        acceptedButtons: Qt.LeftButton | Qt.MiddleButton
 
         hoverEnabled: true
 
         onClicked: {
             root.expanded = !root.expanded;
-            
+        }
+
+        PlasmaCore.ToolTipArea {
+            id: toolTipArea
+            anchors.fill: parent
+            active: !root.expanded
+            interactive: true
+            mainText: weatherData["stationID"]
+            subText: root.toolTipSubText
+            textFormat: Text.RichText
         }
     }
 
-    Component {
-        id: iconAndTextComponent
-
-        IconAndTextItem {
-            id: iconAndTextItem
-
-            iconSource: Utils.getConditionIcon(iconCode)
-            text: appState == showDATA ? Utils.currentTempUnit(Utils.toUserTemp(weatherData["details"]["temp"]), plasmoid.configuration.tempPrecision) : "--- °X"
-        }
-    }
-
-    Component {
-        id: iconComponent
-
-        Kirigami.Icon {
-            id: soleIcon
-
-            isMask: plasmoid.configuration.applyColorScheme ? true : false
-            color: Kirigami.Theme.textColor
-
-            source: Utils.getConditionIcon(iconCode)
-            active: compactMouseArea.containsMouse
-            // reset implicit size, so layout in free dimension does not stop at the default one
-            implicitWidth: Kirigami.Units.iconSizes.small
-            implicitHeight: Kirigami.Units.iconSizes.small
-        }
-    }
-
-    Component {
-        id: iconAndTextTrayComponent
-
-        Item {
-            id: iconWithOverlayItem
-            width: Kirigami.Units.iconSizes.medium
-            height: Kirigami.Units.iconSizes.medium
-
-            Kirigami.Icon {
-                id: weatherIcon
-                anchors.fill: parent
-                isMask: plasmoid.configuration.applyColorScheme ? true : false
-                color: Kirigami.Theme.textColor
-                source: Utils.getConditionIcon(iconCode)
-                active: compactMouseArea.containsMouse
-            }
-
-            Rectangle {
-                id: tempOverlay
-                anchors.right: parent.right
-                anchors.bottom: parent.bottom
-                width: parent.width * 0.6
-                height: parent.height * 0.4
-                color: Kirigami.Theme.backgroundColor
-                opacity: 1
-                radius: 4
-
-                Text {
-                    id: tempText
-                    anchors.centerIn: parent
-                    text: appState == showDATA ? Utils.toUserTemp(weatherData["details"]["temp"]).toFixed(0) + "°" : "---°"
-                    color: Kirigami.Theme.textColor
-                    font.pixelSize: parent.height
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment: Text.AlignVCenter
-                }
-            }
+    Component.onCompleted: {
+        if ((defaultWidgetSize === -1) && (compactRepresentation.width > 0 ||  compactRepresentation.height)) {
+            defaultWidgetSize = Math.min(compactRepresentation.width, compactRepresentation.height)
         }
     }
 }

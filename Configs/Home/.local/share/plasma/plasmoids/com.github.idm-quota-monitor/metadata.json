@@ -1,0 +1,18 @@
+{
+    "KPlugin": {
+        "Name": "IDM Quota Monitor",
+        "Description": "Shows IDM internet quota usage",
+        "Icon": "network-connect",
+        "Id": "com.github.idm-quota-monitor",
+        "Version": "1.0",
+        "Authors": [
+            {"Name": "DarkXero / TechXero", "Email": "info@techxero.com"}
+        ],
+        "Website": "https://xerolinux.xyz",
+        "BugReportUrl": "https://discord.xerolinux.xyz",
+        "License": "GPL-3.0-or-later",
+        "Category": "Online Services"
+    },
+    "KPackageStructure": "Plasma/Applet",
+    "X-Plasma-API-Minimum-Version": "6.0"
+}

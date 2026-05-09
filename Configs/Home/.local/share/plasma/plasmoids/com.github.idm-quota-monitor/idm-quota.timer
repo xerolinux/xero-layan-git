@@ -1,0 +1,11 @@
+[Unit]
+Description=Refresh IDM quota every 15 minutes
+
+[Timer]
+OnBootSec=30s
+OnUnitActiveSec=15min
+AccuracySec=30s
+Persistent=true
+
+[Install]
+WantedBy=timers.target

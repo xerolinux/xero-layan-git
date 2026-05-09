@@ -52,7 +52,7 @@ Kirigami.FormLayout {
         }
     }
 
-    DoubleSpinBox {
+    DoubleSpinBoxCompat {
         id: borderWidth
         Kirigami.FormData.label: i18n("Width:")
         value: root.config.width * multiplier
@@ -66,7 +66,7 @@ Kirigami.FormLayout {
     }
     Label {
         visible: root.elementName === "widgets" && !Number.isInteger(borderWidth.value / 100)
-        text: i18n("Use an integer when using <strong>Widget Islands</strong> to avoid rendering issues! <a href=\"https://github.com/luisbocanegra/plasma-panel-colorizer/issues/64\">See #64<a/>")
+        text: i18n("Use an integer when using <strong>Widget Islands</strong> to avoid rendering issues! <a href=\"https://github.com/luisbocanegra/plasma-panel-colorizer/issues/64\">See #64</a>")
         onLinkActivated: link => Qt.openUrlExternally(link)
         font: Kirigami.Theme.smallFont
         Layout.maximumWidth: 400
@@ -92,7 +92,7 @@ Kirigami.FormLayout {
 
         RowLayout {
             enabled: borderCustomSidesCheckbox.checked && enabledCheckbox.checked
-            DoubleSpinBox {
+            DoubleSpinBoxCompat {
                 id: leftBorderWidth
                 value: root.config.custom.widths.left * multiplier
                 from: 0 * multiplier
@@ -104,7 +104,7 @@ Kirigami.FormLayout {
             }
 
             ColumnLayout {
-                DoubleSpinBox {
+                DoubleSpinBoxCompat {
                     id: topBorderWidth
                     value: root.config.custom.widths.top * multiplier
                     from: 0 * multiplier
@@ -115,7 +115,7 @@ Kirigami.FormLayout {
                     }
                 }
 
-                DoubleSpinBox {
+                DoubleSpinBoxCompat {
                     id: bottomBorderWidth
                     value: root.config.custom.widths.bottom * multiplier
                     from: 0 * multiplier
@@ -127,7 +127,7 @@ Kirigami.FormLayout {
                 }
             }
 
-            DoubleSpinBox {
+            DoubleSpinBoxCompat {
                 id: rightBorderWidth
                 value: root.config.custom.widths.right * multiplier
                 from: 0 * multiplier

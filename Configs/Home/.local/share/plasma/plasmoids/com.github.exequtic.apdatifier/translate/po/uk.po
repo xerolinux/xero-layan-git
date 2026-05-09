@@ -3,12 +3,11 @@
 # This file is distributed under the same license as the apdatifier package.
 # Yuriy Yasynskyy <yurij.yasinskij@gmail.com>, 2025.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: apdatifier\n"
 "Report-Msgid-Bugs-To: https://github.com/exequtic/apdatifier\n"
-"POT-Creation-Date: 2026-01-02 16:32+0300\n"
+"POT-Creation-Date: 2026-02-22 11:04+0300\n"
 "PO-Revision-Date: 2025-11-14 21:00+0200\n"
 "Last-Translator: Yuriy Yasynskyy <yurij.yasinskij@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,9 +21,9 @@ msgstr ""
 msgid "General"
 msgstr "Основне"
 
-#: ../contents/config/config.qml ../contents/tools/sh/messages
-msgid "Upgrade"
-msgstr "Оновлення"
+#: ../contents/config/config.qml
+msgid "Upgrade & Management"
+msgstr ""
 
 #: ../contents/config/config.qml
 msgid "Appearance"
@@ -53,6 +52,10 @@ msgstr "Оновлення Flatpak"
 #: ../contents/tools/sh/messages
 msgid "Plasma Widgets Upgrade"
 msgstr "Оновлення Plasma Віджетів"
+
+#: ../contents/tools/sh/messages
+msgid "Upgrade"
+msgstr "Оновлення"
 
 #: ../contents/tools/sh/messages
 msgid "Total execution time:"
@@ -97,6 +100,10 @@ msgstr "Для запису в файл mirrorlist потрібні права �
 #: ../contents/tools/sh/messages
 msgid "Your current mirrorlist:"
 msgstr "Ваш поточний список дзеркал:"
+
+#: ../contents/tools/sh/messages
+msgid "Refresh mirror list?"
+msgstr ""
 
 #: ../contents/tools/sh/messages
 msgid "For some widgets you may need to Log Out or restart plasmashell after upgrade"
@@ -174,57 +181,101 @@ msgstr "Декілька файлів мають тег версії"
 msgid "Failed to download the package"
 msgstr "Не вдалось завантажити пакет"
 
-#: ../contents/tools/sh/messages
-msgid "Cannot fetch news "
-msgstr "Не вдалося отримати новини "
+#: ../contents/tools/sh/messages ../contents/ui/components/ComboBox.qml ../contents/ui/configuration/Upgrade.qml ../contents/ui/main.qml ../contents/ui/representation/Expanded.qml
+msgid "Management"
+msgstr "Керування"
 
 #: ../contents/tools/sh/messages
-msgid "List all available packages in repositories"
-msgstr "Список всіх доступних пакетів в репозиторіях"
+msgid "Browse available"
+msgstr ""
 
 #: ../contents/tools/sh/messages
-msgid "List all installed packages"
-msgstr "Список всіх встановлених пакетів"
+msgid "Search all available packages and select what to install"
+msgstr ""
 
 #: ../contents/tools/sh/messages
-msgid "List explicitly installed packages"
-msgstr "Список явно встановлених пакетів"
+msgid "Manage installed"
+msgstr ""
 
 #: ../contents/tools/sh/messages
-msgid "List explicitly installed packages and isn't a dependency of anything"
-msgstr "Список явно встановлених пакетів, які не є залежностями"
+msgid "View installed packages and select what to remove"
+msgstr ""
 
 #: ../contents/tools/sh/messages
-msgid "List installed dependencies that aren't needed anymore (orphans)"
-msgstr "Список встановлених непотрібних залежностей (сироти)"
+msgid "Explicit installs"
+msgstr ""
 
 #: ../contents/tools/sh/messages
-msgid "Uninstall orphan packages"
-msgstr "Видалити пакети сироти"
+msgid "Show packages you installed directly"
+msgstr ""
 
 #: ../contents/tools/sh/messages
-msgid "Install (downgrade) a package from cache"
-msgstr "Встановити пакет (понизити версію) з кешу"
+msgid "List explicit installs"
+msgstr ""
 
 #: ../contents/tools/sh/messages
-msgid "Remove ALL cached packages"
-msgstr "Видалити ВСІ кешовані пакети"
+msgid "List unneeded explicit"
+msgstr ""
 
 #: ../contents/tools/sh/messages
-msgid "Remove cached packages that are not currently installed"
-msgstr "Видалити не встановлені кешовані пакети"
+msgid "Orphaned dependency"
+msgstr ""
 
 #: ../contents/tools/sh/messages
-msgid "Rebuild AUR python packages after python upgrade"
-msgstr "Перезбірка python пакетів з AUR після оновлення python"
+msgid "Dependencies that are no longer needed by anything installed"
+msgstr ""
 
 #: ../contents/tools/sh/messages
-msgid "Refresh mirrorlist"
-msgstr "Оновити список дзеркал"
+msgid "List orphans"
+msgstr ""
 
 #: ../contents/tools/sh/messages
-msgid "Exit"
-msgstr "Вихід"
+msgid "Remove orphans"
+msgstr ""
+
+#: ../contents/tools/sh/messages
+msgid "Downgrade from cache"
+msgstr ""
+
+#: ../contents/tools/sh/messages
+msgid "Clean cache"
+msgstr ""
+
+#: ../contents/tools/sh/messages
+msgid "Remove cached files to free disk space"
+msgstr ""
+
+#: ../contents/tools/sh/messages
+msgid "Remove all cache"
+msgstr ""
+
+#: ../contents/tools/sh/messages
+msgid "Remove unused cache"
+msgstr ""
+
+#: ../contents/tools/sh/messages
+msgid "Rebuild packages"
+msgstr ""
+
+#: ../contents/tools/sh/messages
+msgid "Select packages that need reinstall with rebuild"
+msgstr ""
+
+#: ../contents/tools/sh/messages
+msgid "Rebuild AUR packages"
+msgstr ""
+
+#: ../contents/tools/sh/messages
+msgid "Detect Python packages to rebuild"
+msgstr ""
+
+#: ../contents/tools/sh/messages
+msgid "Refresh mirrors"
+msgstr ""
+
+#: ../contents/tools/sh/messages
+msgid "Recent installs"
+msgstr ""
 
 #: ../contents/tools/sh/messages
 msgid "Review dependency warnings before removing"
@@ -239,8 +290,8 @@ msgid "Press Enter to return menu"
 msgstr "Натисніть Enter для повернення в меню"
 
 #: ../contents/tools/sh/messages
-msgid "Search:"
-msgstr "Пошук:"
+msgid "Calculating..."
+msgstr ""
 
 #: ../contents/tools/sh/messages
 msgid "Executed:"
@@ -253,6 +304,10 @@ msgstr "Нічого робити"
 #: ../contents/tools/sh/messages ../contents/ui/configuration/General.qml
 msgid "Required installed"
 msgstr "Потребує обов'язкового встановлення"
+
+#: ../contents/tools/sh/messages
+msgid "Cannot fetch news "
+msgstr "Не вдалося отримати новини "
 
 #: ../contents/tools/tools.js
 msgid "Exit code: "
@@ -288,7 +343,7 @@ msgstr "Перевірка оновлень віджетів..."
 
 #: ../contents/tools/tools.js
 msgid "Checking firmware updates..."
-msgstr ""
+msgstr "Перевірка оновлень прошивки..."
 
 #: ../contents/tools/tools.js
 msgid "latest commit"
@@ -296,11 +351,11 @@ msgstr "останній внесок"
 
 #: ../contents/tools/tools.js
 msgid "Explicitly installed"
-msgstr ""
+msgstr "Встановлено вручну"
 
 #: ../contents/tools/tools.js
 msgid "Installed as a dependency"
-msgstr ""
+msgstr "Встановлено як залежність"
 
 #: ../contents/tools/tools.js ../contents/ui/representation/Expanded.qml
 msgid "%1 error occurred"
@@ -383,10 +438,6 @@ msgstr "Оновити систему"
 msgid "Pause auto check"
 msgstr "Призупинити автоматичну перевірку"
 
-#: ../contents/ui/components/ComboBox.qml ../contents/ui/main.qml ../contents/ui/representation/Expanded.qml
-msgid "Management"
-msgstr "Керування"
-
 #: ../contents/ui/components/Notification.qml ../contents/ui/scrollview/News.qml
 msgid "Read article"
 msgstr "Читати статтю"
@@ -395,120 +446,9 @@ msgstr "Читати статтю"
 msgid "System updated"
 msgstr "Система оновлена"
 
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Panel Icon View"
-msgstr "Вид іконки на панелі"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "List View"
-msgstr "Вигляд списку"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Shown when"
-msgstr "Показувати коли"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "update is pending "
-msgid_plural "updates are pending "
-msgstr[0] "оновлення доступне "
-msgstr[1] "оновлення доступно "
-msgstr[2] "оновлень доступно "
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Default"
-msgstr "Стандартно"
-
-#: ../contents/ui/configuration/Appearance.qml ../contents/ui/representation/Expanded.qml
-msgid "Select..."
-msgstr "Вибрати..."
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Default icon"
-msgstr "Стандартна іконка"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Pause badge"
-msgstr "Значок паузи"
-
 #: ../contents/ui/configuration/Appearance.qml ../contents/ui/configuration/Upgrade.qml
-msgid "Enable"
-msgstr "Включити"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Updated badge"
-msgstr "Значок оновлення"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Counter"
-msgstr "Лічильник"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Color"
-msgstr "Колір"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Default color"
-msgstr "Стандартний колір"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Select counter background color"
-msgstr "Вибір кольру фону лічильника"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Default background color from current theme"
-msgstr "Стандартний колір фону з поточної теми"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Size"
-msgstr "Розмір"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Radius"
-msgstr "Радіус"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Opacity"
-msgstr "Прозорість"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Shadow"
-msgstr "Тінь"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Font"
-msgstr "Шрифт"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Default system font"
-msgstr "Стандартний системний шрифт"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Font bold"
-msgstr "Жирний шрифт"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Font size"
-msgstr "Розмір шрифту"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Left spacing"
-msgstr "Відступ зліва"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Side margins"
-msgstr "Відступи збоків"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Offset"
-msgstr "Зміщення"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Position"
-msgstr "Позиція"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Center"
-msgstr "По центру"
+msgid "Disabled"
+msgstr "Відключено"
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Top-Left"
@@ -525,6 +465,173 @@ msgstr "Знизу-зліва"
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Bottom-Right"
 msgstr "Знизу-зправа"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Panel Icon"
+msgstr "Іконка на панелі"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Full View"
+msgstr "Повний вигляд"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Icon"
+msgstr "Іконка"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Default"
+msgstr "Стандартно"
+
+#: ../contents/ui/configuration/Appearance.qml ../contents/ui/representation/Expanded.qml
+msgid "Select..."
+msgstr "Вибрати..."
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Default icon"
+msgstr "Стандартна іконка"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Hide"
+msgstr "Приховувати"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "when less than"
+msgstr "коли менше ніж"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "update"
+msgid_plural "updates"
+msgstr[0] "оновлення"
+msgstr[1] "оновлення"
+msgstr[2] "оновлень"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "If the widget is on a panel, you can access the hidden icon in Panel Configuration mode."
+msgstr "Якщо віджет розміщено на панелі, ви можете отримати доступ до прихованої іконки в режимі налаштування панелі."
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Busy indicator"
+msgstr "Індикатор зайнятості"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Spinner"
+msgstr "Спінер"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Pulse"
+msgstr "Пульсація"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Spinner uses the standard Plasmoid busy indicator. Pulse animates the panel icon. On the desktop, the busy indicator is always off."
+msgstr "Спінер використовує стандартний індикатор зайнятості Plasmoid. Пульсація анімує іконку на панелі. На робочому столі індикатор зайнятості завжди вимкнений."
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Counter"
+msgstr "Лічильник"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Mode"
+msgstr "Режим"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Off"
+msgstr "Вимкн."
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Side"
+msgstr "Збоку"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Badge"
+msgstr "Значок"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Position"
+msgstr "Позиція"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Center"
+msgstr "По центру"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Left"
+msgstr "Ліворуч"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Right"
+msgstr "Праворуч"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Gaps"
+msgstr "Відступи"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Inner"
+msgstr "Внутрішні"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Outer"
+msgstr "Зовнішні"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Offset"
+msgstr "Зміщення"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Font family"
+msgstr "Сімейство шрифтів"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Default system font"
+msgstr "Стандартний системний шрифт"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Font size"
+msgstr "Розмір шрифту"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Font bold"
+msgstr "Жирний шрифт"
+
+#: ../contents/ui/configuration/Appearance.qml ../contents/ui/configuration/Upgrade.qml
+msgid "Enable"
+msgstr "Включити"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Badge color"
+msgstr "Колір значка"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Default color"
+msgstr "Стандартний колір"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Select counter background color"
+msgstr "Вибір кольру фону лічильника"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Default background color from current theme"
+msgstr "Стандартний колір фону з поточної теми"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Badge radius"
+msgstr "Радіус значка"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Badge opacity"
+msgstr "Непрозорість значка"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Icon Badges"
+msgstr "Значки на іконці"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Paused"
+msgstr "Пауза"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Updated"
+msgstr "Оновлено"
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Use built-in icons"
@@ -732,7 +839,7 @@ msgstr "<br><br>Для розробників віджетів:<br>Не забу
 
 #: ../contents/ui/configuration/General.qml
 msgid "Firmware"
-msgstr ""
+msgstr "Прошивка"
 
 #: ../contents/ui/configuration/General.qml ../contents/ui/representation/Expanded.qml
 msgid "News"
@@ -819,11 +926,11 @@ msgstr "Відновити приховані підказки"
 
 #: ../contents/ui/configuration/General.qml
 msgid "Reset to default. By default, the path is the same as for checkupdates."
-msgstr ""
+msgstr "Скинути до типових. Типово шлях такий самий, як у checkupdates."
 
 #: ../contents/ui/configuration/General.qml
 msgid "Path must not contain spaces"
-msgstr ""
+msgstr "Шлях не повинен містити пробілів"
 
 #: ../contents/ui/configuration/Rules.qml
 msgid "Unimportant"
@@ -942,6 +1049,30 @@ msgid "Running your command or script AFTER the upgrade.<br>For example, you can
 msgstr "Запустіть свою команду чи скрипт ПІСЛЯ оновлення.<br>Наприклад, ви можете вказати свою команду для оновлення ще чогось."
 
 #: ../contents/ui/configuration/Upgrade.qml
+msgid "No Flatpak options"
+msgstr ""
+
+#: ../contents/ui/configuration/Upgrade.qml
+msgid "Hide headers"
+msgstr ""
+
+#: ../contents/ui/configuration/Upgrade.qml
+msgid "Hide help"
+msgstr ""
+
+#: ../contents/ui/configuration/Upgrade.qml
+msgid "Hide option numbers"
+msgstr ""
+
+#: ../contents/ui/configuration/Upgrade.qml
+msgid "Fzf options"
+msgstr ""
+
+#: ../contents/ui/configuration/Upgrade.qml
+msgid "Override default fzf options.<br>See <b>fzf --help</b> for available options."
+msgstr ""
+
+#: ../contents/ui/configuration/Upgrade.qml
 msgid "Wrapper"
 msgstr "Обкладинка"
 
@@ -976,10 +1107,6 @@ msgstr "Також дивіться https://archlinux.org/mirrorlist (натис
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Generator"
 msgstr "Генератор"
-
-#: ../contents/ui/configuration/Upgrade.qml
-msgid "Disabled"
-msgstr "Відключено"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Always ask"
@@ -1022,7 +1149,7 @@ msgstr "Кількість серверів, які будуть записан�
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Show progress"
-msgstr ""
+msgstr "Показувати прогрес"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Country"
@@ -1136,6 +1263,10 @@ msgstr "Гляньте список змін"
 msgid "Dismiss"
 msgstr "Відхилити"
 
+#: ../contents/ui/representation/Expanded.qml
+msgid "No internet connection"
+msgstr ""
+
 #: ../contents/ui/scrollview/Extended.qml
 msgid "Upgrade package"
 msgstr "Оновити пакет"
@@ -1215,3 +1346,42 @@ msgstr "Немає непрочитаних новин"
 #: ../contents/ui/scrollview/News.qml
 msgid "Restore list"
 msgstr "Відновити список"
+
+#~ msgid "List all available packages in repositories"
+#~ msgstr "Список всіх доступних пакетів в репозиторіях"
+
+#~ msgid "List all installed packages"
+#~ msgstr "Список всіх встановлених пакетів"
+
+#~ msgid "List explicitly installed packages"
+#~ msgstr "Список явно встановлених пакетів"
+
+#~ msgid "List explicitly installed packages and isn't a dependency of anything"
+#~ msgstr "Список явно встановлених пакетів, які не є залежностями"
+
+#~ msgid "List installed dependencies that aren't needed anymore (orphans)"
+#~ msgstr "Список встановлених непотрібних залежностей (сироти)"
+
+#~ msgid "Uninstall orphan packages"
+#~ msgstr "Видалити пакети сироти"
+
+#~ msgid "Install (downgrade) a package from cache"
+#~ msgstr "Встановити пакет (понизити версію) з кешу"
+
+#~ msgid "Remove ALL cached packages"
+#~ msgstr "Видалити ВСІ кешовані пакети"
+
+#~ msgid "Remove cached packages that are not currently installed"
+#~ msgstr "Видалити не встановлені кешовані пакети"
+
+#~ msgid "Rebuild AUR python packages after python upgrade"
+#~ msgstr "Перезбірка python пакетів з AUR після оновлення python"
+
+#~ msgid "Refresh mirrorlist"
+#~ msgstr "Оновити список дзеркал"
+
+#~ msgid "Exit"
+#~ msgstr "Вихід"
+
+#~ msgid "Search:"
+#~ msgstr "Пошук:"

@@ -1,21 +1,17 @@
-/*
-    SPDX-FileCopyrightText: 2024 Evgeny Kazantsev <exequtic@gmail.com>
-    SPDX-License-Identifier: MIT
-*/
-
-const scriptDir = "$HOME/.local/share/plasma/plasmoids/com.github.exequtic.apdatifier/contents/tools/sh/"
+const scriptDir = Qt.resolvedUrl("sh/").toString().replace("file://", "");
 const configDir = "$HOME/.config/apdatifier/"
 const configFile = configDir + "config.conf"
 const cacheFile = configDir + "updates.json"
 const rulesFile = configDir + "rules.json"
 const newsFile = configDir + "news.json"
+const procOpt = { stoppable: true }
 
-function execute(command, callback, stoppable) {
+function execute(command, callback, opt) {
     const component = Qt.createComponent("../ui/components/Shell.qml")
     if (component.status === Component.Ready) {
         const componentObject = component.createObject(root)
         if (componentObject) {
-            if (typeof sts !== "undefined") sts.proc = componentObject
+            if (opt && opt.stoppable) sts.proc = componentObject
             componentObject.exec(command, callback)
         } else {
             Error(1, "Failed to create executable DataSource object")
@@ -31,7 +27,24 @@ const writeFile = (data, redir, file) => `echo '${data}' ${redir} "${file}"`
 const bash = (script, ...args) => scriptDir + script + ' ' + args.join(' ')
 const runInTerminal = (script, ...args) => {
     execute('kstart ' + bash('terminal', script, ...args))
-    script === "upgrade" && upgradeTimer.start()
+    if (script === "upgrade") {
+        runLater(5000, () => upgradeTimer.start())
+        scheduler.stop()
+        sts.busy = sts.upgrading = true
+        sts.statusMsg = i18n("Upgrade in progress") + "..."
+        sts.statusIco = cfg.ownIconsUI ? "toolbar_upgrade" : "akonadiconsole"
+    }
+
+}
+
+function runLater(ms, fn) {
+    const timer = Qt.createQmlObject('import QtQuick 2.0; Timer { repeat: false }', parent)
+    timer.interval = ms
+    timer.triggered.connect(() => {
+         fn()
+         timer.destroy()
+    })
+    timer.start()
 }
 
 const debug = true
@@ -179,17 +192,10 @@ function management() {
 
 
 function upgradingState() {
-    const checkProc = `ps aux | grep "[a]pdatifier/contents/tools/sh/upgrade"`
+    const checkProc = `pgrep -f "apdatifier.*upgrade*"`
     execute(checkProc, (cmd, out, err, code) => {
-        const state = !!(out || err)
-        sts.busy = sts.upgrading = state
-
-        if (state) {
-            upgradeTimer.start()
-            scheduler.stop()
-            sts.statusMsg = i18n("Upgrade in progress") + "..."
-            sts.statusIco = cfg.ownIconsUI ? "toolbar_upgrade" : "akonadiconsole"
-        } else {
+        if (!out) {
+            sts.busy = sts.upgrading = false
             upgradeTimer.stop()
             execute(bash('utils', "currentVersions"), (cmd, out, err, code) => {
                 if (Error(code, err)) return
@@ -207,6 +213,12 @@ function upgradingState() {
                 setStatusBar()
                 resumeScheduler()
             })
+        } else {
+            scheduler.stop()
+            upgradeTimer.start()
+            sts.busy = sts.upgrading = true
+            sts.statusMsg = i18n("Upgrade in progress") + "..."
+            sts.statusIco = cfg.ownIconsUI ? "toolbar_upgrade" : "akonadiconsole"
         }
     })
 }
@@ -218,19 +230,23 @@ function upgradeSystem() {
 }
 
 
+function stopCheck() {
+    sts.errors = []
+    sts.busy = false
+    sts.proc?.cleanup()
+    setStatusBar()
+    resumeScheduler()
+
+    if (isOnline) {
+        cfg.timestamp = new Date().getTime().toString()
+    }
+}
+
+
 function checkUpdates() {
     if (sts.upgrading) return
 
     sts.errors = []
-
-    if (sts.busy) {
-        sts.busy = false
-        sts.proc.cleanup()
-        setStatusBar()
-        resumeScheduler()
-        return
-    }
-
     scheduler.stop()
     sts.busy = true
 
@@ -260,7 +276,7 @@ function checkUpdates() {
             if (out) updateNews(out)
             if (handleError(code, err, "news", next)) return
             next()
-         })
+        }, procOpt)
     }
 
     function checkRepos() {
@@ -279,15 +295,15 @@ function checkUpdates() {
                     archRepos = result
                     next()
                 })
-            })
-        })
+            }, procOpt)
+        }, procOpt)
     }
 
     function checkAur() {
         const next = () => cfg.flatpak ? checkFlatpak() : cfg.widgets ? checkWidgets() : cfg.fwupd ? checkFirmwares() : merge()
         sts.statusIco = cfg.ownIconsUI ? "status_package" : "apdatifier-package"
         sts.statusMsg = i18n("Checking AUR updates...")
-        const cmdArg = cfg.wrapper === "pikaur" ? " -Qua --noconfirm 2>&1 | grep -- '->' | awk '{$1=$1}1'" : " -Qua"
+        const cmdArg = cfg.wrapper === "pikaur" ? " -Qua --noconfirm" : " -Qua"
         execute(cfg.wrapper + cmdArg, (cmd, out, err, code) => {
             if (handleError(code, err, "aur", next)) return
             const updates = out ? out.trim().split("\n") : []
@@ -295,7 +311,7 @@ function checkUpdates() {
                 archAur = result
                 next()
             })
-        })
+        }, procOpt)
     }
 
     function checkFlatpak() {
@@ -313,8 +329,8 @@ function checkUpdates() {
                     flatpak = result
                     next()
                 })
-            })
-        })
+            }, procOpt)
+        }, procOpt)
     }
 
     function checkWidgets() {
@@ -325,7 +341,7 @@ function checkUpdates() {
             if (handleError(code, err, "widgets", next)) return
             widgets = JSON.parse(out.trim())
             next()
-        })
+        }, procOpt)
     }
 
     function checkFirmwares() {
@@ -346,12 +362,15 @@ function checkUpdates() {
                 }))
 
                 merge()
-            })
-        })
+            }, procOpt)
+        }, procOpt)
     }
 
     function merge() {
-        finalize(keys(archRepos.concat(archAur, flatpak, widgets, firmwares)))
+        const list = keys(archRepos.concat(archAur, flatpak, widgets, firmwares))
+        sts.errors.length > 0 
+            ? runLater(3000, () => isOnline ? finalize(list) : stopCheck())
+            : finalize(list)
     }
 }
 
@@ -404,10 +423,17 @@ function makeArchList(updates, source) {
         if (updates.length === 0) {
             resolve([])
         } else {
-            const pkgs = updates.map(l => l.split(' ')[0]).join(' ')
-            execute(`pacman -Sl --dbpath "${cfg.dbPath}"`, (cmd, out, err, code) => {
+            const updateRe = /^([A-Za-z0-9@._+-]+)\s+(\S+)\s+->\s+(\S+)/
+            const parsed = updates.map(l => l.trim()).map(l => l.match(updateRe)).filter(Boolean)
+            if (parsed.length === 0) {
+                resolve([])
+                return
+            }
+
+            const pkgs = parsed.map(m => m[1]).join(' ')
+            execute(`LC_ALL=C.UTF-8 pacman -Sl --dbpath "${cfg.dbPath}" | awk 'index($0,"[installed:")>0'`, (cmd, out, err, code) => {
                 if (code && handleError(code, err, source, () => resolve([]))) return
-                const repositories = out.trim().split('\n').filter(line => /\[.*\]/.test(line))
+                const repositories = out.trim().split('\n')
 
                 execute("LC_ALL=C.UTF-8 pacman -Qi " + pkgs, (cmd, out, err, code) => {
                     if (code && handleError(code, err, source, () => resolve([]))) return
@@ -423,15 +449,14 @@ function makeArchList(updates, source) {
                              .forEach(([name, icon]) => iconsMap.set(name, icon))
 
                         const versionsMap = new Map()
-                        updates.forEach(update => {
-                            const [name, currentVer, , newVer] = update.split(' ')
-                            versionsMap.set(name, { currentVer, newVer })
-                        })
+                        parsed.forEach(m => versionsMap.set(m[1], { currentVer: m[2], newVer: m[3] }))
 
                         const repositoriesMap = new Map()
                         repositories.forEach(line => {
-                            const parts = line.trim().split(/\s+/)
-                            if (parts.length >= 2) repositoriesMap.set(parts[1], parts[0])
+                            const [repo, name] = line.trim().split(/\s+/)
+                            if (!repositoriesMap.has(name)) {
+                                repositoriesMap.set(name, repo)
+                            }
                         })
 
                         const keyMap = {
@@ -465,9 +490,9 @@ function makeArchList(updates, source) {
 
                             if (iconsMap.has(pkg.NM)) pkg.IN = iconsMap.get(pkg.NM)
 
-                            const versions = versionsMap.get(pkg.NM)
-                            pkg.VO = versions.currentVer
-                            pkg.VN = (versions.newVer === "latest-commit") ? i18n("latest commit") : versions.newVer
+                            const versions = versionsMap.get(pkg.NM) || {}
+                            pkg.VO = versions.currentVer || ""
+                            pkg.VN = (versions.newVer === "latest-commit") ? i18n("latest commit") : (versions.newVer || "")
                             pkg.RE = repositoriesMap.get(pkg.NM) || (pkg.NM.endsWith("-git") || pkg.VN === i18n("latest commit") ? "devel" : "aur")
                             pkg.RN = pkg.RN.includes("Explicitly") ? i18n("Explicitly installed") : i18n("Installed as a dependency")
 
@@ -475,9 +500,9 @@ function makeArchList(updates, source) {
                         })
 
                         resolve([...new Map(packagesData.map(item => [item.NM, item])).values()])
-                    })
-                })
-            })
+                    }, procOpt)
+                }, procOpt)
+            }, procOpt)
         }
     })
 }
@@ -506,7 +531,7 @@ function makeFlatpakList(updates) {
                     }
                 })
                 resolve(extendedList)
-            })
+            }, procOpt)
         }
     })
 }
@@ -647,6 +672,8 @@ function resumeScheduler() {
 }
 
 function searchScheduler(options) {
+    if (!isOnline) return
+
     const mode = cfg.checkMode
     if (mode === "manual") {
         scheduler.stop()

@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-# SPDX-FileCopyrightText: 2024 Evgeny Kazantsev <exequtic@gmail.com>
-# SPDX-License-Identifier: MIT
-
 source "$(dirname "$0")/vars"
 
 cleanup() {
@@ -20,6 +17,7 @@ colorize() {
     local blue="\033[34m"
     local yellow="\033[33m"
     local white="\033[37m"
+    local gray="\e[90m"
     local clear="\033[0m"
     local bold="\033[1m"
 
@@ -51,7 +49,7 @@ printQuestion() {
 }
 
 printExec() {
-    echo -e "$(colorize blue bold "$ICO_EXEC $MNG_EXEC") $(colorize white $wrapper_sudo $1 $2) \n"
+    echo -e "$(colorize blue bold "$ICO_EXEC $MNG_EXEC") $(colorize white $1) \n"
 }
 
 printMsg() {
@@ -65,14 +63,6 @@ printMsg() {
     echo -e "$(colorize green bold $l)"
     echo -e "$(colorize green bold $s) $(colorize white bold $text) $(colorize green bold $p)"
     echo -e "$(colorize green bold $l)"
-}
-
-printReturn() {
-    tput civis
-    echo
-    echo -e "$(colorize blue bold $ICO_RETURN $MNG_RETURN)"
-    read -r
-    tput cnorm
 }
 
 printClose() {
@@ -211,6 +201,13 @@ updateJson() {
 rss() {
     command -v jq >/dev/null || { echo "${CMD_ERR} jq" >&2; return 127; }
 
+    # Wait for DNS to be ready (up to 30s) — avoids failures at boot/resume
+    local host=$(echo "$1" | sed -e 's|^[^/]*//||' -e 's|/.*$||')
+    for i in $(seq 1 30); do
+        getent hosts "$host" >/dev/null 2>&1 && break
+        sleep 1
+    done
+
     makeTempDir
     trap cleanup EXIT
 
@@ -225,7 +222,7 @@ rss() {
 
     for url in "$@"; do
         local rssFile=$(mktemp "$tempDir/XXXXXX.xml")
-        curl -s -o "$rssFile" --connect-timeout 5 --retry 2 --max-time 10 --url "$url" 2>/dev/null
+        curl -s -o "$rssFile" --connect-timeout 5 --retry 3 --retry-delay 1 --retry-all-errors --max-time 10 --url "$url" 2>/dev/null
         xmllint --noout "$rssFile" 2>/dev/null || {
             errors+="$url "
             continue
@@ -314,7 +311,17 @@ checkCurrentVersions() {
     echo "[${list%,}]"
 }
 
+checkSetup() {
+    if (( systemWide )); then
+        printError "Operation not permitted - the widget is installed system-wide"
+        printClose
+        exit
+    fi
+}
+
 install_devel() {
+    checkSetup
+
     printMsg "Downloading devel"
     echo
 
@@ -380,6 +387,8 @@ install_devel() {
 }
 
 install_stable() {
+    checkSetup
+
     if [[ "$(jq -r '.KPlugin.Description' $appletDir/metadata.json)" = "Arch Update Notifier" ]]; then
         while true; do
             printImportant "It looks like you already have the stable version."
@@ -396,6 +405,16 @@ install_stable() {
 }
 
 uninstall() {
+    checkSetup
+
+    iconsDir="$localDir/icons/breeze/status/22"
+    notifDir="$localDir/knotifications6"
+    notif="apdatifier.notifyrc"
+    icons=(apdatifier-plasmoid.svg
+           apdatifier-packages.svg
+           apdatifier-package.svg
+           apdatifier-flatpak.svg)
+
     printMsg "Uninstall Apdatifier"
     echo
 
@@ -415,7 +434,7 @@ uninstall() {
     }
 
     printImportant "Remove icons"
-    for icon in $icon1 $icon2 $icon3 $icon4; do
+    for icon in "${icons[@]}"; do
         showCommand "rm $iconsDir/$icon"
         test -f "$iconsDir/$icon" && rm "$iconsDir/$icon"
     done
@@ -436,8 +455,8 @@ uninstall() {
     sleep 1; echo
 
     printImportant "Uninstall plasmoid"
-    showCommand "kpackagetool6 -t Plasma/Applet -r $applet"
-    kpackagetool6 -t Plasma/Applet -r $applet 2>/dev/null
+    showCommand "kpackagetool6 -t Plasma/Applet -r com.github.exequtic.apdatifier"
+    kpackagetool6 -t Plasma/Applet -r com.github.exequtic.apdatifier 2>/dev/null
     sleep 1; echo
 
     echo "Bye :("; sleep 1

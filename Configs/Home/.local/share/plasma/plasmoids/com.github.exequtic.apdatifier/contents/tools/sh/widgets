@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-# SPDX-FileCopyrightText: 2024 Evgeny Kazantsev <exequtic@gmail.com>
-# SPDX-License-Identifier: MIT
-
 source "$(dirname "$0")/utils"
 
 fetch_api_data() {
@@ -50,7 +47,8 @@ get_packages() {
         "$localDir/plasma/plasmoids" \
         "$localDir/plasma/wallpapers" \
         -mindepth 1 -maxdepth 1 -type d 2>/dev/null))
-    [ ${#packages[@]} -eq 0 ] && exit
+    [ ${#packages[@]} -eq 0 ] && return 1
+    return 0
 }
 
 get_package_type() {
@@ -144,23 +142,28 @@ get_download_link() {
 }
 
 make_updates_list() {
-    local out=""
+    local tmp="$tempDir/update.list.lines.json"
+    : > "$tmp"
+
     for package in "${packages[@]}"; do
         get_package_info
         [[ $? -ne 0 ]] && continue
-        out+="{\"NM\": \"${name}\","
-        out+="\"RE\": \"${repo}\","
-        out+="\"TP\": \"${type}\","
-        out+="\"CN\": \"${contentId}\","
-        out+="\"IN\": \"${icon}\","
-        out+="\"DE\": \"${description}\","
-        out+="\"AU\": \"${author}\","
-        out+="\"VO\": \"${currentVer}\","
-        out+="\"VN\": \"${latestVer}\","
-        out+="\"LN\": \"${url}\"}",
+
+        jq -cn \
+          --arg NM "$name" \
+          --arg RE "$repo" \
+          --arg TP "$type" \
+          --arg CN "$contentId" \
+          --arg IN "$icon" \
+          --arg DE "$description" \
+          --arg AU "$author" \
+          --arg VO "$currentVer" \
+          --arg VN "$latestVer" \
+          --arg LN "$url" \
+          '{NM:$NM,RE:$RE,TP:$TP,CN:$CN,IN:$IN,DE:$DE,AU:$AU,VO:$VO,VN:$VN,LN:$LN}' >> "$tmp"
     done
 
-    echo -e "[${out%,}]" > $updatesList
+    jq -s '.' "$tmp" > "$updatesList"
 }
 
 check_packages_updates() {
@@ -169,13 +172,16 @@ check_packages_updates() {
         exit 127
     }
 
+    declare -a packages
+    ! get_packages && {
+        echo "[]"
+        exit
+    }
+
     makeTempDir
     XML="$tempDir/api.kde-look.xml"
     updatesList="$tempDir/update.list.json"
     trap cleanup EXIT
-
-    declare -a packages
-    get_packages
 
     fetch_api_data
     case $? in
@@ -222,13 +228,16 @@ download_package() {
 upgrade_all_packages() {
     dependencies "jq"
 
+    declare -a packages
+    ! get_packages && {
+        printDone "$MNG_DONE"
+        exit
+    }
+
     makeTempDir
     XML="$tempDir/api.kde-look.xml"
     updatesList="$tempDir/update.list.json"
     trap cleanup EXIT
-
-    declare -a packages
-    get_packages
 
     fetch_api_data & printWhile $! "$WIDGETS_FETCH"
     [[ $exitCode -ne 0 ]] && exit
@@ -328,7 +337,8 @@ upgrade_package() {
 
 list_current_packages() {
     declare -a packages
-    get_packages
+    ! get_packages && return
+
     local out=""
     for package in "${packages[@]}"; do
         local json="$package/metadata.json"; [ -s "$json" ] || continue

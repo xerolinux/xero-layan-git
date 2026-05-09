@@ -22,6 +22,11 @@ Item {
     property int changeWallpaperTimerHours: 0
     property int changeWallpaperTimerMs: ((changeWallpaperTimerHours * 60 * 60) + (changeWallpaperTimerMinutes * 60) + changeWallpaperTimerSeconds) * 1000
     property bool resumeLastVideo: true
+    property int fillBlurRadius: 32
+    property bool fillBlur: true
+    property real alternativePlaybackRateGlobal: 0.5
+    property bool useAlternativePlaybackRate: false
+    property string audioOutputDevice
 
     // Crossfade must not be longer than the shortest video or the fade becomes glitchy
     // we don't know the length until a video gets played, so the crossfade duration
@@ -43,8 +48,8 @@ Item {
     property bool primaryPlayer: true
     property VideoPlayer player: primaryPlayer ? videoPlayer1 : videoPlayer2
     property VideoPlayer otherPlayer: primaryPlayer ? videoPlayer2 : videoPlayer1
-    property VideoPlayer player1: videoPlayer1
-    property VideoPlayer player2: videoPlayer2
+    readonly property alias player1: videoPlayer1
+    readonly property alias player2: videoPlayer2
 
     function play() {
         player.play();
@@ -98,13 +103,21 @@ Item {
         anchors.fill: parent
         property var playerSource: root.currentSource
         property int actualDuration: duration / playbackRate
-        playbackRate: playerSource.playbackRate || root.playbackRate
+        playbackRate: {
+            if (root.useAlternativePlaybackRate) {
+                return playerSource.alternativePlaybackRate || root.alternativePlaybackRateGlobal;
+            }
+            return playerSource.playbackRate || root.playbackRate;
+        }
         source: playerSource.filename ?? ""
         volume: root.volume
         muted: root.muted
+        audioOutputDevice: root.audioOutputDevice
         z: 2
         opacity: 1
         fillMode: root.fillMode
+        fillBlur: root.fillBlur
+        fillBlurRadius: root.fillBlurRadius
         loops: {
             if (!root.multipleVideos || (root.currentSource.loop && !root.crossfadeEnabled))
                 return MediaPlayer.Infinite;
@@ -186,12 +199,20 @@ Item {
         anchors.fill: parent
         property var playerSource: Utils.createVideo("")
         property int actualDuration: duration / playbackRate
-        playbackRate: playerSource.playbackRate || root.playbackRate
+        playbackRate: {
+            if (root.useAlternativePlaybackRate) {
+                return playerSource.alternativePlaybackRate || root.alternativePlaybackRateGlobal;
+            }
+            return playerSource.playbackRate || root.playbackRate;
+        }
         source: playerSource.filename ?? ""
         volume: root.volume
         muted: root.muted
+        audioOutputDevice: root.audioOutputDevice
         z: 1
         fillMode: root.fillMode
+        fillBlur: root.fillBlur
+        fillBlurRadius: root.fillBlurRadius
         loops: {
             if (!root.multipleVideos || (root.currentSource.loop && !root.crossfadeEnabled))
                 return MediaPlayer.Infinite;

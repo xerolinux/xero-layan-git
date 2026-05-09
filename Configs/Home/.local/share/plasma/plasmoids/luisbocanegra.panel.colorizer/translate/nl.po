@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: colorizer\n"
 "Report-Msgid-Bugs-To: https://github.com/luisbocanegra/plasma-panel-"
 "colorizer\n"
-"POT-Creation-Date: 2026-01-03 19:31+0000\n"
-"PO-Revision-Date: 2025-11-25 10:50+0100\n"
+"POT-Creation-Date: 2026-04-12 03:26+0000\n"
+"PO-Revision-Date: 2026-01-20 10:36+0100\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -37,7 +37,7 @@ msgstr "Voorinstellingen"
 
 #: ../contents/config/config.qml
 msgid "Presets auto-loading"
-msgstr "Voorinstellingen automatisch laden"
+msgstr "Automatisch laden"
 
 #: ../contents/config/config.qml
 msgid "Appearance"
@@ -60,8 +60,12 @@ msgid "Global Overrides"
 msgstr "Globale voorrangsregels"
 
 #: ../contents/config/config.qml
-msgid "Text/Icon Fixes"
-msgstr "Tekst- en pictogramoplossingen"
+msgid "Text/Icon Color Fixes"
+msgstr ""
+
+#: ../contents/config/config.qml
+msgid "Blacklist Widgets"
+msgstr ""
 
 #: ../contents/config/config.qml
 msgid "Hide Widgets"
@@ -69,17 +73,22 @@ msgstr "Widgets verbergen"
 
 #: ../contents/config/config.qml
 msgid "System Tray Icons Replacer"
-msgstr ""
+msgstr "Systeemvakpictogrammen vervangen"
 
 #: ../contents/config/config.qml
 msgid "General"
 msgstr "Algemeen"
+
+#: ../contents/config/config.qml
+msgid "Support Me"
+msgstr ""
 
 #: ../contents/ui/components/CategoryDisabled.qml
 msgid "Panel Colorizer is disabled"
 msgstr "Paneelkleuring is uitgeschakeld"
 
 #: ../contents/ui/components/CategoryDisabled.qml
+#: ../contents/ui/components/FormWidgetSettings.qml
 #: ../contents/ui/configTrayIconsReplacer.qml
 msgid "Enable"
 msgstr "Inschakelen"
@@ -89,6 +98,11 @@ msgstr "Inschakelen"
 #: ../contents/ui/components/FormColors.qml
 msgid "Widget background"
 msgstr "Widgetachtergrond"
+
+#: ../contents/ui/components/DesktopView.qml
+msgid "Panel not found, this widget must be placed on a panel to work"
+msgstr ""
+"Er is geen paneel aangetroffen - de widget dient op een paneel te staan"
 
 #: ../contents/ui/components/FormBorder.qml
 #: ../contents/ui/components/FormWidgetSettings.qml
@@ -101,6 +115,7 @@ msgstr "Rand"
 #: ../contents/ui/components/FormShape.qml ../contents/ui/configGeneral.qml
 #: ../contents/ui/configPresetAutoload.qml
 #: ../contents/ui/configStockPanelSettings.qml
+#: ../contents/ui/configWidgetIslands.qml
 msgid "Enabled:"
 msgstr "Ingeschakeld:"
 
@@ -119,12 +134,8 @@ msgstr "Breedte:"
 msgid ""
 "Use an integer when using <strong>Widget Islands</strong> to avoid rendering "
 "issues! <a href=\"https://github.com/luisbocanegra/plasma-panel-colorizer/"
-"issues/64\">See #64<a/>"
+"issues/64\">See #64</a>"
 msgstr ""
-"Let op: kies altijd voor een geheel getal bij het gebruik van "
-"<strong>widgeteislanden</strong> om problemen te voorkomen! <a "
-"href=\"https://github.com/luisbocanegra/plasma-panel-colorizer/"
-"issues/64\">Zie #64 (Engels)<a/>"
 
 #: ../contents/ui/components/FormBorder.qml
 msgid "Custom widths:"
@@ -370,6 +381,12 @@ msgstr ""
 "vervaging te ontdoen."
 
 #: ../contents/ui/components/FormWidgetSettings.qml
+msgid ""
+"⚠️ Disabling this breaks the panel clickable area and applet dialogs "
+"positioning when the panel is in floating mode! See <a href=\"%1\">#80</a>."
+msgstr ""
+
+#: ../contents/ui/components/FormWidgetSettings.qml
 msgid "The shadow from the Plasma theme"
 msgstr "De schaduw van het Plasma-thema"
 
@@ -405,11 +422,19 @@ msgstr ""
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Wide expand button:"
-msgstr ""
+msgstr "Brede uitvouwknop:"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid ""
-"Make the System Tray expand button be the same width as the other tray items"
+"Make the System Tray expand button use the same size as the other tray items"
+msgstr ""
+
+#: ../contents/ui/components/FormWidgetSettings.qml
+msgid "Custom cell height:"
+msgstr ""
+
+#: ../contents/ui/components/FormWidgetSettings.qml
+msgid "Custom cell width:"
 msgstr ""
 
 #: ../contents/ui/components/FormWidgetSettings.qml
@@ -417,17 +442,9 @@ msgid "Force floating applets"
 msgstr "Zwevende applets afdwingen"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
-msgid "Anchor to edges:"
-msgstr "Vastmaken aan randen:"
-
-#: ../contents/ui/components/FormWidgetSettings.qml
-msgid "Resize content when panel enters/exits floating state"
-msgstr ""
-"Pas de inhoudsgrootte aan als een paneel zwevend of juist niet wordt gemaakt"
-
-#: ../contents/ui/components/FormWidgetSettings.qml
-msgid "Panel de-float:"
-msgstr "Niet-zwevend paneel:"
+#: ../contents/ui/configPresetAutoload.qml
+msgid "Floating panel:"
+msgstr "Zwevend paneel:"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid ""
@@ -436,6 +453,12 @@ msgid ""
 msgstr ""
 "Verwijder de zelfgekozen achtergrond, afgeronde hoeken en kaders op de "
 "schermrand als een paneel niet zweeft"
+
+#: ../contents/ui/components/FormWidgetSettings.qml
+msgid ""
+"Resize panel length when panel enters/exits floating state (instead of just "
+"moving)"
+msgstr ""
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Customization"
@@ -490,18 +513,27 @@ msgstr ""
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid ""
 "C++ plugin not found, this feature will not work. Install the plugin and "
-"reboot or restart plasmashell to be able to use it."
+"reboot or restart plasmashell to be able to use it. See <a "
+"href=\"%1\">install instructions</a>."
 msgstr ""
-"Deze functie werkt niet, omdat de C++-plug-in niet is aangetroffen. "
-"Installeer de plug-in en herstart (plasmashell) om er gebruik van te maken."
 
 #: ../contents/ui/components/FormWidgetSettings.qml
-msgid "Plugin install instructions"
-msgstr "Installatie-instructies"
+msgid "Clipping (Experimental)"
+msgstr ""
+
+#: ../contents/ui/components/FormWidgetSettings.qml
+msgid ""
+"Clip the widget content to the custom background radius.<br>Clipping widgets "
+"against the panel is not supported yet, see <a href=\"%1\">#275</a>."
+msgstr ""
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Shape"
 msgstr "Vorm"
+
+#: ../contents/ui/components/FormWidgetSettings.qml
+msgid "Font"
+msgstr "Lettertype"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Spacing:"
@@ -509,12 +541,45 @@ msgstr "Afstand:"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid ""
-"<strong>Odd</strong> values are automatically converted to <strong>evens</"
-"strong> if <strong>Unified Background</strong> feature is used."
+"<strong>Odd spacing</strong> values will be automatically converted to "
+"<strong>evens</strong> if <strong>Widget Islands</strong> feature is used."
 msgstr ""
-"<strong>Oneven</strong> waarden worden automatisch omgezet in <strong>even</"
-"strong> waarden indien de optie <strong>Gelijke achtergronden</strong> is "
-"ingeschakeld."
+
+#: ../contents/ui/components/FormWidgetSettings.qml
+msgid "Custom font:"
+msgstr "Eigen lettertype:"
+
+#: ../contents/ui/components/FormWidgetSettings.qml
+msgid ""
+"A plasmashell restart is required to restore the original values after "
+"disabling any font setting. <a href=\"#\">Restart now</a>."
+msgstr ""
+"Herstart plasmashell om de oorspronkelijke instellingen terug te zetten na "
+"het uitschakelen hiervan. <a href=\"#\">Nu herstarten</a>."
+
+#: ../contents/ui/components/FormWidgetSettings.qml
+msgid "Font family:"
+msgstr "Lettertype:"
+
+#: ../contents/ui/components/FormWidgetSettings.qml
+msgid "Override"
+msgstr "Afdwingen"
+
+#: ../contents/ui/components/FormWidgetSettings.qml
+msgid "Italic:"
+msgstr "Cursief:"
+
+#: ../contents/ui/components/FormWidgetSettings.qml
+msgid "Underline:"
+msgstr "Onderstrepen:"
+
+#: ../contents/ui/components/FormWidgetSettings.qml
+msgid "Font weight:"
+msgstr "Dikte:"
+
+#: ../contents/ui/components/FormWidgetSettings.qml
+msgid "Font size:"
+msgstr "Tekstgrootte:"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Background Color"
@@ -573,10 +638,6 @@ msgid "Releases"
 msgstr "Uitgaven"
 
 #: ../contents/ui/components/Header.qml
-msgid "Matrix chat"
-msgstr "Matrix-chat"
-
-#: ../contents/ui/components/Header.qml
 msgid "Home page"
 msgstr "Website"
 
@@ -609,26 +670,26 @@ msgid "FAQ"
 msgstr "Veelgestelde vragen"
 
 #: ../contents/ui/components/Header.qml
-msgid "Discussions"
-msgstr "Discussies"
+msgid "GitHub Discussions"
+msgstr ""
 
 #: ../contents/ui/components/Header.qml
 msgid "Send an email"
 msgstr "E-mail sturen"
 
 #: ../contents/ui/components/Header.qml
+msgid "Translate"
+msgstr ""
+
+#: ../contents/ui/components/Header.qml
 msgid "Donate"
 msgstr "Doneren"
 
 #: ../contents/ui/components/Header.qml
-msgid "GitHub sponsors"
-msgstr "GitHub-sponsors"
+msgid "More projects"
+msgstr ""
 
-#: ../contents/ui/components/Header.qml
-msgid "My other projects"
-msgstr "Mijn andere projecten"
-
-#: ../contents/ui/components/Header.qml ../contents/ui/main.qml
+#: ../contents/ui/components/Header.qml ../contents/ui/components/PopupView.qml
 msgid ""
 "Running version of the widget (%1) is different to the one on disk (%2), "
 "please log out and back in (or restart plasmashell user unit) to ensure "
@@ -637,6 +698,14 @@ msgstr ""
 "De actieve versie van de widget (%1) komt niet overeen met de geïnstalleerde "
 "versie (%2). Meld je af en aan (of herstart plasmashell) om optimaal te "
 "kunnen werken!"
+
+#: ../contents/ui/components/PopupView.qml
+msgid "Select a preset"
+msgstr "Kies de voorinstellingen"
+
+#: ../contents/ui/components/PopupView.qml
+msgid "Running outdated version of %1"
+msgstr "Verouderde versie van ‘%1’"
 
 #: ../contents/ui/components/SettingImportExport.qml
 msgid "Import"
@@ -670,12 +739,45 @@ msgstr "Let op: de vorige export wordt overschreven!"
 msgid "This will replace your current settings!"
 msgstr "Let op: de huidige instellingen worden vervangen!"
 
+#: ../contents/ui/components/SupportMe.qml
+msgid "Thank you for using %1!"
+msgstr ""
+
+#: ../contents/ui/components/SupportMe.qml
+msgid ""
+"If you enjoy using the plugin please consider sponsoring or donating so I "
+"can dedicate more time to maintain and improve this and <a href=\"https://"
+"github.com/luisbocanegra?"
+"tab=repositories&q=&type=source&language=&sort=stargazers\">my other "
+"projects</a>."
+msgstr ""
+
+#: ../contents/ui/components/SupportMe.qml
+msgid "You can also"
+msgstr ""
+
+#: ../contents/ui/components/SupportMe.qml
+msgid "Star the project on GitHub"
+msgstr ""
+
+#: ../contents/ui/components/SupportMe.qml
+msgid "Rate in the KDE Store"
+msgstr ""
+
+#: ../contents/ui/components/SupportMe.qml
+msgid "Translate %1 to your language"
+msgstr ""
+
+#: ../contents/ui/components/WidgetCardBlacklist.qml
 #: ../contents/ui/components/WidgetCardConfig.qml
 #: ../contents/ui/components/WidgetCardHide.qml
 #: ../contents/ui/components/WidgetCardTextIconFixes.qml
-#: ../contents/ui/components/WidgetCardUnifiedBg.qml
 msgid "System Tray"
 msgstr "Systeemvak"
+
+#: ../contents/ui/components/WidgetCardBlacklist.qml
+msgid "Blacklist"
+msgstr ""
 
 #: ../contents/ui/components/WidgetCardConfig.qml
 msgid "Add"
@@ -705,18 +807,6 @@ msgstr "Effect"
 #: ../contents/ui/components/WidgetCardTextIconFixes.qml
 msgid "Refresh"
 msgstr "Herladen"
-
-#: ../contents/ui/components/WidgetCardUnifiedBg.qml
-msgid "Disable"
-msgstr "Uitschakelen"
-
-#: ../contents/ui/components/WidgetCardUnifiedBg.qml
-msgid "Start"
-msgstr "Begin"
-
-#: ../contents/ui/components/WidgetCardUnifiedBg.qml
-msgid "End"
-msgstr "Einde"
 
 #: ../contents/ui/configAppearance.qml
 msgid ""
@@ -754,6 +844,17 @@ msgstr "Systeemvakwidgets"
 msgid "Part of the panel on which the options below will be applied."
 msgstr ""
 "Het gedeelte van het paneel waarop onderstaande opties van toepassing zijn."
+
+#: ../contents/ui/configBlacklistWidgets.qml
+msgid ""
+"Blacklist widgets to keep their default appearance. A logout may be required "
+"for some widgets to fully restore their default appearance."
+msgstr ""
+
+#: ../contents/ui/configBlacklistWidgets.qml
+#: ../contents/ui/configTrayIconsReplacer.qml
+msgid "Remove all"
+msgstr "Alles verwijderen"
 
 #: ../contents/ui/configGeneral.qml
 msgid "Hide widget:"
@@ -1033,10 +1134,6 @@ msgid "At least one window is visible:"
 msgstr "Bij minimaal één zichtbaar venster:"
 
 #: ../contents/ui/configPresetAutoload.qml
-msgid "Floating panel:"
-msgstr "Zwevend paneel:"
-
-#: ../contents/ui/configPresetAutoload.qml
 msgid "activity:"
 msgstr "Activiteit:"
 
@@ -1289,16 +1386,10 @@ msgid ""
 "configured preset auto-loading or know how to switch presets using D-Bus (or "
 "have disabled it), you will have no way to make it visible again without "
 "manually removing the configuration or Panel Colorizer, use the command "
-"below in terminal/tty then log out or reboot, it will renove the "
+"below in terminal/tty then log out or reboot, it will remove the "
 "configuration from all Panel Colorizer instances so make sure to save the "
 "others first"
 msgstr ""
-"WAARSCHUWING: wees terughoudend met het gebruik van tonen/verbergen! Als het "
-"paneel verborgen wordt en je hebt het automatisch laden van voorinstellingen "
-"niet ingesteld, of je weet hoe je dit kan doen met behulp van D-Bus, dan is "
-"er geen methode om een en ander weer zichtbaar te maken. In dat geval dien "
-"je onderstaande opdracht uit te voeren in een terminalvenster en vervolgens "
-"af- een aan te melden."
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid ""
@@ -1312,24 +1403,25 @@ msgstr ""
 
 #: ../contents/ui/configTextIconFix.qml
 msgid ""
-"Fix text and icon colors for widgets where the normal method doesn't work or "
-"isn't permanent.<br> - <strong>Mask</strong>: Force color on SVG icons, "
-"useful for symbolic icons.<br> - <strong>Color Effect</strong>: Force color "
-"on text and icons using post-processing effect, useful for non-symbolic "
-"icons.<br> - <strong>Refresh</strong>: Re-apply color at a fixed interval, "
-"useful for widgets that recreate or recolor content themselves<br>To restore "
-"the <strong>Mask<strong> and <strong>Color Effect</strong> disable and "
-"restart Plasma or logout."
+"Fix text and icon colors/font for widgets where the normal method doesn't "
+"work or is reset by the widget.<br> - <strong>Mask</strong>: Force color on "
+"SVG icons, useful for symbolic icons.<br> - <strong>Color Effect</strong>: "
+"Force color on text and icons using post-processing effect, useful for non-"
+"symbolic icons.<br> - <strong>Refresh</strong>: Re-apply color/font at a "
+"fixed interval, useful for widgets that recreate or recolor content "
+"themselves.<br>To restore the <strong>Mask<strong> and <strong>Color Effect</"
+"strong> disable and restart Plasma or logout."
 msgstr ""
-"Verbeter tekst- en pictogramkleuren van widgets die niet volgens de gangbare "
-"werken.<br> - <strong>Maskeren</strong>: dwing kleuren op svg-pictogrammen "
-"af - vooral handig voor symbolische pictogrammen.<br> - <strong>Kleureffect</"
-"strong>: dwing tekst en pictogrammen af aan de hand van een "
-"naverwerkingseffect - vooral handig voor niet-symbolische pictogrammen.<br> "
-"- <strong>Herladen</strong>: pas kleuren op een vooraf ingesteld moment toe "
-"- vooral handig voor widgets die inhoud opnieuw samenstellen of kleuren."
-"<br>Herstart Plasma of meld je af om de oorspronkelijke <strong>maskeer-"
-"<strong> en <strong>kleureffect</strong>instellingen uit te schakelen."
+"Los problemen omtrent kleuren en lettertypen op, op widgets waarop de "
+"gebruikelijke methode niet werkt of waar de widget iets anders afdwingt.<br> "
+"- <strong>Maskeren</strong>: dwing gekleurde svg-pictogrammen af, nuttig "
+"voor symbolische pictogrammen.<br> - <strong>Kleureffect</strong>: dwing "
+"gekleurde tekst en pictogrammen af met behulp van een naverwerkingseffect, "
+"nuttig voor niet-symbolische pictogrammen.<br> - <strong>Herladen</strong>: "
+"pas kleuren en lettertypen op gezette tijden af, nuttig voor widgets die de "
+"inhoud periodiek vernieuwen.<br>Herstart Plasma of meld af en weer aan om de "
+"<strong>maskeer<strong>- en <strong>kleureffect</strong>instellingen uit te "
+"schakelen."
 
 #: ../contents/ui/configTextIconFix.qml
 msgid "Restore default (removes all icon and text fixes)"
@@ -1346,11 +1438,11 @@ msgstr "Herladen, elke"
 
 #: ../contents/ui/configTrayIconsReplacer.qml
 msgid "Add new"
-msgstr ""
+msgstr "Toevoegen"
 
 #: ../contents/ui/configTrayIconsReplacer.qml
-msgid "Remove all"
-msgstr ""
+msgid "Sort"
+msgstr "Sorteren"
 
 #: ../contents/ui/configTrayIconsReplacer.qml
 msgid ""
@@ -1358,6 +1450,10 @@ msgid ""
 "file. The built-in rules icons are part of <a href=\"https://github.com/"
 "PapirusDevelopmentTeam/papirus-icon-theme\">Papirus icon theme</a>."
 msgstr ""
+"Vervang de systeemvakpictogrammen door die van het huidige pictogramthema of "
+"lokale bestanden. De meegeleverde regels zijn afkomstig van het <a "
+"href=\"https://github.com/PapirusDevelopmentTeam/papirus-icon-"
+"theme\">Papirus-pictogramthema</a>."
 
 #: ../contents/ui/configTrayIconsReplacer.qml
 msgid ""
@@ -1366,6 +1462,11 @@ msgid ""
 "com/luisbocanegra/plasma-panel-colorizer?tab=readme-ov-"
 "file#manually\">Install instructions</a>."
 msgstr ""
+"Deze functie werkt niet, omdat de C++-plug-in niet is aangetroffen. "
+"Installeer de plug-in en herstart (plasmashell) om de functie te kunnen "
+"gebruiken. Zie ook de <a href=\"https://github.com/luisbocanegra/plasma-"
+"panel-colorizer?tab=readme-ov-file#manually\">installatieaanwijzingen</a> "
+"(Engels)."
 
 #: ../contents/ui/configTrayIconsReplacer.qml
 msgid ""
@@ -1374,116 +1475,273 @@ msgid ""
 "href=\"https://github.com/luisbocanegra/plasma-panel-colorizer?tab=readme-ov-"
 "file#manually\">Install instructions</a>."
 msgstr ""
+"Deze functie werkt niet, omdat de C++-plug-in verouderd is. Installeer de "
+"plug-in en herstart (plasmashell) om de functie te kunnen gebruiken. Zie ook "
+"de <a href=\"https://github.com/luisbocanegra/plasma-panel-colorizer?"
+"tab=readme-ov-file#manually\">installatieaanwijzingen</a> (Engels)."
 
 #: ../contents/ui/configTrayIconsReplacer.qml
 msgid "Log icon changes:"
-msgstr ""
+msgstr "Pictogramaanpassingen bijhouden:"
 
 #: ../contents/ui/configTrayIconsReplacer.qml
 msgid "Icon hashes will be printed to the system log"
 msgstr ""
+"Controlesommen van pictogrammen worden vastgelegd in het systeemlogboek"
 
 #: ../contents/ui/configTrayIconsReplacer.qml
 msgid "Enable built-in rules:"
-msgstr ""
+msgstr "Meegeleverde regels gebruiken:"
 
 #: ../contents/ui/configTrayIconsReplacer.qml
 msgid "Show"
-msgstr ""
+msgstr "Tonen"
 
 #: ../contents/ui/configTrayIconsReplacer.qml
 msgid "How to use"
-msgstr ""
+msgstr "Gebruiksaanwijzing"
 
 #: ../contents/ui/configTrayIconsReplacer.qml
 msgid "Built-in Rules (read only)"
-msgstr ""
+msgstr "Meegeleverde regels gebruiken (alleen-lezen)"
 
 #: ../contents/ui/configTrayIconsReplacer.qml
 msgid "User Rules"
-msgstr ""
+msgstr "Eigen regels"
 
 #: ../contents/ui/configTrayIconsReplacer.qml
 msgid "Whether or not this replacement is enabled"
-msgstr ""
+msgstr "Of deze vervanging is ingeschakeld"
 
 #: ../contents/ui/configTrayIconsReplacer.qml
 msgid "Description (optional)"
-msgstr ""
+msgstr "Beschrijving (optioneel)"
 
 #: ../contents/ui/configTrayIconsReplacer.qml
 msgid "Description"
-msgstr ""
+msgstr "Beschrijving"
 
 #: ../contents/ui/configTrayIconsReplacer.qml
-msgid "SHA1"
-msgstr ""
+msgid "SHA1, string or regex to match"
+msgstr "Overeen te komen SHA1, tekenreeks of reguliere uitdrukking"
 
 #: ../contents/ui/configTrayIconsReplacer.qml
-msgid "Original icon SHA1"
-msgstr ""
+msgid "Icon SHA1, title or name of the target tray item"
+msgstr "SHA1, titel of naam van het systeemvakitem in kwestie"
 
 #: ../contents/ui/configTrayIconsReplacer.qml
 msgid "Custom icon"
-msgstr ""
+msgstr "Eigen pictogram"
 
 #: ../contents/ui/configTrayIconsReplacer.qml
 msgid "Icon name or file"
-msgstr ""
+msgstr "Pictogramnaam of -bestand"
 
 #: ../contents/ui/configTrayIconsReplacer.qml
-msgctxt "@info:tooltip"
-msgid "Icon name is \"%1\""
-msgstr ""
+msgid "Edit icon"
+msgstr "Pictogram bewerken"
 
 #: ../contents/ui/configTrayIconsReplacer.qml
 msgctxt "@item:inmenu Open icon chooser dialog"
 msgid "Choose…"
-msgstr ""
+msgstr "Kiezen…"
 
 #: ../contents/ui/configTrayIconsReplacer.qml
 msgctxt "@action:inmenu"
 msgid "Remove icon"
-msgstr ""
+msgstr "Pictogram verwijderen"
 
 #: ../contents/ui/configTrayIconsReplacer.qml
 msgid "Copy to User Rules"
-msgstr ""
+msgstr "Kopiëren naar eigen regels"
 
 #: ../contents/ui/configTrayIconsReplacer.qml
 msgid "Copy rule"
+msgstr "Regel kopiëren"
+
+#: ../contents/ui/configWidgetIslands.qml
+msgid "Create widget islands by placing separator widgets around them."
 msgstr ""
 
-#: ../contents/ui/configUnifiedBackground.qml
+#: ../contents/ui/configWidgetIslands.qml
 msgid ""
-"Select start and end of widget islands, widgets between <b>Start</b> and "
-"<b>End</b> must be left <b>disabled</b>. Widget custom background or border "
-"is required for this option to have an effect."
+"<strong>How to use</strong><br>1. Add the widget that will act as islands "
+"separator to the panel(by default the Plasma's Panel Spacer widget will be "
+"used)<br>2. Select the separator widget below<br>3. Add as many separators "
+"as you need and move them to create islands."
 msgstr ""
-"Kies het begin en einde van widgeteilanden. Widgets tussen <b>begin</b> en "
-"<b>einde</b> dienen <b>uitgeschakeld</b> te blijven. Voorzie widgets van een "
-"zelfgekozen achtergrond of kader om deze optie te kunnen gebruiken."
 
-#: ../contents/ui/configUnifiedBackground.qml
-msgid "Remove all unified areas"
-msgstr "Alle samengetrokken gebieden verwijderen"
+#: ../contents/ui/configWidgetIslands.qml
+msgid ""
+"<strong>Notes</strong><br>- Widget custom background or border is required "
+"for this option to have a visible effect.<br>- If the widgets in your panel "
+"have different thickness, add margins to the widgets custom background in "
+"the Appearance tab."
+msgstr ""
+
+#: ../contents/ui/configWidgetIslands.qml
+msgid ""
+"<strong>Need a separator widget?</strong><br>- <a href=\"%1\">Panel "
+"Colorizer Islands Separator</a> visible only in Edit Mode.<br>- <a "
+"href=\"%2\">Advanced Separator</a> always visible and configurable."
+msgstr ""
+
+#: ../contents/ui/configWidgetIslands.qml
+msgid "Separator widget:"
+msgstr ""
+
+#: ../contents/ui/configWidgetIslands.qml
+msgid ""
+"Select the widget that will act as separator for the islands.<br><br>Note "
+"that the separator widget itself does not need to be visible for it to work, "
+"so you can use an invisible spacer/separator for example."
+msgstr ""
+
+#: ../contents/ui/configWidgetIslands.qml
+msgid "Require two separators per island:"
+msgstr ""
+
+#: ../contents/ui/configWidgetIslands.qml
+msgid ""
+"Always require two separators for a group of widgets to become an island. By "
+"default, an arrangement of<br>%1 creates two islands.<br><br>Enabling this "
+"option makes it so that islands do not share separators, so for example an "
+"arrangement of<br>%2 is required to create two islands.<br><br>Enable this "
+"if your islands separator is not a panel spacer and you want to explicitly "
+"define the start and end of each island."
+msgstr ""
+
+#: ../contents/ui/configWidgetIslands.qml
+msgid "Blacklist separator widgets:"
+msgstr ""
+
+#: ../contents/ui/configWidgetIslands.qml
+msgid "Disable customization from separator widgets"
+msgstr ""
 
 #: ../contents/ui/main.qml
 msgid "Hide widget (visible in panel Edit Mode)"
 msgstr "Widget verbergen (zichtbaar in paneelbewerkmodus)"
 
-#: ../contents/ui/main.qml
-msgid "Select a preset"
-msgstr "Kies de voorinstellingen"
+#~ msgid "Disable"
+#~ msgstr "Uitschakelen"
 
-#: ../contents/ui/main.qml
-msgid "Running outdated version of %1"
-msgstr "Verouderde versie van ‘%1’"
+#~ msgid "Start"
+#~ msgstr "Begin"
 
-#: ../contents/ui/main.qml
-msgid "Panel not found, this widget must be placed on a panel to work"
-msgstr ""
-"Er is geen paneel aangetroffen - de widget dient op een paneel te staan"
+#~ msgid "End"
+#~ msgstr "Einde"
+
+#~ msgid ""
+#~ "Select start and end of widget islands, widgets between <b>Start</b> and "
+#~ "<b>End</b> must be left <b>disabled</b>. Widget custom background or "
+#~ "border is required for this option to have an effect."
+#~ msgstr ""
+#~ "Kies het begin en einde van widgeteilanden. Widgets tussen <b>begin</b> "
+#~ "en <b>einde</b> dienen <b>uitgeschakeld</b> te blijven. Voorzie widgets "
+#~ "van een zelfgekozen achtergrond of kader om deze optie te kunnen "
+#~ "gebruiken."
+
+#~ msgid ""
+#~ "Make the System Tray expand button be the same width as the other tray "
+#~ "items"
+#~ msgstr ""
+#~ "Maak de uitvouwknop van het systeemvak even breed als de rest van de items"
+
+#~ msgid "Text/Icon Fixes"
+#~ msgstr "Tekst- en pictogramoplossingen"
+
+#~ msgid "Anchor to edges:"
+#~ msgstr "Vastmaken aan randen:"
+
+#~ msgid "Resize content when panel enters/exits floating state"
+#~ msgstr ""
+#~ "Pas de inhoudsgrootte aan als een paneel zwevend of juist niet wordt "
+#~ "gemaakt"
+
+#~ msgid "Panel de-float:"
+#~ msgstr "Niet-zwevend paneel:"
+
+#~ msgid ""
+#~ "C++ plugin not found, this feature will not work. Install the plugin and "
+#~ "reboot or restart plasmashell to be able to use it."
+#~ msgstr ""
+#~ "Deze functie werkt niet, omdat de C++-plug-in niet is aangetroffen. "
+#~ "Installeer de plug-in en herstart (plasmashell) om er gebruik van te "
+#~ "maken."
+
+#~ msgid "Plugin install instructions"
+#~ msgstr "Installatie-instructies"
+
+#~ msgid ""
+#~ "WARNING: Use Show/Hide with caution, if you hide the panel and have not "
+#~ "configured preset auto-loading or know how to switch presets using D-Bus "
+#~ "(or have disabled it), you will have no way to make it visible again "
+#~ "without manually removing the configuration or Panel Colorizer, use the "
+#~ "command below in terminal/tty then log out or reboot, it will renove the "
+#~ "configuration from all Panel Colorizer instances so make sure to save the "
+#~ "others first"
+#~ msgstr ""
+#~ "WAARSCHUWING: wees terughoudend met het gebruik van tonen/verbergen! Als "
+#~ "het paneel verborgen wordt en je hebt het automatisch laden van "
+#~ "voorinstellingen niet ingesteld, of je weet hoe je dit kan doen met "
+#~ "behulp van D-Bus, dan is er geen methode om een en ander weer zichtbaar "
+#~ "te maken. In dat geval dien je onderstaande opdracht uit te voeren in een "
+#~ "terminalvenster en vervolgens af- een aan te melden."
+
+#~ msgid "Matrix chat"
+#~ msgstr "Matrix-chat"
+
+#~ msgid "Discussions"
+#~ msgstr "Discussies"
+
+#~ msgid "GitHub sponsors"
+#~ msgstr "GitHub-sponsors"
+
+#~ msgid "My other projects"
+#~ msgstr "Mijn andere projecten"
+
+#~ msgid ""
+#~ "Use an integer when using <strong>Widget Islands</strong> to avoid "
+#~ "rendering issues! <a href=\"https://github.com/luisbocanegra/plasma-panel-"
+#~ "colorizer/issues/64\">See #64<a/>"
+#~ msgstr ""
+#~ "Let op: kies altijd voor een geheel getal bij het gebruik van "
+#~ "<strong>widgeteislanden</strong> om problemen te voorkomen! <a "
+#~ "href=\"https://github.com/luisbocanegra/plasma-panel-colorizer/"
+#~ "issues/64\">Zie #64 (Engels)<a/>"
+
+#~ msgid ""
+#~ "<strong>Odd</strong> values are automatically converted to <strong>evens</"
+#~ "strong> if <strong>Unified Background</strong> feature is used."
+#~ msgstr ""
+#~ "<strong>Oneven</strong> waarden worden automatisch omgezet in "
+#~ "<strong>even</strong> waarden indien de optie <strong>Gelijke "
+#~ "achtergronden</strong> is ingeschakeld."
+
+#~ msgid "Remove all unified areas"
+#~ msgstr "Alle samengetrokken gebieden verwijderen"
+
+#~ msgid ""
+#~ "Fix text and icon colors for widgets where the normal method doesn't work "
+#~ "or isn't permanent.<br> - <strong>Mask</strong>: Force color on SVG "
+#~ "icons, useful for symbolic icons.<br> - <strong>Color Effect</strong>: "
+#~ "Force color on text and icons using post-processing effect, useful for "
+#~ "non-symbolic icons.<br> - <strong>Refresh</strong>: Re-apply color at a "
+#~ "fixed interval, useful for widgets that recreate or recolor content "
+#~ "themselves<br>To restore the <strong>Mask<strong> and <strong>Color "
+#~ "Effect</strong> disable and restart Plasma or logout."
+#~ msgstr ""
+#~ "Verbeter tekst- en pictogramkleuren van widgets die niet volgens de "
+#~ "gangbare werken.<br> - <strong>Maskeren</strong>: dwing kleuren op svg-"
+#~ "pictogrammen af - vooral handig voor symbolische pictogrammen.<br> - "
+#~ "<strong>Kleureffect</strong>: dwing tekst en pictogrammen af aan de hand "
+#~ "van een naverwerkingseffect - vooral handig voor niet-symbolische "
+#~ "pictogrammen.<br> - <strong>Herladen</strong>: pas kleuren op een vooraf "
+#~ "ingesteld moment toe - vooral handig voor widgets die inhoud opnieuw "
+#~ "samenstellen of kleuren.<br>Herstart Plasma of meld je af om de "
+#~ "oorspronkelijke <strong>maskeer-<strong> en <strong>kleureffect</"
+#~ "strong>instellingen uit te schakelen."
 
 #~ msgid "Text and icon fixes"
 #~ msgstr "Tekst- en pictogramoplossingen"

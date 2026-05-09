@@ -1,8 +1,3 @@
-/*
-    SPDX-FileCopyrightText: 2024 Evgeny Kazantsev <exequtic@gmail.com>
-    SPDX-License-Identifier: MIT
-*/
-
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
@@ -53,6 +48,8 @@ SimpleKCM {
     property var pkg: plasmoid.configuration.packages
     property var terminals: plasmoid.configuration.terminals
     property alias cfg_dbPath: dbPath.text
+    
+    property bool systemWide: !/^\/home\/[^/]+\/\.local/.test(JS.scriptDir)
 
     property int installButton
     property var dialogTitles: {
@@ -540,6 +537,7 @@ SimpleKCM {
             RowLayout {
                 Layout.preferredWidth: miscTab.width - Kirigami.Units.largeSpacing * 10
                 Button {
+                    enabled: !systemWide
                     Layout.fillWidth: true
                     Layout.maximumWidth: 500
                     icon.name: "folder-git-symbolic"
@@ -553,6 +551,7 @@ SimpleKCM {
             RowLayout {
                 Layout.preferredWidth: miscTab.width - Kirigami.Units.largeSpacing * 10
                 Button {
+                    enabled: !systemWide
                     Layout.fillWidth: true
                     Layout.maximumWidth: 500
                     icon.name: "run-build"
@@ -566,6 +565,7 @@ SimpleKCM {
             RowLayout {
                 Layout.preferredWidth: miscTab.width - Kirigami.Units.largeSpacing * 10
                 Button {
+                    enabled: !systemWide
                     Layout.fillWidth: true
                     Layout.maximumWidth: 500
                     icon.name: "delete"

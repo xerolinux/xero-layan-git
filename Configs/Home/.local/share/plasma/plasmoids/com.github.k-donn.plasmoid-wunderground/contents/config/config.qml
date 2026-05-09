@@ -1,5 +1,5 @@
 /*
- * Copyright 2025  Kevin Donnelly
+ * Copyright 2026  Kevin Donnelly
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -22,16 +22,25 @@ ConfigModel {
         icon: "flag"
         source: "config/ConfigStation.qml"
     }
+
     ConfigCategory {
         name: i18n("Appearance")
         icon: "preferences-desktop-color"
         source: "config/ConfigAppearance.qml"
     }
+
+    ConfigCategory {
+        name: i18n("Layout")
+        icon: "view-grid"
+        source: "config/ConfigLayout.qml"
+    }
+
     ConfigCategory {
         name: i18n("Units")
         icon: "configure"
         source: "config/ConfigUnits.qml"
     }
+    
     ConfigCategory {
         name: i18n("Debug")
         icon: "preferences-other"

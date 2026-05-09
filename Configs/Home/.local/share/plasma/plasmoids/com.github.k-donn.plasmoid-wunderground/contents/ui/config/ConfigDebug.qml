@@ -1,5 +1,5 @@
 /*
- * Copyright 2025  Kevin Donnelly
+ * Copyright 2026  Kevin Donnelly
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -16,6 +16,7 @@
  */
 
 import QtQuick
+import QtQuick.Controls as QQC
 import org.kde.kcmutils as KCM
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.components as PlasmaComponents
@@ -30,19 +31,19 @@ KCM.SimpleKCM {
     Kirigami.FormLayout {
         anchors.fill: parent
 
-        PlasmaComponents.CheckBox {
+        QQC.CheckBox {
             id: logConsole
 
             Kirigami.FormData.label: i18n("Write to console.log:")
         }
 
-        PlasmaComponents.CheckBox {
+        QQC.CheckBox {
             id: useLegacyAPI
 
             Kirigami.FormData.label: i18n("Use Legacy Forecast API:")
         }
 
-        PlasmaComponents.SpinBox {
+        QQC.SpinBox {
             id: startupDelay
 
             Kirigami.FormData.label: i18n("Startup time delay (ms):")

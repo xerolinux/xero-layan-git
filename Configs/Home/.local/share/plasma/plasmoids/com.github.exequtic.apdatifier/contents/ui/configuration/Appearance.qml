@@ -1,8 +1,3 @@
-/*
-    SPDX-FileCopyrightText: 2024 Evgeny Kazantsev <exequtic@gmail.com>
-    SPDX-License-Identifier: MIT
-*/
-
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Dialogs
@@ -18,29 +13,28 @@ import org.kde.plasma.core as PlasmaCore
 import "../../tools/tools.js" as JS
 
 SimpleKCM {
-    property alias cfg_relevantIcon: relevantIcon.value
+    property alias cfg_hideIconPolicy: hideIconPolicy.value
     property string cfg_selectedIcon: plasmoid.configuration.selectedIcon
-    property alias cfg_badgePaused: badgePaused.checked
-    property alias cfg_badgeUpdated: badgeUpdated.checked
-    property alias cfg_counterEnabled: counterEnabled.checked
-    property alias cfg_counterOnLeft: counterOnLeft.checked
+    property string cfg_busyIndicator: plasmoid.configuration.busyIndicator
+
+    property string cfg_pauseBadgePosition: plasmoid.configuration.pauseBadgePosition
+    property string cfg_updatedBadgePosition: plasmoid.configuration.updatedBadgePosition
+    property alias cfg_badgeOffsetX: badgeOffsetX.value
+    property alias cfg_badgeOffsetY: badgeOffsetY.value
+
+    property string cfg_counterMode: plasmoid.configuration.counterMode
+    property string cfg_counterSidePosition: plasmoid.configuration.counterSidePosition
+    property string cfg_counterBadgePosition: plasmoid.configuration.counterBadgePosition
+    property alias cfg_counterOffsetX: counterOffsetX.value
+    property alias cfg_counterOffsetY: counterOffsetY.value
     property string cfg_counterColor: plasmoid.configuration.counterColor
-    property alias cfg_counterSize: counterSize.value
     property alias cfg_counterRadius: counterRadius.value
     property alias cfg_counterOpacity: counterOpacity.value
-    property alias cfg_counterShadow: counterShadow.checked
     property string cfg_counterFontFamily: plasmoid.configuration.counterFontFamily
     property alias cfg_counterFontBold: counterFontBold.checked
     property alias cfg_counterFontSize: counterFontSize.value
-    property alias cfg_counterSpacing: counterSpacing.value
-    property alias cfg_counterMargins: counterMargins.value
-    property alias cfg_counterOffsetX: counterOffsetX.value
-    property alias cfg_counterOffsetY: counterOffsetY.value
-    property alias cfg_counterCenter: counterCenter.checked
-    property bool cfg_counterTop: plasmoid.configuration.counterTop
-    property bool cfg_counterBottom: plasmoid.configuration.counterBottom
-    property bool cfg_counterRight: plasmoid.configuration.counterRight
-    property bool cfg_counterLeft: plasmoid.configuration.counterLeft
+    property alias cfg_counterGapsInner: counterGapsInner.value
+    property alias cfg_counterGapsOuter: counterGapsOuter.value
 
     property alias cfg_ownIconsUI: ownIconsUI.checked
     property int cfg_defaultTab: plasmoid.configuration.defaultTab
@@ -60,11 +54,23 @@ SimpleKCM {
     property alias cfg_tabBarVisible: tabBarVisible.checked
     property alias cfg_tabBarTexts: tabBarTexts.checked
 
-    property bool inTray: (plasmoid.containmentDisplayHints & PlasmaCore.Types.ContainmentDrawsPlasmoidHeading)
-    property bool onDesktop: plasmoid.location === PlasmaCore.Types.Floating
-    property bool horizontal: plasmoid.location === 3 || plasmoid.location === 4
-    property bool counterOverlay: inTray || !horizontal
-    property bool counterRow: !inTray && horizontal
+    readonly property bool inTray: (plasmoid.containmentDisplayHints & PlasmaCore.Types.ContainmentDrawsPlasmoidHeading)
+    readonly property bool onDesktop: plasmoid.location === PlasmaCore.Types.Floating
+    readonly property bool horizontal: plasmoid.location === PlasmaCore.Types.TopEdge || plasmoid.location === PlasmaCore.Types.BottomEdge
+
+    readonly property bool allowOnlyCounterBadge: inTray || !horizontal
+
+    readonly property bool counterEnabled: cfg_counterMode !== "disabled"
+    readonly property bool sideMode: cfg_counterMode === "side"
+    readonly property bool badgeMode: cfg_counterMode === "badge"
+
+    readonly property var positions: [
+        { name: i18n("Disabled"),     value: "disabled" },
+        { name: i18n("Top-Left"),     value: "topLeft" },
+        { name: i18n("Top-Right"),    value: "topRight" },
+        { name: i18n("Bottom-Left"),  value: "bottomLeft" },
+        { name: i18n("Bottom-Right"), value: "bottomRight" }
+    ]
 
     property int currentTab
     signal tabChanged(currentTab: int)
@@ -74,13 +80,13 @@ SimpleKCM {
         actions: [
             Kirigami.Action {
                 icon.name: "view-list-icons"
-                text: i18n("Panel Icon View")
+                text: i18n("Panel Icon")
                 checked: currentTab === 0
                 onTriggered: currentTab = 0
             },
             Kirigami.Action {
                 icon.name: "view-split-left-right"
-                text: i18n("List View")
+                text: i18n("Full View")
                 checked: currentTab === 1
                 onTriggered: currentTab = 1
             }
@@ -91,25 +97,9 @@ SimpleKCM {
         id: iconViewTab
         visible: currentTab === 0
 
-        Item {
+        Kirigami.Separator {
+            Kirigami.FormData.label: i18n("Icon")
             Kirigami.FormData.isSection: true
-        }
-
-        RowLayout {
-            Kirigami.FormData.label: i18n("Shown when")
-            enabled: counterOverlay
-
-            SpinBox {
-                id: relevantIcon
-                from: 0
-                to: 999
-                stepSize: 1
-                value: relevantIcon.value
-            }
-
-            Label {
-                text: i18np("update is pending ", "updates are pending ", relevantIcon.value)
-            }
         }
 
         Button {
@@ -188,57 +178,283 @@ SimpleKCM {
             }
         }
 
+        RowLayout {
+            Kirigami.FormData.label: i18n("Hide") + ":"
+
+            Label {
+                text: i18n("when less than")
+            }
+
+            SpinBox {
+                Layout.preferredWidth: Kirigami.Units.gridUnit * 3
+                id: hideIconPolicy
+                from: 0
+                to: 999
+                stepSize: 1
+            }
+
+            Label {
+                text: i18np("update", "updates", hideIconPolicy.value)
+            }
+
+            Kirigami.ContextualHelpButton {
+                toolTipText: i18n("If the widget is on a panel, you can access the hidden icon in Panel Configuration mode.")
+            }
+        }
+
+        RowLayout {
+            Kirigami.FormData.label: i18n("Busy indicator") + ":"
+
+            RowLayout {
+                spacing: Kirigami.Units.largeSpacing
+
+                ButtonGroup {
+                    id: busyIndicatorGroup
+                    onCheckedButtonChanged: {
+                        if (checkedButton) {
+                            cfg_busyIndicator = checkedButton.modeValue
+                        }
+                    }
+                }
+
+                RadioButton {
+                    text: i18n("Spinner")
+                    property string modeValue: "spinner"
+                    ButtonGroup.group: busyIndicatorGroup
+                }
+
+                RadioButton {
+                    text: i18n("Pulse")
+                    property string modeValue: "pulse"
+                    ButtonGroup.group: busyIndicatorGroup
+                }
+
+                Component.onCompleted: {
+                    const current = plasmoid.configuration.busyIndicator || "spinner"
+                    for (let i = 0; i < busyIndicatorGroup.buttons.length; ++i) {
+                        const b = busyIndicatorGroup.buttons[i]
+                        if (b.modeValue === current) {
+                            b.checked = true
+                            break
+                        }
+                    }
+                }
+            }
+
+            Kirigami.ContextualHelpButton {
+                toolTipText: i18n("Spinner uses the standard Plasmoid busy indicator. Pulse animates the panel icon. On the desktop, the busy indicator is always off.")
+            }
+        }
+
+        Kirigami.Separator {
+            Kirigami.FormData.label: i18n("Counter")
+            Kirigami.FormData.isSection: true
+        }
+
+        RowLayout {
+            Kirigami.FormData.label: i18n("Mode") + ":"
+
+            RowLayout {
+                id: counterMode
+                spacing: Kirigami.Units.largeSpacing
+
+                ButtonGroup {
+                    id: counterModeGroup
+                    onCheckedButtonChanged: {
+                        if (checkedButton) {
+                            cfg_counterMode = checkedButton.modeValue
+                        }
+                    }
+                }
+                RadioButton {
+                    text: i18n("Off")
+                    property string modeValue: "disabled"
+                    ButtonGroup.group: counterModeGroup
+                }
+                RadioButton {
+                    text: i18n("Side")
+                    property string modeValue: "side"
+                    ButtonGroup.group: counterModeGroup
+                    enabled: !allowOnlyCounterBadge
+                }
+                RadioButton {
+                    text: i18n("Badge")
+                    property string modeValue: "badge"
+                    ButtonGroup.group: counterModeGroup
+                }
+                Component.onCompleted: {
+                    if (allowOnlyCounterBadge && plasmoid.configuration.counterMode === "side") {
+                        plasmoid.configuration.counterMode = "badge"
+                    }
+
+                    for (let i = 0; i < counterModeGroup.buttons.length; ++i) {
+                        const b = counterModeGroup.buttons[i]
+                        if (b.modeValue === plasmoid.configuration.counterMode) {
+                            b.checked = true
+                            break
+                        }
+                    }
+                }
+            }
+        }
+
+        RowLayout {
+            Kirigami.FormData.label: i18n("Position") + ":"
+            ComboBox {
+                id: counterBadgePosition
+                enabled: badgeMode
+                textRole: "name"
+                model: positions.slice(1).concat([{ name: i18n("Center"), value: "center" }])
+                onCurrentIndexChanged: cfg_counterBadgePosition = model[currentIndex].value
+                Component.onCompleted: currentIndex = JS.setIndex(plasmoid.configuration.counterBadgePosition, model)
+            }
+        }
+
+        RowLayout {
+            Kirigami.FormData.label: i18n("Side") + ":"
+            enabled: sideMode
+            spacing: Kirigami.Units.largeSpacing
+            RadioButton {
+                text: i18n("Left")
+                checked: cfg_counterSidePosition === "left"
+                onCheckedChanged: {
+                    if (checked) cfg_counterSidePosition = "left"
+                }
+            }
+            RadioButton {
+                text: i18n("Right")
+                checked: cfg_counterSidePosition === "right"
+                onCheckedChanged: {
+                    if (checked) cfg_counterSidePosition = "right"
+                }
+            }
+        }
+
+        RowLayout {
+            Kirigami.FormData.label: i18n("Gaps") + ":"
+            enabled: sideMode
+            spacing: Kirigami.Units.largeSpacing
+
+            RowLayout {
+                Label { text: i18n("Inner") + ":" }
+                SpinBox {
+                    Layout.preferredWidth: Kirigami.Units.gridUnit * 3
+                    enabled: sideMode
+                    id: counterGapsInner
+                    from: 0
+                    to: 99
+                    stepSize: 1
+                }
+            }
+
+            RowLayout {
+                Label { text: i18n("Outer") + ":" }
+                SpinBox {
+                    Layout.preferredWidth: Kirigami.Units.gridUnit * 3
+                    enabled: sideMode
+                    id: counterGapsOuter
+                    from: 0
+                    to: 99
+                    stepSize: 1
+                }
+            }
+        }
+
+        RowLayout {
+            Kirigami.FormData.label: i18n("Offset") + ":"
+            enabled: badgeMode
+            Label { text: "X:" }
+            SpinBox {
+                Layout.preferredWidth: Kirigami.Units.gridUnit * 3
+                id: counterOffsetX
+                from: -5
+                to: 5
+                stepSize: 1
+            }
+
+            Label { text: "Y:" }
+            SpinBox {
+                Layout.preferredWidth: Kirigami.Units.gridUnit * 3
+                id: counterOffsetY
+                from: -5
+                to: 5
+                stepSize: 1
+            }
+        }
+
         Item {
             Kirigami.FormData.isSection: true
         }
 
-        CheckBox {
-            Kirigami.FormData.label: i18n("Pause badge") + ":"
-            id: badgePaused
-            text: i18n("Enable")
+        ComboBox {
+            Kirigami.FormData.label: i18n("Font family") + ":"
+            Layout.preferredWidth: Kirigami.Units.gridUnit * 12
+            enabled: counterEnabled
+            editable: true
+            textRole: "name"
+            model: {
+                let fonts = Qt.fontFamilies()
+                let arr = []
+                arr.push({"name": i18n("Default system font"), "value": ""})
+                for (let i = 0; i < fonts.length; i++) {
+                    arr.push({"name": fonts[i], "value": fonts[i]})
+                }
+                return arr
+            }
+
+            onCurrentIndexChanged: cfg_counterFontFamily = model[currentIndex]["value"]
+            Component.onCompleted: currentIndex = JS.setIndex(plasmoid.configuration.counterFontFamily, model)
+        }
+
+        Slider {
+            Kirigami.FormData.label: i18n("Font size") + ":"
+            Layout.preferredWidth: Kirigami.Units.gridUnit * 10
+            enabled: counterEnabled
+            id: counterFontSize
+            from: 2
+            to: 8
+            stepSize: 1
         }
 
         CheckBox {
-            Kirigami.FormData.label: i18n("Updated badge") + ":"
-            id: badgeUpdated
+            Kirigami.FormData.label: i18n("Font bold") + ":"
+            enabled: counterEnabled
+            id: counterFontBold
             text: i18n("Enable")
+            onCheckedChanged: cfg_counterFontBold = counterFontBold.checked
         }
 
         Item {
             Kirigami.FormData.isSection: true
-        }
-
-        CheckBox {
-            Kirigami.FormData.label: i18n("Counter") + ":"
-            id: counterEnabled
-            text: i18n("Enable")
-        }
-
-        CheckBox {
-            Kirigami.FormData.label: "On left" + ":"
-            id: counterOnLeft
-            text: i18n("Enable")
-            visible: counterRow
-            enabled: counterEnabled.checked
         }
 
         Button {
-            Kirigami.FormData.label: i18n("Color") + ":"
-            id: counterColor
-
+            Kirigami.FormData.label: i18n("Badge color") + ":"
             Layout.leftMargin: Kirigami.Units.gridUnit
+            enabled: badgeMode
 
-            implicitWidth: Kirigami.Units.gridUnit
-            implicitHeight: implicitWidth
-            visible: counterOverlay
-            enabled: counterEnabled.checked
+            id: counterColor
+            implicitWidth: Kirigami.Units.gridUnit * 4
+            implicitHeight: Kirigami.Units.gridUnit
 
-            background: Rectangle {
-                radius: counterRadius.value
-                border.width: 1
-                border.color: "black"
-                color: cfg_counterColor ? cfg_counterColor : Kirigami.Theme.backgroundColor
+            background: Item {
+                Rectangle {
+                    id: bg
+                    anchors.fill: parent
+                    radius: counterRadius.value
+                    border.width: 1
+                    border.color: "black"
+                    color: cfg_counterColor ? cfg_counterColor : Kirigami.Theme.backgroundColor
+                }
+
+                Text {
+                    anchors.centerIn: parent
+                    text: bg.color.toString().toUpperCase()
+                    font.bold: true
+                    color: Kirigami.ColorUtils.brightnessForColor(bg.color) === Kirigami.ColorUtils.Dark ? "white" : "black"
+                }
             }
+
 
             onPressed: menuColor.opened ? menuColor.close() : menuColor.open()
 
@@ -278,41 +494,20 @@ SimpleKCM {
             ToolTip {
                 text: cfg_counterColor ? cfg_counterColor : i18n("Default background color from current theme")
                 delay: Kirigami.Units.toolTipDelay
-                visible: counterColor.hovered
+                visible: !cfg_counterColor && counterColor.hovered
             }
         }
 
         RowLayout {
-            Kirigami.FormData.label: i18n("Size") + ":"
-            visible: counterOverlay
-            enabled: counterEnabled.checked
+            Kirigami.FormData.label: i18n("Badge radius") + ":"
+            enabled: badgeMode
 
             Slider {
-                id: counterSize
-                from: -5
-                to: 10
-                stepSize: 1
-                value: counterSize.value
-                onValueChanged: plasmoid.configuration.counterSize = counterSize.value
-            }
-
-            Label {
-                text: counterSize.value
-            }
-        }
-
-        RowLayout {
-            Kirigami.FormData.label: i18n("Radius") + ":"
-            visible: counterOverlay
-            enabled: counterEnabled.checked
-
-            Slider {
+                Layout.preferredWidth: Kirigami.Units.gridUnit * 10
                 id: counterRadius
                 from: 0
                 to: 100
                 stepSize: 1
-                value: counterRadius.value
-                onValueChanged: plasmoid.configuration.counterRadius = counterRadius.value
             }
 
             Label {
@@ -321,17 +516,15 @@ SimpleKCM {
         }
 
         RowLayout {
-            Kirigami.FormData.label: i18n("Opacity") + ":"
-            visible: counterOverlay
-            enabled: counterEnabled.checked
+            Kirigami.FormData.label: i18n("Badge opacity") + ":"
+            enabled: badgeMode
 
             Slider {
+                Layout.preferredWidth: Kirigami.Units.gridUnit * 10
                 id: counterOpacity
                 from: 0
                 to: 10
                 stepSize: 1
-                value: counterOpacity.value
-                onValueChanged: plasmoid.configuration.counterOpacity = counterOpacity.value
             }
 
             Label {
@@ -339,244 +532,52 @@ SimpleKCM {
             }
         }
 
-
-        CheckBox {
-            Kirigami.FormData.label: i18n("Shadow") + ":"
-            visible: counterOverlay
-            enabled: counterEnabled.checked
-            id: counterShadow
-            text: i18n("Enable")
+        Kirigami.Separator {
+            Kirigami.FormData.label: i18n("Icon Badges")
+            Kirigami.FormData.isSection: true
         }
 
-        ComboBox {
-            Kirigami.FormData.label: i18n("Font") + ":"
-            enabled: counterEnabled.checked
-            implicitWidth: 250
-            editable: true
-            textRole: "name"
-            model: {
-                let fonts = Qt.fontFamilies()
-                let arr = []
-                arr.push({"name": i18n("Default system font"), "value": ""})
-                for (let i = 0; i < fonts.length; i++) {
-                    arr.push({"name": fonts[i], "value": fonts[i]})
-                }
-                return arr
+        RowLayout {
+            Kirigami.FormData.label: i18n("Paused") + ":"
+            ComboBox {
+                id: pauseBadgePosition
+                textRole: "name"
+                model: positions
+                onCurrentIndexChanged: cfg_pauseBadgePosition = model[currentIndex].value
+                Component.onCompleted: currentIndex = JS.setIndex(plasmoid.configuration.pauseBadgePosition, model)
             }
-
-            onCurrentIndexChanged: cfg_counterFontFamily = model[currentIndex]["value"]
-            Component.onCompleted: currentIndex = JS.setIndex(plasmoid.configuration.counterFontFamily, model)
         }
 
-        CheckBox {
-            Kirigami.FormData.label: i18n("Font bold") + ":"
-            enabled: counterEnabled.checked
-            id: counterFontBold
-            text: i18n("Enable")
-        }
-
-        Slider {
-            Kirigami.FormData.label: i18n("Font size") + ":"
-            visible: counterRow
-            enabled: counterEnabled.checked
-            id: counterFontSize
-            from: 4
-            to: 8
-            stepSize: 1
-            value: counterFontSize.value
-            onValueChanged: plasmoid.configuration.counterFontSize = counterFontSize.value
-        }
-
-        SpinBox {
-            Kirigami.FormData.label: i18n("Left spacing") + ":"
-            visible: counterRow
-            enabled: counterEnabled.checked
-            id: counterSpacing
-            from: 0
-            to: 99
-            stepSize: 1
-            value: counterSpacing.value
-            onValueChanged: plasmoid.configuration.counterSpacing = counterSpacing.value
-        }
-
-        SpinBox {
-            Kirigami.FormData.label: i18n("Side margins") + ":"
-            visible: counterRow
-            id: counterMargins
-            from: 0
-            to: 99
-            stepSize: 1
-            value: counterMargins.value
-            onValueChanged: plasmoid.configuration.counterMargins = counterMargins.value
+        RowLayout {
+            Kirigami.FormData.label: i18n("Updated") + ":"
+            ComboBox {
+                id: updatedBadgePosition
+                textRole: "name"
+                model: positions
+                onCurrentIndexChanged: cfg_updatedBadgePosition = model[currentIndex].value
+                Component.onCompleted: currentIndex = JS.setIndex(plasmoid.configuration.updatedBadgePosition, model)
+            }
         }
 
         RowLayout {
             Kirigami.FormData.label: i18n("Offset") + ":"
-            visible: counterOverlay
-            enabled: counterEnabled.checked
-
             Label { text: "X:" }
             SpinBox {
-                id: counterOffsetX
-                from: -10
-                to: 10
+                Layout.preferredWidth: Kirigami.Units.gridUnit * 3
+                id: badgeOffsetX
+                from: -5
+                to: 5
                 stepSize: 1
-                value: counterOffsetX.value
-                onValueChanged: plasmoid.configuration.counterOffsetX = counterOffsetX.value
             }
 
             Label { text: "Y:" }
             SpinBox {
-                id: counterOffsetY
-                from: -10
-                to: 10
+                Layout.preferredWidth: Kirigami.Units.gridUnit * 3
+                id: badgeOffsetY
+                from: -5
+                to: 5
                 stepSize: 1
-                value: counterOffsetY.value
-                onValueChanged: plasmoid.configuration.counterOffsetY = counterOffsetY.value
             }
-        }
-
-        Item {
-            Kirigami.FormData.isSection: true
-        }
-
-        CheckBox {
-            Kirigami.FormData.label: i18n("Position") + ":"
-            visible: counterOverlay
-            enabled: counterEnabled.checked
-            id: counterCenter
-            text: i18n("Center")
-        }
-
-        GridLayout {
-            Layout.fillWidth: true
-            visible: counterOverlay
-            enabled: counterEnabled.checked
-            columns: 4
-            rowSpacing: 0
-            columnSpacing: 0
-
-            ButtonGroup {
-                id: position
-            }
-
-            Label {
-                Layout.fillHeight: true
-                Layout.alignment: Qt.AlignRight
-                Layout.rightMargin: Kirigami.Units.smallSpacing * 2.5
-                text: i18n("Top-Left")
-
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        topleft.checked = true
-                    }
-                }
-            }
-
-            RadioButton {
-                id: topleft
-                ButtonGroup.group: position
-                checked: cfg_counterTop && cfg_counterLeft
-
-                onCheckedChanged: {
-                    if (checked) {
-                        cfg_counterTop = true
-                        cfg_counterBottom = false
-                        cfg_counterRight = false
-                        cfg_counterLeft = true
-                    }
-                }
-            }
-
-            RadioButton {
-                id: topright
-                ButtonGroup.group: position
-                checked: cfg_counterTop && cfg_counterRight
-
-                onCheckedChanged: {
-                    if (checked) {
-                        cfg_counterTop = true
-                        cfg_counterBottom = false
-                        cfg_counterRight = true
-                        cfg_counterLeft = false
-                    }
-                }
-            }
-
-            Label {
-                Layout.fillHeight: true
-                Layout.alignment: Qt.AlignLeft
-                text: i18n("Top-Right")
-
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        topright.checked = true
-                    }
-                }
-            }
-
-            Label {
-                Layout.fillHeight: true
-                Layout.alignment: Qt.AlignRight
-                Layout.rightMargin: Kirigami.Units.smallSpacing * 2.5
-                text: i18n("Bottom-Left")
-
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        bottomleft.checked = true
-                    }
-                }
-            }
-
-            RadioButton {
-                id: bottomleft
-                ButtonGroup.group: position
-                checked: cfg_counterBottom && cfg_counterLeft
-
-                onCheckedChanged: {
-                    if (checked) {
-                        cfg_counterTop = false
-                        cfg_counterBottom = true
-                        cfg_counterRight = false
-                        cfg_counterLeft = true
-                    }
-                }
-            }
-
-            RadioButton {
-                id: bottomright
-                ButtonGroup.group: position
-                checked: cfg_counterBottom && cfg_counterRight
-
-                onCheckedChanged: {
-                    if (checked) {
-                        cfg_counterTop = false
-                        cfg_counterBottom = true
-                        cfg_counterRight = true
-                        cfg_counterLeft = false
-                    }
-                }
-            }
-
-            Label {
-                Layout.fillHeight: true
-                Layout.alignment: Qt.AlignLeft
-                text: i18n("Bottom-Right")
-
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        bottomright.checked = true
-                    }
-                }
-            }
-        }
-
-        Item {
-            Kirigami.FormData.isSection: true
         }
     }
 
@@ -632,12 +633,11 @@ SimpleKCM {
         RowLayout {
             Kirigami.FormData.label: i18n("Item spacing (Compact)") + ":"
             Slider {
+                Layout.preferredWidth: Kirigami.Units.gridUnit * 10
                 id: spacing
                 from: 0
                 to: 12
                 stepSize: 1
-                value: spacing.value
-                onValueChanged: plasmoid.configuration.spacing = spacing.value
             }
 
             Label {

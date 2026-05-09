@@ -1,5 +1,5 @@
 /*
- * Copyright 2025  Kevin Donnelly
+ * Copyright 2026  Kevin Donnelly
  * Copyright 2022  Rafal (Raf) Liwoch
  *
  * This program is free software; you can redistribute it and/or
@@ -52,7 +52,16 @@ var PRES_UNITS = {
 	INHG: 1,
 	MMHG: 2,
 	HPA: 3,
+	PSI: 4,
 };
+
+function mbToPsi(mb) {
+	return mb * 0.0145037738;
+}
+
+function psiToMb(psi) {
+	return psi / 0.0145037738;
+}
 
 var ELEV_UNITS = {
 	M: 0,
@@ -85,8 +94,7 @@ var hourlyModelDictV3 = {
 	iconCode: "iconCode",
 };
 
-/** Map from Wunderground provided icon codes to opendesktop icon theme descs */
-var iconThemeMapPredefined = {
+var systemIconMap = {
 	0: "weather-storm",
 	1: "weather-storm",
 	2: "weather-storm",
@@ -135,70 +143,99 @@ var iconThemeMapPredefined = {
 	45: "weather-showers-scattered-night",
 	46: "weather-snow-storm-night",
 	47: "weather-storm-night",
+	temperature: "\uF00C",
+	uvIndex: "\uF009",
+	pressure: "\uF00A",
+	cloudCover: "\uF03B",
+	humidity: "\uF008",
+	precipitationChance: "\uF007",
+	precipitationRate: "\uF04C",
+	snowPrecipitationRate: "\uF02D",
+	wind: "\uF040",
+	weatherStation: "\uF00B",
+	compass: "\uF01C",
+	pin: "\uF014",
+	"0-2": "\uF006",
+	"3-7": "\uF005",
+	"8-12": "\uF004",
+	"13-17": "\uF003",
+	"18-22": "\uF002",
+	"23-27": "\uF001",
+	"28-32": "\uF000",
 };
 
-/** Map from Wunderground provided icon codes to opendesktop icon theme descs */
-var iconThemeMapSymbolic = {
-	0: "weather-storm-symbolic",
-	1: "weather-storm-symbolic",
-	2: "weather-storm-symbolic",
-	3: "weather-storm-symbolic",
-	4: "weather-storm-symbolic",
-	5: "weather-snow-rain-symbolic",
-	6: "weather-snow-rain-symbolic",
-	7: "weather-freezing-rain-symbolic",
-	8: "weather-freezing-rain-symbolic",
-	9: "weather-showers-scattered-symbolic",
-	10: "weather-freezing-rain-symbolic",
-	11: "weather-showers-symbolic",
-	12: "weather-showers-symbolic",
-	13: "weather-snow-scattered-symbolic",
-	14: "weather-snow-symbolic",
-	15: "weather-snow-symbolic",
-	16: "weather-snow-symbolic",
-	17: "weather-hail-symbolic",
-	18: "weather-snow-scattered-symbolic",
-	19: "weather-many-clouds-wind-symbolic",
-	20: "weather-fog-symbolic",
-	21: "weather-fog-symbolic",
-	22: "weather-fog-symbolic",
-	23: "weather-clouds-wind-symbolic",
-	24: "weather-clouds-wind-symbolic",
-	25: "weather-snow-symbolic",
-	26: "weather-many-clouds-symbolic",
-	27: "weather-many-clouds-symbolic",
-	28: "weather-clouds-symbolic",
-	29: "weather-clouds-night-symbolic",
-	30: "weather-few-clouds-symbolic",
-	31: "weather-clear-night-symbolic",
-	32: "weather-clear-symbolic",
-	33: "weather-few-clouds-night-symbolic",
-	34: "weather-few-clouds-day-symbolic",
-	35: "weather-freezing-storm-day-symbolic",
-	36: "weather-clear-symbolic",
-	37: "weather-storm-day-symbolic",
-	38: "weather-storm-day-symbolic",
-	39: "weather-showers-scattered-day-symbolic",
-	40: "weather-showers-symbolic",
-	41: "weather-snow-scattered-day-symbolic",
-	42: "weather-snow-symbolic",
-	43: "weather-snow-symbolic",
-	44: "weather-none-available-symbolic",
-	45: "weather-showers-scattered-night-symbolic",
-	46: "weather-snow-storm-night-symbolic",
-	47: "weather-storm-night-symbolic",
-};
-
-var chartIconMap = {
-	temperature: "thermometer",
-	uvIndex: "wi-horizon-alt",
-	pressure: "wi-barometer",
-	cloudCover: 28,
-	humidity: "wi-humidity",
-	precipitationChance: "wi-umbrella",
-	precipitationRate: 11,
-	snowPrecipitationRate: 42,
-	wind: 23,
+var iconMap = {
+	0: "\uF057",
+	1: "\uF056",
+	2: "\uF055",
+	3: "\uF054",
+	4: "\uF053",
+	5: "\uF052",
+	6: "\uF051",
+	7: "\uF050",
+	8: "\uF04F",
+	9: "\uF04E",
+	10: "\uF04D",
+	11: "\uF04C",
+	12: "\uF04B",
+	13: "\uF04A",
+	14: "\uF049",
+	15: "\uF048",
+	16: "\uF047",
+	17: "\uF046",
+	18: "\uF045",
+	19: "\uF044",
+	20: "\uF043",
+	21: "\uF042",
+	22: "\uF041",
+	23: "\uF040",
+	24: "\uF03F",
+	25: "\uF03E",
+	26: "\uF03D",
+	27: "\uF03C",
+	28: "\uF03B",
+	29: "\uF03A",
+	30: "\uF039",
+	31: "\uF038",
+	32: "\uF037",
+	33: "\uF036",
+	34: "\uF035",
+	35: "\uF034",
+	36: "\uF033",
+	37: "\uF032",
+	38: "\uF031",
+	39: "\uF030",
+	40: "\uF02F",
+	41: "\uF02E",
+	42: "\uF02D",
+	43: "\uF02C",
+	44: "\uF02B",
+	45: "\uF02A",
+	46: "\uF029",
+	47: "\uF028",
+	temperature: "\uF00C",
+	uvIndex: "\uF009",
+	pressure: "\uF00A",
+	"pressure@2": "\uF059",
+	cloudCover: "\uF03B",
+	"cloudCover@2": "\uF05B",
+	humidity: "\uF008",
+	"humidity@2": "\uF058",
+	precipitationChance: "\uF007",
+	precipitationRate: "\uF04C",
+	snowPrecipitationRate: "\uF02D",
+	wind: "\uF040",
+	"wind@2": "\uF05A",
+	weatherStation: "\uF00B",
+	compass: "\uF01C",
+	pin: "\uF014",
+	"0-2": "\uF006",
+	"3-7": "\uF005",
+	"8-12": "\uF004",
+	"13-17": "\uF003",
+	"18-22": "\uF002",
+	"23-27": "\uF001",
+	"28-32": "\uF000",
 };
 
 var severityColorMap = {
@@ -268,7 +305,7 @@ function zoomForBoundingBox(bbox, map, padding) {
 
 	var metersPerPixelNeeded = Math.max(
 		widthMeters / availW,
-		heightMeters / availH
+		heightMeters / availH,
 	);
 
 	var initialResolution = 156543.03392804097; // 2πR / 256
@@ -287,11 +324,11 @@ function zoomForCircle(centerCoord, radiusMeters, map, padding) {
 
 	const latMax = Math.asin(
 		Math.sin(lat) * Math.cos(angularRadius) +
-			Math.cos(lat) * Math.sin(angularRadius)
+			Math.cos(lat) * Math.sin(angularRadius),
 	);
 	const latMin = Math.asin(
 		Math.sin(lat) * Math.cos(angularRadius) -
-			Math.cos(lat) * Math.sin(angularRadius)
+			Math.cos(lat) * Math.sin(angularRadius),
 	);
 
 	const latCos = Math.cos(lat);
@@ -301,8 +338,8 @@ function zoomForCircle(centerCoord, radiusMeters, map, padding) {
 			? Math.PI // At poles, span all longitudes
 			: Math.acos(
 					(angularRadiusCos - Math.sin(lat) * Math.sin(latMax)) /
-						(Math.cos(lat) * Math.cos(latMax))
-			  );
+						(Math.cos(lat) * Math.cos(latMax)),
+				);
 
 	const lonMin = lon - lonDelta;
 	const lonMax = lon + lonDelta;
@@ -386,6 +423,18 @@ function mbToInhg(mb) {
 
 function mbToMmhg(mb) {
 	return mb * 0.750062;
+}
+
+function kToC(degK) {
+	return degK - 273.15;
+}
+
+function inhgToMb(inhg) {
+	return inhg / 0.02953;
+}
+
+function mmhgToMb(mmhg) {
+	return mmhg / 0.750062;
 }
 
 /**
@@ -543,22 +592,22 @@ function heatColorC(degC, bgColor) {
 	return degC > 37.78
 		? "#9E1642"
 		: degC > 32.2
-		? "#D53E4F"
-		: degC > 26.6
-		? "#F46D43"
-		: degC > 23.9
-		? "#FDAE61"
-		: degC > 21.1
-		? lightDark(bgColor, "#E2B434", "#FEE08B")
-		: degC > 15.5
-		? lightDark(bgColor, "#B1CC2E", "#E6F598")
-		: degC > 10
-		? lightDark(bgColor, "#6EBA50", "#ABDDA4")
-		: degC > 4.4
-		? lightDark(bgColor, "#66C2A5", "#2F9374")
-		: degC > 0
-		? "#3288BD"
-		: "#5E4FA2";
+			? "#D53E4F"
+			: degC > 26.6
+				? "#F46D43"
+				: degC > 23.9
+					? "#FDAE61"
+					: degC > 21.1
+						? lightDark(bgColor, "#E2B434", "#FEE08B")
+						: degC > 15.5
+							? lightDark(bgColor, "#B1CC2E", "#E6F598")
+							: degC > 10
+								? lightDark(bgColor, "#6EBA50", "#ABDDA4")
+								: degC > 4.4
+									? lightDark(bgColor, "#66C2A5", "#2F9374")
+									: degC > 0
+										? "#3288BD"
+										: "#5E4FA2";
 }
 
 /**
@@ -574,22 +623,22 @@ function heatColorF(degF, bgColor) {
 	return degF > 100
 		? "#9E1642"
 		: degF > 90
-		? "#D53E4F"
-		: degF > 80
-		? "#F46D43"
-		: degF > 75
-		? "#FDAE61"
-		: degF > 70
-		? lightDark(bgColor, "#E2B434", "#FEE08B")
-		: degF > 60
-		? lightDark(bgColor, "#B1CC2E", "#E6F598")
-		: degF > 50
-		? lightDark(bgColor, "#6EBA50", "#ABDDA4")
-		: degF > 40
-		? lightDark(bgColor, "#66C2A5", "#2F9374")
-		: degF > 32
-		? "#3288BD"
-		: "#5E4FA2";
+			? "#D53E4F"
+			: degF > 80
+				? "#F46D43"
+				: degF > 75
+					? "#FDAE61"
+					: degF > 70
+						? lightDark(bgColor, "#E2B434", "#FEE08B")
+						: degF > 60
+							? lightDark(bgColor, "#B1CC2E", "#E6F598")
+							: degF > 50
+								? lightDark(bgColor, "#6EBA50", "#ABDDA4")
+								: degF > 40
+									? lightDark(bgColor, "#66C2A5", "#2F9374")
+									: degF > 32
+										? "#3288BD"
+										: "#5E4FA2";
 }
 
 /**
@@ -662,6 +711,8 @@ function getWindBarbIcon(windSpeed) {
 		speedKts = kmhToKts(windSpeed);
 	}
 
+	printDebug(speedKts)
+
 	if (within(speedKts, 0, 2.9999)) {
 		fileName = "0-2";
 	} else if (within(speedKts, 3, 7.9999)) {
@@ -684,29 +735,14 @@ function getWindBarbIcon(windSpeed) {
 }
 
 /**
- * Return the icon representing a weather condition.
+ * Return the icon representing a weather condition or info element.
  *
- * @param {number} code Wunderground provided icon code
- * @returns {string} Either an opendesktop icon name or path to custom icon
+ * @param {number} codeID Identifier code for the icon
+ * @param {boolean} [useSystemThemeIcons=false] Whether to show system bundled icons
+ * @returns {string} opendesktop icon name or unicode escape string
  */
-function getConditionIcon(code) {
-	if (plasmoid.configuration.useSystemThemeIcons) {
-		if (plasmoid.configuration.applyColorScheme) {
-			return iconThemeMapSymbolic[code];
-		} else {
-			return iconThemeMapPredefined[code];
-		}
-	} else {
-		return Qt.resolvedUrl("../icons/" + code + ".svg");
-	}
-}
-
-function getChartIcon(code) {
-	return Qt.resolvedUrl("../icons/" + chartIconMap[code] + ".svg");
-}
-
-function getIcon(code) {
-	return Qt.resolvedUrl("../icons/" + code + ".svg");
+function getConditionIcon(codeID, useSystemThemeIcons = false) {
+	return useSystemThemeIcons ? systemIconMap[codeID] : iconMap[codeID];
 }
 
 /**
@@ -915,17 +951,6 @@ function currentElevUnit(value) {
 }
 
 /**
- * Get hostname
- *
- * @returns {string} hostname
- */
-function getAPIHost() {
-	var hosts = ["aaa", "a91", "0a3", "75b", "fd6"];
-	var host = hosts[Math.floor(Math.random() * hosts.length)];
-	return "https://wps.mitchell-" + host + ".workers.dev";
-}
-
-/**
  * Take in API precip and convert it to user choosen units.
  * When a user chooses custom units, the API returns metric. So,
  * convert from metric to choice.
@@ -1053,6 +1078,10 @@ function toUserPres(value) {
 			return mbToInhg(value);
 		} else if (plasmoid.configuration.presUnitsChoice === PRES_UNITS.MMHG) {
 			return mbToMmhg(value);
+		} else if (plasmoid.configuration.presUnitsChoice === PRES_UNITS.HPA) {
+			return value; // hPa and mb are equivalent
+		} else if (plasmoid.configuration.presUnitsChoice === PRES_UNITS.PSI) {
+			return mbToPsi(value);
 		} else {
 			return value;
 		}
@@ -1063,9 +1092,9 @@ function toUserPres(value) {
 }
 
 /**
- * Return the user's choice of temperature unit with no additional data.
+ * Return the user's choice of pressure unit with no additional data.
  *
- * @returns {"mb"|"inHG"|"mmHG"|"hPa"} User choosen unit
+ * @returns {"mb"|"inHG"|"mmHG"|"hPa"|"psi"} User choosen unit
  */
 function rawPresUnit() {
 	var res = "";
@@ -1082,6 +1111,10 @@ function rawPresUnit() {
 			res = "inHG";
 		} else if (plasmoid.configuration.presUnitsChoice === PRES_UNITS.MMHG) {
 			res = "mmHG";
+		} else if (plasmoid.configuration.presUnitsChoice === PRES_UNITS.HPA) {
+			res = "hPa";
+		} else if (plasmoid.configuration.presUnitsChoice === PRES_UNITS.PSI) {
+			res = "psi";
 		} else {
 			res = "hPa";
 		}
@@ -1093,7 +1126,7 @@ function rawPresUnit() {
  * Take in a numeric pressure value and return a string
  * with the user specified unit attached.
  *
- * @param {number} value Precipitation
+ * @param {number} value Pressure
  *
  * @returns {string} User-shown value
  */
@@ -1124,5 +1157,236 @@ function toUserProp(value, prop) {
 		return toUserPres(value);
 	} else {
 		return value;
+	}
+}
+
+/**
+ * Get hostname
+ *
+ * @returns {string} hostname
+ */
+function getAPIHost() {
+	var hosts = ["aaa", "a91", "0a3", "75b", "fd6"];
+	var host = hosts[Math.floor(Math.random() * hosts.length)];
+	return "https://wps.mitchell-" + host + ".workers.dev";
+}
+
+/**
+ * Calculate total light time between sunrise and sunset
+ *
+ * @param {string} sunrise Time in HH:MM format
+ * @param {string} sunset Time in HH:MM format
+ * @returns {string} Total light time in HH:MM format or "N/A"
+ */
+function calculateTotalLightTime(sunrise, sunset) {
+	if (!sunrise || !sunset) return "N/A";
+	try {
+		var riseParts = sunrise.split(":");
+		var setParts = sunset.split(":");
+		var riseDate = new Date();
+		riseDate.setHours(parseInt(riseParts[0]), parseInt(riseParts[1]), 0, 0);
+		var setDate = new Date();
+		setDate.setHours(parseInt(setParts[0]), parseInt(setParts[1]), 0, 0);
+		if (setDate < riseDate) {
+			setDate.setDate(setDate.getDate() + 1); // Next day
+		}
+		var diffMs = setDate - riseDate;
+		var diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+		var diffMins = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+		return diffHours + ":" + (diffMins < 10 ? "0" : "") + diffMins;
+	} catch (e) {
+		return "N/A";
+	}
+}
+
+function calculateTimeDifference(startDate, endDate, isShowSeconds) {
+	printDebug(
+		`Calculating time difference between ${startDate} and ${endDate}`,
+	);
+	var diff = new Date(endDate).getTime() - new Date(startDate).getTime();
+	
+	if (isNaN(diff) || diff < 0) {
+		printDebug(`Invalid time difference: ${diff}`);
+		return "N/A";
+	}
+
+	var totalSeconds = Math.floor(diff / 1000);
+	var hours = Math.floor(totalSeconds / 3600);
+	var minutes = Math.floor((totalSeconds % 3600) / 60);
+	var seconds = totalSeconds % 60;
+
+	printDebug(`Time difference reported as: ${hours}h ${minutes}m ${seconds}s`);
+
+	if (isShowSeconds) {
+		return `${hours}h ${minutes}m ${seconds}s`;
+	} else {
+		return `${hours}h ${minutes}m`;
+	}
+}
+
+function calculateNeedlePosition(startDate, endDate) {
+	printDebug("Calculating needle position");
+	var startTs = new Date(startDate).getTime();
+	var endTs = new Date(endDate).getTime();
+	var nowTs = new Date().getTime();
+
+	if (nowTs < startTs) {
+		return 0;
+	} else if (nowTs > endTs) {
+		return 100;
+	}
+
+	var diff = endTs - startTs;
+
+	var nowDiff = endTs - nowTs;
+
+	var result = Math.round((nowDiff * 100) / diff);
+
+	if (result < 0) {
+		result = 0;
+	} else if (result > 100) {
+		result = 100;
+	}
+
+	printDebug(
+		`Start ${startTs}, End: ${endTs}, diff: ${diff}, nowDiff: ${nowDiff}, effective needle: ${100 - result}`,
+	);
+
+	return 100 - result;
+}
+
+function getDayLength(startDate, endDate, isShowSeconds) {
+	var dayLength = Utils.calculateTimeDifference(startDate, endDate, isShowSeconds);
+
+	return dayLength;
+}
+
+function remainingUntilSinceDaylight(startDate, endDate, isShowSeconds) {
+	var rise = new Date(startDate);
+	var set = new Date(endDate);
+	var now = new Date();
+	var timeSunlight = "";
+
+	printDebug(`Rise ${rise}, Set: ${set}, Now: ${now}`);
+
+	if (now.getTime() < rise.getTime()) {
+		timeSunlight =
+			i18n("To sunrise") +
+			": " +
+			Utils.calculateTimeDifference(now, rise, isShowSeconds);
+
+		printDebug(` ${timeSunlight}`);
+	} else if (
+		now.getTime() >= rise.getTime() &&
+		now.getTime() < +set.getTime()
+	) {
+		timeSunlight =
+			i18nc("Daylight remaining time, keep short", "Remaining") +
+			": " +
+			Utils.calculateTimeDifference(now, set, isShowSeconds);
+		printDebug(` ${timeSunlight}`);
+	} else if (now.getTime() > set.getTime()) {
+		timeSunlight =
+			i18n("Since sunset") +
+			": " +
+			Utils.calculateTimeDifference(set, now, isShowSeconds);
+		printDebug(`${timeSunlight}`);
+	}
+
+	return timeSunlight;
+}
+
+function getMoonPhaseIcon(phaseCode) {
+	var moonPhasesDict = {
+		N: "\uF068",
+		WXC: "\uF066",
+		FQ: "\uF06A",
+		WXG: "\uF067",
+		F: "\uF069",
+		WNG: "\uF065",
+		LQ: "\uF063",
+		WNC: "\uF064",
+	};
+
+	return moonPhasesDict[phaseCode];
+}
+
+/**
+ * Convert temperature from user units to degrees Celsius.
+ *
+ * @param {number} value Temperature in user units
+ * @returns {number} Temperature in degrees Celsius
+ */
+function userTempToC(value) {
+	if (unitsChoice === UNITS_SYSTEM.CUSTOM) {
+		if (plasmoid.configuration.tempUnitsChoice === TEMP_UNITS.C) {
+			return value;
+		} else if (plasmoid.configuration.tempUnitsChoice === TEMP_UNITS.F) {
+			return fToC(value);
+		} else {
+			return kToC(value);
+		}
+	} else {
+		if (unitsChoice === UNITS_SYSTEM.IMPERIAL) {
+			return fToC(value);
+		} else {
+			return value;
+		}
+	}
+}
+
+/**
+ * Convert pressure from user units to hPa (hectopascals).
+ *
+ * @param {number} value Pressure in user units
+ * @returns {number} Pressure in hPa
+ */
+function userPresToHpa(value) {
+	if (unitsChoice === UNITS_SYSTEM.CUSTOM) {
+		if (plasmoid.configuration.presUnitsChoice === PRES_UNITS.MB || plasmoid.configuration.presUnitsChoice === PRES_UNITS.HPA) {
+			return value;
+		} else if (plasmoid.configuration.presUnitsChoice === PRES_UNITS.INHG) {
+			return inhgToMb(value);
+		} else if (plasmoid.configuration.presUnitsChoice === PRES_UNITS.MMHG) {
+			return mmhgToMb(value);
+		} else if (plasmoid.configuration.presUnitsChoice === PRES_UNITS.PSI) {
+			return psiToMb(value);
+		}
+	} else {
+		if (unitsChoice === UNITS_SYSTEM.IMPERIAL) {
+			return inhgToMb(value);
+		} else {
+			return value;
+		}
+	}
+}
+
+/**
+ * Convert API temperature value to degrees Celsius.
+ * API units depend on unitsChoice: CUSTOM=C, IMPERIAL=F, METRIC/HYBRID=C
+ *
+ * @param {number} value Temperature from API
+ * @returns {number} Temperature in degrees Celsius
+ */
+function apiTempToC(value) {
+	if (unitsChoice === UNITS_SYSTEM.CUSTOM || unitsChoice === UNITS_SYSTEM.METRIC || unitsChoice === UNITS_SYSTEM.HYBRID) {
+		return value; // Already in C
+	} else if (unitsChoice === UNITS_SYSTEM.IMPERIAL) {
+		return fToC(value); // Convert F to C
+	}
+}
+
+/**
+ * Convert API pressure value to hPa (hectopascals).
+ * API units depend on unitsChoice: CUSTOM=mb, IMPERIAL=inHG, METRIC/HYBRID=mb
+ *
+ * @param {number} value Pressure from API
+ * @returns {number} Pressure in hPa
+ */
+function apiPresToHpa(value) {
+	if (unitsChoice === UNITS_SYSTEM.CUSTOM || unitsChoice === UNITS_SYSTEM.METRIC || unitsChoice === UNITS_SYSTEM.HYBRID) {
+		return value; // Already in mb/hPa
+	} else if (unitsChoice === UNITS_SYSTEM.IMPERIAL) {
+		return inhgToMb(value); // Convert inHG to mb
 	}
 }

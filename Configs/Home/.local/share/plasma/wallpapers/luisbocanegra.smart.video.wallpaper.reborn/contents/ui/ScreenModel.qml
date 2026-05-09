@@ -17,7 +17,6 @@
  */
 
 import QtQuick
-import org.kde.plasma.plasma5support as P5Support
 
 Item {
     id: root
@@ -27,28 +26,10 @@ Item {
     property string screenStateCmd
     property bool screenStateCmdRunning: false
     property bool checkScreenState: false
+    property string instanceId
 
     RunCommand {
         id: runCommand
-        onExited: (cmd, exitCode, exitStatus, stdout, stderr) => {
-            if (cmd === root.screenStateCmd)
-                root.screenStateCmdRunning = false;
-            if (exitCode !== 0)
-                return;
-            if (cmd === root.screenStateCmd) {
-                if (stdout.length > 0) {
-                    stdout = stdout.trim().toLowerCase();
-                    root.screenIsOff = stdout === "0" || stdout.includes("off");
-                }
-            }
-        }
-    }
-
-    function dumpProps(obj) {
-        console.error("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-        for (var k of Object.keys(obj)) {
-            print(k + "=" + obj[k] + "\n");
-        }
     }
 
     DBusSignalMonitor {
@@ -61,17 +42,24 @@ Item {
                 root.screenIsLocked = message.trim() === "true";
             }
         }
+        instanceId: root.instanceId
     }
 
     Timer {
         id: screenTimer
         running: root.checkScreenState
         repeat: true
-        interval: 200
+        interval: 1000
         onTriggered: {
             if (root.checkScreenState && !root.screenStateCmdRunning) {
                 root.screenStateCmdRunning = true;
-                runCommand.run(root.screenStateCmd);
+                runCommand.exec(root.screenStateCmd, output => {
+                    root.screenStateCmdRunning = false;
+                    if (output.exitCode === 0 && output.stdout.length > 0) {
+                        const out = output.stdout.trim().toLowerCase();
+                        root.screenIsOff = out === "0" || out === "off";
+                    }
+                });
             }
         }
     }

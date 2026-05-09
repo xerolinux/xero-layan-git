@@ -3,12 +3,11 @@
 # This file is distributed under the same license as the apdatifier package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: apdatifier\n"
 "Report-Msgid-Bugs-To: https://github.com/exequtic/apdatifier\n"
-"POT-Creation-Date: 2026-01-02 16:32+0300\n"
+"POT-Creation-Date: 2026-02-22 11:04+0300\n"
 "PO-Revision-Date: 2025-12-05 11:00+0300\n"
 "Last-Translator: Your Name <your.email@example.com>\n"
 "Language-Team: Turkish <LL@li.org>\n"
@@ -22,9 +21,9 @@ msgstr ""
 msgid "General"
 msgstr "Genel"
 
-#: ../contents/config/config.qml ../contents/tools/sh/messages
-msgid "Upgrade"
-msgstr "Yükselt"
+#: ../contents/config/config.qml
+msgid "Upgrade & Management"
+msgstr ""
 
 #: ../contents/config/config.qml
 msgid "Appearance"
@@ -53,6 +52,10 @@ msgstr "Flatpak Yükseltmesi"
 #: ../contents/tools/sh/messages
 msgid "Plasma Widgets Upgrade"
 msgstr "Plasma Widget'ları Yükseltmesi"
+
+#: ../contents/tools/sh/messages
+msgid "Upgrade"
+msgstr "Yükselt"
 
 #: ../contents/tools/sh/messages
 msgid "Total execution time:"
@@ -97,6 +100,10 @@ msgstr "Yansı listesi dosyasına yazmak için sudo yetkileri gereklidir"
 #: ../contents/tools/sh/messages
 msgid "Your current mirrorlist:"
 msgstr "Geçerli yansı listeniz:"
+
+#: ../contents/tools/sh/messages
+msgid "Refresh mirror list?"
+msgstr ""
 
 #: ../contents/tools/sh/messages
 msgid "For some widgets you may need to Log Out or restart plasmashell after upgrade"
@@ -174,57 +181,101 @@ msgstr "Birden fazla dosya sürüme göre etiketlendi"
 msgid "Failed to download the package"
 msgstr "Paket indirilemedi"
 
-#: ../contents/tools/sh/messages
-msgid "Cannot fetch news "
-msgstr "Haberler alınamıyor "
+#: ../contents/tools/sh/messages ../contents/ui/components/ComboBox.qml ../contents/ui/configuration/Upgrade.qml ../contents/ui/main.qml ../contents/ui/representation/Expanded.qml
+msgid "Management"
+msgstr "Yönetim"
 
 #: ../contents/tools/sh/messages
-msgid "List all available packages in repositories"
-msgstr "Depolardaki tüm mevcut paketleri listele"
+msgid "Browse available"
+msgstr ""
 
 #: ../contents/tools/sh/messages
-msgid "List all installed packages"
-msgstr "Tüm kurulu paketleri listele"
+msgid "Search all available packages and select what to install"
+msgstr ""
 
 #: ../contents/tools/sh/messages
-msgid "List explicitly installed packages"
-msgstr "Açıkça kurulan paketleri listele"
+msgid "Manage installed"
+msgstr ""
 
 #: ../contents/tools/sh/messages
-msgid "List explicitly installed packages and isn't a dependency of anything"
-msgstr "Açıkça kurulan paketleri ve bir şeyin bağımlılığı olmayanları listele"
+msgid "View installed packages and select what to remove"
+msgstr ""
 
 #: ../contents/tools/sh/messages
-msgid "List installed dependencies that aren't needed anymore (orphans)"
-msgstr "Artık ihtiyaç duyulmayan kurulu bağımlılıkları listele (sahipsiz)"
+msgid "Explicit installs"
+msgstr ""
 
 #: ../contents/tools/sh/messages
-msgid "Uninstall orphan packages"
-msgstr "Sahipsiz paketleri kaldır"
+msgid "Show packages you installed directly"
+msgstr ""
 
 #: ../contents/tools/sh/messages
-msgid "Install (downgrade) a package from cache"
-msgstr "Önbellekten bir paketi kur (sürüm düşür)"
+msgid "List explicit installs"
+msgstr ""
 
 #: ../contents/tools/sh/messages
-msgid "Remove ALL cached packages"
-msgstr "TÜM önbelleğe alınmış paketleri kaldır"
+msgid "List unneeded explicit"
+msgstr ""
 
 #: ../contents/tools/sh/messages
-msgid "Remove cached packages that are not currently installed"
-msgstr "Şu anda kurulu olmayan önbelleğe alınmış paketleri kaldır"
+msgid "Orphaned dependency"
+msgstr ""
 
 #: ../contents/tools/sh/messages
-msgid "Rebuild AUR python packages after python upgrade"
-msgstr "Python yükseltmesinden sonra AUR python paketlerini yeniden oluştur"
+msgid "Dependencies that are no longer needed by anything installed"
+msgstr ""
 
 #: ../contents/tools/sh/messages
-msgid "Refresh mirrorlist"
-msgstr "Yansı listesini yenile"
+msgid "List orphans"
+msgstr ""
 
 #: ../contents/tools/sh/messages
-msgid "Exit"
-msgstr "Çıkış"
+msgid "Remove orphans"
+msgstr ""
+
+#: ../contents/tools/sh/messages
+msgid "Downgrade from cache"
+msgstr ""
+
+#: ../contents/tools/sh/messages
+msgid "Clean cache"
+msgstr ""
+
+#: ../contents/tools/sh/messages
+msgid "Remove cached files to free disk space"
+msgstr ""
+
+#: ../contents/tools/sh/messages
+msgid "Remove all cache"
+msgstr ""
+
+#: ../contents/tools/sh/messages
+msgid "Remove unused cache"
+msgstr ""
+
+#: ../contents/tools/sh/messages
+msgid "Rebuild packages"
+msgstr ""
+
+#: ../contents/tools/sh/messages
+msgid "Select packages that need reinstall with rebuild"
+msgstr ""
+
+#: ../contents/tools/sh/messages
+msgid "Rebuild AUR packages"
+msgstr ""
+
+#: ../contents/tools/sh/messages
+msgid "Detect Python packages to rebuild"
+msgstr ""
+
+#: ../contents/tools/sh/messages
+msgid "Refresh mirrors"
+msgstr ""
+
+#: ../contents/tools/sh/messages
+msgid "Recent installs"
+msgstr ""
 
 #: ../contents/tools/sh/messages
 msgid "Review dependency warnings before removing"
@@ -239,8 +290,8 @@ msgid "Press Enter to return menu"
 msgstr "Menüye dönmek için Enter tuşuna basın"
 
 #: ../contents/tools/sh/messages
-msgid "Search:"
-msgstr "Arama:"
+msgid "Calculating..."
+msgstr ""
 
 #: ../contents/tools/sh/messages
 msgid "Executed:"
@@ -253,6 +304,10 @@ msgstr "Yapılacak bir şey yok"
 #: ../contents/tools/sh/messages ../contents/ui/configuration/General.qml
 msgid "Required installed"
 msgstr "Gerekli kuruldu"
+
+#: ../contents/tools/sh/messages
+msgid "Cannot fetch news "
+msgstr "Haberler alınamıyor "
 
 #: ../contents/tools/tools.js
 msgid "Exit code: "
@@ -288,7 +343,7 @@ msgstr "Widget güncellemeleri kontrol ediliyor..."
 
 #: ../contents/tools/tools.js
 msgid "Checking firmware updates..."
-msgstr ""
+msgstr "Aygıt yazılımı güncellemeleri kontrol ediliyor..."
 
 #: ../contents/tools/tools.js
 msgid "latest commit"
@@ -296,11 +351,11 @@ msgstr "en son commit"
 
 #: ../contents/tools/tools.js
 msgid "Explicitly installed"
-msgstr ""
+msgstr "Açıkça yüklendi"
 
 #: ../contents/tools/tools.js
 msgid "Installed as a dependency"
-msgstr ""
+msgstr "Bağımlılık olarak yüklendi"
 
 #: ../contents/tools/tools.js ../contents/ui/representation/Expanded.qml
 msgid "%1 error occurred"
@@ -376,10 +431,6 @@ msgstr "Sistemi yükselt"
 msgid "Pause auto check"
 msgstr "Otomatik kontrolü duraklat"
 
-#: ../contents/ui/components/ComboBox.qml ../contents/ui/main.qml ../contents/ui/representation/Expanded.qml
-msgid "Management"
-msgstr "Yönetim"
-
 #: ../contents/ui/components/Notification.qml ../contents/ui/scrollview/News.qml
 msgid "Read article"
 msgstr "Makaleyi oku"
@@ -388,119 +439,9 @@ msgstr "Makaleyi oku"
 msgid "System updated"
 msgstr "Sistem güncellendi"
 
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Panel Icon View"
-msgstr "Panel Simge Görünümü"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "List View"
-msgstr "Liste Görünümü"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Shown when"
-msgstr "Gösterildiğinde"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "update is pending "
-msgid_plural "updates are pending "
-msgstr[0] "güncelleme bekliyor "
-msgstr[1] "güncelleme bekliyor "
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Default"
-msgstr "Varsayılan"
-
-#: ../contents/ui/configuration/Appearance.qml ../contents/ui/representation/Expanded.qml
-msgid "Select..."
-msgstr "Seç..."
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Default icon"
-msgstr "Varsayılan simge"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Pause badge"
-msgstr "Duraklat rozeti"
-
 #: ../contents/ui/configuration/Appearance.qml ../contents/ui/configuration/Upgrade.qml
-msgid "Enable"
-msgstr "Etkinleştir"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Updated badge"
-msgstr "Güncellenmiş rozet"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Counter"
-msgstr "Sayaç"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Color"
-msgstr "Renk"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Default color"
-msgstr "Varsayılan renk"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Select counter background color"
-msgstr "Sayaç arka plan rengini seçin"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Default background color from current theme"
-msgstr "Geçerli temadan varsayılan arka plan rengi"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Size"
-msgstr "Boyut"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Radius"
-msgstr "Yarıçap"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Opacity"
-msgstr "Saydamlık"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Shadow"
-msgstr "Gölge"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Font"
-msgstr "Yazı tipi"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Default system font"
-msgstr "Varsayılan sistem yazı tipi"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Font bold"
-msgstr "Kalın yazı tipi"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Font size"
-msgstr "Yazı tipi boyutu"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Left spacing"
-msgstr "Sol boşluk"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Side margins"
-msgstr "Kenar boşlukları"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Offset"
-msgstr "Uzaklık"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Position"
-msgstr "Konum"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Center"
-msgstr "Orta"
+msgid "Disabled"
+msgstr "Devre dışı"
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Top-Left"
@@ -517,6 +458,172 @@ msgstr "Alt-Sol"
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Bottom-Right"
 msgstr "Alt-Sağ"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Panel Icon"
+msgstr "Panel simgesi"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Full View"
+msgstr "Tam görünüm"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Icon"
+msgstr "Simge"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Default"
+msgstr "Varsayılan"
+
+#: ../contents/ui/configuration/Appearance.qml ../contents/ui/representation/Expanded.qml
+msgid "Select..."
+msgstr "Seç..."
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Default icon"
+msgstr "Varsayılan simge"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Hide"
+msgstr "Gizle"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "when less than"
+msgstr "şundan az olduğunda"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "update"
+msgid_plural "updates"
+msgstr[0] "güncelleme"
+msgstr[1] "güncelleme"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "If the widget is on a panel, you can access the hidden icon in Panel Configuration mode."
+msgstr "Widget bir panel üzerindeyse, Panel Yapılandırma modunda gizli simgeye erişebilirsiniz."
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Busy indicator"
+msgstr "Meşgul göstergesi"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Spinner"
+msgstr "Döndürücü"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Pulse"
+msgstr "Nabız"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Spinner uses the standard Plasmoid busy indicator. Pulse animates the panel icon. On the desktop, the busy indicator is always off."
+msgstr "Döndürücü, standart Plasmoid meşgul göstergesini kullanır. Nabız, panel simgesini canlandırır. Masaüstünde meşgul göstergesi her zaman kapalıdır."
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Counter"
+msgstr "Sayaç"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Mode"
+msgstr "Mod"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Off"
+msgstr "Kapalı"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Side"
+msgstr "Yan"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Badge"
+msgstr "Rozet"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Position"
+msgstr "Konum"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Center"
+msgstr "Orta"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Left"
+msgstr "Sol"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Right"
+msgstr "Sağ"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Gaps"
+msgstr "Boşluklar"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Inner"
+msgstr "İç"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Outer"
+msgstr "Dış"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Offset"
+msgstr "Uzaklık"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Font family"
+msgstr "Yazı tipi ailesi"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Default system font"
+msgstr "Varsayılan sistem yazı tipi"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Font size"
+msgstr "Yazı tipi boyutu"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Font bold"
+msgstr "Kalın yazı tipi"
+
+#: ../contents/ui/configuration/Appearance.qml ../contents/ui/configuration/Upgrade.qml
+msgid "Enable"
+msgstr "Etkinleştir"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Badge color"
+msgstr "Rozet rengi"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Default color"
+msgstr "Varsayılan renk"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Select counter background color"
+msgstr "Sayaç arka plan rengini seçin"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Default background color from current theme"
+msgstr "Geçerli temadan varsayılan arka plan rengi"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Badge radius"
+msgstr "Rozet yarıçapı"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Badge opacity"
+msgstr "Rozet opaklığı"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Icon Badges"
+msgstr "Simge rozetleri"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Paused"
+msgstr "Duraklatıldı"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Updated"
+msgstr "Güncellendi"
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Use built-in icons"
@@ -724,7 +831,7 @@ msgstr "<br><br>Widget geliştiricileri için:<br>metadata.json dosyasını gün
 
 #: ../contents/ui/configuration/General.qml
 msgid "Firmware"
-msgstr ""
+msgstr "Aygıt yazılımı"
 
 #: ../contents/ui/configuration/General.qml ../contents/ui/representation/Expanded.qml
 msgid "News"
@@ -810,11 +917,11 @@ msgstr "Gizlenmiş araç ipuçlarını geri yükle"
 
 #: ../contents/ui/configuration/General.qml
 msgid "Reset to default. By default, the path is the same as for checkupdates."
-msgstr ""
+msgstr "Varsayılana sıfırla. Varsayılan olarak yol, checkupdates ile aynıdır."
 
 #: ../contents/ui/configuration/General.qml
 msgid "Path must not contain spaces"
-msgstr ""
+msgstr "Yol boşluk içeremez"
 
 #: ../contents/ui/configuration/Rules.qml
 msgid "Unimportant"
@@ -933,6 +1040,30 @@ msgid "Running your command or script AFTER the upgrade.<br>For example, you can
 msgstr "Yükseltmeden SONRA komutunuzu veya betiğinizi çalıştırır.<br>Örneğin, başka bir şeyi yükseltmek için komutunuzu belirtebilirsiniz."
 
 #: ../contents/ui/configuration/Upgrade.qml
+msgid "No Flatpak options"
+msgstr ""
+
+#: ../contents/ui/configuration/Upgrade.qml
+msgid "Hide headers"
+msgstr ""
+
+#: ../contents/ui/configuration/Upgrade.qml
+msgid "Hide help"
+msgstr ""
+
+#: ../contents/ui/configuration/Upgrade.qml
+msgid "Hide option numbers"
+msgstr ""
+
+#: ../contents/ui/configuration/Upgrade.qml
+msgid "Fzf options"
+msgstr ""
+
+#: ../contents/ui/configuration/Upgrade.qml
+msgid "Override default fzf options.<br>See <b>fzf --help</b> for available options."
+msgstr ""
+
+#: ../contents/ui/configuration/Upgrade.qml
 msgid "Wrapper"
 msgstr "Wrapper"
 
@@ -967,10 +1098,6 @@ msgstr "Ayrıca bkz. https://archlinux.org/mirrorlist (bağlantıyı açmak içi
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Generator"
 msgstr "Oluşturucu"
-
-#: ../contents/ui/configuration/Upgrade.qml
-msgid "Disabled"
-msgstr "Devre dışı"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Always ask"
@@ -1012,7 +1139,7 @@ msgstr "Yansı listesi dosyasına yazılacak sunucu sayısı. Tümü için 0."
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Show progress"
-msgstr ""
+msgstr "İlerlemeyi göster"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Country"
@@ -1126,6 +1253,10 @@ msgstr "Sürüm notlarını kontrol et"
 msgid "Dismiss"
 msgstr "Reddet"
 
+#: ../contents/ui/representation/Expanded.qml
+msgid "No internet connection"
+msgstr ""
+
 #: ../contents/ui/scrollview/Extended.qml
 msgid "Upgrade package"
 msgstr "Paketi yükselt"
@@ -1205,3 +1336,42 @@ msgstr "Okunmamış haber yok"
 #: ../contents/ui/scrollview/News.qml
 msgid "Restore list"
 msgstr "Listeyi geri yükle"
+
+#~ msgid "List all available packages in repositories"
+#~ msgstr "Depolardaki tüm mevcut paketleri listele"
+
+#~ msgid "List all installed packages"
+#~ msgstr "Tüm kurulu paketleri listele"
+
+#~ msgid "List explicitly installed packages"
+#~ msgstr "Açıkça kurulan paketleri listele"
+
+#~ msgid "List explicitly installed packages and isn't a dependency of anything"
+#~ msgstr "Açıkça kurulan paketleri ve bir şeyin bağımlılığı olmayanları listele"
+
+#~ msgid "List installed dependencies that aren't needed anymore (orphans)"
+#~ msgstr "Artık ihtiyaç duyulmayan kurulu bağımlılıkları listele (sahipsiz)"
+
+#~ msgid "Uninstall orphan packages"
+#~ msgstr "Sahipsiz paketleri kaldır"
+
+#~ msgid "Install (downgrade) a package from cache"
+#~ msgstr "Önbellekten bir paketi kur (sürüm düşür)"
+
+#~ msgid "Remove ALL cached packages"
+#~ msgstr "TÜM önbelleğe alınmış paketleri kaldır"
+
+#~ msgid "Remove cached packages that are not currently installed"
+#~ msgstr "Şu anda kurulu olmayan önbelleğe alınmış paketleri kaldır"
+
+#~ msgid "Rebuild AUR python packages after python upgrade"
+#~ msgstr "Python yükseltmesinden sonra AUR python paketlerini yeniden oluştur"
+
+#~ msgid "Refresh mirrorlist"
+#~ msgstr "Yansı listesini yenile"
+
+#~ msgid "Exit"
+#~ msgstr "Çıkış"
+
+#~ msgid "Search:"
+#~ msgstr "Arama:"

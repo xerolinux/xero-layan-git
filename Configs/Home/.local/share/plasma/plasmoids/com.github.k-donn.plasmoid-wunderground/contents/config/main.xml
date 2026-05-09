@@ -23,58 +23,12 @@
         </entry>
     </group>
     <group name="Appearance">
-        <entry name="showCompactTemp" type="Bool">
-            <default>true</default>
-        </entry>
-        <entry name="showSystemTrayTemp" type="Bool">
-            <default>true</default>
-        </entry>
-        <entry name="autoFontAndSize" type="Bool">
-            <default>true</default>
-        </entry>
-        <entry name="fontFamily" type="String">
-            <default></default>
-        </entry>
-        <entry name="boldText" type="Bool">
-            <default>false</default>
-        </entry>
-        <entry name="italicText" type="Bool">
-            <default>false</default>
-        </entry>
-        <entry name="underlineText" type="Bool">
-            <default>false</default>
-        </entry>
-        <entry name="strikeoutText" type="Bool">
-            <default>false</default>
-        </entry>
-        <entry name="fontWeight" type="Int">
-            <default>50</default>
-        </entry>
-        <entry name="fontStyleName" type="String">
-            <default></default>
-        </entry>
-        <entry name="fontSize" type="Int">
-            <default>10</default>
-        </entry>
-        <entry name="propHeadPointSize" type="Int">
-            <default>13</default>
-        </entry>
-        <entry name="propPointSize" type="Int">
-            <default>10</default>
-        </entry>
-        <entry name="tempPointSize" type="Int">
-            <default>30</default>
-        </entry>
-        <entry name="useSystemThemeIcons" type="Bool">
-            <default>false</default>
-        </entry>
-        <entry name="applyColorScheme" type="Bool">
-            <default>true</default>
-        </entry>
-        <entry name="detailsIconSize" type="Int">
-            <default>48</default>
-        </entry>
-        <entry name="topIconMargins" type="Int">
+        <entry name="shownInTooltip" type="Enum">
+            <choices>
+                <choice name="Station ID" />
+                <choice name="Station Name" />
+                <choice name="Both" />
+            </choices>
             <default>0</default>
         </entry>
         <entry name="tempAutoColor" type="Bool">
@@ -83,25 +37,171 @@
         <entry name="useDefaultPage" type="Bool">
             <default>true</default>
         </entry>
-        <entry name="defaultLoadPage" type="Int">
+        <entry name="defaultLoadPage" type="Enum">
+            <choices>
+                <choice name="Weather Details" />
+                <choice name="Forecast" />
+                <choice name="Day Chart" />
+                <choice name="More Info" />
+            </choices>
             <default>0</default>
         </entry>
         <entry name="showPresTrend" type="Bool">
             <default>true</default>
+        </entry>
+        <entry name="useSystemThemeIcons" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="showBlurb" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="showTimeSeconds" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="iconSizeMode" type="Enum">
+            <choices>
+                <choice name="Fit"/>
+                <choice name="Fixed"/>
+            </choices>
+            <default>0</default>
+        </entry>
+        <entry name="textSizeMode" type="Enum">
+            <choices>
+                <choice name="Fit"/>
+                <choice name="Fixed"/>
+            </choices>
+            <default>0</default>
+        </entry>
+        <entry name="inTrayActiveTimeoutSec" type="Int">
+            <default>3600</default>
+        </entry>
+        <entry name="widgetFontName" type="String">
+            <default></default>
+        </entry>
+        <entry name="textDropShadow" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="widgetFontSize" type="Int">
+            <default>20</default>
+        </entry>
+        <entry name="widgetIconSize" type="Int">
+            <default>32</default>
+        </entry>
+        <entry name="iconDropShadow" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="iconVisible" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="textVisible" type="Bool">
+            <default>true</default>
+        </entry>
+    </group>
+    <group name="Layout">
+        <entry name="propHeadPointSize" type="Int">
+            <default>10</default>
+        </entry>
+        <entry name="propPointSize" type="Int">
+            <default>10</default>
+        </entry>
+        <entry name="tempPointSize" type="Int">
+            <default>30</default>
+        </entry>
+        <entry name="forecastIconSizeIndex" type="Int">
+            <default>3</default>
+        </entry>
+        <entry name="propIconSizeIndex" type="Int">
+            <default>2</default>
+        </entry>
+        <entry name="forecastIconSize" type="Int">
+            <default>48</default>
+        </entry>
+        <entry name="propIconSize" type="Int">
+            <default>32</default>
+        </entry>
+        <entry name="topIconMargins" type="Int">
+            <default>0</default>
+        </entry>
+        <entry name="planarLayoutType" type="Enum">
+            <choices>
+                <choice name="Full Representation" />
+                <choice name="Compact Representation" />
+            </choices>
+            <default>0</default>
+        </entry>
+        <entry name="layoutType" type="Enum">
+            <choices>
+                <choice name="Horizontal"/>
+                <choice name="Vertical"/>
+                <choice name="Compact"/>
+            </choices>
+            <default>0</default>
+        </entry>
+        <entry name="widgetOrder" type="Enum">
+            <choices>
+                <choice name="widgetOrderIconFirst"/>
+                <choice name="widgetOrderTextFirst"/>
+            </choices>
+            <default>0</default>
+        </entry>
+        <entry name="leftOuterMargin" type="Int">
+            <default>0</default>
+        </entry>
+        <entry name="innerMargin" type="Int">
+            <default>0</default>
+        </entry>
+        <entry name="rightOuterMargin" type="Int">
+            <default>0</default>
+        </entry>
+        <entry name="topOuterMargin" type="Int">
+            <default>0</default>
+        </entry>
+        <entry name="bottomOuterMargin" type="Int">
+            <default>0</default>
         </entry>
     </group>
     <group name="Units">
         <entry name="dayChartTimeFormat" type="String">
             <default>h ap</default>
         </entry>
+        <entry name="dayChartFormatIndex" type="Enum">
+            <choices>
+                <choice name="12hr time"/>
+                <choice name="24hr time"/>
+                <choice name="Custom"/>
+            </choices>
+            <default>0</default>
+        </entry>
         <entry name="weekForecastDateFormat" type="String">
             <default>d</default>
+        </entry>
+        <entry name="weekForecastFormatIndex" type="Enum">
+            <choices>
+                <choice name="Day"/>
+                <choice name="Day/Month"/>
+                <choice name="Custom"/>
+            </choices>
+            <default>0</default>
+        </entry>
+        <entry name="sunMoonTimeFormat" type="String">
+            <default>hh:mm</default>
+        </entry>
+        <entry name="sunMoonFormatIndex" type="Enum">
+            <choices>
+                <choice name="12hr time"/>
+                <choice name="24hr time"/>
+                <choice name="Custom"/>
+            </choices>
+            <default>0</default>
         </entry>
         <entry name="windPrecision" type="Int">
             <default>1</default>
         </entry>
         <entry name="tempPrecision" type="Int">
             <default>1</default>
+        </entry>
+        <entry name="compactTempPrevision" type="Int">
+            <default>0</default>
         </entry>
         <entry name="feelsPrecision" type="Int">
             <default>2</default>
@@ -112,25 +212,61 @@
         <entry name="forecastPrecision" type="Int">
             <default>0</default>
         </entry>
-        <entry name="unitsChoice" type="Int">
+        <entry name="unitsChoice" type="Enum">
+            <choices>
+                <choice name="Metric" />
+                <choice name="Imperial" />
+                <choice name="Hybrid (UK)" />
+                <choice name="Custom" />
+            </choices>
             <default>0</default>
         </entry>
-        <entry name="windUnitsChoice" type="Int">
+        <entry name="windUnitsChoice" type="Enum">
+            <choices>
+                <choice name="kmh" />
+                <choice name="mph" />
+                <choice name="m/s" />
+            </choices>
             <default>0</default>
         </entry>
-        <entry name="rainUnitsChoice" type="Int">
+        <entry name="rainUnitsChoice" type="Enum">
+            <choices>
+                <choice name="mm" />
+                <choice name="in" />
+                <choice name="cm" />
+            </choices>
             <default>0</default>
         </entry>
-        <entry name="snowUnitsChoice" type="Int">
+        <entry name="snowUnitsChoice" type="Enum">
+            <choices>
+                <choice name="mm" />
+                <choice name="in" />
+                <choice name="cm" />
+            </choices>
             <default>0</default>
         </entry>
-        <entry name="tempUnitsChoice" type="Int">
+        <entry name="tempUnitsChoice" type="Enum">
+            <choices>
+                <choice name="C" />
+                <choice name="F" />
+                <choice name="K" />
+            </choices>
             <default>0</default>
         </entry>
-        <entry name="presUnitsChoice" type="Int">
+        <entry name="presUnitsChoice" type="Enum">
+            <choices>
+                <choice name="mb" />
+                <choice name="inHG" />
+                <choice name="mmHG" />
+                <choice name="hPa" />
+            </choices>
             <default>0</default>
         </entry>
-        <entry name="elevUnitsChoice" type="Int">
+        <entry name="elevUnitsChoice" type="Enum">
+            <choices>
+                <choice name="m" />
+                <choice name="ft" />
+            </choices>
             <default>0</default>
         </entry>
     </group>

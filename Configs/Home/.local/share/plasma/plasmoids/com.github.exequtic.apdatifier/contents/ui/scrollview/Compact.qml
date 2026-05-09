@@ -1,8 +1,3 @@
-/*
-    SPDX-FileCopyrightText: 2024 Evgeny Kazantsev <exequtic@gmail.com>
-    SPDX-License-Identifier: MIT
-*/
-
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
@@ -19,7 +14,7 @@ ScrollView {
     ListView {
         model: modelList
         delegate: GridLayout {
-            visible: sts.pending
+            visible: !sts.busy && sts.count
             property var heightItem: Math.round(Kirigami.Theme.defaultFont.pointSize * 1.5)
             property var column: view.width / 2
             height: heightItem + cfg.spacing

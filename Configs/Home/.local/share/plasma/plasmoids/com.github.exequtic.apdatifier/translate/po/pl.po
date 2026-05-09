@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: apdatifier\n"
 "Report-Msgid-Bugs-To: https://github.com/exequtic/apdatifier\n"
-"POT-Creation-Date: 2026-01-02 16:32+0300\n"
+"POT-Creation-Date: 2026-02-22 11:04+0300\n"
 "PO-Revision-Date: 2025-08-16 00:48+0200\n"
 "Last-Translator: Rygorr Mortis <rygorrmortis@gmail.com>\n"
 "Language-Team: Polish <pl@li.org>\n"
@@ -22,9 +22,9 @@ msgstr ""
 msgid "General"
 msgstr "Ogólne"
 
-#: ../contents/config/config.qml ../contents/tools/sh/messages
-msgid "Upgrade"
-msgstr "Aktualizacja"
+#: ../contents/config/config.qml
+msgid "Upgrade & Management"
+msgstr ""
 
 #: ../contents/config/config.qml
 msgid "Appearance"
@@ -53,6 +53,10 @@ msgstr "Aktualizacja Flatpak"
 #: ../contents/tools/sh/messages
 msgid "Plasma Widgets Upgrade"
 msgstr "Aktualizacja widgetów Plasma"
+
+#: ../contents/tools/sh/messages
+msgid "Upgrade"
+msgstr "Aktualizacja"
 
 #: ../contents/tools/sh/messages
 msgid "Total execution time:"
@@ -97,6 +101,10 @@ msgstr "Aby zapisać do pliku mirrorlist, wymagane są uprawnienia sudo"
 #: ../contents/tools/sh/messages
 msgid "Your current mirrorlist:"
 msgstr "Twoja aktualna lista serwerów lustrzanych:"
+
+#: ../contents/tools/sh/messages
+msgid "Refresh mirror list?"
+msgstr ""
 
 #: ../contents/tools/sh/messages
 msgid "For some widgets you may need to Log Out or restart plasmashell after upgrade"
@@ -174,57 +182,101 @@ msgstr "Wiele plików jest oznaczonych wersją"
 msgid "Failed to download the package"
 msgstr "Nie udało się pobrać pakietu"
 
-#: ../contents/tools/sh/messages
-msgid "Cannot fetch news "
-msgstr "Nie można pobrać wiadomości "
+#: ../contents/tools/sh/messages ../contents/ui/components/ComboBox.qml ../contents/ui/configuration/Upgrade.qml ../contents/ui/main.qml ../contents/ui/representation/Expanded.qml
+msgid "Management"
+msgstr "Zarządzanie"
 
 #: ../contents/tools/sh/messages
-msgid "List all available packages in repositories"
-msgstr "Wyświetl wszystkie dostępne pakiety w repozytoriach"
+msgid "Browse available"
+msgstr ""
 
 #: ../contents/tools/sh/messages
-msgid "List all installed packages"
-msgstr "Wyświetl wszystkie zainstalowane pakiety"
+msgid "Search all available packages and select what to install"
+msgstr ""
 
 #: ../contents/tools/sh/messages
-msgid "List explicitly installed packages"
-msgstr "Wyświetl wszystkie pakiety zainstalowane jawnie"
+msgid "Manage installed"
+msgstr ""
 
 #: ../contents/tools/sh/messages
-msgid "List explicitly installed packages and isn't a dependency of anything"
-msgstr "Wyświetl wszystkie pakiety zainstalowane jawnie, które nie są zależnościami żadnych innych pakietów"
+msgid "View installed packages and select what to remove"
+msgstr ""
 
 #: ../contents/tools/sh/messages
-msgid "List installed dependencies that aren't needed anymore (orphans)"
-msgstr "Wyświetl wszystkie zależności, które nie są już potrzebne (osierocone)"
+msgid "Explicit installs"
+msgstr ""
 
 #: ../contents/tools/sh/messages
-msgid "Uninstall orphan packages"
-msgstr "Odinstaluj osierocone pakiety"
+msgid "Show packages you installed directly"
+msgstr ""
 
 #: ../contents/tools/sh/messages
-msgid "Install (downgrade) a package from cache"
-msgstr "Zainstaluj (zaktualizuj do starszej wersji) pakiet z pamięci podręcznej"
+msgid "List explicit installs"
+msgstr ""
 
 #: ../contents/tools/sh/messages
-msgid "Remove ALL cached packages"
-msgstr "Usuń WSZYSTKIE pakiety z pamięci podręcznej"
+msgid "List unneeded explicit"
+msgstr ""
 
 #: ../contents/tools/sh/messages
-msgid "Remove cached packages that are not currently installed"
-msgstr "Usuń pakiety w pamięci podręcznej, które nie są aktualnie zainstalowane"
+msgid "Orphaned dependency"
+msgstr ""
 
 #: ../contents/tools/sh/messages
-msgid "Rebuild AUR python packages after python upgrade"
-msgstr "Zbuduj ponownie pakiety Pythona z AUR po aktualizacji Pythona"
+msgid "Dependencies that are no longer needed by anything installed"
+msgstr ""
 
 #: ../contents/tools/sh/messages
-msgid "Refresh mirrorlist"
-msgstr "Odśwież listę serwerów lustrzanych"
+msgid "List orphans"
+msgstr ""
 
 #: ../contents/tools/sh/messages
-msgid "Exit"
-msgstr "Wyjdź"
+msgid "Remove orphans"
+msgstr ""
+
+#: ../contents/tools/sh/messages
+msgid "Downgrade from cache"
+msgstr ""
+
+#: ../contents/tools/sh/messages
+msgid "Clean cache"
+msgstr ""
+
+#: ../contents/tools/sh/messages
+msgid "Remove cached files to free disk space"
+msgstr ""
+
+#: ../contents/tools/sh/messages
+msgid "Remove all cache"
+msgstr ""
+
+#: ../contents/tools/sh/messages
+msgid "Remove unused cache"
+msgstr ""
+
+#: ../contents/tools/sh/messages
+msgid "Rebuild packages"
+msgstr ""
+
+#: ../contents/tools/sh/messages
+msgid "Select packages that need reinstall with rebuild"
+msgstr ""
+
+#: ../contents/tools/sh/messages
+msgid "Rebuild AUR packages"
+msgstr ""
+
+#: ../contents/tools/sh/messages
+msgid "Detect Python packages to rebuild"
+msgstr ""
+
+#: ../contents/tools/sh/messages
+msgid "Refresh mirrors"
+msgstr ""
+
+#: ../contents/tools/sh/messages
+msgid "Recent installs"
+msgstr ""
 
 #: ../contents/tools/sh/messages
 msgid "Review dependency warnings before removing"
@@ -239,8 +291,8 @@ msgid "Press Enter to return menu"
 msgstr "Naciśnij Enter, aby wrócić do menu"
 
 #: ../contents/tools/sh/messages
-msgid "Search:"
-msgstr "Szukaj:"
+msgid "Calculating..."
+msgstr ""
 
 #: ../contents/tools/sh/messages
 msgid "Executed:"
@@ -253,6 +305,10 @@ msgstr "Nic do zrobienia"
 #: ../contents/tools/sh/messages ../contents/ui/configuration/General.qml
 msgid "Required installed"
 msgstr "Wymagane do zainstalowania"
+
+#: ../contents/tools/sh/messages
+msgid "Cannot fetch news "
+msgstr "Nie można pobrać wiadomości "
 
 #: ../contents/tools/tools.js
 msgid "Exit code: "
@@ -288,7 +344,7 @@ msgstr "Sprawdzanie aktualizacji widżetów..."
 
 #: ../contents/tools/tools.js
 msgid "Checking firmware updates..."
-msgstr ""
+msgstr "Sprawdzanie aktualizacji oprogramowania układowego..."
 
 #: ../contents/tools/tools.js
 msgid "latest commit"
@@ -296,11 +352,11 @@ msgstr "najnowszy commit"
 
 #: ../contents/tools/tools.js
 msgid "Explicitly installed"
-msgstr ""
+msgstr "Zainstalowano ręcznie"
 
 #: ../contents/tools/tools.js
 msgid "Installed as a dependency"
-msgstr ""
+msgstr "Zainstalowano jako zależność"
 
 #: ../contents/tools/tools.js ../contents/ui/representation/Expanded.qml
 msgid "%1 error occurred"
@@ -383,10 +439,6 @@ msgstr "Zaktualizuj system"
 msgid "Pause auto check"
 msgstr "Wstrzymaj automatyczne sprawdzanie"
 
-#: ../contents/ui/components/ComboBox.qml ../contents/ui/main.qml ../contents/ui/representation/Expanded.qml
-msgid "Management"
-msgstr "Zarządzanie"
-
 #: ../contents/ui/components/Notification.qml ../contents/ui/scrollview/News.qml
 msgid "Read article"
 msgstr "Przeczytaj artykuł"
@@ -395,120 +447,9 @@ msgstr "Przeczytaj artykuł"
 msgid "System updated"
 msgstr "System zaktualizowany"
 
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Panel Icon View"
-msgstr "Widok ikon panelu"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "List View"
-msgstr "Widok listy"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Shown when"
-msgstr "Pokazano, gdy"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "update is pending "
-msgid_plural "updates are pending "
-msgstr[0] "aktualizacja oczekuje "
-msgstr[1] "aktualizacje oczekują "
-msgstr[2] "aktualizacji oczekuje "
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Default"
-msgstr "Domyślnie"
-
-#: ../contents/ui/configuration/Appearance.qml ../contents/ui/representation/Expanded.qml
-msgid "Select..."
-msgstr "Wybierz..."
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Default icon"
-msgstr "Ikona domyślna"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Pause badge"
-msgstr "Odznaka pauzy"
-
 #: ../contents/ui/configuration/Appearance.qml ../contents/ui/configuration/Upgrade.qml
-msgid "Enable"
-msgstr "Włącz"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Updated badge"
-msgstr "Odznaka zaktualizowane"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Counter"
-msgstr "Licznik"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Color"
-msgstr "Kolor"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Default color"
-msgstr "Domyślny kolor"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Select counter background color"
-msgstr "Wybierz kolor tła licznika"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Default background color from current theme"
-msgstr "Domyślny kolor tła z bieżącego motywu"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Size"
-msgstr "Rozmiar"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Radius"
-msgstr "Promień"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Opacity"
-msgstr "Przezroczystość"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Shadow"
-msgstr "Cień"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Font"
-msgstr "Czcionka"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Default system font"
-msgstr "Domyślna czcionka systemowa"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Font bold"
-msgstr "Czcionka pogrubiona"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Font size"
-msgstr "Rozmiar czcionki"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Left spacing"
-msgstr "Lewy odstęp"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Side margins"
-msgstr "Marginesy boczne"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Offset"
-msgstr "Przesunięcie"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Position"
-msgstr "Pozycja"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Center"
-msgstr "Środek"
+msgid "Disabled"
+msgstr "Wyłączone"
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Top-Left"
@@ -525,6 +466,173 @@ msgstr "Lewy dolny"
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Bottom-Right"
 msgstr "Prawy dolny"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Panel Icon"
+msgstr "Ikona panelu"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Full View"
+msgstr "Pełny widok"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Icon"
+msgstr "Ikona"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Default"
+msgstr "Domyślnie"
+
+#: ../contents/ui/configuration/Appearance.qml ../contents/ui/representation/Expanded.qml
+msgid "Select..."
+msgstr "Wybierz..."
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Default icon"
+msgstr "Ikona domyślna"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Hide"
+msgstr "Ukryj"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "when less than"
+msgstr "gdy mniej niż"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "update"
+msgid_plural "updates"
+msgstr[0] "aktualizacja"
+msgstr[1] "aktualizacje"
+msgstr[2] "aktualizacji"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "If the widget is on a panel, you can access the hidden icon in Panel Configuration mode."
+msgstr "Jeśli widget znajduje się na panelu, możesz uzyskać dostęp do ukrytej ikony w trybie konfiguracji panelu."
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Busy indicator"
+msgstr "Wskaźnik zajętości"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Spinner"
+msgstr "Spinner"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Pulse"
+msgstr "Puls"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Spinner uses the standard Plasmoid busy indicator. Pulse animates the panel icon. On the desktop, the busy indicator is always off."
+msgstr "Spinner używa standardowego wskaźnika zajętości plasmoidu. Puls animuje ikonę panelu. Na pulpicie wskaźnik zajętości jest zawsze wyłączony."
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Counter"
+msgstr "Licznik"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Mode"
+msgstr "Tryb"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Off"
+msgstr "Wył."
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Side"
+msgstr "Bok"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Badge"
+msgstr "Odznaka"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Position"
+msgstr "Pozycja"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Center"
+msgstr "Środek"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Left"
+msgstr "Lewo"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Right"
+msgstr "Prawo"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Gaps"
+msgstr "Odstępy"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Inner"
+msgstr "Wewnętrzne"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Outer"
+msgstr "Zewnętrzne"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Offset"
+msgstr "Przesunięcie"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Font family"
+msgstr "Rodzina czcionek"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Default system font"
+msgstr "Domyślna czcionka systemowa"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Font size"
+msgstr "Rozmiar czcionki"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Font bold"
+msgstr "Czcionka pogrubiona"
+
+#: ../contents/ui/configuration/Appearance.qml ../contents/ui/configuration/Upgrade.qml
+msgid "Enable"
+msgstr "Włącz"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Badge color"
+msgstr "Kolor odznaki"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Default color"
+msgstr "Domyślny kolor"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Select counter background color"
+msgstr "Wybierz kolor tła licznika"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Default background color from current theme"
+msgstr "Domyślny kolor tła z bieżącego motywu"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Badge radius"
+msgstr "Promień odznaki"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Badge opacity"
+msgstr "Przezroczystość odznaki"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Icon Badges"
+msgstr "Odznaki ikony"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Paused"
+msgstr "Wstrzymano"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Updated"
+msgstr "Zaktualizowano"
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Use built-in icons"
@@ -732,7 +840,7 @@ msgstr "<br><br>Dla twórców widżetów:<br>Nie zapomnij zaktualizować pliku m
 
 #: ../contents/ui/configuration/General.qml
 msgid "Firmware"
-msgstr ""
+msgstr "Oprogramowanie układowe"
 
 #: ../contents/ui/configuration/General.qml ../contents/ui/representation/Expanded.qml
 msgid "News"
@@ -819,11 +927,11 @@ msgstr "Przywróć ukryte podpowiedzi"
 
 #: ../contents/ui/configuration/General.qml
 msgid "Reset to default. By default, the path is the same as for checkupdates."
-msgstr ""
+msgstr "Przywróć domyślne. Domyślnie ścieżka jest taka sama jak w checkupdates."
 
 #: ../contents/ui/configuration/General.qml
 msgid "Path must not contain spaces"
-msgstr ""
+msgstr "Ścieżka nie może zawierać spacji"
 
 #: ../contents/ui/configuration/Rules.qml
 msgid "Unimportant"
@@ -942,6 +1050,30 @@ msgid "Running your command or script AFTER the upgrade.<br>For example, you can
 msgstr "Uruchamianie polecenia lub skryptu PO aktualizacji.<br>Na przykład, możesz określić polecenie do aktualizacji czegoś innego."
 
 #: ../contents/ui/configuration/Upgrade.qml
+msgid "No Flatpak options"
+msgstr ""
+
+#: ../contents/ui/configuration/Upgrade.qml
+msgid "Hide headers"
+msgstr ""
+
+#: ../contents/ui/configuration/Upgrade.qml
+msgid "Hide help"
+msgstr ""
+
+#: ../contents/ui/configuration/Upgrade.qml
+msgid "Hide option numbers"
+msgstr ""
+
+#: ../contents/ui/configuration/Upgrade.qml
+msgid "Fzf options"
+msgstr ""
+
+#: ../contents/ui/configuration/Upgrade.qml
+msgid "Override default fzf options.<br>See <b>fzf --help</b> for available options."
+msgstr ""
+
+#: ../contents/ui/configuration/Upgrade.qml
 msgid "Wrapper"
 msgstr "Opakowanie"
 
@@ -976,10 +1108,6 @@ msgstr "Zobacz także https://archlinux.org/mirrorlist (kliknij przycisk, aby ot
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Generator"
 msgstr "Generator"
-
-#: ../contents/ui/configuration/Upgrade.qml
-msgid "Disabled"
-msgstr "Wyłączone"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Always ask"
@@ -1022,7 +1150,7 @@ msgstr "Liczba serwerów do zapisania w pliku mirrorlist. 0 dla wszystkich."
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Show progress"
-msgstr ""
+msgstr "Pokaż postęp"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Country"
@@ -1136,6 +1264,10 @@ msgstr "Sprawdź informacje o wersji"
 msgid "Dismiss"
 msgstr "Odrzuć"
 
+#: ../contents/ui/representation/Expanded.qml
+msgid "No internet connection"
+msgstr ""
+
 #: ../contents/ui/scrollview/Extended.qml
 msgid "Upgrade package"
 msgstr "Aktualizuj pakiet"
@@ -1215,3 +1347,42 @@ msgstr "Brak nieprzeczytanych wiadomości"
 #: ../contents/ui/scrollview/News.qml
 msgid "Restore list"
 msgstr "Przywróć listę"
+
+#~ msgid "List all available packages in repositories"
+#~ msgstr "Wyświetl wszystkie dostępne pakiety w repozytoriach"
+
+#~ msgid "List all installed packages"
+#~ msgstr "Wyświetl wszystkie zainstalowane pakiety"
+
+#~ msgid "List explicitly installed packages"
+#~ msgstr "Wyświetl wszystkie pakiety zainstalowane jawnie"
+
+#~ msgid "List explicitly installed packages and isn't a dependency of anything"
+#~ msgstr "Wyświetl wszystkie pakiety zainstalowane jawnie, które nie są zależnościami żadnych innych pakietów"
+
+#~ msgid "List installed dependencies that aren't needed anymore (orphans)"
+#~ msgstr "Wyświetl wszystkie zależności, które nie są już potrzebne (osierocone)"
+
+#~ msgid "Uninstall orphan packages"
+#~ msgstr "Odinstaluj osierocone pakiety"
+
+#~ msgid "Install (downgrade) a package from cache"
+#~ msgstr "Zainstaluj (zaktualizuj do starszej wersji) pakiet z pamięci podręcznej"
+
+#~ msgid "Remove ALL cached packages"
+#~ msgstr "Usuń WSZYSTKIE pakiety z pamięci podręcznej"
+
+#~ msgid "Remove cached packages that are not currently installed"
+#~ msgstr "Usuń pakiety w pamięci podręcznej, które nie są aktualnie zainstalowane"
+
+#~ msgid "Rebuild AUR python packages after python upgrade"
+#~ msgstr "Zbuduj ponownie pakiety Pythona z AUR po aktualizacji Pythona"
+
+#~ msgid "Refresh mirrorlist"
+#~ msgstr "Odśwież listę serwerów lustrzanych"
+
+#~ msgid "Exit"
+#~ msgstr "Wyjdź"
+
+#~ msgid "Search:"
+#~ msgstr "Szukaj:"

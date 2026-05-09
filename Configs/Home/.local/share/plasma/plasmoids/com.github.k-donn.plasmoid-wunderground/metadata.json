@@ -3,20 +3,20 @@
   "KPlugin": {
     "Authors": [
       {
-        "Email": "mitchell@mitchelldonnelly.com",
+        "Email": "mitchell+widget@mitchelldonnelly.com",
         "Name": "k-donn"
       }
     ],
     "Category": "Environment and Weather",
     "Description": "Wunderground Personal Weather Station viewer",
-    "Description[da_DK]": "Personlig vejrstation viser",
+    "Description[da_DK]": "Personlig Vejrstation viser",
     "Description[de_DE]": "Meine Wetterstation",
     "Description[es_ES]": "Visor de la estación meteorológica personal Wunderground",
     "Description[fr_FR]": "Visualisation de station météorologique personnelle Wunderground",
     "Description[it_IT]": "La stazione meteo personale Wunderground",
     "Description[ja_JP]": "Wunderground 個人用気象ステーション ビューアー",
-    "Description[nl_NL]": "Wunderground - Bekijk je eigen weerstation",
-    "Description[pl_PL]": "Przeglądarka Osobistej Stacji Pogodowej Wunderground",
+    "Description[nl_NL]": "Weergave van persoonlijke weerstations",
+    "Description[pl_PL]": "Przeglądarka osobistej stacji pogodowej Wunderground",
     "Description[pt_BR]": "Visualizador de Estação Meteorológica Pessoal Wunderground",
     "Description[ru_RU]": "Программа просмотра персональных метеостанций Wunderground",
     "Description[sr_Latn]": "Wunderground Prikazivač Personalnih Meteoroloških Stanica",
@@ -26,7 +26,7 @@
     "Id": "com.github.k-donn.plasmoid-wunderground",
     "License": "GPL-2.0-or-later",
     "Name": "Wunderground",
-    "Name[da_DK]": "Konfigurér Wunderground",
+    "Name[da_DK]": "Wunderground",
     "Name[de_DE]": "Wunderground",
     "Name[es_ES]": "Wunderground",
     "Name[fr_FR]": "Wunderground",
@@ -39,7 +39,7 @@
     "Name[sr_Latn]": "Wunderground",
     "Name[zh_CN]": "Wunderground",
     "Name[zh_TW]": "Wunderground",
-    "Version": "3.6.4",
+    "Version": "3.7.6",
     "Website": "https://github.com/k-donn/plasmoid-wunderground"
   },
   "X-KDE-ParentApp": "",

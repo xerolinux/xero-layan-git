@@ -1,5 +1,5 @@
 /*
- * Copyright 2025  Kevin Donnelly
+ * Copyright 2026  Kevin Donnelly
  * Copyright 2024  dniminenn
  * Copyright 2022  Rafal (Raf) Liwoch
  *
@@ -222,6 +222,7 @@ function _pressureRangeForUnits(unitsChoice, presUnitsChoice) {
 	// custom - fall back to provided presUnitsChoice when available
 	if (presUnitsChoice === Utils.PRES_UNITS.INHG) return 2.1;
 	if (presUnitsChoice === Utils.PRES_UNITS.MMHG) return 53;
+	if (presUnitsChoice === Utils.PRES_UNITS.PSI) return 1.5;
 	return 70;
 }
 
@@ -659,6 +660,12 @@ function getCurrentData(options, callback) {
 			isNight: prevWeather ? prevWeather["isNight"] : false,
 			sunrise: prevWeather ? prevWeather["sunrise"] : "",
 			sunset: prevWeather ? prevWeather["sunset"] : "",
+			cloudCover: prevWeather ? prevWeather["cloudCover"] : null,
+			moonrise: prevWeather ? prevWeather["moonrise"] : null,
+			moonset: prevWeather ? prevWeather["moonset"] : null,
+			moonPhase: prevWeather ? prevWeather["moonPhase"] : null,
+			moonPhaseCode: prevWeather ? prevWeather["moonPhaseCode"] : null,
+			blurb: prevWeather ? prevWeather["blurb"] : null,
 			details: {
 				temp: details["temp"],
 				heatIndex: details["heatIndex"],
@@ -667,19 +674,19 @@ function getCurrentData(options, callback) {
 				windSpeed: details["windSpeed"],
 				windGust: details["windGust"],
 				pressure: details["pressure"],
+				pressureTrend: prevWeather
+					? prevWeather["details"]["pressureTrend"]
+					: null,
+				pressureTrendCode: prevWeather
+					? prevWeather["details"]["pressureTrendCode"]
+					: null,
+				pressureDelta: prevWeather
+					? prevWeather["details"]["pressureDelta"]
+					: null,
 				precipRate: details["precipRate"],
 				precipTotal: details["precipTotal"],
 				elev: details["elev"],
 				solarRad: prevWeather ? prevWeather["solarRad"] : null,
-				pressureTrend: prevWeather
-					? prevWeather["pressureTrend"]
-					: null,
-				pressureTrendCode: prevWeather
-					? prevWeather["pressureTrendCode"]
-					: null,
-				pressureDelta: prevWeather
-					? prevWeather["pressureDelta"]
-					: null,
 			},
 			aq: prevWeather && prevWeather["aq"] ? prevWeather["aq"] : {},
 		};
@@ -710,7 +717,7 @@ function getCurrentData(options, callback) {
  *
  * Callback: cb(err, {
  *   isNight, sunriseTimeLocal, sunsetTimeLocal, pressureTendencyTrend,
- *   pressureTendencyCode, pressureChange, iconCode, conditionNarrative,
+ *   pressureTendencyCode, pressureDelta, iconCode, conditionNarrative,
  *   isRain, alerts, airQuality
  * })
  *
@@ -875,12 +882,13 @@ function getExtendedConditions(options, callback) {
 			pressureTendencyCode: condVars
 				? condVars["pressureTendencyCode"]
 				: null,
-			pressureChange: condVars ? condVars["pressureChange"] : null,
+			pressureDelta: condVars ? condVars["pressureChange"] : null,
 			iconCode: newIconCode,
 			conditionNarrative: newConditionNarrative,
 			isRain: newIsRain,
 			alerts: alertsList,
 			airQuality: aqObj,
+			cloudCover: condVars ? condVars["cloudCover"] : null,
 		};
 
 		callback(null, result);
@@ -1056,17 +1064,32 @@ function getForecastDataV3(options, callback) {
 				golfDesc: !isFirstNight
 					? "Good day for golf."
 					: "Don't play golf at night.",
+				moonrise: dailyForecastVars && dailyForecastVars["moonriseTimeLocal"] ? dailyForecastVars["moonriseTimeLocal"][period] : "",
+				moonset: dailyForecastVars && dailyForecastVars["moonsetTimeLocal"] ? dailyForecastVars["moonsetTimeLocal"][period] : "",
+				moonPhase: dailyForecastVars && dailyForecastVars["moonPhase"] ? dailyForecastVars["moonPhase"][period] : "",
+				moonPhaseCode: dailyForecastVars && dailyForecastVars["moonPhaseCode"] ? dailyForecastVars["moonPhaseCode"][period] : "",
+				blurb: dailyForecastVars && dailyForecastVars["narrative"] ? dailyForecastVars["narrative"][period] : "",
 			});
 		}
 
 		var currDayHigh = forecastArr.length ? forecastArr[0].high : null;
 		var currDayLow = forecastArr.length ? forecastArr[0].low : null;
+		var moonrise = forecastArr.length ? forecastArr[0].moonrise : null;
+		var moonset = forecastArr.length ? forecastArr[0].moonset : null;
+		var moonPhase = forecastArr.length ? forecastArr[0].moonPhase : null;
+		var moonPhaseCode = forecastArr.length ? forecastArr[0].moonPhaseCode : null;
+		var blurb = forecastArr.length ? forecastArr[0].blurb : null;
 
 		printDebug("[pws-api.js] Got new forecast data");
 		callback(null, {
 			forecast: forecastArr,
 			currDayHigh: currDayHigh,
 			currDayLow: currDayLow,
+			moonrise: moonrise,
+			moonset: moonset,
+			moonPhase: moonPhase,
+			moonPhaseCode: moonPhaseCode,
+			blurb: blurb
 		});
 	});
 }
@@ -1327,6 +1350,7 @@ function getHourlyDataV1(options, callback) {
  * @param {number} options.longitude
  * @param {number} [options.unitsChoice]
  * @param {string} [options.language]
+ * @param {number} [options.presUnit]
  * @param {function(Object|null, Object|null)} callback
  */
 function getHourlyDataV3(options, callback) {
@@ -1415,6 +1439,65 @@ function getHourlyDataV3(options, callback) {
 			hourly: hourlyArr,
 			maxValDict: sanitizedMax2,
 			rangeValDict: rangeDict,
+		});
+	});
+}
+
+/**
+ * Fetch planetary K-index data from NOAA SWPC.
+ * Returns the most recent kp_index and the next three predictions.
+ *
+ * @param {function(Object|null, Object|null)} callback - Error-first callback with {current: number, predictions: number[]}
+ */
+function getKpIndexData(callback) {
+	callback = callback || function () {};
+
+	var url = "https://services.swpc.noaa.gov/json/planetary_k_index_1m.json";
+
+	printDebug("[pws-api.js] Fetching KP index " + url);
+
+	_httpGet(url, function (err, res, status, raw) {
+		if (err || status !== 200) {
+			callback(
+				err || {
+					type: "network",
+					message: "Failed to fetch KP index data",
+				},
+				null
+			);
+			return;
+		}
+
+		if (!Array.isArray(res) || res.length === 0) {
+			callback(
+				{
+					type: "data",
+					message: "Invalid or empty KP index data",
+				},
+				null
+			);
+			return;
+		}
+
+		// Sort by time_tag descending (most recent first)
+		res.sort(function (a, b) {
+			return new Date(b.time_tag) - new Date(a.time_tag);
+		});
+
+		var current = res[0].kp_index;
+		var predictions = [];
+		for (var i = 1; i <= 3 && i < res.length; i++) {
+			predictions.push({
+				"kp-index": res[i].estimated_kp !== undefined
+					? res[i].estimated_kp
+					: res[i].kp_index,
+				"time": res[i].time_tag
+			});
+		}
+
+		callback(null, {
+			current: current,
+			predictions: predictions,
 		});
 	});
 }

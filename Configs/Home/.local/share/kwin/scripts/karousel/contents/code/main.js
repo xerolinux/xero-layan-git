@@ -111,8 +111,8 @@ class ContextualResizer {
         if (!Range.contains(visibleRange, column) || column.getWidth() >= maxWidth) {
             return;
         }
-        const leftVisibleColumn = grid.getLeftmostVisibleColumn(visibleRange, true);
-        const rightVisibleColumn = grid.getRightmostVisibleColumn(visibleRange, true);
+        const leftVisibleColumn = grid.getLeftmostVisibleColumn(visibleRange);
+        const rightVisibleColumn = grid.getRightmostVisibleColumn(visibleRange);
         if (leftVisibleColumn === null || rightVisibleColumn === null) {
             console.assert(false); // should at least see self
             return;
@@ -140,8 +140,8 @@ class ContextualResizer {
         if (!Range.contains(visibleRange, column) || column.getWidth() <= minWidth) {
             return;
         }
-        const leftVisibleColumn = grid.getLeftmostVisibleColumn(visibleRange, true);
-        const rightVisibleColumn = grid.getRightmostVisibleColumn(visibleRange, true);
+        const leftVisibleColumn = grid.getLeftmostVisibleColumn(visibleRange);
+        const rightVisibleColumn = grid.getRightmostVisibleColumn(visibleRange);
         if (leftVisibleColumn === null || rightVisibleColumn === null) {
             console.assert(false); // should at least see self
             return;
@@ -169,6 +169,22 @@ class ContextualResizer {
         column.setWidth(newWidth, true);
         desktop.scrollCenterVisible(column);
     }
+    maximizeWidth(column) {
+        const grid = column.grid;
+        const desktop = grid.desktop;
+        const presetWidths = this.presetWidths.getWidths(column.getMinWidth(), column.getMaxWidth());
+        const maxWidth = presetWidths[presetWidths.length - 1];
+        column.setWidth(maxWidth, true);
+        desktop.scrollCenterVisible(column);
+    }
+    minimizeWidth(column) {
+        const grid = column.grid;
+        const desktop = grid.desktop;
+        const presetWidths = this.presetWidths.getWidths(column.getMinWidth(), column.getMaxWidth());
+        const minWidth = presetWidths[0];
+        column.setWidth(minWidth, true);
+        desktop.scrollCenterVisible(column);
+    }
 }
 class RawResizer {
     constructor(presetWidths) {
@@ -191,6 +207,16 @@ class RawResizer {
             return;
         }
         column.setWidth(newWidth, true);
+    }
+    maximizeWidth(column) {
+        const presetWidths = this.presetWidths.getWidths(column.getMinWidth(), column.getMaxWidth());
+        const maxWidth = presetWidths[presetWidths.length - 1];
+        column.setWidth(maxWidth, true);
+    }
+    minimizeWidth(column) {
+        const presetWidths = this.presetWidths.getWidths(column.getMinWidth(), column.getMaxWidth());
+        const minWidth = presetWidths[0];
+        column.setWidth(minWidth, true);
     }
 }
 class CenterClamper {
@@ -261,6 +287,11 @@ const defaultWindowRules = `[
     },
     {
         "class": "(org\\\\.kde\\\\.)?yakuake",
+        "tile": false
+    },
+    {
+        "class": "wl-copy|wl-paste",
+        "caption": "wl-clipboard",
         "tile": false
     },
     {
@@ -600,6 +631,12 @@ class Actions {
         this.columnWidthDecrease = (cm, dm, window, column, grid) => {
             this.config.columnResizer.decreaseWidth(column);
         };
+        this.columnWidthMaximize = (cm, dm, window, column, grid) => {
+            this.config.columnResizer.maximizeWidth(column);
+        };
+        this.columnWidthMinimize = (cm, dm, window, column, grid) => {
+            this.config.columnResizer.minimizeWidth(column);
+        };
         this.cyclePresetWidths = (cm, dm, window, column, grid) => {
             const nextWidth = this.config.presetWidths.next(column.getWidth(), column.getMinWidth(), column.getMaxWidth());
             column.setWidth(nextWidth, true);
@@ -614,7 +651,7 @@ class Actions {
                 return;
             }
             const visibleRange = desktop.getCurrentVisibleRange();
-            const visibleColumns = Array.from(desktop.grid.getVisibleColumns(visibleRange, true));
+            const visibleColumns = Array.from(desktop.grid.getVisibleColumns(visibleRange));
             const availableSpace = desktop.tilingArea.width;
             const gapsWidth = desktop.grid.config.gapsInnerHorizontal * (visibleColumns.length - 1);
             const widths = fillSpace(availableSpace - gapsWidth, visibleColumns.map(column => ({ min: column.getMinWidth(), max: column.getMaxWidth() })));
@@ -626,7 +663,7 @@ class Actions {
             if (!Range.contains(visibleRange, focusedColumn)) {
                 return;
             }
-            const currentVisibleColumns = Array.from(grid.getVisibleColumns(visibleRange, true));
+            const currentVisibleColumns = Array.from(grid.getVisibleColumns(visibleRange));
             console.assert(currentVisibleColumns.includes(focusedColumn), "should at least contain the focused column");
             const targetColumn = grid.getLeftColumn(currentVisibleColumns[0]);
             if (targetColumn === null) {
@@ -649,7 +686,7 @@ class Actions {
             if (!Range.contains(visibleRange, focusedColumn)) {
                 return;
             }
-            const currentVisibleColumns = Array.from(grid.getVisibleColumns(visibleRange, true));
+            const currentVisibleColumns = Array.from(grid.getVisibleColumns(visibleRange));
             console.assert(currentVisibleColumns.includes(focusedColumn), "should at least contain the focused column");
             const targetColumn = grid.getRightColumn(currentVisibleColumns[currentVisibleColumns.length - 1]);
             if (targetColumn === null) {
@@ -736,7 +773,7 @@ class Actions {
                 return;
             }
             const grid = desktop.grid;
-            const column = grid.getLeftmostVisibleColumn(grid.desktop.getCurrentVisibleRange(), true);
+            const column = grid.getLeftmostVisibleColumn(grid.desktop.getCurrentVisibleRange());
             if (column === null) {
                 return;
             }
@@ -752,7 +789,7 @@ class Actions {
                 return;
             }
             const grid = desktop.grid;
-            const column = grid.getRightmostVisibleColumn(grid.desktop.getCurrentVisibleRange(), true);
+            const column = grid.getRightmostVisibleColumn(grid.desktop.getCurrentVisibleRange());
             if (column === null) {
                 return;
             }
@@ -976,6 +1013,16 @@ function getKeyBindings(world, actions) {
             description: "Decrease column width",
             defaultKeySequence: "Meta+Ctrl+-",
             action: () => world.doIfTiledFocused(actions.columnWidthDecrease),
+        },
+        {
+            name: "column-width-maximize",
+            description: "Increase column width to maximum",
+            action: () => world.doIfTiledFocused(actions.columnWidthMaximize),
+        },
+        {
+            name: "column-width-minimize",
+            description: "Decrease column width to minimum",
+            action: () => world.doIfTiledFocused(actions.columnWidthMinimize),
         },
         {
             name: "cycle-preset-widths",
@@ -1202,7 +1249,7 @@ class Column {
     getMinWidth() {
         let maxMinWidth = Column.minWidth;
         for (const window of this.windows.iterator()) {
-            const minWidth = window.client.kwinClient.minSize.width;
+            const minWidth = window.client.kwinClient.minSize.width.ceil();
             if (minWidth > maxMinWidth) {
                 maxMinWidth = minWidth;
             }
@@ -1509,8 +1556,19 @@ class Desktop {
         }
         this.setScroll(this.gestureScrollXInitial + this.config.gestureScrollStep * amount, false);
     }
-    gestureScrollFinish() {
+    gestureScrollFinish(focusedWindow) {
+        const scrolledRight = this.scrollX > this.gestureScrollXInitial;
         this.gestureScrollXInitial = null;
+        const visibleRange = this.getCurrentVisibleRange();
+        if (focusedWindow !== null && !Range.contains(visibleRange, focusedWindow.column)) {
+            // the focused window is no longer visible, find a new window to focus
+            const focusTargetColumn = scrolledRight ?
+                this.grid.getLeftmostVisibleColumn(visibleRange) :
+                this.grid.getRightmostVisibleColumn(visibleRange);
+            if (focusTargetColumn !== null) {
+                focusTargetColumn.getWindowToFocus().focus();
+            }
+        }
     }
     arrange() {
         // TODO (optimization): only arrange visible windows
@@ -1684,7 +1742,7 @@ class Grid {
         }
         this.width = x - this.config.gapsInnerHorizontal;
     }
-    getLeftmostVisibleColumn(visibleRange, fullyVisible) {
+    getLeftmostVisibleColumn(visibleRange) {
         for (const column of this.columns.iterator()) {
             if (Range.contains(visibleRange, column)) {
                 return column;
@@ -1692,7 +1750,7 @@ class Grid {
         }
         return null;
     }
-    getRightmostVisibleColumn(visibleRange, fullyVisible) {
+    getRightmostVisibleColumn(visibleRange) {
         let last = null;
         for (const column of this.columns.iterator()) {
             if (Range.contains(visibleRange, column)) {
@@ -1704,7 +1762,7 @@ class Grid {
         }
         return last;
     }
-    *getVisibleColumns(visibleRange, fullyVisible) {
+    *getVisibleColumns(visibleRange) {
         for (const column of this.columns.iterator()) {
             if (Range.contains(visibleRange, column)) {
                 yield column;
@@ -1839,7 +1897,7 @@ var Range;
 class Window {
     constructor(client, column) {
         this.client = client;
-        this.height = client.kwinClient.frameGeometry.height;
+        this.height = client.kwinClient.frameGeometry.height.round();
         let maximizedMode = this.client.getMaximizedMode();
         if (maximizedMode === undefined) {
             maximizedMode = 0 /* MaximizedMode.Unmaximized */; // defaulting to unmaximized, as this is set in Tiled.prepareClientForTiling
@@ -1938,7 +1996,7 @@ class Window {
     }
     onFrameGeometryChanged() {
         const newGeometry = this.client.kwinClient.frameGeometry;
-        this.column.setWidth(newGeometry.width, true);
+        this.column.setWidth(newGeometry.width.round(), true);
         this.column.grid.desktop.onLayoutChanged();
     }
     destroy(passFocus) {
@@ -2442,6 +2500,15 @@ function fillSpace(availableSpace, items) {
         }
     }
 }
+Number.prototype.round = function () {
+    return Math.round(this);
+};
+Number.prototype.floor = function () {
+    return Math.floor(this);
+};
+Number.prototype.ceil = function () {
+    return Math.ceil(this);
+};
 Function.prototype.partial = function (...head) {
     return (...tail) => this(...head, ...tail);
 };
@@ -2470,11 +2537,26 @@ function pointEquals(a, b) {
     return a.x === b.x &&
         a.y === b.y;
 }
+function rectRight(rect) {
+    return rect.x + rect.width;
+}
+function rectBottom(rect) {
+    return rect.y + rect.height;
+}
 function rectContainsPoint(rect, point) {
-    return rect.left <= point.x &&
-        rect.right >= point.x &&
-        rect.top <= point.y &&
-        rect.bottom >= point.y;
+    return rect.x <= point.x &&
+        rectRight(rect) >= point.x &&
+        rect.y <= point.y &&
+        rectBottom(rect) >= point.y;
+}
+function roundQtRect(rect) {
+    return Qt.rect(rect.x.round(), rect.y.round(), rect.width.round(), rect.height.round());
+}
+function rectRightRound(rect) {
+    return rect.x.round() + rect.width.round();
+}
+function rectBottomRound(rect) {
+    return rect.y.round() + rect.height.round();
 }
 function applyMacro(base, value) {
     return base.replace("{}", String(value));
@@ -2675,7 +2757,7 @@ class ClientWrapper {
         }
         this.signalManager = ClientWrapper.initSignalManager(this);
         this.rulesSignalManager = rulesSignalManager;
-        this.preferredWidth = kwinClient.frameGeometry.width;
+        this.preferredWidth = kwinClient.frameGeometry.width.round();
         this.manipulatingGeometry = new Doer();
         this.lastPlacement = null;
         this.stateManager = new ClientState.Manager(constructInitialState(this));
@@ -2700,7 +2782,7 @@ class ClientWrapper {
         if (this.stateManager.getState() instanceof ClientState.Floating) {
             if (Clients.isOnOneOfVirtualDesktops(this.kwinClient, kwinDesktops)) {
                 const frame = this.kwinClient.frameGeometry;
-                this.kwinClient.frameGeometry = Qt.rect(frame.x + dx, frame.y + dy, frame.width, frame.height);
+                this.kwinClient.frameGeometry = Qt.rect(frame.x.round() + dx, frame.y.round() + dy, frame.width.round(), frame.height.round());
             }
             for (const transient of this.transients) {
                 transient.moveTransient(dx, dy, kwinDesktops);
@@ -2777,12 +2859,12 @@ class ClientWrapper {
         if (!Clients.isOnVirtualDesktop(this.kwinClient, Workspace.currentDesktop)) {
             return;
         }
-        const frame = this.kwinClient.frameGeometry;
-        if (frame.left < screenSize.left) {
-            frame.x = screenSize.left;
+        const frame = roundQtRect(this.kwinClient.frameGeometry);
+        if (frame.x < screenSize.x) {
+            frame.x = screenSize.x;
         }
-        else if (frame.right > screenSize.right) {
-            frame.x = screenSize.right - frame.width;
+        else if (rectRight(frame) > rectRight(screenSize)) {
+            frame.x = rectRight(screenSize) - frame.width;
         }
     }
     destroy(passFocus) {
@@ -2859,8 +2941,8 @@ var Clients;
     Clients.getKwinDesktopApprox = getKwinDesktopApprox;
     function isFullScreenGeometry(kwinClient) {
         const fullScreenArea = Workspace.clientArea(4 /* ClientAreaOption.FullScreenArea */, kwinClient.output, getKwinDesktopApprox(kwinClient));
-        return kwinClient.clientGeometry.width >= fullScreenArea.width &&
-            kwinClient.clientGeometry.height >= fullScreenArea.height;
+        return kwinClient.clientGeometry.width.round() >= fullScreenArea.width &&
+            kwinClient.clientGeometry.height.round() >= fullScreenArea.height;
     }
     Clients.isFullScreenGeometry = isFullScreenGeometry;
     function isOnVirtualDesktop(kwinClient, kwinDesktop) {
@@ -3040,7 +3122,7 @@ class PinManager {
         this.pinnedClients.delete(kwinClient);
     }
     getAvailableSpace(kwinDesktop, screen) {
-        const baseLot = new PinManager.Lot(screen.top, screen.bottom, screen.left, screen.right);
+        const baseLot = new PinManager.Lot(screen.y, rectBottom(screen), screen.x, rectRight(screen));
         let lots = [baseLot];
         for (const client of this.pinnedClients) {
             if (!Clients.isOnVirtualDesktop(client, kwinDesktop) || client.minimized) {
@@ -3048,7 +3130,7 @@ class PinManager {
             }
             const newLots = [];
             for (const lot of lots) {
-                lot.split(newLots, client.frameGeometry);
+                lot.split(newLots, roundQtRect(client.frameGeometry));
             }
             lots = newLots;
         }
@@ -3078,22 +3160,22 @@ class PinManager {
                 destLots.push(this);
                 return;
             }
-            if (obstacle.top - this.top >= Lot.minHeight) {
-                destLots.push(new Lot(this.top, obstacle.top, this.left, this.right));
+            if (obstacle.y - this.top >= Lot.minHeight) {
+                destLots.push(new Lot(this.top, obstacle.y, this.left, this.right));
             }
-            if (this.bottom - obstacle.bottom >= Lot.minHeight) {
-                destLots.push(new Lot(obstacle.bottom, this.bottom, this.left, this.right));
+            if (this.bottom - rectBottom(obstacle) >= Lot.minHeight) {
+                destLots.push(new Lot(rectBottom(obstacle), this.bottom, this.left, this.right));
             }
-            if (obstacle.left - this.left >= Lot.minWidth) {
-                destLots.push(new Lot(this.top, this.bottom, this.left, obstacle.left));
+            if (obstacle.x - this.left >= Lot.minWidth) {
+                destLots.push(new Lot(this.top, this.bottom, this.left, obstacle.x));
             }
-            if (this.right - obstacle.right >= Lot.minWidth) {
-                destLots.push(new Lot(this.top, this.bottom, obstacle.right, this.right));
+            if (this.right - rectRight(obstacle) >= Lot.minWidth) {
+                destLots.push(new Lot(this.top, this.bottom, rectRight(obstacle), this.right));
             }
         }
         contains(obstacle) {
-            return obstacle.right > this.left && obstacle.left < this.right &&
-                obstacle.bottom > this.top && obstacle.top < this.bottom;
+            return rectRight(obstacle) > this.left && obstacle.x < this.right &&
+                rectBottom(obstacle) > this.top && obstacle.y < this.bottom;
         }
         area() {
             return (this.bottom - this.top) * (this.right - this.left);
@@ -3196,7 +3278,7 @@ class World {
             if (tiledWindow === null) {
                 return;
             }
-            const cursorAlreadyInFocus = rectContainsPoint(Workspace.activeWindow.frameGeometry, Workspace.cursorPos);
+            const cursorAlreadyInFocus = rectContainsPoint(roundQtRect(Workspace.activeWindow.frameGeometry), Workspace.cursorPos);
             if (cursorAlreadyInFocus) {
                 return;
             }
@@ -3233,9 +3315,11 @@ class World {
     }
     gestureScrollFinish() {
         this.do((clientManager, desktopManager) => {
+            const focusedWindow = Workspace.activeWindow === null ? null : clientManager.findTiledWindow(Workspace.activeWindow);
             const currentDesktop = desktopManager.getCurrentDesktop();
             if (currentDesktop !== undefined) {
-                currentDesktop.gestureScrollFinish();
+                console.assert(focusedWindow === null || focusedWindow.column.grid.desktop === currentDesktop);
+                currentDesktop.gestureScrollFinish(focusedWindow);
             }
         });
     }
@@ -3295,7 +3379,7 @@ var ClientState;
             const placementArea = Workspace.clientArea(0 /* ClientAreaOption.PlacementArea */, client.kwinClient.output, Clients.getKwinDesktopApprox(client.kwinClient));
             const clientRect = client.kwinClient.frameGeometry;
             const width = client.preferredWidth;
-            client.place(clientRect.x, clientRect.y, width, Math.min(clientRect.height, Math.round(placementArea.height / 2)));
+            client.place(clientRect.x.round(), clientRect.y.round(), width, Math.min(clientRect.height.round(), Math.round(placementArea.height / 2)));
         }
         static initSignalManager(world, kwinClient) {
             const manager = new SignalManager();
@@ -3524,7 +3608,11 @@ var ClientState;
                     });
                     return;
                 }
-                const newGeometry = client.kwinClient.frameGeometry;
+                const newGeometry = roundQtRect(client.kwinClient.frameGeometry);
+                if (rectEquals(oldGeometry, newGeometry)) {
+                    // no real changes, nothing to do
+                    return;
+                }
                 const oldCenterX = oldGeometry.x + oldGeometry.width / 2;
                 const oldCenterY = oldGeometry.y + oldGeometry.height / 2;
                 const newCenterX = newGeometry.x + newGeometry.width / 2;
@@ -3539,7 +3627,7 @@ var ClientState;
                 if (kwinClient.resize) {
                     world.do(() => {
                         if (newGeometry.width !== oldGeometry.width) {
-                            window.column.onUserResizeWidth(resizeStartWidth, newGeometry.width - resizeStartWidth, newGeometry.left !== oldGeometry.left, resizeNeighbor);
+                            window.column.onUserResizeWidth(resizeStartWidth, newGeometry.width - resizeStartWidth, newGeometry.x !== oldGeometry.x, resizeNeighbor);
                         }
                         if (newGeometry.height !== oldGeometry.height) {
                             window.column.adjustWindowHeight(window, newGeometry.height - oldGeometry.height, newGeometry.y !== oldGeometry.y);
@@ -3579,10 +3667,10 @@ var ClientState;
         static getResizeNeighborColumn(window) {
             const kwinClient = window.client.kwinClient;
             const column = window.column;
-            if (Workspace.cursorPos.x > kwinClient.clientGeometry.right) {
+            if (Workspace.cursorPos.x > rectRightRound(kwinClient.clientGeometry)) {
                 return column.grid.getRightColumn(column);
             }
-            else if (Workspace.cursorPos.x < kwinClient.clientGeometry.left) {
+            else if (Workspace.cursorPos.x < kwinClient.clientGeometry.x.round()) {
                 return column.grid.getLeftColumn(column);
             }
             else {

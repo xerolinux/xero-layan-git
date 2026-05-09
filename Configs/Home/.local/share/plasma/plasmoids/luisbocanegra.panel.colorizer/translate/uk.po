@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: colorizer\n"
 "Report-Msgid-Bugs-To: https://github.com/luisbocanegra/plasma-panel-"
 "colorizer\n"
-"POT-Creation-Date: 2026-01-03 19:31+0000\n"
+"POT-Creation-Date: 2026-04-12 03:26+0000\n"
 "PO-Revision-Date: 2025-09-14 11:20-0600\n"
 "Last-Translator: https://github.com/devil6a <EMAIL@ADDRESS>\n"
 "Language-Team: Ukrainian <EMAIL@ADDRESS>\n"
@@ -60,7 +60,11 @@ msgid "Global Overrides"
 msgstr "Глобальні перевизначення"
 
 #: ../contents/config/config.qml
-msgid "Text/Icon Fixes"
+msgid "Text/Icon Color Fixes"
+msgstr ""
+
+#: ../contents/config/config.qml
+msgid "Blacklist Widgets"
 msgstr ""
 
 #: ../contents/config/config.qml
@@ -75,11 +79,16 @@ msgstr ""
 msgid "General"
 msgstr "Загальні"
 
+#: ../contents/config/config.qml
+msgid "Support Me"
+msgstr ""
+
 #: ../contents/ui/components/CategoryDisabled.qml
 msgid "Panel Colorizer is disabled"
 msgstr "Колоризатор панелі вимкнено"
 
 #: ../contents/ui/components/CategoryDisabled.qml
+#: ../contents/ui/components/FormWidgetSettings.qml
 #: ../contents/ui/configTrayIconsReplacer.qml
 msgid "Enable"
 msgstr "Увімкнути"
@@ -89,6 +98,11 @@ msgstr "Увімкнути"
 #: ../contents/ui/components/FormColors.qml
 msgid "Widget background"
 msgstr "Фон віджета"
+
+#: ../contents/ui/components/DesktopView.qml
+msgid "Panel not found, this widget must be placed on a panel to work"
+msgstr ""
+"Панель не знайдено, цей віджет має бути розміщений на панелі для роботи"
 
 #: ../contents/ui/components/FormBorder.qml
 #: ../contents/ui/components/FormWidgetSettings.qml
@@ -101,6 +115,7 @@ msgstr "Рамка"
 #: ../contents/ui/components/FormShape.qml ../contents/ui/configGeneral.qml
 #: ../contents/ui/configPresetAutoload.qml
 #: ../contents/ui/configStockPanelSettings.qml
+#: ../contents/ui/configWidgetIslands.qml
 msgid "Enabled:"
 msgstr "Увімкнено:"
 
@@ -119,7 +134,7 @@ msgstr "Ширина:"
 msgid ""
 "Use an integer when using <strong>Widget Islands</strong> to avoid rendering "
 "issues! <a href=\"https://github.com/luisbocanegra/plasma-panel-colorizer/"
-"issues/64\">See #64<a/>"
+"issues/64\">See #64</a>"
 msgstr ""
 
 #: ../contents/ui/components/FormBorder.qml
@@ -363,6 +378,12 @@ msgstr ""
 "розмиття."
 
 #: ../contents/ui/components/FormWidgetSettings.qml
+msgid ""
+"⚠️ Disabling this breaks the panel clickable area and applet dialogs "
+"positioning when the panel is in floating mode! See <a href=\"%1\">#80</a>."
+msgstr ""
+
+#: ../contents/ui/components/FormWidgetSettings.qml
 msgid "The shadow from the Plasma theme"
 msgstr "Тінь з теми Plasma"
 
@@ -401,7 +422,15 @@ msgstr ""
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid ""
-"Make the System Tray expand button be the same width as the other tray items"
+"Make the System Tray expand button use the same size as the other tray items"
+msgstr ""
+
+#: ../contents/ui/components/FormWidgetSettings.qml
+msgid "Custom cell height:"
+msgstr ""
+
+#: ../contents/ui/components/FormWidgetSettings.qml
+msgid "Custom cell width:"
 msgstr ""
 
 #: ../contents/ui/components/FormWidgetSettings.qml
@@ -409,21 +438,20 @@ msgid "Force floating applets"
 msgstr "Примусово зробити аплети плаваючими"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
-msgid "Anchor to edges:"
-msgstr ""
-
-#: ../contents/ui/components/FormWidgetSettings.qml
-msgid "Resize content when panel enters/exits floating state"
-msgstr ""
-
-#: ../contents/ui/components/FormWidgetSettings.qml
-msgid "Panel de-float:"
-msgstr ""
+#: ../contents/ui/configPresetAutoload.qml
+msgid "Floating panel:"
+msgstr "Плаваюча панель:"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid ""
 "Remove custom background rounded corners and borders on screen edge when "
 "panel is not floating"
+msgstr ""
+
+#: ../contents/ui/components/FormWidgetSettings.qml
+msgid ""
+"Resize panel length when panel enters/exits floating state (instead of just "
+"moving)"
 msgstr ""
 
 #: ../contents/ui/components/FormWidgetSettings.qml
@@ -479,18 +507,26 @@ msgstr ""
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid ""
 "C++ plugin not found, this feature will not work. Install the plugin and "
-"reboot or restart plasmashell to be able to use it."
+"reboot or restart plasmashell to be able to use it. See <a "
+"href=\"%1\">install instructions</a>."
 msgstr ""
-"Плагін C++ не знайдено, ця функція не працюватиме. Встановіть плагін і "
-"перезавантажте комп'ютер або перезапустіть plasmashell, щоб мати можливість "
-"використовувати його."
 
 #: ../contents/ui/components/FormWidgetSettings.qml
-msgid "Plugin install instructions"
-msgstr "Інструкції з встановлення плагіна"
+msgid "Clipping (Experimental)"
+msgstr ""
+
+#: ../contents/ui/components/FormWidgetSettings.qml
+msgid ""
+"Clip the widget content to the custom background radius.<br>Clipping widgets "
+"against the panel is not supported yet, see <a href=\"%1\">#275</a>."
+msgstr ""
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Shape"
+msgstr ""
+
+#: ../contents/ui/components/FormWidgetSettings.qml
+msgid "Font"
 msgstr ""
 
 #: ../contents/ui/components/FormWidgetSettings.qml
@@ -499,12 +535,43 @@ msgstr "Відступи:"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid ""
-"<strong>Odd</strong> values are automatically converted to <strong>evens</"
-"strong> if <strong>Unified Background</strong> feature is used."
+"<strong>Odd spacing</strong> values will be automatically converted to "
+"<strong>evens</strong> if <strong>Widget Islands</strong> feature is used."
 msgstr ""
-"<strong>Непарні</strong> значення автоматично перетворюються на "
-"<strong>парні</strong>, якщо використовується функція <strong>Уніфікований "
-"фон</strong>."
+
+#: ../contents/ui/components/FormWidgetSettings.qml
+msgid "Custom font:"
+msgstr ""
+
+#: ../contents/ui/components/FormWidgetSettings.qml
+msgid ""
+"A plasmashell restart is required to restore the original values after "
+"disabling any font setting. <a href=\"#\">Restart now</a>."
+msgstr ""
+
+#: ../contents/ui/components/FormWidgetSettings.qml
+msgid "Font family:"
+msgstr ""
+
+#: ../contents/ui/components/FormWidgetSettings.qml
+msgid "Override"
+msgstr ""
+
+#: ../contents/ui/components/FormWidgetSettings.qml
+msgid "Italic:"
+msgstr ""
+
+#: ../contents/ui/components/FormWidgetSettings.qml
+msgid "Underline:"
+msgstr ""
+
+#: ../contents/ui/components/FormWidgetSettings.qml
+msgid "Font weight:"
+msgstr ""
+
+#: ../contents/ui/components/FormWidgetSettings.qml
+msgid "Font size:"
+msgstr ""
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Background Color"
@@ -563,10 +630,6 @@ msgid "Releases"
 msgstr ""
 
 #: ../contents/ui/components/Header.qml
-msgid "Matrix chat"
-msgstr ""
-
-#: ../contents/ui/components/Header.qml
 msgid "Home page"
 msgstr ""
 
@@ -599,7 +662,7 @@ msgid "FAQ"
 msgstr ""
 
 #: ../contents/ui/components/Header.qml
-msgid "Discussions"
+msgid "GitHub Discussions"
 msgstr ""
 
 #: ../contents/ui/components/Header.qml
@@ -607,18 +670,18 @@ msgid "Send an email"
 msgstr ""
 
 #: ../contents/ui/components/Header.qml
+msgid "Translate"
+msgstr ""
+
+#: ../contents/ui/components/Header.qml
 msgid "Donate"
 msgstr ""
 
 #: ../contents/ui/components/Header.qml
-msgid "GitHub sponsors"
+msgid "More projects"
 msgstr ""
 
-#: ../contents/ui/components/Header.qml
-msgid "My other projects"
-msgstr ""
-
-#: ../contents/ui/components/Header.qml ../contents/ui/main.qml
+#: ../contents/ui/components/Header.qml ../contents/ui/components/PopupView.qml
 msgid ""
 "Running version of the widget (%1) is different to the one on disk (%2), "
 "please log out and back in (or restart plasmashell user unit) to ensure "
@@ -627,6 +690,14 @@ msgstr ""
 "Поточна версія віджета (%1) відрізняється від версії на диску (%2), будь "
 "ласка, вийдіть із системи та увійдіть знову (або перезапустіть юніт "
 "користувача plasmashell), щоб забезпечити правильну роботу!"
+
+#: ../contents/ui/components/PopupView.qml
+msgid "Select a preset"
+msgstr "Вибрати пресет"
+
+#: ../contents/ui/components/PopupView.qml
+msgid "Running outdated version of %1"
+msgstr "Використовується застаріла версія %1"
 
 #: ../contents/ui/components/SettingImportExport.qml
 msgid "Import"
@@ -660,12 +731,45 @@ msgstr "Це перезапише будь-який попередній екс�
 msgid "This will replace your current settings!"
 msgstr "Це замінить ваші поточні налаштування!"
 
+#: ../contents/ui/components/SupportMe.qml
+msgid "Thank you for using %1!"
+msgstr ""
+
+#: ../contents/ui/components/SupportMe.qml
+msgid ""
+"If you enjoy using the plugin please consider sponsoring or donating so I "
+"can dedicate more time to maintain and improve this and <a href=\"https://"
+"github.com/luisbocanegra?"
+"tab=repositories&q=&type=source&language=&sort=stargazers\">my other "
+"projects</a>."
+msgstr ""
+
+#: ../contents/ui/components/SupportMe.qml
+msgid "You can also"
+msgstr ""
+
+#: ../contents/ui/components/SupportMe.qml
+msgid "Star the project on GitHub"
+msgstr ""
+
+#: ../contents/ui/components/SupportMe.qml
+msgid "Rate in the KDE Store"
+msgstr ""
+
+#: ../contents/ui/components/SupportMe.qml
+msgid "Translate %1 to your language"
+msgstr ""
+
+#: ../contents/ui/components/WidgetCardBlacklist.qml
 #: ../contents/ui/components/WidgetCardConfig.qml
 #: ../contents/ui/components/WidgetCardHide.qml
 #: ../contents/ui/components/WidgetCardTextIconFixes.qml
-#: ../contents/ui/components/WidgetCardUnifiedBg.qml
 msgid "System Tray"
 msgstr "Системний лоток"
+
+#: ../contents/ui/components/WidgetCardBlacklist.qml
+msgid "Blacklist"
+msgstr ""
 
 #: ../contents/ui/components/WidgetCardConfig.qml
 msgid "Add"
@@ -696,18 +800,6 @@ msgstr "Ефект"
 msgid "Refresh"
 msgstr "Оновити"
 
-#: ../contents/ui/components/WidgetCardUnifiedBg.qml
-msgid "Disable"
-msgstr "Вимкнути"
-
-#: ../contents/ui/components/WidgetCardUnifiedBg.qml
-msgid "Start"
-msgstr "Початок"
-
-#: ../contents/ui/components/WidgetCardUnifiedBg.qml
-msgid "End"
-msgstr "Кінець"
-
 #: ../contents/ui/configAppearance.qml
 msgid ""
 "Not getting the expected result? Make sure you're editing the correct "
@@ -737,6 +829,17 @@ msgstr "Віджети лотка"
 
 #: ../contents/ui/configAppearance.qml
 msgid "Part of the panel on which the options below will be applied."
+msgstr ""
+
+#: ../contents/ui/configBlacklistWidgets.qml
+msgid ""
+"Blacklist widgets to keep their default appearance. A logout may be required "
+"for some widgets to fully restore their default appearance."
+msgstr ""
+
+#: ../contents/ui/configBlacklistWidgets.qml
+#: ../contents/ui/configTrayIconsReplacer.qml
+msgid "Remove all"
 msgstr ""
 
 #: ../contents/ui/configGeneral.qml
@@ -1000,10 +1103,6 @@ msgid "At least one window is visible:"
 msgstr "Видно принаймні одне вікно:"
 
 #: ../contents/ui/configPresetAutoload.qml
-msgid "Floating panel:"
-msgstr "Плаваюча панель:"
-
-#: ../contents/ui/configPresetAutoload.qml
 msgid "activity:"
 msgstr "активність:"
 
@@ -1256,7 +1355,7 @@ msgid ""
 "configured preset auto-loading or know how to switch presets using D-Bus (or "
 "have disabled it), you will have no way to make it visible again without "
 "manually removing the configuration or Panel Colorizer, use the command "
-"below in terminal/tty then log out or reboot, it will renove the "
+"below in terminal/tty then log out or reboot, it will remove the "
 "configuration from all Panel Colorizer instances so make sure to save the "
 "others first"
 msgstr ""
@@ -1273,14 +1372,14 @@ msgstr ""
 
 #: ../contents/ui/configTextIconFix.qml
 msgid ""
-"Fix text and icon colors for widgets where the normal method doesn't work or "
-"isn't permanent.<br> - <strong>Mask</strong>: Force color on SVG icons, "
-"useful for symbolic icons.<br> - <strong>Color Effect</strong>: Force color "
-"on text and icons using post-processing effect, useful for non-symbolic "
-"icons.<br> - <strong>Refresh</strong>: Re-apply color at a fixed interval, "
-"useful for widgets that recreate or recolor content themselves<br>To restore "
-"the <strong>Mask<strong> and <strong>Color Effect</strong> disable and "
-"restart Plasma or logout."
+"Fix text and icon colors/font for widgets where the normal method doesn't "
+"work or is reset by the widget.<br> - <strong>Mask</strong>: Force color on "
+"SVG icons, useful for symbolic icons.<br> - <strong>Color Effect</strong>: "
+"Force color on text and icons using post-processing effect, useful for non-"
+"symbolic icons.<br> - <strong>Refresh</strong>: Re-apply color/font at a "
+"fixed interval, useful for widgets that recreate or recolor content "
+"themselves.<br>To restore the <strong>Mask<strong> and <strong>Color Effect</"
+"strong> disable and restart Plasma or logout."
 msgstr ""
 
 #: ../contents/ui/configTextIconFix.qml
@@ -1300,7 +1399,7 @@ msgid "Add new"
 msgstr ""
 
 #: ../contents/ui/configTrayIconsReplacer.qml
-msgid "Remove all"
+msgid "Sort"
 msgstr ""
 
 #: ../contents/ui/configTrayIconsReplacer.qml
@@ -1367,11 +1466,11 @@ msgid "Description"
 msgstr ""
 
 #: ../contents/ui/configTrayIconsReplacer.qml
-msgid "SHA1"
+msgid "SHA1, string or regex to match"
 msgstr ""
 
 #: ../contents/ui/configTrayIconsReplacer.qml
-msgid "Original icon SHA1"
+msgid "Icon SHA1, title or name of the target tray item"
 msgstr ""
 
 #: ../contents/ui/configTrayIconsReplacer.qml
@@ -1383,8 +1482,7 @@ msgid "Icon name or file"
 msgstr ""
 
 #: ../contents/ui/configTrayIconsReplacer.qml
-msgctxt "@info:tooltip"
-msgid "Icon name is \"%1\""
+msgid "Edit icon"
 msgstr ""
 
 #: ../contents/ui/configTrayIconsReplacer.qml
@@ -1405,33 +1503,97 @@ msgstr ""
 msgid "Copy rule"
 msgstr ""
 
-#: ../contents/ui/configUnifiedBackground.qml
-msgid ""
-"Select start and end of widget islands, widgets between <b>Start</b> and "
-"<b>End</b> must be left <b>disabled</b>. Widget custom background or border "
-"is required for this option to have an effect."
+#: ../contents/ui/configWidgetIslands.qml
+msgid "Create widget islands by placing separator widgets around them."
 msgstr ""
 
-#: ../contents/ui/configUnifiedBackground.qml
-msgid "Remove all unified areas"
+#: ../contents/ui/configWidgetIslands.qml
+msgid ""
+"<strong>How to use</strong><br>1. Add the widget that will act as islands "
+"separator to the panel(by default the Plasma's Panel Spacer widget will be "
+"used)<br>2. Select the separator widget below<br>3. Add as many separators "
+"as you need and move them to create islands."
+msgstr ""
+
+#: ../contents/ui/configWidgetIslands.qml
+msgid ""
+"<strong>Notes</strong><br>- Widget custom background or border is required "
+"for this option to have a visible effect.<br>- If the widgets in your panel "
+"have different thickness, add margins to the widgets custom background in "
+"the Appearance tab."
+msgstr ""
+
+#: ../contents/ui/configWidgetIslands.qml
+msgid ""
+"<strong>Need a separator widget?</strong><br>- <a href=\"%1\">Panel "
+"Colorizer Islands Separator</a> visible only in Edit Mode.<br>- <a "
+"href=\"%2\">Advanced Separator</a> always visible and configurable."
+msgstr ""
+
+#: ../contents/ui/configWidgetIslands.qml
+msgid "Separator widget:"
+msgstr ""
+
+#: ../contents/ui/configWidgetIslands.qml
+msgid ""
+"Select the widget that will act as separator for the islands.<br><br>Note "
+"that the separator widget itself does not need to be visible for it to work, "
+"so you can use an invisible spacer/separator for example."
+msgstr ""
+
+#: ../contents/ui/configWidgetIslands.qml
+msgid "Require two separators per island:"
+msgstr ""
+
+#: ../contents/ui/configWidgetIslands.qml
+msgid ""
+"Always require two separators for a group of widgets to become an island. By "
+"default, an arrangement of<br>%1 creates two islands.<br><br>Enabling this "
+"option makes it so that islands do not share separators, so for example an "
+"arrangement of<br>%2 is required to create two islands.<br><br>Enable this "
+"if your islands separator is not a panel spacer and you want to explicitly "
+"define the start and end of each island."
+msgstr ""
+
+#: ../contents/ui/configWidgetIslands.qml
+msgid "Blacklist separator widgets:"
+msgstr ""
+
+#: ../contents/ui/configWidgetIslands.qml
+msgid "Disable customization from separator widgets"
 msgstr ""
 
 #: ../contents/ui/main.qml
 msgid "Hide widget (visible in panel Edit Mode)"
 msgstr "Приховати віджет (видимий у режимі редагування панелі)"
 
-#: ../contents/ui/main.qml
-msgid "Select a preset"
-msgstr "Вибрати пресет"
+#~ msgid "Disable"
+#~ msgstr "Вимкнути"
 
-#: ../contents/ui/main.qml
-msgid "Running outdated version of %1"
-msgstr "Використовується застаріла версія %1"
+#~ msgid "Start"
+#~ msgstr "Початок"
 
-#: ../contents/ui/main.qml
-msgid "Panel not found, this widget must be placed on a panel to work"
-msgstr ""
-"Панель не знайдено, цей віджет має бути розміщений на панелі для роботи"
+#~ msgid "End"
+#~ msgstr "Кінець"
+
+#~ msgid ""
+#~ "C++ plugin not found, this feature will not work. Install the plugin and "
+#~ "reboot or restart plasmashell to be able to use it."
+#~ msgstr ""
+#~ "Плагін C++ не знайдено, ця функція не працюватиме. Встановіть плагін і "
+#~ "перезавантажте комп'ютер або перезапустіть plasmashell, щоб мати "
+#~ "можливість використовувати його."
+
+#~ msgid "Plugin install instructions"
+#~ msgstr "Інструкції з встановлення плагіна"
+
+#~ msgid ""
+#~ "<strong>Odd</strong> values are automatically converted to <strong>evens</"
+#~ "strong> if <strong>Unified Background</strong> feature is used."
+#~ msgstr ""
+#~ "<strong>Непарні</strong> значення автоматично перетворюються на "
+#~ "<strong>парні</strong>, якщо використовується функція "
+#~ "<strong>Уніфікований фон</strong>."
 
 #~ msgid "visible in Panel Edit Mode"
 #~ msgstr "видимий у режимі редагування панелі"

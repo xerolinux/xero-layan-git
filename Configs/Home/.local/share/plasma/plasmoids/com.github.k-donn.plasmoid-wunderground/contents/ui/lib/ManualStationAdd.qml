@@ -1,5 +1,5 @@
 /*
- * Copyright 2025  Kevin Donnelly
+ * Copyright 2026  Kevin Donnelly
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -17,9 +17,10 @@
 
 import QtQuick
 import QtQuick.Layouts
-import org.kde.plasma.components as PlasmaComponents
-import org.kde.kirigami as Kirigami
+import QtQuick.Controls as QQC
 import org.kde.plasma.plasmoid
+import org.kde.kirigami as Kirigami
+import org.kde.plasma.components as PlasmaComponents
 
 Window {
     id: manualAdd
@@ -33,7 +34,7 @@ Window {
     modality: Qt.WindowModal
 
     width: Kirigami.Units.gridUnit * 17
-    height: Kirigami.Units.gridUnit * 6
+    height: Kirigami.Units.gridUnit * 10
 
     SystemPalette {
         id: syspal
@@ -47,6 +48,8 @@ Window {
 
     onOpen: {
         manualAdd.visible = true;
+        stationIDInput.text = "";
+        stationNameInput.text = "";
     }
 
     title: i18n("Add Station...")
@@ -57,32 +60,34 @@ Window {
         anchors.margins: Kirigami.Units.largeSpacing
         spacing: Kirigami.Units.largeSpacing
 
-        PlasmaComponents.TextField {
-            id: stationInput
+        QQC.TextField {
+            id: stationIDInput
             Layout.fillWidth: true
             placeholderText: i18n("Enter station ID")
-            onAccepted: {
-                if (text.trim().length > 0) {
-                    manualAdd.stationSelected(text.trim());
-                    manualAdd.visible = false;
-                }
-            }
+        }
+
+        QQC.TextField {
+            id: stationNameInput
+            Layout.fillWidth: true
+            placeholderText: i18n("Enter station name (optional)")
         }
 
         RowLayout {
             Layout.alignment: Qt.AlignRight
             spacing: Kirigami.Units.smallSpacing
 
-            PlasmaComponents.Button {
+            QQC.Button {
                 text: i18n("Confirm")
-                enabled: stationInput.text.trim().length > 0
+                enabled: stationIDInput.text.trim().length > 0
                 onClicked: {
-                    manualAdd.stationSelected(stationInput.text.trim());
+                    var stationID = stationIDInput.text.trim();
+                    var address = stationNameInput.text.trim().length > 0 ? stationNameInput.text.trim() : stationID;
+                    manualAdd.stationSelected({stationID, address});
                     manualAdd.visible = false;
                 }
             }
 
-            PlasmaComponents.Button {
+            QQC.Button {
                 text: i18n("Cancel")
                 onClicked: {
                     manualAdd.visible = false;

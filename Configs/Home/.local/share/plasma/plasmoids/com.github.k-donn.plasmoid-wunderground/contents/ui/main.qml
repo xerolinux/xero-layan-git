@@ -1,5 +1,5 @@
 /*
- * Copyright 2025  Kevin Donnelly
+ * Copyright 2026  Kevin Donnelly
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -26,11 +26,15 @@ import "../code/pws-api.js" as StationAPI
 PlasmoidItem {
     id: root
 
+    FontLoader {
+        source: "../fonts/weather-icons.ttf"
+    }
+
     property var weatherData: ({
-            "stationID": "",
-            "neighborhood": "",
+            "stationID": "KSTAT100",
+            "neighborhood": "Place name",
             "uv": 0,
-            "obsTimeLocal": "",
+            "obsTimeLocal": "2020-08-09T10:11:10-0500",
             "isNight": false,
             "winddir": 0,
             "latitude": 0,
@@ -39,6 +43,15 @@ PlasmoidItem {
             "sunset": "2020-08-09T20:00:10-0500",
             "solarRad": 0,
             "humidity": 0,
+            "moonrise": "2020-08-09T20:00:10-0500",
+            "moonset": "2020-08-10T04:00:10-0500",
+            "moonPhase": "Full Moon",
+            "moonPhaseCode": "F",
+            "blurb": "AAAAAAAAAAAAAAAAAAAAAA",
+            "kp-index": 0,
+            "kp-health": 0,
+            "kp-color": "#00FF00",
+            "cloudCover": 0,
             "details": {
                 "temp": 0,
                 "windSpeed": 0,
@@ -68,12 +81,12 @@ PlasmoidItem {
                 },
                 "messages": {
                     "general": {
-                        "title": "",
-                        "phrase": ""
+                        "title": "major",
+                        "phrase": "major details"
                     },
                     "sensitive": {
-                        "title": "",
-                        "phrase": ""
+                        "title": "minor",
+                        "phrase": "minor details"
                     }
                 }
             }
@@ -81,9 +94,10 @@ PlasmoidItem {
     property ListModel forecastModel: ListModel {}
     property ListModel hourlyModel: ListModel {}
     property ListModel alertsModel: ListModel {}
+    property ListModel kpPredictionsModel: ListModel {}
     property int currDayHigh: 0
     property int currDayLow: 0
-    property string iconCode: "32" // 32 = sunny
+    property int iconCode: 32 // 32 = sunny
     property string conditionNarrative: ""
 
     property string errorStr: ""
@@ -106,6 +120,12 @@ PlasmoidItem {
     property int snowUnitsChoice: plasmoid.configuration.snowUnitsChoice
     property int presUnitsChoice: plasmoid.configuration.presUnitsChoice
     property bool useLegacyAPI: plasmoid.configuration.useLegacyAPI
+
+    property int layoutType: plasmoid.configuration.layoutType
+    property int widgetOrder: plasmoid.configuration.widgetOrder
+    property int planarLayoutType: plasmoid.configuration.planarLayoutType
+    property int iconSizeMode: plasmoid.configuration.iconSizeMode
+    property int textSizeMode: plasmoid.configuration.textSizeMode
 
     property bool inTray: false
     // Metric units change based on precipitation type
@@ -183,14 +203,14 @@ PlasmoidItem {
         })
 
     property Component fr: FullRepresentation {
-        Layout.preferredWidth: 600
-        Layout.preferredHeight: 380
+        Layout.preferredWidth: 650
+        Layout.preferredHeight: 480
     }
+    property Component cr: CompactRepresentation {}
+    property Component crInTray: CompactRepresentationInTray {}
 
-    property Component cr:
-    // Layout.preferredWidth: 16
-    // Layout.preferredHeight: 16
-    CompactRepresentation {}
+    property bool vertical: plasmoid.formFactor === PlasmaCore.Types.Vertical
+    property bool onDesktop: (plasmoid.location === PlasmaCore.Types.Desktop || plasmoid.location === PlasmaCore.Types.Floating)
 
     function printDebug(msg) {
         if (plasmoid.configuration.logConsole) {
@@ -233,7 +253,7 @@ PlasmoidItem {
                 if (err) {
                     errorStr = err.message || JSON.stringify(err);
                     errorType = err.type || JSON.stringify(err);
-                    printDebug("[main.qml] " + errorStr);
+                    printDebug(errorStr);
                     appState = showERROR;
                     return;
                 }
@@ -242,8 +262,7 @@ PlasmoidItem {
                 weatherData = curRes.weatherData;
                 plasmoid.configuration.latitude = curRes.configUpdates.latitude;
                 plasmoid.configuration.longitude = curRes.configUpdates.longitude;
-                plasmoid.configuration.stationName = curRes.configUpdates.stationName;
-                printDebug("[main.qml] Got new current data");
+                printDebug("Got new current data");
 
                 // Fetch extended conditions for the same location
                 StationAPI.getExtendedConditions({
@@ -254,7 +273,7 @@ PlasmoidItem {
                     language: Qt.locale().name.replace("_", "-")
                 }, function (err2, extRes) {
                     if (err2) {
-                        printDebug("[main.qml] Extended conditions failed: " + (err2.message || JSON.stringify(err2)));
+                        printDebug("Extended conditions failed: " + (err2.message || JSON.stringify(err2)));
                         // Do not proceed to forecast if extended conditions fail (preserves previous behaviour)
                         return;
                     }
@@ -273,12 +292,13 @@ PlasmoidItem {
                     // Merge extended info into weatherData
                     var merged = JSON.parse(JSON.stringify(weatherData));
                     merged.isNight = extRes.isNight;
-                    merged.sunrise = extRes.sunriseTimeLocal || merged.sunrise;
-                    merged.sunset = extRes.sunsetTimeLocal || merged.sunset;
+                    merged.sunrise = extRes.sunriseTimeLocal;
+                    merged.sunset = extRes.sunsetTimeLocal;
+                    merged.cloudCover = extRes.cloudCover;
                     merged.details = merged.details || {};
-                    merged.details.pressureTrend = extRes.pressureTendencyTrend || merged.details.pressureTrend;
-                    merged.details.pressureTrendCode = extRes.pressureTendencyCode || merged.details.pressureTrendCode;
-                    merged.details.pressureDelta = extRes.pressureChange || merged.details.pressureDelta;
+                    merged.details.pressureTrend = extRes.pressureTendencyTrend;
+                    merged.details.pressureTrendCode = extRes.pressureTendencyCode;
+                    merged.details.pressureDelta = extRes.pressureDelta;
                     merged.aq = extRes.airQuality || merged.aq;
                     weatherData = merged;
 
@@ -293,7 +313,7 @@ PlasmoidItem {
                         if (err3) {
                             errorStr = err3.message || JSON.stringify(err3);
                             errorType = err3.type || JSON.stringify(err3);
-                            printDebug("[main.qml] " + errorStr);
+                            printDebug(errorStr);
                             appState = showERROR;
                             return;
                         }
@@ -304,8 +324,15 @@ PlasmoidItem {
                         }
                         currDayHigh = fcRes.currDayHigh;
                         currDayLow = fcRes.currDayLow;
+                        var updated = JSON.parse(JSON.stringify(weatherData));
+                        updated.moonrise = fcRes.moonrise || updated.moonrise;
+                        updated.moonset = fcRes.moonset || updated.moonset;
+                        updated.moonPhase = fcRes.moonPhase || updated.moonPhase;
+                        updated.moonPhaseCode = fcRes.moonPhaseCode || updated.moonPhaseCode;
+                        updated.blurb = fcRes.blurb || updated.blurb;
+                        weatherData = updated;
 
-                        printDebug("[main.qml] Got new forecast data");
+                        printDebug("Got new forecast data");
                         showForecast = true;
 
                         // Fetch hourly data after forecast is populated
@@ -318,7 +345,7 @@ PlasmoidItem {
                             if (err4) {
                                 errorStr = err4.message || JSON.stringify(err4);
                                 errorType = err4.type || JSON.stringify(err4);
-                                printDebug("[main.qml] " + errorStr);
+                                printDebug(errorStr);
                                 appState = showERROR;
                                 return;
                             }
@@ -330,7 +357,32 @@ PlasmoidItem {
                             maxValDict = hrRes.maxValDict;
                             rangeValDict = hrRes.rangeValDict;
 
-                            printDebug("[main.qml] Got hourly data");
+                            printDebug("Got hourly data");
+
+                            // Fetch KP index data
+                            StationAPI.getKpIndexData(function (err, kpRes) {
+                                if (err) {
+                                    printDebug("KP index fetch failed: " + err.message);
+                                } else {
+                                    var updated = JSON.parse(JSON.stringify(weatherData));
+                                    updated["kp-index"] = kpRes.current;
+                                    var tempC = Math.abs(Utils.apiTempToC(weatherData["details"]["temp"] - 20));
+                                    var deltaPHpa = Utils.apiPresToHpa(weatherData["details"]["pressureDelta"]);
+                                    var kpComp = Math.min(1, Math.max(0, (updated["kp-index"] - 2) / 6));
+                                    var presComp = Math.min(1, Math.abs(deltaPHpa) / 10);
+                                    var tempComp = Math.min(1, Math.abs(tempC - 20) / 20);
+                                    updated["kp-health"] = 10 * (0.35 * updated["kp-index"] + 0.4 * presComp + 0.25 * tempComp);
+                                    updated["kp-color"] = updated["kp-health"] <= 4 ? "#00FF00" : updated["kp-health"] <= 7 ? "#FFFF00" : "#FF0000";
+
+                                    kpPredictionsModel.clear();
+                                    for (var p = 0; p < kpRes.predictions.length; p++) {
+                                        kpPredictionsModel.append(kpRes.predictions[p]);
+                                    }
+
+                                    weatherData = updated;
+                                    printDebug("Got KP index data");
+                                }
+                            });
                         });
                     });
                 });
@@ -353,11 +405,36 @@ PlasmoidItem {
                 errorStr = err.message || JSON.stringify(err);
                 errorType = err.type || JSON.stringify(err);
                 appState = showERROR;
-                printDebug("[main.qml] " + errorStr);
+                printDebug(errorStr);
                 return;
             }
             weatherData = curRes.weatherData;
-            printDebug("[main.qml] Got new current data");
+            printDebug("Got new current data");
+
+            // Fetch KP index data
+            StationAPI.getKpIndexData(function (err, kpRes) {
+                if (err) {
+                    printDebug("KP index fetch failed: " + err.message);
+                } else {
+                    var updated = JSON.parse(JSON.stringify(weatherData));
+                    updated["kp-index"] = kpRes.current;
+                    var tempC = Math.abs(Utils.apiTempToC(weatherData["details"]["temp"] - 20));
+                    var deltaPHpa = Utils.apiPresToHpa(weatherData["details"]["pressureDelta"]);
+                    var kpComp = Math.min(1, Math.max(0, (updated["kp-index"] - 2) / 6));
+                    var presComp = Math.min(1, Math.abs(deltaPHpa) / 10);
+                    var tempComp = Math.min(1, Math.abs(tempC - 20) / 20);
+                    updated["kp-health"] = 10 * (0.35 * updated["kp-index"] + 0.4 * presComp + 0.25 * tempComp);
+                    updated["kp-color"] = updated["kp-health"] <= 4 ? "#00FF00" : updated["kp-health"] <= 7 ? "#FFFF00" : "#FF0000";
+
+                    kpPredictionsModel.clear();
+                    for (var p = 0; p < kpRes.predictions.length; p++) {
+                        kpPredictionsModel.append(kpRes.predictions[p]);
+                    }
+
+                    weatherData = updated;
+                    printDebug("Got KP index data");
+                }
+            });
             appState = showDATA;
         });
     }
@@ -372,7 +449,7 @@ PlasmoidItem {
             language: Qt.locale().name.replace("_", "-")
         }, function (err, extRes) {
             if (err) {
-                printDebug("[main.qml] Extended conditions fetch failed: " + (err.message || JSON.stringify(err)));
+                printDebug("Extended conditions fetch failed: " + (err.message || JSON.stringify(err)));
                 return;
             }
 
@@ -389,10 +466,11 @@ PlasmoidItem {
             merged.isNight = extRes.isNight;
             merged.sunrise = extRes.sunriseTimeLocal || merged.sunrise;
             merged.sunset = extRes.sunsetTimeLocal || merged.sunset;
+            merged.cloudCover = extRes.cloudCover || merged.cloudCover;
             merged.details = merged.details || {};
             merged.details.pressureTrend = extRes.pressureTendencyTrend || merged.details.pressureTrend;
             merged.details.pressureTrendCode = extRes.pressureTendencyCode || merged.details.pressureTrendCode;
-            merged.details.pressureDelta = extRes.pressureChange || merged.details.pressureDelta;
+            merged.details.pressureDelta = extRes.pressureDelta || merged.details.pressureDelta;
             merged.aq = extRes.airQuality || merged.aq;
             weatherData = merged;
 
@@ -406,7 +484,7 @@ PlasmoidItem {
                 if (err2) {
                     errorStr = err2.message || JSON.stringify(err2);
                     errorType = err2.type || JSON.stringify(err2);
-                    printDebug("[main.qml] " + errorStr);
+                    printDebug(errorStr);
                     appState = showERROR;
                     return;
                 }
@@ -416,7 +494,14 @@ PlasmoidItem {
                     forecastModel.append(fcRes.forecast[k]);
                 currDayHigh = fcRes.currDayHigh;
                 currDayLow = fcRes.currDayLow;
-                printDebug("[main.qml] Got new forecast data");
+                var updated = JSON.parse(JSON.stringify(weatherData));
+                updated.moonrise = fcRes.moonrise || updated.moonrise;
+                updated.moonset = fcRes.moonset || updated.moonset;
+                updated.moonPhase = fcRes.moonPhase || updated.moonPhase;
+                updated.moonPhaseCode = fcRes.moonPhaseCode || updated.moonPhaseCode;
+                updated.blurb = fcRes.blurb || updated.blurb;
+                weatherData = updated;
+                printDebug("Got new forecast data");
                 showForecast = true;
 
                 StationAPI.getHourlyData({
@@ -428,7 +513,7 @@ PlasmoidItem {
                     if (err3) {
                         errorStr = err3.message || JSON.stringify(err3);
                         errorType = err3.type || JSON.stringify(err3);
-                        printDebug("[main.qml] " + errorStr);
+                        printDebug(errorStr);
                         appState = showERROR;
                         return;
                     }
@@ -437,7 +522,30 @@ PlasmoidItem {
                         hourlyModel.append(hrRes.hourly[hh]);
                     maxValDict = hrRes.maxValDict;
                     rangeValDict = hrRes.rangeValDict;
-                    printDebug("[main.qml] Got hourly data");
+
+                    printDebug("Got hourly data");
+
+                    // Fetch KP index data
+                    StationAPI.getKpIndexData(function (err, kpRes) {
+                        if (err) {
+                            printDebug("KP index fetch failed: " + err.message);
+                        } else {
+                            var updated = JSON.parse(JSON.stringify(weatherData));
+                            updated["kp-index"] = kpRes.current;
+                            var calcTemp = Utils.apiTempToC(weatherData["details"]["temp"]);
+                            var calcDeltaP = Utils.apiPresToHpa(weatherData["details"]["pressureDelta"]);
+                            updated["kp-health"] = 10 - (0.35 * updated["kp-index"] + 0.4 * calcDeltaP + 0.25 * calcTemp);
+                            updated["kp-color"] = updated["kp-health"] >= 7 ? "#00FF00" : updated["kp-health"] >= 4 ? "#FFFF00" : "#FF0000";
+
+                            kpPredictionsModel.clear();
+                            for (var p = 0; p < kpRes.predictions.length; p++) {
+                                kpPredictionsModel.append(kpRes.predictions[p]);
+                            }
+                            
+                            weatherData = updated;
+                            printDebug("Got KP index data");
+                        }
+                    });
                 });
             });
         });
@@ -532,7 +640,7 @@ PlasmoidItem {
         // Plasma::Types::FormFactor::Horizonal = 2
         inTray = plasmoid.containment.containmentType == 129 && plasmoid.formFactor == 2;
         plasmoid.configurationRequiredReason = i18n("Set the weather station to pull data from.");
-        plasmoid.backgroundHints = PlasmaCore.Types.ConfigurableBackground;
+        plasmoid.backgroundHints = PlasmaCore.Types.DefaultBackground | PlasmaCore.Types.ConfigurableBackground;
 
         if (plasmoid.configuration.refreshPeriod < 300) {
             plasmoid.configuration.refreshPeriod = 300;
@@ -558,7 +666,9 @@ PlasmoidItem {
         if (appState == showCONFIG) {
             return i18n("Please Configure");
         } else if (appState == showDATA) {
-            return stationID;
+            return plasmoid.configuration.shownInTooltip == 0 ? weatherData["stationID"] :
+                   plasmoid.configuration.shownInTooltip == 1 ? plasmoid.configuration.stationName :
+                   plasmoid.configuration.stationName + "\n" + weatherData["stationID"];
         } else if (appState == showLOADING) {
             return i18n("Loading...");
         } else if (appState == showERROR) {
@@ -568,10 +678,21 @@ PlasmoidItem {
     toolTipSubText: {
         var subText = "";
         if (appState == showDATA) {
-            subText += i18nc("Do not edit HTML tags. 'Temp' means temperature", "<font size='4'>Temp: %1</font><br />", Utils.currentTempUnit(Utils.toUserTemp(weatherData["details"]["temp"]), plasmoid.configuration.tempPrecision));
-            subText += i18nc("Do not edit HTML tags.", "<font size='4'>Feels: %1</font><br />", Utils.currentTempUnit(Utils.feelsLike(weatherData["details"]["temp"], weatherData["humidity"], weatherData["details"]["windSpeed"]), plasmoid.configuration.feelsPrecision));
-            subText += i18nc("Do not edit HTML tags. 'Wnd Spd' means Wind Speed", "<font size='4'>Wnd spd: %1</font><br />", Utils.currentSpeedUnit(Utils.toUserSpeed(weatherData["details"]["windSpeed"])));
-            subText += "<font size='4'>" + weatherData["obsTimeLocal"] + "</font>";
+            var windDir = weatherData["winddir"];
+            var windSpd = Utils.currentSpeedUnit(Utils.toUserSpeed(weatherData["details"]["windSpeed"]), plasmoid.configuration.windPrecision);
+            var temp = Utils.currentTempUnit(Utils.toUserTemp(weatherData["details"]["temp"]), plasmoid.configuration.tempPrecision);
+            var pres = Utils.currentPresUnit(Utils.toUserPres(weatherData["details"]["pressure"]), 2);
+            subText += weatherData["obsTimeLocal"];
+            subText += "<br /><br />";
+            subText += "<font size=\"8\" style=\"font-family: weather-icons;\">" + Utils.getConditionIcon(iconCode) + "</font>&nbsp;&nbsp;<font size=\"8\"><b>" + temp + "</b></font>";
+            subText += "<br /><br />";
+            subText += "<font size=\"4\" style=\"font-family: weather-icons;\">" + Utils.getConditionIcon("wind@2") + "</font><font size=\"4\">" + windDir + "°&nbsp;&nbsp;@&nbsp;" + windSpd + "</font>";
+            subText += "<br />";
+            subText += "<font size=\"4\" style=\"font-family: weather-icons;\">" + Utils.getConditionIcon("humidity@2") + "</font><font size=\"4\">" + weatherData["humidity"] + "%</font>";
+            subText += "&nbsp;&nbsp;";
+            subText += "<font size=\"4\" style=\"font-family: weather-icons;\">" + Utils.getConditionIcon("cloudCover@2") + "</font><font size=\"4\">" + weatherData["cloudCover"] + "%</font>";
+            subText += "<br />";
+            subText += "<font size=\"4\" style=\"font-family: weather-icons;\">" + Utils.getConditionIcon("pressure@2") + "</font>&nbsp;<font size=\"4\">" + pres + "</font>";
         } else if (appState == showERROR) {
             subText = errorStr;
         }
@@ -589,7 +710,6 @@ PlasmoidItem {
         }
     ]
 
-    // preferredRepresentation: compactRepresentation
-    fullRepresentation: fr
-    compactRepresentation: cr
+    fullRepresentation: planarLayoutType === 0 ? fr : cr
+    compactRepresentation: inTray ? crInTray : cr
 }

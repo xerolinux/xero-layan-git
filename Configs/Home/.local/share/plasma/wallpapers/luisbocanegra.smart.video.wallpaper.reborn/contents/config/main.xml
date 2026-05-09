@@ -11,8 +11,12 @@
       <default>[]</default>
     </entry>
     <entry name="BackgroundColor" type="String">
-      <label>Last folder used</label>
+      <label>Background color</label>
       <default>#000000</default>
+    </entry>
+    <entry name="AudioOutputDevice" type="String">
+      <label>Audio output device</label>
+      <default></default>
     </entry>
     <entry name="FillMode" type="Int">
       <label>Video fill mode</label>
@@ -58,7 +62,7 @@
     </entry>
     <entry name="ScreenStateCmd" type="String">
       <label>Command/script to get the screen state should return 0 for Off and anything else for On state</label>
-      <default>cat /sys/class/backlight/intel_backlight/actual_brightness</default>
+      <default>cat /sys/class/backlight/intel_backlight/actual_brightness 2> /dev/null || kscreen-doctor --dpms show 2> /dev/null | head -n1 | awk '{print $NF}'</default>
     </entry>
     <entry name="CheckWindowsActiveScreen" type="Bool">
       <label>Whether or not check for windows from all screens instead of just the active one.</label>
@@ -79,6 +83,9 @@
       <default></default>
     </entry>
     <entry name="EffectsShowBlur" type="String">
+      <default></default>
+    </entry>
+    <entry name="EffectsAlternativeSpeed" type="String">
       <default></default>
     </entry>
     <entry name="BlurAnimationDuration" type="Int">
@@ -131,6 +138,25 @@
     <entry name="ResumeLastVideo" type="Bool">
       <label>Whether or not to resume last playing video on startup</label>
       <default>True</default>
+    </entry>
+    <entry name="FillBlur" type="Bool">
+      <label>Blur background filling</label>
+      <default>true</default>
+    </entry>
+    <entry name="FillBlurRadius" type="Int">
+      <default>64</default>
+    </entry>
+    <!-- Alternative playback rate
+        0: when existing a maximized or full-screen windows
+        1: when a visible window is active
+        2: when a window is visible
+        3: never
+    -->
+    <entry name="AlternativePlaybackRateMode" type="Int">
+      <default>3</default>
+    </entry>
+    <entry name="AlternativePlaybackRate" type="Double">
+      <default>0.5</default>
     </entry>
   </group>
 </kcfg>

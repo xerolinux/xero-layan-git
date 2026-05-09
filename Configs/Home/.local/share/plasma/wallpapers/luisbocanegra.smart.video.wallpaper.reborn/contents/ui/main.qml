@@ -21,6 +21,7 @@
 import QtQuick
 import QtQuick.Layouts
 import org.kde.plasma.core as PlasmaCore
+import org.kde.ksvg as KSvg
 import org.kde.plasma.plasma5support as P5Support
 import org.kde.plasma.plasmoid
 import Qt5Compat.GraphicalEffects
@@ -117,8 +118,10 @@ WallpaperItem {
     property var activeEffects: effectsModel.activeEffects
     property var effectsHideBlur: main.configuration.EffectsHideBlur.split(",").filter(Boolean)
     property var effectsShowBlur: main.configuration.EffectsShowBlur.split(",").filter(Boolean)
+    property var effectsAlternativeSpeed: main.configuration.EffectsAlternativeSpeed.split(",").filter(Boolean)
     property bool effectHideBlur: effectsHideBlur.some(item => activeEffects.includes(item))
     property bool effectShowBlur: effectsShowBlur.some(item => activeEffects.includes(item))
+    property bool effectAlternativeSpeed: effectsAlternativeSpeed.some(item => activeEffects.includes(item))
 
     property var effectsPauseVideo: main.configuration.EffectsPauseVideo.split(",").filter(Boolean)
     property var effectsPlayVideo: main.configuration.EffectsPlayVideo.split(",").filter(Boolean)
@@ -165,6 +168,31 @@ WallpaperItem {
             mute = true;
         }
         return mute;
+    }
+    property bool useAlternativePlaybackRate: {
+        if (lockScreenMode) {
+            return false;
+        }
+
+        if (effectAlternativeSpeed) {
+            return true;
+        }
+
+        let r = false;
+        switch (main.configuration.AlternativePlaybackRateMode) {
+        case Enum.PauseMode.MaximizedOrFullScreen:
+            r = windowModel.maximizedExists;
+            break;
+        case Enum.PauseMode.ActiveWindowPresent:
+            r = windowModel.activeExists;
+            break;
+        case Enum.PauseMode.WindowVisible:
+            r = windowModel.visibleExists;
+            break;
+        case Enum.PauseMode.Never:
+            r = false;
+        }
+        return r;
     }
 
     function getVideos() {
@@ -222,6 +250,7 @@ WallpaperItem {
         checkScreenLock: !main.lockScreenMode
         checkScreenState: main.screenOffPausesVideo && screenStateCmd !== ""
         screenStateCmd: main.configuration.ScreenStateCmd
+        instanceId: Plasmoid.id ?? ""
     }
 
     EffectsModel {
@@ -253,6 +282,7 @@ WallpaperItem {
             anchors.fill: parent
             muted: main.muteAudio
             lastVideoPosition: main.configuration.LastVideoPosition
+            visible: main.videosConfig.length !== 0
             onSetNextSource: {
                 main.nextVideo();
             }
@@ -265,58 +295,83 @@ WallpaperItem {
             changeWallpaperTimerMinutes: main.changeWallpaperTimerMinutes
             changeWallpaperTimerHours: main.changeWallpaperTimerHours
             fillMode: main.configuration.FillMode
+            fillBlur: main.configuration.FillBlur && !main.batteryDisablesBlur
+            fillBlurRadius: main.configuration.FillBlurRadius
             volume: main.volume
             playbackRate: main.playbackRate
+            useAlternativePlaybackRate: main.useAlternativePlaybackRate
+            alternativePlaybackRateGlobal: main.configuration.AlternativePlaybackRate
             resumeLastVideo: main.configuration.ResumeLastVideo
+            audioOutputDevice: main.configuration.AudioOutputDevice
         }
+    }
+    FastBlur {
+        id: mainBlur
+        source: background
+        radius: main.showBlur ? main.configuration.BlurRadius : 0
+        visible: radius !== 0
+        anchors.fill: background
+        Behavior on radius {
+            NumberAnimation {
+                duration: main.blurAnimationDuration
+            }
+        }
+    }
 
-        FastBlur {
-            source: player
-            radius: main.showBlur ? main.configuration.BlurRadius : 0
-            visible: radius !== 0
+    PlasmaExtras.PlaceholderMessage {
+        visible: main.videosConfig.length == 0
+        anchors.centerIn: parent
+        width: parent.width - Kirigami.Units.gridUnit * 2
+        iconName: "video-symbolic"
+        text: i18nd("plasma_wallpaper_luisbocanegra.smart.video.wallpaper.reborn", "No video source \n" + main.videoUrls)
+    }
+
+    Item {
+        visible: main.debugEnabled
+        implicitWidth: debugArea.implicitWidth + debugArea.anchors.leftMargin + debugArea.anchors.rightMargin
+        implicitHeight: debugArea.implicitHeight + debugArea.anchors.topMargin + debugArea.anchors.bottomMargin
+        x: 40
+        y: 100
+        KSvg.FrameSvgItem {
+            id: frameSvg
+            imagePath: "widgets/background"
             anchors.fill: parent
-            Behavior on radius {
-                NumberAnimation {
-                    duration: main.blurAnimationDuration
-                }
-            }
         }
-
-        PlasmaExtras.PlaceholderMessage {
-            visible: main.videosConfig.length == 0
-            anchors.centerIn: parent
-            width: parent.width - Kirigami.Units.gridUnit * 2
-            iconName: "video-symbolic"
-            text: i18n("No video source \n" + main.videoUrls)
-        }
-
         ColumnLayout {
-            id: root
-            visible: main.debugEnabled
-            Item {
-                Layout.preferredWidth: 1
-                Layout.preferredHeight: 100
+            id: debugArea
+            anchors {
+                fill: parent
+                leftMargin: frameSvg.fixedMargins.left
+                rightMargin: frameSvg.fixedMargins.right
+                topMargin: frameSvg.fixedMargins.top
+                bottomMargin: frameSvg.fixedMargins.bottom
             }
-            Kirigami.AbstractCard {
+            PlasmaComponents.Label {
                 Layout.margins: Kirigami.Units.largeSpacing
-                contentItem: PlasmaComponents.Label {
-                    text: {
-                        let text = `filename: ${main.currentSource.filename}\n`;
-                        text += `loops: ${main.currentSource.loop ?? false}\n`;
-                        text += `currentVideoIndex ${main.currentVideoIndex}\n`;
-                        text += `changeWallpaperMode ${main.changeWallpaperMode}\n`;
-                        text += `crossfade ${main.crossfadeEnabled}\n`;
-                        text += `crossfadeDuration ${player.crossfadeDuration} ${player.crossfadeMinDurationLast} ${player.crossfadeMinDurationCurrent}\n`;
-                        text += `multipleVideos ${player.multipleVideos}\n`;
-                        text += `player ${player.player.objectName}\n`;
-                        text += `media status ${player.player.mediaStatus}\n`;
-                        text += `player1 playing ${player.player1.playing}\n`;
-                        text += `player2 playing ${player.player2.playing}\n`;
-                        text += `position ${player.player.position}\n`;
-                        text += `duration ${player.player.duration}\n`;
-                        text += `resumeLastVideo ${player.resumeLastVideo}`;
-                        return text;
-                    }
+                text: {
+                    let text = `filename: ${main.currentSource.filename}\n`;
+                    text += `loops: ${main.currentSource.loop ?? false}\n`;
+                    text += `currentVideoIndex: ${main.currentVideoIndex}\n`;
+                    text += `changeWallpaperMode: ${main.changeWallpaperMode}\n`;
+                    text += `crossfade: ${main.crossfadeEnabled}\n`;
+                    text += `crossfadeDuration: ${player.crossfadeDuration} ${player.crossfadeMinDurationLast} ${player.crossfadeMinDurationCurrent}\n`;
+                    text += `multipleVideos: ${player.multipleVideos}\n`;
+                    text += `player: ${player.player.objectName}\n`;
+                    text += `mediaStatus: ${player.player.mediaStatus}\n`;
+                    text += `player1 playing: ${player.player1.playing}\n`;
+                    text += `player2 playing: ${player.player2.playing}\n`;
+                    text += `position: ${player.player.position}\n`;
+                    text += `duration: ${player.player.duration}\n`;
+                    text += `resumeLastVideo: ${player.resumeLastVideo}\n`;
+                    text += `screenOffPausesVideo: ${main.screenOffPausesVideo} off ${main.screenIsOff}\n`;
+                    text += `pauseBattery: below ${main.pauseBatteryLevel}% ${main.pauseBattery}\n`;
+                    text += `playing: ${main.playing}\n`;
+                    text += `inLockScreen: ${main.lockScreenMode}\n`;
+                    text += `screenLocked: ${main.screenLocked}\n`;
+                    text += `showBlur: ${main.showBlur}\n`;
+                    text += `id: ${Plasmoid.id}\n`;
+                    text += `Audio Device: ${player.player1.currentAudioDevice}`;
+                    return text;
                 }
             }
         }
@@ -433,7 +488,7 @@ WallpaperItem {
 
     contextualActions: [
         PlasmaCore.Action {
-            text: i18n("Next Video")
+            text: i18nd("plasma_wallpaper_luisbocanegra.smart.video.wallpaper.reborn", "Next Video")
             icon.name: "media-skip-forward"
             onTriggered: {
                 player.next(true, true);
@@ -443,11 +498,11 @@ WallpaperItem {
         PlasmaCore.Action {
             text: {
                 if (main.playbackOverride === Enum.PlaybackOverride.Play) {
-                    return i18n("Pause");
+                    return i18nd("plasma_wallpaper_luisbocanegra.smart.video.wallpaper.reborn", "Pause");
                 } else if (main.playbackOverride === Enum.PlaybackOverride.Pause) {
-                    return i18n("Default");
+                    return i18nd("plasma_wallpaper_luisbocanegra.smart.video.wallpaper.reborn", "Default");
                 } else {
-                    return i18n("Play");
+                    return i18nd("plasma_wallpaper_luisbocanegra.smart.video.wallpaper.reborn", "Play");
                 }
             }
             icon.name: main.playing ? "media-playback-start" : "media-playback-pause"
@@ -456,11 +511,11 @@ WallpaperItem {
         PlasmaCore.Action {
             text: {
                 if (main.muteOverride === Enum.MuteOverride.Mute) {
-                    return i18n("Unmute");
+                    return i18nd("plasma_wallpaper_luisbocanegra.smart.video.wallpaper.reborn", "Unmute");
                 } else if (main.muteOverride === Enum.MuteOverride.Unmute) {
-                    return i18n("Default");
+                    return i18nd("plasma_wallpaper_luisbocanegra.smart.video.wallpaper.reborn", "Default");
                 } else {
-                    return i18n("Mute");
+                    return i18nd("plasma_wallpaper_luisbocanegra.smart.video.wallpaper.reborn", "Mute");
                 }
             }
             icon.name: main.muteAudio ? "audio-volume-muted" : "audio-volume-high"

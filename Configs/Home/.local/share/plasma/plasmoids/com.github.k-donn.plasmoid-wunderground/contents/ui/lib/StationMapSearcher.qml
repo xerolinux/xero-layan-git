@@ -1,5 +1,5 @@
 /*
- * Copyright 2025  Kevin Donnelly
+ * Copyright 2026  Kevin Donnelly
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -19,10 +19,11 @@ import QtQuick
 import QtQuick.Layouts
 import QtLocation
 import QtPositioning
-import org.kde.kirigami as Kirigami
 import org.kde.plasma.plasmoid
-import org.kde.plasma.components as PlasmaComponents
+import QtQuick.Controls as QQC
+import org.kde.kirigami as Kirigami
 import org.kde.plasma.core as PlasmaCore
+import org.kde.plasma.components as PlasmaComponents
 import "../../code/utils.js" as Utils
 import "../../code/pws-api.js" as StationAPI
 
@@ -65,6 +66,12 @@ Window {
     property ListModel searchResults: ListModel {}
     property ListModel availableCitiesModel: ListModel {}
 
+    function printDebug(msg) {
+        if (plasmoid.configuration.logConsole) {
+            console.log("[debug] [StationMapSearcher.qml] " + msg);
+        }
+    }
+
     onOpen: {
         stationMapSearcher.visible = true;
         errorMessage = "";
@@ -84,7 +91,7 @@ Window {
         name: "osm"
         PluginParameter {
             name: "osm.useragent"
-            value: "WundergroundPlasmoid/3.6.4 (https://github.com/k-donn/plasmoid-wunderground; contact:mitchell@mitchelldonnelly.com)"
+            value: "WundergroundPlasmoid/3.7.6 (https://github.com/k-donn/plasmoid-wunderground; contact:mitchell@mitchelldonnelly.com)"
         }
         PluginParameter {
             name: "osm.mapping.custom.host"
@@ -107,7 +114,7 @@ Window {
                 text: i18n("Search by:")
             }
 
-            PlasmaComponents.ComboBox {
+            QQC.ComboBox {
                 id: modeCombo
                 model: [i18n("Area Name"), i18n("Weatherstation ID:"), i18n("Lat/Lon")]
                 onCurrentIndexChanged: {
@@ -132,7 +139,7 @@ Window {
                 sourceComponent: stationMapSearcher.searchMode === "latlon" ? latLonSearchComponent : textSearchComponent
             }
 
-            PlasmaComponents.Button {
+            QQC.Button {
                 id: searchBtn
                 text: i18n("Search")
                 enabled: stationMapSearcher.searchText.length > 0 || stationMapSearcher.searchMode === "latlon"
@@ -256,10 +263,9 @@ Window {
 
         Component {
             id: textSearchComponent
-            PlasmaComponents.TextField {
+            QQC.TextField {
                 id: searchField
                 Layout.fillWidth: true
-                clearButtonShown: true
                 placeholderText: stationMapSearcher.searchMode === "stationID" ? i18n("Enter Station") : i18n("Enter city, state, locality, or address")
                 onTextChanged: {
                     stationMapSearcher.searchText = text.trim();
@@ -288,7 +294,7 @@ Window {
                     text: i18n("Searching place:")
                 }
 
-                PlasmaComponents.ComboBox {
+                QQC.ComboBox {
                     id: cityChoice
                     Layout.fillWidth: true
                     textRole: "address"
@@ -296,7 +302,7 @@ Window {
                     enabled: stationMapSearcher.availableCitiesModel.count > 0
                 }
 
-                PlasmaComponents.Button {
+                QQC.Button {
                     text: i18n("Choose")
                     enabled: cityChoice.currentIndex !== -1
                     onClicked: {
@@ -361,7 +367,7 @@ Window {
             }
         }
 
-        PlasmaComponents.TextField {
+        QQC.TextField {
             enabled: false
             Layout.fillWidth: true
             visible: stationMapSearcher.errorMessage.length > 0
@@ -461,13 +467,18 @@ Window {
                 id: searchPointMarker
                 coordinate: QtPositioning.coordinate(stationMapSearcher.searchLat, stationMapSearcher.searchLon)
                 visible: stationMapSearcher.searchMode === "latlon"
-                anchorPoint.x: searchIconImage.height / 2
-                anchorPoint.y: searchIconImage.height / 2
-                sourceItem: Image {
-                    id: searchIconImage
-                    source: Utils.getIcon("compass")
+                anchorPoint.x: searchIconLabel.width / 2
+                anchorPoint.y: searchIconLabel.height / 2
+                sourceItem: PlasmaComponents.Label {
+                    id: searchIconLabel
+                    text: Utils.getConditionIcon("compass")
+                    color: Kirigami.Theme.textColor
+                    font.family: "weather-icons"
+                    font.pixelSize: 24
                     width: 24
                     height: 24
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
                 }
 
                 DragHandler {
@@ -508,13 +519,16 @@ Window {
                     anchorPoint.x: 2.5
                     anchorPoint.y: iconImage.height
                     sourceItem: Column {
-                        Kirigami.Icon {
+                        PlasmaComponents.Label {
                             id: iconImage
-                            source: Utils.getIcon("weather-station-2")
+                            text: Utils.getConditionIcon("weatherStation")
+                            color: stationMapSearcher.selectedStation !== undefined && stationMapSearcher.selectedStation.stationID === stationMarker.stationID ? "red" : "black"
+                            font.family: "weather-icons"
+                            font.pixelSize: 32
                             width: 32
                             height: 32
-                            isMask: true
-                            color: stationMapSearcher.selectedStation !== undefined && stationMapSearcher.selectedStation.stationID === stationMarker.stationID ? "red" : "black"
+                            horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment: Text.AlignVCenter
                         }
                         PlasmaComponents.Label {
                             text: stationMarker.stationID
@@ -561,14 +575,14 @@ Window {
                 }
             }
 
-            PlasmaComponents.TextField {
+            QQC.TextField {
                 visible: stationMapSearcher.stationHealth >= 0
                 text: stationMapSearcher.stationHealth >= 0 ? i18n("Station Health: %1%", stationMapSearcher.stationHealth) : ""
                 enabled: false
                 color: stationMapSearcher.stationHealth >= 75 ? "green" : stationMapSearcher.stationHealth >= 40 ? "orange" : "red"
             }
 
-            PlasmaComponents.Button {
+            QQC.Button {
                 text: i18n("Test Station")
                 enabled: stationMapSearcher.selectedStation !== undefined
                 onClicked: {
@@ -616,7 +630,7 @@ Window {
 
             Layout.alignment: Qt.AlignRight
 
-            PlasmaComponents.Button {
+            QQC.Button {
                 icon.name: "dialog-ok"
                 text: i18n("Confirm")
                 enabled: stationMapSearcher.selectedStation !== undefined
@@ -626,7 +640,7 @@ Window {
                 }
             }
 
-            PlasmaComponents.Button {
+            QQC.Button {
                 icon.name: "dialog-cancel"
                 text: i18n("Cancel")
                 onClicked: {

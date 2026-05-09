@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-import "../" as Root
+import "../"
 
 RowLayout {
     id: root
@@ -14,43 +14,28 @@ RowLayout {
     readonly property string projects: "https://github.com/" + ghUser + "?tab=repositories&q=&type=source&language=&sort=stargazers"
     readonly property string kdeStore: "https://store.kde.org/p/2139746"
     readonly property string matrixRoom: "https://matrix.to/#/#kde-plasma-smart-video-wallpaper-reborn:matrix.org"
-    property string wallpaperVersion
 
-    Root.RunCommand {
-        id: runCommand
-        onExited: (cmd, exitCode, exitStatus, stdout, stderr) => {
-            if (exitCode !== 0) {
-                root.wallpaperVersion = stderr;
-                console.log(cmd, stderr);
+    PluginMetadataModel {
+        id: pluginMetadata
+    }
+
+    Label {
+        text: pluginMetadata.version
+        font.weight: Font.DemiBold
+    }
+
+    Button {
+        id: linksButton
+        text: i18nd("plasma_wallpaper_luisbocanegra.smart.video.wallpaper.reborn", "About")
+        icon.name: "info-symbolic"
+        onClicked: {
+            if (menu.opened) {
+                menu.close();
             } else {
-                try {
-                    root.wallpaperVersion = JSON.parse(stdout).KPlugin.Version;
-                } catch (e) {
-                    console.log(e);
-                    root.wallpaperVersion = e;
-                }
+                menu.open();
             }
         }
-    }
-
-    Component.onCompleted: {
-        const metaDataFile = Qt.resolvedUrl("../../../").toString().substring(7) + "metadata.json";
-        console.log(metaDataFile);
-        runCommand.run(`cat "${metaDataFile}"`);
-    }
-
-    Item {
-        Layout.fillWidth: true
-    }
-    RowLayout {
-        Layout.alignment: Qt.AlignRight
-        Label {
-            text: i18n("Version:")
-        }
-        Label {
-            text: wallpaperVersion
-            font.weight: Font.DemiBold
-        }
+        Layout.fillHeight: true
     }
 
     Menu {
@@ -69,8 +54,14 @@ RowLayout {
         }
 
         Action {
-            text: "Matrix chat"
-            icon.name: Qt.resolvedUrl("../../icons/matrix_logo.svg").toString().replace("file://", "")
+            text: "Discord"
+            icon.source: Qt.resolvedUrl("../../icons/discord.svg")
+            onTriggered: Qt.openUrlExternally("https://discord.gg/ZqD75dzKTe")
+        }
+
+        Action {
+            text: "Matrix"
+            icon.source: Qt.resolvedUrl("../../icons/matrix_logo.svg")
             onTriggered: Qt.openUrlExternally(matrixRoom)
         }
 
@@ -119,40 +110,12 @@ RowLayout {
             }
         }
 
-        Menu {
-            title: "Donate"
-            icon.name: "love"
-            Action {
-                text: "Ko-fi"
-                onTriggered: Qt.openUrlExternally(kofi)
-            }
-            Action {
-                text: "Paypal"
-                onTriggered: Qt.openUrlExternally(paypal)
-            }
-            Action {
-                text: "GitHub sponsors"
-                onTriggered: Qt.openUrlExternally("https://github.com/sponsors/" + ghUser)
-            }
-        }
-
         MenuSeparator {}
 
         Action {
             text: "More projects"
             onTriggered: Qt.openUrlExternally(projects)
             icon.name: "starred-symbolic"
-        }
-    }
-    ToolButton {
-        id: linksButton
-        icon.name: "application-menu"
-        onClicked: {
-            if (menu.opened) {
-                menu.close();
-            } else {
-                menu.open();
-            }
         }
     }
 }

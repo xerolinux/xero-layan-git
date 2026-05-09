@@ -1,8 +1,3 @@
-/*
-    SPDX-FileCopyrightText: 2024 Evgeny Kazantsev <exequtic@gmail.com>
-    SPDX-License-Identifier: MIT
-*/
-
 import org.kde.plasma.configuration
 
 ConfigModel {
@@ -13,7 +8,7 @@ ConfigModel {
     }
 
     ConfigCategory {
-         name: i18n("Upgrade")
+         name: i18n("Upgrade & Management")
          icon: "preferences-system-startup"
          source: "configuration/Upgrade.qml"
     }

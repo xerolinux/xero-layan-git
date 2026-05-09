@@ -1,5 +1,5 @@
 /*
- * Copyright 2025  Kevin Donnelly
+ * Copyright 2026  Kevin Donnelly
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -27,7 +27,7 @@ RowLayout {
 
     Layout.preferredHeight: preferredIconSize
 
-    readonly property int preferredIconSize: plasmoid.configuration.detailsIconSize
+    readonly property int preferredIconSize: plasmoid.configuration.propIconSize
 
     Item {
         Layout.alignment: Qt.AlignLeft | Qt.AlignTop
@@ -35,17 +35,34 @@ RowLayout {
         Layout.fillWidth: true
         Layout.preferredWidth: 1
 
-        Kirigami.Icon {
-            id: topPanelIcon
+        Loader {
+            id: topPanelFontIconLoader
 
-            source: Utils.getConditionIcon(iconCode)
+            active: !plasmoid.configuration.useSystemThemeIcons
 
-            isMask: plasmoid.configuration.applyColorScheme ? true : false
-            color: Kirigami.Theme.textColor
+            sourceComponent: PlasmaComponents.Label {
+                text: Utils.getConditionIcon(iconCode)
 
-            implicitHeight: preferredIconSize
-            implicitWidth: implicitHeight
+                color: Kirigami.Theme.textColor
+
+                font.family: "weather-icons"
+                font.pixelSize: preferredIconSize
+            }
         }
+
+        Loader {
+            id: topPanelSystemIconLoader
+
+            active: plasmoid.configuration.useSystemThemeIcons
+
+            sourceComponent: Kirigami.Icon {
+                source: Utils.getConditionIcon(iconCode, true)
+
+                implicitHeight: preferredIconSize
+                implicitWidth: implicitHeight
+            }
+        }
+
     }
 
     PlasmaComponents.Label {
