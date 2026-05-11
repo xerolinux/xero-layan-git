@@ -12,8 +12,8 @@ terminal-border: "0"
 
 # Boot menu
 + boot_menu {
-  left = 21%
-  top = 43%
+  left = 15%
+  top = 40%
   width = 55%
   height = 65%
   item_font = "Ubuntu Regular 20"
@@ -32,8 +32,8 @@ terminal-border: "0"
 # Countdown label
 # You can change the name of default starting OS here
 + label {
-  left = 43%
-  top = 39%
+  left = 15%
+  top = 31%
   align = "center"
   id = "__timeout__"
   text = "Selected OS will start in %d seconds"
