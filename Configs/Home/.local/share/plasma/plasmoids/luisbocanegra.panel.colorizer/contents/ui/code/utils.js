@@ -286,8 +286,7 @@ function getWidgetProperties(
                 title = applet?.plasmoid.title ?? "";
                 id = inTray ? -1 : (applet.plasmoid.id ?? -1);
                 expanded = applet.compactRepresentationItem !== null && applet.expanded;
-                needsAttention =
-                    pcTypes.NeedsAttentionStatus === applet.plasmoid.status;
+                needsAttention = pcTypes.NeedsAttentionStatus === applet.plasmoid.status;
                 busy = applet.plasmoid.busy;
                 break;
             }
@@ -857,7 +856,7 @@ function showTrayAreas(trayGridView, backgroundComponent) {
         let index = 0;
         for (let i = 0; i < trayGridView.count; i++) {
             const item = trayGridView.itemAtIndex(i);
-            if (!item.visible) continue;
+            if (!item || !item.visible) continue;
             const bgItem = getBgManaged(item);
             if (!bgItem) {
                 backgroundComponent.createObject(item, {
@@ -869,9 +868,7 @@ function showTrayAreas(trayGridView, backgroundComponent) {
             } else {
                 bgItem.targetIndex = index;
             }
-            if (item.visible) {
-                index++;
-            }
+            index++;
         }
 
         for (let i in trayGridView.parent.children) {
@@ -1092,17 +1089,17 @@ function pointToPixel(pointSize) {
  * @param {string} islandSeparatorWidget - Widget used as island separator
  * @param {boolean} islandsEnabled - Enable/disable island functionality
  * @param {boolean} islandSeparatorPairing - Treat separators as pairs (start and end) instead of sharing the separator between two islands
- * @returns {Array<{id: int, name: string, type: Enum.IslandSectionType}>} Widgets with their corresponding island section type
+ * @returns {{islandTypes: Array<{id: int, name: string, type: Enum.IslandSectionType}>, widgetTypes: Array<{id: int, name: string, type: string}>}} Object containing island and widget types
  */
 function updateIslandWidgetTypes(panelLayout, noBgTracker, hiddenTracker, islandSeparatorWidget, islandsEnabled, islandSeparatorPairing) {
-    let output = [];
-    if (!panelLayout || !islandsEnabled) {
-        return output;
+    if (!panelLayout) {
+        return { islandTypes: [], widgetTypes: [] };
     }
 
     const SectionType = Enum.IslandSectionType;
 
-    const items = [];
+    let islandTypes = [];
+    const widgetTypes = [];
     let totalSeparators = 0;
 
     for (let i = 0; i < panelLayout.children.length; i++) {
@@ -1118,34 +1115,42 @@ function updateIslandWidgetTypes(panelLayout, noBgTracker, hiddenTracker, island
 
         if (currentIsSeparator) {
             totalSeparators++;
-            items.push({
+            widgetTypes.push({
                 type: "separator",
                 id: currentId,
-                name: currentName
+                name: currentName,
+                hidden: currentIsHidden,
             });
         } else if (currentIsBlank) {
-            items.push({
+            widgetTypes.push({
                 type: "blank",
                 id: currentId,
-                name: currentName
+                name: currentName,
+                hidden: currentIsHidden,
             });
         } else if (currentIsHidden) {
-            items.push({
+            widgetTypes.push({
                 type: "hidden",
                 id: currentId,
-                name: currentName
+                name: currentName,
+                hidden: currentIsHidden,
             });
         } else {
-            items.push({
+            widgetTypes.push({
                 type: "widget",
                 id: currentId,
-                name: currentName
+                name: currentName,
+                hidden: currentIsHidden,
             });
         }
     }
 
+    if (!islandsEnabled) {
+        return { islandTypes: [], widgetTypes };
+    }
+
     function pushWidget(item, type) {
-        output.push({
+        islandTypes.push({
             id: item.id,
             name: item.name,
             type: type,
@@ -1171,8 +1176,8 @@ function updateIslandWidgetTypes(panelLayout, noBgTracker, hiddenTracker, island
         });
     }
 
-    for (let i = 0; i < items.length; i++) {
-        if (items[i].type !== "separator") {
+    for (let i = 0; i < widgetTypes.length; i++) {
+        if (widgetTypes[i].type !== "separator") {
             continue;
         }
 
@@ -1182,7 +1187,7 @@ function updateIslandWidgetTypes(panelLayout, noBgTracker, hiddenTracker, island
     }
 
     // Flush trailing non-separator group.
-    pushGroup(items.length - 1);
+    pushGroup(widgetTypes.length - 1);
 
     function pushWidgetChunk(start, end) {
         let firstWidgetIndex = -1;
@@ -1190,7 +1195,7 @@ function updateIslandWidgetTypes(panelLayout, noBgTracker, hiddenTracker, island
         let widgetCount = 0;
 
         for (let i = start; i <= end; i++) {
-            if (items[i].type === "widget") {
+            if (widgetTypes[i].type === "widget") {
                 if (firstWidgetIndex === -1) {
                     firstWidgetIndex = i;
                 }
@@ -1200,7 +1205,7 @@ function updateIslandWidgetTypes(panelLayout, noBgTracker, hiddenTracker, island
         }
 
         for (let i = start; i <= end; i++) {
-            const current = items[i];
+            const current = widgetTypes[i];
             if (current.type !== "widget" || widgetCount < 2) {
                 pushWidget(current, SectionType.Default);
                 continue;
@@ -1220,7 +1225,7 @@ function updateIslandWidgetTypes(panelLayout, noBgTracker, hiddenTracker, island
     for (const group of groups) {
         if (!group.active) {
             for (let i = group.start; i <= group.end; i++) {
-                pushWidget(items[i], SectionType.Default);
+                pushWidget(widgetTypes[i], SectionType.Default);
             }
             continue;
         }
@@ -1228,7 +1233,7 @@ function updateIslandWidgetTypes(panelLayout, noBgTracker, hiddenTracker, island
         let chunkStart = group.start;
         for (let i = group.start; i <= group.end + 1; i++) {
             const atGroupEnd = i === group.end + 1;
-            const atBlank = !atGroupEnd && items[i].type === "blank";
+            const atBlank = !atGroupEnd && widgetTypes[i].type === "blank";
             if (!atGroupEnd && !atBlank) {
                 continue;
             }
@@ -1237,11 +1242,11 @@ function updateIslandWidgetTypes(panelLayout, noBgTracker, hiddenTracker, island
                 pushWidgetChunk(chunkStart, i - 1);
             }
             if (atBlank) {
-                pushWidget(items[i], SectionType.Default);
+                pushWidget(widgetTypes[i], SectionType.Default);
             }
             chunkStart = i + 1;
         }
     }
 
-    return output;
+    return { islandTypes, widgetTypes };
 }

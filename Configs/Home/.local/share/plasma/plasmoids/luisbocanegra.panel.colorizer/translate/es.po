@@ -1,1382 +1,1381 @@
-# Translation of colorizer in Russian
+# Translation of colorizer in SPANISH
 # Copyright (C) 2026
 # This file is distributed under the same license as the colorizer package.
-# qud0 <qudro0@gmail.com>, 2026.
 #
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: colorizer\n"
 "Report-Msgid-Bugs-To: https://github.com/luisbocanegra/plasma-panel-colorizer\n"
 "POT-Creation-Date: 2026-05-14 14:39+0000\n"
-"PO-Revision-Date: 2026-04-08 18:15+ZONE\n"
-"Last-Translator: qud0\n"
-"Language-Team: Russian\n"
-"Language: ru\n"
+"PO-Revision-Date: 2026-04-15 16:01-0300\n"
+"Last-Translator: Lucas Cesa <lucascesa455@gmail.com>\n"
+"Language-Team: spanish <LL@li.org>\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../metadata.json
 msgid "Panel colorizer"
-msgstr "Раскраска панели"
+msgstr "Panel Colorizer"
 
 #: ../metadata.json
 msgid "Latte-Dock and WM status bar customization features for the default Plasma panel"
-msgstr "Функции настройки в стиле Latte-Dock и статус-баров WM для стандартной панели Plasma"
+msgstr "Personalización de la barra de estado Latte-Dock y WM para el panel Plasma predeterminado"
 
 #: ../contents/config/config.qml
 msgid "Presets"
-msgstr "Пресеты"
+msgstr "Ajustes"
 
 #: ../contents/config/config.qml
 msgid "Presets auto-loading"
-msgstr "Автозагрузка пресетов"
+msgstr "Autocarga de ajustes"
 
 #: ../contents/config/config.qml
 msgid "Appearance"
-msgstr "Внешний вид"
+msgstr "Apariencia"
 
 #: ../contents/config/config.qml
 msgid "Stock Panel Settings"
-msgstr "Стандартные настройки панели"
+msgstr "Preferencias por defecto del panel"
 
 #: ../contents/config/config.qml
 msgid "Widget Islands"
-msgstr "Островки виджетов"
+msgstr "Islas de Widgets"
 
 #: ../contents/config/config.qml
 msgid "Preset Overrides"
-msgstr "Переопределения пресета"
+msgstr "Sobrescrituras de Ajustes"
 
 #: ../contents/config/config.qml
 msgid "Global Overrides"
-msgstr "Глобальные переопределения"
+msgstr "Sobrescrituras Globales"
 
 #: ../contents/config/config.qml
 msgid "Text/Icon Color Fixes"
-msgstr "Исправления цвета текста/иконок"
+msgstr "Arreglo de color de Texto/Iconos"
 
 #: ../contents/config/config.qml
 msgid "Blacklist Widgets"
-msgstr "Черный список виджетов"
+msgstr "Widgets excluidos"
 
 #: ../contents/config/config.qml
 msgid "Hide Widgets"
-msgstr "Скрыть виджеты"
+msgstr "Ocultar Widgets"
 
 #: ../contents/config/config.qml
 msgid "System Tray Icons Replacer"
-msgstr "Замена иконок системного трея"
+msgstr "Reemplazo de iconos de la bandeja"
 
 #: ../contents/config/config.qml
 msgid "General"
-msgstr "Общие"
+msgstr "General"
 
 #: ../contents/config/config.qml
 msgid "Support Me"
-msgstr "Поддержать автора"
+msgstr "Apoya el proyecto"
 
 #: ../contents/ui/components/CategoryDisabled.qml
 msgid "Panel Colorizer is disabled"
-msgstr "Раскраска панели отключена"
+msgstr "Panel Colorizer está desactivado"
 
 #: ../contents/ui/components/CategoryDisabled.qml ../contents/ui/components/FormWidgetSettings.qml ../contents/ui/configTrayIconsReplacer.qml
 msgid "Enable"
-msgstr "Включить"
+msgstr "Activar"
 
 #: ../contents/ui/components/ColorPickerGradientList.qml ../contents/ui/components/ColorPickerList.qml ../contents/ui/components/FormColors.qml
 msgid "Widget background"
-msgstr "Фон виджета"
+msgstr "Fondo del Widget"
 
 #: ../contents/ui/components/DesktopView.qml
 msgid "Panel not found, this widget must be placed on a panel to work"
-msgstr "Панель не найдена; для работы этот виджет должен быть размещен на панели"
+msgstr "Panel no encontrado, este widget debe colocarse en un panel para funcionar"
 
 #: ../contents/ui/components/FormBorder.qml ../contents/ui/components/FormWidgetSettings.qml
 msgid "Border"
-msgstr "Рамка"
+msgstr "Borde"
 
 #: ../contents/ui/components/FormBorder.qml ../contents/ui/components/FormPadding.qml ../contents/ui/components/FormShadow.qml ../contents/ui/components/FormShape.qml ../contents/ui/configGeneral.qml ../contents/ui/configPresetAutoload.qml ../contents/ui/configStockPanelSettings.qml ../contents/ui/configWidgetIslands.qml
 msgid "Enabled:"
-msgstr "Включено:"
+msgstr "Activado:"
 
 #: ../contents/ui/components/FormBorder.qml ../contents/ui/components/FormColors.qml ../contents/ui/components/FormShadow.qml ../contents/ui/components/FormShape.qml
 msgid "Disabled"
-msgstr "Отключено"
+msgstr "Desactivado"
 
 #: ../contents/ui/components/FormBorder.qml
 msgid "Width:"
-msgstr "Ширина:"
+msgstr "Ancho:"
 
 #: ../contents/ui/components/FormBorder.qml
 msgid "Use an integer when using <strong>Widget Islands</strong> to avoid rendering issues! <a href=\"https://github.com/luisbocanegra/plasma-panel-colorizer/issues/64\">See #64</a>"
-msgstr "При использовании <strong>Островков виджетов</strong> используйте целые числа, чтобы избежать проблем с отрисовкой! <a href=\"https://github.com/luisbocanegra/plasma-panel-colorizer/issues/64\">См. #64</a>"
+msgstr "¡Usa números enteros al utilizar <strong>Islas de Widgets</strong> para evitar problemas de renderizado! <a href=\"https://github.com/luisbocanegra/plasma-panel-colorizer/issues/64\">Más información #64</a>"
 
 #: ../contents/ui/components/FormBorder.qml
 msgid "Custom widths:"
-msgstr "Настраиваемая ширина:"
+msgstr "Anchura personalizada:"
 
 #: ../contents/ui/components/FormColors.qml ../contents/ui/components/FormWidgetSettings.qml
 msgid "Color"
-msgstr "Цвет"
+msgstr "Color"
 
 #: ../contents/ui/components/FormColors.qml ../contents/ui/components/FormWidgetSettings.qml
 msgid "Enable:"
-msgstr "Включить:"
+msgstr "Activar:"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Animation:"
-msgstr "Анимация:"
+msgstr "Animación:"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Interval (ms):"
-msgstr "Интервал (мс):"
+msgstr "Intervalo (ms):"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Smoothing (ms):"
-msgstr "Сглаживание (мс):"
+msgstr "Suavizado (ms):"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Color source:"
-msgstr "Источник цвета:"
+msgstr "Origen del color:"
 
 #: ../contents/ui/components/FormColors.qml ../contents/ui/configStockPanelSettings.qml
 msgid "Custom"
-msgstr "Пользовательский"
+msgstr "Personalizado"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "A fixed custom color"
-msgstr "Фиксированный пользовательский цвет"
+msgstr "Un color personalizado fijo"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "System"
-msgstr "Системный"
+msgstr "Sistema"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Color that updates with your System theme"
-msgstr "Цвет, который обновляется вместе с системной темой"
+msgstr "Color que se actualiza con el color de tu sistema"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Custom list"
-msgstr "Пользовательский список"
+msgstr "Lista personalizada"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Define a list of colors that will be applied to all the elements, wraps around if there are more elements than colors"
-msgstr "Определите список цветов, которые будут применены ко всем элементам; если элементов больше, чем цветов, список начнется заново"
+msgstr "Define una lista de colores que será aplicada a todos los elementos, se repetirá si hay más elementos que colores"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Random"
-msgstr "Случайный"
+msgstr "Aleatorio"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Random color for each element"
-msgstr "Случайный цвет для каждого элемента"
+msgstr "Color aleatorio para cada elemento"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Follow"
-msgstr "Следовать за"
+msgstr "Seguir"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Follow the color of a parent element"
-msgstr "Использовать цвет родительского элемента"
+msgstr "Sigue el color de un elemento primario"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Gradient"
-msgstr "Градиент"
+msgstr "Gradiente"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Horizontal or vertical customizable color gradient"
-msgstr "Настраиваемый горизонтальный или вертикальный цветовой градиент"
+msgstr "Gradiente de color horizontal o vertical personalizable"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Image"
-msgstr "Изображение"
+msgstr "Imagen"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "High resolution images can slow down the desktop when the panel or widget size changes!"
-msgstr "Изображения высокого разрешения могут замедлять работу рабочего стола при изменении размера панели или виджета!"
+msgstr "¡Las imágenes de alta resolución pueden ralentizar el escritorio cuando el panel o widget cambia de tamaño!"
 
 #: ../contents/ui/components/FormColors.qml ../contents/ui/configAppearance.qml
 msgid "Element:"
-msgstr "Элемент:"
+msgstr "Elemento:"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Panel background"
-msgstr "Фон панели"
+msgstr "Fondo del panel"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Tray widget background"
-msgstr "Фон виджета в трее"
+msgstr "Fondo del widget de la bandeja"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Positioning:"
-msgstr "Позиционирование:"
+msgstr "Posición:"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Stretch"
-msgstr "Растянуть"
+msgstr "Estirar"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Tile"
-msgstr "Замостить"
+msgstr "Mosaico"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Scaled and Cropped"
-msgstr "Масштабировать и обрезать"
+msgstr "Escalado y Recortado"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Image:"
-msgstr "Изображение:"
+msgstr "Imagen:"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Pick a image file"
-msgstr "Выбрать файл изображения"
+msgstr "Selecciona una imagen"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Image files"
-msgstr "Файлы изображений"
+msgstr "Imágenes"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "All files"
-msgstr "Все файлы"
+msgstr "Todos los archivos"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Color:"
-msgstr "Цвет:"
+msgstr "Color:"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Color set:"
-msgstr "Набор цветов:"
+msgstr "Set de colores:"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Colors:"
-msgstr "Цвета:"
+msgstr "Colores:"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Orientation:"
-msgstr "Ориентация:"
+msgstr "Orientación:"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Horizontal"
-msgstr "Горизонтально"
+msgstr "Horizontal"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Vertical"
-msgstr "Вертикально"
+msgstr "Vertical"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Gradient steps:"
-msgstr "Шаги градиента:"
+msgstr "Pasos de la gradiente:"
 
 #: ../contents/ui/components/FormColors.qml ../contents/ui/configGeneral.qml
 msgid "Alpha:"
-msgstr "Прозрачность (альфа):"
+msgstr "Alfa:"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Contrast Correction"
-msgstr "Коррекция контраста"
+msgstr "Corrección de contraste"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Saturation:"
-msgstr "Насыщенность:"
+msgstr "Saturación:"
 
 #: ../contents/ui/components/FormColors.qml
 msgid "Lightness:"
-msgstr "Яркость:"
+msgstr "Claridad:"
 
 #: ../contents/ui/components/FormPadding.qml
 msgid "Padding"
-msgstr "Отступы"
+msgstr "Padding"
 
 #: ../contents/ui/components/FormPadding.qml
 msgid "Horizontal and vertical padding only work properly when the panel is on the same orientation."
-msgstr "Горизонтальные и вертикальные отступы работают корректно только тогда, когда панель имеет соответствующую ориентацию."
+msgstr "El padding horizontal y vertical solo funciona correctamente cuando el panel está en la misma orientación"
 
 #: ../contents/ui/components/FormShadow.qml ../contents/ui/components/FormWidgetSettings.qml
 msgid "Shadow"
-msgstr "Тень"
+msgstr "Sombra"
 
 #: ../contents/ui/components/FormShadow.qml
 msgid "Size:"
-msgstr "Размер:"
+msgstr "Tamaño:"
 
 #: ../contents/ui/components/FormShadow.qml
 msgid "X offset:"
-msgstr "Смещение по X:"
+msgstr "Margen X:"
 
 #: ../contents/ui/components/FormShadow.qml
 msgid "Y offset:"
-msgstr "Смещение по Y:"
+msgstr "Margen Y"
 
 #: ../contents/ui/components/FormShape.qml
 msgid "Radius"
-msgstr "Радиус"
+msgstr "Radio"
 
 #: ../contents/ui/components/FormShape.qml
 msgid "Margin"
-msgstr "Поля"
+msgstr "Margen"
 
 #: ../contents/ui/components/FormShape.qml
 msgid "Requires plasmashell restart after disabling to restore the default. <a href=\"#\">Restart now</a>."
-msgstr "После отключения требуется перезапуск plasmashell для восстановления настроек по умолчанию. <a href=\"#\">Перезапустить сейчас</a>."
+msgstr "Requiere reiniciar plasmashell luego de desactivar para restaurar la configuración por defecto. <a href=\"#\">Reinicia ahora</a>"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Native panel:"
-msgstr "Стандартная панель:"
+msgstr "Panel nativo:"
 
 #: ../contents/ui/components/FormWidgetSettings.qml ../contents/ui/configGeneral.qml
 msgid "Background"
-msgstr "Фон"
+msgstr "Fondo"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Disable to make panel fully transparent, removes contrast and blur effects."
-msgstr "Отключите, чтобы сделать панель полностью прозрачной; это удалит эффекты контраста и размытия."
+msgstr "Desactiva para hacer el panel totalmente transparente, quita el contraste y el blur"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "⚠️ Disabling this breaks the panel clickable area and applet dialogs positioning when the panel is in floating mode! See <a href=\"%1\">#80</a>."
-msgstr "⚠️ Отключение этого параметра нарушает кликабельную область панели и позиционирование диалогов апплетов в плавающем режиме! См. <a href=\"%1\">#80</a>."
+msgstr "   ¡Desactivar esto rompe la clickeabilidad del panel y la posición del diálogo del applet cuando el panel está en modo flotante! Más información <a href=\"%1\">#80</a>."
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "The shadow from the Plasma theme"
-msgstr "Тень из темы Plasma"
+msgstr "La sombra del tema Plasma"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Opacity:"
-msgstr "Непрозрачность:"
+msgstr "Opacidad:"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Set to 0 to keep the mask required for custom background blur."
-msgstr "Установите значение 0, чтобы сохранить маску, необходимую для настраиваемого размытия фона."
+msgstr "Establecer en 0 para mantener la máscara requerida para el fondo blur personalizado"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Floating applets:"
-msgstr "Плавающие апплеты:"
+msgstr "Applets flotantes:"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Allow changes (Plasma 6.4.0 and later)"
-msgstr "Разрешить изменения (Plasma 6.4.0 и новее)"
+msgstr "Permitir cambios (Plasma 6.4.0 o posterior)"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid ""
 "Since version 6.4.0, Plasma now has a built-in <b>Floating panel and applets</b> option, enabling this overrides that option.\n"
 "⚠️Changing <b>Floating</b> from the panel configuration will not work with this is enabled!"
 msgstr ""
-"Начиная с версии 6.4.0, в Plasma появилась встроенная опция <b>Плавающая панель и апплеты</b>. Включение этого параметра переопределяет системную настройку.\n"
-"⚠️Изменение параметра <b>Плавающая панель</b> в конфигурации панели не будет работать, пока это включено!"
+"Desde la versión 6.4.0, Plasma tiene los <b>paneles y applets flotantes</b> como opción nativa, activar esta función sobrescribe la función nativa.\n"
+"⚠️¡Cambiar al <b> modo flotante</b> desde el panel no funcionará con esto activado!"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Wide expand button:"
-msgstr "Широкая кнопка развертывания:"
+msgstr "Botón de expandido ancho:"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Make the System Tray expand button use the same size as the other tray items"
-msgstr "Сделать кнопку развертывания системного трея того же размера, что и другие элементы трея"
+msgstr "Hacer que el botón de expandido de la bandeja del sistema posea el mismo tamaño que los demás elementos de la bandeja"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Custom cell height:"
-msgstr "Высота ячейки:"
+msgstr "Altura de celda personalizada:"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Custom cell width:"
-msgstr "Ширина ячейки:"
+msgstr "Anchura de celda personalizada:"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Force floating applets"
-msgstr "Принудительно плавающие апплеты"
+msgstr "Forzar applets flotantes"
 
 #: ../contents/ui/components/FormWidgetSettings.qml ../contents/ui/configPresetAutoload.qml
 msgid "Floating panel:"
-msgstr "Плавающая панель:"
+msgstr "Panel flotante:"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Remove custom background rounded corners and borders on screen edge when panel is not floating"
-msgstr "Убирать скругленные углы и рамки у края экрана, если панель не находится в плавающем режиме"
+msgstr "Quitar las esquinas redondeadas del fondo personalizado cuando el panel no está flotando"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Resize panel length when panel enters/exits floating state (instead of just moving)"
-msgstr "Изменять длину панели при переходе в плавающий режим и обратно (вместо обычного перемещения)"
+msgstr "Cambiar longitud del panel cuando el panel entra/sale del modo flotante (en lugar de solo moverse)"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Hide panel:"
-msgstr ""
+msgstr "Ocultar panel:"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "When there are no widgets visible"
-msgstr ""
+msgstr "Cuando no haya widgets visibles"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Customization"
-msgstr "Настройка"
+msgstr "Personalización"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "State:"
-msgstr "Состояние:"
+msgstr "Estado:"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Normal"
-msgstr "Обычное"
+msgstr "Normal"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Hover"
-msgstr "При наведении"
+msgstr "Cursor encima"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Expanded"
-msgstr "Развернуто"
+msgstr "Expandido"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Needs attention"
-msgstr "Требует внимания"
+msgstr "Necesita atención"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Busy"
-msgstr "Занят"
+msgstr "Ocupado"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Change element appearance based on their state, configuration is stacked on top of the current appearance"
-msgstr "Изменение внешнего вида элементов в зависимости от их состояния; настройки накладываются поверх текущего оформления"
+msgstr "Cambiar la apariencia del elemento basado en su estado, esta configuración se superpone a la apariencia actual"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Blur custom background (Beta)"
-msgstr "Размытие фона (бета)"
+msgstr "Fondo blur personalizado (Beta)"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Draw a custom blur mask behind the custom background(s).<br><strong>Native panel background must be enabled with opacity of 0 for this to work as intended.</strong>"
-msgstr "Отрисовка маски размытия за пользовательским фоном.<br><strong>Для корректной работы фон стандартной панели должен быть включен с непрозрачностью 0.</strong>"
+msgstr "Dibuja una máscara de blur personalizada detrás del fondo o fondos personalizados.<br><strong>El fondo nativo del panel debe estar activado con opacidad 0 para que esto funcione correctamente.</strong>"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "C++ plugin not found, this feature will not work. Install the plugin and reboot or restart plasmashell to be able to use it. See <a href=\"%1\">install instructions</a>."
-msgstr "Плагин C++ не найден, эта функция не будет работать. Установите плагин и перезагрузитесь или перезапустите plasmashell. См. <a href=\"%1\">инструкции по установке</a>."
+msgstr "Plugin C++ no encontrado, esta característica no funcionará. Instala el plugin y reinicia el sistema o plasmashell para poder utilizarla. <a href=\"%1\">Instrucciones de instalación</a>."
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Clipping (Experimental)"
-msgstr "Обрезание (экспериментально)"
+msgstr "Recortado (Experimental)"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Clip the widget content to the custom background radius.<br>Clipping widgets against the panel is not supported yet, see <a href=\"%1\">#275</a>."
-msgstr "Обрезает содержимое виджета по радиусу скругления фона.<br>Обрезание виджетов относительно панели пока не поддерживается, см. <a href=\"%1\">#275</a>."
+msgstr "Recorta el contenido del Widget al radio del fondo personalizado. <br>El recortado de widgets contra el panel no está todavía soportado, más información <a href=\"%1\">#275</a>."
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Shape"
-msgstr "Форма"
+msgstr "Forma"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Font"
-msgstr "Шрифт"
+msgstr "Fuente"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Spacing:"
-msgstr "Интервалы:"
+msgstr "Espaciado:"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "<strong>Odd spacing</strong> values will be automatically converted to <strong>evens</strong> if <strong>Widget Islands</strong> feature is used."
-msgstr "<strong>Нечетные значения</strong> интервалов будут автоматически преобразованы в <strong>четные</strong>, если используются «Островки виджетов»."
+msgstr "<strong>Un espaciado impar</strong> será automáticamente reconvertido a <strong>par</strong> si la función <strong>Islas de Widgets</strong> está en uso."
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Custom font:"
-msgstr "Пользовательский шрифт:"
+msgstr "Fuente personalizada:"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "A plasmashell restart is required to restore the original values after disabling any font setting. <a href=\"#\">Restart now</a>."
-msgstr "После отключения настроек шрифта требуется перезапуск plasmashell для восстановления исходных значений. <a href=\"#\">Перезапустить сейчас</a>."
+msgstr "Se requiere un reinicio de plasmashell para restaurar los valores por defecto luego de desactivar cualquier preferencia de fuente. <a href=\"#\">Reiniciar ahora</a>."
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Font family:"
-msgstr "Семейство шрифтов:"
+msgstr "Familia de fuente:"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Override"
-msgstr "Переопределить"
+msgstr "Sobrescritura"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Italic:"
-msgstr "Курсив:"
+msgstr "Cursiva:"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Underline:"
-msgstr "Подчеркивание:"
+msgstr "Subrayado:"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Font weight:"
-msgstr "Начертание:"
+msgstr "Grosor de fuente:"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Font size:"
-msgstr "Размер шрифта:"
+msgstr "Tamaño de fuente:"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Background Color"
-msgstr "Цвет фона"
+msgstr "Color de fondo"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Foreground Color"
-msgstr "Цвет текста/иконок"
+msgstr "Color de primer plano"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Primary Border"
-msgstr "Основная рамка"
+msgstr "Borde primario"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Secondary Border"
-msgstr "Вторичная рамка"
+msgstr "Borde secundario"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Background Shadow"
-msgstr "Тень фона"
+msgstr "Sombra del fondo"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Background Shadow Color"
-msgstr "Цвет тени фона"
+msgstr "Sombra de color del fondo"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Foreground Shadow"
-msgstr "Тень текста/иконок"
+msgstr "Sombra del primer plano"
 
 #: ../contents/ui/components/FormWidgetSettings.qml
 msgid "Foreground Shadow Color"
-msgstr "Цвет тени текста/иконок"
+msgstr "Sombra de color del primer plano"
 
 #: ../contents/ui/components/Header.qml
 msgid "None"
-msgstr "Нет"
+msgstr "Ninguno"
 
 #: ../contents/ui/components/Header.qml
 msgid "Enable %1:"
-msgstr "Включить %1:"
+msgstr "Activar %1:"
 
 #: ../contents/ui/components/Header.qml ../contents/ui/main.qml
 msgid "Last preset loaded:"
-msgstr "Последний загруженный пресет:"
+msgstr "Último ajuste cargado:"
 
 #: ../contents/ui/components/Header.qml
 msgid "Version:"
-msgstr "Версия:"
+msgstr "Versión:"
 
 #: ../contents/ui/components/Header.qml
 msgid "Changelog"
-msgstr "Список изменений"
+msgstr "Lista de cambios:"
 
 #: ../contents/ui/components/Header.qml
 msgid "Releases"
-msgstr "Релизы"
+msgstr "Lanzamientos"
 
 #: ../contents/ui/components/Header.qml
 msgid "Home page"
-msgstr "Домашняя страница"
+msgstr "Página de inicio"
 
 #: ../contents/ui/components/Header.qml
 msgid "KDE Store"
-msgstr "KDE Store"
+msgstr "Tienda KDE"
 
 #: ../contents/ui/components/Header.qml
 msgid "Issues"
-msgstr "Проблемы"
+msgstr "Problemas"
 
 #: ../contents/ui/components/Header.qml
 msgid "Current issues"
-msgstr "Текущие проблемы"
+msgstr "Problemas actuales"
 
 #: ../contents/ui/components/Header.qml
 msgid "Report a bug"
-msgstr "Сообщить об ошибке"
+msgstr "Reportar un bug"
 
 #: ../contents/ui/components/Header.qml
 msgid "Request a feature"
-msgstr "Предложить функцию"
+msgstr "Proponer una función"
 
 #: ../contents/ui/components/Header.qml
 msgid "Help"
-msgstr "Помощь"
+msgstr "Ayuda"
 
 #: ../contents/ui/components/Header.qml
 msgid "FAQ"
-msgstr "Часто задаваемые вопросы"
+msgstr "Preguntas Frecuentes"
 
 #: ../contents/ui/components/Header.qml
 msgid "GitHub Discussions"
-msgstr "Обсуждения на GitHub"
+msgstr "Discusiones en Github"
 
 #: ../contents/ui/components/Header.qml
 msgid "Send an email"
-msgstr "Отправить письмо"
+msgstr "Enviar un correo electrónico"
 
 #: ../contents/ui/components/Header.qml
 msgid "Translate"
-msgstr "Перевести"
+msgstr "Traducir"
 
 #: ../contents/ui/components/Header.qml
 msgid "Donate"
-msgstr "Пожертвовать"
+msgstr "Donar"
 
 #: ../contents/ui/components/Header.qml
 msgid "More projects"
-msgstr "Другие проекты"
+msgstr "Más proyectos"
 
 #: ../contents/ui/components/Header.qml ../contents/ui/components/PopupView.qml
 msgid "Running version of the widget (%1) is different to the one on disk (%2), please log out and back in (or restart plasmashell user unit) to ensure things work correctly!"
-msgstr "Запущенная версия виджета (%1) отличается от версии на диске (%2). Пожалуйста, перезайдите в систему (или перезапустите plasmashell), чтобы обеспечить корректную работу!"
+msgstr "La versión del widget en ejecución (%1) es diferente de la instalada en el sistema (%2). ¡Por favor, cierre sesión y vuelva a entrar (o reinicie plasmashell) para asegurarse de que todo funcione correctamente!"
 
 #: ../contents/ui/components/PopupView.qml
 msgid "Select a preset"
-msgstr "Выберите пресет"
+msgstr "Seleccionar un ajuste"
 
 #: ../contents/ui/components/PopupView.qml
 msgid "Running outdated version of %1"
-msgstr "Запущена устаревшая версия %1"
+msgstr "Ejecutando versión desactualizada de %1"
 
 #: ../contents/ui/components/SettingImportExport.qml
 msgid "Import"
-msgstr "Импорт"
+msgstr "Importar"
 
 #: ../contents/ui/components/SettingImportExport.qml
 msgid "Export"
-msgstr "Экспорт"
+msgstr "Exportar"
 
 #: ../contents/ui/components/SettingImportExport.qml
 msgid "Export these settings to the default configuration folder and import them in other instances of Panel Colorizer"
-msgstr "Экспортируйте эти настройки в папку конфигурации по умолчанию, чтобы импортировать их в других экземплярах Panel Colorizer"
+msgstr "Exporta estos ajustes a la carpeta de configuración predeterminada e impórtalos en otras instancias de Panel Colorizer"
 
 #: ../contents/ui/components/SettingImportExport.qml
 msgid "Export current settings?"
-msgstr "Экспортировать текущие настройки?"
+msgstr "¿Exportar preferencias actuales?"
 
 #: ../contents/ui/components/SettingImportExport.qml
 msgid "Import saved settings?"
-msgstr "Импортировать сохраненные настройки?"
+msgstr "¿Importar las preferencias guardadas?"
 
 #: ../contents/ui/components/SettingImportExport.qml
 msgid "This will overwrite any previous export!"
-msgstr "Это перезапишет любой предыдущий экспорт!"
+msgstr "¡Esto sobrescribirá cualquiera exportación previa!"
 
 #: ../contents/ui/components/SettingImportExport.qml
 msgid "This will replace your current settings!"
-msgstr "Это заменит ваши текущие настройки!"
+msgstr "¡Esto reemplazará tus preferencias actuales!"
 
 #: ../contents/ui/components/SupportMe.qml
 msgid "Thank you for using %1!"
-msgstr "Спасибо за использование %1!"
+msgstr "¡Gracias por usar %1!"
 
 #: ../contents/ui/components/SupportMe.qml
 msgid "If you enjoy using the plugin please consider sponsoring or donating so I can dedicate more time to maintain and improve this and <a href=\"https://github.com/luisbocanegra?tab=repositories&q=&type=source&language=&sort=stargazers\">my other projects</a>."
-msgstr "Если вам нравится этот плагин, пожалуйста, рассмотрите возможность поддержки или пожертвования. Это позволит мне уделять больше времени поддержке и улучшению этого и <a href=\"https://github.com/luisbocanegra?tab=repositories&q=&type=source&language=&sort=stargazers\">других моих проектов</a>."
+msgstr "Si te gusta este plugin por favor considera donar, asi podré dedicar más tiempo para mantener y mejorar este y <a href=\"https://github.com/luisbocanegra?tab=repositories&q=&type=source&language=&sort=stargazers\">mis otros proyectos</a>."
 
 #: ../contents/ui/components/SupportMe.qml
 msgid "You can also"
-msgstr "Вы также можете"
+msgstr "También puedes"
 
 #: ../contents/ui/components/SupportMe.qml
 msgid "Star the project on GitHub"
-msgstr "Поставить «звезду» проекту на GitHub"
+msgstr "Dar una estrella en Github"
 
 #: ../contents/ui/components/SupportMe.qml
 msgid "Rate in the KDE Store"
-msgstr "Оценить в KDE Store"
+msgstr "Puntuar en la tienda KDE"
 
 #: ../contents/ui/components/SupportMe.qml
 msgid "Translate %1 to your language"
-msgstr "Перевести %1 на ваш язык"
+msgstr "Traduce %1 a tu idioma"
 
 #: ../contents/ui/components/WidgetCardBlacklist.qml ../contents/ui/components/WidgetCardConfig.qml ../contents/ui/components/WidgetCardHide.qml ../contents/ui/components/WidgetCardTextIconFixes.qml
 msgid "System Tray"
-msgstr "Системный трей"
+msgstr "Bandeja del sistema"
 
 #: ../contents/ui/components/WidgetCardBlacklist.qml
 msgid "Blacklist"
-msgstr "Черный список"
+msgstr "Excluidos"
 
 #: ../contents/ui/components/WidgetCardConfig.qml
 msgid "Add"
-msgstr "Добавить"
+msgstr "Añadir"
 
 #: ../contents/ui/components/WidgetCardHide.qml
 msgid "Hide"
-msgstr "Скрыть"
+msgstr "Ocultar"
 
 #: ../contents/ui/components/WidgetCardOverride.qml
 msgid "Edit"
-msgstr "Редактировать"
+msgstr "Editar"
 
 #: ../contents/ui/components/WidgetCardOverride.qml ../contents/ui/configPresets.qml
 msgid "Delete"
-msgstr "Удалить"
+msgstr "Eliminar"
 
 #: ../contents/ui/components/WidgetCardTextIconFixes.qml
 msgid "Mask"
-msgstr "Маска"
+msgstr "Máscara"
 
 #: ../contents/ui/components/WidgetCardTextIconFixes.qml
 msgid "Effect"
-msgstr "Эффект"
+msgstr "Efecto"
 
 #: ../contents/ui/components/WidgetCardTextIconFixes.qml
 msgid "Refresh"
-msgstr "Обновить"
+msgstr "Actualizar"
 
 #: ../contents/ui/configAppearance.qml
 msgid "Not getting the expected result? Make sure you're editing the correct element.<br>Custom blur not working? Try reinstalling/rebuilding the C++ plugin using the latest source, <a href=\"https://github.com/luisbocanegra/plasma-panel-colorizer#build-from-source-with-c-plugin\">see instructions</a>."
-msgstr "Не получаете ожидаемый результат? Убедитесь, что вы редактируете нужный элемент.<br>Не работает настраиваемое размытие? Попробуйте переустановить или пересобрать C++ плагин из свежих исходников, <a href=\"https://github.com/luisbocanegra/plasma-panel-colorizer#build-from-source-with-c-plugin\">см. инструкции</a>."
+msgstr "¿No obtienes el resultado esperado? Asegúrate de estar editando el elemento correcto.<br>¿El desenfoque no funciona? Prueba a reinstalar o recompilar el complemento C++ usando el código fuente más reciente, <a href=\"https://github.com/luisbocanegra/plasma-panel-colorizer#build-from-source-with-c-plugin\">ver instrucciones</a>."
 
 #: ../contents/ui/configAppearance.qml
 msgid "Restore default (removes all customizations)"
-msgstr "Восстановить по умолчанию (удалит все настройки)"
+msgstr "Restaurar ajustes por defecto (elimina todos los ajustes personalizados)"
 
 #: ../contents/ui/configAppearance.qml
 msgid "Panel"
-msgstr "Панель"
+msgstr "Panel"
 
 #: ../contents/ui/configAppearance.qml ../contents/ui/configGlobalWidgetOverrides.qml ../contents/ui/configPresetWidgetOverrides.qml
 msgid "Widgets"
-msgstr "Виджеты"
+msgstr "Widgets"
 
 #: ../contents/ui/configAppearance.qml
 msgid "Tray widgets"
-msgstr "Виджеты трея"
+msgstr "Widgets de la bandeja"
 
 #: ../contents/ui/configAppearance.qml
 msgid "Part of the panel on which the options below will be applied."
-msgstr "Часть панели, к которой будут применены указанные ниже параметры."
+msgstr "Parte del panel en la que se aplicarán las siguientes opciones."
 
 #: ../contents/ui/configBlacklistWidgets.qml
 msgid "Blacklist widgets to keep their default appearance. A logout may be required for some widgets to fully restore their default appearance."
-msgstr "Добавьте виджеты в черный список, чтобы сохранить их стандартный вид. Для полного восстановления вида некоторых виджетов может потребоваться перезапуск сеанса."
+msgstr "Añadir widgets a la lista de excluidos para mantener su apariencia predeterminada. Puede que sea necesario cerrar la sesión para que algunos widgets restauren completamente su apariencia por defecto."
 
 #: ../contents/ui/configBlacklistWidgets.qml
 msgid "Blacklist spacers"
-msgstr ""
+msgstr "Excluir separadores"
 
 #: ../contents/ui/configBlacklistWidgets.qml ../contents/ui/configTrayIconsReplacer.qml
 msgid "Remove all"
-msgstr "Удалить все"
+msgstr "Quitar todo"
 
 #: ../contents/ui/configGeneral.qml
 msgid "Hide widget:"
-msgstr "Скрыть виджет:"
+msgstr "Ocultar widget:"
 
 #: ../contents/ui/configGeneral.qml
 msgid "Visible in Panel Edit Mode"
-msgstr "Виден в режиме настройки панели"
+msgstr "Visible en el modo configuración del panel"
 
 #: ../contents/ui/configGeneral.qml
 msgid "Configure from any widget:"
-msgstr "Настройка из любого виджета:"
+msgstr "Configurar desde cualquier widget:"
 
 #: ../contents/ui/configGeneral.qml
 msgid "Disable to remove <b>%1</b> option from other widget's context (right-click) menu."
-msgstr "Отключите, чтобы убрать пункт <b>%1</b> из контекстного меню других виджетов."
+msgstr "Desactiva esto para eliminar la opción <b>%1</b> del menú contextual (clic derecho) de otros widgets."
 
 #: ../contents/ui/configGeneral.qml
 msgid "Debug mode:"
-msgstr "Режим отладки:"
+msgstr "Modo debug:"
 
 #: ../contents/ui/configGeneral.qml
 msgid "Show debugging information"
-msgstr "Показывать отладочную информацию"
+msgstr "Mostrar información de debugging"
 
 #: ../contents/ui/configGeneral.qml
 msgid "Grid"
-msgstr "Сетка"
+msgstr "Cuadrícula"
 
 #: ../contents/ui/configGeneral.qml
 msgid "Enabled"
-msgstr "Включено"
+msgstr "Activado"
 
 #: ../contents/ui/configGeneral.qml
 msgid "Visible while configuring"
-msgstr "Видна при настройке"
+msgstr "Visible mientras se configura"
 
 #: ../contents/ui/configGeneral.qml
 msgid "Minor line:"
-msgstr "Дополнительная линия:"
+msgstr "Línea menor:"
 
 #: ../contents/ui/configGeneral.qml
 msgid "spacing"
-msgstr "интервал"
+msgstr "espaciado"
 
 #: ../contents/ui/configGeneral.qml
 msgid "Major line:"
-msgstr "Основная линия:"
+msgstr "Línea mayor:"
 
 #: ../contents/ui/configGeneral.qml
 msgid "every"
-msgstr "каждые"
+msgstr "cada"
 
 #: ../contents/ui/configGeneral.qml
 msgid "Property change animations"
-msgstr "Анимация изменения свойств"
+msgstr "Animaciones de cambio de propiedad"
 
 #: ../contents/ui/configGeneral.qml
 msgid "Duration:"
-msgstr "Длительность:"
+msgstr "Duración:"
 
 #: ../contents/ui/configGeneral.qml
 msgid "D-Bus Service"
-msgstr "Служба D-Bus"
+msgstr "Servicio D-Bus"
 
 #: ../contents/ui/configGeneral.qml
 msgid "D-Bus name:"
-msgstr "Имя D-Bus:"
+msgstr "Nombre D-Bus:"
 
 #: ../contents/ui/configGeneral.qml
 msgid "Each Panel Colorizer instance has its own D-Bus name."
-msgstr "Каждый экземпляр Panel Colorizer имеет свое собственное имя D-Bus."
+msgstr "Cada instancia de Panel Colorizer tiene su propio nombre en D-Bus"
 
 #: ../contents/ui/configGeneral.qml
 msgid "Python 3 executable:"
-msgstr "Исполняемый файл Python 3:"
+msgstr "Ejecutable de Python 3:"
 
 #: ../contents/ui/configGeneral.qml
 msgid "Required to run the D-Bus service in the background"
-msgstr "Требуется для запуска службы D-Bus в фоновом режиме"
+msgstr "Es necesario ejecutar el servicio D-Bus en segundo plano"
 
 #: ../contents/ui/configGeneral.qml
 msgid "Usage examples:"
-msgstr "Примеры использования:"
+msgstr "Ejemplos de uso:"
 
 #: ../contents/ui/configGeneral.qml
 msgid "Apply a preset:"
-msgstr "Применить пресет:"
+msgstr "Aplicar un ajuste:"
 
 #: ../contents/ui/configGeneral.qml
 msgid "Preview and switch presets using fzf + qdbus6 + jq:"
-msgstr "Предпросмотр и переключение пресетов через fzf + qdbus6 + jq:"
+msgstr "Previsualizar y cambiar ajustes usando fzf + qdbus6 + jq:"
 
 #: ../contents/ui/configGeneral.qml
 msgid "Hide/show this panel"
-msgstr "Скрыть/показать эту панель"
+msgstr "Ocultar/mostrar este panel"
 
 #: ../contents/ui/configGeneral.qml
 msgid "Hide/show all panels"
-msgstr "Скрыть/показать все панели"
+msgstr "Ocultar/mostrar todos los paneles"
 
 #: ../contents/ui/configGlobalWidgetOverrides.qml
 msgid "Create configuration overrides and apply them to one or multiple widgets. These overrides are independent of presets and will be applied on top of the current settings and across presets.<br>To blacklist a widget from modifications, <b>uncheck</b> options <b>Enable</b> and <b>Fallback</b>, and apply the override to the widget."
-msgstr "Создавайте переопределения конфигурации и применяйте их к одному или нескольким виджетам. Эти переопределения не зависят от пресетов и накладываются поверх текущих настроек.<br>Чтобы исключить виджет из модификаций, <b>снимите галочки</b> с опций <b>Включить</b> и <b>Запасной вариант</b> (Fallback), и примените это переопределение к виджету."
+msgstr "Crea sobrescrituras de configuración y aplícalas a uno o varios widgets. Estas sobrescrituras son independientes de los ajustes y se aplicarán sobre la configuración actual en todos ellos.<br>Para añadir un widget a la lista de exclusión y evitar modificaciones, <b>desmarca</b> las opciones <b>Activar</b> y <b>Fallback</b>, y aplica la sobrescritura al widget."
 
 #: ../contents/ui/configGlobalWidgetOverrides.qml ../contents/ui/configPresetWidgetOverrides.qml
 msgid "Restore default (removes all overrides)"
-msgstr "Восстановить по умолчанию (удалит все переопределения)"
+msgstr "Restaurar valores predeterminados (elimina todas las sobrescrituras)"
 
 #: ../contents/ui/configGlobalWidgetOverrides.qml ../contents/ui/configPresetWidgetOverrides.qml
 msgid "Configuration overrides"
-msgstr "Переопределения конфигурации"
+msgstr "Sobrescrituras de configuración"
 
 #: ../contents/ui/configGlobalWidgetOverrides.qml ../contents/ui/configPresetWidgetOverrides.qml
 msgid "New override"
-msgstr "Новое переопределение"
+msgstr "Nueva sobrescritura"
 
 #: ../contents/ui/configGlobalWidgetOverrides.qml ../contents/ui/configPresetWidgetOverrides.qml
 msgid "Override settings"
-msgstr "Настройки переопределения"
+msgstr "Ajustes de sobrescritura"
 
 #: ../contents/ui/configGlobalWidgetOverrides.qml ../contents/ui/configPresetWidgetOverrides.qml
 msgid "Override name"
-msgstr "Имя переопределения"
+msgstr "Nombre de la sobrescritura"
 
 #: ../contents/ui/configGlobalWidgetOverrides.qml ../contents/ui/configPresetWidgetOverrides.qml
 msgid "Rename"
-msgstr "Переименовать"
+msgstr "Cambiar nombre"
 
 #: ../contents/ui/configGlobalWidgetOverrides.qml
 msgid "Fallback:"
-msgstr "Запасной вариант:"
+msgstr "Fallback:"
 
 #: ../contents/ui/configGlobalWidgetOverrides.qml
 msgid "Fallback to the Global/Preset widget settings for disabled options, except for <b>Enable</b> and <b>Blur</>."
-msgstr "Использовать глобальные настройки или настройки пресета для отключенных опций, кроме параметров <b>Включить</b> и <b>Размытие</b>."
+msgstr "Usar como fallback la configuración Global/Preestablecida del widget para las opciones deshabilitadas, excepto <b>Activar</b> y <b>Desenfoque</b>."
 
 #: ../contents/ui/configGlobalWidgetOverrides.qml ../contents/ui/configPresetWidgetOverrides.qml
 msgid "Overrides are applied from top to bottom, if two or more configuration overrides share the same option, the last occurence replaces the value of the previous one."
-msgstr "Переопределения применяются сверху вниз: если два или более правила используют одну и ту же опцию, последнее правило перезапишет значение предыдущих."
+msgstr "Las sobrescrituras se aplican de arriba a abajo; si dos o más sobrescrituras de configuración comparten la misma opción, la última aparición reemplaza el valor de la anterior."
 
 #: ../contents/ui/configHideWidgets.qml
 msgid "Hidden widgets can still be activated using keyboard shortcuts and are always visible in the Desktop Edit Mode.<br>The activation shortcut can be configured from the <b>Keyboard Shortcuts</b> page on each widget's configuration window."
-msgstr "Скрытые виджеты все еще можно активировать горячими клавишами, и они всегда видны в режиме правки рабочего стола.<br>Комбинацию клавиш можно настроить в разделе <b>Комбинации клавиш</b> окна конфигурации каждого виджета."
+msgstr "Los widgets ocultos pueden seguir activándose mediante atajos de teclado y siempre son visibles en el Modo de edición del escritorio.<br>El atajo de activación se puede configurar desde la página de <b>Atajos de teclado</b> en la ventana de configuración de cada widget."
 
 #: ../contents/ui/configHideWidgets.qml
 msgid "Restore default (controlled by each widget)"
-msgstr "Восстановить по умолчанию (управляется каждым виджетом)"
+msgstr "Restaurar ajuste por defecto (controlado por cada widget)"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "Toggle Panel Colorizer"
-msgstr "Переключить Panel Colorizer"
+msgstr "Activar/desactivar Panel Colorizer"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "Switch presets"
-msgstr "Переключить пресеты"
+msgstr "Cambiar ajustes"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "Show popup"
-msgstr "Показать всплывающее окно"
+msgstr "Mostrar popup"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "Do nothing"
-msgstr "Ничего не делать"
+msgstr "No hacer nada"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "Automatically switch between different presets based on the Panel and window states.<br>Disable preset auto-loading before making changes to presets, unsaved preset settings will be lost when auto-loading switches to other preset!"
-msgstr "Автоматическое переключение пресетов в зависимости от состояния панели и окон.<br>Отключите автозагрузку перед внесением изменений в пресеты, иначе несохраненные настройки будут потеряны при автоматическом переключении!"
+msgstr "Cambia automáticamente entre diferentes ajustes según el estado del panel y las ventanas.<br>Desactiva la carga automática antes de realizar cambios en los ajustes. ¡Los cambios no guardados se perderán cuando la carga automática cambie a otro ajuste!"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "Remove all auto-loading conditions"
-msgstr "Удалить все условия автозагрузки"
+msgstr "Quitar todas las condiciones de carga automática"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "Auto-loading conditions"
-msgstr "Условия автозагрузки"
+msgstr "Condiciones de carga automática"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "Priorities go in descending order. E.g. if both <b>Maximized window is shown</b> and <b>Panel touching window</b> have a preset selected, and there is a maximized window on the screen, the <b>Maximized</b> preset will be applied."
-msgstr "Приоритеты идут в порядке убывания. Например, если для пунктов <b>Окно развернуто</b> и <b>Панель касается окна</b> выбраны разные пресеты, то при наличии развернутого окна применится пресет <b>Окно развернуто</b>."
+msgstr "Las prioridades van en orden descendente. Por ejemplo, si tanto <b>Se muestra una ventana maximizada</b> como <b>El panel toca una ventana</b> tienen un ajuste seleccionado, y hay una ventana maximizada en pantalla, se aplicará el ajuste <b>Maximizado</b>."
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "Window tracking:"
-msgstr "Отслеживание окон:"
+msgstr "Seguimiento de ventanas:"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "Per screen"
-msgstr "Для каждого экрана"
+msgstr "Por pantalla"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "Active only"
-msgstr "Только активное"
+msgstr "Solo activas"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "Active window fallback"
-msgstr "Запасной вариант активного окна"
+msgstr "Fallback de ventana activa"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "Track KWin's top window when there is no active one in the screen."
-msgstr "Отслеживать верхнее окно KWin, если на экране нет активного окна."
+msgstr "Rastrear la ventana superior de KWin cuando no haya ninguna activa en la pantalla."
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "Fullscreen window:"
-msgstr "Полноэкранное окно:"
+msgstr "Ventana en pantalla completa:"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "Maximized window:"
-msgstr "Развернутое окно:"
+msgstr "Ventana maximizada:"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "Window touching panel:"
-msgstr "Окно касается панели:"
+msgstr "Ventana tocando el panel:"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "Active window:"
-msgstr "Активное окно:"
+msgstr "Ventana activa"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "At least one window is visible:"
-msgstr "Видно хотя бы одно окно:"
+msgstr "Al menos una ventana es visible:"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "activity:"
-msgstr "комната:"
+msgstr "Actividad:"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "Normal:"
-msgstr "Обычное:"
+msgstr "Normal:"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "Widget Click"
-msgstr "Клик по виджету"
+msgstr "Click de Widget"
 
 #: ../contents/ui/configPresetAutoload.qml
 msgid "Action:"
-msgstr "Действие:"
+msgstr "Acción:"
 
 #: ../contents/ui/configPresetWidgetOverrides.qml
 msgid "Create configuration overrides and apply them to one or multiple widgets. These overrides should be saved to a preset in <strong>Presets</strong> tab or they will be lost when presets change!"
-msgstr "Создавайте переопределения и применяйте их к виджетам. Эти настройки должны быть сохранены в пресет во вкладке <strong>Пресеты</strong>, иначе они будут потеряны при смене пресета!"
+msgstr "Crea sobrescrituras de configuración y aplícalas a uno o varios widgets. ¡Estas sobrescrituras deben guardarse en un ajuste de la pestaña <strong>Ajustes preestablecidos</strong> o se perderán cuando cambien los ajustes!"
 
 #: ../contents/ui/configPresetWidgetOverrides.qml
 msgid "Name:"
-msgstr "Имя:"
+msgstr "Nombre:"
 
 #: ../contents/ui/configPresets.qml
 msgid "Delete preset"
-msgstr "Удалить пресет"
+msgstr "Eliminar ajuste"
 
 #: ../contents/ui/configPresets.qml
 msgid "This will permanently delete the file from your system!"
-msgstr "Это навсегда удалит файл из вашей системы!"
+msgstr "¡Esto eliminará el archivo de forma permanente!"
 
 #: ../contents/ui/configPresets.qml
 msgid "Update preset"
-msgstr "Обновить пресет"
+msgstr "Actualizar ajuste"
 
 #: ../contents/ui/configPresets.qml
 msgid "Preset configuration will be overwritten!"
-msgstr "Конфигурация пресета будет перезаписана!"
+msgstr "¡La configuración del ajuste será reemplazada!"
 
 #: ../contents/ui/configPresets.qml
 msgid "Create preset preview?"
-msgstr "Создать превью пресета?"
+msgstr "¿Crear previsualización del ajuste?"
 
 #: ../contents/ui/configPresets.qml
 msgid "Current preview will be overwritten!"
-msgstr "Текущее превью будет перезаписано!"
+msgstr "¡La previsualización actual sera reemplazada!"
 
 #: ../contents/ui/configPresets.qml
 msgid "Create preset"
-msgstr "Создать пресет"
+msgstr "Crear ajuste"
 
 #: ../contents/ui/configPresets.qml
 msgid "Changes to the current preset are not synced to disk automatically. You should come back to this tab and update it manually before switching to a different preset, otherwise unsaved preset settings will be lost when presets change!"
-msgstr "Изменения текущего пресета не сохраняются на диск автоматически. Вам следует вернуться на эту вкладку и обновить его вручную перед переключением на другой пресет, иначе несохраненные настройки будут потеряны!"
+msgstr "Los cambios en el ajuste actual no se sincronizan en el disco automáticamente. Deberías volver a esta pestaña y actualizarlo manualmente antes de cambiar a un ajuste diferente; de lo contrario, ¡los cambios no guardados se perderán cuando cambien los ajustes!"
 
 #: ../contents/ui/configPresets.qml
 msgid "Restore default preset"
-msgstr "Восстановить пресет по умолчанию"
+msgstr "Restaurar ajuste predefinido"
 
 #: ../contents/ui/configPresets.qml
 msgid "New from current settings"
-msgstr "Новый из текущих настроек"
+msgstr "Nuevo a partir de la configuración actual"
 
 #: ../contents/ui/configPresets.qml
 msgid "Save"
-msgstr "Сохранить"
+msgstr "Guardar"
 
 #: ../contents/ui/configPresets.qml
 msgid "Refresh presets"
-msgstr "Обновить список пресетов"
+msgstr "Recargar ajustes"
 
 #: ../contents/ui/configPresets.qml
 msgid "Built-in"
-msgstr "Встроенные"
+msgstr "Integrado"
 
 #: ../contents/ui/configPresets.qml
 msgid "Load"
-msgstr "Загрузить"
+msgstr "Cargar"
 
 #: ../contents/ui/configPresets.qml
 msgid "Update"
-msgstr "Обновить"
+msgstr "Actualizar"
 
 #: ../contents/ui/configPresets.qml
 msgid "Create preview"
-msgstr "Создать превью"
+msgstr "Crear previsualización"
 
 #: ../contents/ui/configPresets.qml
 msgid "Update preview"
-msgstr "Обновить превью"
+msgstr "Actualizar previsualización"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Changing panel position is currently unstable and may cause Plasma to crash when moving panels between non-parallel edges (e.g from top to left)."
-msgstr "Изменение положения панели в данный момент нестабильно и может привести к сбою Plasma при перемещении панелей между непараллельными краями (например, сверху налево)."
+msgstr "Cambiar la posición del panel es actualmente inestable y puede causar un crash de Plasma al mover paneles entre bordes no paralelos (e.g., de la parte superior a la izquierda)."
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Opacity and Screen options require <b>Plasma 6.3</b> or newer.<br>Opacity depends on the current Plasma Theme, for finer control or full transparency use <b>Panel Opacity</b> and <b>Native panel background</b> options in <b>Appearance</b> tab instead."
-msgstr "Настройки непрозрачности и экрана требуют <b>Plasma 6.3</b> или новее.<br>Непрозрачность зависит от текущей темы Plasma. Для более точного контроля или полной прозрачности используйте опции <b>Непрозрачность панели</b> и <b>Фон стандартной панели</b> во вкладке <b>Внешний вид</b>."
+msgstr "Las opciones de Opacidad y Pantalla requieren <b>Plasma 6.3</b> o posterior.<br>La opacidad depende del tema actual de Plasma; para un control más fino o transparencia total, utiliza en su lugar las opciones <b>Opacidad del panel</b> y <b>Fondo de panel nativo</b> en la pestaña <b>Apariencia</b>."
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Screen"
-msgstr "Экран"
+msgstr "Pantalla"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Screen:"
-msgstr "Экран:"
+msgstr "Pantalla:"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Position"
-msgstr "Положение"
+msgstr "Posición"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Position:"
-msgstr "Положение:"
+msgstr "Posición:"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Top"
-msgstr "Сверху"
+msgstr "superior"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Bottom"
-msgstr "Снизу"
+msgstr "Inferior"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Left"
-msgstr "Слева"
+msgstr "izquierda"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Right"
-msgstr "Справа"
+msgstr "Derecha"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Alignment"
-msgstr "Выравнивание"
+msgstr "Alineación"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Alignment:"
-msgstr "Выравнивание:"
+msgstr "Alineación:"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Center"
-msgstr "По центру"
+msgstr "Centrado"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Length mode"
-msgstr "Режим длины"
+msgstr "Modo de longitud"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Mode:"
-msgstr "Режим:"
+msgstr "Modo:"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Fill"
-msgstr "Заполнить"
+msgstr "Rellenar"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Fit content"
-msgstr "По содержимому"
+msgstr "Ajustar al contenido"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Visibility"
-msgstr "Видимость"
+msgstr "Visibilidad"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Always visible"
-msgstr "Всегда видима"
+msgstr "Siempre visible"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Auto hide"
-msgstr "Автоматически скрывать"
+msgstr "Ocultar automáticamente"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Dodge windows"
-msgstr "Избегать окон"
+msgstr "Esquivar ventanas"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Windows go below"
-msgstr "Окна уходят под панель"
+msgstr "Las ventanas van por detrás"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Opacity"
-msgstr "Непрозрачность"
+msgstr "Opacidad"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Adaptive"
-msgstr "Адаптивная"
+msgstr "Adaptativo"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Opaque"
-msgstr "Непрозрачная"
+msgstr "Opaco"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Translucent"
-msgstr "Полупрозрачная"
+msgstr "Transparente"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Floating"
-msgstr "Плавающая"
+msgstr "Flotante"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Floating:"
-msgstr "Плавающая:"
+msgstr "Flotante:"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Thickness"
-msgstr "Толщина"
+msgstr "Grosor"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Thickness:"
-msgstr "Толщина:"
+msgstr "Grosor:"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Show/Hide"
-msgstr "Показать/Скрыть"
+msgstr "Mostrar/Ocultar"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "Show:"
-msgstr "Показать:"
+msgstr "Mostrar:"
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid ""
 "WARNING: Use Show/Hide with caution, if you hide the panel and have not configured preset auto-loading or know how to switch presets using D-Bus (or have disabled it), you will have no way to make it visible again without manually removing the configuration or Panel Colorizer, use the command below in terminal/tty then log out or reboot, it will remove the configuration from all Panel Colorizer "
 "instances so make sure to save the others first"
-msgstr "ВНИМАНИЕ: Используйте Показать/Скрыть с осторожностью. Если вы скроете панель и не настроите автозагрузку пресетов или не умеете переключать их через D-Bus, вы не сможете вернуть её видимость без удаления конфига. Команда ниже удалит настройки ВСЕХ экземпляров Panel Colorizer — сначала сохраните данные других панелей."
+msgstr ""
+"ADVERTENCIA: Usa Mostrar/Ocultar con precaución. Si ocultas el panel y no has configurado la carga automática de ajustes o no sabes cómo cambiar de ajuste usando D-Bus (o lo has desactivado), no habrá forma de volver a hacerlo visible sin eliminar manualmente la configuración o Panel Colorizer. Usa el siguiente comando en una terminal o TTY y luego cierra sesión o reinicia; esto eliminará la "
+"configuración de todas las instancias de Panel Colorizer, así que asegúrate de guardar las demás primero."
 
 #: ../contents/ui/configStockPanelSettings.qml
 msgid "If you have D-Bus enabled is it recommended that you use that with shortcuts instead. Consult the README to learn more or see the General tab for some examples."
-msgstr "Если у вас включен D-Bus, рекомендуется использовать его с горячими клавишами. Обратитесь к README или вкладке «Общие» за примерами."
+msgstr "Si tienes D-Bus habilitado, se recomienda usarlo con atajos de teclado en su lugar. Consulta el archivo README para obtener más información o mira la pestaña General para ver algunos ejemplos."
 
 #: ../contents/ui/configTextIconFix.qml
 msgid ""
 "Fix text and icon colors/font for widgets where the normal method doesn't work or is reset by the widget.<br> - <strong>Mask</strong>: Force color on SVG icons, useful for symbolic icons.<br> - <strong>Color Effect</strong>: Force color on text and icons using post-processing effect, useful for non-symbolic icons.<br> - <strong>Refresh</strong>: Re-apply color/font at a fixed interval, useful "
 "for widgets that recreate or recolor content themselves.<br>To restore the <strong>Mask<strong> and <strong>Color Effect</strong> disable and restart Plasma or logout."
 msgstr ""
-"Исправление цветов и шрифтов для виджетов, где стандартный метод не работает.<br> - <strong>Маска</strong>: Принудительный цвет для SVG (символьные иконки).<br> - <strong>Цветовой эффект</strong>: Пост-обработка для текста и обычных иконок.<br> - <strong>Обновление</strong>: Повторное применение настроек через интервал для динамичных виджетов.<br>Для сброса эффектов отключите их и перезапустите "
-"Plasma."
+"Corrige los colores y la fuente del texto y los iconos en widgets donde el método normal no funciona o el widget lo restablece.<br> - <strong>Máscara</strong>: fuerza el color en iconos SVG, útil para iconos simbólicos.<br> - <strong>Efecto de color</strong>: fuerza el color en texto e iconos usando un efecto de posprocesado, útil para iconos no simbólicos.<br> - <strong>Actualizar</strong>: "
+"vuelve a aplicar el color/la fuente a intervalos fijos, útil para widgets que recrean o recolorean el contenido por sí mismos.<br>Para restaurar <strong>Máscara<strong> y <strong>Efecto de color</strong>, desactiva y reinicia Plasma o cierra sesión."
 
 #: ../contents/ui/configTextIconFix.qml
 msgid "Restore default (removes all icon and text fixes)"
-msgstr "Восстановить по умолчанию (удалит все исправления)"
+msgstr "Restaurar valores predeterminados (elimina todas las correcciones de iconos y texto)"
 
 #: ../contents/ui/configTextIconFix.qml
 msgid "Force Text/Icon color"
-msgstr "Принудительный цвет текста/иконок"
+msgstr "Forzar color de Texto/Icono"
 
 #: ../contents/ui/configTextIconFix.qml
 msgid "Refresh interval:"
-msgstr "Интервал обновления:"
+msgstr "Intervalo de actualización:"
 
 #: ../contents/ui/configTrayIconsReplacer.qml
 msgid "Add new"
-msgstr "Добавить"
+msgstr "Añadir nuevo"
 
 #: ../contents/ui/configTrayIconsReplacer.qml
 msgid "Sort"
-msgstr "Сортировать"
+msgstr "Ordenar"
 
 #: ../contents/ui/configTrayIconsReplacer.qml
 msgid "Replace System Tray icons with icons from the current icon theme or a local file. The built-in rules icons are part of <a href=\"https://github.com/PapirusDevelopmentTeam/papirus-icon-theme\">Papirus icon theme</a>."
-msgstr "Заменяйте иконки системного трея иконками из текущей темы или локальными файлами. Встроенные правила используют иконки из темы <a href=\"https://github.com/PapirusDevelopmentTeam/papirus-icon-theme\">Papirus</a>."
+msgstr "Reemplaza los iconos de la bandeja del sistema con iconos del tema de iconos actual o un archivo local. Los iconos de las reglas integradas forman parte del <a href=\"https://github.com/PapirusDevelopmentTeam/papirus-icon-theme\">tema de iconos Papirus</a>."
 
 #: ../contents/ui/configTrayIconsReplacer.qml
 msgid "C++ plugin not found, this feature will not work. Install the plugin and reboot or restart plasmashell to be able to use it <a href=\"https://github.com/luisbocanegra/plasma-panel-colorizer?tab=readme-ov-file#manually\">Install instructions</a>."
-msgstr "C++ плагин не найден. Установите его и перезапустите plasmashell для работы этой функции. <a href=\"https://github.com/luisbocanegra/plasma-panel-colorizer?tab=readme-ov-file#manually\">Инструкции</a>."
+msgstr "No se ha encontrado el complemento de C++; esta función no funcionará. Instala el complemento y reinicia el equipo o plasmashell para poder utilizarlo. <a href=\"https://github.com/luisbocanegra/plasma-panel-colorizer?tab=readme-ov-file#manually\">Instrucciones de instalación</a>."
 
 #: ../contents/ui/configTrayIconsReplacer.qml
 msgid "The installed version of the C++ plugin doesn't support this feature, update the plugin and reboot or restart plasmashell to be able to use it <a href=\"https://github.com/luisbocanegra/plasma-panel-colorizer?tab=readme-ov-file#manually\">Install instructions</a>."
-msgstr "Установленная версия C++ плагина не поддерживает эту функцию. Обновите плагин и перезапустите plasmashell. <a href=\"https://github.com/luisbocanegra/plasma-panel-colorizer?tab=readme-ov-file#manually\">Инструкции</a>."
+msgstr "La versión instalada del complemento de C++ no admite esta función; actualiza el complemento y reinicia el equipo o plasmashell para poder utilizarlo. <a href=\"https://github.com/luisbocanegra/plasma-panel-colorizer?tab=readme-ov-file#manually\">Instrucciones de instalación</a>."
 
 #: ../contents/ui/configTrayIconsReplacer.qml
 msgid "Log icon changes:"
-msgstr "Логировать изменения иконок:"
+msgstr "Registrar cambios de iconos:"
 
 #: ../contents/ui/configTrayIconsReplacer.qml
 msgid "Icon hashes will be printed to the system log"
-msgstr "Хеши иконок будут выводиться в системный лог"
+msgstr "Los hashes de los iconos se escribirán en el registro del sistema"
 
 #: ../contents/ui/configTrayIconsReplacer.qml
 msgid "Enable built-in rules:"
-msgstr "Включить встроенные правила:"
+msgstr "Activar reglas integradas:"
 
 #: ../contents/ui/configTrayIconsReplacer.qml
 msgid "Show"
-msgstr "Показать"
+msgstr "Mostrar"
 
 #: ../contents/ui/configTrayIconsReplacer.qml
 msgid "How to use"
-msgstr "Как использовать"
+msgstr "Cómo usar"
 
 #: ../contents/ui/configTrayIconsReplacer.qml
 msgid "Built-in Rules (read only)"
-msgstr "Встроенные правила (только чтение)"
+msgstr "Reglas integradas (solo lectura)"
 
 #: ../contents/ui/configTrayIconsReplacer.qml
 msgid "User Rules"
-msgstr "Пользовательские правила"
+msgstr "Reglas de usuario"
 
 #: ../contents/ui/configTrayIconsReplacer.qml
 msgid "Whether or not this replacement is enabled"
-msgstr "Включена ли данная замена"
+msgstr "Si este reemplazo está activado o no"
 
 #: ../contents/ui/configTrayIconsReplacer.qml
 msgid "Description (optional)"
-msgstr "Описание (необязательно)"
+msgstr "Descripción (opcional)"
 
 #: ../contents/ui/configTrayIconsReplacer.qml
 msgid "Description"
-msgstr "Описание"
+msgstr "Descripción"
 
 #: ../contents/ui/configTrayIconsReplacer.qml
 msgid "SHA1, string or regex to match"
-msgstr "SHA1, строка или регулярное выражение для поиска"
+msgstr "SHA1, cadena o expresión regular a coincidir"
 
 #: ../contents/ui/configTrayIconsReplacer.qml
 msgid "Icon SHA1, title or name of the target tray item"
-msgstr "SHA1 иконки, заголовок или имя элемента трея"
+msgstr "SHA1 del icono, título o nombre del elemento de la bandeja"
 
 #: ../contents/ui/configTrayIconsReplacer.qml
 msgid "Custom icon"
-msgstr "Своя иконка"
+msgstr "Icono personalizado"
 
 #: ../contents/ui/configTrayIconsReplacer.qml
 msgid "Icon name or file"
-msgstr "Имя иконки или файл"
+msgstr "Nombre de icono o archivo"
 
 #: ../contents/ui/configTrayIconsReplacer.qml
 msgid "Edit icon"
-msgstr "Редактировать иконку"
+msgstr "Editar icono"
 
 #: ../contents/ui/configTrayIconsReplacer.qml
 msgctxt "@item:inmenu Open icon chooser dialog"
 msgid "Choose…"
-msgstr "Выбрать…"
+msgstr "Elegir…"
 
 #: ../contents/ui/configTrayIconsReplacer.qml
 msgctxt "@action:inmenu"
 msgid "Remove icon"
-msgstr "Удалить иконку"
+msgstr "Eliminar icono"
 
 #: ../contents/ui/configTrayIconsReplacer.qml
 msgid "Copy to User Rules"
-msgstr "Копировать в пользовательские правила"
+msgstr "Copiar a Reglas de usuario"
 
 #: ../contents/ui/configTrayIconsReplacer.qml
 msgid "Copy rule"
-msgstr "Копировать правило"
+msgstr "Copiar regla"
 
 #: ../contents/ui/configWidgetIslands.qml
 msgid "Create widget islands by placing separator widgets around them."
-msgstr ""
+msgstr "Crea islas de widgets colocando widgets separadores a su alrededor."
 
 #: ../contents/ui/configWidgetIslands.qml
 msgid "<strong>How to use</strong><br>1. Add the widget that will act as islands separator to the panel(by default the Plasma's Panel Spacer widget will be used)<br>2. Select the separator widget below<br>3. Add as many separators as you need and move them to create islands."
-msgstr ""
+msgstr "<strong>Modo de uso</strong><br>1. Añade al panel el widget que servirá como separador de islas (por defecto se usará el Espaciador del panel de Plasma)<br>2. Selecciona el widget separador a continuación<br>3. Añade tantos separadores como necesites y muévelos para crear las islas."
 
 #: ../contents/ui/configWidgetIslands.qml
 msgid "<strong>Notes</strong><br>- Widget custom background or border is required for this option to have a visible effect.<br>- If the widgets in your panel have different thickness, add margins to the widgets custom background in the Appearance tab."
-msgstr ""
+msgstr "<strong>Notas</strong><br>- Se requiere un fondo o borde personalizado para que esta opción tenga un efecto visible.<br>- Si los widgets de tu panel tienen grosores diferentes, añade márgenes al fondo personalizado de los widgets en la pestaña Apariencia."
 
 #: ../contents/ui/configWidgetIslands.qml
 msgid "<strong>Need a separator widget?</strong><br>- <a href=\"%1\">Panel Colorizer Islands Separator</a> visible only in Edit Mode.<br>- <a href=\"%2\">Advanced Separator</a> always visible and configurable."
-msgstr ""
+msgstr "<strong>¿Necesitas un widget separador?</strong><br>- <a href=\"%1\">Separador de islas de Panel Colorizer</a> visible solo en el Modo edición.<br>- <a href=\"%2\">Advanced Separator</a> siempre visible y configurable."
 
 #: ../contents/ui/configWidgetIslands.qml
 msgid "Separator widget:"
-msgstr ""
+msgstr "Widget separador:"
 
 #: ../contents/ui/configWidgetIslands.qml
 msgid "Select the widget that will act as separator for the islands.<br><br>Note that the separator widget itself does not need to be visible for it to work, so you can use an invisible spacer/separator for example."
-msgstr ""
+msgstr "Selecciona el widget que actuará como separador para las islas.<br><br>Ten en cuenta que el widget separador en sí mismo no necesita ser visible para funcionar, por lo que puedes usar un espaciador o separador invisible, por ejemplo."
 
 #: ../contents/ui/configWidgetIslands.qml
 msgid "Require two separators per island:"
-msgstr ""
+msgstr "Requerir dos separadores por isla:"
 
 #: ../contents/ui/configWidgetIslands.qml
 msgid ""
 "Always require two separators for a group of widgets to become an island. By default, an arrangement of<br>%1 creates two islands.<br><br>Enabling this option makes it so that islands do not share separators, so for example an arrangement of<br>%2 is required to create two islands.<br><br>Enable this if your islands separator is not a panel spacer and you want to explicitly define the start and "
 "end of each island."
 msgstr ""
+"Obliga siempre a usar dos separadores para que un grupo de widgets se convierta en una isla. Por defecto, una disposición de<br>%1 crea dos islas.<br><br>Activar esta opción hace que las islas no compartan separadores; por ejemplo, se requeriría una disposición de<br>%2 para crear dos islas.<br><br>Activa esto si tu separador de islas no es un espaciador de panel y quieres definir "
+"explícitamente el inicio y el fin de cada isla."
 
 #: ../contents/ui/configWidgetIslands.qml
 msgid "Blacklist separator widgets:"
-msgstr ""
+msgstr "Lista negra de widgets separadores:"
 
 #: ../contents/ui/configWidgetIslands.qml
 msgid "Disable customization from separator widgets"
-msgstr ""
+msgstr "Desactivar personalización de los widgets separadores"
 
 #: ../contents/ui/main.qml
 msgid "Hide widget (visible in panel Edit Mode)"
-msgstr "Скрыть виджет (виден в режиме настройки панели)"
+msgstr "Ocultar widget (visible en el Modo edición del panel)"
 
 #: ../contents/ui/main.qml
 msgid "A Plasmashell restart is required to remove all the modifications made by %1. Run journalctl restart --user plasma-plasmashell or log out and log back in."
-msgstr ""
+msgstr "Se requiere reiniciar Plasmashell para eliminar todas las modificaciones hechas por %1. Ejecute journalctl restart --user plasma-plasmashell o cierre sesión y vuelva a ingresar."
 
-#~ msgid "Disable"
-#~ msgstr "Отключить"
+#~ msgid "Fallback to the Global/Preset widget settings for disabled options, except for <b>Enable</b> and <b>Blur</b>."
+#~ msgstr "Recurrir a los ajustes de widget Globales/Preestablecidos para las opciones desactivadas, excepto para <b>Activar</b> y <b>Desenfoque</b>."
 
-#~ msgid "Start"
-#~ msgstr "Начало"
-
-#~ msgid "End"
-#~ msgstr "Конец"
-
-#~ msgid "Select start and end of widget islands, widgets between <b>Start</b> and <b>End</b> must be left <b>disabled</b>. Widget custom background or border is required for this option to have an effect."
-#~ msgstr "Выберите начало и конец островков виджетов. Виджеты между <b>Началом</b> и <b>Концом</b> должны быть <b>отключены</b>. Для работы функции необходим настраиваемый фон или рамка."
-
-#~ msgid "Remove all islands"
-#~ msgstr "Удалить все островки"
+#~ msgid ""
+#~ "Fix text and icon colors/font for widgets where the normal method doesn't work or is reset by the widget.<br> - <strong>Mask</strong>: Force color on SVG icons, useful for symbolic icons.<br> - <strong>Color Effect</strong>: Force color on text and icons using post-processing effect, useful for non-symbolic icons.<br> - <strong>Refresh</strong>: Re-apply color/font at a fixed interval, "
+#~ "useful for widgets that recreate or recolor content themselves.<br>To restore the <strong>Mask</strong> and <strong>Color Effect</strong> disable and restart Plasma or logout."
+#~ msgstr ""
+#~ "Corrige los colores y la fuente de texto e iconos en widgets donde el método normal no funciona o el propio widget lo restablece.<br> - <strong>Máscara</strong>: Fuerza el color en iconos SVG, útil para iconos simbólicos.<br> - <strong>Efecto de color</strong>: Fuerza el color en texto e iconos mediante un efecto de postprocesado, útil para iconos no simbólicos.<br> - <strong>Refrescar</"
+#~ "strong>: Vuelve a aplicar el color o la fuente en un intervalo fijo, útil para widgets que recrean o colorean su contenido por sí mismos.<br>Para restaurar la <strong>Máscara</strong> y el <strong>Efecto de color</strong>, desactívalos y reinicia Plasma o cierra sesión."

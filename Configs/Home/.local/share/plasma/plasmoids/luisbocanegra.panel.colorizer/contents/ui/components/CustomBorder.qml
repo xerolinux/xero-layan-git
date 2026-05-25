@@ -104,10 +104,9 @@ Rectangle {
             color: (root.unifyBgType === Enum.IslandSectionType.Start || root.unifyBgType === Enum.IslandSectionType.Middle) ? "black" : "transparent"
             anchors.right: root.horizontal ? parent.right : undefined
             anchors.bottom: !root.horizontal ? parent.bottom : undefined
-            anchors.verticalCenter: root.horizontal ? parent.verticalCenter : undefined
-            anchors.horizontalCenter: !root.horizontal ? parent.horizontalCenter : undefined
             antialiasing: true
-            anchors.alignWhenCentered: false
+            x: root.horizontal ? 0 : root.cfgBorder.width
+            y: root.horizontal ? root.cfgBorder.width : 0
         }
         // island widget mask left/top
         Rectangle {
@@ -117,10 +116,9 @@ Rectangle {
             color: (root.unifyBgType === Enum.IslandSectionType.Middle || root.unifyBgType === Enum.IslandSectionType.End) ? "black" : "transparent"
             anchors.left: root.horizontal ? parent.left : undefined
             anchors.top: !root.horizontal ? parent.top : undefined
-            anchors.verticalCenter: root.horizontal ? parent.verticalCenter : undefined
-            anchors.horizontalCenter: !root.horizontal ? parent.horizontalCenter : undefined
             antialiasing: true
-            anchors.alignWhenCentered: false
+            x: root.horizontal ? 0 : root.cfgBorder.width
+            y: root.horizontal ? root.cfgBorder.width : 0
         }
         // mask the border touching the screen edge
         Rectangle {

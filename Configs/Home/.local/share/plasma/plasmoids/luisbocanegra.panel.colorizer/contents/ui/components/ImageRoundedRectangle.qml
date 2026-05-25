@@ -16,11 +16,6 @@ AnimatedImage {
     asynchronous: true
     anchors.fill: parent
     layer.enabled: true
-    // workaround for https://github.com/luisbocanegra/plasma-panel-colorizer/issues/232
-    // possibly https://bugreports.qt.io/browse/QTBUG-65463
-    onPlayingChanged: {
-        layer.live = playing;
-    }
     layer.effect: MultiEffect {
         maskEnabled: true
         maskSpreadAtMax: 1
