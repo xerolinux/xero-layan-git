@@ -3,7 +3,13 @@
 # Grub2 Theme
 
 ROOT_UID=0
-THEME_DIR="/usr/share/grub/themes/"
+# Fedora/openSUSE keep grub2 assets under /boot/grub2 and /boot is reliably
+# readable by GRUB at boot; Arch's standard path is /usr/share/grub/themes.
+if command -v dnf > /dev/null 2>&1 || command -v zypper > /dev/null 2>&1; then
+  THEME_DIR="/boot/grub2/themes/"
+else
+  THEME_DIR="/usr/share/grub/themes/"
+fi
 THEME_NAME=XeroLayan
 MAX_DELAY=20                                        # max delay for user to enter root pass
 
@@ -74,11 +80,11 @@ if [ "$UID" -eq "$ROOT_UID" ]; then
   elif has_command grub-mkconfig; then
     grub-mkconfig -o /boot/grub/grub.cfg
   elif has_command grub2-mkconfig; then
-    if has_command zypper; then
-      grub2-mkconfig -o /boot/grub2/grub.cfg
-    elif has_command dnf; then
-      grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg
-    fi
+    # Fedora 34+ / openSUSE use a unified config at /boot/grub2/grub.cfg.
+    # The EFI stub at /boot/efi/EFI/<distro>/grub.cfg just chainloads it,
+    # but regenerate it too when present for older layouts.
+    grub2-mkconfig -o /boot/grub2/grub.cfg
+    [ -f /boot/efi/EFI/fedora/grub.cfg ] && grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg
   fi
 
   # Success message

@@ -1,0 +1,41 @@
+# Translation of Simple Separator in Dutch
+# Copyright (C) 2025
+# This file is distributed under the same license as the zayron.simple.separator package.
+# ADOLFO <adolfo@librepixels.com>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: zayron.simple.separator\n"
+"Report-Msgid-Bugs-To: https://store.kde.org/p/2137418/\n"
+"POT-Creation-Date: 2023-05-01 16:59-0300\n"
+"PO-Revision-Date: 2025-06-16 16:00-0600\n"
+"Last-Translator: Adolfo Silerio <adolfo@librepixels.com>\n"
+"Language-Team: Dutch <nl@li.org>\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../contents/ui/GeneralConfig.qml
+msgid "Single point mode:"
+msgstr "Enkelpuntsmodus:"
+
+#: ../contents/ui/GeneralConfig.qml
+msgid "Margin length:"
+msgstr "Marghoogte:"
+
+#: ../contents/ui/GeneralConfig.qml
+msgid "Separator length (percentage):"
+msgstr "Scheidinglengte (percentage):"
+
+#: ../contents/ui/GeneralConfig.qml
+msgid "Thickness:"
+msgstr "Dikte:"
+
+#: ../contents/ui/GeneralConfig.qml
+msgid "Custom Color:"
+msgstr "Aangepaste kleur:"
+
+#: ../contents/ui/GeneralConfig.qml
+msgid "Opacity:"
+msgstr "Doorzichtigheid:"

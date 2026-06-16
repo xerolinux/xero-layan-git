@@ -1,0 +1,41 @@
+# Translation of Simple Separator into Traditional Chinese
+# Copyright (C) 2025
+# This file is distributed under the same license as the zayron.simple.separator package.
+# ADOLFO <adolfo@librepixels.com>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: zayron.simple.separator\n"
+"Report-Msgid-Bugs-To: https://store.kde.org/p/2137418/\n"
+"POT-Creation-Date: 2023-05-01 16:59-0300\n"
+"PO-Revision-Date: 2025-07-20 00:00+0800\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Chinese (Traditional) <zh_TW@li.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../contents/ui/GeneralConfig.qml
+msgid "Single point mode:"
+msgstr "單點模式："
+
+#: ../contents/ui/GeneralConfig.qml
+msgid "Margin length:"
+msgstr "邊距長度："
+
+#: ../contents/ui/GeneralConfig.qml
+msgid "Separator length (percentage):"
+msgstr "分隔線長度（百分比）："
+
+#: ../contents/ui/GeneralConfig.qml
+msgid "Thickness:"
+msgstr "厚度："
+
+#: ../contents/ui/GeneralConfig.qml
+msgid "Custom Color:"
+msgstr "自訂顏色："
+
+#: ../contents/ui/GeneralConfig.qml
+msgid "Opacity:"
+msgstr "不透明度："

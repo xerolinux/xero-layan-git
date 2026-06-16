@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+      http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
+  <kcfgfile name=""/>
+
+  <group name="General">
+  </group>
+  <entry name="checkColorCustom" type="bool">
+    <default>false</default>
+  </entry>
+  <entry name="lengthMargin" type="int">
+    <default>10</default>
+  </entry>
+  <entry name="lengthSeparator" type="int">
+    <default>90</default>
+  </entry>
+  <entry name="customColors" type="color">
+    <default>#ffffff</default>
+  </entry>
+  <entry name="thicknessSeparator" type="int">
+    <default>1</default>
+  </entry>
+  <entry name="opacity" type="int">
+    <default>40</default>
+  </entry>
+  <entry name="pointDesing" type="bool">
+    <default>false</default>
+  </entry>
+</kcfg>
