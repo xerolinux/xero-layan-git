@@ -3,104 +3,89 @@
 # Grub2 Theme
 
 ROOT_UID=0
-# Fedora/openSUSE keep grub2 assets under /boot/grub2 and /boot is reliably
-# readable by GRUB at boot; Arch's standard path is /usr/share/grub/themes.
+
+# Fedora/openSUSE keep grub2 assets under /boot/grub2; Arch uses /usr/share/grub/themes.
 if command -v dnf > /dev/null 2>&1 || command -v zypper > /dev/null 2>&1; then
-  THEME_DIR="/boot/grub2/themes/"
+  THEME_DIR="/boot/grub2/themes"
 else
-  THEME_DIR="/usr/share/grub/themes/"
+  THEME_DIR="/usr/share/grub/themes"
 fi
 THEME_NAME=XeroLayan
-MAX_DELAY=20                                        # max delay for user to enter root pass
 
 #COLORS
-CDEF=" \033[0m"                                     # default color
-CCIN=" \033[0;36m"                                  # info color
-CGSC=" \033[0;32m"                                  # success color
-CRER=" \033[0;31m"                                  # error color
-CWAR=" \033[0;33m"                                  # waring color
-b_CDEF=" \033[1;37m"                                # bold default color
-b_CCIN=" \033[1;36m"                                # bold info color
-b_CGSC=" \033[1;32m"                                # bold success color
-b_CRER=" \033[1;31m"                                # bold error color
-b_CWAR=" \033[1;33m"                                # bold warning color
+CDEF=" \033[0m"
+CCIN=" \033[0;36m"
+CGSC=" \033[0;32m"
+CRER=" \033[0;31m"
+CWAR=" \033[0;33m"
+b_CDEF=" \033[1;37m"
+b_CCIN=" \033[1;36m"
+b_CGSC=" \033[1;32m"
+b_CRER=" \033[1;31m"
+b_CWAR=" \033[1;33m"
 
-# echo like ...  with  flag type  and display message  colors
 prompt () {
   case ${1} in
-    "-s"|"--success")
-      echo -e "${b_CGSC}${@/-s/}${CDEF}";;          # print success message
-    "-e"|"--error")
-      echo -e "${b_CRER}${@/-e/}${CDEF}";;          # print error message
-    "-w"|"--warning")
-      echo -e "${b_CWAR}${@/-w/}${CDEF}";;          # print warning message
-    "-i"|"--info")
-      echo -e "${b_CCIN}${@/-i/}${CDEF}";;          # print info message
-    *)
-    echo -e "$@"
-    ;;
+    "-s"|"--success") echo -e "${b_CGSC}${@/-s/}${CDEF}";;
+    "-e"|"--error")   echo -e "${b_CRER}${@/-e/}${CDEF}";;
+    "-w"|"--warning") echo -e "${b_CWAR}${@/-w/}${CDEF}";;
+    "-i"|"--info")    echo -e "${b_CCIN}${@/-i/}${CDEF}";;
+    *)                echo -e "$@";;
   esac
 }
 
-# Welcome message
-prompt -s "\n\t************************\n\t*  ${THEME_NAME} - Grub2 Theme  *\n\t************************"
-
-# Check command avalibility
 function has_command() {
-  command -v $1 > /dev/null
+  command -v "$1" > /dev/null 2>&1
 }
 
-# Checking for root access and proceed if it is present
+# Set or replace a key=value line in /etc/default/grub
+set_grub_opt() {
+  local key="$1" val="$2"
+  if grep -q "^${key}=" /etc/default/grub 2>/dev/null; then
+    sed -i "s|^${key}=.*|${key}=${val}|" /etc/default/grub
+  else
+    echo "${key}=${val}" >> /etc/default/grub
+  fi
+}
+
+prompt -s "\n\t************************\n\t*  ${THEME_NAME} - Grub2 Theme  *\n\t************************"
+
 if [ "$UID" -eq "$ROOT_UID" ]; then
 
-  # Create themes directory if not exists
-  prompt -i "\nChecking directory...\n"
-  [[ -d ${THEME_DIR}/${THEME_NAME} ]] && rm -rf ${THEME_DIR}/${THEME_NAME}
+  prompt -i "\nChecking directory..."
+  [[ -d "${THEME_DIR}/${THEME_NAME}" ]] && rm -rf "${THEME_DIR}/${THEME_NAME}"
   mkdir -p "${THEME_DIR}/${THEME_NAME}"
 
-  # Copy theme
-  prompt -i "\nInstalling theme...\n"
+  prompt -i "\nInstalling theme..."
+  cp -a "${THEME_NAME}/"* "${THEME_DIR}/${THEME_NAME}/"
 
-  cp -a ${THEME_NAME}/* ${THEME_DIR}/${THEME_NAME}
-
-  # Set theme
-  prompt -i "\nSetting the theme as main...\n"
-
-  # Backup grub config
+  prompt -i "\nSetting theme in /etc/default/grub..."
   cp -an /etc/default/grub /etc/default/grub.bak
 
-  grep "GRUB_THEME=" /etc/default/grub 2>&1 >/dev/null && sed -i '/GRUB_THEME=/d' /etc/default/grub
-
+  # Remove any stale GRUB_THEME line (wrong path from a previous run) then set correct one
+  sed -i '/^GRUB_THEME=/d' /etc/default/grub
   echo "GRUB_THEME=\"${THEME_DIR}/${THEME_NAME}/theme.txt\"" >> /etc/default/grub
 
-  # Update grub config
-  echo -e "Updating grub..."
+  # Fedora hides the boot menu by default - make it visible so the theme shows
+  if command -v dnf > /dev/null 2>&1; then
+    prompt -i "\nConfiguring Fedora GRUB timeout (5s, menu visible)..."
+    set_grub_opt GRUB_TIMEOUT 5
+    set_grub_opt GRUB_TIMEOUT_STYLE menu
+    set_grub_opt GRUB_GFXMODE 1920x1080x32
+  fi
+
+  prompt -i "\nUpdating grub config..."
   if has_command update-grub; then
     update-grub
   elif has_command grub-mkconfig; then
     grub-mkconfig -o /boot/grub/grub.cfg
   elif has_command grub2-mkconfig; then
-    # Fedora 34+ / openSUSE use a unified config at /boot/grub2/grub.cfg.
-    # The EFI stub at /boot/efi/EFI/<distro>/grub.cfg just chainloads it,
-    # but regenerate it too when present for older layouts.
     grub2-mkconfig -o /boot/grub2/grub.cfg
-    [ -f /boot/efi/EFI/fedora/grub.cfg ] && grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg
   fi
 
-  # Success message
   prompt -s "\n\t          ***************\n\t          *  installed!  *\n\t          ***************\n"
 
 else
-
-  # Error message
-  prompt -e "\n [ Error! ] -> Run me as root "
-
-  # persisted execution of the script as root
-  read -p "[ trusted ] specify the root password : " -t${MAX_DELAY} -s
-  [[ -n "$REPLY" ]] && {
-    sudo -S <<< $REPLY $0
-  } || {
-    prompt  "\n Operation canceled"
-    exit 1
-  }
+  prompt -e "\n [ Error! ] -> Run as root: sudo bash Grub.sh"
+  exit 1
 fi
