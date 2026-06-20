@@ -3,12 +3,12 @@
 source "$(dirname "$0")/vars"
 
 cleanup() {
-    [ -d $tempDir ] && rm -rf $tempDir
+    [ -d "$tempDir" ] && rm -rf "$tempDir"
 }
 
 makeTempDir() {
     cleanup
-    mkdir $tempDir
+    mkdir "$tempDir"
 }
 
 colorize() {
@@ -70,7 +70,7 @@ printClose() {
     printMsg "$UPGRADE_ENTER"
     read -r
     tput cnorm
-    [[ $(basename $terminal) = "yakuake" ]] && qdbusCMD sessions removeSession $(qdbusCMD sessions activeSessionId)
+    [[ $(basename "$terminal") = "yakuake" ]] && qdbusCMD sessions removeSession "$(qdbusCMD sessions activeSessionId)"
 }
 
 printWhile() {
@@ -157,7 +157,7 @@ compareVer() {
 
 getId() {
     [[ $1 =~ ^[0-9]+$ ]] && f=2 || f=1
-    grep $1 "$(dirname "$0")/widgets-id" | cut -d' ' -f$f
+    grep "$1" "$(dirname "$0")/widgets-id" | cut -d' ' -f$f
 }
 
 restartPlasmashell() {
@@ -180,7 +180,7 @@ restartPlasmashell() {
 combineFiles() {
     sleep 1
     [ -f "$1" ] && rm "$1"
-    for cache in $(find $configDir -name "updates.json_*" | sort); do
+    for cache in $(find "$cacheDir" -name "updates.json_*" 2>/dev/null | sort); do
         cat "$cache" >> "$1"; rm "$cache"
     done
 }
@@ -211,45 +211,92 @@ rss() {
     makeTempDir
     trap cleanup EXIT
 
-    local newsFile="$configDir/news.json"
+    local newsFile="$cacheDir/news.json"
     local errors=""
 
     if [[ ! -s "$newsFile" ]] \
     || ! jq -e '.' "$newsFile" >/dev/null 2>&1 \
-    || ! jq -e '[.[] | .date | strptime("%d.%m.%Y | %H:%M")] | length == length' "$newsFile" >/dev/null 2>&1; then
+    || ! jq -e 'all(.[]; .timestamp | numbers)' "$newsFile" >/dev/null 2>&1; then
         echo '[]' > "$newsFile"
     fi
 
-    for url in "$@"; do
+    # Build per-URL output file list for parallel download
+    local -a urls=("$@")
+    local -a rssFiles=()
+    local -a curlArgs=()
+    for url in "${urls[@]}"; do
         local rssFile=$(mktemp "$tempDir/XXXXXX.xml")
-        curl -s -o "$rssFile" --connect-timeout 5 --retry 3 --retry-delay 1 --retry-all-errors --max-time 10 --url "$url" 2>/dev/null
-        xmllint --noout "$rssFile" 2>/dev/null || {
-            errors+="$url "
-            continue
-        }
-
-        local title=$(xmllint --xpath "string(/rss/channel/title)" $rssFile)
-        local article=$(xmllint --xpath "string(/rss/channel/item[1]/title)" $rssFile)
-        local date=$(date -d "$(xmllint --xpath 'string(/rss/channel/item[1]/pubDate)' $rssFile)" +"%d.%m.%Y | %H:%M")
-        local link=$(xmllint --xpath "string(/rss/channel/item[1]/link)" $rssFile)
-
-        [[ -z "$title" || -z "$article" || -z "$date" || -z "$link" ]] && {
-            errors+="$url "
-            continue
-        }
-
-        while (( $(jq "[.[] | select(.title == \"$title\")] | length" "$newsFile") > newsKeep )); do
-            index=$(jq --arg title "$title" 'to_entries | reverse | map(select(.value.title == $title)) | .[0].key' $newsFile)
-            updateJson $newsFile "$(jq --argjson index "$index" "del(.[$index])" $newsFile)"
-        done
-
-        if ! jq -e ".[] | select(.link == \"$link\")" $newsFile > /dev/null; then
-            local item=$(jq -n --arg t "$title" --arg a "$article" --arg d "$date" --arg l "$link" '{title: $t, article: $a, date: $d, link: $l, removed: false}')
-            updateJson $newsFile "$(jq "[$item] + ." $newsFile)"
-        fi
+        rssFiles+=("$rssFile")
+        curlArgs+=(-o "$rssFile" --url "$url")
     done
 
-    updateJson $newsFile "$(jq 'sort_by(.date | strptime("%d.%m.%Y | %H:%M") | mktime) | reverse' $newsFile)"
+    # Fetch all feeds simultaneously
+    curl -s --parallel --parallel-immediate \
+        --connect-timeout 5 --retry 3 --retry-delay 1 --retry-all-errors --max-time 15 \
+        "${curlArgs[@]}" 2>/dev/null
+
+    # Process each downloaded file
+    for i in "${!urls[@]}"; do
+        local url="${urls[$i]}"
+        local rssFile="${rssFiles[$i]}"
+
+        # Strip default XML namespace to avoid XPath 1.0 namespace issues
+        local cleanFile=$(mktemp "$tempDir/XXXXXX.xml")
+        sed 's/ xmlns="[^"]*"//g' "$rssFile" > "$cleanFile"
+
+        xmllint --noout "$cleanFile" 2>/dev/null || {
+            errors+="$url "
+            continue
+        }
+
+        # Detect RSS 2.0 vs Atom 1.0 by root element name
+        local root=$(xmllint --xpath "name(/*)" "$cleanFile" 2>/dev/null)
+
+        # Count available items in feed (capped at feedsFetchCount)
+        local count title
+        if [[ "$root" == "feed" ]]; then
+            count=$(xmllint --xpath "count(/feed/entry)" "$cleanFile" 2>/dev/null || echo 0)
+            title=$(xmllint --xpath "string(/feed/title)" "$cleanFile")
+        else
+            count=$(xmllint --xpath "count(/rss/channel/item)" "$cleanFile" 2>/dev/null || echo 0)
+            title=$(xmllint --xpath "string(/rss/channel/title)" "$cleanFile")
+        fi
+
+        [[ -z "$title" ]] && { errors+="$url "; continue; }
+
+        local max=${feedsFetchCount:-3}
+        (( count > max )) && count=$max
+
+        local n
+        for (( n=1; n<=count; n++ )); do
+            local article timestamp link
+            if [[ "$root" == "feed" ]]; then
+                article=$(xmllint --xpath "string(/feed/entry[$n]/title)" "$cleanFile")
+                timestamp=$(date -d "$(xmllint --xpath "string(/feed/entry[$n]/updated)" "$cleanFile")" +%s 2>/dev/null)
+                link=$(xmllint --xpath "string(/feed/entry[$n]/link/@href)" "$cleanFile")
+            else
+                article=$(xmllint --xpath "string(/rss/channel/item[$n]/title)" "$cleanFile")
+                timestamp=$(date -d "$(xmllint --xpath "string(/rss/channel/item[$n]/pubDate)" "$cleanFile")" +%s 2>/dev/null)
+                link=$(xmllint --xpath "string(/rss/channel/item[$n]/link)" "$cleanFile")
+            fi
+
+            [[ -z "$article" || -z "$timestamp" || -z "$link" ]] && continue
+
+            if ! jq -e --arg l "$link" '.[] | select(.link == $l)' "$newsFile" > /dev/null; then
+                local item=$(jq -n --arg t "$title" --arg a "$article" --arg l "$link" --argjson ts "$timestamp" \
+                    '{title: $t, article: $a, timestamp: $ts, link: $l, removed: false}')
+                updateJson "$newsFile" "$(jq --argjson item "$item" '[$item] + .' "$newsFile")"
+            fi
+        done
+
+        # Prune oldest entries for this feed down to feedsFetchCount
+        while (( $(jq --arg t "$title" '[.[] | select(.title == $t)] | length' "$newsFile") > max )); do
+            index=$(jq --arg t "$title" 'to_entries | reverse | map(select(.value.title == $t)) | .[0].key' "$newsFile")
+            updateJson "$newsFile" "$(jq --argjson index "$index" 'del(.[$index])' "$newsFile")"
+        done
+    done
+
+    updateJson "$newsFile" "$(jq 'sort_by(.timestamp) | reverse' "$newsFile")"
 
     jq . $newsFile
 
@@ -299,7 +346,7 @@ checkCurrentVersions() {
     fi
 
     if [ "$widgets" = true ]; then
-        list+=$($scriptDir/widgets list)
+        list+=$("$scriptDir"/widgets list)
     fi
 
     if [ "$fwupd" = true ]; then
@@ -330,7 +377,7 @@ install_devel() {
 
     commit=$(curl -s https://api.github.com/repos/exequtic/apdatifier/commits/main | jq -r '.sha' | cut -c1-7)
 
-    if [[ "github commit: $commit" = "$(jq -r '.KPlugin.Description' $appletDir/metadata.json)" ]]; then
+    if [[ "github commit: $commit" = "$(jq -r '.KPlugin.Description' "$appletDir/metadata.json")" ]]; then
         printDone "Up to date"
         printClose
         exit
@@ -338,7 +385,7 @@ install_devel() {
 
     savedir=$(pwd)
     clonedir=$(mktemp -d)
-    cd $clonedir
+    cd "$clonedir"
 
     { git clone -n --depth=10 --filter=tree:0 -b main https://github.com/exequtic/apdatifier 2>/dev/null
     } & printWhile $! "Clone main branch"
@@ -376,8 +423,8 @@ install_devel() {
     kpackagetool6 -t Plasma/Applet -u apdatifier.tar 2>/dev/null
     echo
 
-    cd $savedir
-    [ ! -d $clonedir ] || rm -rf $clonedir
+    cd "$savedir"
+    [ ! -d "$clonedir" ] || rm -rf "$clonedir"
 
     restartShell=true
     restartPlasmashell
@@ -389,7 +436,7 @@ install_devel() {
 install_stable() {
     checkSetup
 
-    if [[ "$(jq -r '.KPlugin.Description' $appletDir/metadata.json)" = "Arch Update Notifier" ]]; then
+    if [[ "$(jq -r '.KPlugin.Description' "$appletDir/metadata.json")" = "Arch Update Notifier" ]]; then
         while true; do
             printImportant "It looks like you already have the stable version."
             printQuestion "Do you still want to proceed?"; read -r answer

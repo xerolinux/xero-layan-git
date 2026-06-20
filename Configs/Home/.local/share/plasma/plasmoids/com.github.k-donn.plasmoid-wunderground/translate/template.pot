@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmoid-wunderground\n"
 "Report-Msgid-Bugs-To: https://github.com/k-donn/plasmoid-wunderground\n"
-"POT-Creation-Date: 2026-04-26 18:46-0500\n"
+"POT-Creation-Date: 2026-06-09 20:53-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -79,10 +79,12 @@ msgid "Air quality"
 msgstr ""
 
 #: ../contents/ui/AirAndSolarItem.qml
+msgctxt "Air Quality Index"
 msgid "AQI"
 msgstr ""
 
 #: ../contents/ui/AirAndSolarItem.qml
+msgctxt "Air Quality Health Index"
 msgid "AQHI"
 msgstr ""
 
@@ -95,10 +97,34 @@ msgid "Info"
 msgstr ""
 
 #: ../contents/ui/AirAndSolarItem.qml
+msgid ""
+"The AQI is a measure of air quality that takes into account the levels of various pollutants in the air. It ranges from 0 to 500, with higher values indicating worse air quality. An AQI of 0-50 is "
+"considered good, 51-100 is moderate, 101-150 is unhealthy for sensitive groups, 151-200 is unhealthy, 201-300 is very unhealthy, and 301-500 is hazardous."
+msgstr ""
+
+#: ../contents/ui/AirAndSolarItem.qml
+msgid ""
+"The AQHI is a measure of how the air quality may affect human health. It ranges from 1 to 10+, with higher values indicating more unfavorable conditions for health. An AQHI of 1-3 is considered low "
+"risk, 4-6 is moderate risk, 7-10 is high risk, and 10+ is very high risk."
+msgstr ""
+
+#: ../contents/ui/AirAndSolarItem.qml
+msgctxt "Particulate Matter"
+msgid "PM2.5"
+msgstr ""
+
+#: ../contents/ui/AirAndSolarItem.qml
+msgid ""
+"Particulate matter (PM2.5) is a measure of the amount of solid particles and liquid droplets suspended in the air. It can have serious health effects, especially on the respiratory and "
+"cardiovascular systems."
+msgstr ""
+
+#: ../contents/ui/AirAndSolarItem.qml
 msgid "Solar info"
 msgstr ""
 
 #: ../contents/ui/AirAndSolarItem.qml
+msgctxt "See: https://www.swpc.noaa.gov/products/planetary-k-index"
 msgid "Kp-index"
 msgstr ""
 
@@ -108,6 +134,22 @@ msgstr ""
 
 #: ../contents/ui/AirAndSolarItem.qml
 msgid "Health index"
+msgstr ""
+
+#: ../contents/ui/AirAndSolarItem.qml
+msgid "Details"
+msgstr ""
+
+#: ../contents/ui/AirAndSolarItem.qml
+msgid ""
+"The Kp-index is a measure of geomagnetic activity. It ranges from 0 to 9, with higher values indicating more intense geomagnetic storms. A Kp-index of 0-3 is considered quiet, 4-5 is unsettled, 6-7 "
+"is active, and 8-9 is storm-level activity."
+msgstr ""
+
+#: ../contents/ui/AirAndSolarItem.qml
+msgid ""
+"The health index is a measure of how the solar conditions combined with pressure changes may affect human health. It ranges from 0 to 10+, with higher values indicating more unfavorable conditions "
+"for health. A health index of 0-2 is considered comfortable, 3-5 is moderate, and 6+ is unfavorable."
 msgstr ""
 
 #: ../contents/ui/AlertsItem.qml

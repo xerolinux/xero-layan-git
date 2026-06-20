@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: apdatifier\n"
 "Report-Msgid-Bugs-To: https://github.com/exequtic/apdatifier\n"
-"POT-Creation-Date: 2026-02-22 11:04+0300\n"
+"POT-Creation-Date: 2026-06-19 12:43+0300\n"
 "PO-Revision-Date: 2024-05-27 15:58-0600\n"
 "Last-Translator: RodvinSanchez\n"
 "Language-Team: Español\n"
@@ -28,7 +28,7 @@ msgstr ""
 msgid "Appearance"
 msgstr "Apariencia"
 
-#: ../contents/config/config.qml
+#: ../contents/config/config.qml ../contents/ui/configuration/Rules.qml
 msgid "Rules"
 msgstr "Reglas"
 
@@ -69,12 +69,20 @@ msgid "Do you want to reboot now?"
 msgstr "¿Deseas reiniciar ahora?"
 
 #: ../contents/tools/sh/messages
+msgid "The system is going to reboot now..."
+msgstr ""
+
+#: ../contents/tools/sh/messages
 msgid "Press Enter to close"
 msgstr "Presiona Enter para cerrar"
 
 #: ../contents/tools/sh/messages
 msgid "Skipped..."
 msgstr "Omitido..."
+
+#: ../contents/tools/sh/messages
+msgid "Upgrade complete, close the terminal"
+msgstr ""
 
 #: ../contents/tools/sh/messages
 msgid "Fetching the latest filtered mirror list"
@@ -209,15 +217,15 @@ msgid "Show packages you installed directly"
 msgstr ""
 
 #: ../contents/tools/sh/messages
-msgid "List explicit installs"
+msgid "All explicit installs"
 msgstr ""
 
 #: ../contents/tools/sh/messages
-msgid "List unneeded explicit"
+msgid "Explicit installs not required by anything"
 msgstr ""
 
 #: ../contents/tools/sh/messages
-msgid "Orphaned dependency"
+msgid "Orphaned dependencies"
 msgstr ""
 
 #: ../contents/tools/sh/messages
@@ -253,6 +261,14 @@ msgid "Remove unused cache"
 msgstr ""
 
 #: ../contents/tools/sh/messages
+msgid "Found directories in the pacman cache:"
+msgstr ""
+
+#: ../contents/tools/sh/messages
+msgid "Remove these directories?"
+msgstr ""
+
+#: ../contents/tools/sh/messages
 msgid "Rebuild packages"
 msgstr ""
 
@@ -273,10 +289,6 @@ msgid "Refresh mirrors"
 msgstr ""
 
 #: ../contents/tools/sh/messages
-msgid "Recent installs"
-msgstr ""
-
-#: ../contents/tools/sh/messages
 msgid "Review dependency warnings before removing"
 msgstr "Revisar advertencias de dependencias antes de eliminar"
 
@@ -289,7 +301,23 @@ msgid "Press Enter to return menu"
 msgstr "Presiona Enter para volver al menú"
 
 #: ../contents/tools/sh/messages
-msgid "Calculating..."
+msgid "Recent installs"
+msgstr ""
+
+#: ../contents/tools/sh/messages
+msgid "Scanning pacman log..."
+msgstr ""
+
+#: ../contents/tools/sh/messages ../contents/ui/scrollview/Extended.qml
+msgid "Explicitly installed"
+msgstr "Instalado explícitamente"
+
+#: ../contents/tools/sh/messages ../contents/ui/scrollview/Extended.qml
+msgid "Installed as a dependency"
+msgstr "Instalado como dependencia"
+
+#: ../contents/tools/sh/messages ../contents/ui/scrollview/Extended.qml
+msgid "Orphaned dependency"
 msgstr ""
 
 #: ../contents/tools/sh/messages
@@ -300,7 +328,7 @@ msgstr "Ejecutado:"
 msgid "Nothing to do"
 msgstr "Nada que hacer"
 
-#: ../contents/tools/sh/messages ../contents/ui/configuration/General.qml
+#: ../contents/tools/sh/messages
 msgid "Required installed"
 msgstr "Requerido instalado"
 
@@ -315,6 +343,12 @@ msgstr "Código de salida: "
 #: ../contents/tools/tools.js
 msgid "Checking latest news..."
 msgstr "Verificando las últimas noticias..."
+
+#: ../contents/tools/tools.js
+msgid "%1 new article"
+msgid_plural "%1 new articles"
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../contents/tools/tools.js
 msgid "Synchronizing pacman databases..."
@@ -347,14 +381,6 @@ msgstr "Verificando actualizaciones de firmware..."
 #: ../contents/tools/tools.js
 msgid "latest commit"
 msgstr "último commit"
-
-#: ../contents/tools/tools.js
-msgid "Explicitly installed"
-msgstr "Instalado explícitamente"
-
-#: ../contents/tools/tools.js
-msgid "Installed as a dependency"
-msgstr "Instalado como dependencia"
 
 #: ../contents/tools/tools.js ../contents/ui/representation/Expanded.qml
 msgid "%1 error occurred"
@@ -434,11 +460,7 @@ msgstr "Pausar verificación automática"
 msgid "Read article"
 msgstr "Leer artículo"
 
-#: ../contents/ui/components/Placeholder.qml
-msgid "System updated"
-msgstr "Sistema actualizado"
-
-#: ../contents/ui/configuration/Appearance.qml ../contents/ui/configuration/Upgrade.qml
+#: ../contents/ui/configuration/Appearance.qml ../contents/ui/configuration/General.qml ../contents/ui/configuration/Upgrade.qml
 msgid "Disabled"
 msgstr "Desactivado"
 
@@ -520,7 +542,7 @@ msgstr "Spinner usa el indicador de actividad estándar del plasmoide. Pulso ani
 msgid "Counter"
 msgstr "Contador"
 
-#: ../contents/ui/configuration/Appearance.qml
+#: ../contents/ui/configuration/Appearance.qml ../contents/ui/configuration/General.qml
 msgid "Mode"
 msgstr "Modo"
 
@@ -633,28 +655,32 @@ msgid "Override custom icon theme and use default Apdatifier icons instead."
 msgstr "Anular el tema de iconos personalizado y usar los iconos predeterminados de Apdatifier."
 
 #: ../contents/ui/configuration/Appearance.qml
-msgid "Default tab"
-msgstr "Pestaña predeterminada"
+msgid "Scrollbar"
+msgstr ""
 
-#: ../contents/ui/configuration/Appearance.qml ../contents/ui/representation/Expanded.qml
-msgid "Compact"
-msgstr "Compacto"
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Auto-hide scrollbar"
+msgstr ""
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Default view"
+msgstr ""
 
 #: ../contents/ui/configuration/Appearance.qml ../contents/ui/representation/Expanded.qml
 msgid "Extended"
 msgstr "Extendido"
+
+#: ../contents/ui/configuration/Appearance.qml ../contents/ui/representation/Expanded.qml
+msgid "Compact"
+msgstr "Compacto"
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Behavior"
 msgstr "Comportamiento"
 
 #: ../contents/ui/configuration/Appearance.qml
-msgid "Always switch to default tab"
-msgstr "Siempre cambiar a la pestaña predeterminada"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Item spacing (Compact)"
-msgstr "Altura de los elementos (Compacto)"
+msgid "Always switch to default view"
+msgstr ""
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Sorting"
@@ -669,6 +695,10 @@ msgid "By name"
 msgstr "Por nombre"
 
 #: ../contents/ui/configuration/Appearance.qml
+msgid "Toolbar"
+msgstr ""
+
+#: ../contents/ui/configuration/Appearance.qml
 msgid "Header"
 msgstr "Encabezado"
 
@@ -679,6 +709,42 @@ msgstr "Mostrar estado"
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Show tool bar"
 msgstr "Mostrar barra de herramientas"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Additional Package Info"
+msgstr ""
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Compact view"
+msgstr "Vista compacta"
+
+#: ../contents/ui/configuration/Appearance.qml ../contents/ui/scrollview/Extended.qml
+msgid "Repository"
+msgstr ""
+
+#: ../contents/ui/configuration/Appearance.qml ../contents/ui/scrollview/Extended.qml
+msgid "Install reason"
+msgstr "Motivo de instalación"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Versions"
+msgstr ""
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Extended view"
+msgstr "Vista extendida"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Highlight version differences"
+msgstr ""
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Colorize install reason"
+msgstr ""
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Tab Bar"
+msgstr ""
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Footer"
@@ -737,8 +803,8 @@ msgid "Configuration is automatically saved in a config file and loaded at every
 msgstr "La configuración se guarda automáticamente en un archivo de configuración y se carga en cada inicio, asegurando que nunca pierdas tus ajustes. El archivo de configuración se almacena en "
 
 #: ../contents/ui/configuration/General.qml
-msgid "Check mode"
-msgstr "Modo de verificación"
+msgid "Schedule"
+msgstr ""
 
 #: ../contents/ui/configuration/General.qml
 msgid "Manual"
@@ -757,20 +823,12 @@ msgid "Weekly"
 msgstr "Semanal"
 
 #: ../contents/ui/configuration/General.qml
-msgid "Choose how automatic checks are scheduled: manual, periodic interval (minutes, max 43200 - 30 days), daily at specific time or weekly at specific day/time."
-msgstr "Elige cómo se programan las verificaciones automáticas: manual, intervalo periódico (minutos, máx. 43200 - 30 días), diario a una hora específica o semanal en un día/hora específicos."
-
-#: ../contents/ui/configuration/General.qml
 msgid "minutes"
 msgstr "minutos"
 
 #: ../contents/ui/configuration/General.qml
 msgid "Daily time"
 msgstr "Hora diaria"
-
-#: ../contents/ui/configuration/General.qml
-msgid "Weekly schedule"
-msgstr "Programación semanal"
 
 #: ../contents/ui/configuration/General.qml
 msgid "Sunday"
@@ -800,7 +858,7 @@ msgstr "Viernes"
 msgid "Saturday"
 msgstr "Sábado"
 
-#: ../contents/ui/configuration/General.qml
+#: ../contents/ui/configuration/General.qml ../contents/ui/representation/Expanded.qml
 msgid "Updates"
 msgstr "Actualizaciones"
 
@@ -825,30 +883,38 @@ msgid "Plasma Widgets"
 msgstr "Widgets de Plasma"
 
 #: ../contents/ui/configuration/General.qml
-msgid "<br><br>For widget developers:<br>Don't forget to update the metadata.json and specify the name of the applet and its version <b>exactly</b> as they appear on the KDE Store."
-msgstr "<br><br>Para desarrolladores de widgets:<br>No olvides actualizar el metadata.json y especificar el nombre del applet y su versión <b>exactamente</b> como aparecen en la KDE Store."
-
-#: ../contents/ui/configuration/General.qml
 msgid "Firmware"
 msgstr "Firmware"
 
-#: ../contents/ui/configuration/General.qml ../contents/ui/representation/Expanded.qml
-msgid "News"
-msgstr "Noticias"
+#: ../contents/ui/configuration/General.qml
+msgid "RSS Feeds"
+msgstr ""
 
 #: ../contents/ui/configuration/General.qml
-msgid "Arch Linux News"
-msgstr "Noticias de Arch Linux"
+msgid "Enabled"
+msgstr ""
 
 #: ../contents/ui/configuration/General.qml
-msgid "Keep"
-msgstr "Mantener"
+msgid "Reset"
+msgstr ""
+
+#: ../contents/ui/configuration/General.qml ../contents/ui/configuration/Rules.qml
+msgid "Add"
+msgstr ""
+
+#: ../contents/ui/configuration/General.qml ../contents/ui/configuration/Rules.qml
+msgid "Remove"
+msgstr "Eliminar"
 
 #: ../contents/ui/configuration/General.qml
-msgid "news item from the feed"
-msgid_plural "news items from the feed"
-msgstr[0] "noticia del feed"
-msgstr[1] "noticias del feed"
+msgid "latest article from each feed"
+msgid_plural "latest articles from each feed"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../contents/ui/configuration/General.qml
+msgid "Recommended RSS Feeds"
+msgstr ""
 
 #: ../contents/ui/configuration/General.qml
 msgid "For new updates"
@@ -922,45 +988,33 @@ msgstr "Restablecer a los valores predeterminados. De forma predeterminada, la r
 msgid "Path must not contain spaces"
 msgstr "La ruta no debe contener espacios"
 
-#: ../contents/ui/configuration/Rules.qml
-msgid "Unimportant"
-msgstr "Poco importante"
+#: ../contents/ui/configuration/General.qml
+msgid "Network"
+msgstr ""
 
-#: ../contents/ui/configuration/Rules.qml
-msgid "Repository"
-msgstr "Repositorio"
+#: ../contents/ui/configuration/General.qml
+msgid "Connectivity check"
+msgstr ""
 
-#: ../contents/ui/configuration/Rules.qml
-msgid "Exact repository match"
-msgstr "Coincidencia exacta de repositorio"
-
-#: ../contents/ui/configuration/Rules.qml
-msgid "Group"
-msgstr "Grupo"
-
-#: ../contents/ui/configuration/Rules.qml
-msgid "Substring group match"
-msgstr "Coincidencia parcial de grupo"
-
-#: ../contents/ui/configuration/Rules.qml
-msgid "Substring"
-msgstr "Subcadena"
-
-#: ../contents/ui/configuration/Rules.qml
-msgid "Substring name match"
-msgstr "Coincidencia parcial de nombre"
+#: ../contents/ui/configuration/General.qml
+msgid "Respect metered connection"
+msgstr ""
 
 #: ../contents/ui/configuration/Rules.qml
 msgid "Name"
 msgstr "Nombre"
 
 #: ../contents/ui/configuration/Rules.qml
-msgid "Exact name match"
-msgstr "Coincidencia exacta de nombre"
+msgid "Exact package name"
+msgstr ""
 
 #: ../contents/ui/configuration/Rules.qml
-msgid "Here you can override the default package icons and exclude them from the list. Each rule overwrites the previous one, so the list of rules should be in this order: "
-msgstr "Aquí puedes anular los iconos predeterminados de los paquetes y excluirlos de la lista. Cada regla sobrescribe la anterior, por lo que la lista de reglas debe estar en este orden: "
+msgid "Regex"
+msgstr ""
+
+#: ../contents/ui/configuration/Rules.qml
+msgid "See Help"
+msgstr ""
 
 #: ../contents/ui/configuration/Rules.qml
 msgid "Mark as important"
@@ -974,25 +1028,29 @@ msgstr "Mostrar en la lista"
 msgid "Exclude from the list"
 msgstr "Excluir de la lista"
 
-#: ../contents/ui/configuration/Rules.qml ../contents/ui/scrollview/News.qml
-msgid "Remove"
-msgstr "Eliminar"
+#: ../contents/ui/configuration/Rules.qml
+msgid "Ignore a package upgrade. <b>Be careful in skipping packages, since partial upgrades are unsupported.</b>"
+msgstr ""
 
 #: ../contents/ui/configuration/Rules.qml
-msgid "Add rule"
-msgstr "Añadir regla"
+msgid "Help"
+msgstr ""
 
 #: ../contents/ui/configuration/Rules.qml
 msgid "Apply"
 msgstr "Aplicar"
 
+#: ../contents/ui/configuration/Rules.qml
+msgid "Rules apply top-to-bottom: later rules override earlier ones.<br><br>Regex examples:<br><b>^nvidia</b> — names starting with nvidia<br><b>wayland$</b> — names ending with wayland<br><b>.*qt.*</b> — names containing qt<br><b>(ttf|font|otf)</b> — any of ttf, font, or otf<br><b>linux(-zen|-lts)?$</b> — linux, linux-zen or linux-lts"
+msgstr ""
+
+#: ../contents/ui/configuration/Rules.qml
+msgid "No rules yet"
+msgstr ""
+
 #: ../contents/ui/configuration/Support.qml
 msgid "Thanks for using my widget! If you appreciate my work, you can support me by starring the GitHub repository or buying me a coffee ;)"
 msgstr "¡Gracias por usar mi widget! Si aprecias mi trabajo, puedes apoyarme dándole una estrella al repositorio en GitHub o invitándome un café ;)"
-
-#: ../contents/ui/configuration/Support.qml
-msgid "Visit %1"
-msgstr "Visitar %1"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Widgets"
@@ -1013,6 +1071,14 @@ msgstr "Si tu terminal utiliza alguna <b>Nerd Font</b>, se usarán los iconos de
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "tmux session"
 msgstr "sesión de tmux"
+
+#: ../contents/ui/configuration/Upgrade.qml
+msgid "Idle Inhibit"
+msgstr ""
+
+#: ../contents/ui/configuration/Upgrade.qml
+msgid "Disables automatic sleep and screen lock while upgrading."
+msgstr ""
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Pre/post upgrade scripts"
@@ -1039,7 +1105,7 @@ msgid "Running your command or script AFTER the upgrade.<br>For example, you can
 msgstr "Ejecutar tu comando o script DESPUÉS de la actualización.<br>Por ejemplo, puedes especificar tu comando para actualizar algo más."
 
 #: ../contents/ui/configuration/Upgrade.qml
-msgid "No Flatpak options"
+msgid "Without Flatpak options"
 msgstr ""
 
 #: ../contents/ui/configuration/Upgrade.qml
@@ -1081,6 +1147,10 @@ msgstr "Reiniciar sistema"
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Suggest after upgrading"
 msgstr "Sugerir después de actualizar"
+
+#: ../contents/ui/configuration/Upgrade.qml
+msgid "This option suggests restarting the system after upgrading critical packages.<br><br><b>Note that not all critical packages require a full system restart; some may only need a session restart or no action at all, such as when an updated package is not currently running (e.g., an alternative kernel) or not in use (e.g., an alternative driver).</b>"
+msgstr ""
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Pacman Mirrorlist Generator"
@@ -1205,12 +1275,12 @@ msgid "Filter by package name"
 msgstr "Filtrar por nombre de paquete"
 
 #: ../contents/ui/representation/Expanded.qml
-msgid "Disable auto search updates"
-msgstr "Desactivar búsqueda automática de actualizaciones"
-
-#: ../contents/ui/representation/Expanded.qml
 msgid "Enable auto search updates"
 msgstr "Activar búsqueda automática de actualizaciones"
+
+#: ../contents/ui/representation/Expanded.qml
+msgid "Disable auto search updates"
+msgstr "Desactivar búsqueda automática de actualizaciones"
 
 #: ../contents/ui/representation/Expanded.qml
 msgid "Sort packages by name"
@@ -1237,12 +1307,8 @@ msgid "Keep open"
 msgstr "Mantener abierto"
 
 #: ../contents/ui/representation/Expanded.qml
-msgid "Compact view"
-msgstr "Vista compacta"
-
-#: ../contents/ui/representation/Expanded.qml
-msgid "Extended view"
-msgstr "Vista extendida"
+msgid "News"
+msgstr "Noticias"
 
 #: ../contents/ui/representation/Expanded.qml
 msgid "Check out release notes"
@@ -1325,52 +1391,13 @@ msgid "Install date"
 msgstr "Fecha de instalación"
 
 #: ../contents/ui/scrollview/Extended.qml
-msgid "Install reason"
-msgstr "Motivo de instalación"
+msgid "System updated"
+msgstr "Sistema actualizado"
+
+#: ../contents/ui/scrollview/News.qml
+msgid "Mark as read"
+msgstr ""
 
 #: ../contents/ui/scrollview/News.qml
 msgid "No unread news"
 msgstr "No hay noticias sin leer"
-
-#: ../contents/ui/scrollview/News.qml
-msgid "Restore list"
-msgstr "Restaurar lista"
-
-#~ msgid "List all available packages in repositories"
-#~ msgstr "Listar todos los paquetes disponibles en los repositorios"
-
-#~ msgid "List all installed packages"
-#~ msgstr "Listar todos los paquetes instalados"
-
-#~ msgid "List explicitly installed packages"
-#~ msgstr "Listar paquetes instalados explícitamente"
-
-#~ msgid "List explicitly installed packages and isn't a dependency of anything"
-#~ msgstr "Listar paquetes instalados explícitamente y que no son dependencia de nada"
-
-#~ msgid "List installed dependencies that aren't needed anymore (orphans)"
-#~ msgstr "Listar dependencias instaladas que ya no son necesarias (huérfanos)"
-
-#~ msgid "Uninstall orphan packages"
-#~ msgstr "Desinstalar paquetes huérfanos"
-
-#~ msgid "Install (downgrade) a package from cache"
-#~ msgstr "Instalar (revertir) un paquete desde la caché"
-
-#~ msgid "Remove ALL cached packages"
-#~ msgstr "Eliminar TODOS los paquetes en caché"
-
-#~ msgid "Remove cached packages that are not currently installed"
-#~ msgstr "Eliminar paquetes en caché que no están actualmente instalados"
-
-#~ msgid "Rebuild AUR python packages after python upgrade"
-#~ msgstr "Reconstruir paquetes Python de AUR después de actualizar Python"
-
-#~ msgid "Refresh mirrorlist"
-#~ msgstr "Actualizar lista de espejos"
-
-#~ msgid "Exit"
-#~ msgstr "Salir"
-
-#~ msgid "Search:"
-#~ msgstr "Buscar:"

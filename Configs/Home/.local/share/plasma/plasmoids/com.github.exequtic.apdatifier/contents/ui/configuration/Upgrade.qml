@@ -24,6 +24,7 @@ SimpleKCM {
     property alias cfg_sudoBin: sudoBin.text
     property alias cfg_rebootSystem: rebootSystem.checked
     property string cfg_mirrors: plasmoid.configuration.mirrors
+    property bool mirrorsGeneratorEnabled: cfg_mirrors !== "false"
     property alias cfg_mirrorsAge: mirrorsAge.value
     property alias cfg_mirrorCount: mirrorCount.value
     property alias cfg_mirrorProgress: mirrorProgress.checked
@@ -140,11 +141,11 @@ SimpleKCM {
         RowLayout {
             CheckBox {
                 id: idleInhibit
-                text: "Idle Inhibit"
+                text: i18n("Idle Inhibit")
             }
 
             Kirigami.ContextualHelpButton {
-                toolTipText: "Disables automatic sleep and screen lock while upgrading."
+                toolTipText: i18n("Disables automatic sleep and screen lock while upgrading.")
             }
         }
 
@@ -210,7 +211,7 @@ SimpleKCM {
 
         CheckBox {
             id: mngHideFlatpak
-            text: i18n("No Flatpak options")
+            text: i18n("Without Flatpak options")
         }
         CheckBox {
             id: mngHideHeaders
@@ -310,9 +311,9 @@ SimpleKCM {
             TextField {
                 id: archFlags
                 onTextChanged: {
-                    var allow = /^[a-z\- ]*$/
+                    var allow = /^[a-z0-9\- ]*$/
                     if (!allow.test(archFlags.text))
-                        archFlags.text = archFlags.text.replace(/[^a-z\- ]/g, "")
+                        archFlags.text = archFlags.text.replace(/[^a-z0-9\- ]/g, "")
                 }
             }
         }
@@ -344,7 +345,7 @@ SimpleKCM {
             }
 
             Kirigami.ContextualHelpButton {
-                toolTipText: "This option suggests restarting the system after upgrading critical packages.<br><br><b>Note that not all critical packages require a full system restart; some may only need a session restart or no action at all, such as when an updated package is not currently running (e.g., an alternative kernel) or not in use (e.g., an alternative driver).</b>"
+                toolTipText: i18n("This option suggests restarting the system after upgrading critical packages.<br><br><b>Note that not all critical packages require a full system restart; some may only need a session restart or no action at all, such as when an updated package is not currently running (e.g., an alternative kernel) or not in use (e.g., an alternative driver).</b>")
             }
         }
 
@@ -360,7 +361,7 @@ SimpleKCM {
                 font.pointSize: Kirigami.Theme.smallFont.pointSize
                 font.bold: true
                 color: Kirigami.Theme.negativeTextColor
-                text: i18n("Only for official repositories")
+                text: i18n("Only for official repositories")+"!\n"+" (core, extra, multilib, ...)"
             }
 
             Kirigami.ContextualHelpButton {
@@ -403,7 +404,6 @@ SimpleKCM {
         RadioButton {
             ButtonGroup.group: generator
             text: i18n("Always ask")
-            enabled: mirrors.enabled
             checked: plasmoid.configuration.mirrors === "alwaysAsk"
             onCheckedChanged: {
                 if (checked) cfg_mirrors = "alwaysAsk"
@@ -411,7 +411,6 @@ SimpleKCM {
         }
 
         RowLayout{
-            enabled: mirrors.enabled
             RadioButton {
                 ButtonGroup.group: generator
                 text: i18n("Ask if older than")
@@ -437,7 +436,6 @@ SimpleKCM {
         RadioButton {
             ButtonGroup.group: generator
             text: i18n("No ask, force refresh")
-            enabled: mirrors.enabled
             checked: plasmoid.configuration.mirrors === "force"
             onCheckedChanged: {
                 if (checked) cfg_mirrors = "force"
@@ -452,18 +450,17 @@ SimpleKCM {
             Kirigami.FormData.label: i18n("Protocol") + ":"
 
             CheckBox {
-                
                 id: http
                 text: "http"
                 onClicked: updateUrl()
-                enabled: mirrors.enabled
+                enabled: mirrorsGeneratorEnabled
             }
 
             CheckBox {
                 id: https
                 text: "https"
                 onClicked: updateUrl()
-                enabled: mirrors.enabled
+                enabled: mirrorsGeneratorEnabled
             }
         }
 
@@ -474,14 +471,14 @@ SimpleKCM {
                 id: ipv4
                 text: "IPv4"
                 onClicked: updateUrl()
-                enabled: mirrors.enabled
+                enabled: mirrorsGeneratorEnabled
             }
 
             CheckBox {
                 id: ipv6
                 text: "IPv6"
                 onClicked: updateUrl()
-                enabled: mirrors.enabled
+                enabled: mirrorsGeneratorEnabled
             }
         }
 
@@ -490,7 +487,7 @@ SimpleKCM {
             id: mirrorstatus
             text: i18n("Enable")
             onClicked: updateUrl()
-            enabled: mirrors.enabled
+            enabled: mirrorsGeneratorEnabled
         }
 
         RowLayout {
@@ -502,7 +499,7 @@ SimpleKCM {
                 to: 10
                 stepSize: 1
                 value: mirrorCount
-                enabled: mirrors.enabled
+                enabled: mirrorsGeneratorEnabled
             }
 
             Kirigami.ContextualHelpButton {
@@ -514,7 +511,7 @@ SimpleKCM {
             Kirigami.FormData.label: i18n("Show progress") + ":"
             id: mirrorProgress
             text: i18n("Enable")
-            enabled: mirrors.enabled
+            enabled: mirrorsGeneratorEnabled
         }
 
         Item {
@@ -523,6 +520,7 @@ SimpleKCM {
 
         RowLayout {
             Kirigami.FormData.label: i18n("Country") + ":"
+            enabled: mirrorsGeneratorEnabled
 
             Label {
                 textFormat: Text.RichText
@@ -545,7 +543,7 @@ SimpleKCM {
         ColumnLayout {
             Layout.maximumWidth: archTab.width / 2.5
             Layout.maximumHeight: 200
-            enabled: mirrors.enabled
+            enabled: mirrorsGeneratorEnabled
 
             ScrollView {
                 Layout.preferredWidth: archTab.width / 2.5

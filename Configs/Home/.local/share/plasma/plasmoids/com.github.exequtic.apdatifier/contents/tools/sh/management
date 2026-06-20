@@ -73,14 +73,14 @@ showMenu() {
                 4) downgrade;;
                 5) showMenu cache;;
                 6) showMenu rebuild;;
-                7) tui_exit; exec $scriptDir/mirrorlist menu $selected;;
+                7) tui_exit; exec "$scriptDir/mirrorlist" menu "$selected";;
                 8) recentlyInstalled;;
                 9) showMenu main;;
             esac
             ;;
         browse)
             selected=0
-            opts+=("$ICO_MNG_11 pacman repositories")
+            opts+=("$ICO_MNG_11 pacman")
             opts+=("$ICO_MNG_11 flathub")
             redraw
             case $selected in
@@ -269,7 +269,7 @@ handleInput() {
 
 fzfExec() {
     tui_exit
-    dependency pacman fzf
+    dependency pacman fzf || return
 
     argList="-$1"
     case $1 in
@@ -296,13 +296,13 @@ fzfExec() {
 
 uninstallOrphans() {
     tui_exit
-    dependency pacman
+    dependency pacman || return
 
     orphans=$($wrapper -Qqtd | oneLine)
     if [[ -n "$orphans" ]]; then
         printExec "$wrapper_sudo -Rsn $orphans"
         printImportant "$MNG_WARN"; echo
-        $wrapper_sudo -Rsn "$orphans"
+        $wrapper_sudo -Rsn $orphans
     else
         printDone "$MNG_DONE"
     fi
@@ -313,7 +313,7 @@ uninstallOrphans() {
 
 downgrade() {
     tui_exit
-    dependency pacman fzf
+    dependency pacman fzf || return
 
     pacman_cache_dir="$(pacman-conf CacheDir)"
     wrapper_cache_dir="$HOME/.cache/$wrapper"
@@ -324,8 +324,8 @@ downgrade() {
         file_paths=()
 
         for file in $files; do
-            if [ -f "${pacman_cache_dir}${file}" ]; then
-                file_paths+=("${pacman_cache_dir}${file}")
+            if [ -f "${pacman_cache_dir%/}/${file}" ]; then
+                file_paths+=("${pacman_cache_dir%/}/${file}")
             else
                 path=$(find "$wrapper_cache_dir" -type f -name "$file" 2>/dev/null)
                 [[ -n "$path" ]] && file_paths+=("$path")
@@ -346,7 +346,42 @@ downgrade() {
 
 cleanCache() {
     tui_exit
-    dependency pacman
+    dependency pacman || return
+
+    pacman_cache_dir="$(pacman-conf CacheDir | head -n1)"
+    mapfile -t dirs < <(find "$pacman_cache_dir" -mindepth 1 -maxdepth 1 -type d)
+    if ((${#dirs[@]})); then
+        printImportant "$MNG_CACHE_DIR"
+        printf '  %q\n' "${dirs[@]}"
+        echo
+
+        while true; do
+            printQuestion "$MNG_CACHE_DIR_RM"; read -r answer
+            case "$answer" in
+                [Yy]*)
+                    [ -w "$pacman_cache_dir" ] && prefix="" || prefix="$sudoBin "
+                    cmd="${prefix}rm -rf"
+                    for dir in "${dirs[@]}"; do
+                        printf -v escaped '%q' "$dir"
+                        cmd+=" $escaped"
+                    done
+                    echo
+                    printExec "$cmd"
+                    if [ -n "$prefix" ]; then
+                        "$sudoBin" rm -rf "${dirs[@]}"
+                    else
+                        rm -rf "${dirs[@]}"
+                    fi
+                    break
+                ;;
+             [Nn]*|"") break ;;
+                    *)  ;;
+            esac
+        done
+
+        echo
+    fi
+
     printExec "$wrapper_sudo -$1"
     $wrapper_sudo -$1
     pressReturn
@@ -374,27 +409,22 @@ rebuildPython() {
         fi
     fi
 
-    rebuild_dir=$(find /usr/lib -maxdepth 1 -type d -name "python*.*" | oneLine)
+    rebuild_dir=$(find /usr/lib -maxdepth 1 -type d -name "python*.*" | sort -V | tail -1)
 
-    if [ $(echo "$rebuild_dir" | wc -w) -gt 1 ]; then
-        rebuild_dir="${rebuild_dir#* }"
-        rebuild_packages=$( { pacman -Qqo "$rebuild_dir" | pacman -Qqm - | oneLine; } 2>/dev/null)
-        if [[ -z "$rebuild_packages" ]]; then
-            printDone "$MNG_DONE"
-        else
-            printExec "$wrapper_sudo -S --rebuild" "$rebuild_packages"
-            while true; do
-                printQuestion "$MNG_RESUME"; read -r answer
-                case "$answer" in
-                        [Yy]*) echo; break;;
-                     [Nn]*|"") echo; pressReturn;;
-                            *)  ;;
-                esac
-            done
-            pacman -Qqo "$rebuild_dir" | pacman -Qqm - | $wrapper -S --rebuild -
-        fi
-    else
+    rebuild_packages=$( { pacman -Qqo "$rebuild_dir" | pacman -Qqm - | oneLine; } 2>/dev/null)
+    if [[ -z "$rebuild_packages" ]]; then
         printDone "$MNG_DONE"
+    else
+        printExec "$wrapper_sudo -S --rebuild" "$rebuild_packages"
+        while true; do
+            printQuestion "$MNG_RESUME"; read -r answer
+            case "$answer" in
+                    [Yy]*) echo; break;;
+                 [Nn]*|"") echo; pressReturn;;
+                        *)  ;;
+            esac
+        done
+        pacman -Qqo "$rebuild_dir" | pacman -Qqm - | $wrapper -S --rebuild -
     fi
 
     pressReturn
@@ -404,7 +434,7 @@ rebuildPython() {
 recentlyInstalled() {
     tui_exit
 
-    echo "$MNG_CALC"
+    echo "$MNG_RECENT_SCAN"
 
     local log="/var/log/pacman.log"
     if [[ ! -f "$log" ]]; then
@@ -431,11 +461,11 @@ recentlyInstalled() {
 
         local status status_color
         if echo "$orphan_pkgs" | grep -qx "$pkg"; then
-            status="orphan"; status_color="31"
+            status="$MNG_RECENT_ORPHAN"; status_color="31"
         elif echo "$explicit_pkgs" | grep -qx "$pkg"; then
-            status="explicit"; status_color="32"
+            status="$MNG_RECENT_EXPLICIT"; status_color="32"
         else
-            status="dependency"; status_color="33"
+            status="$MNG_RECENT_DEPEND"; status_color="33"
         fi
 
         output+="${pkg_date[$pkg]}|${pkg}|${status}|${status_color}\n"
@@ -456,7 +486,7 @@ recentlyInstalled() {
 
 flatpakInstalled() {
     tui_exit
-    dependency flatpak fzf
+    dependency flatpak fzf || return
 
     local apps=$(
     flatpak list --app --columns=application,name \
@@ -465,9 +495,9 @@ flatpakInstalled() {
     )
 
     if [[ -n "$apps" ]]; then
-        local apps=$(echo "$apps" | cut -f1 | oneLine)
-        printExec "flatpak uninstall $apps"
-        flatpak uninstall $apps
+        local ids=$(echo "$apps" | cut -f1 | oneLine)
+        printExec "flatpak uninstall $ids"
+        flatpak uninstall $ids
 
         if [ "$flatpakRemoveUnused" = true ]; then
             echo
@@ -483,7 +513,7 @@ flatpakInstalled() {
 
 flatpakFlathub() {
     tui_exit
-    dependency flatpak fzf curl jq
+    dependency flatpak fzf curl jq || return
 
     local apps=$(curl -s https://flathub.org/api/v2/appstream | jq -r '.[]' | fzf $fzf_settings --preview "flatpak remote-info flathub {}")
 
@@ -519,11 +549,12 @@ tui_restore() {
 }
 
 dependency() {
-    for cmd in ${1}; do
+    for cmd in "$@"; do
         if ! command -v "$cmd" >/dev/null; then
             printError "${CMD_ERR} ${cmd}"
             pressReturn
             tui_restore
+            return 1
         fi
     done
 }

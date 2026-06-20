@@ -113,7 +113,7 @@ RowLayout {
                 horizontalAlignment: Text.AlignHCenter
                 font.pointSize: plasmoid.configuration.propPointSize
 
-                text: i18n("AQI")
+                text: i18nc("Air Quality Index","AQI")
             }
 
             PlasmaComponents.Label {
@@ -143,7 +143,7 @@ RowLayout {
                 horizontalAlignment: Text.AlignHCenter
                 font.pointSize: plasmoid.configuration.propPointSize
 
-                text: i18n("AQHI")
+                text: i18nc("Air Quality Health Index", "AQHI")
             }
 
             PlasmaComponents.Label {
@@ -219,25 +219,74 @@ RowLayout {
 
                     interactive: true
 
-                    mainItem: ColumnLayout {
-                        PlasmaComponents.Label {
-                            text: weatherData["aq"]["messages"]["general"]["title"]
-                            font.bold: true
-                        }
+                    mainItem: Item {
+                        implicitWidth: Kirigami.Units.gridUnit * 15
+                        implicitHeight: aqInfoLayout.implicitHeight + Kirigami.Units.gridUnit * 2
+                        
+                        ColumnLayout {
+                            id: aqInfoLayout
 
-                        PlasmaComponents.Label {
-                            text: weatherData["aq"]["messages"]["general"]["phrase"]
-                            wrapMode: Text.WordWrap
-                        }
+                            anchors.fill: parent
 
-                        PlasmaComponents.Label {
-                            text: weatherData["aq"]["messages"]["sensitive"]["title"]
-                            font.bold: true
-                        }
+                            PlasmaComponents.Label {
+                                Layout.fillWidth: true
+                                text: weatherData["aq"]["messages"]["general"]["title"]
+                                font.bold: true
+                            }
 
-                        PlasmaComponents.Label {
-                            text: weatherData["aq"]["messages"]["sensitive"]["phrase"]
-                            wrapMode: Text.WordWrap
+                            PlasmaComponents.Label {
+                                Layout.fillWidth: true
+                                text: weatherData["aq"]["messages"]["general"]["phrase"]
+                                wrapMode: Text.WordWrap
+                            }
+
+                            PlasmaComponents.Label {
+                                Layout.fillWidth: true
+                                text: weatherData["aq"]["messages"]["sensitive"]["title"]
+                                font.bold: true
+                            }
+
+                            PlasmaComponents.Label {
+                                Layout.fillWidth: true
+                                text: weatherData["aq"]["messages"]["sensitive"]["phrase"]
+                                wrapMode: Text.WordWrap
+                            }
+
+                            PlasmaComponents.Label {
+                                Layout.fillWidth: true
+                                text: i18nc("Air Quality Index","AQI")
+                                font.bold: true
+                            }
+
+                            PlasmaComponents.Label {
+                                Layout.fillWidth: true
+                                text: i18n("The AQI is a measure of air quality that takes into account the levels of various pollutants in the air. It ranges from 0 to 500, with higher values indicating worse air quality. An AQI of 0-50 is considered good, 51-100 is moderate, 101-150 is unhealthy for sensitive groups, 151-200 is unhealthy, 201-300 is very unhealthy, and 301-500 is hazardous.")
+                                wrapMode: Text.WordWrap
+                            }
+
+                            PlasmaComponents.Label {
+                                Layout.fillWidth: true
+                                text: i18nc("Air Quality Health Index", "AQHI")
+                                font.bold: true
+                            }
+
+                            PlasmaComponents.Label {
+                                Layout.fillWidth: true
+                                text: i18n("The AQHI is a measure of how the air quality may affect human health. It ranges from 1 to 10+, with higher values indicating more unfavorable conditions for health. An AQHI of 1-3 is considered low risk, 4-6 is moderate risk, 7-10 is high risk, and 10+ is very high risk.")
+                                wrapMode: Text.WordWrap
+                            }
+
+                            PlasmaComponents.Label {
+                                Layout.fillWidth: true
+                                text: i18nc("Particulate Matter", "PM2.5")
+                                font.bold: true
+                            }
+
+                            PlasmaComponents.Label {
+                                Layout.fillWidth: true
+                                text: i18n("Particulate matter (PM2.5) is a measure of the amount of solid particles and liquid droplets suspended in the air. It can have serious health effects, especially on the respiratory and cardiovascular systems.")
+                                wrapMode: Text.WordWrap
+                            }
                         }
                     }
                 }
@@ -248,7 +297,7 @@ RowLayout {
     GridLayout {
         id: solGrid
 
-        columns: 3
+        columns: 4
         rows: 3
 
         uniformCellWidths: true
@@ -259,7 +308,7 @@ RowLayout {
         PlasmaComponents.Label {
             id: solLabel
 
-            Layout.columnSpan: 3
+            Layout.columnSpan: 4
             Layout.alignment: Qt.AlignHCenter
             Layout.fillWidth: true
 
@@ -277,7 +326,7 @@ RowLayout {
             Layout.preferredWidth: solStatusTxt.width + 5
             Layout.preferredHeight: solStatusTxt.height + 5
             Layout.alignment: Qt.AlignCenter
-            Layout.columnSpan: 3
+            Layout.columnSpan: 4
 
             color: weatherData["kp-color"] || "#FFFFFF"
 
@@ -318,7 +367,7 @@ RowLayout {
                 horizontalAlignment: Text.AlignHCenter
                 font.pointSize: plasmoid.configuration.propPointSize
 
-                text: i18n("Kp-index")
+                text: i18nc("See: https://www.swpc.noaa.gov/products/planetary-k-index","Kp-index")
             }
 
             PlasmaComponents.Label {
@@ -393,42 +442,75 @@ RowLayout {
             }
         }
 
-        // ColumnLayout {
-        //     Layout.fillWidth: true
-        //     spacing: 0
+        ColumnLayout {
+            Layout.fillWidth: true
+            spacing: 0
 
-        //     Kirigami.Icon {
-        //         source: "documentinfo-symbolic"
-        //         width: Kirigami.Units.iconSizes.medium
-        //         height: Kirigami.Units.iconSizes.medium
-        //         Layout.alignment: Qt.AlignHCenter
-        //     }
+            Kirigami.Icon {
+                source: "documentinfo-symbolic"
+                width: Kirigami.Units.iconSizes.medium
+                height: Kirigami.Units.iconSizes.medium
+                Layout.alignment: Qt.AlignHCenter
+            }
 
-        //     PlasmaComponents.Label {
-        //         Layout.fillWidth: true
-        //         horizontalAlignment: Text.AlignHCenter
-        //         font.pointSize: plasmoid.configuration.propPointSize
+            PlasmaComponents.Label {
+                Layout.fillWidth: true
+                horizontalAlignment: Text.AlignHCenter
+                font.pointSize: plasmoid.configuration.propPointSize
 
-        //         text: i18n("Status")
-        //     }
+                text: i18n("Info")
+            }
 
-        //     PlasmaComponents.Label {
-        //         Layout.fillWidth: true
-        //         horizontalAlignment: Text.AlignHCenter
-        //         font.pointSize: plasmoid.configuration.propPointSize
-        //         font.bold: true
+            PlasmaComponents.Label {
+                Layout.fillWidth: true
+                horizontalAlignment: Text.AlignHCenter
+                font.pointSize: plasmoid.configuration.propPointSize
+                font.bold: true
+                font.underline: true
 
-                // text: {
-                //     var val = Math.round(weatherData["kp-health"]);
-                //     if (val < 4) {
-                //         return i18n("Comfortable");
-                //     } else if (val < 7) {
-                //         return i18n("Moderate");
-                //     } else {
-                //         return i18n("Unfavorable");
-                //     }
-                // }
-        //     }
-        // }
+                text: i18n("Details")
+
+                PlasmaCore.ToolTipArea {
+                    anchors.fill: parent
+
+                    interactive: true
+
+                    mainItem: Item {
+                        implicitWidth: Kirigami.Units.gridUnit * 15
+                        implicitHeight: solInfoLayout.implicitHeight + Kirigami.Units.gridUnit * 2
+                        
+                        ColumnLayout {
+                            id: solInfoLayout
+
+                            anchors.fill: parent
+
+                            PlasmaComponents.Label {
+                                Layout.fillWidth: true
+                                text: i18nc("See: https://www.swpc.noaa.gov/products/planetary-k-index","Kp-index")
+                                font.bold: true
+                            }
+
+                            PlasmaComponents.Label {
+                                Layout.fillWidth: true
+                                text: i18n("The Kp-index is a measure of geomagnetic activity. It ranges from 0 to 9, with higher values indicating more intense geomagnetic storms. A Kp-index of 0-3 is considered quiet, 4-5 is unsettled, 6-7 is active, and 8-9 is storm-level activity.")
+                                wrapMode: Text.WordWrap
+                            }
+
+                            PlasmaComponents.Label {
+                                Layout.fillWidth: true
+                                text: i18n("Health index")
+                                font.bold: true
+                            }
+
+                            PlasmaComponents.Label {
+                                Layout.fillWidth: true
+                                text: i18n("The health index is a measure of how the solar conditions combined with pressure changes may affect human health. It ranges from 0 to 10+, with higher values indicating more unfavorable conditions for health. A health index of 0-2 is considered comfortable, 3-5 is moderate, and 6+ is unfavorable.")
+                                wrapMode: Text.WordWrap
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }

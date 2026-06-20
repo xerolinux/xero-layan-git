@@ -41,16 +41,18 @@ PlasmoidItem {
     onCountUpdatesChanged: updatePlasmoidStatus()
 
     toolTipMainText: sts.paused ? i18n("Auto check disabled") : ""
-    toolTipSubText: sts.busy ? sts.statusMsg : sts.checktime
+    toolTipSubText: sts.busy ? sts.statusMsg : sts.checkTimeTooltip
 
     hideOnWindowDeactivate: !pinned
 
-    property bool isOnline: NetworkInformation.reachability === NetworkInformation.Reachability.Online
+    property bool isOnline: cfg.checkConn ? (NetworkInformation.reachability === NetworkInformation.Reachability.Online) : true
+    property bool isMetered: NetworkInformation.isMetered && cfg.respectMeteredConn
     property bool inTray: (plasmoid.containmentDisplayHints & PlasmaCore.Types.ContainmentDrawsPlasmoidHeading)
     property bool onDesktop: plasmoid.location === PlasmaCore.Types.Floating
     property bool horizontal: plasmoid.location === PlasmaCore.Types.TopEdge || plasmoid.location === PlasmaCore.Types.BottomEdge
     property bool panelConfigurationMode: Plasmoid.containment.corona?.editMode ?? false
     property bool pinned: false
+    property bool listCompactMode: false
     property var cache: []
     property string checkMode: plasmoid.configuration.checkMode
     property bool sorting: plasmoid.configuration.sorting
@@ -64,13 +66,14 @@ PlasmoidItem {
         property bool init: false
         property var errors: []
         property int count: 0
+        property double lastCheck: 0
         property bool busy: true
         property bool upgrading: false
         property bool error: !busy && errors.length > 0
         property bool paused: !busy && !scheduler.running && cfg.checkMode !== "manual"
         property string statusMsg: ""
         property string statusIco: ""
-        property string checktime: ""
+        property string checkTimeTooltip: ""
         property var proc: null
     }
 

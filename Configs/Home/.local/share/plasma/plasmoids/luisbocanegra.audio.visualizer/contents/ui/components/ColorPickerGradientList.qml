@@ -181,7 +181,7 @@ ColumnLayout {
                         }
                     }
 
-                    DoubleSpinBoxCompat {
+                    DoubleSpinBox {
                         id: stepPositionSpinbox
                         value: model.position * multiplier
                         // Component.onCompleted: value = parseFloat(model.position)

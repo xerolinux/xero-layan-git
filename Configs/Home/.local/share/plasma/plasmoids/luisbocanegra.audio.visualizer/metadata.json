@@ -10,7 +10,6 @@
     "BugReportUrl": "https://github.com/luisbocanegra/kurve/issues",
     "Category": "System Information",
     "Description": "Audio visualizer powered by CAVA",
-    "Description[fr]": "Visualiseur audio propulsé par CAVA",
     "Description[nl]": "Audiovisualisatie, gebaseerd op CAVA",
     "Description[ru]": "Аудио-визуализатор на базе CAVA",
     "Description[sv]": "Ljudvisualisering som använder CAVA",
@@ -20,12 +19,11 @@
     "Id": "luisbocanegra.audio.visualizer",
     "License": "GPL-3.0",
     "Name": "Kurve",
-    "Name[fr]": "Kurve",
     "Name[nl]": "Kurve",
     "Name[ru]": "Kurve",
     "Name[sv]": "Kurve",
     "Name[zh_CN]": "Kurve",
-    "Version": "3.5.1",
+    "Version": "3.3.0",
     "Website": "https://github.com/luisbocanegra/kurve"
   },
   "X-Plasma-API-Minimum-Version": "6.0"

@@ -1,9 +1,12 @@
 const scriptDir = Qt.resolvedUrl("sh/").toString().replace("file://", "");
-const configDir = "$HOME/.config/apdatifier/"
+const configDir = "${APDATIFIER_CONFIG_DIR:-${XDG_CONFIG_HOME:-$HOME/.config}/apdatifier}/"
+const cacheDir = "${APDATIFIER_CACHE_DIR:-${XDG_CACHE_HOME:-$HOME/.cache}/apdatifier}/"
 const configFile = configDir + "config.conf"
-const cacheFile = configDir + "updates.json"
+const cacheFile = cacheDir + "updates.json"
 const rulesFile = configDir + "rules.json"
-const newsFile = configDir + "news.json"
+const newsFile = cacheDir + "news.json"
+const timestampFile = cacheDir + "lastCheck"
+
 const procOpt = { stoppable: true }
 
 function execute(command, callback, opt) {
@@ -23,10 +26,12 @@ function execute(command, callback, opt) {
 
 const readFile = (file) => `[ -f "${file}" ] && cat "${file}"`
 const writeFile = (data, redir, file) => `echo '${data}' ${redir} "${file}"`
+const saveTimestamp = () => execute(writeFile(Math.round(sts.lastCheck).toString(), '>', timestampFile))
 
 const bash = (script, ...args) => scriptDir + script + ' ' + args.join(' ')
 const runInTerminal = (script, ...args) => {
-    execute('kstart ' + bash('terminal', script, ...args))
+    const cmd = bash('terminal', script, ...args)
+    execute(`kstart -- bash -c '${cmd}'`)
     if (script === "upgrade") {
         runLater(5000, () => upgradeTimer.start())
         scheduler.stop()
@@ -93,7 +98,10 @@ function init() {
                 })
             }
 
-            loadCache()
+            execute(readFile(timestampFile), (cmd, out, err, code) => {
+                if (out) sts.lastCheck = parseInt(out.trim()) || 0
+                loadCache()
+            })
         })
     }
 
@@ -116,7 +124,26 @@ function init() {
     function loadNews() {
         execute(readFile(newsFile), (cmd, out, err, code) => {
             if (Error(code, err)) return
-            if (out && validJSON(out, newsFile)) JSON.parse(out.trim()).forEach(item => newsModel.append(item))
+            if (out && validJSON(out, newsFile)) {
+                const news = JSON.parse(out.trim())
+                let migrate = false //
+                for (const article of news) {
+                    // todo: remove later
+                    if (article.timestamp === undefined && article.date) {
+                        migrate = true
+                        const [d, t] = article.date.split(" | ")
+                        const [day, month, year] = d.split(".").map(Number)
+                        const [hour, minute] = t.split(":").map(Number)
+                        article.timestamp = Math.floor(new Date(year, month - 1, day, hour, minute).getTime() / 1000)
+                        delete article.date
+                    }//
+
+                    addNewsItem(article)
+                }
+
+                if (migrate) saveNews() //
+            }
+
             onStartup()
         })
     }
@@ -125,7 +152,6 @@ function init() {
         sts.init = true
         checkDependencies()
         refreshListModel()
-        updateActiveNews()
         upgradingState()
     }
 }
@@ -167,10 +193,7 @@ function checkDependencies() {
         if (!tmux) plasmoid.configuration.tmuxSession = false
         if (!jq) {
             plasmoid.configuration.widgets = false
-            plasmoid.configuration.newsArch = false
-            plasmoid.configuration.newsKDE = false
-            plasmoid.configuration.newsTWIK = false
-            plasmoid.configuration.newsTWIKA = false
+            plasmoid.configuration.feedsEnabled = false
         }
     })
 }
@@ -220,13 +243,15 @@ function upgradingState() {
             sts.statusMsg = i18n("Upgrade in progress") + "..."
             sts.statusIco = cfg.ownIconsUI ? "toolbar_upgrade" : "akonadiconsole"
         }
+        updatePlasmoidStatus()
     })
 }
 
 
 function upgradeSystem() {
     if (sts.upgrading && !cfg.tmuxSession) return
-    runInTerminal("upgrade", "full")
+    const ignorePkgs = buildIgnoreString()
+    runInTerminal("upgrade", "full", `${ignorePkgs}`)
 }
 
 
@@ -238,13 +263,59 @@ function stopCheck() {
     resumeScheduler()
 
     if (isOnline) {
-        cfg.timestamp = new Date().getTime().toString()
+        sts.lastCheck = Date.now()
+        saveTimestamp()
     }
+}
+
+
+function loadIgnorePkgs() {
+    return new Promise(resolve => {
+        if (!cfg.packages || !cfg.packages.pacman) {
+            resolve([])
+            return
+        }
+
+        execute("pacman-conf IgnorePkg", (cmd, out, err, code) => {
+            if (code || !out) {
+                resolve([])
+                return
+            }
+
+            const tokens = out.trim().split(/\s+/).filter(Boolean)
+            const escapeRe = s => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+
+            const patterns = tokens.map(token => {
+                let pat = token.split(/[<>=]/)[0].trim()
+                if (!pat) return null
+                let re = escapeRe(pat)
+                re = re.replace(/\\\*/g, ".*").replace(/\\\?/g, ".")
+                return new RegExp("^" + re + "$")
+            }).filter(Boolean)
+
+            resolve(patterns)
+        })
+    })
+}
+
+function buildIgnoreString() {
+    const rules = !cfg.rules ? [] : JSON.parse(cfg.rules)
+    if (!Array.isArray(rules)) return ''
+
+    const ignoreItems = rules.filter(rule =>
+        rule && rule.ignore === true
+    )
+
+    if (ignoreItems.length === 0) return ''
+
+    const values = ignoreItems.map(rule => rule.value)
+    return `--ignore ${values.join(',')}`
 }
 
 
 function checkUpdates() {
     if (sts.upgrading) return
+    if (!isOnline) return
 
     sts.errors = []
     scheduler.stop()
@@ -252,14 +323,10 @@ function checkUpdates() {
 
     let archRepos = [], archAur = [], flatpak = [], widgets = [], firmwares = []
 
-    const feeds = [
-        cfg.newsArch  && "'https://archlinux.org/feeds/news/'",
-        cfg.newsKDE   && "'https://kde.org/index.xml'",
-        cfg.newsTWIK  && "'https://blogs.kde.org/categories/this-week-in-plasma/index.xml'",
-        cfg.newsTWIKA && "'https://blogs.kde.org/categories/this-week-in-kde-apps/index.xml'"
-    ].filter(Boolean).join(' ')
+    const feeds = cfg.feedsEnabled ? parseCustomFeeds(cfg.feeds).map(u => `'${u}'`).join(' ') : ""
+    const news = feeds && cfg.packages?.jq
 
-            feeds ? checkNews() :
+             news ? checkNews() :
          cfg.arch ? checkRepos() :
           cfg.aur ? checkAur() :
       cfg.flatpak ? checkFlatpak() :
@@ -273,7 +340,35 @@ function checkUpdates() {
         sts.statusIco = cfg.ownIconsUI ? "status_news" : "news-subscribe"
         sts.statusMsg = i18n("Checking latest news...")
         execute(bash('utils', 'rss', feeds), (cmd, out, err, code) => {
-            if (out) updateNews(out)
+            if (out) {
+                const news = JSON.parse(out.trim())
+                if (cfg.notifyNews) {
+                    const currentLinks = new Set(Array.from(Array(newsModel.count), (_, i) => newsModel.get(i).link))
+                    const newItems = news.filter(item => !currentLinks.has(item.link))
+                    if (newItems.length > 0) {
+                        const title = i18np("%1 new article", "%1 new articles", newItems.length)
+                        const body = newItems.map(item => `<b>${item.title}</b>: ${item.article}`).join("\n")
+                        notify.send("news", title, body, newItems[0].link)
+                    }
+                }
+
+                if (newsModel.count === 0) {
+                    news.forEach(item => addNewsItem(item))
+                } else {
+                    let newLinks = news.map(item => item.link)
+                    let prevLinks = modelToArray(newsModel).map(item => item.link)
+
+                    news.forEach(item => {
+                        if (!prevLinks.includes(item.link)) addNewsItem(item)
+                    })
+
+                    for (let i = newsModel.count - 1; i >= 0; --i) {
+                        let modelItem = newsModel.get(i)
+                        if (!newLinks.includes(modelItem.link)) newsModel.remove(i)
+                    }
+                }
+            }
+
             if (handleError(code, err, "news", next)) return
             next()
         }, procOpt)
@@ -368,55 +463,23 @@ function checkUpdates() {
 
     function merge() {
         const list = keys(archRepos.concat(archAur, flatpak, widgets, firmwares))
-        sts.errors.length > 0 
-            ? runLater(3000, () => isOnline ? finalize(list) : stopCheck())
-            : finalize(list)
-    }
-}
 
+        const finish = (finalList) => {
+            sts.errors.length > 0
+                ? runLater(3000, () => isOnline ? finalize(finalList) : stopCheck())
+                : finalize(finalList)
+        }
 
-function updateNews(out) {
-    const news = JSON.parse(out.trim())
-
-    if (cfg.notifyNews) {
-        const currentNews = Array.from(Array(newsModel.count), (_, i) => newsModel.get(i))
-        news.forEach(item => {
-            if (!currentNews.some(currentItem => currentItem.link === item.link)) {
-                notify.send("news", item.title, item.article, item.link)
+        loadIgnorePkgs().then(ignorePatterns => {
+            if (!ignorePatterns || ignorePatterns.length === 0) {
+                finish(list)
+            } else {
+                const filtered = list.filter(pkg => !ignorePatterns.some(re => re.test(pkg.NM)))
+                finish(filtered)
             }
         })
     }
-
-    newsModel.clear()
-    news.forEach(item => newsModel.append(item))
-    updateActiveNews()
 }
-function updateActiveNews() {
-    const activeItems = Array.from({ length: newsModel.count }, (_, i) => newsModel.get(i)).filter(item => !item.removed)
-    activeNewsModel.clear()
-    activeItems.forEach(item => activeNewsModel.append(item))
-}
-function removeNewsItem(index) {
-    for (let i = 0; i < newsModel.count; i++) {
-        if (newsModel.get(i).link === activeNewsModel.get(index).link) {
-            newsModel.setProperty(i, "removed", true)
-            activeNewsModel.remove(index)
-            break
-        }
-    }
-    let array = Array.from(Array(newsModel.count), (_, i) => newsModel.get(i))
-    execute(writeFile(toFileFormat(array), '>', newsFile))
-}
-function restoreNewsList() {
-    let array = []
-    for (let i = 0; i < newsModel.count; i++) {
-        newsModel.setProperty(i, "removed", false)
-        array.push(newsModel.get(i))
-    }
-    execute(writeFile(toFileFormat(array), '>', newsFile))
-    updateActiveNews()
-}
-
 
 function makeArchList(updates, source) {
     return new Promise((resolve) => {
@@ -467,6 +530,7 @@ function makeArchList(updates, source) {
                             'Provides':       'PR',
                             'Depends On':     'DP',
                             'Required By':    'RQ',
+                            'Optional For':   'OF',
                             'Conflicts With': 'CF',
                             'Replaces':       'RP',
                             'Installed Size': 'IS',
@@ -494,7 +558,16 @@ function makeArchList(updates, source) {
                             pkg.VO = versions.currentVer || ""
                             pkg.VN = (versions.newVer === "latest-commit") ? i18n("latest commit") : (versions.newVer || "")
                             pkg.RE = repositoriesMap.get(pkg.NM) || (pkg.NM.endsWith("-git") || pkg.VN === i18n("latest commit") ? "devel" : "aur")
-                            pkg.RN = pkg.RN.includes("Explicitly") ? i18n("Explicitly installed") : i18n("Installed as a dependency")
+
+                            if (pkg.RN.includes("Explicitly")) {
+                                pkg.RN = "explicit"
+                            } else if (!pkg.RQ && !pkg.OF) {
+                                pkg.RN = "orphan"
+                            } else {
+                                pkg.RN = "dependency"
+                            }
+
+                            delete pkg.OF
 
                             return pkg
                         })
@@ -576,7 +649,8 @@ function finalize(list) {
     sts.busy = false
     resumeScheduler()
 
-    cfg.timestamp = new Date().getTime().toString()
+    sts.lastCheck = Date.now()
+    saveTimestamp()
 
     if (cfg.notifyErrors && sts.error) {
         const notifyMsg = sts.errors.map(err => `<b>${err.type}</b> => ${err.message} (Exit code ${err.code})`).join('\n\n')
@@ -673,6 +747,7 @@ function resumeScheduler() {
 
 function searchScheduler(options) {
     if (!isOnline) return
+    if (isMetered) return
 
     const mode = cfg.checkMode
     if (mode === "manual") {
@@ -681,7 +756,7 @@ function searchScheduler(options) {
     }
 
     const currTime = new Date().getTime()
-    const lastCheck = parseInt(cfg.timestamp) || 0
+    const lastCheck = sts.lastCheck || 0
     let nextCheck = null
 
     if (mode === "interval") {
@@ -716,7 +791,7 @@ function searchScheduler(options) {
 
 function getCheckTime() {
     const currTime = new Date().getTime()
-    const lastCheck = parseInt(cfg.timestamp) || currTime
+    const lastCheck = sts.lastCheck || currTime
 
     const formatDelta = (ms1, ms2) => {
         const diff = Math.max(0, Math.floor((ms1 - ms2) / 1000))
@@ -777,14 +852,11 @@ function applyRules(list) {
 
     function applyRule(el, rule) {
         const types = {
-            'all'    : () => true,
-            'repo'   : () => el.RE === rule.value,
-            'group'  : () => el.GR.includes(rule.value),
-            'match'  : () => el.NM.includes(rule.value),
-            'name'   : () => el.NM === rule.value
+            'name'  : () => el.NM === rule.value,
+            'regex' : () => { try { return new RegExp(rule.value).test(el.NM) } catch(e) { return false } }
         }
 
-        if (types[rule.type]()) {
+        if (types[rule.type] && types[rule.type]()) {
             el.IC = rule.icon
             el.EX = rule.excluded
             el.IM = rule.important
@@ -837,3 +909,75 @@ function validJSON(string, file) {
 
     return false
 }
+
+function isValidFeedUrl(value) {
+  return /^https?:\/\/\S+$/i.test((value || "").trim())
+}
+
+function parseCustomFeeds(value) {
+  return String(value || "")
+    .split(/[\n|]/)
+    .map(feed => feed.trim())
+    .filter(isValidFeedUrl)
+}
+
+function serializeCustomFeeds(value) {
+  return (Array.isArray(value) ? value : parseCustomFeeds(value))
+    .map(feed => feed.trim())
+    .filter((feed, index, feeds) => isValidFeedUrl(feed) && feeds.indexOf(feed) === index)
+    .join("|")
+}
+
+
+
+function modelToArray(model) {
+    const array = new Array(model.count)
+    for (let i = 0; i < model.count; i++) {
+        array[i] = model.get(i)
+    }
+    return array
+}
+
+function findInsertIndex(news) {
+    const n = newsModel.count
+    let firstRemoved = n
+
+    for (let i = 0; i < n; i++) {
+        if (newsModel.get(i).removed) {
+            firstRemoved = i
+            break
+        }
+    }
+
+    const start = news.removed ? firstRemoved : 0
+    const end = news.removed ? n : firstRemoved
+
+    for (let i = start; i < end; i++) {
+        if (newsModel.get(i).timestamp < news.timestamp)
+            return i
+    }
+
+    return end
+}
+
+function saveNews() {
+    execute(writeFile(toFileFormat(modelToArray(newsModel)), '>', newsFile))
+}
+
+function addNewsItem(news) {
+    newsModel.insert(findInsertIndex(news), news)
+}
+
+function removeNewsItem(index) {
+    const item = newsModel.get(index)
+    if (!item || item.removed) return
+
+    let to = findInsertIndex({ timestamp: item.timestamp, removed: true })
+    if (to > index) to--
+
+    newsModel.move(index, to, 1)
+    newsModel.setProperty(to, "removed", true)
+
+    saveNews()
+}
+

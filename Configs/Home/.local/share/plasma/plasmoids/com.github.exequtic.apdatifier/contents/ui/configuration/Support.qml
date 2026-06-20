@@ -92,7 +92,7 @@ Kirigami.Page {
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.bold: true
                 visible: handlerGithub.hovered
-                text: i18n("Visit %1", "github")
+                text: "https://github.com"
             }
         }
     }

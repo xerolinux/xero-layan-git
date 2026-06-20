@@ -692,7 +692,7 @@ Kirigami.FormLayout {
         Kirigami.FormData.label: i18n("Alpha:")
         visible: colorModeGroup.checkedButton.index !== 6
 
-        DoubleSpinBoxCompat {
+        DoubleSpinBox {
             id: alphaSpinbox
             from: 0 * multiplier
             to: 1 * multiplier
@@ -725,7 +725,7 @@ Kirigami.FormLayout {
             }
         }
 
-        DoubleSpinBoxCompat {
+        DoubleSpinBox {
             id: saturationSpinbox
             from: 0 * multiplier
             to: 1 * multiplier
@@ -751,7 +751,7 @@ Kirigami.FormLayout {
             }
         }
 
-        DoubleSpinBoxCompat {
+        DoubleSpinBox {
             id: lightnessSpinbox
             from: 0 * multiplier
             to: 1 * multiplier

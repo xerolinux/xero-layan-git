@@ -18,7 +18,6 @@ PlasmoidItem {
     property int orientation: Plasmoid.configuration.orientation
     property bool stopCava: Plasmoid.configuration._stopCava
     property bool disableLeftClick: Plasmoid.configuration.disableLeftClick
-    property real minimumDimension: Math.min(main.width, main.height)
 
     property int barGap: {
         if (Plasmoid.configuration.visualizerStyle === Enum.VisualizerStyles.Wave) {
@@ -31,7 +30,7 @@ PlasmoidItem {
         let bars = 1;
         let width;
         if (Plasmoid.configuration.circleMode) {
-            width = minimumDimension;
+            width = Math.min(main.width, main.height);
         } else {
             width = [Enum.Orientation.Left, Enum.Orientation.Right].includes(Plasmoid.configuration.orientation) ? main.height : main.width;
         }

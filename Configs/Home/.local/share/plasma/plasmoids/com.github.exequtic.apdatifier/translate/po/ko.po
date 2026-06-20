@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: apdatifier\n"
 "Report-Msgid-Bugs-To: https://github.com/exequtic/apdatifier\n"
-"POT-Creation-Date: 2026-02-22 11:04+0300\n"
+"POT-Creation-Date: 2026-06-19 12:43+0300\n"
 "PO-Revision-Date: 2024-07-02 17:18+0900\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -30,7 +30,7 @@ msgstr ""
 msgid "Appearance"
 msgstr "모양새"
 
-#: ../contents/config/config.qml
+#: ../contents/config/config.qml ../contents/ui/configuration/Rules.qml
 msgid "Rules"
 msgstr "규칙"
 
@@ -71,12 +71,20 @@ msgid "Do you want to reboot now?"
 msgstr "지금 재부팅하시겠습니까?"
 
 #: ../contents/tools/sh/messages
+msgid "The system is going to reboot now..."
+msgstr ""
+
+#: ../contents/tools/sh/messages
 msgid "Press Enter to close"
 msgstr "Enter 키를 눌러 닫기"
 
 #: ../contents/tools/sh/messages
 msgid "Skipped..."
 msgstr "건너뜀..."
+
+#: ../contents/tools/sh/messages
+msgid "Upgrade complete, close the terminal"
+msgstr ""
 
 #: ../contents/tools/sh/messages
 msgid "Fetching the latest filtered mirror list"
@@ -219,15 +227,15 @@ msgid "Show packages you installed directly"
 msgstr ""
 
 #: ../contents/tools/sh/messages
-msgid "List explicit installs"
+msgid "All explicit installs"
 msgstr ""
 
 #: ../contents/tools/sh/messages
-msgid "List unneeded explicit"
+msgid "Explicit installs not required by anything"
 msgstr ""
 
 #: ../contents/tools/sh/messages
-msgid "Orphaned dependency"
+msgid "Orphaned dependencies"
 msgstr ""
 
 #: ../contents/tools/sh/messages
@@ -263,6 +271,14 @@ msgid "Remove unused cache"
 msgstr ""
 
 #: ../contents/tools/sh/messages
+msgid "Found directories in the pacman cache:"
+msgstr ""
+
+#: ../contents/tools/sh/messages
+msgid "Remove these directories?"
+msgstr ""
+
+#: ../contents/tools/sh/messages
 msgid "Rebuild packages"
 msgstr ""
 
@@ -283,10 +299,6 @@ msgid "Refresh mirrors"
 msgstr ""
 
 #: ../contents/tools/sh/messages
-msgid "Recent installs"
-msgstr ""
-
-#: ../contents/tools/sh/messages
 msgid "Review dependency warnings before removing"
 msgstr "삭제 전 의존성 경고를 확인하십시오"
 
@@ -299,7 +311,23 @@ msgid "Press Enter to return menu"
 msgstr "메뉴로 돌아가려면 Enter를 누르시오"
 
 #: ../contents/tools/sh/messages
-msgid "Calculating..."
+msgid "Recent installs"
+msgstr ""
+
+#: ../contents/tools/sh/messages
+msgid "Scanning pacman log..."
+msgstr ""
+
+#: ../contents/tools/sh/messages ../contents/ui/scrollview/Extended.qml
+msgid "Explicitly installed"
+msgstr "명시적으로 설치됨"
+
+#: ../contents/tools/sh/messages ../contents/ui/scrollview/Extended.qml
+msgid "Installed as a dependency"
+msgstr "의존성으로 설치됨"
+
+#: ../contents/tools/sh/messages ../contents/ui/scrollview/Extended.qml
+msgid "Orphaned dependency"
 msgstr ""
 
 #: ../contents/tools/sh/messages
@@ -310,7 +338,7 @@ msgstr "실행됨:"
 msgid "Nothing to do"
 msgstr "할 일 없음"
 
-#: ../contents/tools/sh/messages ../contents/ui/configuration/General.qml
+#: ../contents/tools/sh/messages
 msgid "Required installed"
 msgstr "설치에 필요"
 
@@ -325,6 +353,11 @@ msgstr "종료 코드: "
 #: ../contents/tools/tools.js
 msgid "Checking latest news..."
 msgstr "최근 소식 확인 중..."
+
+#: ../contents/tools/tools.js
+msgid "%1 new article"
+msgid_plural "%1 new articles"
+msgstr[0] ""
 
 #: ../contents/tools/tools.js
 msgid "Synchronizing pacman databases..."
@@ -357,14 +390,6 @@ msgstr "펌웨어 업데이트 확인 중..."
 #: ../contents/tools/tools.js
 msgid "latest commit"
 msgstr "최신 커밋"
-
-#: ../contents/tools/tools.js
-msgid "Explicitly installed"
-msgstr "명시적으로 설치됨"
-
-#: ../contents/tools/tools.js
-msgid "Installed as a dependency"
-msgstr "의존성으로 설치됨"
 
 #: ../contents/tools/tools.js ../contents/ui/representation/Expanded.qml
 msgid "%1 error occurred"
@@ -441,11 +466,8 @@ msgstr "자동 확인 일시 중지"
 msgid "Read article"
 msgstr "기사 읽기"
 
-#: ../contents/ui/components/Placeholder.qml
-msgid "System updated"
-msgstr "시스템 업데이트됨"
-
 #: ../contents/ui/configuration/Appearance.qml
+#: ../contents/ui/configuration/General.qml
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Disabled"
 msgstr "비활성화"
@@ -537,6 +559,7 @@ msgid "Counter"
 msgstr "카운터"
 
 #: ../contents/ui/configuration/Appearance.qml
+#: ../contents/ui/configuration/General.qml
 msgid "Mode"
 msgstr "모드"
 
@@ -650,13 +673,16 @@ msgid "Override custom icon theme and use default Apdatifier icons instead."
 msgstr "아이콘 테마 대신 Apdatifier 아이콘 사용"
 
 #: ../contents/ui/configuration/Appearance.qml
-msgid "Default tab"
-msgstr "기본 탭"
+msgid "Scrollbar"
+msgstr ""
 
 #: ../contents/ui/configuration/Appearance.qml
-#: ../contents/ui/representation/Expanded.qml
-msgid "Compact"
-msgstr "간결"
+msgid "Auto-hide scrollbar"
+msgstr ""
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Default view"
+msgstr ""
 
 #: ../contents/ui/configuration/Appearance.qml
 #: ../contents/ui/representation/Expanded.qml
@@ -664,16 +690,17 @@ msgid "Extended"
 msgstr "확장"
 
 #: ../contents/ui/configuration/Appearance.qml
+#: ../contents/ui/representation/Expanded.qml
+msgid "Compact"
+msgstr "간결"
+
+#: ../contents/ui/configuration/Appearance.qml
 msgid "Behavior"
 msgstr "동작"
 
 #: ../contents/ui/configuration/Appearance.qml
-msgid "Always switch to default tab"
-msgstr "항상 기본 탭으로 전환"
-
-#: ../contents/ui/configuration/Appearance.qml
-msgid "Item spacing (Compact)"
-msgstr "항목 간격 (간결)"
+msgid "Always switch to default view"
+msgstr ""
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Sorting"
@@ -688,6 +715,10 @@ msgid "By name"
 msgstr "패키지 이름"
 
 #: ../contents/ui/configuration/Appearance.qml
+msgid "Toolbar"
+msgstr ""
+
+#: ../contents/ui/configuration/Appearance.qml
 msgid "Header"
 msgstr "헤더"
 
@@ -698,6 +729,44 @@ msgstr "상태 표시"
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Show tool bar"
 msgstr "툴바 표시"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Additional Package Info"
+msgstr ""
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Compact view"
+msgstr "간결 보기"
+
+#: ../contents/ui/configuration/Appearance.qml
+#: ../contents/ui/scrollview/Extended.qml
+msgid "Repository"
+msgstr ""
+
+#: ../contents/ui/configuration/Appearance.qml
+#: ../contents/ui/scrollview/Extended.qml
+msgid "Install reason"
+msgstr "설치 이유"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Versions"
+msgstr ""
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Extended view"
+msgstr "확장 보기"
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Highlight version differences"
+msgstr ""
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Colorize install reason"
+msgstr ""
+
+#: ../contents/ui/configuration/Appearance.qml
+msgid "Tab Bar"
+msgstr ""
 
 #: ../contents/ui/configuration/Appearance.qml
 msgid "Footer"
@@ -766,8 +835,8 @@ msgstr ""
 "되지 않도록 합니다. 설정 파일 위치: "
 
 #: ../contents/ui/configuration/General.qml
-msgid "Check mode"
-msgstr "확인 모드"
+msgid "Schedule"
+msgstr ""
 
 #: ../contents/ui/configuration/General.qml
 msgid "Manual"
@@ -786,25 +855,12 @@ msgid "Weekly"
 msgstr "매주"
 
 #: ../contents/ui/configuration/General.qml
-msgid ""
-"Choose how automatic checks are scheduled: manual, periodic interval "
-"(minutes, max 43200 - 30 days), daily at specific time or weekly at specific "
-"day/time."
-msgstr ""
-"자동 확인 일정을 선택하세요: 수동, 주기적 간격(분, 최대 43200 - 30일), 특정 "
-"시간에 매일 또는 특정 요일/시간에 매주."
-
-#: ../contents/ui/configuration/General.qml
 msgid "minutes"
 msgstr "분"
 
 #: ../contents/ui/configuration/General.qml
 msgid "Daily time"
 msgstr "매일 시간"
-
-#: ../contents/ui/configuration/General.qml
-msgid "Weekly schedule"
-msgstr "주간 일정"
 
 #: ../contents/ui/configuration/General.qml
 msgid "Sunday"
@@ -835,6 +891,7 @@ msgid "Saturday"
 msgstr "토요일"
 
 #: ../contents/ui/configuration/General.qml
+#: ../contents/ui/representation/Expanded.qml
 msgid "Updates"
 msgstr "업데이트"
 
@@ -860,36 +917,39 @@ msgid "Plasma Widgets"
 msgstr "Plasma 위젯"
 
 #: ../contents/ui/configuration/General.qml
-msgid ""
-"<br><br>For widget developers:<br>Don't forget to update the metadata.json "
-"and specify the name of the applet and its version <b>exactly</b> as they "
-"appear on the KDE Store."
-msgstr ""
-"<br><br>위젯 개발자에게:<br>metadata.json 파일을 업데이트하는 것을 잊지 마세"
-"요. 위젯 이름과 버전을 KDE 스토어에 표시된 것과 <b>정확히</b> 동일하게 지정하"
-"세요."
-
-#: ../contents/ui/configuration/General.qml
 msgid "Firmware"
 msgstr "펌웨어"
 
 #: ../contents/ui/configuration/General.qml
-#: ../contents/ui/representation/Expanded.qml
-msgid "News"
-msgstr "소식"
+msgid "RSS Feeds"
+msgstr ""
 
 #: ../contents/ui/configuration/General.qml
-msgid "Arch Linux News"
-msgstr "아치 리눅스 소식"
+msgid "Enabled"
+msgstr ""
 
 #: ../contents/ui/configuration/General.qml
-msgid "Keep"
-msgstr "유지"
+msgid "Reset"
+msgstr ""
 
 #: ../contents/ui/configuration/General.qml
-msgid "news item from the feed"
-msgid_plural "news items from the feed"
-msgstr[0] "피드의 뉴스 항목"
+#: ../contents/ui/configuration/Rules.qml
+msgid "Add"
+msgstr ""
+
+#: ../contents/ui/configuration/General.qml
+#: ../contents/ui/configuration/Rules.qml
+msgid "Remove"
+msgstr "제거"
+
+#: ../contents/ui/configuration/General.qml
+msgid "latest article from each feed"
+msgid_plural "latest articles from each feed"
+msgstr[0] ""
+
+#: ../contents/ui/configuration/General.qml
+msgid "Recommended RSS Feeds"
+msgstr ""
 
 #: ../contents/ui/configuration/General.qml
 msgid "For new updates"
@@ -979,50 +1039,33 @@ msgstr "기본값으로 재설정합니다. 기본적으로 경로는 checkupdat
 msgid "Path must not contain spaces"
 msgstr "경로에는 공백이 포함될 수 없습니다"
 
-#: ../contents/ui/configuration/Rules.qml
-msgid "Unimportant"
-msgstr "중요하지 않음"
+#: ../contents/ui/configuration/General.qml
+msgid "Network"
+msgstr ""
 
-#: ../contents/ui/configuration/Rules.qml
-msgid "Repository"
-msgstr "저장소"
+#: ../contents/ui/configuration/General.qml
+msgid "Connectivity check"
+msgstr ""
 
-#: ../contents/ui/configuration/Rules.qml
-msgid "Exact repository match"
-msgstr "정확한 저장소 일치"
-
-#: ../contents/ui/configuration/Rules.qml
-msgid "Group"
-msgstr "그룹"
-
-#: ../contents/ui/configuration/Rules.qml
-msgid "Substring group match"
-msgstr "부분 문자열 그룹 일치"
-
-#: ../contents/ui/configuration/Rules.qml
-msgid "Substring"
-msgstr "부분 문자열"
-
-#: ../contents/ui/configuration/Rules.qml
-msgid "Substring name match"
-msgstr "부분 문자열 이름 일치"
+#: ../contents/ui/configuration/General.qml
+msgid "Respect metered connection"
+msgstr ""
 
 #: ../contents/ui/configuration/Rules.qml
 msgid "Name"
 msgstr "이름"
 
 #: ../contents/ui/configuration/Rules.qml
-msgid "Exact name match"
-msgstr "정확한 이름 일치"
+msgid "Exact package name"
+msgstr ""
 
 #: ../contents/ui/configuration/Rules.qml
-msgid ""
-"Here you can override the default package icons and exclude them from the "
-"list. Each rule overwrites the previous one, so the list of rules should be "
-"in this order: "
+msgid "Regex"
 msgstr ""
-"여기서 기본 패키지 아이콘을 재정의하고 목록에서 제외할 수 있습니다. 각 규칙"
-"은 이전 규칙을 덮어쓰므로 규칙 목록은 다음 순서여야 합니다: "
+
+#: ../contents/ui/configuration/Rules.qml
+msgid "See Help"
+msgstr ""
 
 #: ../contents/ui/configuration/Rules.qml
 msgid "Mark as important"
@@ -1036,17 +1079,32 @@ msgstr "목록에 표시"
 msgid "Exclude from the list"
 msgstr "목록에서 제외"
 
-#: ../contents/ui/configuration/Rules.qml ../contents/ui/scrollview/News.qml
-msgid "Remove"
-msgstr "제거"
+#: ../contents/ui/configuration/Rules.qml
+msgid ""
+"Ignore a package upgrade. <b>Be careful in skipping packages, since partial "
+"upgrades are unsupported.</b>"
+msgstr ""
 
 #: ../contents/ui/configuration/Rules.qml
-msgid "Add rule"
-msgstr "규칙 추가"
+msgid "Help"
+msgstr ""
 
 #: ../contents/ui/configuration/Rules.qml
 msgid "Apply"
 msgstr "적용"
+
+#: ../contents/ui/configuration/Rules.qml
+msgid ""
+"Rules apply top-to-bottom: later rules override earlier ones.<br><br>Regex "
+"examples:<br><b>^nvidia</b> — names starting with nvidia<br><b>wayland$</b> "
+"— names ending with wayland<br><b>.*qt.*</b> — names containing "
+"qt<br><b>(ttf|font|otf)</b> — any of ttf, font, or otf<br><b>linux(-zen|-"
+"lts)?$</b> — linux, linux-zen or linux-lts"
+msgstr ""
+
+#: ../contents/ui/configuration/Rules.qml
+msgid "No rules yet"
+msgstr ""
 
 #: ../contents/ui/configuration/Support.qml
 msgid ""
@@ -1055,10 +1113,6 @@ msgid ""
 msgstr ""
 "위젯을 사용해 주셔서 감사합니다! 제 작업을 좋아하신다면 GitHub 저장소에 별을 "
 "주시거나 커피를 사주실 수 있습니다 ;)"
-
-#: ../contents/ui/configuration/Support.qml
-msgid "Visit %1"
-msgstr "%1 방문"
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Widgets"
@@ -1082,6 +1136,14 @@ msgstr ""
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "tmux session"
 msgstr "tmux 세션"
+
+#: ../contents/ui/configuration/Upgrade.qml
+msgid "Idle Inhibit"
+msgstr ""
+
+#: ../contents/ui/configuration/Upgrade.qml
+msgid "Disables automatic sleep and screen lock while upgrading."
+msgstr ""
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Pre/post upgrade scripts"
@@ -1117,7 +1179,7 @@ msgstr ""
 "레이드하는 명령을 지정할 수 있습니다."
 
 #: ../contents/ui/configuration/Upgrade.qml
-msgid "No Flatpak options"
+msgid "Without Flatpak options"
 msgstr ""
 
 #: ../contents/ui/configuration/Upgrade.qml
@@ -1160,6 +1222,15 @@ msgstr "시스템 재부팅"
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Suggest after upgrading"
 msgstr "업그레이드 후 권장됨"
+
+#: ../contents/ui/configuration/Upgrade.qml
+msgid ""
+"This option suggests restarting the system after upgrading critical packages."
+"<br><br><b>Note that not all critical packages require a full system "
+"restart; some may only need a session restart or no action at all, such as "
+"when an updated package is not currently running (e.g., an alternative "
+"kernel) or not in use (e.g., an alternative driver).</b>"
+msgstr ""
 
 #: ../contents/ui/configuration/Upgrade.qml
 msgid "Pacman Mirrorlist Generator"
@@ -1295,12 +1366,12 @@ msgid "Filter by package name"
 msgstr "패키지 이름으로 필터링"
 
 #: ../contents/ui/representation/Expanded.qml
-msgid "Disable auto search updates"
-msgstr "자동 검색 업데이트 비활성화"
-
-#: ../contents/ui/representation/Expanded.qml
 msgid "Enable auto search updates"
 msgstr "자동 검색 업데이트 활성화"
+
+#: ../contents/ui/representation/Expanded.qml
+msgid "Disable auto search updates"
+msgstr "자동 검색 업데이트 비활성화"
 
 #: ../contents/ui/representation/Expanded.qml
 msgid "Sort packages by name"
@@ -1327,12 +1398,8 @@ msgid "Keep open"
 msgstr "열어두기"
 
 #: ../contents/ui/representation/Expanded.qml
-msgid "Compact view"
-msgstr "간결 보기"
-
-#: ../contents/ui/representation/Expanded.qml
-msgid "Extended view"
-msgstr "확장 보기"
+msgid "News"
+msgstr "소식"
 
 #: ../contents/ui/representation/Expanded.qml
 msgid "Check out release notes"
@@ -1415,53 +1482,13 @@ msgid "Install date"
 msgstr "설치 날짜"
 
 #: ../contents/ui/scrollview/Extended.qml
-msgid "Install reason"
-msgstr "설치 이유"
+msgid "System updated"
+msgstr "시스템 업데이트됨"
+
+#: ../contents/ui/scrollview/News.qml
+msgid "Mark as read"
+msgstr ""
 
 #: ../contents/ui/scrollview/News.qml
 msgid "No unread news"
 msgstr "읽지 않은 뉴스 없음"
-
-#: ../contents/ui/scrollview/News.qml
-msgid "Restore list"
-msgstr "목록 복원"
-
-#~ msgid "List all available packages in repositories"
-#~ msgstr "저장소에 있는 사용 가능한 모든 패키지 목록"
-
-#~ msgid "List all installed packages"
-#~ msgstr "모든 설치된 패키지 목록"
-
-#~ msgid "List explicitly installed packages"
-#~ msgstr "명시적으로 설치된 패키지 목록"
-
-#~ msgid ""
-#~ "List explicitly installed packages and isn't a dependency of anything"
-#~ msgstr "의존성이 없는 명시된 패키지 목록"
-
-#~ msgid "List installed dependencies that aren't needed anymore (orphans)"
-#~ msgstr "더 이상 필요하지 않은 의존성 설치 목록"
-
-#~ msgid "Uninstall orphan packages"
-#~ msgstr "고아 패키지 제거"
-
-#~ msgid "Install (downgrade) a package from cache"
-#~ msgstr "캐시로부터 다운그레이드 패키지 설치"
-
-#~ msgid "Remove ALL cached packages"
-#~ msgstr "모든 캐시된 패키지 제거"
-
-#~ msgid "Remove cached packages that are not currently installed"
-#~ msgstr "현재 설치되지 않은 캐시된 패키지 제거"
-
-#~ msgid "Rebuild AUR python packages after python upgrade"
-#~ msgstr "Python 업그레이드 후 AUR Python 패키지 재빌드"
-
-#~ msgid "Refresh mirrorlist"
-#~ msgstr "미러리스트 새로 고침"
-
-#~ msgid "Exit"
-#~ msgstr "나가기"
-
-#~ msgid "Search:"
-#~ msgstr "검색:"

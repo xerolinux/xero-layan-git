@@ -13,12 +13,12 @@ import "../scrollview" as View
 import "../../tools/tools.js" as JS
 
 Representation {
-    property string currVersion: "v2.9.8"
+    property string currVersion: "v2.9.9"
     property bool searchFieldOpen: false
     property bool expanded: root.expanded
     onExpandedChanged: {
         if (plasmoid.configuration.switchDefaultTab && !expanded)
-            swipeView.currentIndex = plasmoid.configuration.defaultTab
+            listCompactMode = (plasmoid.configuration.defaultTab !== 0)
     }
 
     function svg(icon) {
@@ -27,6 +27,30 @@ Representation {
 
     property var backgroundHidden: (Plasmoid.formFactor === PlasmaCore.Types.Planar) && (Plasmoid.userBackgroundHints === PlasmaCore.Types.ShadowBackground)
     onBackgroundHiddenChanged: topHeader.background.visible = bottomHeader.background.visible = !backgroundHidden
+
+
+    property bool activeNewsItems: false
+    function checkActiveNewsItems() {
+        activeNewsItems = false
+        for (let i = 0; i < newsModel.count; ++i) {
+            if (newsModel.get(i).removed === false) {
+                activeNewsItems = true
+                return
+            }
+        }
+    }
+
+    Connections {
+        target: newsModel
+        function onDataChanged() {
+            checkActiveNewsItems()
+        }
+        function onCountChanged() {
+            checkActiveNewsItems()
+        }
+    }
+
+    Component.onCompleted: checkActiveNewsItems()
 
     header: PlasmoidHeading {
         id: topHeader
@@ -78,8 +102,8 @@ Representation {
                     id: searchButton
                     tooltipText: i18n("Filter by package name")
                     iconSource: cfg.ownIconsUI ? svg("toolbar_search") : "search"
-                    visible: cfg.searchButton && !sts.busy && sts.count
-                    enabled: visible && swipeView.currentIndex != 2
+                    visible: cfg.searchButton && sts.count
+                    enabled: visible && swipeView.currentIndex === 0
                     onClicked: {
                         if (searchFieldOpen) searchField.text = ""
                         searchFieldOpen = !searchField.visible
@@ -88,7 +112,7 @@ Representation {
                 }
 
                 ToolbarButton {
-                    tooltipText: sts.paused ? i18n("Disable auto search updates") : i18n("Enable auto search updates")
+                    tooltipText: sts.paused ? i18n("Enable auto search updates") : i18n("Disable auto search updates")
                     iconSource: cfg.ownIconsUI ? (!sts.paused ? svg("toolbar_pause") : svg("toolbar_start"))
                                                : (!sts.paused ? "media-playback-paused" : "media-playback-playing")
                     iconColor: sts.paused ? Kirigami.Theme.negativeTextColor : Kirigami.Theme.colorSet
@@ -101,8 +125,19 @@ Representation {
                     tooltipText: cfg.sorting ? i18n("Sort packages by name") : i18n("Sort packages by repository")
                     iconSource: cfg.ownIconsUI ? svg("toolbar_sort") : "sort-name"
                     visible: cfg.sortButton && !sts.busy && sts.count
-                    enabled: visible && swipeView.currentIndex != 2
+                    enabled: visible && swipeView.currentIndex === 0
                     onClicked: cfg.sorting = !cfg.sorting
+                }
+
+                ToolbarButton {
+                    tooltipText: listCompactMode ? i18n("Extended") : i18n("Compact")
+                    iconSource: cfg.ownIconsUI ? (listCompactMode ? svg("tab_extended") : svg("tab_compact"))
+                                               : (listCompactMode ? "view-split-top-bottom" : "view-split-left-right")
+
+
+                    visible: cfg.viewButton && sts.count && swipeView.currentIndex === 0
+                    enabled: visible
+                    onClicked: listCompactMode = !listCompactMode
                 }
 
                 ToolbarButton {
@@ -154,7 +189,7 @@ Representation {
         spacing: 0
         topPadding: 0
         height: Kirigami.Units.iconSizes.medium
-        visible: cfg.tabBarVisible && !sts.error
+        visible: cfg.tabBarVisible && cfg.feedsEnabled && !sts.error
 
         contentItem: TabBar {
             id: tabBar
@@ -164,67 +199,44 @@ Representation {
             currentIndex: swipeView.currentIndex
             onCurrentIndexChanged: {
                 swipeView.currentIndex = currentIndex
-                if (swipeView.currentIndex === 2) {
+                if (swipeView.currentIndex >= 1) {
                     searchFieldOpen = false
                     searchField.text = ""
                 }
             }
 
-            TabButton {
-                id: compactViewTab
-                ToolTip { text: cfg.tabBarTexts ? "" : i18n("Compact view") }
-                contentItem: RowLayout {
-                    Kirigami.Theme.inherit: true
-                    Item { Layout.fillWidth: true }
-                    Kirigami.Icon {
-                        Layout.preferredHeight: Kirigami.Units.iconSizes.small
-                        Layout.preferredWidth: Kirigami.Units.iconSizes.small
-                        source: cfg.ownIconsUI ? svg("tab_compact") : "view-split-left-right"
-                        color: Kirigami.Theme.colorSet
-                        isMask: cfg.ownIconsUI
-                        smooth: true
-                    }
-                    Label { text: i18n("Compact"); visible: cfg.tabBarTexts }
-                    Item { Layout.fillWidth: true }
-                }
-            }
+            Repeater {
+                model: [
+                    {
+                        id: "updates",
+                        icon: "status_package",
+                        fallback: "kpackagekit-updates",
+                        label: i18n("Updates"),
+                    },
+                    cfg.feedsEnabled ? {
+                        id: "news",
+                        icon: "status_news",
+                        fallback: "news-subscribe",
+                        label: i18n("News"),
+                    } : null
+                    ].filter(Boolean)
 
-            TabButton {
-                id: extendViewTab
-                ToolTip { text: cfg.tabBarTexts ? "" : i18n("Extended view") }
-                contentItem: RowLayout {
-                    Kirigami.Theme.inherit: true
-                    Item { Layout.fillWidth: true }
-                    Kirigami.Icon {
-                        Layout.preferredHeight: Kirigami.Units.iconSizes.small
-                        Layout.preferredWidth: Kirigami.Units.iconSizes.small
-                        source: cfg.ownIconsUI ? svg("tab_extended") : "view-split-top-bottom"
-                        color: Kirigami.Theme.colorSet
-                        isMask: cfg.ownIconsUI
-                        smooth: true
+                delegate: TabButton {
+                    required property var modelData
+                    contentItem: RowLayout {
+                        Kirigami.Theme.inherit: true
+                        Item { Layout.fillWidth: true }
+                        Kirigami.Icon {
+                            Layout.preferredHeight: Kirigami.Units.iconSizes.small
+                            Layout.preferredWidth: Kirigami.Units.iconSizes.small
+                            source: cfg.ownIconsUI ? svg(modelData.icon) : modelData.fallback
+                            color: (modelData.id === "news" && activeNewsItems) ? Kirigami.Theme.negativeTextColor : Kirigami.Theme.colorSet
+                            isMask: cfg.ownIconsUI
+                            smooth: true
+                        }
+                        Label { text: modelData.label; visible: cfg.tabBarTexts }
+                        Item { Layout.fillWidth: true }
                     }
-                    Label { text: i18n("Extended"); visible: cfg.tabBarTexts }
-                    Item { Layout.fillWidth: true }
-                }
-            }
-
-            TabButton {
-                id: newsViewTab
-                ToolTip { text: cfg.tabBarTexts ? "" : i18n("News") }
-                contentItem: RowLayout {
-                    Kirigami.Theme.inherit: true
-                    Item { Layout.fillWidth: true }
-                    Kirigami.Icon {
-                        id: newsIcon
-                        Layout.preferredHeight: Kirigami.Units.iconSizes.small
-                        Layout.preferredWidth: Kirigami.Units.iconSizes.small
-                        source: cfg.ownIconsUI ? svg("status_news") : "news-subscribe"
-                        color: activeNewsModel.count > 0 ? Kirigami.Theme.negativeTextColor : Kirigami.Theme.colorSet
-                        isMask: cfg.ownIconsUI
-                        smooth: true
-                    }
-                    Label { text: i18n("News"); visible: cfg.tabBarTexts }
-                    Item { Layout.fillWidth: true }
                 }
             }
         }
@@ -233,6 +245,12 @@ Representation {
     ColumnLayout {
         anchors.fill: parent
         spacing: 0
+
+        Loader {
+            Layout.fillWidth: true
+            active: sts.busy
+            sourceComponent: ProgressBar { from: 0; to: 100; indeterminate: true }
+        }
 
         TextField {
             Layout.fillWidth: true
@@ -243,7 +261,7 @@ Representation {
 
             id: searchField
             clearButtonShown: true
-            visible: searchFieldOpen && !sts.busy && sts.count
+            visible: searchFieldOpen && sts.count
             placeholderText: i18n("Filter by package name")
             onTextChanged: modelList.setFilterFixedString(text)
         }
@@ -291,10 +309,21 @@ Representation {
             Layout.fillWidth: true
             Layout.fillHeight: true
             clip: true
-            currentIndex: plasmoid.configuration.defaultTab
-            View.Compact {}
-            View.Extended {}
-            View.News {}
+            currentIndex: 0
+            Repeater {
+                model: [
+                    { component: "updates" },
+                    cfg.feedsEnabled ? { component: "news" } : null
+                ].filter(Boolean)
+
+                delegate: Loader {
+                    required property var modelData
+                    sourceComponent: modelData.component === "updates" ? updatesComp : newsComp
+                }
+            }
+
+            Component { id: updatesComp; View.Updates {} }
+            Component { id: newsComp; View.News { id: newsPage } }
         }
     }
 

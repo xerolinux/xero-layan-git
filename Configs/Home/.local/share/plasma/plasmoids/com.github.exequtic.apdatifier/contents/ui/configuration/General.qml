@@ -24,11 +24,9 @@ SimpleKCM {
     property alias cfg_fwupd: fwupd.checked
     property alias cfg_widgets: widgets.checked
 
-    property alias cfg_newsArch: newsArch.checked
-    property alias cfg_newsKDE: newsKDE.checked
-    property alias cfg_newsTWIK: newsTWIK.checked
-    property alias cfg_newsTWIKA: newsTWIKA.checked
-    property alias cfg_newsKeep: newsKeep.value
+    property bool cfg_feedsEnabled: plasmoid.configuration.feedsEnabled
+    property alias cfg_feedsFetchCount: feedsFetchCount.value
+    property string cfg_feeds: plasmoid.configuration.feeds
 
     property string cfg_middleAction: plasmoid.configuration.middleAction
     property string cfg_rightAction: plasmoid.configuration.rightAction
@@ -44,9 +42,13 @@ SimpleKCM {
     property alias cfg_notifySound: notifySound.checked
     property alias cfg_notifyPersistent: notifyPersistent.checked
 
+    property alias cfg_checkConn: checkConn.checked
+    property alias cfg_respectMeteredConn: respectMeteredConn.checked
+
     property var cfg: plasmoid.configuration
     property var pkg: plasmoid.configuration.packages
     property var terminals: plasmoid.configuration.terminals
+    property var feeds: []
     property alias cfg_dbPath: dbPath.text
     
     property bool systemWide: !/^\/home\/[^/]+\/\.local/.test(JS.scriptDir)
@@ -68,6 +70,9 @@ SimpleKCM {
     onCurrentTabChanged: tabChanged(currentTab)
 
     Component.onCompleted: {
+        feeds = JS.parseCustomFeeds(cfg_feeds)
+        cfg_feeds = JS.serializeCustomFeeds(feeds)
+        feedsUrl.syncToModel()
         JS.checkDependencies()
     }
  
@@ -122,12 +127,13 @@ SimpleKCM {
             id: searchTab
             visible: currentTab === 0
 
-            Item {
+            Kirigami.Separator {
+                Kirigami.FormData.label: i18n("Schedule")
                 Kirigami.FormData.isSection: true
             }
 
             RowLayout {
-                Kirigami.FormData.label: i18n("Check mode") + ":"
+                Kirigami.FormData.label: i18n("Mode") + ":"
 
                 ComboBox {
                     id: checkMode
@@ -139,10 +145,6 @@ SimpleKCM {
                         { name: i18n("Weekly"), value: "weekly" }]
                     currentIndex: JS.setIndex(cfg_checkMode, model)
                     onCurrentIndexChanged: cfg_checkMode = model[currentIndex].value
-                }
-
-                Kirigami.ContextualHelpButton {
-                    toolTipText: i18n("Choose how automatic checks are scheduled: manual, periodic interval (minutes, max 43200 - 30 days), daily at specific time or weekly at specific day/time.")
                 }
             }
 
@@ -191,7 +193,7 @@ SimpleKCM {
 
             RowLayout {
                 visible: cfg_checkMode === "weekly"
-                Kirigami.FormData.label: i18n("Weekly schedule") + ":"
+                Kirigami.FormData.label: i18n("Schedule") + ":"
 
                 ComboBox {
                     id: weeklyDay
@@ -239,13 +241,12 @@ SimpleKCM {
                 }
             }
 
-            Item {
+            Kirigami.Separator {
+                Kirigami.FormData.label: i18n("Updates")
                 Kirigami.FormData.isSection: true
             }
 
             RowLayout {
-                Kirigami.FormData.label: i18n("Updates") + ":"
-
                 CheckBox {
                     id: arch
                     text: i18n("Arch Official Repositories")
@@ -297,10 +298,6 @@ SimpleKCM {
                     text: i18n("Plasma Widgets")
                     enabled: pkg.jq
                 }
-
-                Kirigami.ContextualHelpButton {
-                    toolTipText: i18n("Required installed") + " jq." + i18n("<br><br>For widget developers:<br>Don't forget to update the metadata.json and specify the name of the applet and its version <b>exactly</b> as they appear on the KDE Store.")
-                }
             }
 
             RowLayout {
@@ -316,51 +313,192 @@ SimpleKCM {
             Item {
                 Kirigami.FormData.isSection: true
             }
+        }
 
-            RowLayout {
-                Kirigami.FormData.label: i18n("News") + ":"
+        ColumnLayout {
+            visible: currentTab === 0
+            Layout.fillWidth: true
+            Layout.leftMargin: Kirigami.Units.largeSpacing
+            Layout.rightMargin: Kirigami.Units.largeSpacing
 
-                CheckBox {
-                    id: newsArch
-                    text: i18n("Arch Linux News")
-                    enabled: pkg.jq
+            ColumnLayout {
+                id: feedsUrl
+                Layout.fillWidth: true
+                enabled: pkg.jq
+                spacing: Kirigami.Units.largeSpacing
+
+                function syncFromModel() {
+                    var items = []
+                    for (var i = 0; i < feedsModel.count; i++) {
+                        items.push(feedsModel.get(i).url)
+                    }
+                    feeds = items
+                    cfg_feeds = JS.serializeCustomFeeds(feeds)
+                }
+                function syncToModel() {
+                    feedsModel.clear()
+                    for (var i = 0; i < feeds.length; i++) {
+                        feedsModel.append({url: feeds[i]})
+                    }
+                }
+                function reset() {
+                    feedsModel.clear()
+                    var defaults = JS.parseCustomFeeds(plasmoid.configuration.feedsDefault)
+                    for (var i = 0; i < defaults.length; i++) {
+                        feedsModel.append({url: defaults[i]})
+                    }
+                    syncFromModel()
+                }
+
+                ListModel {
+                    id: feedsModel
+                }
+
+                ListView {
+                    id: feedsList
+                    Layout.fillWidth: true
+                    implicitHeight: contentHeight
+                    model: feedsModel
+                    headerPositioning: ListView.OverlayHeader
+                    header: Kirigami.InlineViewHeader {
+                        width: feedsList.width
+                        text: i18n("RSS Feeds")
+                        actions: [
+                            Kirigami.Action {
+                                icon.name: "rating"
+                                enabled: cfg_feedsEnabled && pkg.jq
+                                onTriggered: recommendedFeedsDialog.open()
+                            },
+                            Kirigami.Action {
+                                icon.name: cfg_feedsEnabled ? "news-subscribe" : "news-unsubscribe"
+                                text: cfg_feedsEnabled ? i18n("Enabled") : i18n("Disabled")
+                                onTriggered: cfg_feedsEnabled = !cfg_feedsEnabled
+                            },
+                            Kirigami.Action {
+                                icon.name: "edit-reset"
+                                text: i18n("Reset")
+                                enabled: cfg_feedsEnabled && pkg.jq
+                                onTriggered: feedsUrl.reset()
+                            },
+                            Kirigami.Action {
+                                icon.name: "list-add-symbolic"
+                                text: i18n("Add")
+                                enabled: cfg_feedsEnabled && pkg.jq
+                                onTriggered: {
+                                    feedsModel.insert(0, {url: ""})
+                                    feedsUrl.syncFromModel()
+                                }
+                            }
+                        ]
+                    }
+
+                    delegate: RowLayout {
+                        required property string url
+                        required property int index
+                        width: ListView.view.width
+                        spacing: Kirigami.Units.smallSpacing
+
+                        TextField {
+                            Layout.fillWidth: true
+                            text: url
+                            placeholderText: "https://..."
+                            font.family: "monospace"
+                            font.pointSize: Kirigami.Theme.smallFont.pointSize
+                            selectByMouse: true
+                            implicitHeight: Kirigami.Units.gridUnit * 1.8
+                            enabled: cfg_feedsEnabled
+                            onTextChanged: {
+                                feedsModel.setProperty(index, "url", text)
+                                feedsUrl.syncFromModel()
+                            }
+                        }
+
+                        Button {
+                            icon.name: "delete-symbolic"
+                            implicitWidth: Kirigami.Units.gridUnit * 2
+                            implicitHeight: Kirigami.Units.gridUnit * 2
+                            ToolTip {
+                                text: i18n("Remove")
+                                delay: Kirigami.Units.toolTipDelay
+                            }
+                            onClicked: {
+                                feedsModel.remove(index)
+                                feedsUrl.syncFromModel()
+                            }
+                        }
+                    }
+
+                    add: Transition { NumberAnimation { property: "x"; from: 80; to: 0; duration: 320; easing.type: Easing.OutCubic } }
+                    moveDisplaced: Transition { NumberAnimation { properties: "x,y"; duration: 300; easing.type: Easing.OutCubic } }
+                    move: Transition { NumberAnimation { properties: "x,y"; duration: 300; easing.type: Easing.OutCubic } }
+                    removeDisplaced: Transition { NumberAnimation { properties: "x,y"; duration: 280; easing.type: Easing.OutCubic } }
+                    remove: Transition { ParallelAnimation {
+                        NumberAnimation { property: "opacity"; to: 0; duration: 220; easing.type: Easing.InQuad }
+                        NumberAnimation { property: "x"; to: 80; duration: 300; easing.type: Easing.InCubic } } }
+                }
+
+                RowLayout {
+                    enabled: pkg.jq && cfg_feedsEnabled && cfg_feeds !== ""
+
+                    SpinBox {
+                        id: feedsFetchCount
+                        from: 1
+                        to: 10
+                        stepSize: 1
+                    }
+
+                    Label {
+                        text: i18np(
+                            "latest article from each feed",
+                            "latest articles from each feed",
+                            feedsFetchCount.value
+                        )
+                    }
                 }
             }
 
-            CheckBox {
-                id: newsKDE
-                text: "KDE Announcements"
-                enabled: pkg.jq
-            }
 
-            CheckBox {
-                id: newsTWIK
-                text: "This Week in KDE"
-                enabled: pkg.jq
-            }
+            Kirigami.Dialog {
+                id: recommendedFeedsDialog
+                title: i18n("Recommended RSS Feeds")
+                preferredWidth: Kirigami.Units.gridUnit * 25
 
-            CheckBox {
-                id: newsTWIKA
-                text: "This Week in KDE Apps"
-                enabled: pkg.jq
-            }
+                ColumnLayout {
+                    spacing: 0
 
-            RowLayout {
-                Label {
-                    text: i18n("Keep")
-                }
+                    Repeater {
+                        model: [
+                            { name: "This week in Plasma", url: "https://blogs.kde.org/categories/this-week-in-plasma/index.xml" },
+                            { name: "This week in KDE Apps", url: "https://blogs.kde.org/categories/this-week-in-kde-apps/index.xml" },
+                            { name: "KDE Community", url: "https://kde.org/index.xml" },
+                            { name: "CachyOS's Blog", url: "https://cachyos.org/rss.xml" },
+                            { name: "Apdatifier Release Notes", url: "https://github.com/exequtic/apdatifier/releases.atom" }
+                        ]
 
-                SpinBox {
-                    id: newsKeep
-                    from: 1
-                    to: 10
-                    stepSize: 1
-                    value: newsKeep
-                    enabled: newsArch.checked || newsKDE.checked || newsTWIK.checked || newsTWIKA.checked
-                }
-
-                Label {
-                    text: i18np("news item from the feed", "news items from the feed", newsKeep.value)
+                        delegate: Frame {
+                            Layout.fillWidth: true
+                            Layout.topMargin: index > 0 ? 2 : 0
+                            RowLayout {
+                                anchors.fill: parent
+                                Label {
+                                    text: modelData.name
+                                    font.bold: true
+                                    Layout.fillWidth: true
+                                }
+                                Button {
+                                    icon.name: "list-add"
+                                    text: i18n("Add")
+                                    Layout.preferredWidth: Kirigami.Units.gridUnit * 6
+                                    onClicked: {
+                                        if (!feeds.includes(modelData.url)) {
+                                            feedsModel.insert(0, {url: modelData.url})
+                                            feedsUrl.syncFromModel()
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -523,7 +661,6 @@ SimpleKCM {
                     text: i18n("Restore hidden tooltips")
                     onClicked: {
                         plasmoid.configuration.configMsg = true
-                        plasmoid.configuration.rulesMsg = true
                         plasmoid.configuration.newsMsg = true
                         plasmoid.configuration.version = "v0"
                     }
@@ -642,6 +779,21 @@ SimpleKCM {
                         JS.execute(JS.runInTerminal("utils", "uninstall"))
                     }
                 }
+            }
+
+            Kirigami.Separator {
+                Kirigami.FormData.label: i18n("Network")
+                Kirigami.FormData.isSection: true
+            }
+
+            CheckBox {
+                id: checkConn
+                text: i18n("Connectivity check")
+            }
+
+            CheckBox {
+                id: respectMeteredConn
+                text: i18n("Respect metered connection")
             }
         }
     }
