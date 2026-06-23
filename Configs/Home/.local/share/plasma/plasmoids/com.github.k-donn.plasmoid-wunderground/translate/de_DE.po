@@ -64,15 +64,15 @@ msgstr "Debuggen"
 
 #: ../contents/ui/AirAndSolarItem.qml
 msgid "Comfortable"
-msgstr ""
+msgstr "Angenehm"
 
 #: ../contents/ui/AirAndSolarItem.qml
 msgid "Moderate"
-msgstr ""
+msgstr "Mäßig"
 
 #: ../contents/ui/AirAndSolarItem.qml
 msgid "Unfavorable"
-msgstr ""
+msgstr "Ungünstig"
 
 #: ../contents/ui/AirAndSolarItem.qml
 msgid "Air quality"
@@ -81,12 +81,12 @@ msgstr "Luftqualität"
 #: ../contents/ui/AirAndSolarItem.qml
 msgctxt "Air Quality Index"
 msgid "AQI"
-msgstr ""
+msgstr "AQI"
 
 #: ../contents/ui/AirAndSolarItem.qml
 msgctxt "Air Quality Health Index"
 msgid "AQHI"
-msgstr ""
+msgstr "AQHI"
 
 #: ../contents/ui/AirAndSolarItem.qml ../contents/ui/AlertsItem.qml
 msgid "Alerts"
@@ -94,24 +94,24 @@ msgstr "Warnungen:"
 
 #: ../contents/ui/AirAndSolarItem.qml
 msgid "Info"
-msgstr ""
+msgstr "Informationen"
 
 #: ../contents/ui/AirAndSolarItem.qml
 msgid "The AQI is a measure of air quality that takes into account the levels of various pollutants in the air. It ranges from 0 to 500, with higher values indicating worse air quality. An AQI of 0-50 is considered good, 51-100 is moderate, 101-150 is unhealthy for sensitive groups, 151-200 is unhealthy, 201-300 is very unhealthy, and 301-500 is hazardous."
-msgstr ""
+msgstr "Der AQI ist ein Maß für die Luftqualität, das die Konzentrationen verschiedener Schadstoffe in der Luft berücksichtigt. Er reicht von 0 bis 500, wobei höhere Werte auf eine schlechtere Luftqualität hinweisen. Ein AQI von 0–50 gilt als gut, 51–100 als mäßig, 101–150 als ungesund für empfindliche Personengruppen, 151–200 als ungesund, 201–300 als sehr ungesund und 301–500 als gefährlich."
 
 #: ../contents/ui/AirAndSolarItem.qml
 msgid "The AQHI is a measure of how the air quality may affect human health. It ranges from 1 to 10+, with higher values indicating more unfavorable conditions for health. An AQHI of 1-3 is considered low risk, 4-6 is moderate risk, 7-10 is high risk, and 10+ is very high risk."
-msgstr ""
+msgstr "Der AQHI ist ein Maß dafür, wie sich die Luftqualität auf die menschliche Gesundheit auswirken kann. Er reicht von 1 bis 10+, wobei höhere Werte auf ungünstigere Bedingungen für die Gesundheit hinweisen. Ein AQHI von 1–3 gilt als geringes Risiko, 4–6 als mäßiges Risiko, 7–10 als hohes Risiko und 10+ als sehr hohes Risiko."
 
 #: ../contents/ui/AirAndSolarItem.qml
 msgctxt "Particulate Matter"
 msgid "PM2.5"
-msgstr ""
+msgstr "PM2.5"
 
 #: ../contents/ui/AirAndSolarItem.qml
 msgid "Particulate matter (PM2.5) is a measure of the amount of solid particles and liquid droplets suspended in the air. It can have serious health effects, especially on the respiratory and cardiovascular systems."
-msgstr ""
+msgstr "Feinstaub (PM2,5) ist ein Maß für die Menge an festen Partikeln und Flüssigkeitströpfchen, die in der Luft schweben. Er kann schwerwiegende gesundheitliche Auswirkungen haben, insbesondere auf die Atemwege und das Herz-Kreislauf-System."
 
 #: ../contents/ui/AirAndSolarItem.qml
 msgid "Solar info"
@@ -120,27 +120,27 @@ msgstr "Solar Info"
 #: ../contents/ui/AirAndSolarItem.qml
 msgctxt "See: https://www.swpc.noaa.gov/products/planetary-k-index"
 msgid "Kp-index"
-msgstr ""
+msgstr "Kp-Index"
 
 #: ../contents/ui/AirAndSolarItem.qml
 msgid "Power"
-msgstr ""
+msgstr "Intensität"
 
 #: ../contents/ui/AirAndSolarItem.qml
 msgid "Health index"
-msgstr ""
+msgstr "Gesundheitsindex"
 
 #: ../contents/ui/AirAndSolarItem.qml
 msgid "Details"
-msgstr ""
+msgstr "Details"
 
 #: ../contents/ui/AirAndSolarItem.qml
 msgid "The Kp-index is a measure of geomagnetic activity. It ranges from 0 to 9, with higher values indicating more intense geomagnetic storms. A Kp-index of 0-3 is considered quiet, 4-5 is unsettled, 6-7 is active, and 8-9 is storm-level activity."
-msgstr ""
+msgstr "er Kp-Index ist ein Maß für die geomagnetische Aktivität. Er reicht von 0 bis 9, wobei höhere Werte auf stärkere geomagnetische Stürme hinweisen. Ein Kp-Index von 0–3 gilt als ruhig, 4–5 als unruhig, 6–7 als aktiv und 8–9 als Sturmaktivität."
 
 #: ../contents/ui/AirAndSolarItem.qml
 msgid "The health index is a measure of how the solar conditions combined with pressure changes may affect human health. It ranges from 0 to 10+, with higher values indicating more unfavorable conditions for health. A health index of 0-2 is considered comfortable, 3-5 is moderate, and 6+ is unfavorable."
-msgstr ""
+msgstr "Der Gesundheitsindex gibt an, inwieweit sich die Sonnenbedingungen in Verbindung mit Luftdruckänderungen auf die menschliche Gesundheit auswirken können. Er reicht von 0 bis 10+, wobei höhere Werte auf ungünstigere Bedingungen für die Gesundheit hindeuten. Ein Gesundheitsindex von 0–2 gilt als angenehm, 3–5 als mäßig und 6+ als ungünstig."
 
 #: ../contents/ui/AlertsItem.qml
 msgid "There are no alerts for your area."
@@ -156,7 +156,7 @@ msgstr "Region: %1<br/>Aktion: %2<br/>Haftungsausschluss: %3<br/>Ausgestellt von
 
 #: ../contents/ui/BottomPanel.qml
 msgid "There are weather alerts for your area!"
-msgstr "Es gibt Wetterwarnungen für ihre Region"
+msgstr "Es gibt Wetterwarnungen für ihre Region!"
 
 #: ../contents/ui/DayChartItem.qml
 msgctxt "per 12 hours, please keep it short"
@@ -231,7 +231,7 @@ msgstr "Entschuldigung! Das Widget hat einen Netzwerkfehler festgestellt: "
 
 #: ../contents/ui/FullRepresentation.qml
 msgid "Refresh Weather"
-msgstr ""
+msgstr "Wetterdaten aktualisieren"
 
 #: ../contents/ui/SwitchPanel.qml ../contents/ui/config/ConfigAppearance.qml
 msgid "Weather Details"
@@ -268,11 +268,11 @@ msgstr "Allgemein"
 
 #: ../contents/ui/config/ConfigAppearance.qml
 msgid "Use system theme icons:"
-msgstr "Systemdesignsymbole verwenden"
+msgstr "Systemdesignsymbole verwenden:"
 
 #: ../contents/ui/config/ConfigAppearance.qml
 msgid "Shown in tooltip:"
-msgstr "Angezeigt im Tooltip"
+msgstr "Angezeigt im Tooltip:"
 
 #: ../contents/ui/config/ConfigAppearance.qml
 msgid "Station ID"
@@ -292,11 +292,11 @@ msgstr "Desktopansicht"
 
 #: ../contents/ui/config/ConfigAppearance.qml
 msgid "Auto-color temperature:"
-msgstr "Auto-Farbe der Temperatur"
+msgstr "Auto-Farbe der Temperatur:"
 
 #: ../contents/ui/config/ConfigAppearance.qml
 msgid "Show time seconds:"
-msgstr ""
+msgstr "Zeige die Sekunden:"
 
 #: ../contents/ui/config/ConfigAppearance.qml
 msgid "Show blurb:"
@@ -304,15 +304,15 @@ msgstr "Klappentext anzeigen:"
 
 #: ../contents/ui/config/ConfigAppearance.qml
 msgid "Use default page:"
-msgstr "Standardseite verwenden"
+msgstr "Standardseite verwenden:"
 
 #: ../contents/ui/config/ConfigAppearance.qml
 msgid "Default page shown:"
-msgstr "Standardseite"
+msgstr "Standardseite:"
 
 #: ../contents/ui/config/ConfigAppearance.qml
 msgid "Show pressure trend:"
-msgstr "Zeige Luftdrucktendenz"
+msgstr "Zeige Luftdrucktendenz:"
 
 #: ../contents/ui/config/ConfigAppearance.qml ../contents/ui/config/ConfigLayout.qml
 msgid "Compact Representation"
@@ -320,11 +320,11 @@ msgstr "Kontrollleistenansicht"
 
 #: ../contents/ui/config/ConfigAppearance.qml
 msgid "Choose a Font:"
-msgstr "Wähle Schriftart"
+msgstr "Wähle Schriftart:"
 
 #: ../contents/ui/config/ConfigAppearance.qml
 msgid "Text size mode:"
-msgstr "Textgrößenmodus"
+msgstr "Textgrößenmodus:"
 
 #: ../contents/ui/config/ConfigAppearance.qml
 msgid "Automatic fit"
@@ -378,7 +378,7 @@ msgstr "sek"
 
 #: ../contents/ui/config/ConfigDebug.qml
 msgid "Write to console.log:"
-msgstr "Schreibe in den console.log"
+msgstr "Schreibe in den console.log:"
 
 #: ../contents/ui/config/ConfigDebug.qml
 msgid "Use Legacy Forecast API:"
@@ -434,15 +434,15 @@ msgstr "Enorm"
 
 #: ../contents/ui/config/ConfigLayout.qml
 msgid "Forecast icon size:"
-msgstr ""
+msgstr "Größe der Symbole in der Wettervorhersage:"
 
 #: ../contents/ui/config/ConfigLayout.qml
 msgid "Property icon size:"
-msgstr ""
+msgstr "Symbolgröße:"
 
 #: ../contents/ui/config/ConfigLayout.qml
 msgid "Top panel icon margins:"
-msgstr "Abstand der Symbole zum oberen Rand"
+msgstr "Abstand der Symbole zum oberen Rand:"
 
 #: ../contents/ui/config/ConfigLayout.qml
 msgid "Layout type"
@@ -546,11 +546,11 @@ msgstr "Sonnen-/Mondzeitformat:"
 
 #: ../contents/ui/config/ConfigUnits.qml
 msgid "12hr time"
-msgstr ""
+msgstr "12hr Zeit"
 
 #: ../contents/ui/config/ConfigUnits.qml
 msgid "24hr time"
-msgstr ""
+msgstr "24hr Zeit"
 
 #: ../contents/ui/config/ConfigUnits.qml
 msgid "Custom"
@@ -558,11 +558,11 @@ msgstr "Individuell"
 
 #: ../contents/ui/config/ConfigUnits.qml
 msgid "Day Chart time format:"
-msgstr "Tagesdiagramme- Zeitformat"
+msgstr "Tagesdiagramme- Zeitformat:"
 
 #: ../contents/ui/config/ConfigUnits.qml
 msgid "Time format"
-msgstr ""
+msgstr "Zeitformat"
 
 #: ../contents/ui/config/ConfigUnits.qml
 msgid "Week forecast date format:"
@@ -570,15 +570,15 @@ msgstr "Wettervorhersage- Datumsformat:"
 
 #: ../contents/ui/config/ConfigUnits.qml
 msgid "Day"
-msgstr ""
+msgstr "Tag"
 
 #: ../contents/ui/config/ConfigUnits.qml
 msgid "Day/Month"
-msgstr ""
+msgstr "Tag/Monat"
 
 #: ../contents/ui/config/ConfigUnits.qml
 msgid "Date format"
-msgstr ""
+msgstr "Datumsformat"
 
 #: ../contents/ui/config/ConfigUnits.qml
 msgid "Precision"
@@ -677,7 +677,7 @@ msgstr "Entfernen"
 
 #: ../contents/ui/lib/StationMapSearcher.qml ../contents/ui/lib/StationSearcher.qml
 msgid "Search by:"
-msgstr "Suche nach"
+msgstr "Suche nach:"
 
 #: ../contents/ui/lib/StationMapSearcher.qml
 msgid "Area Name"
@@ -685,7 +685,7 @@ msgstr "Gebietsname"
 
 #: ../contents/ui/lib/StationMapSearcher.qml ../contents/ui/lib/StationSearcher.qml
 msgid "Weatherstation ID:"
-msgstr "Wetterstation ID"
+msgstr "Wetterstation ID:"
 
 #: ../contents/ui/lib/StationMapSearcher.qml ../contents/ui/lib/StationSearcher.qml
 msgid "Lat/Lon"
@@ -838,30 +838,3 @@ msgstr "Fehler..."
 #: ../contents/ui/main.qml
 msgid "Refresh weather"
 msgstr "Wetterdaten aktualisieren"
-
-#~ msgid "Details icon size:"
-#~ msgstr "Größe der Symbole in der Wettervorhersage"
-
-#~ msgid "Status Color"
-#~ msgstr "Status"
-
-#~ msgid "Messages"
-#~ msgstr "Nachrichten"
-
-#~ msgid "AQI: %1"
-#~ msgstr "AQI: %1"
-
-#~ msgid "AQHI: %1"
-#~ msgstr "AQHI: %1"
-
-#~ msgid "Primary pollutant: "
-#~ msgstr "Primärschadstoff:  "
-
-#~ msgid "Amount: %1 %2<br/>Description: %3<br/>Index: %4"
-#~ msgstr "Menge: %1 %2<br/>Beschreibung: %3<br/>Index: %4"
-
-#~ msgid "Sunrise"
-#~ msgstr "Sonnenaufgang"
-
-#~ msgid "Sunset"
-#~ msgstr "Sonnenuntergang"

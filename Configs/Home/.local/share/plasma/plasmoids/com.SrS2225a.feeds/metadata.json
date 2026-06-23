@@ -1,0 +1,25 @@
+{
+  "KPlugin": {
+    "Authors": [
+      {
+        "Email": "info@fenriris.net",
+        "Name": "Fenriris"
+      }
+    ],
+    "Category": "Internet",
+    "Description": "View news articles from the Internet",
+    "EnabledByDefault": true,
+    "Icon": "news-subscribe",
+    "Id": "com.SrS2225a.feeds",
+    "License": "GPL",
+    "Name": "News",
+    "KPackageStructure": "Plasma/Applet",
+    "Version": "1.2",
+    "Website": "https://fenriris.net/"
+  },
+  "X-Plasma-API": "declarativeappletscript",
+  "X-Plasma-MainScript": "ui/main.qml",
+  "X-Plasma-StandAloneApp": true,
+  "X-Plasma-API-Minimum-Version": "6.0",
+  "KPackageStructure": "Plasma/Applet"
+}

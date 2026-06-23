@@ -19,6 +19,7 @@ QtObject {
     property int configMaxAutoTileDelay: 5
     property int configMaxAutoTileDelaySessionStart: 10
     property var configAutoTileBlacklist: ([])
+    property int configAutoTileToggleBehavior: 0
     property var configAutoTileIds: ([])
 
     // Use to determine if people can auto-tile
@@ -47,6 +48,8 @@ QtObject {
     property var activeWindow: Workspace.activeWindow
 
     property var allConnections: ({})
+
+    property int autoTilingBlocked: 0
 
     function logDev(text) {
         root.logDev('AutoTiler - ' + text);
@@ -179,6 +182,17 @@ QtObject {
     function autoTileWindowOnStart(window) {
         if (isValidAutoTileWindow(window)) {
             let currentMapping = getMappingForWindow(window);
+
+            if (autoTilingBlocked > 0) {
+                if (autoTilingBlocked == 3) { // Next window only
+                    autoTilingBlocked = 0;
+                }
+                if (currentMapping.autoTileByDefault) {
+                    window.mt_autoRestore = 128;
+                }
+                return;
+            }
+
             if (currentMapping.autoTileByDefault || ((window.mt_autoRestore & 256) == 256)) {
                 if ((window.mt_autoRestore & 128) != 128) {
                     if (window.mt_auto == undefined) {
@@ -1468,15 +1482,72 @@ QtObject {
         configMaxAutoTileDelay = KWin.readConfig("maxAutoTileDelay", 5);
         configMaxAutoTileDelaySessionStart = KWin.readConfig("maxAutoTileDelaySessionStart", 10);
         configAutoTileBlacklist = KWin.readConfig("autoTileBlacklist", defaultBlacklist).replace(/\s+/g, '').split(',');
+        configAutoTileToggleBehavior = KWin.readConfig("autoTileToggleBehavior", 0);
         configAutoTileIds = KWin.readConfig("autoTileIds", "").replace(/\s+/g, '').split(',');
 
+        initAutoTilingBlocked();
         initAutoTilerLayout(1);
         initAutoTilerLayout(2);
         initAutoTilerLayout(3);
     }
 
+    function initAutoTilingBlocked() {
+        switch (configAutoTileToggleBehavior) {
+            case 0: // Block auto-tiling until re-enabled (resets on new session/reboot)
+                autoTilingBlocked = 0;
+                break;
+            case 1: // Block auto-tiling until re-enabled (will not reset until manually toggled)
+                autoTilingBlocked = settings.autoTilingBlockedCrossSession ? 2 : 0;
+                break;
+            case 2: // Block auto-tiling of next window
+                autoTilingBlocked = 0;
+                break;
+            case 3: // Toggle through all above options
+                autoTilingBlocked = settings.autoTilingBlockedMode;
+                break;
+        }
+    }
+
+    function toggleAutoTilingBlocked() {
+        switch (configAutoTileToggleBehavior) {
+            case 0: // Block auto-tiling until re-enabled (resets on new session/reboot)
+                autoTilingBlocked = autoTilingBlocked == 0 ? 1 : 0;
+                break;
+            case 1: // Block auto-tiling until re-enabled (will not reset until manually toggled)
+                autoTilingBlocked = autoTilingBlocked == 0 ? 2 : 0;
+                settings.autoTilingBlockedCrossSession = autoTilingBlocked == 2;
+                break;
+            case 2: // Block auto-tiling of next window
+                autoTilingBlocked = autoTilingBlocked == 0 ? 3 : 0;
+                break;
+            case 3: // Toggle through all above options
+                autoTilingBlocked++;
+                if (autoTilingBlocked > 3) {
+                    autoTilingBlocked = 0;
+                }
+                settings.autoTilingBlockedCrossSession = autoTilingBlocked == 2;
+                settings.autoTilingBlockedMode = autoTilingBlocked == 2 ? 2 : 0;
+                break;
+        }
+
+        switch(autoTilingBlocked) {
+            case 0: // Auto-tiling enabled
+                onScreenDisplay.show('Auto-tiling allowed', 'emblem-default');
+                break;
+            case 1: // Auto-tiling blocked until re-enabled (resets on new session/reboot)
+                onScreenDisplay.show('Auto-tiling blocked (this session)', 'emblem-readonly');
+                break;
+            case 2: // Auto-tiling blocked until re-enabled (will not reset until manually toggled)
+                onScreenDisplay.show('Auto-tiling blocked (cross-session)', 'emblem-readonly');
+                break;
+            case 3: // Auto-tiling blocked next window only
+                onScreenDisplay.show('Auto-tiling of next window blocked', 'emblem-unreadable');
+                break;
+        }
+    }
+
     function initAutoTilerLayout(humanReadableIndex) {
-        const defaultModes = [8, 1, 12];
+        const defaultModes = [8, 20, 12];
 
         let mode = KWin.readConfig('autoTilerMode' + humanReadableIndex, defaultModes[humanReadableIndex - 1]);
         let name = 'Default';
@@ -1617,7 +1688,7 @@ QtObject {
 0:12,0,76,100+1:88,0,76,100
 -1:-64,0,76,100+0:12,0,76,100+1:88,0,76,100
 -1:-64,0,76,100+0:12,0,76,100+1:88,0,76,100+2:152,0,76,100
--2:-140,0,76+-1:-64,0,76,100+0:12,0,76,100+1:88,0,76,100+2:164,0,76,100`;
+-2:-140,0,76,100+-1:-64,0,76,100+0:12,0,76,100+1:88,0,76,100+2:164,0,76,100`;
                 case 18:
                     name = '50% + 50% CAROUSEL';
                     return `{"carousel":true,"focusAction":5}
@@ -1625,6 +1696,19 @@ QtObject {
 0:0,0,50,100+1:50,0,50,100
 -1:-50,0,50,100+0:0,0,50,100+1:50,0,50,100
 -1:-50,0,50,100+0:0,0,50,100+1:50,0,50,100+2:100,0,50,100`;
+                case 19:
+                    name = '3 COLUMNS';
+                    return `0:0,0,100,100
+0:0,0,50,100+1:50,0,50,100
+2:0,0,33,100+0:33,0,34,100+1:67,0,33,100`;
+                case 20:
+                    name = 'SPIRAL 6';
+                    return `0:0,0,100,100
+0:0,0,50,100+1:50,0,50,100
+2:0,0,33,100+0:33,0,34,100+1:67,0,33,100
+3:0,0,33,50+2:0,50,33,50+0:33,0,34,100+1:67,0,33,100
+4:0,0,33,50+3:0,50,33,50+0:33,0,34,100+1:67,0,33,50+2:67,50,33,50
+5:0,0,33,50+4:0,50,33,50+0:33,0,34,50+3:33,50,34,50+1:67,0,33,50+2:67,50,33,50`;
             }
         }
 

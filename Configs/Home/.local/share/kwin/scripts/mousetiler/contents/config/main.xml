@@ -279,6 +279,9 @@ SPECIAL_AUTO_TILER_3</default>
         <entry name="autoTileRestoreSizeAndPosition" type="Bool">
             <default>true</default>
         </entry>
+        <entry name="autoTileToggleBehavior" type="Int">
+            <default>0</default>
+        </entry>
         <entry name="autoTileIds" type="String">
             <default></default>
         </entry>

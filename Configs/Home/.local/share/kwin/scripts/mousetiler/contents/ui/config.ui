@@ -2642,6 +2642,47 @@
            </widget>
           </item>
           <item>
+           <layout class="QFormLayout" name="formLayout_11">
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_110">
+              <property name="text">
+               <string>Auto tile toggle shortcut behavior (only applies to new windows - manual auto-tiling via shortcut or popup grid still works)</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QComboBox" name="kcfg_autoTileToggleBehavior">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <item>
+               <property name="text">
+                <string>Block auto-tiling until re-enabled (resets on new session/reboot)</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Block auto-tiling until re-enabled (will not reset until manually toggled)</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Block auto-tiling of next window</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Toggle through all modes (mode remembered cross-session)</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
            <layout class="QFormLayout" name="formLayout_9">
             <item row="1" column="1">
              <widget class="QLineEdit" name="kcfg_autoTileBlacklist"/>
@@ -3124,6 +3165,16 @@
                 <string>❌ Multi-monitor friendly - 50% + 50% CAROUSEL</string>
                </property>
               </item>
+              <item>
+               <property name="text">
+                <string>✅ Multi-monitor friendly - 3 COLUMNS</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>✅ Multi-monitor friendly - SPIRAL 6</string>
+               </property>
+              </item>
              </widget>
             </item>
             <item row="2" column="0">
@@ -3325,6 +3376,16 @@
                 <string>❌ Multi-monitor friendly - 50% + 50% CAROUSEL</string>
                </property>
               </item>
+              <item>
+               <property name="text">
+                <string>✅ Multi-monitor friendly - 3 COLUMNS</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>✅ Multi-monitor friendly - SPIRAL 6</string>
+               </property>
+              </item>
              </widget>
             </item>
             <item row="1" column="2">
@@ -3422,6 +3483,16 @@
               <item>
                <property name="text">
                 <string>❌ Multi-monitor friendly - 50% + 50% CAROUSEL</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>✅ Multi-monitor friendly - 3 COLUMNS</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>✅ Multi-monitor friendly - SPIRAL 6</string>
                </property>
               </item>
              </widget>

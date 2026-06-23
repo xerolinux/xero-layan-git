@@ -48,8 +48,8 @@ RowLayout {
     GridLayout {
         id: aqGrid
 
-        columns: 4
-        rows: 3
+        columns: 2
+        rows: 4
 
         Layout.preferredWidth: 1
         Layout.fillWidth: true
@@ -59,7 +59,7 @@ RowLayout {
         PlasmaComponents.Label {
             id: aqLabel
 
-            Layout.columnSpan: 4
+            Layout.columnSpan: 2
             Layout.fillWidth: true
 
             horizontalAlignment: Text.AlignHCenter
@@ -78,7 +78,7 @@ RowLayout {
             Layout.preferredWidth: aqIndexTxt.width + 5
             Layout.preferredHeight: aqIndexTxt.height + 5
             Layout.alignment: Qt.AlignCenter
-            Layout.columnSpan: 4
+            Layout.columnSpan: 2
 
             color: "#" + weatherData["aq"]["aqColor"]
 
@@ -297,8 +297,8 @@ RowLayout {
     GridLayout {
         id: solGrid
 
-        columns: 4
-        rows: 3
+        columns: 2
+        rows: 4
 
         uniformCellWidths: true
 
@@ -308,7 +308,7 @@ RowLayout {
         PlasmaComponents.Label {
             id: solLabel
 
-            Layout.columnSpan: 4
+            Layout.columnSpan: 2
             Layout.alignment: Qt.AlignHCenter
             Layout.fillWidth: true
 
@@ -326,7 +326,7 @@ RowLayout {
             Layout.preferredWidth: solStatusTxt.width + 5
             Layout.preferredHeight: solStatusTxt.height + 5
             Layout.alignment: Qt.AlignCenter
-            Layout.columnSpan: 4
+            Layout.columnSpan: 2
 
             color: weatherData["kp-color"] || "#FFFFFF"
 

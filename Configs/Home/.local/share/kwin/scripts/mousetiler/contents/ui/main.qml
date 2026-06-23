@@ -1437,6 +1437,8 @@ SPECIAL_AUTO_TILER_3`;
         // Saved in default settings file ~/.config/kde.org/kwin.conf
         id: settings
         property bool showTilingSuggestions: true
+        property bool autoTilingBlockedCrossSession: false
+        property int autoTilingBlockedMode: 0
     }
 
     Connections {
@@ -1737,6 +1739,16 @@ SPECIAL_AUTO_TILER_3`;
         }
     }
 
+    ShortcutHandler {
+        name: "Mouse Tiler: Auto Tiler - Block Toggle"
+        text: "Mouse Tiler: Auto Tiler - Block Toggle"
+        sequence: "Ctrl+Alt+B"
+        onActivated: {
+            log('Auto Tiler - Block Toggle triggered!');
+            autoTiler.toggleAutoTilingBlocked();
+        }
+    }
+
     ScreenEdgeHandler {
         enabled: autoTiler.shouldShowLeftScreenEdge
         edge: ScreenEdgeHandler.LeftEdge
@@ -1761,8 +1773,8 @@ SPECIAL_AUTO_TILER_3`;
         path: "/org/kde/osdService"
         method: "showText"
 
-        function show(message) {
-            this.arguments = ['dialog-error', message];
+        function show(message, icon = 'dialog-error') {
+            this.arguments = [icon, message];
             this.call();
         }
     }
