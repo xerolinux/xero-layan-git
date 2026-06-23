@@ -283,7 +283,7 @@ swap_fastfetch_logo_fedora() {
   sed -i \
     -e 's#"source": "~/.config/fastfetch/ArchP.png",#"source": "fedora",#' \
     -e 's#"type": "kitty",#"type": "builtin",#' \
-    -e 's#"width": 30,#"width": 16,#' \
+    -e 's#"width": 30,#"width": 13,#' \
     -e 's#"top": 8,#"top": 6,#' \
     "$cfg"
 }
