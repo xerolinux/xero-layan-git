@@ -1,24 +1,24 @@
 {
-  "KPackageStructure": "Plasma/Applet",
-  "KPlugin": {
-    "Authors": [
-      {
-        "Email": "catterina.claudio@gmail.com",
-        "Name": "Claudio Catterina"
-      }
-    ],
-    "Description": "Show currently playing song information and provide playback controls",
-    "BugReportUrl": "https://github.com/ccatterina/plasmusic-toolbar/issues",
-    "Website": "https://github.com/ccatterina/plasmusic-toolbar",
-    "Icon": "view-media-track",
-    "Id": "plasmusic-toolbar",
-    "License": "GPL3",
-    "Name": "PlasMusic Toolbar",
-    "Version": "4.0.0",
-    "Category": "Multimedia"
-  },
-  "X-Plasma-API-Minimum-Version": "6.0.4",
-  "X-Plasma-Provides": [
-    "org.kde.plasma.multimediacontrols"
-  ]
+    "KPlugin": {
+        "Authors": [
+            {
+                "Name": "Evgeny Kazantsev",
+                "Email": "exequtic@gmail.com"
+            }
+        ],
+        "Category": "System Information",
+        "Description": "Arch Update Notifier",
+        "Icon": "apdatifier-plasmoid",
+        "Id": "com.github.exequtic.apdatifier",
+        "Name": "Apdatifier",
+        "EnabledByDefault": false,
+        "Version": "2.9.9",
+        "License": "MIT",
+        "BugReportUrl": "https://github.com/exequtic/apdatifier/issues",
+        "Website": "https://github.com/exequtic/apdatifier"
+    },
+    "KPackageStructure": "Plasma/Applet",
+    "X-Plasma-API-Minimum-Version": "6.0",
+    "X-Plasma-NotificationArea": "true",
+    "X-Plasma-NotificationAreaCategory": "SystemServices"
 }

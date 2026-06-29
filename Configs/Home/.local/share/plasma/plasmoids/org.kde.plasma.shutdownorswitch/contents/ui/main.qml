@@ -25,22 +25,27 @@ PlasmoidItem {
     readonly property bool showIcon: Plasmoid.configuration.showIcon
     readonly property bool showName: Plasmoid.configuration.showName
     readonly property bool showFullName: Plasmoid.configuration.showFullName
+    readonly property string icon: Plasmoid.configuration.icon
     readonly property bool showLockScreen: Plasmoid.configuration.showLockScreen
     readonly property bool showLogOut: Plasmoid.configuration.showLogOut
     readonly property bool showRestart: Plasmoid.configuration.showRestart
     readonly property bool showShutdown: Plasmoid.configuration.showShutdown
     readonly property bool showSuspend: Plasmoid.configuration.showSuspend
-    readonly property bool showHybernate: Plasmoid.configuration.showHybernate
+    readonly property bool showSuspendThenHibernate: Plasmoid.configuration.showSuspendThenHibernate
+    readonly property bool showHibernate: Plasmoid.configuration.showHibernate
     readonly property bool showNewSession: Plasmoid.configuration.showNewSession
     readonly property bool showUsers: Plasmoid.configuration.showUsers
     readonly property bool showText: Plasmoid.configuration.showText
+    readonly property int shutdownConfirmation: Plasmoid.configuration.shutdownConfirmation - 1
+    readonly property int rebootConfirmation: Plasmoid.configuration.rebootConfirmation - 1
+    readonly property int logoutConfirmation: Plasmoid.configuration.logoutConfirmation - 1
 
     readonly property bool isVertical: Plasmoid.formFactor === PlasmaCore.Types.Vertical
     readonly property bool inPanel: (Plasmoid.location === PlasmaCore.Types.TopEdge
         || Plasmoid.location === PlasmaCore.Types.RightEdge
         || Plasmoid.location === PlasmaCore.Types.BottomEdge
         || Plasmoid.location === PlasmaCore.Types.LeftEdge)
-    
+
     readonly property string avatarIcon: kuser.faceIconUrl.toString()
     readonly property string displayedName: showFullName ? kuser.fullName : kuser.loginName
 
@@ -83,7 +88,7 @@ PlasmoidItem {
 
             Kirigami.Icon {
                 id: shutdownIcon
-                source: "system-shutdown"
+                source: root.icon
                 anchors.verticalCenter: parent.verticalCenter
                 height: compactRoot.height - Math.round(Kirigami.Units.smallSpacing / 2)
                 width: height
@@ -118,7 +123,7 @@ PlasmoidItem {
         Layout.minimumWidth: Layout.preferredWidth
         Layout.minimumHeight: Layout.preferredHeight
         Layout.maximumWidth: Layout.preferredWidth
-        Layout.maximumHeight: Screen.height / 2
+        Layout.maximumHeight: Layout.preferredHeight
 
         Sessions.SessionManagement {
             id: sm
@@ -214,15 +219,15 @@ PlasmoidItem {
                 icon.name: "system-log-out"
                 visible: sm.canLogout && showLogOut
                 KeyNavigation.up: lockScreenButton
-                onClicked: sm.requestLogout(0) // do not show the Leave screen
+                onClicked: sm.requestLogout(logoutConfirmation)
             }
 
             ActionListDelegate {
                 id: rebootButton
-                text: showText ? i18nc("@action", "Reboot...") : ""
+                text: showText ? i18nc("@action", "Reboot") : ""
                 icon.name: "system-reboot"
                 visible: sm.canReboot && showRestart
-                onClicked: sm.requestReboot(0) // do not show the Leave screen
+                onClicked: sm.requestReboot(rebootConfirmation)
             }
 
             ActionListDelegate {
@@ -230,7 +235,7 @@ PlasmoidItem {
                 text: showText ? i18nc("@action", "Shutdown") : ""
                 icon.name: "system-shutdown"
                 visible: sm.canShutdown && showShutdown
-                onClicked: sm.requestShutdown(0) // do not show the Leave screen
+                onClicked: sm.requestShutdown(shutdownConfirmation)
             }
 
             ActionListDelegate {
@@ -242,11 +247,19 @@ PlasmoidItem {
             }
 
             ActionListDelegate {
-                id: hybernateButton
-                text: showText ? i18nc("@action", "Hybernate") : ""
+                id: suspendThenHibernateButton
+                text: showText ? i18nc("@action", "Suspend then Hibernate") : ""
                 icon.name: "system-suspend-hibernate"
-                visible: sm.canSuspendThenHibernate && showHybernate
+                visible: sm.canSuspendThenHibernate && showSuspendThenHibernate
                 onClicked: sm.suspendThenHibernate()
+            }
+
+            ActionListDelegate {
+                id: hibernateButton
+                text: showText ? i18nc("@action", "Hibernate") : ""
+                icon.name: "system-hibernate"
+                visible: sm.canHibernate && showHibernate
+                onClicked: sm.hibernate()
             }
         }
 

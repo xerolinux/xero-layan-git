@@ -1,53 +1,144 @@
 import QtQuick
 import QtQuick.Layouts
-import org.kde.plasma.core as PlasmaCore
-import org.kde.plasma.plasmoid
-import org.kde.plasma.components as PlasmaComponents3
-import org.kde.kirigami as Kirigami
-import org.kde.plasma.private.mpris as Mpris
+import QtNetwork
 
+import org.kde.plasma.plasmoid
+import org.kde.kirigami as Kirigami
+import org.kde.plasma.core as PlasmaCore
+
+import "components"
+import "representation" as Rep
+import "../tools/tools.js" as JS
 
 PlasmoidItem {
-    id: widget
-
-    Plasmoid.status: (showWhenNoMedia || player.ready) ? PlasmaCore.Types.ActiveStatus : PlasmaCore.Types.HiddenStatus
-    Plasmoid.backgroundHints: plasmoid.configuration.desktopWidgetBg
-
-    readonly property int formFactor: Plasmoid.formFactor
-    readonly property int location: Plasmoid.location
-    readonly property bool showWhenNoMedia: plasmoid.configuration.showWhenNoMedia
-
-    readonly property font baseFont: plasmoid.configuration.useCustomFont ? plasmoid.configuration.customFont : Kirigami.Theme.defaultFont
-
-    toolTipTextFormat: Text.PlainText
-    toolTipMainText: player.playbackStatus > Mpris.PlaybackStatus.Stopped ? player.title : i18n("No media playing")
-    toolTipSubText: {
-        let text = player.artists ? i18nc("%1 is the media artist/author and %2 is the player name", "by %1 (%2)", player.artists, player.identity)
-            : i18nc("%1 is the player name", "%1", player.identity)
-        text += "\n" + (player.playbackStatus === Mpris.PlaybackStatus.Playing ? i18n("Middle-click to pause") : i18n("Middle-click to play"))
-        text += "\n" + i18n("Scroll to adjust volume")
-        text += "\n" + (player.canRaise ? i18n("Ctrl+Click to bring player to the front") : i18n("This player can't be raised"))
-        return text
+    id: root
+    compactRepresentation: Rep.Panel {}
+    fullRepresentation: Rep.Expanded {
+        Layout.minimumWidth: Kirigami.Units.gridUnit * 24
+        Layout.minimumHeight: Kirigami.Units.gridUnit * 16
+        anchors.fill: parent
+        focus: true
     }
 
-    onShowWhenNoMediaChanged: {
-        Plasmoid.status = (showWhenNoMedia || player.ready) ? PlasmaCore.Types.ActiveStatus : PlasmaCore.Types.HiddenStatus
-    }
+    switchWidth: Kirigami.Units.gridUnit * 24
+    switchHeight: Kirigami.Units.gridUnit * 16
 
-    Player {
-        id: player
-        sourceIdentity: {
-            if (!plasmoid.configuration.choosePlayerAutomatically) {
-                return plasmoid.configuration.preferredPlayerIdentity
-            }
+    Plasmoid.busy: plasmoid.location === PlasmaCore.Types.Floating ? false : ((cfg.busyIndicator || "spinner") === "spinner" ? sts.busy : false)
+    Plasmoid.backgroundHints: PlasmaCore.Types.DefaultBackground | PlasmaCore.Types.ConfigurableBackground
+    Plasmoid.icon: plasmoid.configuration.selectedIcon
+
+    function updatePlasmoidStatus() {
+        if (sts.count >= cfg.hideIconPolicy || sts.busy || sts.error || panelConfigurationMode) {
+            Plasmoid.status = PlasmaCore.Types.ActiveStatus
+        } else {
+            Plasmoid.status = inTray ? PlasmaCore.Types.PassiveStatus : PlasmaCore.Types.HiddenStatus
         }
-        onReadyChanged: {
-            Plasmoid.status = (showWhenNoMedia || player.ready) ? PlasmaCore.Types.ActiveStatus : PlasmaCore.Types.HiddenStatus
-            console.debug(`Player ready changed: ${player.ready} -> plasmoid status changed: ${Plasmoid.status}`)
-        }
-
     }
 
-    compactRepresentation: Compact {}
-    fullRepresentation: Full {}
+    property int hideIconPolicy: cfg.hideIconPolicy
+    property int countUpdates: sts.count
+    onHideIconPolicyChanged: updatePlasmoidStatus()
+    onCountUpdatesChanged: updatePlasmoidStatus()
+
+    toolTipMainText: sts.paused ? i18n("Auto check disabled") : ""
+    toolTipSubText: sts.busy ? sts.statusMsg : sts.checkTimeTooltip
+
+    hideOnWindowDeactivate: !pinned
+
+    property bool isOnline: cfg.checkConn ? (NetworkInformation.reachability === NetworkInformation.Reachability.Online) : true
+    property bool isMetered: NetworkInformation.isMetered && cfg.respectMeteredConn
+    property bool inTray: (plasmoid.containmentDisplayHints & PlasmaCore.Types.ContainmentDrawsPlasmoidHeading)
+    property bool onDesktop: plasmoid.location === PlasmaCore.Types.Floating
+    property bool horizontal: plasmoid.location === PlasmaCore.Types.TopEdge || plasmoid.location === PlasmaCore.Types.BottomEdge
+    property bool panelConfigurationMode: Plasmoid.containment.corona?.editMode ?? false
+    property bool pinned: false
+    property bool listCompactMode: false
+    property var cache: []
+    property string checkMode: plasmoid.configuration.checkMode
+    property bool sorting: plasmoid.configuration.sorting
+    property string rules: plasmoid.configuration.rules || ""
+    property var pkg: plasmoid.configuration.packages || ""
+    property var cfg: plasmoid.configuration
+    property var configuration: JSON.stringify(cfg)
+
+    QtObject {
+        id: sts
+        property bool init: false
+        property var errors: []
+        property int count: 0
+        property double lastCheck: 0
+        property bool busy: true
+        property bool upgrading: false
+        property bool error: !busy && errors.length > 0
+        property bool paused: !busy && !scheduler.running && cfg.checkMode !== "manual"
+        property string statusMsg: ""
+        property string statusIco: ""
+        property string checkTimeTooltip: ""
+        property var proc: null
+    }
+
+    ListModel  {
+        id: listModel
+    }
+
+    ListModel  {
+        id: newsModel
+    }
+
+    ListModel {
+        id: activeNewsModel
+    }
+
+    Notification {
+        id: notify
+    }
+
+    Plasmoid.contextualActions: [
+        PlasmaCore.Action {
+            text: i18n("Check updates")
+            icon.name: "view-refresh"
+            enabled: !sts.upgrading
+            onTriggered: sts.proc ? JS.stopCheck() : JS.checkUpdates()
+        },
+        PlasmaCore.Action {
+            text: i18n("Upgrade system")
+            icon.name: "akonadiconsole"
+            enabled: (cfg.terminal && cfg.tmuxSession && sts.count) || (cfg.terminal && !sts.busy && sts.count)
+            onTriggered: JS.upgradeSystem()
+        },
+        PlasmaCore.Action {
+            text: i18n("Management")
+            icon.name: "tools"
+            enabled: cfg.terminal && pkg.pacman
+            onTriggered: JS.management()
+        }
+    ]
+
+    Timer {
+        id: scheduler
+        interval: 10 * 1000
+        repeat: true
+        triggeredOnStart: true
+        onTriggered: JS.searchScheduler()
+    }
+
+    Timer {
+        id: upgradeTimer
+        interval: 1000
+        repeat: true
+        onTriggered: JS.upgradingState()
+    }
+
+    Timer {
+        id: saveTimer
+        interval: 1000
+        onTriggered: JS.saveConfig()
+    }
+
+    onIsOnlineChanged: (!isOnline && sts.proc) && JS.stopCheck()
+    onCheckModeChanged: sts.init && scheduler.restart()
+    onSortingChanged: sts.init && JS.refreshListModel()
+    onRulesChanged: sts.init && JS.refreshListModel()
+    onConfigurationChanged: saveTimer.start()
+	Component.onCompleted: JS.init()
 }

@@ -12,18 +12,23 @@ import QtQuick.Dialogs
 
 import org.kde.kirigami as Kirigami
 import org.kde.kcmutils as KCM
+import org.kde.iconthemes as KIconThemes
 
 KCM.SimpleKCM {
     property bool cfg_showIcon
     property bool cfg_showName
     property bool cfg_showFullName
+    property alias cfg_shutdownConfirmation: shutdownConfirmation.currentIndex
+    property alias cfg_rebootConfirmation: rebootConfirmation.currentIndex
+    property alias cfg_logoutConfirmation: logoutConfirmation.currentIndex
     property alias cfg_showNewSession: showNewSession.checked
     property alias cfg_showLockScreen: showLockScreen.checked
     property alias cfg_showLogOut: showLogOut.checked
     property alias cfg_showRestart: showRestart.checked
     property alias cfg_showShutdown: showShutdown.checked
     property alias cfg_showSuspend: showSuspend.checked
-    property alias cfg_showHybernate: showHybernate.checked
+    property alias cfg_showSuspendThenHibernate: showSuspendThenHibernate.checked
+    property alias cfg_showHibernate: showHibernate.checked
     property alias cfg_showUsers: showUsers.checked
     property alias cfg_showText: showText.checked
     property alias cfg_icon: icon.text
@@ -167,8 +172,13 @@ KCM.SimpleKCM {
         }
 
         QtControls.CheckBox {
-            id: showHybernate
-            text: i18nc("@option:check", "Hybernate")
+            id: showSuspendThenHibernate
+            text: i18nc("@option:check", "Suspend then Hibernate")
+        }
+
+        QtControls.CheckBox {
+            id: showHibernate
+            text: i18nc("@option:check", "Hibernate")
         }
 
         QtControls.CheckBox {
@@ -177,5 +187,38 @@ KCM.SimpleKCM {
             text: ""
         }
 
+        Item {
+            Kirigami.FormData.isSection: true
+        }
+
+        QtControls.ComboBox {
+            Kirigami.FormData.label: i18nc("@title:label", "Confirmation on Shutdown:")
+            id: shutdownConfirmation
+            model: ["Follow System", "Don't ask", "Always ask"]
+            currentIndex: 1
+        }
+
+        QtControls.ComboBox {
+            Kirigami.FormData.label: i18nc("@title:label", "Confirmation on Reboot:")
+            id: rebootConfirmation
+            model: ["Follow System", "Don't ask", "Always ask"]
+            currentIndex: 1
+        }
+
+        QtControls.ComboBox {
+            Kirigami.FormData.label: i18nc("@title:label", "Confirmation on Logout:")
+            id: logoutConfirmation
+            model: ["Follow System", "Don't ask", "Always ask"]
+            currentIndex: 1
+        }
+
+    }
+
+    KIconThemes.IconDialog {
+        id: iconDialog
+
+        onIconNameChanged: iconName => {
+            cfg_icon = iconName;
+        }
     }
 }

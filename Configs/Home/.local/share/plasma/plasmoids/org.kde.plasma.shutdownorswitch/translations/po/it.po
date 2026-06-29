@@ -1,0 +1,199 @@
+# Translation of shutdownorswitch in Italian (Italiano)
+# Copyright (C) 2026
+# This file is distributed under the same license as the shutdownorswitch package.
+# Gaetano Orciuoli - Nino Di Mario <nino3084@gmail.com>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: shutdownorswitch 1.1.4\n"
+"Report-Msgid-Bugs-To: https://github.com/Davide-sd/shutdown_or_switch\n"
+"POT-Creation-Date: 2025-10-09 09:55+0200\n"
+"PO-Revision-Date: 2026-04-13 09:55+0200\n"
+"Last-Translator: Gaetano Orciuoli - Nino Di Mario  <nino3084@gmail.com>\n"
+"Language-Team: Italian (Italiano) <nino3084@gmail.com>\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../metadata.json
+msgid "Shutdown or Switch"
+msgstr "Spegni o Cambio Utente"
+
+#: ../metadata.json
+msgid "Quickly switch between different users and access shutdown options"
+msgstr "Accedi alle Opzioni di Spegnimento o di Cambio Utente"
+
+#: ../contents/config/config.qml
+msgctxt "@title"
+msgid "General"
+msgstr "Generale"
+
+#: ../contents/ui/configGeneral.qml
+msgctxt "@title:label"
+msgid "Username style:"
+msgstr "Stile Nome Utente:"
+
+#: ../contents/ui/configGeneral.qml
+msgctxt "@option:radio"
+msgid "Full name (if available)"
+msgstr "Nome Completo (se disponibile)"
+
+#: ../contents/ui/configGeneral.qml
+msgctxt "@option:radio"
+msgid "Login username"
+msgstr "Nome Utente di Accesso"
+
+#: ../contents/ui/configGeneral.qml
+msgctxt "@title:label"
+msgid "Show:"
+msgstr "Mostra:"
+
+#: ../contents/ui/configGeneral.qml
+msgctxt "@option:radio"
+msgid "Name"
+msgstr "Nome"
+
+#: ../contents/ui/configGeneral.qml
+msgctxt "@option:radio"
+msgid "Icon"
+msgstr "Icona"
+
+#: ../contents/ui/configGeneral.qml
+msgctxt "@option:radio"
+msgid "Icon and Name"
+msgstr "Icona & Nome"
+
+#: ../contents/ui/configGeneral.qml
+msgctxt "@title:label"
+msgid "Icon:"
+msgstr "Icona:"
+
+#: ../contents/ui/configGeneral.qml
+msgctxt "@title:label"
+msgid "Menu Entries:"
+msgstr "Menu Opzioni:"
+
+#: ../contents/ui/configGeneral.qml
+msgctxt "@option:check"
+msgid "Users"
+msgstr "Utenti"
+
+#: ../contents/ui/configGeneral.qml
+msgctxt "@option:check"
+msgid "New Session"
+msgstr "Nuova Sessione"
+
+#: ../contents/ui/configGeneral.qml
+msgctxt "@option:check"
+msgid "Lock Screen"
+msgstr "Schermata di Blocco"
+
+#: ../contents/ui/configGeneral.qml
+msgctxt "@option:check"
+msgid "Log Out"
+msgstr "Esci"
+
+#: ../contents/ui/configGeneral.qml
+msgctxt "@option:check"
+msgid "Restart"
+msgstr "Riavvia"
+
+#: ../contents/ui/configGeneral.qml
+msgctxt "@option:check"
+msgid "Shutdown"
+msgstr "Spegni"
+
+#: ../contents/ui/configGeneral.qml
+msgctxt "@option:check"
+msgid "Suspend"
+msgstr "Sospendi"
+
+#: ../contents/ui/configGeneral.qml
+msgctxt "@option:check"
+msgid "Suspend then Hibernate"
+msgstr "Sospendi & Iberna"
+
+#: ../contents/ui/configGeneral.qml
+msgctxt "@option:check"
+msgid "Hibernate"
+msgstr "Iberna"
+
+#: ../contents/ui/configGeneral.qml
+msgctxt "@title:label"
+msgid "Show text on Menu Entries:"
+msgstr "Mostra testo nelle voci del Menu:"
+
+#: ../contents/ui/configGeneral.qml
+msgctxt "@title:label"
+msgid "Confirmation on Shutdown:"
+msgstr "Conferma Spegnimento:"
+
+#: ../contents/ui/configGeneral.qml
+msgctxt "@title:label"
+msgid "Confirmation on Reboot:"
+msgstr "Conferma Riavvio:"
+
+#: ../contents/ui/configGeneral.qml
+msgctxt "@title:label"
+msgid "Confirmation on Logout:"
+msgstr "Conferma uscita:"
+
+#: ../contents/ui/main.qml
+msgid "You are logged in as <b>%1</b>"
+msgstr "Hai effettuato l'accesso come <b>%1</b>"
+
+#: ../contents/ui/main.qml
+msgid "Current user"
+msgstr "Utente Corrente"
+
+#: ../contents/ui/main.qml
+msgctxt "Nobody logged in on that session"
+msgid "Unused"
+msgstr "Non Utilizzato"
+
+#: ../contents/ui/main.qml
+msgctxt "@action:button"
+msgid "Switch to User %1"
+msgstr "Cambia verso l'utente %1"
+
+#: ../contents/ui/main.qml
+msgctxt "@action"
+msgid "New Session"
+msgstr "Nuova Sessione"
+
+#: ../contents/ui/main.qml
+msgctxt "@action"
+msgid "Lock Screen"
+msgstr "Schermata di Blocco"
+
+#: ../contents/ui/main.qml
+msgctxt "@action"
+msgid "Log Out"
+msgstr "Esci"
+
+#: ../contents/ui/main.qml
+msgctxt "@action"
+msgid "Reboot"
+msgstr "Riavvia"
+
+#: ../contents/ui/main.qml
+msgctxt "@action"
+msgid "Shutdown"
+msgstr "Spegni"
+
+#: ../contents/ui/main.qml
+msgctxt "@action"
+msgid "Suspend"
+msgstr "Sospendi"
+
+#: ../contents/ui/main.qml
+msgctxt "@action"
+msgid "Suspend then Hibernate"
+msgstr "Sospendi & Iberna"
+
+#: ../contents/ui/main.qml
+msgctxt "@action"
+msgid "Hibernate"
+msgstr "Iberna"

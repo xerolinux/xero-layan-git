@@ -1,0 +1,199 @@
+# Translation of shutdownorswitch in Polish
+# Copyright (C) 2025
+# This file is distributed under the same license as the shutdownorswitch package.
+# Rygorr Mortis <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: shutdownorswitch 1.1.3\n"
+"Report-Msgid-Bugs-To: https://github.com/Davide-sd/shutdown_or_switch\n"
+"POT-Creation-Date: 2025-10-09 09:55+0200\n"
+"PO-Revision-Date: 2025-10-09 09:55+0200\n"
+"Last-Translator: RygorrMortis <rygorrmortis@gmail.com>\n"
+"Language-Team: Polish <pl@li.org>\n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../metadata.json
+msgid "Shutdown or Switch"
+msgstr "Wyłącz lub przełącz"
+
+#: ../metadata.json
+msgid "Quickly switch between different users and access shutdown options"
+msgstr "Szybko przełączaj się między użytkownikami i uzyskaj dostęp do opcji wyłączania"
+
+#: ../contents/config/config.qml
+msgctxt "@title"
+msgid "General"
+msgstr "Ogólne"
+
+#: ../contents/ui/configGeneral.qml
+msgctxt "@title:label"
+msgid "Username style:"
+msgstr "Styl nazwy użytkownika:"
+
+#: ../contents/ui/configGeneral.qml
+msgctxt "@option:radio"
+msgid "Full name (if available)"
+msgstr "Pełna nazwa (jeśli dostępna)"
+
+#: ../contents/ui/configGeneral.qml
+msgctxt "@option:radio"
+msgid "Login username"
+msgstr "Nazwa użytkownika logowania"
+
+#: ../contents/ui/configGeneral.qml
+msgctxt "@title:label"
+msgid "Show:"
+msgstr "Pokaż:"
+
+#: ../contents/ui/configGeneral.qml
+msgctxt "@option:radio"
+msgid "Name"
+msgstr "Nazwa"
+
+#: ../contents/ui/configGeneral.qml
+msgctxt "@option:radio"
+msgid "Icon"
+msgstr "Ikona"
+
+#: ../contents/ui/configGeneral.qml
+msgctxt "@option:radio"
+msgid "Icon and Name"
+msgstr "Ikona i nazwa"
+
+#: ../contents/ui/configGeneral.qml
+msgctxt "@title:label"
+msgid "Icon:"
+msgstr "Ikona:"
+
+#: ../contents/ui/configGeneral.qml
+msgctxt "@title:label"
+msgid "Menu Entries:"
+msgstr "Wpisy menu:"
+
+#: ../contents/ui/configGeneral.qml
+msgctxt "@option:check"
+msgid "Users"
+msgstr "Użytkownicy"
+
+#: ../contents/ui/configGeneral.qml
+msgctxt "@option:check"
+msgid "New Session"
+msgstr "Nowa sesja"
+
+#: ../contents/ui/configGeneral.qml
+msgctxt "@option:check"
+msgid "Lock Screen"
+msgstr "Zablokuj ekran"
+
+#: ../contents/ui/configGeneral.qml
+msgctxt "@option:check"
+msgid "Log Out"
+msgstr "Wyloguj"
+
+#: ../contents/ui/configGeneral.qml
+msgctxt "@option:check"
+msgid "Restart"
+msgstr "Uruchom ponownie"
+
+#: ../contents/ui/configGeneral.qml
+msgctxt "@option:check"
+msgid "Shutdown"
+msgstr "Wyłącz"
+
+#: ../contents/ui/configGeneral.qml
+msgctxt "@option:check"
+msgid "Suspend"
+msgstr "Uśpij"
+
+#: ../contents/ui/configGeneral.qml
+msgctxt "@option:check"
+msgid "Suspend then Hibernate"
+msgstr "Uśpij, a następnie hibernuj"
+
+#: ../contents/ui/configGeneral.qml
+msgctxt "@option:check"
+msgid "Hibernate"
+msgstr "Hibernuj"
+
+#: ../contents/ui/configGeneral.qml
+msgctxt "@title:label"
+msgid "Show text on Menu Entries:"
+msgstr "Pokaż tekst na wpisach menu:"
+
+#: ../contents/ui/configGeneral.qml
+msgctxt "@title:label"
+msgid "Confirmation on Shutdown:"
+msgstr "Potwierdzenie przy wyłączaniu:"
+
+#: ../contents/ui/configGeneral.qml
+msgctxt "@title:label"
+msgid "Confirmation on Reboot:"
+msgstr "Potwierdzenie przy ponownym uruchomieniu:"
+
+#: ../contents/ui/configGeneral.qml
+msgctxt "@title:label"
+msgid "Confirmation on Logout:"
+msgstr "Potwierdzenie przy wylogowaniu:"
+
+#: ../contents/ui/main.qml
+msgid "You are logged in as <b>%1</b>"
+msgstr "Jesteś zalogowany jako <b>%1</b>"
+
+#: ../contents/ui/main.qml
+msgid "Current user"
+msgstr "Bieżący użytkownik"
+
+#: ../contents/ui/main.qml
+msgctxt "Nobody logged in on that session"
+msgid "Unused"
+msgstr "Nieużywany"
+
+#: ../contents/ui/main.qml
+msgctxt "@action:button"
+msgid "Switch to User %1"
+msgstr "Przełącz na użytkownika %1"
+
+#: ../contents/ui/main.qml
+msgctxt "@action"
+msgid "New Session"
+msgstr "Nowa sesja"
+
+#: ../contents/ui/main.qml
+msgctxt "@action"
+msgid "Lock Screen"
+msgstr "Zablokuj ekran"
+
+#: ../contents/ui/main.qml
+msgctxt "@action"
+msgid "Log Out"
+msgstr "Wyloguj"
+
+#: ../contents/ui/main.qml
+msgctxt "@action"
+msgid "Reboot"
+msgstr "Uruchom ponownie"
+
+#: ../contents/ui/main.qml
+msgctxt "@action"
+msgid "Shutdown"
+msgstr "Wyłącz"
+
+#: ../contents/ui/main.qml
+msgctxt "@action"
+msgid "Suspend"
+msgstr "Uśpij"
+
+#: ../contents/ui/main.qml
+msgctxt "@action"
+msgid "Suspend then Hibernate"
+msgstr "Uśpij, a następnie hibernuj"
+
+#: ../contents/ui/main.qml
+msgctxt "@action"
+msgid "Hibernate"
+msgstr "Hibernuj"
