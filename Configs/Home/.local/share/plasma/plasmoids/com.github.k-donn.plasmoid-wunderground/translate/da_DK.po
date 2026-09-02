@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmoid-wunderground\n"
 "Report-Msgid-Bugs-To: https://github.com/k-donn/plasmoid-wunderground\n"
-"POT-Creation-Date: 2026-06-09 20:53-0500\n"
-"PO-Revision-Date: 2026-04-14 00:03+0200\n"
+"POT-Creation-Date: 2026-08-29 14:25-0500\n"
+"PO-Revision-Date: 2026-08-17 12:02+0200\n"
 "Last-Translator: Martin Eilsøe <martin@eilsoe.dk>\n"
 "Language-Team: <ll@li.org>\n"
 "Language: da_DK\n"
@@ -26,11 +26,192 @@ msgstr "Wunderground"
 
 #: ../metadata.json
 msgid "Wunderground Personal Weather Station viewer"
-msgstr "Personlig Vejrstation viser"
+msgstr "Personlig Vejrstation Viser"
+
+#: ../contents/code/pws-api.js
+msgid "Could not send request"
+msgstr "Kunne ikke sende forespørgsel"
+
+#: ../contents/code/pws-api.js
+msgid "Network error"
+msgstr "Netværksfejl"
+
+#: ../contents/code/pws-api.js
+msgid "network"
+msgstr "netværk"
+
+#: ../contents/code/pws-api.js
+msgid "Request failed"
+msgstr "Forespørgsel fejlede"
+
+#: ../contents/code/pws-api.js
+msgid "No stations found"
+msgstr "Ingen stationer fundet"
 
 #: ../contents/code/pws-api.js
 msgid "Location not found"
 msgstr "Lokation ikke fundet"
+
+#: ../contents/code/pws-api.js
+msgid "No observation returned"
+msgstr "Ingen observation returneret"
+
+#: ../contents/code/pws-api.js
+msgid "No extended conditions returned"
+msgstr "Ingen udvidet betingelser returneret"
+
+#: ../contents/code/pws-api.js
+msgid "Failed to fetch KP index data"
+msgstr "Kunne ikke hente KP-indeksdata"
+
+#: ../contents/code/utils.js
+msgctxt "Abbreviation for North"
+msgid "N"
+msgstr "N"
+
+#: ../contents/code/utils.js
+msgctxt "Abbreviation for North Northeast"
+msgid "NNE"
+msgstr "NNØ"
+
+#: ../contents/code/utils.js
+msgctxt "Abbreviation for Northeast"
+msgid "NE"
+msgstr "NØ"
+
+#: ../contents/code/utils.js
+msgctxt "Abbreviation for East Northeast"
+msgid "ENE"
+msgstr "ØNØ"
+
+#: ../contents/code/utils.js
+msgctxt "Abbreviation for East"
+msgid "E"
+msgstr "Ø"
+
+#: ../contents/code/utils.js
+msgctxt "Abbreviation for East Southeast"
+msgid "ESE"
+msgstr "ØSØ"
+
+#: ../contents/code/utils.js
+msgctxt "Abbreviation for Southeast"
+msgid "SE"
+msgstr "SØ"
+
+#: ../contents/code/utils.js
+msgctxt "Abbreviation for South Southeast"
+msgid "SSE"
+msgstr "SSØ"
+
+#: ../contents/code/utils.js
+msgctxt "Abbreviation for South"
+msgid "S"
+msgstr "S"
+
+#: ../contents/code/utils.js
+msgctxt "Abbreviation for South Southwest"
+msgid "SSW"
+msgstr "SSV"
+
+#: ../contents/code/utils.js
+msgctxt "Abbreviation for Southwest"
+msgid "SW"
+msgstr "SV"
+
+#: ../contents/code/utils.js
+msgctxt "Abbreviation for West Southwest"
+msgid "WSW"
+msgstr "VSV"
+
+#: ../contents/code/utils.js
+msgctxt "Abbreviation for West"
+msgid "W"
+msgstr "V"
+
+#: ../contents/code/utils.js
+msgctxt "Abbreviation for West Northwest"
+msgid "WNW"
+msgstr "VNV"
+
+#: ../contents/code/utils.js
+msgctxt "Abbreviation for Northwest"
+msgid "NW"
+msgstr "NV"
+
+#: ../contents/code/utils.js
+msgctxt "Abbreviation for North Northwest"
+msgid "NNW"
+msgstr "NNV"
+
+#: ../contents/code/utils.js ../contents/ui/config/ConfigUnits.qml
+msgctxt "Abbreviation for Celsius"
+msgid "C"
+msgstr "C"
+
+#: ../contents/code/utils.js ../contents/ui/config/ConfigUnits.qml
+msgctxt "Abbreviation for Fahrenheit"
+msgid "F"
+msgstr "F"
+
+#: ../contents/code/utils.js ../contents/ui/config/ConfigUnits.qml
+msgctxt "Abbreviation for Kelvin"
+msgid "K"
+msgstr "K"
+
+#: ../contents/code/utils.js ../contents/ui/config/ConfigUnits.qml
+msgid "kmh"
+msgstr "km/t"
+
+#: ../contents/code/utils.js ../contents/ui/config/ConfigUnits.qml
+msgid "mph"
+msgstr "mph"
+
+#: ../contents/code/utils.js ../contents/ui/config/ConfigUnits.qml
+msgid "m/s"
+msgstr "m/s"
+
+#: ../contents/code/utils.js ../contents/ui/config/ConfigUnits.qml
+msgctxt "Abbreviation for Meters"
+msgid "m"
+msgstr "m"
+
+#: ../contents/code/utils.js ../contents/ui/config/ConfigUnits.qml
+msgid "ft"
+msgstr "ft"
+
+#: ../contents/code/utils.js ../contents/ui/config/ConfigUnits.qml
+msgid "mm"
+msgstr "mm"
+
+#: ../contents/code/utils.js ../contents/ui/config/ConfigUnits.qml
+msgid "cm"
+msgstr "cm"
+
+#: ../contents/code/utils.js ../contents/ui/config/ConfigUnits.qml
+msgctxt "Abbreviation for Inches"
+msgid "in"
+msgstr "in"
+
+#: ../contents/code/utils.js ../contents/ui/config/ConfigUnits.qml
+msgid "mb"
+msgstr "mb"
+
+#: ../contents/code/utils.js ../contents/ui/config/ConfigUnits.qml
+msgid "inHG"
+msgstr "inHG"
+
+#: ../contents/code/utils.js ../contents/ui/config/ConfigUnits.qml
+msgid "mmHG"
+msgstr "mmHG"
+
+#: ../contents/code/utils.js ../contents/ui/config/ConfigUnits.qml
+msgid "hPa"
+msgstr "hPa"
+
+#: ../contents/code/utils.js ../contents/ui/config/ConfigUnits.qml
+msgid "psi"
+msgstr "psi"
 
 #: ../contents/code/utils.js
 msgid "To sunrise"
@@ -107,6 +288,11 @@ msgid ""
 "moderate, 101-150 is unhealthy for sensitive groups, 151-200 is unhealthy, "
 "201-300 is very unhealthy, and 301-500 is hazardous."
 msgstr ""
+"AQI er et mål for luftkvalitet, der tager højde for niveauerne af "
+"forskellige forurenende stoffer i luften. Den varierer fra 0 til 500, hvor "
+"højere værdier indikerer dårligere luftkvalitet. En AQI på 0-50 anses for at "
+"være god, 51-100 er moderat, 101-150 er usundt for følsomme grupper, 151-200 "
+"er usundt, 201-300 er meget usundt, og 301-500 er farligt."
 
 #: ../contents/ui/AirAndSolarItem.qml
 msgid ""
@@ -115,11 +301,15 @@ msgid ""
 "conditions for health. An AQHI of 1-3 is considered low risk, 4-6 is "
 "moderate risk, 7-10 is high risk, and 10+ is very high risk."
 msgstr ""
+"AQHI er et mål for, hvordan luftkvaliteten kan påvirke menneskers sundhed. "
+"Den varierer fra 1 til 10+, hvor højere værdier indikerer mere ugunstige "
+"helbredsbetingelser. En AQHI på 1-3 betragtes som lav risiko, 4-6 er moderat "
+"risiko, 7-10 er høj risiko, og 10+ er meget høj risiko."
 
 #: ../contents/ui/AirAndSolarItem.qml
 msgctxt "Particulate Matter"
 msgid "PM2.5"
-msgstr ""
+msgstr "PM2.5"
 
 #: ../contents/ui/AirAndSolarItem.qml
 msgid ""
@@ -127,6 +317,9 @@ msgid ""
 "liquid droplets suspended in the air. It can have serious health effects, "
 "especially on the respiratory and cardiovascular systems."
 msgstr ""
+"Partikler (PM2.5) er et mål for mængden af faste partikler og væskedråber, "
+"der suspenderes i luften. Det kan have alvorlige helbredsmæssige effekter, "
+"især for luftvejs- og hjerte-kar-systemet."
 
 #: ../contents/ui/AirAndSolarItem.qml
 msgid "Solar info"
@@ -147,7 +340,7 @@ msgstr "Sundhedsindeks"
 
 #: ../contents/ui/AirAndSolarItem.qml
 msgid "Details"
-msgstr ""
+msgstr "Detaljer"
 
 #: ../contents/ui/AirAndSolarItem.qml
 msgid ""
@@ -156,6 +349,10 @@ msgid ""
 "0-3 is considered quiet, 4-5 is unsettled, 6-7 is active, and 8-9 is storm-"
 "level activity."
 msgstr ""
+"Kp-indekset er et mål for geomagnetisk aktivitet. Den varierer fra 0 til 9, "
+"hvor højere værdier indikerer mere intense geomagnetiske storme. Et Kp-"
+"indeks på 0-3 betragtes som stille, 4-5 er ustabilt, 6-7 er aktivt, og 8-9 "
+"er aktivitet på stormniveau."
 
 #: ../contents/ui/AirAndSolarItem.qml
 msgid ""
@@ -165,6 +362,11 @@ msgid ""
 "index of 0-2 is considered comfortable, 3-5 is moderate, and 6+ is "
 "unfavorable."
 msgstr ""
+"Sundhedsindekset er et mål for, hvordan solforholdene kombineret med "
+"trykændringer kan påvirke menneskers sundhed. Den varierer fra 0 til 10+, "
+"hvor højere værdier indikerer mere ugunstige helbredsbetingelser. Et "
+"sundhedsindeks på 0-2 anses for behageligt, 3-5 er moderat, og 6+ er "
+"ugunstigt."
 
 #: ../contents/ui/AlertsItem.qml
 msgid "There are no alerts for your area."
@@ -239,7 +441,7 @@ msgstr "Fugtighed"
 
 #: ../contents/ui/DetailsItem.qml
 msgid "Precip Accum"
-msgstr "Nedbør akkum."
+msgstr "Akkumuleret nedbør"
 
 #: ../contents/ui/DetailsItem.qml ../contents/ui/main.qml
 msgid "UV"
@@ -260,7 +462,7 @@ msgstr "Der opstod en netværksfejl: "
 
 #: ../contents/ui/FullRepresentation.qml
 msgid "Refresh Weather"
-msgstr ""
+msgstr "Opdater vejr"
 
 #: ../contents/ui/SwitchPanel.qml ../contents/ui/config/ConfigAppearance.qml
 msgid "Weather Details"
@@ -366,11 +568,11 @@ msgstr "Automatisk"
 
 #: ../contents/ui/config/ConfigAppearance.qml
 msgid "Exact size"
-msgstr "Fast str."
+msgstr "Fast størrelse"
 
 #: ../contents/ui/config/ConfigAppearance.qml
 msgid "Text size"
-msgstr "Tekst str."
+msgstr "Tekst størrelse"
 
 #: ../contents/ui/config/ConfigAppearance.qml
 #: ../contents/ui/config/ConfigLayout.qml
@@ -392,7 +594,7 @@ msgstr "Ikon størrelse:"
 
 #: ../contents/ui/config/ConfigAppearance.qml
 msgid "Icon size"
-msgstr "Ikon str."
+msgstr "Ikon størrelse"
 
 #: ../contents/ui/config/ConfigAppearance.qml
 msgid "Icon visible"
@@ -433,15 +635,15 @@ msgstr "Anvendt på skrivebordet eller i skrivebords gruppering"
 
 #: ../contents/ui/config/ConfigLayout.qml
 msgid "Property header text size"
-msgstr "Egenskab overskrift tekst str."
+msgstr "Tekst str. på egenskabs overskrift"
 
 #: ../contents/ui/config/ConfigLayout.qml
 msgid "Property text size"
-msgstr "Egenskab tekst str."
+msgstr "Tekst str. på egenskaber"
 
 #: ../contents/ui/config/ConfigLayout.qml
 msgid "Temperature text size"
-msgstr "Temperatur tekst str."
+msgstr "Tekst størrelse for temperatur"
 
 #: ../contents/ui/config/ConfigLayout.qml
 msgid "small (16x16)"
@@ -556,6 +758,15 @@ msgid "Actions"
 msgstr "Handling"
 
 #: ../contents/ui/config/ConfigStation.qml
+msgid "Add Current Location"
+msgstr "Tilføj nuværende placering"
+
+#: ../contents/ui/config/ConfigStation.qml
+#: ../contents/ui/lib/StationMapSearcher.qml
+msgid "No nearby stations found."
+msgstr "Ingen nærliggende stationer fundet."
+
+#: ../contents/ui/config/ConfigStation.qml
 msgid "Select from Map"
 msgstr "Vælg fra kort"
 
@@ -568,6 +779,11 @@ msgstr "Find station"
 #: ../contents/ui/config/ConfigStation.qml
 msgid "Manual Add"
 msgstr "Manuel tilføjelse"
+
+#: ../contents/ui/config/ConfigStation.qml
+#: ../contents/ui/lib/StationMapSearcher.qml
+msgid "Error (%1): %2"
+msgstr "Fejl: (%1): %2"
 
 #: ../contents/ui/config/ConfigStation.qml
 msgid "Refresh period (s):"
@@ -623,7 +839,7 @@ msgstr "Præcision"
 
 #: ../contents/ui/config/ConfigUnits.qml
 msgid "Compact Rep Temperature"
-msgstr "Kompakt rep. temp."
+msgstr "Kompakt Rep-temperatur"
 
 #: ../contents/ui/config/ConfigUnits.qml ../contents/ui/main.qml
 msgid "Temperature"
@@ -717,6 +933,10 @@ msgstr "Rediger Navn"
 msgid "Remove"
 msgstr "Fjern"
 
+#: ../contents/ui/lib/StationManager.qml
+msgid "Duplicate station entered"
+msgstr ""
+
 #: ../contents/ui/lib/StationMapSearcher.qml
 #: ../contents/ui/lib/StationSearcher.qml
 msgid "Search by:"
@@ -737,6 +957,11 @@ msgid "Lat/Lon"
 msgstr "Bred/Læng"
 
 #: ../contents/ui/lib/StationMapSearcher.qml
+msgid "Current Location"
+msgstr "Nuværende placering"
+
+#: ../contents/ui/lib/StationMapSearcher.qml
+#: ../contents/ui/lib/StationSearcher.qml
 msgid "Search"
 msgstr "Søg"
 
@@ -752,6 +977,10 @@ msgstr "Angiv by, stat, lokalitet eller adresse"
 #: ../contents/ui/lib/StationMapSearcher.qml
 msgid "Click or drag the marker on the map below."
 msgstr "Klik eller træk markør på kortet nedenfor."
+
+#: ../contents/ui/lib/StationMapSearcher.qml
+msgid "Searching for nearby stations using IP2Location.io"
+msgstr "Søger efter nærliggende stationer ved hjælp af IP2Location.io"
 
 #: ../contents/ui/lib/StationMapSearcher.qml
 #: ../contents/ui/lib/StationSearcher.qml
@@ -772,8 +1001,14 @@ msgid "Selected latitude: %1, longitude: %2"
 msgstr "Valgte længdegrad: %1, breddegrad: %2"
 
 #: ../contents/ui/lib/StationMapSearcher.qml
-msgid "Error (%1): %2"
-msgstr "Fejl: (%1): %2"
+msgid ""
+"Privacy Policy: IP2Location.io is used to determine your approximate "
+"location based on your IP address. No personally identifiable information is "
+"collected or stored."
+msgstr ""
+"Privatlivspolitik: IP2Location.io bruges til at bestemme din omtrentlige "
+"placering baseret på din IP-adresse. Der indsamles eller opbevares ingen "
+"personligt identificerbare oplysninger."
 
 #: ../contents/ui/lib/StationMapSearcher.qml
 msgid "Warning"

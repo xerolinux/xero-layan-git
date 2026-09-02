@@ -66,7 +66,7 @@ KCM.SimpleKCM {
 
         Kirigami.InlineMessage {
             Layout.fillWidth: true
-            text: i18n("Not getting the expected result? Make sure you're editing the correct element.<br>Custom blur not working? Try reinstalling/rebuilding the C++ plugin using the latest source, <a href=\"https://github.com/luisbocanegra/plasma-panel-colorizer#build-from-source-with-c-plugin\">see instructions</a>.")
+            text: i18n("Not getting the expected result? Make sure you're editing the correct element.<br>Custom blur not working? Try reinstalling/rebuilding the C++ plugin using the latest source, <a href=\"%1\">see instructions</a>.", "https://github.com/luisbocanegra/plasma-panel-colorizer#build-from-source-with-c-plugin")
             visible: true
             type: Kirigami.MessageType.Information
             onLinkActivated: Qt.openUrlExternally(link)

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: colorizer\n"
 "Report-Msgid-Bugs-To: https://github.com/luisbocanegra/plasma-panel-colorizer\n"
-"POT-Creation-Date: 2026-05-14 14:39+0000\n"
+"POT-Creation-Date: 2026-08-09 07:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: scoutJ <jerry2714@gmail.com>\n"
 "Language-Team: \n"
@@ -93,6 +93,10 @@ msgstr "元件背景"
 msgid "Panel not found, this widget must be placed on a panel to work"
 msgstr "找不到面板，此元件須要被放置在面板中才能運作"
 
+#: ../contents/ui/components/FontFamilyChooser.qml
+msgid "Search fonts"
+msgstr ""
+
 #: ../contents/ui/components/FormBorder.qml ../contents/ui/components/FormWidgetSettings.qml
 msgid "Border"
 msgstr "邊框"
@@ -110,8 +114,8 @@ msgid "Width:"
 msgstr "寬度："
 
 #: ../contents/ui/components/FormBorder.qml
-msgid "Use an integer when using <strong>Widget Islands</strong> to avoid rendering issues! <a href=\"https://github.com/luisbocanegra/plasma-panel-colorizer/issues/64\">See #64</a>"
-msgstr "當使用 <strong>元件島</strong> 時，使用整數來避免彩現問題! <a href=\"https://github.com/luisbocanegra/plasma-panel-colorizer/issues/64\">請見 #64</a>"
+msgid "Use an integer when using <strong>Widget Islands</strong> to avoid rendering issues! See <a href=\"%1\">#64</a>."
+msgstr ""
 
 #: ../contents/ui/components/FormBorder.qml
 msgid "Custom widths:"
@@ -658,8 +662,8 @@ msgid "Thank you for using %1!"
 msgstr "感謝您使用 %1!"
 
 #: ../contents/ui/components/SupportMe.qml
-msgid "If you enjoy using the plugin please consider sponsoring or donating so I can dedicate more time to maintain and improve this and <a href=\"https://github.com/luisbocanegra?tab=repositories&q=&type=source&language=&sort=stargazers\">my other projects</a>."
-msgstr "如果您喜歡此外掛，可以請您考慮贊助，使我能投入更多時間在維護和精進這個專案以及<a href=\"https://github.com/luisbocanegra?tab=repositories&q=&type=source&language=&sort=stargazers\">我的其他專案</a>。"
+msgid "If you enjoy using the plugin please consider sponsoring or donating so I can dedicate more time to maintain and improve this and <a href=\"%1\">my other projects</a>."
+msgstr ""
 
 #: ../contents/ui/components/SupportMe.qml
 msgid "You can also"
@@ -684,6 +688,10 @@ msgstr "系統匣"
 #: ../contents/ui/components/WidgetCardBlacklist.qml
 msgid "Blacklist"
 msgstr "黑名單"
+
+#: ../contents/ui/components/WidgetCardConfig.qml
+msgid "Clear"
+msgstr ""
 
 #: ../contents/ui/components/WidgetCardConfig.qml
 msgid "Add"
@@ -714,8 +722,8 @@ msgid "Refresh"
 msgstr "重整"
 
 #: ../contents/ui/configAppearance.qml
-msgid "Not getting the expected result? Make sure you're editing the correct element.<br>Custom blur not working? Try reinstalling/rebuilding the C++ plugin using the latest source, <a href=\"https://github.com/luisbocanegra/plasma-panel-colorizer#build-from-source-with-c-plugin\">see instructions</a>."
-msgstr "沒有得到預期的結果嗎？請確定您在編輯正確的元素。<br>自訂模糊無效嗎？請嘗試用最新版的原始碼來重新安裝 C++外掛，<a href=\"https://github.com/luisbocanegra/plasma-panel-colorizer#build-from-source-with-c-plugin\">詳情請參考指南</a>。"
+msgid "Not getting the expected result? Make sure you're editing the correct element.<br>Custom blur not working? Try reinstalling/rebuilding the C++ plugin using the latest source, <a href=\"%1\">see instructions</a>."
+msgstr ""
 
 #: ../contents/ui/configAppearance.qml
 msgid "Restore default (removes all customizations)"
@@ -1199,6 +1207,10 @@ msgstr "警告：請小心使用顯示/隱藏功能，若您將面板隱藏，�
 msgid "If you have D-Bus enabled is it recommended that you use that with shortcuts instead. Consult the README to learn more or see the General tab for some examples."
 msgstr "若您有開啟 D-Bus 功能，建議您可以為其設定快捷鍵。請參考 README 了解更多或是到一般分頁參考範例。"
 
+#: ../contents/ui/configStockPanelSettings.qml
+msgid "D-Bus usage"
+msgstr ""
+
 #: ../contents/ui/configTextIconFix.qml
 msgid ""
 "Fix text and icon colors/font for widgets where the normal method doesn't work or is reset by the widget.<br> - <strong>Mask</strong>: Force color on SVG icons, useful for symbolic icons.<br> - <strong>Color Effect</strong>: Force color on text and icons using post-processing effect, useful for non-symbolic icons.<br> - <strong>Refresh</strong>: Re-apply color/font at a fixed interval, useful "
@@ -1228,16 +1240,16 @@ msgid "Sort"
 msgstr "排序"
 
 #: ../contents/ui/configTrayIconsReplacer.qml
-msgid "Replace System Tray icons with icons from the current icon theme or a local file. The built-in rules icons are part of <a href=\"https://github.com/PapirusDevelopmentTeam/papirus-icon-theme\">Papirus icon theme</a>."
-msgstr "使用目前圖示主題中的圖示，或是本機檔案來替換系統匣圖示。內建規則中使用的圖示來自<a href=\"https://github.com/PapirusDevelopmentTeam/papirus-icon-theme\">Papirus 圖示主題</a>。"
+msgid "Replace System Tray icons with icons from the current icon theme or a local file. The built-in rules icons are part of <a href=\"%1\">Papirus icon theme</a>."
+msgstr ""
 
 #: ../contents/ui/configTrayIconsReplacer.qml
-msgid "C++ plugin not found, this feature will not work. Install the plugin and reboot or restart plasmashell to be able to use it <a href=\"https://github.com/luisbocanegra/plasma-panel-colorizer?tab=readme-ov-file#manually\">Install instructions</a>."
-msgstr "找不到 C++ 外掛，無法使用此功能。安裝外掛並重新系統或是 plasmashell 後可使用此功能。<a href=\"https://github.com/luisbocanegra/plasma-panel-colorizer?tab=readme-ov-file#manually\">安裝指南</a>。"
+msgid "C++ plugin not found, this feature will not work. Install the plugin and reboot or restart plasmashell to be able to use it <a href=\"%1\">Install instructions</a>."
+msgstr ""
 
 #: ../contents/ui/configTrayIconsReplacer.qml
-msgid "The installed version of the C++ plugin doesn't support this feature, update the plugin and reboot or restart plasmashell to be able to use it <a href=\"https://github.com/luisbocanegra/plasma-panel-colorizer?tab=readme-ov-file#manually\">Install instructions</a>."
-msgstr "已安裝的 C++ 外掛不支援此功能，需要更新外掛並重新啟動系統或 plasmashell 才能使用此功能。<a href=\"https://github.com/luisbocanegra/plasma-panel-colorizer?tab=readme-ov-file#manually\">安裝指南</a>。"
+msgid "The installed version of the C++ plugin doesn't support this feature, update the plugin and reboot or restart plasmashell to be able to use it <a href=\"%1\">Install instructions</a>."
+msgstr ""
 
 #: ../contents/ui/configTrayIconsReplacer.qml
 msgid "Log icon changes:"
@@ -1258,6 +1270,26 @@ msgstr "顯示"
 #: ../contents/ui/configTrayIconsReplacer.qml
 msgid "How to use"
 msgstr "如何使用"
+
+#: ../contents/ui/configTrayIconsReplacer.qml
+msgid "1. Enable <b>Log icon changes</b> above<br>2. Run <b>journalctl -f</b> from terminal<br>3. Hover the System tray entry or trigger an icon change<br>4. Copy any of the properties: icon SHA1/name, title or name <br>5. Add a new rule with the SHA1/icon name/title/name you choose and specify the custom icon name or file"
+msgstr ""
+
+#: ../contents/ui/configTrayIconsReplacer.qml
+msgid "<b>Note</b>: There are some rules without icon as there was no matching one in Papirus, you can override those with your own icons by copying the rule to <b>User Replacements</b>"
+msgstr ""
+
+#: ../contents/ui/configTrayIconsReplacer.qml
+msgid "<b>Note</b>: Some applications like Signal are missing accumulated notification icons, contribution of missing icons via GitHub pull request or issue is very welcome, please do so by providing the the description + SHA1/title/name + icon-name from Papirus (panel/status icons only if no matching icon exists, otherwise it can be omitted)"
+msgstr ""
+
+#: ../contents/ui/configTrayIconsReplacer.qml
+msgid "<b>Note</b>: Matching properties (especially the SHA1) may change when applications get updated, rules will need to be updated when that happens."
+msgstr ""
+
+#: ../contents/ui/configTrayIconsReplacer.qml
+msgid "<b>Note</b>: Plasma widgets in the system tray are not supported by this feature as widgets provide their own visual content and logic."
+msgstr ""
 
 #: ../contents/ui/configTrayIconsReplacer.qml
 msgid "Built-in Rules (read only)"
@@ -1314,8 +1346,8 @@ msgid "Copy to User Rules"
 msgstr "複製到使用者規則"
 
 #: ../contents/ui/configTrayIconsReplacer.qml
-msgid "Copy rule"
-msgstr "複製規則"
+msgid "Duplicate rule"
+msgstr ""
 
 #: ../contents/ui/configWidgetIslands.qml
 msgid "Create widget islands by placing separator widgets around them."
@@ -1360,12 +1392,37 @@ msgid "Disable customization from separator widgets"
 msgstr ""
 
 #: ../contents/ui/main.qml
+msgid "This widget must be placed in a panel to work!"
+msgstr ""
+
+#: ../contents/ui/main.qml
 msgid "Hide widget (visible in panel Edit Mode)"
 msgstr "隱藏元件 (在面板設定模式下可見)"
 
 #: ../contents/ui/main.qml
-msgid "A Plasmashell restart is required to remove all the modifications made by %1. Run journalctl restart --user plasma-plasmashell or log out and log back in."
+msgid "A Plasmashell restart is required to remove all the modifications made by %1. Run systemctl restart --user plasma-plasmashell or log out and log back in."
 msgstr ""
+
+#~ msgid "Use an integer when using <strong>Widget Islands</strong> to avoid rendering issues! <a href=\"https://github.com/luisbocanegra/plasma-panel-colorizer/issues/64\">See #64</a>"
+#~ msgstr "當使用 <strong>元件島</strong> 時，使用整數來避免彩現問題! <a href=\"https://github.com/luisbocanegra/plasma-panel-colorizer/issues/64\">請見 #64</a>"
+
+#~ msgid "If you enjoy using the plugin please consider sponsoring or donating so I can dedicate more time to maintain and improve this and <a href=\"https://github.com/luisbocanegra?tab=repositories&q=&type=source&language=&sort=stargazers\">my other projects</a>."
+#~ msgstr "如果您喜歡此外掛，可以請您考慮贊助，使我能投入更多時間在維護和精進這個專案以及<a href=\"https://github.com/luisbocanegra?tab=repositories&q=&type=source&language=&sort=stargazers\">我的其他專案</a>。"
+
+#~ msgid "Not getting the expected result? Make sure you're editing the correct element.<br>Custom blur not working? Try reinstalling/rebuilding the C++ plugin using the latest source, <a href=\"https://github.com/luisbocanegra/plasma-panel-colorizer#build-from-source-with-c-plugin\">see instructions</a>."
+#~ msgstr "沒有得到預期的結果嗎？請確定您在編輯正確的元素。<br>自訂模糊無效嗎？請嘗試用最新版的原始碼來重新安裝 C++外掛，<a href=\"https://github.com/luisbocanegra/plasma-panel-colorizer#build-from-source-with-c-plugin\">詳情請參考指南</a>。"
+
+#~ msgid "Replace System Tray icons with icons from the current icon theme or a local file. The built-in rules icons are part of <a href=\"https://github.com/PapirusDevelopmentTeam/papirus-icon-theme\">Papirus icon theme</a>."
+#~ msgstr "使用目前圖示主題中的圖示，或是本機檔案來替換系統匣圖示。內建規則中使用的圖示來自<a href=\"https://github.com/PapirusDevelopmentTeam/papirus-icon-theme\">Papirus 圖示主題</a>。"
+
+#~ msgid "C++ plugin not found, this feature will not work. Install the plugin and reboot or restart plasmashell to be able to use it <a href=\"https://github.com/luisbocanegra/plasma-panel-colorizer?tab=readme-ov-file#manually\">Install instructions</a>."
+#~ msgstr "找不到 C++ 外掛，無法使用此功能。安裝外掛並重新系統或是 plasmashell 後可使用此功能。<a href=\"https://github.com/luisbocanegra/plasma-panel-colorizer?tab=readme-ov-file#manually\">安裝指南</a>。"
+
+#~ msgid "The installed version of the C++ plugin doesn't support this feature, update the plugin and reboot or restart plasmashell to be able to use it <a href=\"https://github.com/luisbocanegra/plasma-panel-colorizer?tab=readme-ov-file#manually\">Install instructions</a>."
+#~ msgstr "已安裝的 C++ 外掛不支援此功能，需要更新外掛並重新啟動系統或 plasmashell 才能使用此功能。<a href=\"https://github.com/luisbocanegra/plasma-panel-colorizer?tab=readme-ov-file#manually\">安裝指南</a>。"
+
+#~ msgid "Copy rule"
+#~ msgstr "複製規則"
 
 #~ msgid "Disable"
 #~ msgstr "停用"

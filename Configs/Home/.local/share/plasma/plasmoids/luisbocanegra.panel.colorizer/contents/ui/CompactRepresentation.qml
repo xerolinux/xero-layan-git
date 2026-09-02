@@ -2,6 +2,7 @@ import QtQuick
 import "components" as Components
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.core as PlasmaCore
+import org.kde.plasma.components as PC3
 
 MouseArea {
     id: compact
@@ -30,7 +31,16 @@ MouseArea {
 
             height: Kirigami.Units.iconSizes.roundedIconSize(Math.min(parent.width, parent.height))
             width: height
-            source: icon
+            source: compact.icon
+        }
+
+        PC3.Label {
+            font: Kirigami.Theme.smallFont
+            text: main.toolTipSubText
+            width: compact.width
+            wrapMode: PC3.Label.WordWrap
+            visible: main.onDesktop
+            textFormat: PC3.Label.RichText
         }
     }
 }

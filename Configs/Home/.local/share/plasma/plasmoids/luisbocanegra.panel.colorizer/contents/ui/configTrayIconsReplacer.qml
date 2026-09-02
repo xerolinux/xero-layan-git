@@ -6,7 +6,6 @@ import QtQuick.Layouts
 import org.kde.iconthemes as KIconThemes
 import org.kde.kcmutils as KCM
 import org.kde.kirigami as Kirigami
-import org.kde.plasma.plasmoid
 import "components" as Components
 import "code/statusNotifierItemIconRules.js" as SNIIconRules
 
@@ -111,7 +110,7 @@ KCM.ScrollViewKCM {
         }
         Kirigami.InlineMessage {
             Layout.fillWidth: true
-            text: i18n("Replace System Tray icons with icons from the current icon theme or a local file. The built-in rules icons are part of <a href=\"https://github.com/PapirusDevelopmentTeam/papirus-icon-theme\">Papirus icon theme</a>.")
+            text: i18n("Replace System Tray icons with icons from the current icon theme or a local file. The built-in rules icons are part of <a href=\"%1\">Papirus icon theme</a>.", "https://github.com/PapirusDevelopmentTeam/papirus-icon-theme")
             visible: true
             type: Kirigami.MessageType.Information
             spacing: 0
@@ -119,7 +118,7 @@ KCM.ScrollViewKCM {
         }
         Kirigami.InlineMessage {
             Layout.fillWidth: true
-            text: i18n("C++ plugin not found, this feature will not work. Install the plugin and reboot or restart plasmashell to be able to use it <a href=\"https://github.com/luisbocanegra/plasma-panel-colorizer?tab=readme-ov-file#manually\">Install instructions</a>.")
+            text: i18n("C++ plugin not found, this feature will not work. Install the plugin and reboot or restart plasmashell to be able to use it <a href=\"%1\">Install instructions</a>.", "https://github.com/luisbocanegra/plasma-panel-colorizer?tab=readme-ov-file#manually")
             visible: root.panelColorizer === null
             type: Kirigami.MessageType.Error
             spacing: 0
@@ -127,7 +126,7 @@ KCM.ScrollViewKCM {
         }
         Kirigami.InlineMessage {
             Layout.fillWidth: true
-            text: i18n("The installed version of the C++ plugin doesn't support this feature, update the plugin and reboot or restart plasmashell to be able to use it <a href=\"https://github.com/luisbocanegra/plasma-panel-colorizer?tab=readme-ov-file#manually\">Install instructions</a>.")
+            text: i18n("The installed version of the C++ plugin doesn't support this feature, update the plugin and reboot or restart plasmashell to be able to use it <a href=\"%1\">Install instructions</a>.", "https://github.com/luisbocanegra/plasma-panel-colorizer?tab=readme-ov-file#manually")
             visible: root.panelColorizer && (typeof root.panelColorizer?.getIconHash !== "function")
             type: Kirigami.MessageType.Error
             spacing: 0
@@ -173,7 +172,7 @@ KCM.ScrollViewKCM {
             Layout.margins: Kirigami.Units.mediumSpacing
         }
         Label {
-            text: "1. Enable <b>Log icon changes</b> above<br>2. Run <b>journalctl -f</b> from terminal<br>3. Hover the System tray entry or trigger an icon change<br>4. Copy the icon SHA1 (long string of numbers and letters), title or name <br>5. Add a new rule with the SHA1/title/name and your icon name or icon file"
+            text: i18n("1. Enable <b>Log icon changes</b> above<br>2. Run <b>journalctl -f</b> from terminal<br>3. Hover the System tray entry or trigger an icon change<br>4. Copy any of the properties: icon SHA1/name, title or name <br>5. Add a new rule with the SHA1/icon name/title/name you choose and specify the custom icon name or file")
             wrapMode: Label.WordWrap
             font.features: {
                 "tnum": 1
@@ -183,14 +182,28 @@ KCM.ScrollViewKCM {
             Layout.fillWidth: true
         }
         Label {
-            text: "<b>Note</b>: There are some rules without icon as there was no matching one in Papirus, you can override those with your own icons by copying the rule to <b>User Replacements</b>"
+            text: i18n("<b>Note</b>: There are some rules without icon as there was no matching one in Papirus, you can override those with your own icons by copying the rule to <b>User Replacements</b>")
             wrapMode: Label.WordWrap
             visible: showHowToLabel.checked
             Layout.margins: Kirigami.Units.mediumSpacing
             Layout.fillWidth: true
         }
         Label {
-            text: "<b>Note</b>: Some applications like Signal are missing accumulated notification icons, contribution of missing icons via GitHub pull request or issue is very welcome, please do so by providing the the description + SHA1/title/name + icon-name from Papirus (panel/status icons only if no matching icon exists, otherwise it can be omitted)</b>"
+            text: i18n("<b>Note</b>: Some applications like Signal are missing accumulated notification icons, contribution of missing icons via GitHub pull request or issue is very welcome, please do so by providing the the description + SHA1/title/name + icon-name from Papirus (panel/status icons only if no matching icon exists, otherwise it can be omitted)")
+            wrapMode: Label.WordWrap
+            visible: showHowToLabel.checked
+            Layout.margins: Kirigami.Units.mediumSpacing
+            Layout.fillWidth: true
+        }
+        Label {
+            text: i18n("<b>Note</b>: Matching properties (especially the SHA1) may change when applications get updated, rules will need to be updated when that happens.")
+            wrapMode: Label.WordWrap
+            visible: showHowToLabel.checked
+            Layout.margins: Kirigami.Units.mediumSpacing
+            Layout.fillWidth: true
+        }
+        Label {
+            text: i18n("<b>Note</b>: Plasma widgets in the system tray are not supported by this feature as widgets provide their own visual content and logic.")
             wrapMode: Label.WordWrap
             visible: showHowToLabel.checked
             Layout.margins: Kirigami.Units.mediumSpacing
@@ -393,7 +406,7 @@ KCM.ScrollViewKCM {
                         }
                         hoverEnabled: true
                         ToolTip.delay: Kirigami.Units.toolTipDelay
-                        ToolTip.text: showBuiltInRules.checked ? i18n("Copy to User Rules") : i18n("Copy rule")
+                        ToolTip.text: showBuiltInRules.checked ? i18n("Copy to User Rules") : i18n("Duplicate rule")
                         ToolTip.visible: copyRuleButton.hovered
                     }
 

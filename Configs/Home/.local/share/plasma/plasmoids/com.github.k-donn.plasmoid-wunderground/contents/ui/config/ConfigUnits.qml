@@ -305,7 +305,7 @@ KCM.SimpleKCM {
 
             visible: unitsChoice.currentIndex == 3
 
-            model: ["kmh", "mph", "m/s"]
+            model: [i18n("kmh"), i18n("mph"), i18n("m/s")]
 
             Kirigami.FormData.label: i18n("Wind unit:")
         }
@@ -315,7 +315,7 @@ KCM.SimpleKCM {
 
             visible: unitsChoice.currentIndex == 3
 
-            model: ["mm", "in", "cm"]
+            model: [i18n("mm"), i18nc("Abbreviation for Inches","in"), i18n("cm")]
 
             Kirigami.FormData.label: i18n("Rain unit:")
         }
@@ -325,7 +325,7 @@ KCM.SimpleKCM {
 
             visible: unitsChoice.currentIndex == 3
 
-            model: ["mm", "in", "cm"]
+            model: [i18n("mm"), i18nc("Abbreviation for Inches","in"), i18n("cm")]
 
             Kirigami.FormData.label: i18n("Snow unit:")
         }
@@ -335,7 +335,7 @@ KCM.SimpleKCM {
 
             visible: unitsChoice.currentIndex == 3
 
-            model: ["C", "F", "K"]
+            model: [i18nc("Abbreviation for Celsius","C"), i18nc("Abbreviation for Fahrenheit","F"), i18nc("Abbreviation for Kelvin","K")]
 
             Kirigami.FormData.label: i18n("Temperature unit:")
         }
@@ -345,7 +345,7 @@ KCM.SimpleKCM {
 
             visible: unitsChoice.currentIndex == 3
 
-            model: ["mb", "inHG", "mmHG", "hPa", "psi"]
+            model: [i18n("mb"), i18n("inHG"), i18n("mmHG"), i18n("hPa"), i18n("psi")]
 
             Kirigami.FormData.label: i18n("Pressure unit:")
         }
@@ -355,7 +355,7 @@ KCM.SimpleKCM {
 
             visible: unitsChoice.currentIndex == 3
 
-            model: ["m", "ft"]
+            model: [i18nc("Abbreviation for Meters","m"), i18n("ft")]
 
             Kirigami.FormData.label: i18n("Elevation unit:")
         }

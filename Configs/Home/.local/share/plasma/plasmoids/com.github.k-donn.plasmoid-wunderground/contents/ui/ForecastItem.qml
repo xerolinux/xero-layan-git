@@ -34,7 +34,7 @@ RowLayout {
         model: forecastModel
 
         ColumnLayout {
-            Layout.maximumWidth: parent.width / 7
+            Layout.maximumWidth: parent.width / 8
 
             PlasmaComponents.Label {
                 Layout.alignment: Qt.AlignCenter
@@ -43,7 +43,10 @@ RowLayout {
             }
 
             PlasmaComponents.Label {
-                Layout.alignment: Qt.AlignCenter
+                Layout.fillWidth: true
+
+                wrapMode: Text.Wrap
+                horizontalAlignment: Text.AlignHCenter
 
                 text: dayOfWeek
             }
@@ -51,7 +54,7 @@ RowLayout {
             PlasmaComponents.Label {
                 Layout.fillWidth: true
 
-                elide: Text.ElideRight
+                wrapMode: Text.Wrap
                 horizontalAlignment: Text.AlignHCenter
 
                 text: shortDesc

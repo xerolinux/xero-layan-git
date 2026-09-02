@@ -250,6 +250,11 @@ PlasmaCore.Dialog {
                     geometry = splitAndMoveSplitted(root.currentlyMovedWindow, false, activeTileIndex == 0, false);
                 }
                 break;
+            case 'SPECIAL_FIT':
+                if (root.currentlyMovedWindow != null) {
+                    geometry = root.getFitGeometry(root.currentlyMovedWindow);
+                }
+                break;
             case 'SPECIAL_NO_TITLEBAR_AND_FRAME':
             case 'SPECIAL_KEEP_ABOVE':
             case 'SPECIAL_KEEP_BELOW':

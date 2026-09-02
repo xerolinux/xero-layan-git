@@ -237,29 +237,13 @@ const baseTrayConfig = {
     opacity: 1.0,
 };
 
-const baseOverride = {
-    blurBehind: false,
-    backgroundClipping: false,
-    backgroundColor: baseBgColor,
-    foregroundColor: baseFgColor,
-    radius: baseRadius,
-    margin: baseMargin,
-    spacing: 4,
-    border: baseBorder,
-    borderSecondary: baseBorder,
-    shadow: baseShadowConfig,
-    enabled: true,
-    opacity: 1.0,
-    fontConfig: baseFontConfig,
-};
-
 const baseOverrideConfig = {
     disabledFallback: true,
-    normal: baseOverride,
-    busy: baseOverride,
-    hovered: baseOverride,
-    needsAttention: baseOverride,
-    expanded: baseOverride,
+    normal: baseWidgetConfig,
+    busy: baseWidgetConfig,
+    hovered: baseWidgetConfig,
+    needsAttention: baseWidgetConfig,
+    expanded: baseWidgetConfig,
 };
 
 const baseStockPanelSettings = {

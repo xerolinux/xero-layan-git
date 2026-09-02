@@ -1,0 +1,10 @@
+<svg width="22" height="22" enable-background="new" version="1.1" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <style id="current-color-scheme" type="text/css">.ColorScheme-Text { color:#333333; } .ColorScheme-Highlight { color:#5294e2; } .ColorScheme-ButtonBackground { color:#333333; }</style>
+ </defs>
+ <g id="kmail" transform="translate(-467 -135)">
+  <path d="m467 135h22v22h-22z" opacity="0"/>
+  <path class="ColorScheme-Text" d="m471 139c-1.108 0-2 0.892-2 2v10c0 1.108 0.892 2 2 2h14c1.108 0 2-0.892 2-2v-10c0-1.108-0.892-2-2-2zm0 2h14v10h-14v-7z" fill="currentColor"/>
+  <path class="ColorScheme-Text" transform="rotate(15)" d="m491.96 16.224 0.53584 1.9998 7.2609 0.0522 6.262-3.6757-0.53584-1.9998-6.262 3.6757z" fill="currentColor"/>
+ </g>
+</svg>

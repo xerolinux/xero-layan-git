@@ -121,8 +121,8 @@ function _httpGet(url, cb) {
 	req.onerror = function () {
 		cb(
 			{
-				type: "Could not send request",
-				message: req.statusText || "Network error",
+				type: i18n("Could not send request"),
+				message: req.statusText || i18n("Network error"),
 			},
 			null,
 			req.status,
@@ -339,8 +339,8 @@ function isStationActive(givenID, options, callback) {
 		if (err || status !== 200) {
 			callback(
 				err || {
-					type: status || "network",
-					message: raw || "Request failed",
+					type: status || i18n("network"),
+					message: raw || i18n("Request failed"),
 				},
 				null
 			);
@@ -416,12 +416,12 @@ function searchStationID(query, options, callback) {
 	_httpGet(url, function (err, res, status, raw) {
 		if (err || status !== 200) {
 			if (status === 404)
-				callback({ type: "404", message: "No stations found" }, null);
+				callback({ type: "404", message: i18n("No stations found") }, null);
 			else
 				callback(
 					err || {
-						type: status || "network",
-						message: raw || "Request failed",
+						type: status || i18n("network"),
+						message: raw || i18n("Request failed"),
 					},
 					null
 				);
@@ -438,10 +438,10 @@ function searchStationID(query, options, callback) {
 				: 0;
 			for (var i = 0; i < count; i++) {
 				stationsArr.push({
-					stationID: loc.pwsId ? loc.pwsId[i] : "",
-					address: loc.neighborhood ? loc.neighborhood[i] : "",
-					latitude: loc.latitude ? loc.latitude[i] : 0,
-					longitude: loc.longitude ? loc.longitude[i] : 0,
+					stationID: loc.pwsId[i] ? loc.pwsId[i] : "",
+					address: loc.neighborhood[i] ? loc.neighborhood[i] : "",
+					latitude: loc.latitude[i] ? loc.latitude[i] : 0,
+					longitude: loc.longitude[i] ? loc.longitude[i] : 0,
 					qcStatus: 0,
 				});
 			}
@@ -471,10 +471,12 @@ function searchGeocode(latLongObj, options, callback) {
 	var latitude = latLongObj.latitude;
 	var longitude = latLongObj.longitude;
 
+	var language = options.language || _formatLanguage();
 	var url = _buildUrl("/v3/location/near", {
 		geocode: latitude + "," + longitude,
 		product: "pws",
 		format: "json",
+		language: language,
 	});
 
 	printDebug("[pws-api.js] " + url);
@@ -482,12 +484,12 @@ function searchGeocode(latLongObj, options, callback) {
 	_httpGet(url, function (err, res, status, raw) {
 		if (err || status !== 200) {
 			if (status === 404)
-				callback({ type: "404", message: "No stations found" }, null);
+				callback({ type: "404", message: i18n("No stations found") }, null);
 			else
 				callback(
 					err || {
-						type: status || "network",
-						message: raw || "Request failed",
+						type: status || i18n("network"),
+						message: raw || i18n("Request failed"),
 					},
 					null
 				);
@@ -500,10 +502,56 @@ function searchGeocode(latLongObj, options, callback) {
 			for (var i = 0; i < loc.stationId.length; i++) {
 				stationsArr.push({
 					stationID: loc.stationId[i],
-					address: loc.stationName ? loc.stationName[i] : "",
-					latitude: loc.latitude ? loc.latitude[i] : 0,
-					longitude: loc.longitude ? loc.longitude[i] : 0,
-					qcStatus: loc.qcStatus ? loc.qcStatus[i] : 0,
+					address: loc.stationName[i] ? loc.stationName[i] : "",
+					latitude: loc.latitude[i] ? loc.latitude[i] : 0,
+					longitude: loc.longitude[i] ? loc.longitude[i] : 0,
+					qcStatus: loc.qcStatus[i] ? loc.qcStatus[i] : 0,
+				});
+			}
+		}
+
+		callback(null, stationsArr);
+	});
+}
+
+function getNearest(options, callback) {
+	options = options || {};
+	callback = callback || function () {};
+
+	var language = options.language || _formatLanguage();
+	var url = _buildUrl("/v3/location/here", {
+		product: "pws",
+		format: "json",
+		language: language,
+	});
+
+		printDebug("[pws-api.js] " + url);
+
+	_httpGet(url, function (err, res, status, raw) {
+		if (err || status !== 200) {
+			if (status === 404)
+				callback({ type: "404", message: i18n("No stations found") }, null);
+			else
+				callback(
+					err || {
+						type: status || i18n("network"),
+						message: raw || i18n("Request failed"),
+					},
+					null
+				);
+			return;
+		}
+
+		var stationsArr = [];
+		var loc = res && res.location;
+		if (loc && Array.isArray(loc.stationId)) {
+			for (var i = 0; i < loc.stationId.length; i++) {
+				stationsArr.push({
+					stationID: loc.stationId[i],
+					address: loc.stationName[i] ? loc.stationName[i] : "",
+					latitude: loc.latitude[i] ? loc.latitude[i] : 0,
+					longitude: loc.longitude[i] ? loc.longitude[i] : 0,
+					qcStatus: loc.qcStatus[i] ? loc.qcStatus[i] : 0,
 				});
 			}
 		}
@@ -556,8 +604,8 @@ function getLocations(city, options, callback) {
 			else
 				callback(
 					err || {
-						type: status || "network",
-						message: raw || "Request failed",
+						type: status || i18n("network"),
+						message: raw || i18n("Request failed"),
 					},
 					null
 				);
@@ -570,9 +618,9 @@ function getLocations(city, options, callback) {
 			var count = Array.isArray(loc.address) ? loc.address.length : 0;
 			for (var i = 0; i < count; i++) {
 				locationsArr.push({
-					address: loc.address ? loc.address[i] : "",
-					latitude: loc.latitude ? loc.latitude[i] : 0,
-					longitude: loc.longitude ? loc.longitude[i] : 0,
+					address: loc.address[i] ? loc.address[i] : "",
+					latitude: loc.latitude[i] ? loc.latitude[i] : 0,
+					longitude: loc.longitude[i] ? loc.longitude[i] : 0,
 				});
 			}
 		}
@@ -599,7 +647,7 @@ function getLocations(city, options, callback) {
  *  - configUpdates: latitude/longitude/stationName values discovered
  *
  * @param {Object} options
- * @param {string} options.stationID
+ * @param {string} [options.stationID]
  * @param {number} [options.unitsChoice]
  * @param {Object} [options.oldWeatherData]
  * @param {function(Object|null, Object|null)} callback
@@ -628,8 +676,8 @@ function getCurrentData(options, callback) {
 		if (err || status !== 200) {
 			callback(
 				err || {
-					type: status || "network",
-					message: raw || "Request failed",
+					type: status || i18n("network"),
+					message: raw || i18n("Request failed"),
 				},
 				null
 			);
@@ -640,7 +688,7 @@ function getCurrentData(options, callback) {
 		var obs = res && res.observations ? res.observations[0] : null;
 		if (!obs) {
 			callback(
-				{ type: "no_data", message: "No observation returned" },
+				{ type: "no_data", message: i18n("No observation returned") },
 				null
 			);
 			return;
@@ -759,8 +807,8 @@ function getExtendedConditions(options, callback) {
 		if (err || status !== 200) {
 			callback(
 				err || {
-					type: status || "network",
-					message: raw || "Request failed",
+					type: status || i18n("network"),
+					message: raw || i18n("Request failed"),
 				},
 				null
 			);
@@ -770,7 +818,7 @@ function getExtendedConditions(options, callback) {
 		var combinedVars = res && res[0] ? res[0] : null;
 		if (!combinedVars) {
 			callback(
-				{ type: "no_data", message: "No extended conditions returned" },
+				{ type: "no_data", message: i18n("No extended conditions returned") },
 				null
 			);
 			return;
@@ -904,8 +952,8 @@ function getExtendedConditions(options, callback) {
  * Callback: cb(err, { forecast: Array<day>, currDayHigh, currDayLow })
  *
  * @param {Object} options
- * @param {number} options.latitude
- * @param {number} options.longitude
+ * @param {number} [options.latitude]
+ * @param {number} [options.longitude]
  * @param {number} [options.unitsChoice]
  * @param {boolean} [options.useLegacyAPI]
  * @param {string} [options.language]
@@ -924,8 +972,8 @@ function getForecastData(options, callback) {
  * V3 forecast implementation.
  *
  * @param {Object} options
- * @param {number} options.latitude
- * @param {number} options.longitude
+ * @param {number} [options.latitude]
+ * @param {number} [options.longitude]
  * @param {number} [options.unitsChoice]
  * @param {string} [options.language]
  * @param {function(Object|null, Object|null)} callback
@@ -955,8 +1003,8 @@ function getForecastDataV3(options, callback) {
 		if (err || status !== 200) {
 			callback(
 				err || {
-					type: status || "network",
-					message: raw || "Request failed",
+					type: status || i18n("network"),
+					message: raw || i18n("Request failed"),
 				},
 				null
 			);
@@ -1098,8 +1146,8 @@ function getForecastDataV3(options, callback) {
  * V1 forecast implementation.
  *
  * @param {Object} options
- * @param {number} options.latitude
- * @param {number} options.longitude
+ * @param {number} [options.latitude]
+ * @param {number} [options.longitude]
  * @param {number} [options.unitsChoice]
  * @param {string} [options.language]
  * @param {function(Object|null, Object|null)} callback
@@ -1134,8 +1182,8 @@ function getForecastDataV1(options, callback) {
 		if (err || status !== 200) {
 			callback(
 				err || {
-					type: status || "network",
-					message: raw || "Request failed",
+					type: status || i18n("network"),
+					message: raw || i18n("Request failed"),
 				},
 				null
 			);
@@ -1234,8 +1282,8 @@ function getHourlyData(optionsOrCallback, callback) {
  * V1 hourly forecast implementation.
  *
  * @param {Object} options
- * @param {number} options.latitude
- * @param {number} options.longitude
+ * @param {number} [options.latitude]
+ * @param {number} [options.longitude]
  * @param {number} [options.unitsChoice]
  * @param {string} [options.language]
  * @param {function(Object|null, Object|null)} callback
@@ -1270,8 +1318,8 @@ function getHourlyDataV1(options, callback) {
 		if (err || status !== 200) {
 			callback(
 				err || {
-					type: status || "network",
-					message: raw || "Request failed",
+					type: status || i18n("network"),
+					message: raw || i18n("Request failed"),
 				},
 				null
 			);
@@ -1346,8 +1394,8 @@ function getHourlyDataV1(options, callback) {
  * V3 hourly forecast implementation.
  *
  * @param {Object} options
- * @param {number} options.latitude
- * @param {number} options.longitude
+ * @param {number} [options.latitude]
+ * @param {number} [options.longitude]
  * @param {number} [options.unitsChoice]
  * @param {string} [options.language]
  * @param {number} [options.presUnit]
@@ -1378,8 +1426,8 @@ function getHourlyDataV3(options, callback) {
 		if (err || status !== 200) {
 			callback(
 				err || {
-					type: status || "network",
-					message: raw || "Request failed",
+					type: status || i18n("network"),
+					message: raw || i18n("Request failed"),
 				},
 				null
 			);
@@ -1460,8 +1508,8 @@ function getKpIndexData(callback) {
 		if (err || status !== 200) {
 			callback(
 				err || {
-					type: "network",
-					message: "Failed to fetch KP index data",
+					type: i18n("network"),
+					message: i18n("Failed to fetch KP index data"),
 				},
 				null
 			);

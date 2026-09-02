@@ -77,7 +77,7 @@ WallpaperItem {
         return play;
     }
     property bool playing: {
-        return ((shouldPlay && !batteryPausesVideo && !screenLocked && !screenIsOff && !effectPauseVideo) || effectPlayVideo) && videosConfig.length !== 0;
+        return ((shouldPlay && !batteryPausesVideo && !screenLocked && !screenIsOff && !effectPauseVideo && isCurrentActivity) || effectPlayVideo) && videosConfig.length !== 0;
     }
     property bool shouldBlur: {
         if (videosConfig.length == 0) {
@@ -111,6 +111,13 @@ WallpaperItem {
     property bool batteryDisablesBlur: pauseBattery && main.configuration.BatteryDisablesBlur
 
     property bool screenIsOff: screenModel.screenIsOff
+    property bool isCurrentActivity: {
+        // lock and login screens have no activity
+        if (Plasmoid.activity === undefined) {
+            return true;
+        }
+        return Plasmoid.activity === windowModel.currentActivity;
+    }
     property bool screenOffPausesVideo: main.configuration.ScreenOffPausesVideo
     property bool lockScreenMode: false
     property bool debugEnabled: main.configuration.DebugEnabled

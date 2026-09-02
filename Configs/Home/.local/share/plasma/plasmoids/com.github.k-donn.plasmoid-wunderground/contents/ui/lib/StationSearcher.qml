@@ -142,7 +142,7 @@ Window {
             }
 
             QQC.Button {
-                text: "Search"
+                text: i18n("Search")
                 enabled: (stationSearcher.searchMode === "stationID" || stationSearcher.searchMode === "placeName") ? stationSearcher.searchText.length > 0 : true
                 onClicked: {
                     clearError();

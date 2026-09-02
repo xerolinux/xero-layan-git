@@ -634,7 +634,6 @@ Kirigami.FormLayout {
     RowLayout {
         enabled: isEnabled
         Kirigami.FormData.label: i18n("Alpha:")
-        visible: colorModeGroup.checkedButton.index < 5
 
         DoubleSpinBoxCompat {
             id: alphaSpinbox

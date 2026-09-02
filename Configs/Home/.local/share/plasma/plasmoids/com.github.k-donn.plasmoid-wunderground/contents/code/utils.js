@@ -255,22 +255,22 @@ var severityColorMap = {
  */
 function windDirToCard(deg) {
 	var directions = [
-		"N",
-		"NNE",
-		"NE",
-		"ENE",
-		"E",
-		"ESE",
-		"SE",
-		"SSE",
-		"S",
-		"SSW",
-		"SW",
-		"WSW",
-		"W",
-		"WNW",
-		"NW",
-		"NNW",
+		i18nc("Abbreviation for North", "N"),
+		i18nc("Abbreviation for North Northeast", "NNE"),
+		i18nc("Abbreviation for Northeast", "NE"),
+		i18nc("Abbreviation for East Northeast", "ENE"),
+		i18nc("Abbreviation for East", "E"),
+		i18nc("Abbreviation for East Southeast", "ESE"),
+		i18nc("Abbreviation for Southeast", "SE"),
+		i18nc("Abbreviation for South Southeast", "SSE"),
+		i18nc("Abbreviation for South", "S"),
+		i18nc("Abbreviation for South Southwest", "SSW"),
+		i18nc("Abbreviation for Southwest", "SW"),
+		i18nc("Abbreviation for West Southwest", "WSW"),
+		i18nc("Abbreviation for West", "W"),
+		i18nc("Abbreviation for West Northwest", "WNW"),
+		i18nc("Abbreviation for Northwest", "NW"),
+		i18nc("Abbreviation for North Northwest", "NNW"),
 	];
 	deg *= 10;
 	return directions[Math.round((deg % 3600) / 255)];
@@ -316,49 +316,55 @@ function zoomForBoundingBox(bbox, map, padding) {
 }
 
 function zoomForCircle(centerCoord, radiusMeters, map, padding) {
-	const EARTH_RADIUS = 6378137;
-	const lat = degToRad(centerCoord.latitude);
-	const lon = degToRad(centerCoord.longitude);
+    const EARTH_RADIUS = 6378137;
 
-	const angularRadius = radiusMeters / EARTH_RADIUS;
+    if (padding === undefined) {
+        padding = 20;
+    }
 
-	const latMax = Math.asin(
-		Math.sin(lat) * Math.cos(angularRadius) +
-			Math.cos(lat) * Math.sin(angularRadius),
-	);
-	const latMin = Math.asin(
-		Math.sin(lat) * Math.cos(angularRadius) -
-			Math.cos(lat) * Math.sin(angularRadius),
-	);
+    const lat = degToRad(centerCoord.latitude);
+    const lon = degToRad(centerCoord.longitude);
 
-	const latCos = Math.cos(lat);
-	const angularRadiusCos = Math.cos(angularRadius);
-	const lonDelta =
-		latCos === 0
-			? Math.PI // At poles, span all longitudes
-			: Math.acos(
-					(angularRadiusCos - Math.sin(lat) * Math.sin(latMax)) /
-						(Math.cos(lat) * Math.cos(latMax)),
-				);
+    const angularRadius = radiusMeters / EARTH_RADIUS;
 
-	const lonMin = lon - lonDelta;
-	const lonMax = lon + lonDelta;
+    // Latitude bounds of the great-circle circle.
+    const latMax = Math.asin(
+        Math.sin(lat) * Math.cos(angularRadius) +
+        Math.cos(lat) * Math.sin(angularRadius)
+    );
 
-	var bbox = {
-		minLat: (latMin * 180) / Math.PI,
-		maxLat: (latMax * 180) / Math.PI,
-		minLon: (lonMin * 180) / Math.PI,
-		maxLon: (lonMax * 180) / Math.PI,
-	};
+    const latMin = Math.asin(
+        Math.sin(lat) * Math.cos(angularRadius) -
+        Math.cos(lat) * Math.sin(angularRadius)
+    );
 
-	if (bbox.minLon < -180) {
-		bbox.minLon = bbox.minLon + 360;
-	}
-	if (bbox.maxLon > 180) {
-		bbox.maxLon = bbox.maxLon - 360;
-	}
+    // Longitude extent.
+    const latCos = Math.cos(lat);
 
-	return zoomForBoundingBox(bbox, map, padding);
+    let lonDelta;
+
+    if (Math.abs(latCos) < 1e-12) {
+        // At the poles, the circle spans every longitude.
+        lonDelta = Math.PI;
+    } else {
+        const value =
+            Math.sin(angularRadius) / Math.abs(latCos);
+
+        // Clamp against floating-point error.
+        lonDelta = Math.asin(Math.min(1, value));
+    }
+
+    const lonMin = lon - lonDelta;
+    const lonMax = lon + lonDelta;
+
+    const bbox = {
+        minLat: latMin * 180 / Math.PI,
+        maxLat: latMax * 180 / Math.PI,
+        minLon: lonMin * 180 / Math.PI,
+        maxLon: lonMax * 180 / Math.PI,
+    };
+
+    return zoomForBoundingBox(bbox, map, padding);
 }
 
 function cToF(degC) {
@@ -711,8 +717,6 @@ function getWindBarbIcon(windSpeed) {
 		speedKts = kmhToKts(windSpeed);
 	}
 
-	printDebug(speedKts)
-
 	if (within(speedKts, 0, 2.9999)) {
 		fileName = "0-2";
 	} else if (within(speedKts, 3, 7.9999)) {
@@ -794,18 +798,18 @@ function toUserTemp(value) {
 function rawTempUnit() {
 	var res = "";
 	if (unitsChoice === UNITS_SYSTEM.METRIC) {
-		res = "°C";
+		res = "°" + i18nc("Abbreviation for Celsius","C");
 	} else if (unitsChoice === UNITS_SYSTEM.IMPERIAL) {
-		res = "°F";
+		res = "°" + i18nc("Abbreviation for Fahrenheit","F");
 	} else if (unitsChoice === UNITS_SYSTEM.HYBRID) {
-		res = "°C";
+		res = "°" + i18nc("Abbreviation for Celsius","C");
 	} else {
 		if (plasmoid.configuration.tempUnitsChoice === TEMP_UNITS.C) {
-			res = "°C";
+			res = "°" + i18nc("Abbreviation for Celsius","C");
 		} else if (plasmoid.configuration.tempUnitsChoice === TEMP_UNITS.F) {
-			res = "°F";
+			res = "°" + i18nc("Abbreviation for Fahrenheit","F");
 		} else {
-			res = "°K";
+			res = "°" + i18nc("Abbreviation for Kelvin","K");
 		}
 	}
 	return res;
@@ -859,18 +863,18 @@ function toUserSpeed(value) {
 function rawSpeedUnit() {
 	var res = "";
 	if (unitsChoice === UNITS_SYSTEM.METRIC) {
-		res = "kmh";
+		res = i18n("kmh");
 	} else if (unitsChoice === UNITS_SYSTEM.IMPERIAL) {
-		res = "mph";
+		res = i18n("mph");
 	} else if (unitsChoice === UNITS_SYSTEM.HYBRID) {
-		res = "mph";
+		res = i18n("mph");
 	} else {
 		if (plasmoid.configuration.windUnitsChoice === WIND_UNITS.KMH) {
-			res = "kmh";
+			res = i18n("kmh");
 		} else if (plasmoid.configuration.windUnitsChoice === WIND_UNITS.MPH) {
-			res = "mph";
+			res = i18n("mph");
 		} else {
-			res = "m/s";
+			res = i18n("m/s");
 		}
 	}
 	return res;
@@ -921,16 +925,16 @@ function toUserElev(value) {
 function rawElevUnit() {
 	var res = "";
 	if (unitsChoice === UNITS_SYSTEM.METRIC) {
-		res = "m";
+		res = i18nc("Abbreviation for Meters","m");
 	} else if (unitsChoice === UNITS_SYSTEM.IMPERIAL) {
-		res = "ft";
+		res = i18n("ft");
 	} else if (unitsChoice === UNITS_SYSTEM.HYBRID) {
-		res = "ft";
+		res = i18n("ft");
 	} else {
 		if (plasmoid.configuration.elevUnitsChoice === ELEV_UNITS.M) {
-			res = "m";
+			res = i18nc("Abbreviation for Meters","m");
 		} else {
-			res = "ft";
+			res = i18n("ft");
 		}
 	}
 	return res;
@@ -1006,40 +1010,40 @@ function rawPrecipUnit(isRain) {
 	}
 	if (unitsChoice === UNITS_SYSTEM.METRIC) {
 		if (isRain) {
-			res = "mm";
+			res = i18n("mm");
 		} else {
-			res = "cm";
+			res = i18n("cm");
 		}
 	} else if (unitsChoice === UNITS_SYSTEM.IMPERIAL) {
-		return (res = "in");
+		return (res = i18nc("Abbreviation for Inches","in"));
 	} else if (unitsChoice === UNITS_SYSTEM.HYBRID) {
 		if (isRain) {
-			res = "mm";
+			res = i18n("mm");
 		} else {
-			res = "cm";
+			res = i18n("cm");
 		}
 	} else {
 		// This is not redundant because the user can choose different rain/snow
 		// units and the result of this function must reflect that.
 		if (isRain) {
 			if (plasmoid.configuration.rainUnitsChoice === RAIN_UNITS.MM) {
-				res = "mm";
+				res = i18n("mm");
 			} else if (
 				plasmoid.configuration.rainUnitsChoice === RAIN_UNITS.IN
 			) {
-				res = "in";
+				res = i18nc("Abbreviation for Inches","in");
 			} else {
-				res = "cm";
+				res = i18n("cm");
 			}
 		} else {
 			if (plasmoid.configuration.snowUnitsChoice === SNOW_UNITS.MM) {
-				res = "mm";
+				res = i18n("mm");
 			} else if (
 				plasmoid.configuration.snowUnitsChoice === SNOW_UNITS.IN
 			) {
-				res = "in";
+				res = i18nc("Abbreviation for Inches","in");
 			} else {
-				res = "cm";
+				res = i18n("cm");
 			}
 		}
 	}
@@ -1099,24 +1103,24 @@ function toUserPres(value) {
 function rawPresUnit() {
 	var res = "";
 	if (unitsChoice === UNITS_SYSTEM.METRIC) {
-		res = "mb";
+		res = i18n("mb");
 	} else if (unitsChoice === UNITS_SYSTEM.IMPERIAL) {
-		res = "inHG";
+		res = i18n("inHG");
 	} else if (unitsChoice === UNITS_SYSTEM.HYBRID) {
-		res = "mb";
+		res = i18n("mb");
 	} else {
 		if (plasmoid.configuration.presUnitsChoice === PRES_UNITS.MB) {
-			res = "mb";
+			res = i18n("mb");
 		} else if (plasmoid.configuration.presUnitsChoice === PRES_UNITS.INHG) {
-			res = "inHG";
+			res = i18n("inHG");
 		} else if (plasmoid.configuration.presUnitsChoice === PRES_UNITS.MMHG) {
-			res = "mmHG";
+			res = i18n("mmHG");
 		} else if (plasmoid.configuration.presUnitsChoice === PRES_UNITS.HPA) {
-			res = "hPa";
+			res = i18n("hPa");
 		} else if (plasmoid.configuration.presUnitsChoice === PRES_UNITS.PSI) {
-			res = "psi";
+			res = i18n("psi");
 		} else {
-			res = "hPa";
+			res = i18n("hPa");
 		}
 	}
 	return res;

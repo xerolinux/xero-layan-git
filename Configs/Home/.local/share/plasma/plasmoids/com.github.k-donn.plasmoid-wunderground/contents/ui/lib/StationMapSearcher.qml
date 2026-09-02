@@ -91,7 +91,7 @@ Window {
         name: "osm"
         PluginParameter {
             name: "osm.useragent"
-            value: "WundergroundPlasmoid/3.7.9 (https://github.com/k-donn/plasmoid-wunderground; contact:mitchell@mitchelldonnelly.com)"
+            value: "WundergroundPlasmoid/3.8.3 (https://github.com/k-donn/plasmoid-wunderground; contact:mitchell@mitchelldonnelly.com)"
         }
         PluginParameter {
             name: "osm.mapping.custom.host"
@@ -116,7 +116,7 @@ Window {
 
             QQC.ComboBox {
                 id: modeCombo
-                model: [i18n("Area Name"), i18n("Weatherstation ID:"), i18n("Lat/Lon")]
+                model: [i18n("Area Name"), i18n("Weatherstation ID:"), i18n("Lat/Lon"), i18n("Current Location")]
                 onCurrentIndexChanged: {
                     stationMapSearcher.searchResults.clear();
                     stationMapSearcher.availableCitiesModel.clear();
@@ -126,9 +126,11 @@ Window {
                         stationMapSearcher.searchMode = "address";
                     } else if (currentIndex === 1) {
                         stationMapSearcher.searchMode = "stationID";
-                    } else {
+                    } else if (currentIndex === 2) {
                         stationMapSearcher.searchRadius = 10000;
                         stationMapSearcher.searchMode = "latlon";
+                    } else if (currentIndex === 3) {
+                        stationMapSearcher.searchMode = "currentLocation";
                     }
                 }
             }
@@ -136,29 +138,37 @@ Window {
             Loader {
                 id: searchLoader
                 Layout.fillWidth: true
-                sourceComponent: stationMapSearcher.searchMode === "latlon" ? latLonSearchComponent : textSearchComponent
+                sourceComponent: {
+                    if (stationMapSearcher.searchMode === "address" || stationMapSearcher.searchMode === "stationID") {
+                        return textSearchComponent;
+                    } else if (stationMapSearcher.searchMode === "latlon") {
+                        return latLonSearchComponent;
+                    } else if (stationMapSearcher.searchMode === "currentLocation") {
+                        return currentLocationComponent;
+                    }
+                }
             }
 
             QQC.Button {
                 id: searchBtn
                 text: i18n("Search")
-                enabled: stationMapSearcher.searchText.length > 0 || stationMapSearcher.searchMode === "latlon"
+                enabled: stationMapSearcher.searchText.length > 0 || stationMapSearcher.searchMode === "latlon" || stationMapSearcher.searchMode === "currentLocation"
                 onPressed: {
                     if (stationMapSearcher.searchMode === "address") {
                         StationAPI.getLocations(stationMapSearcher.searchText, {
                             language: Qt.locale().name.replace("_", "-")
                         }, function (err, places) {
                             if (err) {
-                                errorType = err.type;
-                                errorMessage = err.message;
-                                availableCitiesModel.clear();
+                                stationMapSearcher.errorType = err.type;
+                                stationMapSearcher.errorMessage = err.message;
+                                stationMapSearcher.availableCitiesModel.clear();
                                 return;
                             }
-                            errorType = "";
-                            errorMessage = "";
-                            availableCitiesModel.clear();
+                            stationMapSearcher.errorType = "";
+                            stationMapSearcher.errorMessage = "";
+                            stationMapSearcher.availableCitiesModel.clear();
                             for (var i = 0; i < places.length; i++) {
-                                availableCitiesModel.append({
+                                stationMapSearcher.availableCitiesModel.append({
                                     "address": places[i].address,
                                     "latitude": places[i].latitude,
                                     "longitude": places[i].longitude
@@ -174,12 +184,12 @@ Window {
                             language: Qt.locale().name.replace("_", "-")
                         }, function (err, stations) {
                             if (err) {
-                                errorType = err.type;
-                                errorMessage = err.message;
+                                stationMapSearcher.errorType = err.type;
+                                stationMapSearcher.errorMessage = err.message;
                                 return;
                             }
-                            errorType = "";
-                            errorMessage = "";
+                            stationMapSearcher.errorType = "";
+                            stationMapSearcher.errorMessage = "";
                             var latMin, latMax, latSum, latCount, lonMin, lonMax, lonSum, lonCount;
                             latSum = latCount = lonSum = lonCount = 0;
                             latMin = lonMin = Infinity;
@@ -198,7 +208,7 @@ Window {
                                 lonSum += stations[i].longitude;
                                 latCount += 1;
                                 lonCount += 1;
-                                searchResults.append({
+                                stationMapSearcher.searchResults.append({
                                     "stationID": stations[i].stationID,
                                     "address": stations[i].address,
                                     "latitude": stations[i].latitude,
@@ -225,21 +235,21 @@ Window {
                             language: Qt.locale().name.replace("_", "-")
                         }, function (err, stations) {
                             if (err) {
-                                errorType = err.type;
-                                errorMessage = err.message;
+                                stationMapSearcher.errorType = err.type;
+                                stationMapSearcher.errorMessage = err.message;
                                 return;
                             }
-                            errorType = "";
-                            errorMessage = "";
+                            stationMapSearcher.errorType = "";
+                            stationMapSearcher.errorMessage = "";
                             var latSum, latCount, lonSum, lonCount;
                             latSum = latCount = lonSum = lonCount = 0;
-                            searchResults.clear();
+                            stationMapSearcher.searchResults.clear();
                             for (var i = 0; i < stations.length; i++) {
                                 latSum += stations[i].latitude;
                                 lonSum += stations[i].longitude;
                                 latCount += 1;
                                 lonCount += 1;
-                                searchResults.append({
+                                stationMapSearcher.searchResults.append({
                                     "stationID": stations[i].stationID,
                                     "address": stations[i].address,
                                     "latitude": stations[i].latitude,
@@ -254,6 +264,57 @@ Window {
                             stationMap.center = QtPositioning.coordinate(latAvg, lonAvg);
                             stationMap.zoomLevel = Utils.zoomForCircle(stationMap.center, stationMapSearcher.searchRadius, stationMap, 5);
                         });
+                    } else if (stationMapSearcher.searchMode === "currentLocation") {
+                        StationAPI.getNearest({ language: Qt.locale().name.replace("_", "-")}, function(err, stations) {
+                            if (err) {
+                                stationMapSearcher.errorMessage = err.message;
+                                stationMapSearcher.errorType = err.type;
+                                return;
+                            }
+                            stationMapSearcher.errorType = "";
+                            stationMapSearcher.errorMessage = "";
+                            if (stations.length > 0) {
+                                var latMin, latMax, latSum, latCount, lonMin, lonMax, lonSum, lonCount;
+                                latSum = latCount = lonSum = lonCount = 0;
+                                latMin = lonMin = Infinity;
+                                latMax = lonMax = -Infinity;
+                                stationMapSearcher.searchResults.clear();
+                                for (var i = 0; i < stations.length; i++) {
+                                    if (stations[i].latitude < latMin)
+                                        latMin = stations[i].latitude;
+                                    if (stations[i].latitude > latMax)
+                                        latMax = stations[i].latitude;
+                                    if (stations[i].longitude < lonMin)
+                                        lonMin = stations[i].longitude;
+                                    if (stations[i].longitude > lonMax)
+                                        lonMax = stations[i].longitude;
+                                    latSum += stations[i].latitude;
+                                    lonSum += stations[i].longitude;
+                                    latCount += 1;
+                                    lonCount += 1;
+                                    stationMapSearcher.searchResults.append({
+                                        "stationID": stations[i].stationID,
+                                        "address": stations[i].address,
+                                        "latitude": stations[i].latitude,
+                                        "longitude": stations[i].longitude,
+                                        "qcStatus": stations[i].qcStatus
+                                    });
+                                }
+                                var latAvg = latSum / latCount;
+                                var lonAvg = lonSum / lonCount;
+                                var minCoord = QtPositioning.coordinate(latMin, lonMin);
+                                var maxCoord = QtPositioning.coordinate(latMax, lonMax);
+                                var avgCoord = QtPositioning.coordinate(latAvg, lonAvg);
+                                stationMapSearcher.searchRadius = stations.length > 1 ? Math.max(avgCoord.distanceTo(minCoord), avgCoord.distanceTo(maxCoord)) : 5000;
+                                stationMapSearcher.areaLat = latAvg;
+                                stationMapSearcher.areaLon = lonAvg;
+                                stationMap.center = avgCoord;
+                                stationMap.zoomLevel = Utils.zoomForCircle(stationMap.center, stationMapSearcher.searchRadius, stationMap, 5);
+                            } else {
+                                stationMapSearcher.errorMessage = i18n("No nearby stations found.");
+                                stationMapSearcher.errorType = "NoStations";
+                            }
+                        })
                     }
                 }
             }
@@ -262,11 +323,22 @@ Window {
         Loader {
             id: helperLoader
             Layout.fillWidth: true
-            sourceComponent: stationMapSearcher.searchMode === "address" ? addressHelperComponent : stationMapSearcher.searchMode === "stationID" ? stationIDHelperComponent : latLonHelperComponent
+            sourceComponent: {
+                if (stationMapSearcher.searchMode === "address") {
+                    return addressHelperComponent;
+                } else if (stationMapSearcher.searchMode === "stationID") {
+                    return stationIDHelperComponent;
+                } else if (stationMapSearcher.searchMode === "latlon") {
+                    return latLonHelperComponent;
+                } else if (stationMapSearcher.searchMode === "currentLocation") {
+                    return currentLocationHelperComponent;
+                }
+            }
         }
 
         Component {
             id: textSearchComponent
+
             QQC.TextField {
                 id: searchField
                 Layout.fillWidth: true
@@ -285,6 +357,14 @@ Window {
 
             PlasmaComponents.Label {
                 text: i18n("Click or drag the marker on the map below.")
+            }
+        }
+
+        Component {
+            id: currentLocationComponent
+
+            PlasmaComponents.Label {
+                text: i18n("Searching for nearby stations using IP2Location.io")
             }
         }
 
@@ -313,21 +393,24 @@ Window {
                         stationMapSearcher.searchResults.clear();
                         stationMapSearcher.areaLat = stationMapSearcher.availableCitiesModel.get(cityChoice.currentIndex).latitude;
                         stationMapSearcher.areaLon = stationMapSearcher.availableCitiesModel.get(cityChoice.currentIndex).longitude;
-                        stationMap.center = QtPositioning.coordinate(stationMapSearcher.availableCitiesModel.get(cityChoice.currentIndex).latitude, stationMapSearcher.availableCitiesModel.get(cityChoice.currentIndex).longitude);
                         StationAPI.searchGeocode({
-                            latitude: stationMapSearcher.availableCitiesModel.get(cityChoice.currentIndex).latitude,
-                            longitude: stationMapSearcher.availableCitiesModel.get(cityChoice.currentIndex).longitude
+                            latitude: stationMapSearcher.areaLat,
+                            longitude: stationMapSearcher.areaLon
                         }, {
                             language: Qt.locale().name.replace("_", "-")
                         }, function (err, stations) {
                             if (err) {
-                                errorType = err.type;
-                                errorMessage = err.message;
+                                stationMapSearcher.errorType = err.type;
+                                stationMapSearcher.errorMessage = err.message;
                                 return;
                             }
-                            var latMin, latMax, lonMin, lonMax;
+                            stationMapSearcher.errorType = "";
+                            stationMapSearcher.errorMessage = "";
+                            var latMin, latMax, latSum, latCount, lonMin, lonMax, lonSum, lonCount;
+                            latSum = latCount = lonSum = lonCount = 0;
                             latMin = lonMin = Infinity;
                             latMax = lonMax = -Infinity;
+                            stationMapSearcher.searchResults.clear();
                             for (var i = 0; i < stations.length; i++) {
                                 if (stations[i].latitude < latMin)
                                     latMin = stations[i].latitude;
@@ -337,6 +420,10 @@ Window {
                                     lonMin = stations[i].longitude;
                                 if (stations[i].longitude > lonMax)
                                     lonMax = stations[i].longitude;
+                                latSum += stations[i].latitude;
+                                lonSum += stations[i].longitude;
+                                latCount += 1;
+                                lonCount += 1;
                                 stationMapSearcher.searchResults.append({
                                     "stationID": stations[i].stationID,
                                     "address": stations[i].address,
@@ -345,11 +432,13 @@ Window {
                                     "qcStatus": stations[i].qcStatus
                                 });
                             }
+                            var latAvg = latSum / latCount;
+                            var lonAvg = lonSum / lonCount;
                             var minCoord = QtPositioning.coordinate(latMin, lonMin);
                             var maxCoord = QtPositioning.coordinate(latMax, lonMax);
-                            var avgCoord = stationMap.center;
-
-                            stationMapSearcher.searchRadius = Math.max(avgCoord.distanceTo(minCoord), avgCoord.distanceTo(maxCoord));
+                            var avgCoord = QtPositioning.coordinate(latAvg, lonAvg);
+                            stationMapSearcher.searchRadius = stations.length > 1 ? Math.max(avgCoord.distanceTo(minCoord), avgCoord.distanceTo(maxCoord)) : 5000;
+                            stationMap.center = avgCoord;
                             stationMap.zoomLevel = Utils.zoomForCircle(stationMap.center, stationMapSearcher.searchRadius, stationMap, 5);
                         });
                     }
@@ -368,6 +457,35 @@ Window {
             id: latLonHelperComponent
             PlasmaComponents.Label {
                 text: i18n("Selected latitude: %1, longitude: %2", stationMapSearcher.searchLat.toFixed(4), stationMapSearcher.searchLon.toFixed(4))
+            }
+        }
+
+        Component {
+            id: currentLocationHelperComponent
+
+            PlasmaComponents.Label {
+                text: i18n("Privacy Policy: IP2Location.io is used to determine your approximate location based on your IP address. No personally identifiable information is collected or stored.")
+
+                color: Kirigami.Theme.linkColor
+                
+                width: parent.width
+                wrapMode: Text.Wrap
+
+                MouseArea {
+                    anchors.fill: parent
+
+                    hoverEnabled: true
+
+                    onEntered: {
+                        parent.font.underline = true;
+                    }
+
+                    onExited: {
+                        parent.font.underline = false;
+                    }
+
+                    onClicked: Qt.openUrlExternally("https://www.ip2location.io/privacy-policy")
+                }
             }
         }
 

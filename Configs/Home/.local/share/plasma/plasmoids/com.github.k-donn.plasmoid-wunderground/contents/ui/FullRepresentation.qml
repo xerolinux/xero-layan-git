@@ -84,7 +84,7 @@ ColumnLayout {
         PlasmaComponents.Button {
             id: copyButton
 
-            text: i18nd("plasma_shell_org.kde.plasma.desktop", "Copy to Clipboard")
+            text: i18ndc("plasma_shell_org.kde.plasma.desktop", "@action:button", "Copy to Clipboard")
             icon.name: "edit-copy"
             onClicked: {
                 textArea.selectAll();

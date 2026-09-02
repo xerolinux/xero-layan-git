@@ -70,11 +70,11 @@ KCM.SimpleKCM {
 
             RowLayout {
                 Kirigami.FormData.label: i18n("Separator widget:")
-                Layout.preferredWidth: 300
+                Layout.preferredWidth: 400
                 TextField {
                     id: islandSeparatorWidget
                     Layout.fillWidth: true
-                    placeholderText: "auto"
+                    placeholderText: "org.kde.plasma.panelspacer"
                 }
                 Button {
                     icon.name: widgetsCard.visible ? "arrow-up" : "arrow-down"

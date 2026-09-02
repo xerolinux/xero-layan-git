@@ -130,9 +130,17 @@ QtObject {
         }
     }
 
-    function addStation(stationID, address, lat, lon) {
+    function addStation(stationID, address, lat, lon, errCallback) {
+        // Check for duplicates
+        for (var i = 0; i < listModel.count; i++) {
+            if (listModel.get(i).stationID === stationID) {
+                errCallback({ "type": "duplicate", "message": i18n("Duplicate station entered")});
+                return;
+            }
+        }
+
         printDebug("Adding station: " + stationID);
-        
+
         // Deselect all stations
         for (var i = 0; i < listModel.count; i++) {
             listModel.setProperty(i, "selected", false);

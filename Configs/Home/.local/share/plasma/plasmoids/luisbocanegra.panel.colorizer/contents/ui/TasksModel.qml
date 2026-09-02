@@ -1,5 +1,6 @@
 import QtQuick
 import org.kde.taskmanager as TaskManager
+import org.kde.plasma.plasmoid
 
 Item {
     id: root
@@ -21,22 +22,22 @@ Item {
 
     function getTopTask() {
         let highestTask = null;
-        let maxStackingOrder = 0;
+        let maxStackingOrder = -1;
         for (var i = 0; i < tasksModel.count; i++) {
             const currentTask = tasksModel.index(i, 0);
             if (currentTask === undefined || !tasksModel.data(currentTask, isWindow))
                 continue;
 
-            const staskingOder = tasksModel.data(currentTask, abstractTasksModel.StackingOrder);
-            if (staskingOder > maxStackingOrder) {
-                maxStackingOrder = staskingOder;
+            const stackingOrder = tasksModel.data(currentTask, abstractTasksModel.StackingOrder);
+            if (stackingOrder > maxStackingOrder) {
+                maxStackingOrder = stackingOrder;
                 highestTask = currentTask;
             }
         }
         return highestTask;
     }
 
-    function updateWindowsinfo() {
+    function updateWindowsInfo() {
         let activeCount = 0;
         let visibleCount = 0;
         let maximizedCount = 0;
@@ -66,7 +67,7 @@ Item {
             _activeTask = tasksModel.activeTask;
         }
 
-        if (filterByActive && !_activeTask && trackLastActive) {
+        if (!_activeTask && trackLastActive) {
             _activeTask = getTopTask();
             _activeExists = Boolean(_activeTask);
         }
@@ -85,11 +86,10 @@ Item {
 
     Connections {
         function onValueChanged() {
-            if (!updateTimer.running)
-                updateTimer.start();
+            Qt.callLater(root.update);
         }
 
-        target: plasmoid.configuration
+        target: Plasmoid.configuration
     }
 
     TaskManager.VirtualDesktopInfo {
@@ -107,24 +107,34 @@ Item {
 
         sortMode: TaskManager.TasksModel.SortVirtualDesktop
         groupMode: TaskManager.TasksModel.GroupDisabled
-        virtualDesktop: virtualDesktopInfo.currentDesktop
         activity: activityInfo.currentActivity
         screenGeometry: root.screenGeometry
-        filterByVirtualDesktop: true
         filterByScreen: root.filterByScreen
         filterByActivity: true
         filterMinimized: true
         onDataChanged: {
-            Qt.callLater(() => {
-                if (!updateTimer.running)
-                    updateTimer.start();
-            });
+            Qt.callLater(root.update);
         }
         onCountChanged: {
-            Qt.callLater(() => {
-                if (!updateTimer.running)
-                    updateTimer.start();
-            });
+            Qt.callLater(root.update);
+        }
+        Component.onCompleted: {
+            // Plasma 6.7 per-output virtual desktops
+            // https://invent.kde.org/plasma/plasma-desktop/-/merge_requests/3427
+            if (tasksModel.hasOwnProperty("filterByCurrentVirtualDesktop")) {
+                tasksModel.filterByCurrentVirtualDesktop = true;
+            } else {
+                tasksModel.virtualDesktop = Qt.binding(function () {
+                    return virtualDesktopInfo.currentDesktop;
+                });
+                tasksModel.filterByVirtualDesktop = true;
+            }
+        }
+    }
+
+    function update() {
+        if (!updateTimer.running) {
+            updateTimer.start();
         }
     }
 
@@ -133,7 +143,7 @@ Item {
 
         interval: 5
         onTriggered: {
-            root.updateWindowsinfo();
+            root.updateWindowsInfo();
         }
     }
 }

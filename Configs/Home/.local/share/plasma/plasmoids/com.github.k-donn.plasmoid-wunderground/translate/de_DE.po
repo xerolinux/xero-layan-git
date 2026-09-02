@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmoid-wunderground\n"
 "Report-Msgid-Bugs-To: https://github.com/k-donn/plasmoid-wunderground\n"
-"POT-Creation-Date: 2026-06-09 20:53-0500\n"
+"POT-Creation-Date: 2026-08-29 14:25-0500\n"
 "PO-Revision-Date: DA-Mo-YEAR HO:MI+ZONE\n"
 "Last-Translator: Stefan Wannemacher <swannema@t-online.de>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,8 +26,189 @@ msgid "Wunderground Personal Weather Station viewer"
 msgstr "Meine Wetterstation"
 
 #: ../contents/code/pws-api.js
+msgid "Could not send request"
+msgstr "Anfrage konnte nicht gesendet werden"
+
+#: ../contents/code/pws-api.js
+msgid "Network error"
+msgstr "Netzwerkfehler"
+
+#: ../contents/code/pws-api.js
+msgid "network"
+msgstr "Netzwerk"
+
+#: ../contents/code/pws-api.js
+msgid "Request failed"
+msgstr "Die Anfrage ist fehlgeschlagen"
+
+#: ../contents/code/pws-api.js
+msgid "No stations found"
+msgstr "Keine Station gefunden"
+
+#: ../contents/code/pws-api.js
 msgid "Location not found"
 msgstr "Standort nicht gefunden"
+
+#: ../contents/code/pws-api.js
+msgid "No observation returned"
+msgstr "Keine Beobachtungen zurückgegeben"
+
+#: ../contents/code/pws-api.js
+msgid "No extended conditions returned"
+msgstr "Es wurden keine erweiterten Bedingungen zurückgegeben"
+
+#: ../contents/code/pws-api.js
+msgid "Failed to fetch KP index data"
+msgstr "Das Abrufen der KP-Indexdaten ist fehlgeschlagen"
+
+#: ../contents/code/utils.js
+msgctxt "Abbreviation for North"
+msgid "N"
+msgstr "N"
+
+#: ../contents/code/utils.js
+msgctxt "Abbreviation for North Northeast"
+msgid "NNE"
+msgstr "NNO"
+
+#: ../contents/code/utils.js
+msgctxt "Abbreviation for Northeast"
+msgid "NE"
+msgstr "NO"
+
+#: ../contents/code/utils.js
+msgctxt "Abbreviation for East Northeast"
+msgid "ENE"
+msgstr ""
+
+#: ../contents/code/utils.js
+msgctxt "Abbreviation for East"
+msgid "E"
+msgstr "O"
+
+#: ../contents/code/utils.js
+msgctxt "Abbreviation for East Southeast"
+msgid "ESE"
+msgstr "OSO"
+
+#: ../contents/code/utils.js
+msgctxt "Abbreviation for Southeast"
+msgid "SE"
+msgstr "SO"
+
+#: ../contents/code/utils.js
+msgctxt "Abbreviation for South Southeast"
+msgid "SSE"
+msgstr "SSO"
+
+#: ../contents/code/utils.js
+msgctxt "Abbreviation for South"
+msgid "S"
+msgstr "S"
+
+#: ../contents/code/utils.js
+msgctxt "Abbreviation for South Southwest"
+msgid "SSW"
+msgstr "SSW"
+
+#: ../contents/code/utils.js
+msgctxt "Abbreviation for Southwest"
+msgid "SW"
+msgstr "SW"
+
+#: ../contents/code/utils.js
+msgctxt "Abbreviation for West Southwest"
+msgid "WSW"
+msgstr "WSW"
+
+#: ../contents/code/utils.js
+msgctxt "Abbreviation for West"
+msgid "W"
+msgstr "W"
+
+#: ../contents/code/utils.js
+msgctxt "Abbreviation for West Northwest"
+msgid "WNW"
+msgstr "WNW"
+
+#: ../contents/code/utils.js
+msgctxt "Abbreviation for Northwest"
+msgid "NW"
+msgstr "NW"
+
+#: ../contents/code/utils.js
+msgctxt "Abbreviation for North Northwest"
+msgid "NNW"
+msgstr "NNW"
+
+#: ../contents/code/utils.js ../contents/ui/config/ConfigUnits.qml
+msgctxt "Abbreviation for Celsius"
+msgid "C"
+msgstr "C"
+
+#: ../contents/code/utils.js ../contents/ui/config/ConfigUnits.qml
+msgctxt "Abbreviation for Fahrenheit"
+msgid "F"
+msgstr "F"
+
+#: ../contents/code/utils.js ../contents/ui/config/ConfigUnits.qml
+msgctxt "Abbreviation for Kelvin"
+msgid "K"
+msgstr "K"
+
+#: ../contents/code/utils.js ../contents/ui/config/ConfigUnits.qml
+msgid "kmh"
+msgstr "kmh"
+
+#: ../contents/code/utils.js ../contents/ui/config/ConfigUnits.qml
+msgid "mph"
+msgstr "mph"
+
+#: ../contents/code/utils.js ../contents/ui/config/ConfigUnits.qml
+msgid "m/s"
+msgstr "m/s"
+
+#: ../contents/code/utils.js ../contents/ui/config/ConfigUnits.qml
+msgctxt "Abbreviation for Meters"
+msgid "m"
+msgstr "m"
+
+#: ../contents/code/utils.js ../contents/ui/config/ConfigUnits.qml
+msgid "ft"
+msgstr "ft"
+
+#: ../contents/code/utils.js ../contents/ui/config/ConfigUnits.qml
+msgid "mm"
+msgstr "mm"
+
+#: ../contents/code/utils.js ../contents/ui/config/ConfigUnits.qml
+msgid "cm"
+msgstr "cm"
+
+#: ../contents/code/utils.js ../contents/ui/config/ConfigUnits.qml
+msgctxt "Abbreviation for Inches"
+msgid "in"
+msgstr "in"
+
+#: ../contents/code/utils.js ../contents/ui/config/ConfigUnits.qml
+msgid "mb"
+msgstr "mb"
+
+#: ../contents/code/utils.js ../contents/ui/config/ConfigUnits.qml
+msgid "inHG"
+msgstr "inHG"
+
+#: ../contents/code/utils.js ../contents/ui/config/ConfigUnits.qml
+msgid "mmHG"
+msgstr "mmHG"
+
+#: ../contents/code/utils.js ../contents/ui/config/ConfigUnits.qml
+msgid "hPa"
+msgstr "hPa"
+
+#: ../contents/code/utils.js ../contents/ui/config/ConfigUnits.qml
+msgid "psi"
+msgstr "psi"
 
 #: ../contents/code/utils.js
 msgid "To sunrise"
@@ -521,6 +702,14 @@ msgid "Actions"
 msgstr "Aktionen"
 
 #: ../contents/ui/config/ConfigStation.qml
+msgid "Add Current Location"
+msgstr ""
+
+#: ../contents/ui/config/ConfigStation.qml ../contents/ui/lib/StationMapSearcher.qml
+msgid "No nearby stations found."
+msgstr ""
+
+#: ../contents/ui/config/ConfigStation.qml
 msgid "Select from Map"
 msgstr "Aus Karte auswählen"
 
@@ -531,6 +720,10 @@ msgstr "Station suchen"
 #: ../contents/ui/config/ConfigStation.qml
 msgid "Manual Add"
 msgstr "Manuelles Hinzufügen"
+
+#: ../contents/ui/config/ConfigStation.qml ../contents/ui/lib/StationMapSearcher.qml
+msgid "Error (%1): %2"
+msgstr "Fehler (%1): %2"
 
 #: ../contents/ui/config/ConfigStation.qml
 msgid "Refresh period (s):"
@@ -675,6 +868,10 @@ msgstr "Name bearbeiten"
 msgid "Remove"
 msgstr "Entfernen"
 
+#: ../contents/ui/lib/StationManager.qml
+msgid "Duplicate station entered"
+msgstr ""
+
 #: ../contents/ui/lib/StationMapSearcher.qml ../contents/ui/lib/StationSearcher.qml
 msgid "Search by:"
 msgstr "Suche nach:"
@@ -692,6 +889,10 @@ msgid "Lat/Lon"
 msgstr "Breiten-/Längengrad"
 
 #: ../contents/ui/lib/StationMapSearcher.qml
+msgid "Current Location"
+msgstr ""
+
+#: ../contents/ui/lib/StationMapSearcher.qml ../contents/ui/lib/StationSearcher.qml
 msgid "Search"
 msgstr "Suche"
 
@@ -706,6 +907,10 @@ msgstr "Stadt, Bundesland, Ort oder Adresse eingeben"
 #: ../contents/ui/lib/StationMapSearcher.qml
 msgid "Click or drag the marker on the map below."
 msgstr "Klicken oder ziehen Sie die Markierung auf der Karte unten."
+
+#: ../contents/ui/lib/StationMapSearcher.qml
+msgid "Searching for nearby stations using IP2Location.io"
+msgstr ""
 
 #: ../contents/ui/lib/StationMapSearcher.qml ../contents/ui/lib/StationSearcher.qml
 msgid "Searching place:"
@@ -724,8 +929,8 @@ msgid "Selected latitude: %1, longitude: %2"
 msgstr "Ausgewählter Breitengrad: %1, Längengrad: %2"
 
 #: ../contents/ui/lib/StationMapSearcher.qml
-msgid "Error (%1): %2"
-msgstr "Fehler (%1): %2"
+msgid "Privacy Policy: IP2Location.io is used to determine your approximate location based on your IP address. No personally identifiable information is collected or stored."
+msgstr ""
 
 #: ../contents/ui/lib/StationMapSearcher.qml
 msgid "Warning"

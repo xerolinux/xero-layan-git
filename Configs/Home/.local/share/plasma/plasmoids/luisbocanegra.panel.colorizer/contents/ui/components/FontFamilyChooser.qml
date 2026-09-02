@@ -33,7 +33,7 @@ ColumnLayout {
 
     Kirigami.SearchField {
         id: searchField
-        placeholderText: "Search fonts"
+        placeholderText: i18n("Search fonts")
         Layout.fillWidth: true
         onTextChanged: fontsFilteredModel.setFilterFixedString(text)
     }

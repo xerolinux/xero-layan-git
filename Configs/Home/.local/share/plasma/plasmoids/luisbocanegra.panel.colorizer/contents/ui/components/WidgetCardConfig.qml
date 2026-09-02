@@ -114,7 +114,7 @@ Kirigami.AbstractCard {
                         onClicked: {
                             clearOverrides();
                         }
-                        text: "Clear"
+                        text: i18n("Clear")
                         visible: currentOverrides.length !== 0
                     }
 

@@ -133,6 +133,7 @@ ForegroundVisited=224,64,251
 [General]
 ColorScheme=VimixDarkDoder
 Name=Layan
+TintFactor=0
 shadeSortColumn=true
 
 [KDE]

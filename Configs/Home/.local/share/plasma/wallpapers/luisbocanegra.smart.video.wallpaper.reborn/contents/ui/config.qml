@@ -35,17 +35,21 @@ ColumnLayout {
     id: root
     spacing: 0
     property var parentLayout
-    property alias cfg_FillMode: videoFillMode.currentValue
-    property alias cfg_PauseMode: pauseModeCombo.currentValue
-    property alias cfg_AlternativePlaybackRateMode: alternativePlaybackRateMode.currentValue
+    property var configDialog: null
+    property var wallpaperConfiguration: wallpaper.configuration
+    property int cfg_FillMode: 2
+    property int cfg_PauseMode: 0
+    property int cfg_AlternativePlaybackRateMode: 3
+    property string cfg_AudioOutputDevice: ""
+    property int cfg_BlurMode: 5
+    property int cfg_ChangeWallpaperMode: 1
+    property int cfg_MuteMode: 5
     property alias cfg_BackgroundColor: colorButton.color
     property alias cfg_PauseBatteryLevel: pauseBatteryLevel.value
     property alias cfg_BatteryPausesVideo: batteryPausesVideoCheckBox.checked
-    property alias cfg_BlurMode: blurModeCombo.currentValue
     property alias cfg_BatteryDisablesBlur: batteryDisablesBlurCheckBox.checked
     property alias cfg_BlurRadius: blurRadiusSpinBox.value
     property string cfg_VideoUrls
-    property alias cfg_AudioOutputDevice: audioDeviceCombo.currentValue
     property bool isLoading: false
     property alias cfg_ScreenOffPausesVideo: screenOffPausesVideoCheckbox.checked
     property alias cfg_ScreenStateCmd: screenStateCmdTextField.text
@@ -67,7 +71,6 @@ ColumnLayout {
     property alias cfg_Volume: volumeSlider.value
     property alias cfg_RandomMode: randomModeCheckbox.checked
     property alias cfg_ResumeLastVideo: resumeLastVideoCheckbox.checked
-    property alias cfg_ChangeWallpaperMode: changeWallpaperModeComboBox.currentValue
     property alias cfg_ChangeWallpaperTimerSeconds: wallpaperTimerSeconds.value
     property alias cfg_ChangeWallpaperTimerMinutes: wallpaperTimerMinutes.value
     property alias cfg_ChangeWallpaperTimerHours: wallpaperTimerHours.value
@@ -76,11 +79,8 @@ ColumnLayout {
     property alias currentTab: tabBar.currentIndex
     property bool showVideosList: false
     property var isLockScreenSettings: null
-    property alias cfg_MuteMode: muteModeCombo.currentValue
     property int editingIndex: -1
     property var validDropExtensions: [".mp4", ".mpg", ".ogg", ".mov", ".webm", ".flv", ".mkv", ".avi", ".wmv", ".gif"]
-
-    readonly property int seconds: (wallpaperTimerHours.value * 60 * 60) + (wallpaperTimerMinutes.value * 60) + wallpaperTimerSeconds.value
 
     property var muteModeModel: {
         // options for desktop and lock screen
@@ -352,6 +352,10 @@ ColumnLayout {
                 ]
                 textRole: "text"
                 valueRole: "value"
+                onActivated: root.cfg_FillMode = currentValue
+                Component.onCompleted: {
+                    currentIndex = model.findIndex(mode => mode.value === root.cfg_FillMode);
+                }
             }
         }
         // RowLayout {
@@ -438,6 +442,10 @@ ColumnLayout {
                 ]
                 textRole: "text"
                 valueRole: "value"
+                onActivated: root.cfg_ChangeWallpaperMode = currentValue
+                Component.onCompleted: {
+                    currentIndex = model.findIndex(mode => mode.value === root.cfg_ChangeWallpaperMode);
+                }
             }
             Kirigami.ContextualHelpButton {
                 toolTipText: i18nd("plasma_wallpaper_luisbocanegra.smart.video.wallpaper.reborn", "Automatically play the next video using the selected strategy. You can also change the wallpaper manually using <strong>Next Video</strong> from the Desktop right click menu.")
@@ -490,7 +498,7 @@ ColumnLayout {
             }
             SpinBox {
                 id: wallpaperTimerSeconds
-                from: root.seconds > 0 ? 0 : 1
+                from: (wallpaperTimerHours.value === 0 && wallpaperTimerMinutes.value === 0) ? 1 : 0
                 to: 59
                 stepSize: 1
                 editable: true
@@ -623,6 +631,10 @@ ColumnLayout {
             textRole: "text"
             valueRole: "value"
             visible: !root.isLockScreenSettings && root.currentTab === 1
+            onActivated: root.cfg_PauseMode = currentValue
+            Component.onCompleted: {
+                currentIndex = model.findIndex(mode => mode.value === root.cfg_PauseMode);
+            }
         }
 
         ComboBox {
@@ -632,6 +644,10 @@ ColumnLayout {
             textRole: "text"
             valueRole: "value"
             visible: root.currentTab === 1
+            onActivated: root.cfg_MuteMode = currentValue
+            Component.onCompleted: {
+                currentIndex = model.findIndex(mode => mode.value === root.cfg_MuteMode);
+            }
         }
 
         ComboBox {
@@ -641,6 +657,16 @@ ColumnLayout {
             model: audioDevicesModel
             textRole: "description"
             valueRole: "id"
+            onActivated: root.cfg_AudioOutputDevice = currentValue
+            Component.onCompleted: {
+                for (let i = 0; i < model.count; i++) {
+                    if (model.get(i).id === root.cfg_AudioOutputDevice) {
+                        currentIndex = i;
+                        break;
+                    }
+                }
+                return -1;
+            }
         }
 
         RowLayout {
@@ -674,6 +700,10 @@ ColumnLayout {
             textRole: "text"
             valueRole: "value"
             visible: root.currentTab === 1
+            onActivated: root.cfg_BlurMode = currentValue
+            Component.onCompleted: {
+                currentIndex = model.findIndex(mode => mode.value === root.cfg_BlurMode);
+            }
         }
 
         RowLayout {
@@ -764,6 +794,10 @@ ColumnLayout {
             textRole: "text"
             valueRole: "value"
             visible: !root.isLockScreenSettings && root.currentTab === 1
+            onActivated: root.cfg_AlternativePlaybackRateMode = currentValue
+            Component.onCompleted: {
+                currentIndex = model.findIndex(mode => mode.value === root.cfg_AlternativePlaybackRateMode);
+            }
         }
 
         RowLayout {

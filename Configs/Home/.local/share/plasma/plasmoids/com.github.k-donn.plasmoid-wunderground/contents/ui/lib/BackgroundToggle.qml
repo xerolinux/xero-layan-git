@@ -9,7 +9,7 @@ import org.kde.kirigami as Kirigami
 // https://invent.kde.org/plasma/plasma-desktop/-/blame/master/containments/desktop/package/contents/ui/ConfigOverlay.qml
 QQC2.CheckBox {
     Kirigami.FormData.label: i18n("Desktop Widget:")
-    text: i18nd("plasma_applet_org.kde.desktopcontainment", "Show Background")
+    text: i18ndc("plasma_applet_org.kde.desktopcontainment", "@action:button tooltip", "Show Background")
     visible: (plasmoid.backgroundHints & PlasmaCore.Types.ConfigurableBackground)
     checked: plasmoid.effectiveBackgroundHints & PlasmaCore.Types.StandardBackground || plasmoid.effectiveBackgroundHints & PlasmaCore.Types.TranslucentBackground
     onClicked: {

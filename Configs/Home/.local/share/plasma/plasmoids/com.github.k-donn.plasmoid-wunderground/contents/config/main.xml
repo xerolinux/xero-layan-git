@@ -200,7 +200,7 @@
         <entry name="tempPrecision" type="Int">
             <default>1</default>
         </entry>
-        <entry name="compactTempPrevision" type="Int">
+        <entry name="compactTempPrecision" type="Int">
             <default>0</default>
         </entry>
         <entry name="feelsPrecision" type="Int">

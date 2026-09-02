@@ -139,7 +139,8 @@ SPECIAL_CLOSE
 SPECIAL_AUTO_TILER_TOGGLE
 SPECIAL_AUTO_TILER_1
 SPECIAL_AUTO_TILER_2
-SPECIAL_AUTO_TILER_3`;
+SPECIAL_AUTO_TILER_3
+SPECIAL_FIT`;
         const defaultOverlayLayout = '4x2';
         const defaultPopupLayouts = `1x1
 2x1
@@ -511,6 +512,11 @@ SPECIAL_AUTO_TILER_3`;
                                         layout.special = 'SPECIAL_AUTO_TILER_3';
                                         isValid = true;
                                         break;
+                                    case 'SPECIAL_FIT':
+                                        layout.tiles.push({x: 0, y: 0, w: 100, h: 100, t: '<br>FIT<br>⇱⇲', hint: 'Expand or shrink current window to fit surrounding empty space<br>The window will remain in same general location without overlapping other windows'});
+                                        layout.special = 'SPECIAL_FIT';
+                                        isValid = true;
+                                        break;
                                 }
                             } else {
                                 // no coordinates found - just grid size defined by wxh
@@ -805,11 +811,11 @@ SPECIAL_AUTO_TILER_3`;
                 if (!useMouseCursor) {
                     windowCursor = Qt.point(client.x + client.width / 2, client.y);
                 }
+                positionAtMoveStart = {x: client.x, y: client.y};
                 if ((config.restoreSize || autoTiler.configAutoTileRestoreSize && client.mt_auto) && client.mt_originalSize) {
                     client.frameGeometry = Qt.rect(getCursorPosition().x, client.frameGeometry.y, client.mt_originalSize.width, client.mt_originalSize.height);
                     delete client.mt_originalSize;
                 }
-                positionAtMoveStart = {x: client.x, y: client.y};
                 virtualDesktopAtMoveStart = Workspace.currentDesktop;
                 virtualDesktopIndexAtMoveStart = Workspace.desktops.indexOf(virtualDesktopAtMoveStart);
                 virtualDesktopChangedSinceMoveStart = false;
@@ -897,8 +903,8 @@ SPECIAL_AUTO_TILER_3`;
                             switch (geometry.special) {
                                 case 'SPECIAL_FILL':
                                     geometry = getFillGeometry(client, geometry.specialMode == 0);
-                                    addMargins(geometry, true, true, true, true);
                                     if (geometry != null) {
+                                        addMargins(geometry, true, true, true, true);
                                         moveAndResizeWindow(client, geometry);
                                     }
                                     break;
@@ -953,6 +959,15 @@ SPECIAL_AUTO_TILER_3`;
                                 case 'SPECIAL_AUTO_TILER_3':
                                     autoTiler.windowDropped(client, geometry.specialMode, 2);
                                     moveHandledByAutoTiler = true;
+                                    break;
+                                case 'SPECIAL_FIT':
+                                    geometry = getFitGeometry(client);
+                                    if (geometry != null) {
+                                        if (!geometry.noMargins) {
+                                            addMargins(geometry, true, true, true, true);
+                                        }
+                                        moveAndResizeWindow(client, geometry);
+                                    }
                                     break;
                                 default:
                                     addMargins(geometry, true, true, true, true);
@@ -1044,6 +1059,90 @@ SPECIAL_AUTO_TILER_3`;
 
             return leftOrTop ? geometryFirst : geometrySecond;
         }
+    }
+
+    function getFitGeometry(client) {
+        // Abort if client is fully inside another window (including same size)
+        // Make sure current window is overlapping new area
+
+        let screenGeometry = Workspace.activeScreen.geometry;
+        let freeAreas = [Workspace.clientArea(KWin.FullScreenArea, Workspace.activeScreen, Workspace.currentDesktop)];
+        let originalWindow = Qt.rect(positionAtMoveStart.x, positionAtMoveStart.y, client.width, client.height);
+
+        const windows = Workspace.stackingOrder;
+        for (var i = 0; i < windows.length; i++) {
+            let window = windows[i];
+            if (client.internalId != window.internalId && isValidWindow(window) && !window.minimized && (window.onAllDesktops || window.desktops.includes(Workspace.currentDesktop)) && (window.activities.length == 0 || window.activities.includes(Workspace.currentActivity))) {
+                let area = Qt.rect(window.frameGeometry.x, window.frameGeometry.y, window.frameGeometry.width, window.frameGeometry.height);
+
+                if (geometryContains(area, originalWindow)) {
+                    // Unable to fit window - already contained inside another window - cancel
+                    log('Unable to fit window - already contained inside another window ' + area + ' ' + originalWindow);
+                    return {x: positionAtMoveStart.x, y: positionAtMoveStart.y, width: client.width, height: client.height, noMargins: true};
+                } else {
+                    removeUsedAreas(freeAreas, area);
+                    removeOverlappingSmallerAreas(freeAreas);
+                }
+            }
+        }
+
+        var matchIndex = -1;
+        var matchArea = -1;
+
+        for (var i = 0; i < freeAreas.length; i++) {
+            if (geometryContains(freeAreas[i], originalWindow)) {
+                let area = freeAreas[i].width * freeAreas[i].height;
+                if (area > matchArea) {
+                    log('Found expansion area size: ' + area);
+                    matchArea = area;
+                    matchIndex = i;
+                }
+            }
+        }
+
+        if (matchIndex < 0) {
+            log('Not expanding - try to find shrink');
+            for (var i = 0; i < freeAreas.length; i++) {
+                if (geometryOverlaps(freeAreas[i], originalWindow)) {
+                    let area = freeAreas[i].width * freeAreas[i].height;
+                    if (area > matchArea) {
+                        log('Found shrink area size: ' + area);
+                        matchArea = area;
+                        matchIndex = i;
+                    }
+                }
+            }
+        }
+
+        if (matchIndex >= 0 && !geometryEquals(freeAreas[matchIndex], originalWindow)) {
+            log('Returning fit match: ' + freeAreas[matchIndex]);
+            return freeAreas[matchIndex];
+        }
+
+        log('Unable to fit - returning original...');
+
+        return {x: positionAtMoveStart.x, y: positionAtMoveStart.y, width: client.width, height: client.height, noMargins: true};
+    }
+
+    function geometryContains(geometry, matching) {
+        return ((geometry.left <= matching.left) || (Math.abs(geometry.left - matching.left) < 0.1)) &&
+               ((geometry.right >= matching.right) || (Math.abs(geometry.right - matching.right) < 0.1)) &&
+               ((geometry.top <= matching.top) || (Math.abs(geometry.top - matching.top) < 0.1)) &&
+               ((geometry.bottom >= matching.bottom) || (Math.abs(geometry.bottom - matching.bottom) < 0.1));
+    }
+
+    function geometryOverlaps(geometry, matching) {
+        return !((geometry.right - matching.left < 0.1) ||
+                 (geometry.bottom - matching.top < 0.1) ||
+                 (matching.right - geometry.left < 0.1) ||
+                 (matching.bottom - geometry.top < 0.1));
+    }
+
+    function geometryEquals(geometry, matching) {
+        return (Math.abs(geometry.left - matching.left) < 0.1) &&
+               (Math.abs(geometry.right - matching.right) < 0.1) &&
+               (Math.abs(geometry.top - matching.top) < 0.1) &&
+               (Math.abs(geometry.bottom - matching.bottom) < 0.1);
     }
 
     function getFillGeometry(client, largest) {

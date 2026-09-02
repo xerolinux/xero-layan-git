@@ -70,6 +70,8 @@ RowLayout {
             }
 
             text: i18n("Air quality")
+
+            wrapMode: Text.WordWrap
         }
 
         Rectangle {
@@ -320,6 +322,8 @@ RowLayout {
             }
 
             text: i18n("Solar info")
+
+            wrapMode: Text.WordWrap
         }
 
         Rectangle {

@@ -1,0 +1,1045 @@
+# Translation of plasmoid-wunderground in ca_ES
+# Copyright (C) 2026
+# This file is distributed under the same license as the plasmoid-wunderground package.
+# Enric Duxans <enric.sanchez.duxans@gmail.com>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: plasmoid-wunderground\n"
+"Report-Msgid-Bugs-To: https://github.com/k-donn/plasmoid-wunderground\n"
+"POT-Creation-Date: 2026-08-29 14:25-0500\n"
+"PO-Revision-Date: 2026-08-25 12:37+0100\n"
+"Last-Translator: Enric Duxans <enric.sanchez.duxans@gmail.com>\n"
+"Language-Team: Català <>\n"
+"Language: ca_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../metadata.json
+msgid "Wunderground"
+msgstr "Wunderground"
+
+#: ../metadata.json
+msgid "Wunderground Personal Weather Station viewer"
+msgstr "Visor d'estació meteorològica personal Wunderground"
+
+#: ../contents/code/pws-api.js
+msgid "Could not send request"
+msgstr "No es pot enviar la petició"
+
+#: ../contents/code/pws-api.js
+msgid "Network error"
+msgstr "Error de xarxa"
+
+#: ../contents/code/pws-api.js
+msgid "network"
+msgstr "xarxa"
+
+#: ../contents/code/pws-api.js
+msgid "Request failed"
+msgstr "Ha fallat la petició"
+
+#: ../contents/code/pws-api.js
+msgid "No stations found"
+msgstr "No s'ha trobat cap estació"
+
+#: ../contents/code/pws-api.js
+msgid "Location not found"
+msgstr "Lloc no trobat"
+
+#: ../contents/code/pws-api.js
+msgid "No observation returned"
+msgstr "No retorna cap observació"
+
+#: ../contents/code/pws-api.js
+msgid "No extended conditions returned"
+msgstr "No retorna cap condició extesa"
+
+#: ../contents/code/pws-api.js
+msgid "Failed to fetch KP index data"
+msgstr "Ha fallat l'accés a les dades índex KP"
+
+#: ../contents/code/utils.js
+msgctxt "Abbreviation for North"
+msgid "N"
+msgstr "N"
+
+#: ../contents/code/utils.js
+msgctxt "Abbreviation for North Northeast"
+msgid "NNE"
+msgstr "NNE"
+
+#: ../contents/code/utils.js
+msgctxt "Abbreviation for Northeast"
+msgid "NE"
+msgstr "NE"
+
+#: ../contents/code/utils.js
+msgctxt "Abbreviation for East Northeast"
+msgid "ENE"
+msgstr "ENE"
+
+#: ../contents/code/utils.js
+msgctxt "Abbreviation for East"
+msgid "E"
+msgstr "E"
+
+#: ../contents/code/utils.js
+msgctxt "Abbreviation for East Southeast"
+msgid "ESE"
+msgstr "ESE"
+
+#: ../contents/code/utils.js
+msgctxt "Abbreviation for Southeast"
+msgid "SE"
+msgstr "SE"
+
+#: ../contents/code/utils.js
+msgctxt "Abbreviation for South Southeast"
+msgid "SSE"
+msgstr "SSE"
+
+#: ../contents/code/utils.js
+msgctxt "Abbreviation for South"
+msgid "S"
+msgstr "S"
+
+#: ../contents/code/utils.js
+msgctxt "Abbreviation for South Southwest"
+msgid "SSW"
+msgstr "SSO"
+
+#: ../contents/code/utils.js
+msgctxt "Abbreviation for Southwest"
+msgid "SW"
+msgstr "SO"
+
+#: ../contents/code/utils.js
+msgctxt "Abbreviation for West Southwest"
+msgid "WSW"
+msgstr "OSO"
+
+#: ../contents/code/utils.js
+msgctxt "Abbreviation for West"
+msgid "W"
+msgstr "O"
+
+#: ../contents/code/utils.js
+msgctxt "Abbreviation for West Northwest"
+msgid "WNW"
+msgstr "ONO"
+
+#: ../contents/code/utils.js
+msgctxt "Abbreviation for Northwest"
+msgid "NW"
+msgstr "NO"
+
+#: ../contents/code/utils.js
+msgctxt "Abbreviation for North Northwest"
+msgid "NNW"
+msgstr "NNO"
+
+#: ../contents/code/utils.js ../contents/ui/config/ConfigUnits.qml
+msgctxt "Abbreviation for Celsius"
+msgid "C"
+msgstr ""
+
+#: ../contents/code/utils.js ../contents/ui/config/ConfigUnits.qml
+msgctxt "Abbreviation for Fahrenheit"
+msgid "F"
+msgstr ""
+
+#: ../contents/code/utils.js ../contents/ui/config/ConfigUnits.qml
+msgctxt "Abbreviation for Kelvin"
+msgid "K"
+msgstr ""
+
+#: ../contents/code/utils.js ../contents/ui/config/ConfigUnits.qml
+msgid "kmh"
+msgstr ""
+
+#: ../contents/code/utils.js ../contents/ui/config/ConfigUnits.qml
+msgid "mph"
+msgstr ""
+
+#: ../contents/code/utils.js ../contents/ui/config/ConfigUnits.qml
+msgid "m/s"
+msgstr ""
+
+#: ../contents/code/utils.js ../contents/ui/config/ConfigUnits.qml
+msgctxt "Abbreviation for Meters"
+msgid "m"
+msgstr ""
+
+#: ../contents/code/utils.js ../contents/ui/config/ConfigUnits.qml
+msgid "ft"
+msgstr "peu"
+
+#: ../contents/code/utils.js ../contents/ui/config/ConfigUnits.qml
+msgid "mm"
+msgstr ""
+
+#: ../contents/code/utils.js ../contents/ui/config/ConfigUnits.qml
+msgid "cm"
+msgstr ""
+
+#: ../contents/code/utils.js ../contents/ui/config/ConfigUnits.qml
+msgctxt "Abbreviation for Inches"
+msgid "in"
+msgstr "pls"
+
+#: ../contents/code/utils.js ../contents/ui/config/ConfigUnits.qml
+msgid "mb"
+msgstr ""
+
+#: ../contents/code/utils.js ../contents/ui/config/ConfigUnits.qml
+msgid "inHG"
+msgstr ""
+
+#: ../contents/code/utils.js ../contents/ui/config/ConfigUnits.qml
+msgid "mmHG"
+msgstr ""
+
+#: ../contents/code/utils.js ../contents/ui/config/ConfigUnits.qml
+msgid "hPa"
+msgstr ""
+
+#: ../contents/code/utils.js ../contents/ui/config/ConfigUnits.qml
+msgid "psi"
+msgstr ""
+
+#: ../contents/code/utils.js
+msgid "To sunrise"
+msgstr "Pel sol ixent"
+
+#: ../contents/code/utils.js
+msgctxt "Daylight remaining time, keep short"
+msgid "Remaining"
+msgstr "Queden"
+
+#: ../contents/code/utils.js
+msgid "Since sunset"
+msgstr "Des del sol ponent"
+
+#: ../contents/config/config.qml
+msgid "Station"
+msgstr "Estació"
+
+#: ../contents/config/config.qml
+msgid "Appearance"
+msgstr "Aspecte"
+
+#: ../contents/config/config.qml
+msgid "Layout"
+msgstr "Disseny"
+
+#: ../contents/config/config.qml ../contents/ui/config/ConfigUnits.qml
+msgid "Units"
+msgstr "Unitats"
+
+#: ../contents/config/config.qml
+msgid "Debug"
+msgstr "Depuració"
+
+#: ../contents/ui/AirAndSolarItem.qml
+msgid "Comfortable"
+msgstr "Confortable"
+
+#: ../contents/ui/AirAndSolarItem.qml
+msgid "Moderate"
+msgstr "Moderat"
+
+#: ../contents/ui/AirAndSolarItem.qml
+msgid "Unfavorable"
+msgstr "Desfavorable"
+
+#: ../contents/ui/AirAndSolarItem.qml
+msgid "Air quality"
+msgstr "Qualitat de l'aire"
+
+#: ../contents/ui/AirAndSolarItem.qml
+msgctxt "Air Quality Index"
+msgid "AQI"
+msgstr "IQA"
+
+#: ../contents/ui/AirAndSolarItem.qml
+msgctxt "Air Quality Health Index"
+msgid "AQHI"
+msgstr "ISQA"
+
+#: ../contents/ui/AirAndSolarItem.qml ../contents/ui/AlertsItem.qml
+msgid "Alerts"
+msgstr "Alertes"
+
+#: ../contents/ui/AirAndSolarItem.qml
+msgid "Info"
+msgstr "Info"
+
+#: ../contents/ui/AirAndSolarItem.qml
+msgid "The AQI is a measure of air quality that takes into account the levels of various pollutants in the air. It ranges from 0 to 500, with higher values indicating worse air quality. An AQI of 0-50 is considered good, 51-100 is moderate, 101-150 is unhealthy for sensitive groups, 151-200 is unhealthy, 201-300 is very unhealthy, and 301-500 is hazardous."
+msgstr "L'IQA és una mesura de la qualitat de l'aire que té en compte els nivells de diversos pol·lutants en l'aire. El seu rang és de 0 a 500, on els valors alts indiquen pitjor qualitat d'aire. Un valor IQA es considera bo, 51-100 és moderat, 101-150 no és saludable per grups sensibles, 151-200 no és sa, 201-300 és molt insà, i 301-500 és perillós."
+
+#: ../contents/ui/AirAndSolarItem.qml
+msgid "The AQHI is a measure of how the air quality may affect human health. It ranges from 1 to 10+, with higher values indicating more unfavorable conditions for health. An AQHI of 1-3 is considered low risk, 4-6 is moderate risk, 7-10 is high risk, and 10+ is very high risk."
+msgstr "L'ISQA és una mesura de com la qualitat de l'aire pot afectar la salut humana. Va de 1 a 10+, on els valors alts indiquen les condicions més desfavorable per la salut. Un ISQA es considerabaix risc, 4-6 és risc moderat, 7-10 és alt risc, i 10+ és molt alt risc."
+
+#: ../contents/ui/AirAndSolarItem.qml
+msgctxt "Particulate Matter"
+msgid "PM2.5"
+msgstr ""
+
+#: ../contents/ui/AirAndSolarItem.qml
+msgid "Particulate matter (PM2.5) is a measure of the amount of solid particles and liquid droplets suspended in the air. It can have serious health effects, especially on the respiratory and cardiovascular systems."
+msgstr "Partícules en suspensió (PM2.5) és una mesura de la quantitat de partícules sòlides i gotetes líquides suspeses en l'aire. Pot tenir efectes greus a la salutm, especialment en els sistemes respiratori i cardiovascular"
+
+#: ../contents/ui/AirAndSolarItem.qml
+msgid "Solar info"
+msgstr "Info solar"
+
+#: ../contents/ui/AirAndSolarItem.qml
+msgctxt "See: https://www.swpc.noaa.gov/products/planetary-k-index"
+msgid "Kp-index"
+msgstr ""
+
+#: ../contents/ui/AirAndSolarItem.qml
+msgid "Power"
+msgstr "Força"
+
+#: ../contents/ui/AirAndSolarItem.qml
+msgid "Health index"
+msgstr "Índex de salut"
+
+#: ../contents/ui/AirAndSolarItem.qml
+msgid "Details"
+msgstr "Detalls"
+
+#: ../contents/ui/AirAndSolarItem.qml
+msgid "The Kp-index is a measure of geomagnetic activity. It ranges from 0 to 9, with higher values indicating more intense geomagnetic storms. A Kp-index of 0-3 is considered quiet, 4-5 is unsettled, 6-7 is active, and 8-9 is storm-level activity."
+msgstr "El Kp-index és una mesura de l'activitat geomagnètica. Va de 0 a 9, on valors alts indiquen tormentes geomagnètiques més intenses. Un Kp-index de 0-3 es considera calma, 4-5 és inquiet, 6-7 és actiu, i 8-9 és activitat a nivell tormenta."
+
+#: ../contents/ui/AirAndSolarItem.qml
+msgid "The health index is a measure of how the solar conditions combined with pressure changes may affect human health. It ranges from 0 to 10+, with higher values indicating more unfavorable conditions for health. A health index of 0-2 is considered comfortable, 3-5 is moderate, and 6+ is unfavorable."
+msgstr "L'índex de salut és una mesura de com les condicions solars combinades amb els canvis de pressió pot afectar la salut humana. Va de 0 a 10+, on valors alts indiquen condicions més desfavorablesper la salut. Un índex de salut de 0-2 es considera confortable, 3-5 és moderat, i 6+ és desfavorable."
+
+#: ../contents/ui/AlertsItem.qml
+msgid "There are no alerts for your area."
+msgstr "No hi ha alertes en la vostra àrea."
+
+#: ../contents/ui/AlertsItem.qml
+msgid "Severity: %1"
+msgstr "Severitat: %1"
+
+#: ../contents/ui/AlertsItem.qml
+msgid "Region: %1<br/>Action: %2<br/>Disclaimer: %3<br/>Issued by: %4"
+msgstr "Regió: %1<br/>Acció: %2<br/>Avís legal: %3<br/>Emès per: %4"
+
+#: ../contents/ui/BottomPanel.qml
+msgid "There are weather alerts for your area!"
+msgstr "Hi ha alertes metereològiques a la vostra àrea!"
+
+#: ../contents/ui/DayChartItem.qml
+msgctxt "per 12 hours, please keep it short"
+msgid "/12h"
+msgstr "/12h"
+
+#. i18n strings
+#: ../contents/ui/DetailsItem.qml ../contents/ui/config/ConfigUnits.qml
+msgid "Feels like %1"
+msgstr "Sensació de %1"
+
+#: ../contents/ui/DetailsItem.qml
+msgid "Wind Barb"
+msgstr "Fletxa del vent"
+
+#: ../contents/ui/DetailsItem.qml
+msgid "Wind direction and speed indicator"
+msgstr "Direcció del vent i indicador de velocitat"
+
+#: ../contents/ui/DetailsItem.qml
+msgid "Learn more"
+msgstr "Saber-ne més"
+
+#: ../contents/ui/DetailsItem.qml
+msgid "Wind from: %1 (%2°)"
+msgstr "Vent des de: %1 (%2º)"
+
+#: ../contents/ui/DetailsItem.qml ../contents/ui/config/ConfigUnits.qml ../contents/ui/main.qml
+msgid "Wind & Gust"
+msgstr "Vent i ràfegues"
+
+#: ../contents/ui/DetailsItem.qml ../contents/ui/config/ConfigUnits.qml
+msgid "Dew Point"
+msgstr "Punt de rosada"
+
+#: ../contents/ui/DetailsItem.qml
+msgid "Precip Rate"
+msgstr "Precipitació"
+
+#: ../contents/ui/DetailsItem.qml ../contents/ui/main.qml
+msgid "Pressure"
+msgstr "Pressió"
+
+#: ../contents/ui/DetailsItem.qml
+msgid "Pressure has risen %1 in the last three hours."
+msgstr "La pressió ha pujat %1 en les darreres tres hores."
+
+#: ../contents/ui/DetailsItem.qml
+msgid "Pressure has fallen %1 in the last three hours."
+msgstr "La pressió ha baixat %1 en les darrreres tres hores."
+
+#: ../contents/ui/DetailsItem.qml ../contents/ui/main.qml
+msgid "Humidity"
+msgstr "Humitat"
+
+#: ../contents/ui/DetailsItem.qml
+msgid "Precip Accum"
+msgstr "Precipitació acumulada"
+
+#: ../contents/ui/DetailsItem.qml ../contents/ui/main.qml
+msgid "UV"
+msgstr "UV"
+
+#: ../contents/ui/ForecastItem.qml
+msgctxt "Do not edit HTML tags."
+msgid "<font size='4'>Feels like: %1<br/>Thunder: %2<br/>UV: %3<br/>Snow: %4<br/>Golf: %5</font>"
+msgstr "<font size='4'>Sensació de: %1<br/>Trons: %2<br/>UV: %3<br/>Neu: %4<br/>Golf: %5</font>"
+
+#: ../contents/ui/FullRepresentation.qml
+msgid "Sorry! The widget ran into a network error: "
+msgstr "Ho sentim! El widget s'ha trobat un error de xarxa: "
+
+#: ../contents/ui/FullRepresentation.qml
+msgid "Refresh Weather"
+msgstr "Actualitzar metereologia"
+
+#: ../contents/ui/SwitchPanel.qml ../contents/ui/config/ConfigAppearance.qml
+msgid "Weather Details"
+msgstr "Detalls metereològics"
+
+#: ../contents/ui/SwitchPanel.qml ../contents/ui/config/ConfigAppearance.qml ../contents/ui/config/ConfigUnits.qml
+msgid "Forecast"
+msgstr "Previsió"
+
+#: ../contents/ui/SwitchPanel.qml ../contents/ui/config/ConfigAppearance.qml
+msgid "Day Chart"
+msgstr "Gràfic del dia"
+
+#: ../contents/ui/SwitchPanel.qml ../contents/ui/config/ConfigAppearance.qml
+msgid "More Info"
+msgstr "Més info"
+
+#: ../contents/ui/TopPanel.qml
+msgid "High: %1 Low: %2"
+msgstr "Màxima: %1 Mínima: %2"
+
+#: ../contents/ui/TopPanel.qml ../contents/ui/main.qml
+msgid "Loading..."
+msgstr "Carregant..."
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgctxt "Use default font"
+msgid "Default"
+msgstr "per defecte"
+
+#: ../contents/ui/config/ConfigAppearance.qml ../contents/ui/config/ConfigLayout.qml
+msgid "General"
+msgstr "General"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Use system theme icons:"
+msgstr "Usar icones del tema del sistema:"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Shown in tooltip:"
+msgstr "Mostrar en ajuda emergent:"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Station ID"
+msgstr "ID d'estació"
+
+#: ../contents/ui/config/ConfigAppearance.qml ../contents/ui/config/ConfigStation.qml
+msgid "Station Name"
+msgstr "Nom d'estació"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Both"
+msgstr "Ambdos"
+
+#: ../contents/ui/config/ConfigAppearance.qml ../contents/ui/config/ConfigLayout.qml
+msgid "Full Representation"
+msgstr "Representació total"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Auto-color temperature:"
+msgstr "Temperatura auto-color:"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Show time seconds:"
+msgstr "Mostrar els segons:"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Show blurb:"
+msgstr "Mostrar propaganda:"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Use default page:"
+msgstr "Usar pàgina per defecte:"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Default page shown:"
+msgstr "Pàgina per defecte mostrada:"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Show pressure trend:"
+msgstr "Mostrar tendència de la pressió:"
+
+#: ../contents/ui/config/ConfigAppearance.qml ../contents/ui/config/ConfigLayout.qml
+msgid "Compact Representation"
+msgstr "Representació compacte"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Choose a Font:"
+msgstr "Escollir un font:"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Text size mode:"
+msgstr "Mode de mida de text:"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Automatic fit"
+msgstr "Encaix automàtic"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Exact size"
+msgstr "Mida exacte"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Text size"
+msgstr "Mida de text"
+
+#: ../contents/ui/config/ConfigAppearance.qml ../contents/ui/config/ConfigLayout.qml
+msgctxt "pixels"
+msgid "px"
+msgstr "px"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Text visible"
+msgstr "Text visible"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Text drop shadow"
+msgstr "Ombra projectada de text"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Icon size mode:"
+msgstr "Mode de mida d'icona:"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Icon size"
+msgstr "Mida d'icona"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Icon visible"
+msgstr "Icona visible"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Icon drop shadow"
+msgstr "Ombra projectada d'icona"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "System tray active timeout"
+msgstr "Temporització activa de la safata de sistema"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgctxt "Abbreviation for seconds"
+msgid "sec"
+msgstr "seg"
+
+#: ../contents/ui/config/ConfigDebug.qml
+msgid "Write to console.log:"
+msgstr "Escriure a console.log:"
+
+#: ../contents/ui/config/ConfigDebug.qml
+msgid "Use Legacy Forecast API:"
+msgstr "Usar API de previsió heretada:"
+
+#: ../contents/ui/config/ConfigDebug.qml
+msgid "Startup time delay (ms):"
+msgstr "Temps de retard a l'inici (ms):"
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "Planar layout"
+msgstr "Disseny planar"
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "Used on the desktop or in a desktop grouper"
+msgstr "Usat a l'escriptori o un agrupador d'escriptori"
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "Property header text size"
+msgstr "Mida de text de la capçalera de propietat"
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "Property text size"
+msgstr "Mida de text de propietat"
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "Temperature text size"
+msgstr "Mida de text de temperatura"
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "small (16x16)"
+msgstr "petit (16x16)"
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "smallMedium (22x22)"
+msgstr "petitMitjà (22x22)"
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "medium (32x32)"
+msgstr "mitjà (32x32)"
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "large (48x48)"
+msgstr "gran (48x48)"
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "huge (64x64)"
+msgstr "gros (64x64)"
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "enormous (128x128)"
+msgstr "enorme (128x128)"
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "Forecast icon size:"
+msgstr "Mida d'icona de previsió:"
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "Property icon size:"
+msgstr "Mida d'icona de propietat:"
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "Top panel icon margins:"
+msgstr "Marges d'icona del panell superior:"
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "Layout type"
+msgstr "Tipus de disseny"
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "Horizontal"
+msgstr "Horitzontal"
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "Vertical"
+msgstr "Vertical"
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "Compressed"
+msgstr "Comprimit"
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "Layout type is not available in the system tray"
+msgstr "El tipus de disseny no està disponible a la safata del sistema"
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "Widget order"
+msgstr "Ordenació del widget"
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "Icon first"
+msgstr "Primer icona"
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "Text first"
+msgstr "Primer text"
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "Widget order is not available in the system tray"
+msgstr "L'ordenació del widget no està disponible a la safata del sistema"
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "Top Margin"
+msgstr "Marge superior"
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "Bottom Margin"
+msgstr "Marge inferior"
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "Left Margin"
+msgstr "Marge esquerre"
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "Right Margin"
+msgstr "Marge dret"
+
+#: ../contents/ui/config/ConfigLayout.qml
+msgid "Inner Margin"
+msgstr "Marge interior"
+
+#: ../contents/ui/config/ConfigStation.qml
+msgid "Saved Weather Stations"
+msgstr "Estacions metereològiques desades"
+
+#: ../contents/ui/config/ConfigStation.qml
+msgid "ID"
+msgstr "ID"
+
+#: ../contents/ui/config/ConfigStation.qml
+msgid "Latitude"
+msgstr "Latitud"
+
+#: ../contents/ui/config/ConfigStation.qml
+msgid "Longitude"
+msgstr "Longitud"
+
+#: ../contents/ui/config/ConfigStation.qml
+msgid "Actions"
+msgstr "Accions"
+
+#: ../contents/ui/config/ConfigStation.qml
+msgid "Add Current Location"
+msgstr "Afegir localització actual"
+
+#: ../contents/ui/config/ConfigStation.qml ../contents/ui/lib/StationMapSearcher.qml
+msgid "No nearby stations found."
+msgstr "No s'han trobat estacions properes."
+
+#: ../contents/ui/config/ConfigStation.qml
+msgid "Select from Map"
+msgstr "Seleccionar en el mapa"
+
+#: ../contents/ui/config/ConfigStation.qml ../contents/ui/lib/StationMapSearcher.qml ../contents/ui/lib/StationSearcher.qml
+msgid "Find Station"
+msgstr "Cercar estació"
+
+#: ../contents/ui/config/ConfigStation.qml
+msgid "Manual Add"
+msgstr "Afegir manualment"
+
+#: ../contents/ui/config/ConfigStation.qml ../contents/ui/lib/StationMapSearcher.qml
+msgid "Error (%1): %2"
+msgstr "Error (%1): %2"
+
+#: ../contents/ui/config/ConfigStation.qml
+msgid "Refresh period (s):"
+msgstr "Període d'actualització (s):"
+
+#: ../contents/ui/config/ConfigUnits.qml
+msgid "Time/Date Format"
+msgstr "Format de Temps/Data"
+
+#: ../contents/ui/config/ConfigUnits.qml
+msgid "Sun/Moon time format:"
+msgstr "Format del temps Sol/Lluna:"
+
+#: ../contents/ui/config/ConfigUnits.qml
+msgid "12hr time"
+msgstr "temps 12h"
+
+#: ../contents/ui/config/ConfigUnits.qml
+msgid "24hr time"
+msgstr "temps 24h"
+
+#: ../contents/ui/config/ConfigUnits.qml
+msgid "Custom"
+msgstr "Client"
+
+#: ../contents/ui/config/ConfigUnits.qml
+msgid "Day Chart time format:"
+msgstr "Format de temps del gràfic del dia:"
+
+#: ../contents/ui/config/ConfigUnits.qml
+msgid "Time format"
+msgstr "Format del temps"
+
+#: ../contents/ui/config/ConfigUnits.qml
+msgid "Week forecast date format:"
+msgstr "Format de data de previsió setmanal:"
+
+#: ../contents/ui/config/ConfigUnits.qml
+msgid "Day"
+msgstr "Dia"
+
+#: ../contents/ui/config/ConfigUnits.qml
+msgid "Day/Month"
+msgstr "Dia/Mes"
+
+#: ../contents/ui/config/ConfigUnits.qml
+msgid "Date format"
+msgstr "Format de data"
+
+#: ../contents/ui/config/ConfigUnits.qml
+msgid "Precision"
+msgstr "Precisió"
+
+#: ../contents/ui/config/ConfigUnits.qml
+msgid "Compact Rep Temperature"
+msgstr "Temperatura informe compacte"
+
+#: ../contents/ui/config/ConfigUnits.qml ../contents/ui/main.qml
+msgid "Temperature"
+msgstr "Temperatura"
+
+#: ../contents/ui/config/ConfigUnits.qml
+msgctxt "The unit system"
+msgid "Metric"
+msgstr "Mètric"
+
+#: ../contents/ui/config/ConfigUnits.qml
+msgctxt "The unit system"
+msgid "Imperial"
+msgstr "Imperial"
+
+#: ../contents/ui/config/ConfigUnits.qml
+msgctxt "The unit system"
+msgid "Hybrid (UK)"
+msgstr "Híbrid (UK)"
+
+#: ../contents/ui/config/ConfigUnits.qml
+msgid "Choose:"
+msgstr "Escollir:"
+
+#: ../contents/ui/config/ConfigUnits.qml
+msgid "Wind unit:"
+msgstr "Unitat de vent:"
+
+#: ../contents/ui/config/ConfigUnits.qml
+msgid "Rain unit:"
+msgstr "Unitat de pluja:"
+
+#: ../contents/ui/config/ConfigUnits.qml
+msgid "Snow unit:"
+msgstr "Unitat de neu:"
+
+#: ../contents/ui/config/ConfigUnits.qml
+msgid "Temperature unit:"
+msgstr "Unitat de temperatura:"
+
+#: ../contents/ui/config/ConfigUnits.qml
+msgid "Pressure unit:"
+msgstr "Unitat de pressió:"
+
+#: ../contents/ui/config/ConfigUnits.qml
+msgid "Elevation unit:"
+msgstr "Unitat d'elevació:"
+
+#: ../contents/ui/lib/BackgroundToggle.qml
+msgid "Desktop Widget:"
+msgstr "Widget d'escriptori:"
+
+#: ../contents/ui/lib/ConfigBtn.qml
+msgid "Configure Wunderground"
+msgstr "Configurar Wunderground"
+
+#: ../contents/ui/lib/ManualStationAdd.qml
+msgid "Add Station..."
+msgstr "Afegir estació..."
+
+#: ../contents/ui/lib/ManualStationAdd.qml
+msgid "Enter station ID"
+msgstr "Entrar ID d'estació"
+
+#: ../contents/ui/lib/ManualStationAdd.qml
+msgid "Enter station name (optional)"
+msgstr "Entrar nom d'estació (opcional)"
+
+#: ../contents/ui/lib/ManualStationAdd.qml ../contents/ui/lib/StationMapSearcher.qml ../contents/ui/lib/StationSearcher.qml
+msgid "Confirm"
+msgstr "Confirmar"
+
+#: ../contents/ui/lib/ManualStationAdd.qml ../contents/ui/lib/StationMapSearcher.qml ../contents/ui/lib/StationSearcher.qml
+msgid "Cancel"
+msgstr "Cancel·lar"
+
+#: ../contents/ui/lib/StationListDelegate.qml ../contents/ui/lib/StationSearcher.qml
+msgid "Select"
+msgstr "Seleccionar"
+
+#: ../contents/ui/lib/StationListDelegate.qml
+msgid "Edit Name"
+msgstr "Editar nom"
+
+#: ../contents/ui/lib/StationListDelegate.qml
+msgid "Remove"
+msgstr "Suprimir"
+
+#: ../contents/ui/lib/StationManager.qml
+msgid "Duplicate station entered"
+msgstr ""
+
+#: ../contents/ui/lib/StationMapSearcher.qml ../contents/ui/lib/StationSearcher.qml
+msgid "Search by:"
+msgstr "Cerca per:"
+
+#: ../contents/ui/lib/StationMapSearcher.qml
+msgid "Area Name"
+msgstr "Nom d'àrea"
+
+#: ../contents/ui/lib/StationMapSearcher.qml ../contents/ui/lib/StationSearcher.qml
+msgid "Weatherstation ID:"
+msgstr "ID estació meteorològica:"
+
+#: ../contents/ui/lib/StationMapSearcher.qml ../contents/ui/lib/StationSearcher.qml
+msgid "Lat/Lon"
+msgstr "Lat/Lon"
+
+#: ../contents/ui/lib/StationMapSearcher.qml
+msgid "Current Location"
+msgstr "Localització actual"
+
+#: ../contents/ui/lib/StationMapSearcher.qml ../contents/ui/lib/StationSearcher.qml
+msgid "Search"
+msgstr "Cercar"
+
+#: ../contents/ui/lib/StationMapSearcher.qml ../contents/ui/lib/StationSearcher.qml
+msgid "Enter Station"
+msgstr "Entrar estació"
+
+#: ../contents/ui/lib/StationMapSearcher.qml
+msgid "Enter city, state, locality, or address"
+msgstr "Entrar ciutat, estat, localitat, or adreça"
+
+#: ../contents/ui/lib/StationMapSearcher.qml
+msgid "Click or drag the marker on the map below."
+msgstr "Clica o arrossega el símbol en el mata a sota."
+
+#: ../contents/ui/lib/StationMapSearcher.qml
+msgid "Searching for nearby stations using IP2Location.io"
+msgstr "Cercant estacions properes usant IP2Location.io"
+
+#: ../contents/ui/lib/StationMapSearcher.qml ../contents/ui/lib/StationSearcher.qml
+msgid "Searching place:"
+msgstr "Cercant lloc:"
+
+#: ../contents/ui/lib/StationMapSearcher.qml ../contents/ui/lib/StationSearcher.qml
+msgid "Choose"
+msgstr "Escollir"
+
+#: ../contents/ui/lib/StationMapSearcher.qml
+msgid "Searching by Weatherstation ID. Example: KGADACUL1"
+msgstr "Cercant per ID d'estació meteorològica. Exemple: KGADACUL1"
+
+#: ../contents/ui/lib/StationMapSearcher.qml
+msgid "Selected latitude: %1, longitude: %2"
+msgstr "Seleccionar latitud: %1, Longitud: %2"
+
+#: ../contents/ui/lib/StationMapSearcher.qml
+msgid "Privacy Policy: IP2Location.io is used to determine your approximate location based on your IP address. No personally identifiable information is collected or stored."
+msgstr "Política de privacitat: s'utilitza IP2Location.io per determinar la vostra localització aproximada basada en la vostra adreça IP. No es recull ni es desa cap informació personal identificable."
+
+#: ../contents/ui/lib/StationMapSearcher.qml
+msgid "Warning"
+msgstr "Avís"
+
+#: ../contents/ui/lib/StationMapSearcher.qml
+msgid "Station has failed quality checks and may provide unreliable data."
+msgstr "L'estació ha fallat les comprovacions de qualitat i potser no proporciona dades fiables."
+
+#: ../contents/ui/lib/StationMapSearcher.qml
+msgid "Station Health: %1%"
+msgstr "Salut de l'estació: %1%"
+
+#: ../contents/ui/lib/StationMapSearcher.qml
+msgid "Test Station"
+msgstr "Estació de prova"
+
+#: ../contents/ui/lib/StationMapSearcher.qml
+msgid "Selected Station: %1 (%2)"
+msgstr "Seleccionar estació: %1 (%2)"
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Error: %1 message: %2"
+msgstr "Error: %1 missatge: %2"
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Station active!"
+msgstr "Estació activa!"
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Reporting %1% of properties."
+msgstr "Informant %1% de les propietats."
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Station active."
+msgstr "Estació activa."
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Station unhealthy."
+msgstr "Estació insana."
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Error: Bad station."
+msgstr "Error: Mala estació."
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Error: Station not active!"
+msgstr "Error: L'estació no està activa!"
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "City Name"
+msgstr "Nom de ciutat"
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Uses WGS84 geocode coordinates"
+msgstr "Usa coordinades de geocodificació WGS84"
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Use Station ID, not city name. Select 'Search by: City Name' to search by city."
+msgstr "Usar ID d'estació, no el nom de ciutat. Seleccionar 'Cerca per: Nom de ciutat' per cercar per ciutat."
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Enter City Name"
+msgstr "Entrar nom de ciutat"
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Latitude:"
+msgstr "Latitud"
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Longitude:"
+msgstr "Longitud"
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Weatherstation Name:"
+msgstr "Nom d'estació meteorològica:"
+
+#: ../contents/ui/lib/StationSearcher.qml
+msgid "Test"
+msgstr "Prova"
+
+#: ../contents/ui/main.qml
+msgid "Cloud Cover"
+msgstr "Ennuvolat"
+
+#: ../contents/ui/main.qml
+msgid "Precipitation Chance"
+msgstr "Probabilitat de precipitació"
+
+#: ../contents/ui/main.qml
+msgid "Precipitation Rate"
+msgstr "Freqüència de precipitació"
+
+#: ../contents/ui/main.qml
+msgid "Snow Precipitation Rate"
+msgstr "Freqüència de nevada"
+
+#: ../contents/ui/main.qml
+msgid "Set the weather station to pull data from."
+msgstr "Posar l'estació meteorològica a recollir dades des de."
+
+#: ../contents/ui/main.qml
+msgid "Please Configure"
+msgstr "Si us plau, configureu"
+
+#: ../contents/ui/main.qml
+msgid "Error..."
+msgstr "Error..."
+
+#: ../contents/ui/main.qml
+msgid "Refresh weather"
+msgstr "Actualitzar clima"

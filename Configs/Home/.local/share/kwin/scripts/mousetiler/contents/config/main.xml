@@ -202,7 +202,8 @@ SPECIAL_CLOSE
 SPECIAL_AUTO_TILER_TOGGLE
 SPECIAL_AUTO_TILER_1
 SPECIAL_AUTO_TILER_2
-SPECIAL_AUTO_TILER_3</default>
+SPECIAL_AUTO_TILER_3
+SPECIAL_FIT</default>
         </entry>
         <entry name="shortcutChangeMode" type="String">
             <default>Meta+Ctrl+Space</default>

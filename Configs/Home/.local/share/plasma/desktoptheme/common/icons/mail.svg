@@ -1,0 +1,22 @@
+<svg width="22" height="22" enable-background="new" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:osb="http://www.openswatchbook.org/uri/2009/osb">
+ <defs>
+  <style id="current-color-scheme" type="text/css">.ColorScheme-Text { color:#363636; } .ColorScheme-Highlight { color:#5294e2; } .ColorScheme-ButtonBackground { color:#363636; }</style>
+ </defs>
+ <g id="mail-unread" transform="translate(-467 -135)">
+  <path d="m467 135h22v22h-22z" opacity="0"/>
+  <path class="ColorScheme-Text" d="m471 139c-1.108 0-2 0.892-2 2v10c0 1.108 0.892 2 2 2h14c1.108 0 2-0.892 2-2v-10c0-1.108-0.892-2-2-2zm0 2h14v10h-14v-7z" fill="currentColor"/>
+  <path class="ColorScheme-Text" transform="rotate(15)" d="m491.96 16.224 0.53584 1.9998 7.2609 0.0522 6.262-3.6757-0.53584-1.9998-6.262 3.6757z" fill="currentColor"/>
+ </g>
+ <g id="mail-unread-new">
+  <path d="m22 0h22v22h-22z" opacity="0"/>
+  <path class="ColorScheme-Text" d="m26 4c-1.108 0-2 0.892-2 2v10c0 1.108 0.892 2 2 2h11.768a3 3 0 0 1-0.76758-2h-11v-7-3h14v3 4a3 3 0 0 1 2 0.76367v-7.7637c0-1.108-0.892-2-2-2h-14z" fill="currentColor"/>
+  <path class="ColorScheme-Text" d="m26 8 3e-6 2.0703 7 1.9297 7-1.9297-4e-6 -2.0703-7 1.9297z" fill="currentColor"/>
+  <path class="ColorScheme-Highlight" d="m40 14a2 2 0 0 0-2 2 2 2 0 0 0 2 2 2 2 0 0 0 2-2 2 2 0 0 0-2-2z" fill="currentColor"/>
+ </g>
+ <g id="mail-mark-unread-new" transform="translate(22)">
+  <path d="m22 0h22v22h-22z" opacity="0"/>
+  <path class="ColorScheme-Text" d="m26 4c-1.108 0-2 0.892-2 2v10c0 1.108 0.892 2 2 2h11.768a3 3 0 0 1-0.76758-2h-11v-10h14v7a3 3 0 0 1 2 0.76367v-7.7637c0-1.108-0.892-2-2-2z" fill="currentColor"/>
+  <path class="ColorScheme-Text" d="m26 8 3e-6 2.0703 7 1.9297 7-1.9297-4e-6 -2.0703-7 1.9297z" fill="currentColor"/>
+  <path class="ColorScheme-Highlight" d="m40 14a2 2 0 0 0-2 2 2 2 0 0 0 2 2 2 2 0 0 0 2-2 2 2 0 0 0-2-2z" fill="currentColor"/>
+ </g>
+</svg>

@@ -24,6 +24,7 @@ import org.kde.kcmutils as KCM
 import org.kde.plasma.components as PlasmaComponents
 import org.kde.kirigami as Kirigami
 import "../lib" as Lib
+import "../../code/pws-api.js" as StationAPI
 
 KCM.SimpleKCM {
     id: stationConfig
@@ -35,6 +36,15 @@ KCM.SimpleKCM {
     property alias cfg_latitude: stationManager.latitude
     property alias cfg_longitude: stationManager.longitude
     property alias cfg_refreshPeriod: refreshPeriod.value
+
+    property string errorType: ""
+    property string errorMessage: ""
+
+        function printDebug(msg) {
+        if (plasmoid.configuration.logConsole) {
+            console.log("[debug] [ConfigStation.qml] " + msg);
+        }
+    }
 
     Lib.StationManager {
         id: stationManager
@@ -117,6 +127,32 @@ KCM.SimpleKCM {
                 spacing: Kirigami.Units.smallSpacing
 
                 QQC.Button {
+                    text: i18n("Add Current Location")
+                    icon.name: "mark-location"
+                    onClicked: function() {
+                        StationAPI.getNearest({ language: Qt.locale().name.replace("_", "-")}, function(err, stations) {
+                            if (err) {
+                                stationConfig.errorMessage = err.message;
+                                stationConfig.errorType = err.type;
+                                return;
+                            }
+                            stationConfig.errorType = "";
+                            stationConfig.errorMessage = "";
+                            if (stations.length > 0) {
+                                var station = stations[0];
+                                stationManager.addStation(station.stationID, station.address, station.latitude, station.longitude, function(err) {
+                                    stationConfig.errorType = err.type;
+                                    stationConfig.errorMessage = err.message;
+                                });
+                            } else {
+                                stationConfig.errorMessage = i18n("No nearby stations found.");
+                                stationConfig.errorType = "NoStations";
+                            }
+                        })
+                    }
+                }
+
+                QQC.Button {
                     text: i18n("Select from Map")
                     icon.name: "earth"
                     onClicked: stationMapSearcher.open()
@@ -135,6 +171,15 @@ KCM.SimpleKCM {
                 }
 
                 Item { Layout.fillWidth: true }
+            }
+
+            // Error Text
+            QQC.TextField {
+                enabled: false
+                Layout.fillWidth: true
+                visible: stationConfig.errorMessage.length > 0
+                text: i18n("Error (%1): %2", stationConfig.errorType, stationConfig.errorMessage)
+                color: "red"
             }
 
             // Refresh Period Setting
@@ -161,7 +206,7 @@ KCM.SimpleKCM {
 
             // Version
             PlasmaComponents.Label {
-                text: "Version 3.7.9"
+                text: "Version 3.8.3"
                 font.pointSize: 9
                 opacity: 0.7
             }
@@ -174,7 +219,10 @@ KCM.SimpleKCM {
     Lib.StationSearcher {
         id: stationSearcher
         onStationSelected: function (station) {
-            stationManager.addStation(station.stationID, station.placeName, station.latitude, station.longitude)
+            stationManager.addStation(station.stationID, station.placeName, station.latitude, station.longitude, function(err) {
+                stationConfig.errorType = err.type;
+                stationConfig.errorMessage = err.message;
+            });
             stationSearcher.close()
         }
     }
@@ -183,7 +231,10 @@ KCM.SimpleKCM {
     Lib.StationMapSearcher {
         id: stationMapSearcher
         onStationSelected: function (station) {
-            stationManager.addStation(station.stationID, station.address, station.latitude, station.longitude)
+            stationManager.addStation(station.stationID, station.address, station.latitude, station.longitude, function(err) {
+                stationConfig.errorType = err.type;
+                stationConfig.errorMessage = err.message;
+            });
         }
     }
 
@@ -191,7 +242,10 @@ KCM.SimpleKCM {
     Lib.ManualStationAdd {
         id: manualAdd
         onStationSelected: function (station) {
-            stationManager.addStation(station.stationID, station.address, 0, 0)
+            stationManager.addStation(station.stationID, station.address, 0, 0, function(err) {
+                stationConfig.errorType = err.type;
+                stationConfig.errorMessage = err.message;
+            });
         }
     }
 }

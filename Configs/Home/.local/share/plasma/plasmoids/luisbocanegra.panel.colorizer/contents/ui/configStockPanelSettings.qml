@@ -441,7 +441,7 @@ KCM.SimpleKCM {
             actions: [
                 Kirigami.Action {
                     icon.name: "view-readermode-symbolic"
-                    text: "D-Bus usage"
+                    text: i18n("D-Bus usage")
                     onTriggered: {
                         Qt.openUrlExternally("https://github.com/luisbocanegra/plasma-panel-colorizer?tab=readme-ov-file#advanced-commandline-usage-with-d-bus-version-200-or-later");
                     }

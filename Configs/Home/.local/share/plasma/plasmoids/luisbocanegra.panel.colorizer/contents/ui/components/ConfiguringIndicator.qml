@@ -21,13 +21,6 @@ Item {
             color: "#fafafa"
             roundToIconSize: false
             isMask: true
-            NumberAnimation on rotation {
-                from: 0
-                to: 360
-                running: true
-                loops: Animation.Infinite
-                duration: 3000
-            }
         }
     }
 
