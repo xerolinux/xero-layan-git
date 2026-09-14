@@ -36,10 +36,8 @@ header() {
 detect_distro() {
   if command -v pacman >/dev/null 2>&1; then
     DISTRO="arch"
-  elif command -v dnf >/dev/null 2>&1; then
-    DISTRO="fedora"
   else
-    echo -e "${RED}Unsupported distro: need pacman (Arch) or dnf (Fedora).${RESET}"
+    echo -e "${RED}Unsupported distro: need pacman (Arch).${RESET}"
     exit 1
   fi
   echo "Detected package manager for: $DISTRO"
@@ -126,116 +124,17 @@ install_arch_packages() {
   setup_aur_helper
 
   header "Installing AUR Packages"
-  # Tela-circle is installed from source (shared step) for cross-distro parity.
+  # Tela-circle is installed from source (shared step below).
   $AUR_HELPER -S --noconfirm --needed \
     ttf-meslo-nerd-font-powerlevel10k oh-my-posh-bin pacseek
 }
 
 #############################################
-# Fedora package setup
+# Shared steps
 #############################################
 
-# Nerd Fonts are not packaged in Fedora repos -> fetch from upstream releases
-install_nerd_fonts() {
-  header "Installing Nerd Fonts"
-  local ver="v3.2.1"
-  local dir="$HOME/.local/share/fonts"
-  local fonts=(Hack FiraCode Terminus Meslo)
-  mkdir -p "$dir"
-  for f in "${fonts[@]}"; do
-    if find "$dir" -iname "*${f}*Nerd*" 2>/dev/null | grep -q .; then
-      echo "$f Nerd Font already present."
-      continue
-    fi
-    echo "Downloading $f Nerd Font..."
-    if curl -fLo "/tmp/${f}.zip" \
-        "https://github.com/ryanoasis/nerd-fonts/releases/download/${ver}/${f}.zip"; then
-      unzip -oq "/tmp/${f}.zip" -d "$dir/${f}-NF" && rm -f "/tmp/${f}.zip"
-    else
-      echo "Warning: failed to download $f Nerd Font, skipping."
-    fi
-  done
-  fc-cache -f >/dev/null 2>&1 || true
-}
-
-# dnfseek: Fedora replacement for Arch's pacseek (fzf-based dnf TUI browser)
-install_dnfseek() {
-  header "Installing dnfseek (pacseek replacement)"
-  if command -v dnfseek >/dev/null 2>&1; then
-    echo "dnfseek already present."
-    return
-  fi
-  rm -rf /tmp/dnfseek
-  if git clone --depth=1 https://github.com/OmarHesham2356/dnfseek.git /tmp/dnfseek; then
-    sudo install -m755 /tmp/dnfseek/dnfseek.sh /usr/local/bin/dnfseek \
-      || echo "Warning: dnfseek install failed."
-    rm -rf /tmp/dnfseek
-  else
-    echo "Warning: failed to clone dnfseek, skipping."
-  fi
-}
-
-# Kurve CAVA visualizer plasmoid needs a compiled QML plugin
-# (com.github.luisbocanegra.audiovisualizer.process) for its Primary backend.
-# Build + install it from source; on failure the widget uses the QtWebSockets
-# fallback (qt6-qtwebsockets-devel + python3-websockets, both installed above).
-# install.sh puts the plugin in /usr (survives the later Configs copy) and a
-# plasmoid copy in ~/.local (harmless: the rice's Configs copy overwrites it).
-install_kurve_cava_plugin() {
-  header "Building Kurve CAVA Visualizer Plugin"
-  rm -rf /tmp/kurve
-  if git clone --depth=1 --branch v3.5.1 https://github.com/luisbocanegra/kurve.git /tmp/kurve \
-     || git clone --depth=1 https://github.com/luisbocanegra/kurve.git /tmp/kurve; then
-    ( cd /tmp/kurve && ./install.sh ) \
-      || echo "Warning: Kurve plugin build failed; widget falls back to QtWebSockets."
-    rm -rf /tmp/kurve
-  else
-    echo "Warning: failed to clone Kurve; widget falls back to QtWebSockets."
-  fi
-}
-
-# oh-my-posh (oh-my-posh-bin on Arch) -> official installer to /usr/local/bin
-install_oh_my_posh_bin() {
-  if command -v oh-my-posh >/dev/null 2>&1; then
-    echo "oh-my-posh already present."
-    return
-  fi
-  header "Installing Oh-My-Posh"
-  curl -s https://ohmyposh.dev/install.sh | sudo bash -s -- -d /usr/local/bin \
-    || echo "Warning: oh-my-posh install failed."
-}
-
-install_fedora_packages() {
-  header "Installing Native Packages"
-  # fzf: dnfseek dep (pacseek replacement).
-  # Nerd fonts, oh-my-posh, Tela-circle handled by manual installers below.
-  # Dropped vs Arch: kwin-zones (KDE-automotive ext-zones C++ plugin, no Fedora
-  # package; kwinrc has kzonesEnabled=false so snapping isn't relied on) and
-  # pacseek (pacman-only; replaced by dnfseek).
-  # qt6-qtwebsockets-devel: ships the 'import QtWebSockets' QML module that the
-  # Kurve (CAVA) visualizer plasmoid needs for its ProcessMonitor fallback;
-  # the base qt6-qtwebsockets lib alone lacks the QML import on Fedora. Pulls
-  # the base lib as a dependency.
-  # gcc-c++/cmake/extra-cmake-modules/libplasma-devel: build Kurve's C++ plugin.
-  sudo dnf install -y \
-    git curl unzip fzf jq xmlstarlet ImageMagick fastfetch btop cava \
-    kvantum kde-connect python3-websockets qt6-qtwebsockets-devel \
-    fira-code-fonts google-noto-emoji-fonts adw-gtk3-theme \
-    gcc-c++ cmake extra-cmake-modules libplasma-devel
-
-  install_kurve_cava_plugin
-
-  install_nerd_fonts
-  install_oh_my_posh_bin
-  install_dnfseek
-}
-
-#############################################
-# Shared / cross-distro steps
-#############################################
-
-# Tela-circle purple icon theme installed from source on every distro
-# (https://github.com/vinceliuice/Tela-circle-icon-theme) for parity.
+# Tela-circle purple icon theme installed from source
+# (https://github.com/vinceliuice/Tela-circle-icon-theme).
 install_tela_icons() {
   header "Installing Tela-circle Icon Theme"
   if [ -d "$HOME/.local/share/icons/Tela-circle-purple-dark" ] \
@@ -253,8 +152,8 @@ install_tela_icons() {
 }
 
 # XeroLinux KDE wallpaper set (kde-wallpapers pkg from the XeroLinux Arch repo).
-# Installed from source on every distro: the repo mirrors the system tree under
-# usr/, matching the PKGBUILD which copies the repo root to / (minus docs).
+# Installed from source: the repo mirrors the system tree under usr/, matching
+# the PKGBUILD which copies the repo root to / (minus docs).
 install_xero_wallpapers() {
   header "Installing XeroLinux KDE Wallpapers"
   rm -rf /tmp/kde-wallpapers
@@ -266,72 +165,10 @@ install_xero_wallpapers() {
   fi
 }
 
-# Remove plasmoids/configs that only work on Arch (pacman backend) so they
-# don't ship a broken updater widget on Fedora. $1 = home dir to clean.
-strip_arch_plasmoids() {
-  local home="$1"
-  rm -rf "$home/.local/share/plasma/plasmoids/com.github.exequtic.apdatifier" \
-         "$home/.config/apdatifier" \
-         "$home/.config/pacseek"
-}
-
-# Swap the Arch png logo for fastfetch's built-in Fedora logo and size it to
-# look right (builtin ascii is narrower than the 30-wide kitty png). $1 = home.
-swap_fastfetch_logo_fedora() {
-  local cfg="$1/.config/fastfetch/config.jsonc"
-  [ -f "$cfg" ] || return 0
-  sed -i \
-    -e 's#"source": "~/.config/fastfetch/ArchP.png",#"source": "fedora",#' \
-    -e 's#"type": "kitty",#"type": "builtin",#' \
-    -e 's#"width": 30,#"width": 13,#' \
-    -e 's#"top": 8,#"top": 6,#' \
-    "$cfg"
-}
-
-# Swap the Kicker/Kickoff app-menu button icon from the Arch logo to Fedora's.
-# $1 = home dir.
-swap_appmenu_logo_fedora() {
-  local cfg="$1/.config/plasma-org.kde.plasma.desktop-appletsrc"
-  [ -f "$cfg" ] || return 0
-  sed -i 's/^customButtonImage=distributor-logo-archlinux/customButtonImage=goa-account-fedora/' "$cfg"
-}
-
-# fastfetch's "kernel" module prints the full Fedora kernel string with the
-# distro suffix (e.g. 6.x.x-300.fc41.x86_64). Replace that module with a command
-# that strips the ".fcNN.*" suffix for a clean "Linux 6.x.x-300". Fedora only;
-# the Arch config keeps the plain "kernel" module. $1 = home dir.
-swap_fastfetch_kernel_fedora() {
-  local cfg="$1/.config/fastfetch/config.jsonc"
-  [ -f "$cfg" ] || return 0
-  python3 - "$cfg" <<'PY'
-import sys, re
-p = sys.argv[1]
-s = open(p, encoding='utf-8').read()
-pat = re.compile(r'"type": "kernel",(\s*\n\s*"key": "[^"]*",\s*\n\s*"keyColor": "yellow")')
-def repl(m):
-    return ('"type": "command",' + m.group(1) + ',\n'
-            '            "text": "echo Linux $(uname -r | sed \'s/\\\\.fc[0-9]*\\\\..*//\')"')
-s, n = pat.subn(repl, s, count=1)
-if n:
-    open(p, 'w', encoding='utf-8').write(s)
-PY
-}
-
-# Widen the Konsole profile from 105 to 120 columns on Fedora. $1 = home dir.
-swap_konsole_columns_fedora() {
-  local cfg="$1/.local/share/konsole/XeroLinux.profile"
-  [ -f "$cfg" ] || return 0
-  sed -i 's/^TerminalColumns=105$/TerminalColumns=120/' "$cfg"
-}
-
 #############################################
-# Run package setup for detected distro
+# Run package setup
 #############################################
-if [ "$DISTRO" = "arch" ]; then
-  install_arch_packages
-else
-  install_fedora_packages
-fi
+install_arch_packages
 
 install_tela_icons
 install_xero_wallpapers
@@ -343,25 +180,6 @@ cp -Rf ~/.config "$backup_dir"
 cp -Rf Configs/Home/. ~
 sudo cp -Rf Configs/System/. /
 sudo cp -Rf Configs/Home/. /root/
-
-if [ "$DISTRO" = "fedora" ]; then
-  header "Adapting Configs For Fedora"
-  echo "Removing Arch-only plasmoids (apdatifier, pacseek)..."
-  strip_arch_plasmoids "$HOME"
-  sudo bash -c "$(declare -f strip_arch_plasmoids); strip_arch_plasmoids /root"
-  echo "Swapping fastfetch logo to Fedora..."
-  swap_fastfetch_logo_fedora "$HOME"
-  sudo bash -c "$(declare -f swap_fastfetch_logo_fedora); swap_fastfetch_logo_fedora /root"
-  echo "Swapping app-menu button icon to Fedora..."
-  swap_appmenu_logo_fedora "$HOME"
-  sudo bash -c "$(declare -f swap_appmenu_logo_fedora); swap_appmenu_logo_fedora /root"
-  echo "Fixing fastfetch kernel line for Fedora..."
-  swap_fastfetch_kernel_fedora "$HOME"
-  sudo bash -c "$(declare -f swap_fastfetch_kernel_fedora); swap_fastfetch_kernel_fedora /root"
-  echo "Widening Konsole columns to 120 for Fedora..."
-  swap_konsole_columns_fedora "$HOME"
-  sudo bash -c "$(declare -f swap_konsole_columns_fedora); swap_konsole_columns_fedora /root"
-fi
 
 header "Setting up Fastfetch"
 read -p "Enable fastfetch on terminal launch? (y/n): " response
@@ -398,11 +216,6 @@ header "Installing GRUB Theme"
 if [ -d "/boot/grub" ] || [ -d "/boot/grub2" ]; then
   # Apply /etc/default/grub tweaks BEFORE Grub.sh regenerates grub.cfg.
   set_grub_option GRUB_GFXMODE 1920x1080x32
-  if [ "$DISTRO" = "fedora" ]; then
-    # Fedora hides the boot menu by default; show it for 5s so the theme shows.
-    set_grub_option GRUB_TIMEOUT 5
-    set_grub_option GRUB_TIMEOUT_STYLE menu
-  fi
   sudo ./Grub.sh
 else
   echo "GRUB not detected, skipping theme."
