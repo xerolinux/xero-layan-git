@@ -267,6 +267,7 @@ rss() {
         local max=${feedsFetchCount:-3}
         (( count > max )) && count=$max
 
+        local -a feedLinks=()
         local n
         for (( n=1; n<=count; n++ )); do
             local article timestamp link
@@ -281,6 +282,7 @@ rss() {
             fi
 
             [[ -z "$article" || -z "$timestamp" || -z "$link" ]] && continue
+            feedLinks+=("$link")
 
             if ! jq -e --arg l "$link" '.[] | select(.link == $l)' "$newsFile" > /dev/null; then
                 local item=$(jq -n --arg t "$title" --arg a "$article" --arg l "$link" --argjson ts "$timestamp" \
@@ -289,14 +291,16 @@ rss() {
             fi
         done
 
-        # Prune oldest entries for this feed down to feedsFetchCount
-        while (( $(jq --arg t "$title" '[.[] | select(.title == $t)] | length' "$newsFile") > max )); do
-            index=$(jq --arg t "$title" 'to_entries | reverse | map(select(.value.title == $t)) | .[0].key' "$newsFile")
-            updateJson "$newsFile" "$(jq --argjson index "$index" 'del(.[$index])' "$newsFile")"
-        done
+        # Drop this feed's entries whose link left the feed (zombies from feed edits)
+        if (( ${#feedLinks[@]} )); then
+            local linksJson
+            linksJson=$(printf '%s\n' "${feedLinks[@]}" | jq -R . | jq -s .)
+            updateJson "$newsFile" "$(jq --arg t "$title" --argjson links "$linksJson" \
+                'map(select(.title != $t or (.link as $l | $links | index($l)) != null))' "$newsFile")"
+        fi
     done
 
-    updateJson "$newsFile" "$(jq 'sort_by(.timestamp) | reverse' "$newsFile")"
+    updateJson "$newsFile" "$(jq 'map(del(.date)) | sort_by(.timestamp) | reverse' "$newsFile")"
 
     jq . $newsFile
 
@@ -512,6 +516,20 @@ uninstall() {
     exit
 }
 
+checkPkgs() {
+    local terms="alacritty foot ghostty gnome-terminal kitty konsole lxterminal ptyxis terminator tilix wezterm xterm yakuake"
+    local utils="pacman flatpak fwupdmgr paru pikaur yay jq tmux $terms"
+    for pkg in $utils; do command -v $pkg || echo; done
+    if command -v flatpak >/dev/null; then
+        flatpak list --app --columns=application | while IFS= read -r app; do
+            metadata="$(flatpak info --show-metadata "$app" 2>/dev/null)" || continue
+            grep -qx 'org.freedesktop.Flatpak=talk' <<< "$metadata" || continue
+            command="$(sed -nE '/^\[Application\]/,/^\[/ s/^command=([^[:space:]]+).*/\1/p' <<< "$metadata")"
+            [[ " $terms " == *" $command "* ]] && echo "flatpak://$app/$command"
+        done
+    fi
+}
+
 case "$1" in
           "syncdb") sync_dbs ;;
              "rss") shift; rss "$@" ;;
@@ -521,4 +539,5 @@ case "$1" in
       "installDev") install_devel ;;
    "installStable") install_stable ;;
        "uninstall") uninstall ;;
+       "checkPkgs") shift; checkPkgs "$@" ;;
 esac

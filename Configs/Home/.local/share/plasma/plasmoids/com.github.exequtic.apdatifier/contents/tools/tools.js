@@ -25,7 +25,7 @@ function execute(command, callback, opt) {
 }
 
 const readFile = (file) => `[ -f "${file}" ] && cat "${file}"`
-const writeFile = (data, redir, file) => `echo '${data}' ${redir} "${file}"`
+const writeFile = (data, redir, file) => `echo '${String(data).replace(/'/g, "'\\''")}' ${redir} "${file}"`
 const saveTimestamp = () => execute(writeFile(Math.round(sts.lastCheck).toString(), '>', timestampFile))
 
 const bash = (script, ...args) => scriptDir + script + ' ' + args.join(' ')
@@ -69,6 +69,7 @@ function Error(code, err) {
 
 function handleError(code, err, type, onError) {
     if (code && err) {
+        if (type === "aur") err = err.replace(/(https?:\/\/[^\s)?]+)\?[^\s)]+/g, '$1?…')
         sts.errors = sts.errors.concat([{code: code, message: err.trim(), type: type}])
         onError()
         return true
@@ -94,7 +95,10 @@ function init() {
                 }
                 config.forEach(line => {
                     const match = line.match(/(\w+)="([^"]*)"/)
-                    if (match) plasmoid.configuration[match[1]] = convert(match[2])
+                    if (match) {
+                        if (typeof plasmoid.configuration[match[1]] === "object") return // skip font
+                        plasmoid.configuration[match[1]] = convert(match[2])
+                    }
                 })
             }
 
@@ -126,22 +130,7 @@ function init() {
             if (Error(code, err)) return
             if (out && validJSON(out, newsFile)) {
                 const news = JSON.parse(out.trim())
-                let migrate = false //
-                for (const article of news) {
-                    // todo: remove later
-                    if (article.timestamp === undefined && article.date) {
-                        migrate = true
-                        const [d, t] = article.date.split(" | ")
-                        const [day, month, year] = d.split(".").map(Number)
-                        const [hour, minute] = t.split(":").map(Number)
-                        article.timestamp = Math.floor(new Date(year, month - 1, day, hour, minute).getTime() / 1000)
-                        delete article.date
-                    }//
-
-                    addNewsItem(article)
-                }
-
-                if (migrate) saveNews() //
+                for (const article of news) addNewsItem(article)
             }
 
             onStartup()
@@ -162,6 +151,7 @@ function saveConfig() {
     Object.keys(cfg).forEach(key => {
         if (key.endsWith("Default")) {
             let name = key.slice(0, -7)
+            if (typeof cfg[name] === "object") return // skip font
             config += `${name}="${cfg[name]}"\n`
         }
     })
@@ -169,11 +159,12 @@ function saveConfig() {
 }
 
 function checkDependencies() {
-    const pkgs = "pacman flatpak fwupdmgr paru pikaur yay jq tmux alacritty foot ghostty gnome-terminal kitty konsole lxterminal ptyxis terminator tilix wezterm xterm yakuake"
-    const checkPkg = (pkgs) => `for pkg in ${pkgs}; do command -v $pkg || echo; done`
-    const populate = (data) => data.map(item => ({ "name": item.split("/").pop(), "value": item }))
+    const populate = (data) => data.map(item => ({
+        "name": item.startsWith("flatpak://") ? `${item.split("/").pop()} (Flatpak)` : item.split("/").pop(),
+        "value": item
+    }))
 
-    execute(checkPkg(pkgs), (cmd, out, err, code) => {
+    execute(bash('utils', 'checkPkgs'), (cmd, out, err, code) => {
         if (Error(code, err)) return
 
         const output = out.split("\n")
@@ -184,7 +175,8 @@ function checkDependencies() {
 
         const terminals = populate(output.slice(8).filter(Boolean))
         cfg.terminals = terminals.length > 0 ? terminals : null
-        if (!cfg.terminal) cfg.terminal = cfg.terminals.length > 0 ? cfg.terminals[0].value : ""
+        if (!cfg.terminal || !terminals.some(t => t.value === cfg.terminal))
+            cfg.terminal = terminals.length > 0 ? terminals[0].value : ""
 
         if (!pacman) plasmoid.configuration.arch = false
         if (!pacman || (!yay && !paru && !pikaur)) plasmoid.configuration.aur = false
@@ -203,9 +195,9 @@ function upgradePackage(name, appID, contentID) {
     if (sts.upgrading) return
 
     if (appID) {
-        runInTerminal("upgrade", "flatpak", appID, name)
+        runInTerminal("upgrade", "flatpak-pkg", appID, name)
     } else if (contentID) {
-        runInTerminal("upgrade", "widget", contentID, name)
+        runInTerminal("upgrade", "widget-pkg", contentID, name)
     }
 }
 
@@ -254,6 +246,14 @@ function upgradeSystem() {
     runInTerminal("upgrade", "full", `${ignorePkgs}`)
 }
 
+function upgradePart(source) {
+    if (sts.upgrading && !cfg.tmuxSession) return
+    if (source === "system") {
+        runInTerminal("upgrade", "system", buildIgnoreString())
+    } else {
+        runInTerminal("upgrade", source)
+    }
+}
 
 function stopCheck() {
     sts.errors = []
@@ -340,6 +340,7 @@ function checkUpdates() {
         sts.statusIco = cfg.ownIconsUI ? "status_news" : "news-subscribe"
         sts.statusMsg = i18n("Checking latest news...")
         execute(bash('utils', 'rss', feeds), (cmd, out, err, code) => {
+            if (handleError(code, err, "news", next)) return
             if (out) {
                 const news = JSON.parse(out.trim())
                 if (cfg.notifyNews) {
@@ -367,9 +368,10 @@ function checkUpdates() {
                         if (!newLinks.includes(modelItem.link)) newsModel.remove(i)
                     }
                 }
+
+                saveNews()
             }
 
-            if (handleError(code, err, "news", next)) return
             next()
         }, procOpt)
     }
@@ -696,7 +698,10 @@ function finalize(list) {
 
     if (cfg.notifyUpdates) {
         const cached = new Map(cache.map(el => [el.NM, el.VN]))
-        const newList = applyRules(list).filter(el => !cached.has(el.NM) || (cfg.notifyEveryBump && cached.get(el.NM) !== el.VN))
+        const newList = applyRules(list).filter(el =>
+            (!cfg.notifyExplicitOnly || !el.RN || el.RN === "explicit") &&
+            (!cached.has(el.NM) || (cfg.notifyEveryBump && cached.get(el.NM) !== el.VN))
+        )
     
         if (newList.length > 0) {
             const title = i18np("+%1 new update", "+%1 new updates", newList.length)
@@ -713,7 +718,7 @@ function saveCache(list) {
     if (JSON.stringify(list).length > 130000) {
         let start = 0
         const chunkSize = 200
-        const json = JSON.stringify(keys(sortList(JSON.parse(JSON.stringify(list)), true))).replace(/},/g, "},\n").replace(/'/g, "")
+        const json = JSON.stringify(keys(sortList(JSON.parse(JSON.stringify(list)), true))).replace(/},/g, "},\n")
         const lines = json.split("\n")
         while (start < lines.length) {
             const chunk = lines.slice(start, start + chunkSize).join("\n")
@@ -892,9 +897,7 @@ function switchScheduler() {
 }
 
 function toFileFormat(obj) {
-    const jsonStringWithSpace = JSON.stringify(obj, null, 2)
-    const writebleJsonStrings = jsonStringWithSpace.replace(/'/g, "")
-    return writebleJsonStrings
+    return JSON.stringify(obj, null, 2)
 }
 
 function validJSON(string, file) {
@@ -980,4 +983,3 @@ function removeNewsItem(index) {
 
     saveNews()
 }
-

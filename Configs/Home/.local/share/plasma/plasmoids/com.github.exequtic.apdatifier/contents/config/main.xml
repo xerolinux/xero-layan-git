@@ -27,6 +27,7 @@
         <entry name="notifyUpdates" type="bool"><default>true</default></entry>
         <entry name="notifyUpdatesAction" type="bool"><default>false</default></entry>
         <entry name="notifyEveryBump" type="bool"><default>true</default></entry>
+        <entry name="notifyExplicitOnly" type="bool"><default>false</default></entry>
         <entry name="notifyNews" type="bool"><default>true</default></entry>
         <entry name="notifyNewsAction" type="bool"><default>false</default></entry>
         <entry name="notifyErrors" type="bool"><default>true</default></entry>
@@ -77,9 +78,7 @@
         <entry name="counterColor" type="string"><default></default></entry>
         <entry name="counterRadius" type="int"><default>3</default></entry>
         <entry name="counterOpacity" type="int"><default>8</default></entry>
-        <entry name="counterFontFamily" type="string"><default></default></entry>
-        <entry name="counterFontSize" type="int"><default>4</default></entry>
-        <entry name="counterFontBold" type="bool"><default>true</default></entry>
+        <entry name="counterFont" type="font"><default></default></entry>
         <entry name="pauseBadgePosition" type="string"><default>topLeft</default></entry>
         <entry name="updatedBadgePosition" type="string"><default>topRight</default></entry>
         <entry name="badgeOffsetX" type="int"><default>0</default></entry>

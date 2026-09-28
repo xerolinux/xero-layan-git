@@ -13,7 +13,16 @@ import "../scrollview" as View
 import "../../tools/tools.js" as JS
 
 Representation {
-    property string currVersion: "v2.9.9"
+    property string currVersion: "v2.10.0"
+    function versionLess(a, b) {
+        const nums = v => (String(v).match(/\d+/g) || []).map(Number)
+        const [x, y] = [nums(a), nums(b)]
+        for (let i = 0; i < Math.max(x.length, y.length); i++) {
+            const d = (x[i] || 0) - (y[i] || 0)
+            if (d) return d < 0
+        }
+        return false
+    }
     property bool searchFieldOpen: false
     property bool expanded: root.expanded
     onExpandedChanged: {
@@ -50,7 +59,41 @@ Representation {
         }
     }
 
-    Component.onCompleted: checkActiveNewsItems()
+    Component.onCompleted: {
+        checkActiveNewsItems()
+        listCompactMode = (cfg.defaultTab !== 0)
+    }
+
+    Connections {
+        target: plasmoid.configuration
+        function onDefaultTabChanged() {
+            listCompactMode = (plasmoid.configuration.defaultTab !== 0)
+        }
+    }
+
+    Menu {
+        id: upgradeMenu
+
+        readonly property var sources: [
+            (cfg.arch || cfg.aur) ? { t: i18n("System packages"), i: "apdatifier-package", a: "system" } : null,
+            cfg.flatpak  ? { t: "Flatpak",         i: "apdatifier-flatpak", a: "flatpak" } : null,
+            cfg.widgets  ? { t: i18n("Widgets"),   i: "start-here-kde-plasma-symbolic", a: "widgets" } : null,
+            cfg.fwupd    ? { t: i18n("Firmware"),  i: "application-x-firmware", a: "fwupd" } : null
+        ].filter(Boolean)
+
+        function openAt(anchor) {
+            Qt.callLater(() => anchor ? upgradeMenu.popup(anchor, 0, anchor.height) : upgradeMenu.popup())
+        }
+
+        Repeater {
+            model: upgradeMenu.sources
+            MenuItem {
+                text: modelData.t
+                icon.name: modelData.i
+                onClicked: JS.upgradePart(modelData.a)
+            }
+        }
+    }
 
     header: PlasmoidHeading {
         id: topHeader
@@ -151,11 +194,20 @@ Representation {
 
                 ToolbarButton {
                     id: upgradeButton
-                    tooltipText: i18n("Upgrade system")
+                    tooltipText: upgradeMenu.sources.length > 1 ? i18n("Full upgrade (right-click to choose)") : i18n("Full upgrade")
                     iconSource: cfg.ownIconsUI ? svg("toolbar_upgrade") : "akonadiconsole"
                     enabled: !sts.busy && sts.count && cfg.terminal
                     visible: enabled && cfg.upgradeButton
-                    onClicked: { buttonTooltip.hide(); JS.upgradeSystem() }
+                    onClicked: {
+                        buttonTooltip.hide()
+                        JS.upgradeSystem()
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        acceptedButtons: Qt.RightButton
+                        onPressed: upgradeMenu.sources.length > 1 ? upgradeMenu.openAt(upgradeButton) : null
+                    }
                 }
 
                 ToolbarButton {
@@ -272,8 +324,7 @@ Representation {
             Layout.bottomMargin: Kirigami.Units.smallSpacing * 2
             text: "<b>" + i18n("Check out release notes")+" "+currVersion+"</b>"
             type: Kirigami.MessageType.Positive
-            visible: !searchFieldOpen && isOnline &&
-                     plasmoid.configuration.version.localeCompare(currVersion, undefined, { numeric: true, sensitivity: 'base' }) < 0
+            visible: !searchFieldOpen && isOnline && versionLess(plasmoid.configuration.version, currVersion)
 
             actions: [
                 Kirigami.Action {
