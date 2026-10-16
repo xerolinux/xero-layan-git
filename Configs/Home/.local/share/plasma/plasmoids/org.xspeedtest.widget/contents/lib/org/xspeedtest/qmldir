@@ -1,0 +1,28 @@
+module org.xspeedtest
+linktarget xspeedtestplugin
+optional plugin xspeedtestplugin
+classname org_xspeedtestPlugin
+typeinfo xspeedtest.qmltypes
+depends QtQuick
+depends QtQuick.Effects
+prefer :/qt/qml/org/xspeedtest/
+ActionButton 1.0 ActionButton.qml
+CenterLayout 1.0 CenterLayout.qml
+CompactLayout 1.0 CompactLayout.qml
+DualLayout 1.0 DualLayout.qml
+HistoryPage 1.0 HistoryPage.qml
+MinimalLayout 1.0 MinimalLayout.qml
+Readout 1.0 Readout.qml
+SettingsPage 1.0 SettingsPage.qml
+SettingsRow 1.0 SettingsRow.qml
+ShareCard 1.0 ShareCard.qml
+SpeedPanel 1.0 SpeedPanel.qml
+SpeedView 1.0 SpeedView.qml
+SplitLayout 1.0 SplitLayout.qml
+StatChips 1.0 StatChips.qml
+StyleCanvas 1.0 StyleCanvas.qml
+singleton Styles 1.0 Styles.qml
+singleton Stream 1.0 Stream.qml
+Visualizers 1.0 Visualizers.js
+WideLayout 1.0 WideLayout.qml
+

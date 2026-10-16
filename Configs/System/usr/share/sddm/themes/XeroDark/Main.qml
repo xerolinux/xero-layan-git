@@ -302,15 +302,12 @@ Item {
             }
         }
 
-        VirtualKeyboardLoader {
+        // Plasma 6.8 dropped VirtualKeyboardLoader; stub keeps the rest of the theme loading
+        Item {
             id: inputPanel
-
-            z: 1
-
-            screenRoot: root
-            mainStack: mainStack
-            mainBlock: userListComponent
-            passwordField: userListComponent.mainPasswordBox
+            property bool keyboardActive: false
+            property int status: Loader.Null
+            function showHide() {}
         }
 
         Component {

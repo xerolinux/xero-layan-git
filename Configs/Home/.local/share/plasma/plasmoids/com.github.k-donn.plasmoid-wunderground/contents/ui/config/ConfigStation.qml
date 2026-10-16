@@ -206,7 +206,7 @@ KCM.SimpleKCM {
 
             // Version
             PlasmaComponents.Label {
-                text: "Version 3.8.3"
+                text: "Version 3.8.5"
                 font.pointSize: 9
                 opacity: 0.7
             }

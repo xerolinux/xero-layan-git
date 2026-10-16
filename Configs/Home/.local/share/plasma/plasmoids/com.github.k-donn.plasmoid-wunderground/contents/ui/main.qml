@@ -652,6 +652,7 @@ PlasmoidItem {
         running: appState != showCONFIG
         repeat: true
         onTriggered: updateCurrentData()
+        triggeredOnStart: true
     }
 
     Timer {
@@ -659,6 +660,7 @@ PlasmoidItem {
         running: appState != showCONFIG
         repeat: true
         onTriggered: updateForecastData()
+        triggeredOnStart: true
     }
 
     toolTipTextFormat: Text.RichText

@@ -1,0 +1,19 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Name": "xSpeedTest"
+            }
+        ],
+        "Category": "System Information",
+        "Description": "Internet speed test with live download and upload animation",
+        "EnabledByDefault": true,
+        "Icon": "xspeedtest",
+        "Id": "org.xspeedtest.widget",
+        "License": "GPL-3.0-or-later",
+        "Name": "xSpeedTest",
+        "Version": "0.1.0"
+    },
+    "X-Plasma-API-Minimum-Version": "6.0"
+}

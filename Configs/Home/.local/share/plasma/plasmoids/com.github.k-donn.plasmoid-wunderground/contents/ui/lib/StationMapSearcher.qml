@@ -91,7 +91,7 @@ Window {
         name: "osm"
         PluginParameter {
             name: "osm.useragent"
-            value: "WundergroundPlasmoid/3.8.3 (https://github.com/k-donn/plasmoid-wunderground; contact:mitchell@mitchelldonnelly.com)"
+            value: "WundergroundPlasmoid/3.8.5 (https://github.com/k-donn/plasmoid-wunderground; contact:mitchell@mitchelldonnelly.com)"
         }
         PluginParameter {
             name: "osm.mapping.custom.host"

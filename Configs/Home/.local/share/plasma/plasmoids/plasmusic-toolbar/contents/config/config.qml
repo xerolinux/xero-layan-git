@@ -1,33 +1,20 @@
+import QtQuick 2.0
 import org.kde.plasma.configuration
 
 ConfigModel {
     ConfigCategory {
         name: i18n("General")
-        icon: "preferences-desktop"
-        source: "configuration/General.qml"
+        icon: "preferences-system-windows-behavior"
+        source: "config/General.qml"
     }
-
     ConfigCategory {
-         name: i18n("Upgrade & Management")
-         icon: "preferences-system-startup"
-         source: "configuration/Upgrade.qml"
+        name: i18n("Panel View")
+        icon: "preferences-system-windows-effect-screenedge"
+        source: "config/Compact.qml"
     }
-
     ConfigCategory {
-         name: i18n("Appearance")
-         icon: "preferences-desktop-display-color"
-         source: "configuration/Appearance.qml"
-    }
-
-    ConfigCategory {
-         name: i18n("Rules")
-         icon: "preferences-system-windows-behavior"
-         source: "configuration/Rules.qml"
-    }
-
-    ConfigCategory {
-         name: i18n("Support me")
-         icon: "donate"
-         source: "configuration/Support.qml"
+        name: i18n("Full View")
+        icon: "preferences-system-windows-effect-slidingpopups"
+        source: "config/Full.qml"
     }
 }

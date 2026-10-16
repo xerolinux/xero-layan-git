@@ -1,0 +1,278 @@
+#!/usr/bin/env python3
+import http.client
+import json
+import os
+import statistics
+import sys
+import threading
+import time
+from concurrent.futures import ThreadPoolExecutor
+from dataclasses import dataclass, field
+from datetime import datetime, timezone
+from urllib.parse import urlsplit
+
+CHUNK = 128 * 1024
+UPLOAD_BODY = 10_000_000
+LATENCY_SAMPLES = 8
+MIN_LATENCY_SAMPLES = 5
+PROBE_COUNT = 3
+LATENCY_SLACK_MS = 30
+PROBE_TOLERANCE = 0.85
+PROBE_SECONDS = 2.5
+PROBE_WARMUP = 1.0
+TEST_SECONDS = 8.0
+TEST_WARMUP = 2.5
+DOWNLOAD_CONNS = 4
+UPLOAD_CONNS = 4
+SAMPLE_INTERVAL = 0.1
+LIVE_WINDOW = 1.0
+SMOOTHING = 0.35
+HEADERS = {"User-Agent": "xspeedtest", "Cache-Control": "no-cache"}
+
+_out_lock = threading.Lock()
+
+
+class HelperError(Exception):
+    pass
+
+
+def emit(**fields):
+    with _out_lock:
+        sys.stdout.write(json.dumps(fields) + "\n")
+        sys.stdout.flush()
+
+
+@dataclass
+class Target:
+    name: str
+    country: str
+    sponsor: str
+    host: str
+    latency: str
+    down: str
+    up: str
+    latencies: list = field(default_factory=list)
+    probe: float = 0.0
+
+    def connect(self):
+        return http.client.HTTPSConnection(self.host, timeout=8, blocksize=CHUNK)
+
+    def url(self, path):
+        return f"{path}{'&' if '?' in path else '?'}x={time.time_ns()}"
+
+    @property
+    def ping(self):
+        return statistics.median(self.latencies)
+
+    @property
+    def jitter(self):
+        return statistics.mean(abs(b - a) for a, b in zip(self.latencies, self.latencies[1:]))
+
+    @property
+    def score(self):
+        return self.ping + statistics.pstdev(self.latencies)
+
+
+def speedtest_targets():
+    import speedtest
+
+    st = speedtest.Speedtest(secure=True)
+    st.get_servers()
+    targets = []
+    for server in (s for group in st.servers.values() for s in group):
+        url = urlsplit(server["url"])
+        base = url.path.rsplit("/", 1)[0]
+        targets.append(Target(
+            name=server["name"], country=server["country"], sponsor=server["sponsor"], host=url.netloc,
+            latency=f"{base}/latency.txt", down=f"{base}/random4000x4000.jpg", up=url.path))
+    return targets, st.config["client"].get("isp", "")
+
+
+def cloudflare_target():
+    target = Target(name="", country="", sponsor="Cloudflare", host="speed.cloudflare.com",
+                    latency="/__down?bytes=0", down="/__down?bytes=25000000", up="/__up")
+    conn = target.connect()
+    try:
+        conn.request("GET", target.url(target.latency), headers=HEADERS)
+        response = conn.getresponse()
+        response.read()
+        target.name = response.getheader("colo") or "Cloudflare"
+    finally:
+        conn.close()
+    return target
+
+
+def collect_targets(backend):
+    targets, isp, errors = [], "", []
+    if backend in ("auto", "speedtest"):
+        try:
+            found, isp = speedtest_targets()
+            targets += found
+        except Exception as exc:
+            errors.append(f"speedtest servers: {exc}")
+    if backend in ("auto", "cloudflare"):
+        try:
+            targets.append(cloudflare_target())
+        except Exception as exc:
+            errors.append(f"Cloudflare: {exc}")
+    if not targets:
+        raise HelperError("No test servers reachable (" + "; ".join(errors) + ")")
+    return targets, isp
+
+
+def measure_latency(target):
+    conn = target.connect()
+    samples = []
+    try:
+        for i in range(LATENCY_SAMPLES + 1):
+            started = time.perf_counter()
+            conn.request("GET", target.url(target.latency), headers=HEADERS)
+            conn.getresponse().read()
+            if i:
+                samples.append((time.perf_counter() - started) * 1000)
+    except (OSError, http.client.HTTPException):
+        pass
+    finally:
+        conn.close()
+    target.latencies = samples
+    return target
+
+
+class Body:
+    def __init__(self, counts, index, stop):
+        self.counts, self.index, self.stop = counts, index, stop
+        self.left = UPLOAD_BODY
+        self.payload = os.urandom(CHUNK)
+
+    def read(self, size=CHUNK):
+        if self.left <= 0 or self.stop.is_set():
+            return b""
+        size = min(size, self.left, CHUNK)
+        self.left -= size
+        self.counts[self.index] += size
+        return self.payload[:size]
+
+
+def download_worker(target, counts, index, stop):
+    while not stop.is_set():
+        conn = target.connect()
+        try:
+            conn.request("GET", target.url(target.down), headers=HEADERS)
+            response = conn.getresponse()
+            if response.status != 200:
+                stop.wait(0.2)
+                continue
+            while not stop.is_set():
+                chunk = response.read(CHUNK)
+                if not chunk:
+                    break
+                counts[index] += len(chunk)
+        except (OSError, http.client.HTTPException):
+            stop.wait(0.1)
+        finally:
+            conn.close()
+
+
+def upload_worker(target, counts, index, stop):
+    while not stop.is_set():
+        conn = target.connect()
+        try:
+            headers = dict(HEADERS, **{"Content-Length": str(UPLOAD_BODY)})
+            conn.request("POST", target.url(target.up), body=Body(counts, index, stop), headers=headers)
+            conn.getresponse().read()
+        except (OSError, http.client.HTTPException):
+            stop.wait(0.1)
+        finally:
+            conn.close()
+
+
+def transfer(target, direction, conns, seconds, warmup, on_sample=None):
+    stop = threading.Event()
+    counts = [0] * conns
+    worker = download_worker if direction == "download" else upload_worker
+    for i in range(conns):
+        threading.Thread(target=worker, args=(target, counts, i, stop), daemon=True).start()
+
+    started = time.perf_counter()
+    samples = [(0.0, 0)]
+    while True:
+        time.sleep(SAMPLE_INTERVAL)
+        elapsed = time.perf_counter() - started
+        samples.append((elapsed, sum(counts)))
+        if on_sample:
+            on_sample(elapsed, samples)
+        if elapsed >= seconds:
+            break
+    stop.set()
+
+    steady = [s for s in samples if s[0] >= warmup]
+    if len(steady) < 2:
+        return 0.0
+    (t0, b0), (t1, b1) = steady[0], steady[-1]
+    return (b1 - b0) * 8 / (t1 - t0) / 1e6
+
+
+def run_stage(target, direction):
+    conns = DOWNLOAD_CONNS if direction == "download" else UPLOAD_CONNS
+    smoothed = 0.0
+
+    def on_sample(elapsed, samples):
+        nonlocal smoothed
+        recent = next((s for s in samples if s[0] >= elapsed - LIVE_WINDOW), samples[0])
+        span = elapsed - recent[0]
+        raw = (samples[-1][1] - recent[1]) * 8 / span / 1e6 if span > 0 else 0.0
+        smoothed += (raw - smoothed) * SMOOTHING
+        emit(phase=direction, mbps=round(smoothed, 2), progress=round(min(1.0, elapsed / TEST_SECONDS), 3))
+
+    result = transfer(target, direction, conns, TEST_SECONDS, TEST_WARMUP, on_sample)
+    emit(phase=direction, mbps=round(result, 2), progress=1.0)
+    return result
+
+
+def choose_target(targets):
+    emit(phase="ping", progress=0.0)
+    finished = 0
+    with ThreadPoolExecutor(len(targets)) as pool:
+        for _ in pool.map(measure_latency, targets):
+            finished += 1
+            emit(phase="ping", progress=round(0.4 * finished / len(targets), 3))
+
+    ranked = sorted((t for t in targets if len(t.latencies) >= MIN_LATENCY_SAMPLES), key=lambda t: t.score)
+    if not ranked:
+        raise HelperError("No test server responded")
+    limit = max(ranked[0].score * 2, ranked[0].score + LATENCY_SLACK_MS)
+    shortlist = [t for t in ranked if t.score <= limit][:PROBE_COUNT]
+    if len(shortlist) == 1:
+        emit(phase="ping", progress=1.0)
+        return shortlist[0]
+    for i, target in enumerate(shortlist, 1):
+        target.probe = transfer(target, "download", DOWNLOAD_CONNS, PROBE_SECONDS, PROBE_WARMUP)
+        emit(phase="ping", progress=round(0.4 + 0.6 * i / len(shortlist), 3))
+    fastest = max(t.probe for t in shortlist)
+    return min((t for t in shortlist if t.probe >= fastest * PROBE_TOLERANCE), key=lambda t: t.score)
+
+
+def main():
+    targets, isp = collect_targets(os.environ.get("XSPEEDTEST_BACKEND", "auto"))
+    best = choose_target(targets)
+    emit(phase="server", name=best.name, sponsor=best.sponsor, country=best.country, ping=round(best.ping, 1))
+    jitter = round(best.jitter, 1)
+    emit(phase="jitter", jitter=jitter)
+
+    download = run_stage(best, "download")
+    upload = run_stage(best, "upload")
+    label = best.name + (f", {best.country}" if best.country else "") + f" ({best.sponsor})"
+    emit(phase="done", ping=round(best.ping, 1), jitter=jitter,
+         download=round(download, 2), upload=round(upload, 2), server=label, isp=isp,
+         timestamp=datetime.now(timezone.utc).isoformat(timespec="seconds"))
+
+
+if __name__ == "__main__":
+    try:
+        main()
+    except HelperError as exc:
+        emit(phase="error", message=str(exc))
+        sys.exit(1)
+    except Exception as exc:
+        emit(phase="error", message=f"{type(exc).__name__}: {exc}")
+        sys.exit(1)
